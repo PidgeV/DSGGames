@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// This class is a protoype for flying mechanics.
+/// This class is a protoype for flying mechanics. It uses a velocity system to keep momentum of flight. You will need to take the physics into account when flying.
 /// </summary>
 
 [RequireComponent(typeof(Rigidbody))]
@@ -28,56 +28,34 @@ public class TestPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        currentSpeed = rigidbody.velocity.magnitude;
+
         float accel = Input.GetAxis("Vertical");
         float rot = Input.GetAxis("SpinAxis");
 
-        //Acceleration and deceleration
-        if(accel > 0)
+        //Move forward
+        if (currentSpeed <= maxSpeed && currentSpeed >= minSpeed)
         {
-            currentSpeed += accel * acceleration * Time.deltaTime;
+
+            if (accel > 0)
+            {
+                rigidbody.velocity = rigidbody.velocity + (transform.forward * accel * acceleration * Time.deltaTime);
+            }
+            else if(accel < 0)
+            {
+                rigidbody.velocity = rigidbody.velocity + (transform.forward * accel * deceleration * Time.deltaTime);
+            }
         }
         else
         {
-            currentSpeed += -deceleration * Time.deltaTime;
+            rigidbody.velocity = transform.forward * minSpeed;
         }
         
 
-        // Keeps ship moving and in speed ranges
-        if (currentSpeed < minSpeed)
-        {
-            currentSpeed = minSpeed;
-        }
-        else if (currentSpeed > maxSpeed)
-        {
-            currentSpeed = maxSpeed;
-        }
-
-        //Move forward
-        rigidbody.velocity = transform.forward * currentSpeed;
-
         //Rotation
-        transform.Rotate(new Vector3(0, 0, rot * spinSpeed * Time.deltaTime), Space.Self);
-        transform.Rotate(new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0) * Time.deltaTime * rotateSpeed);
+        transform.Rotate(new Vector3(0, 0, rot * spinSpeed * Time.deltaTime), Space.Self); //Spinning rotation
+        transform.Rotate(new Vector3(-Input.GetAxis("Mouse Y"), Input.GetAxis("Mouse X"), 0) * Time.deltaTime * rotateSpeed);   //Look rotation
 
         Debug.DrawRay(transform.position, transform.forward);
-
-        //rigidbody.velocity += transform.forward *(Time.deltaTime * minSpeed * 100f);
-
-        //// Get the players INPUT
-        //float inputX = Input.GetAxis("Horizontal");
-        //float inputY = Input.GetAxis("Vertical");
-        ////float inputZ = Input.GetAxis("Spin");
-
-        //// GET the rotation speed to moving UP and DOWN
-        //float xRot = -inputY * Time.deltaTime * 10f * rotationSpeed.y;
-
-        //// GET the rotation speed to moving LEFT and RIGHT
-        //float yRot = inputX * Time.deltaTime * 10f * rotationSpeed.x;
-
-        //// GET the rotation speed to SPIN
-        ////float zRot = -inputZ * Time.deltaTime * 10f * rotationSpeed.z;
-
-        //// Set the new ROTATION of the ship
-        //transform.localRotation = transform.localRotation * Quaternion.Euler(xRot, yRot, 0);
     }
 }
