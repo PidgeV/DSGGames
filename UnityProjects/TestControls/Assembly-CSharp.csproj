@@ -62,8 +62,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\FlightController.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
-    <Compile Include="Assets\Scripts\TestPlayer.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Blake/Documents/GitHub/DSGGames/UnityProjects/TestControls/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
