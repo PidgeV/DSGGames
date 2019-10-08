@@ -77,7 +77,7 @@ public class TestPlayer : MonoBehaviour
 
     private void OnGUI()
     {
-        GUI.color = Color.white;
-        GUI.Label(new Rect(5, 5, 200, 50), "Current Speed = " + currentSpeed);
+        //GUI.color = Color.white;
+        //GUI.Label(new Rect(5, 5, 200, 50), "Current Speed = " + currentSpeed);
     }
 }

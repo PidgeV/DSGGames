@@ -12,7 +12,7 @@ public class RingControl : MonoBehaviour
 
     Vector2 dir; // The direction from the center to the target
 
-    Vector2 screenHalf; // The center
+    Vector2 center; // The center
 
     // Radius for the inner and outer rings
     float ringRadius;
@@ -21,7 +21,7 @@ public class RingControl : MonoBehaviour
     private void Awake()
     {
         target = transform.Find("Target").GetComponent<Image>();
-        screenHalf = new Vector2(Screen.width / 2.0f, Screen.height / 2.0f);
+        center = transform.Find("Redicle").GetComponent<RectTransform>().transform.position;
     }
 
     // Start is called before the first frame update
@@ -66,18 +66,19 @@ public class RingControl : MonoBehaviour
         // Finds the new position for the target
         Vector2 newPosition = target.transform.position + new Vector3(mouseX, mouseY) * Time.deltaTime * 100;
 
-        dir = newPosition - screenHalf;
+        dir = newPosition - center;
 
         // Determines if the target is in the inner ring or is outside of the outer ring
-        float distance = Vector2.Distance(newPosition, screenHalf);
+        Vector3 diff = newPosition - center;
+        float distance = diff.sqrMagnitude;
 
-        if (distance <= innerRingRadius)
+        if (distance <= innerRingRadius * innerRingRadius)
         {
             dir = new Vector2();
         }
-        else if (distance > ringRadius)
+        else if (distance > ringRadius * ringRadius)
         {
-            newPosition = screenHalf + dir.normalized * ringRadius;
+            newPosition = center + dir.normalized * ringRadius;
         }
 
         // Moves the target
