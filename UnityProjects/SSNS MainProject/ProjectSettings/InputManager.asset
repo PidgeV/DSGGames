@@ -489,15 +489,15 @@ InputManager:
     m_Name: SpinAxis
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: q
-    positiveButton: e
+    negativeButton: e
+    positiveButton: q
     altNegativeButton: 
     altPositiveButton: 
-    gravity: 1000
+    gravity: 3
     dead: 0.001
     sensitivity: 1000
     snap: 0
     invert: 0
-    type: 2
-    axis: 5
+    type: 0
+    axis: 0
     joyNum: 0
