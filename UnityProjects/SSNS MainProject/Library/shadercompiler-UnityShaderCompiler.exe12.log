@@ -1,0 +1,24 @@
+Base path: 'D:/Unity/Editor/Data', plugins path 'D:/Unity/Editor/Data/PlaybackEngines'
+Cmd: initializeCompiler
+Cmd: compileComputeKernel
+  api=4 insize=15603 outsize=55274 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15603 outsize=48540 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15603 outsize=57607 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15603 outsize=33989 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=9347 outsize=12677 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=7423 outsize=1128 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=20668 outsize=95091 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=36515 outsize=35084 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=8970 outsize=4890 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=9814 outsize=4256 ok=1
+
+Quitting shader compiler process
