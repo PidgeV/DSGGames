@@ -1,40 +1,13 @@
 Base path: 'D:/Unity/Editor/Data', plugins path 'D:/Unity/Editor/Data/PlaybackEngines'
 Cmd: initializeCompiler
-Cmd: compileComputeKernel
-  api=4 insize=18610 outsize=4959 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=15603 outsize=63394 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=15603 outsize=15264 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=15603 outsize=48544 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=15603 outsize=33857 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=15603 outsize=37645 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=975 outsize=888 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=9347 outsize=7442 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=4918 outsize=2708 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=7423 outsize=1322 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=13624 outsize=3543 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=21554 outsize=15086 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=36515 outsize=32909 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=3043 outsize=2697 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=9814 outsize=2460 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=3844 outsize=4285 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=19711 outsize=14761 ok=1
 Cmd: compileSnippet
-  api=4 type=1 insize=11846 outsize=5706 kw=SHADOWS_SPLIT_SPHERES pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_COLORSPACE_GAMMA UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
-
-Quitting shader compiler process
+  api=4 type=0 insize=6670 outsize=810 kw=_NORMALMAP_TANGENT_SPACE _ENABLESPECULAROCCLUSION pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
+Cmd: initializeCompiler
+Cmd: compileComputeKernel
+  api=4 insize=4855 outsize=9142 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=18299 outsize=8653 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=27710 outsize=1890 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=7138 outsize=1818 kw=LIGHTMAP_ON DIRLIGHTMAP_COMBINED DYNAMICLIGHTMAP_ON DECALS_3RT DEBUG_DISPLAY _NORMALMAP_TANGENT_SPACE pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1

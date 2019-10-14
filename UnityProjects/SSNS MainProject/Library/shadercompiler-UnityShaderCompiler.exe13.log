@@ -1,42 +1,17 @@
 Base path: 'D:/Unity/Editor/Data', plugins path 'D:/Unity/Editor/Data/PlaybackEngines'
 Cmd: initializeCompiler
-Cmd: compileComputeKernel
-  api=4 insize=15603 outsize=38538 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=15603 outsize=35940 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=15603 outsize=32172 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=15603 outsize=22344 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=15603 outsize=65875 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=13624 outsize=4058 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=2643 outsize=1197 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=1834 outsize=1067 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=21554 outsize=14612 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=5906 outsize=9178 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=21751 outsize=21785 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=8644 outsize=4172 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=20668 outsize=95086 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=36515 outsize=32909 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=5065 outsize=1174 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=15717 outsize=3063 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=9814 outsize=4225 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=19711 outsize=2569 ok=1
 Cmd: compileSnippet
-  api=4 type=0 insize=11846 outsize=1258 kw=SHADOWS_SPLIT_SPHERES pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_COLORSPACE_GAMMA UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
+  api=4 type=0 insize=6670 outsize=810 kw=_NORMALMAP_TANGENT_SPACE _MATERIAL_FEATURE_ANISOTROPY pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
+Cmd: initializeCompiler
+Cmd: compileComputeKernel
+  api=4 insize=4855 outsize=3708 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=18299 outsize=10442 ok=1
+Cmd: compileSnippet
+  error: 1 plat 4 at (1368): implicit truncation of vector type\nCompiling Vertex program with DECALS_3RT SHADOW_LOW USE_CLUSTERED_LIGHTLIST
+Platform defines: UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR
+  api=4 type=0 insize=27820 outsize=1610 kw=DECALS_3RT SHADOW_LOW USE_CLUSTERED_LIGHTLIST pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=7138 outsize=1670 kw=LIGHTMAP_ON DIRLIGHTMAP_COMBINED DECALS_3RT _NORMALMAP_TANGENT_SPACE pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
 
 Quitting shader compiler process
