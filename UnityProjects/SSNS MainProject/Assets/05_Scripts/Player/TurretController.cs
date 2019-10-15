@@ -10,18 +10,16 @@ public class TurretController : MonoBehaviour
 
 	public bool lockToShipRotation = false;
 
-	// Update is called once per frame
-	void Update()
+	public void Move(Vector2 move)
 	{
-		// GET the input
-		float x = Input.GetAxis("JHorizontal2") * Time.deltaTime * speed;
-		float y = Input.GetAxis("JVertical2") * Time.deltaTime * speed;
+		Vector3 newMove = new Vector3(-move.y, move.x, 0.0f) * speed;
 
-		// ADD the input to the rotation
-		turretRotation += new Vector3(-y, x, 0.0f);
+		// Add the input to our current ships rotation
+		// The reason I have a vector3 for it is so its consistent
+		turretRotation += newMove;
 
-		// Clamp the turrets rotation
-		//turretRotation.x = Mathf.Clamp(turretRotation.x, -15, 80);
+		// Apply the rotation and move the shop forward
+		transform.localRotation = Quaternion.Euler(turretRotation.x, turretRotation.y, 0.0f);
 
 		// Rotate the turret
 		if (lockToShipRotation)

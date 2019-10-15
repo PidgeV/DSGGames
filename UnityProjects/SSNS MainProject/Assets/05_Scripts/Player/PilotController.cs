@@ -10,7 +10,6 @@ public class PilotController : MonoBehaviour
 
 	[Tooltip("A reference to the ship gameobject")]
 	public GameObject ship;
-	public GameObject gunner;
 	[Space(10)]
 
 	#region Ship Stats
@@ -19,7 +18,7 @@ public class PilotController : MonoBehaviour
 	public float boost = 2.0f;
 
 	[Tooltip("The speed you can turn left right up and down")]
-	public float rotationSpeed = 50.0f;
+	public float rotationSpeed = 20.0f;
 
 	[Space(10)]
 	[Tooltip("This is the speed the ship model turns")]
@@ -40,15 +39,9 @@ public class PilotController : MonoBehaviour
 		}
 	}
 
-	// Update is called once per frame
-	void FixedUpdate()
+	public void Move(Vector2 move)
 	{
-		// GET INPUTS
-		float x = Input.GetAxis("JHorizontal") * Time.deltaTime * rotationSpeed;
-		float y = Input.GetAxis("JVertical") * Time.deltaTime * rotationSpeed;
-
-		Vector3 newMove = new Vector3(-y, x, 0.0f);
-		//Vector3 newMove = new Vector3(0.1f, 0.1f, 0.0f);
+		Vector3 newMove = new Vector3(-move.y, move.x, 0.0f) * rotationSpeed;
 
 		// Add the input to our current ships rotation
 		// The reason I have a vector3 for it is so its consistent
@@ -56,34 +49,28 @@ public class PilotController : MonoBehaviour
 
 		// Apply the rotation and move the shop forward
 		transform.localRotation = Quaternion.Euler(shipRotation.x, shipRotation.y, 0.0f);
+	}
 
+	public void Boost(bool boosting)
+	{
 		// MOVE the ship forward
-		if (Input.GetAxis("Fire2") > 0)
+		if (boosting)
 		{
 			// If we ARE boosting
 			transform.Translate(Vector3.forward * Time.deltaTime * speed * boost);
-			SetShipTransfrom(true);
 		}
 		else
 		{
 			// If we are NOT boosting
 			transform.Translate(Vector3.forward * Time.deltaTime * speed);
-			SetShipTransfrom();
 		}
 	}
 
-	private void LateUpdate()
-	{
-		// Spin
-		SickoMode();
-	}
-
 	// This updates the ship model
-	void SetShipTransfrom(bool boost = false)
+	public void SetShipTransfrom(Vector2 move, bool boost )
 	{
 		if (ship)
 		{
-
 			float x = Input.GetAxis("JHorizontal") * Time.deltaTime * simulatedRotation.x;
 			float y = Input.GetAxis("JVertical") * Time.deltaTime * simulatedRotation.y;
 
@@ -97,7 +84,7 @@ public class PilotController : MonoBehaviour
 			}
 
 			// Slowly move the ship back to its initial position
-			//ship.transform.localRotation = Quaternion.Lerp(ship.transform.localRotation, Quaternion.Euler(0, 0, new Quaternion(0f, 0f, dialManager.GetRotation(), 1f).z), 0.05f);
+			// ship.transform.localRotation = Quaternion.Lerp(ship.transform.localRotation, Quaternion.Euler(0, 0, new Quaternion(0f, 0f, dialManager.GetRotation(), 1f).z), 0.05f);
 			ship.transform.localRotation = Quaternion.Lerp(ship.transform.localRotation, Quaternion.identity, 0.05f);
 			ship.transform.localPosition = Vector3.Lerp(ship.transform.localPosition, Vector3.zero, 0.02f);
 		}
@@ -105,18 +92,5 @@ public class PilotController : MonoBehaviour
 		{
 			Debug.LogError("Why is there no ship?");
 		}
-	}
-
-	void SickoMode()
-	{
-		//// Im so sorry
-		//if (Input.GetAxis("BumperR") > 0 &&
-		//	Input.GetAxis("BumperL") > 0 &&
-		//	Input.GetAxis("Fire1") > 0 &&
-		//	Input.GetAxis("Fire2") > 0)
-		//{
-		//	Debug.Log("REEEEEEEE");
-		//	gunner.transform.Rotate(257, -155, 205);
-		//}
 	}
 }
