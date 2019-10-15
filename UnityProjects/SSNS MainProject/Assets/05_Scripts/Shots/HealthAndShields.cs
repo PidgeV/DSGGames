@@ -81,6 +81,14 @@ public class HealthAndShields : MonoBehaviour
 			life = 0;
 			OnDeath();
 		}
+
+
+		// TEMP -- COLOR THE THINGS YOU HIT
+		Color c = gameObject.GetComponent<Renderer>().material.GetColor("_BaseColor");
+		float p = (life + shield / maxLife + maxShield) / 360f;
+		gameObject.GetComponent<Renderer>().material.SetColor("_BaseColor", new Color(c.r, c.g, p, c.a));
+
+		Debug.Log(p);
 	}
 
 	// When life is 0 this is called by TakeDamage()

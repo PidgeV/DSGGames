@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\05_Scripts\Environment\SimpleCameraController.cs" />
+    <Compile Include="Assets\05_Scripts\Environment\TargetMove.cs" />
     <Compile Include="Assets\05_Scripts\GameManager.cs" />
     <Compile Include="Assets\05_Scripts\Inputs\GunnerInput.cs" />
     <Compile Include="Assets\05_Scripts\Inputs\NoJobInputs.cs" />
