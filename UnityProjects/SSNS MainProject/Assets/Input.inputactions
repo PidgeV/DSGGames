@@ -57,7 +57,7 @@
                     "name": "Break",
                     "type": "Button",
                     "id": "e847b28e-6510-47be-8601-f6404cc74712",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press(behavior=2)"
                 }
@@ -204,9 +204,9 @@
                     "name": "ChangeWeapons",
                     "type": "Value",
                     "id": "af9d7f54-6a3a-4a22-a16e-d1a9a871d514",
-                    "expectedControlType": "",
+                    "expectedControlType": "Dpad",
                     "processors": "",
-                    "interactions": "Press(behavior=2)"
+                    "interactions": ""
                 }
             ],
             "bindings": [

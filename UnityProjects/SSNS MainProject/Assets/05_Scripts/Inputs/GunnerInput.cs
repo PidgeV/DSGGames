@@ -12,6 +12,7 @@ public class GunnerInput : MonoBehaviour
 
 	// The last input -- This is the same as Input.GetAxis();
 	Vector2 move = new Vector2();
+	Vector2 weaponSwap = new Vector2();
 
 	// If you want to know if a button is being held down 
 	// You can reference these
@@ -73,9 +74,9 @@ public class GunnerInput : MonoBehaviour
 
 	void OnChangeWeapons(InputValue value)
 	{
-		ChangeWeapons = value.Get<float>() <= 0.5f ? false : true;
+		weaponSwap = value.Get<Vector2>();
 
-		if (printDebug) { Helper.PrintTime("Gunner -- OnChangeWeapons" + "[ " + ChangeWeapons + " ]"); }
+		if (printDebug) { Helper.PrintTime("Gunner -- OnChangeWeapons" + "[ " + weaponSwap + " ]"); }
 	}
 	#endregion
 }
