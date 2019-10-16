@@ -27,7 +27,7 @@
                     "id": "a803969c-55f7-4595-ad8a-0949c53ef046",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press(behavior=2)"
                 },
                 {
                     "name": "MapToggle",
@@ -35,7 +35,7 @@
                     "id": "9f7c2cb2-786d-4087-b7dd-27a7d8e33f2b",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press(behavior=2)"
                 },
                 {
                     "name": "RotateLeft",
@@ -43,7 +43,7 @@
                     "id": "7985842b-8107-4141-a92a-53f3706dabff",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press(behavior=2)"
                 },
                 {
                     "name": "RotateRight",
@@ -51,7 +51,7 @@
                     "id": "9a7e100e-8659-4b9b-a409-dd48f8c6507b",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press(behavior=2)"
                 },
                 {
                     "name": "Break",
@@ -59,7 +59,7 @@
                     "id": "e847b28e-6510-47be-8601-f6404cc74712",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press(behavior=2)"
                 }
             ],
             "bindings": [
@@ -182,7 +182,7 @@
                     "id": "4fbbac83-d637-4c02-84e2-ded66c27582b",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press(behavior=2)"
                 },
                 {
                     "name": "MapToggle",
@@ -190,7 +190,7 @@
                     "id": "e866bcf7-10b6-4a5e-8ec5-00bf8771943e",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press(behavior=2)"
                 },
                 {
                     "name": "Shoot",
@@ -198,7 +198,7 @@
                     "id": "6589817a-4154-45d3-9761-4c453f394aed",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press(behavior=2)"
                 },
                 {
                     "name": "ChangeWeapons",
@@ -206,7 +206,7 @@
                     "id": "af9d7f54-6a3a-4a22-a16e-d1a9a871d514",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press(behavior=2)"
                 }
             ],
             "bindings": [
@@ -318,7 +318,7 @@
                     "id": "0f221be3-8e55-420b-bc56-949df527e746",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press(behavior=2)"
                 },
                 {
                     "name": "Back",
@@ -326,7 +326,7 @@
                     "id": "b4c62da8-f828-4f6a-bdd7-6be34c1a7214",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press(behavior=2)"
                 },
                 {
                     "name": "ConvertToGunner",

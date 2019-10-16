@@ -41,7 +41,7 @@ public class PilotController : MonoBehaviour
 
 	public void Move(Vector2 move)
 	{
-		Vector3 newMove = new Vector3(-move.y, move.x, 0.0f) * rotationSpeed;
+		Vector3 newMove = new Vector3(-move.y, move.x, 0.0f) * rotationSpeed * Time.deltaTime;
 
 		// Add the input to our current ships rotation
 		// The reason I have a vector3 for it is so its consistent
@@ -72,7 +72,7 @@ public class PilotController : MonoBehaviour
 		if (ship)
 		{
             // MOVE the ship model
-			ship.transform.Rotate(-move.y, 0.0f, -move.x);
+			ship.transform.Rotate(-move.y * Time.deltaTime, 0.0f, -move.x * Time.deltaTime);
             
 			// BOOST the ship forward
 			if (boost)

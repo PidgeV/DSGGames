@@ -8,58 +8,92 @@ using UnityEngine.InputSystem;
 
 public class ShipInput : MonoBehaviour
 {
-    public PilotController pilotController;
+	public PilotController controller;
 
-    Vector3 lastInput = new Vector3();
+	// The last input -- This is the same as Input.GetAxis();
+	public Vector2 move = new Vector2();
 
-    bool boosting = false;
+	// If you want to know if a button is being held down 
+	// You can reference these
+	public bool RotateLeft = false;
+	public bool RotateRight = false;
+	public bool MapToggle = false;
+	public bool Boosting = false;
+	public bool JobSwap = false;
+	public bool Break = false;
 
-    private void Awake()
-    {
-        pilotController = FindObjectOfType<PilotController>();
-    }
+	// DEBUG
+	public bool printDebug = false;
 
-    private void Update()
-    {
-        pilotController.Move(lastInput * Time.deltaTime);
-        pilotController.Boost(boosting);
-        pilotController.SetShipTransfrom(lastInput * Time.deltaTime, boosting);
-    }
+	private void Update()
+	{
+		if (controller)
+		{
+			controller.Move(move);
+			controller.Boost(Boosting);
+			controller.SetShipTransfrom(move, Boosting);
+		}
+	}
 
-    void OnMove(InputValue value)
-    {
-        lastInput = value.Get<Vector2>();
-        Debug.Log("Ship -- OnMove");
-    }
+	// You NEED to give this script a PilotController for it to update anything
+	public void GiveController(PilotController newPilotController)
+	{
+		controller = newPilotController;
+	}
 
-    void OnBoost(InputValue value)
-    {
-        Debug.Log("Ship -- OnBoost");
-        boosting = value.Get<float>() <= 0.5f ? false : true;
-    }
+	// IF YOU WANT CODE TO ACTIVATE ON A BUTTON CLICK USE THESE
 
-    void OnJobSwap()
-    {
-        Debug.Log("Ship -- OnJobSwap");
-    }
+	// NOTE -- These are the input functions called AUTOMATICALLY by the Player Input Script 
+	//		   [Part of unitys new input system]
 
-    void OnMapToggle()
-    {
-        Debug.Log("Ship -- OnMapToggle");
-    }
+	#region Input Functions
+	void OnMove(InputValue value)
+	{
+		move = value.Get<Vector2>();
 
-    void OnRotateLeft()
-    {
-        Debug.Log("Ship -- OnRotateLeft");
-    }
+		if (printDebug) { Helper.PrintTime("Ship -- OnMove" + "[ " + move + " ]"); }
+	}
 
-    void OnRotateRight()
-    {
-        Debug.Log("Ship -- OnRotateRight");
-    }
+	void OnBoost(InputValue value)
+	{
+		Boosting = value.Get<float>() <= 0.5f ? false : true;
 
-    void OnBreak()
-    {
-        Debug.Log("Ship -- OnBreak");
-    }
+		if (printDebug) { Helper.PrintTime("Ship -- OnBoost" + " [" + Boosting + "]"); }
+	}
+
+	void OnJobSwap(InputValue value)
+	{
+		JobSwap = value.Get<float>() <= 0.5f ? false : true;
+
+		if (printDebug) { Helper.PrintTime("Ship -- OnJobSwap" + "[ " + JobSwap + " ]"); }
+	}
+
+	void OnMapToggle(InputValue value)
+	{
+		MapToggle = value.Get<float>() <= 0.5f ? false : true;
+
+		if (printDebug) { Helper.PrintTime("Ship -- OnMapToggle" + "[ " + MapToggle + " ]"); }
+	}
+
+	void OnRotateLeft(InputValue value)
+	{
+		RotateLeft = value.Get<float>() <= 0.5f ? false : true;
+
+		if (printDebug) { Helper.PrintTime("Ship -- OnRotateLeft" + "[ " + RotateLeft + " ]"); }
+	}
+
+	void OnRotateRight(InputValue value)
+	{
+		RotateRight = value.Get<float>() <= 0.5f ? false : true;
+
+		if (printDebug) { Helper.PrintTime("Ship -- OnRotateRight" + "[ " + RotateRight + " ]"); }
+	}
+
+	void OnBreak(InputValue value)
+	{
+		Break = value.Get<float>() <= 0.5f ? false : true;
+
+		if (printDebug) { Helper.PrintTime("Ship -- OnBreak" + "[ " + Break + " ]"); }
+	}
+	#endregion
 }

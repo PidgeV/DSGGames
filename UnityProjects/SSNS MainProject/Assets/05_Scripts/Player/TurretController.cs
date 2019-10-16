@@ -12,7 +12,7 @@ public class TurretController : MonoBehaviour
 
 	public void Move(Vector2 move)
 	{
-		Vector3 newMove = new Vector3(-move.y, move.x, 0.0f) * speed;
+		Vector3 newMove = new Vector3(-move.y, move.x, 0.0f) * speed * Time.deltaTime;
 
 		// Add the input to our current ships rotation
 		// The reason I have a vector3 for it is so its consistent

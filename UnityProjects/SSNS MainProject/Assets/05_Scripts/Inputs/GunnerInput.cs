@@ -8,43 +8,74 @@ using UnityEngine.InputSystem;
 
 public class GunnerInput : MonoBehaviour
 {
-    public TurretController turretController;
+	public TurretController controller;
 
-    Vector3 lastInput = new Vector3();
+	// The last input -- This is the same as Input.GetAxis();
+	Vector2 move = new Vector2();
 
-    private void Start()
-    {
-        turretController = FindObjectOfType<TurretController>();
-    }
+	// If you want to know if a button is being held down 
+	// You can reference these
+	public bool ChangeWeapons = false;
+	public bool MapToggle = false;
+	public bool JobSwap = false;
+	public bool Shoot = false;
 
-    private void Update()
-    {
-        turretController.Move(lastInput * Time.deltaTime);
-    }
+	// DEBUG
+	public bool printDebug = false;
 
-    void OnMove(InputValue value)
-    {
-        lastInput = value.Get<Vector2>();
-        Debug.Log("Gunner -- OnMove");
-    }
+	private void Update()
+	{
+		if (controller)
+		{
+			controller.Move(move);
+		}
+	}
 
-    void OnJobSwap()
-    {
-        Debug.Log("Gunner -- OnJobSwap");
-    }
+	// You NEED to give this script a TurretController for it to update anything
+	public void GiveController(TurretController newTurretController)
+	{
+		controller = newTurretController;
+	}
 
-    void OnMapToggle()
-    {
-        Debug.Log("Gunner -- OnMapToggle");
-    }
+	// IF YOU WANT CODE TO ACTIVATE ON A BUTTON CLICK USE THESE
 
-    void OnShoot()
-    {
-        Debug.Log("Gunner -- OnShoot");
-    }
+	// NOTE -- These are the input functions called AUTOMATICALLY by the Player Input Script 
+	//		   [Part of unitys new input system]
 
-    void OnChangeWeapons()
-    {
-        Debug.Log("Gunner -- OnChangeWeapons");
-    }
+	#region Input Functions
+	void OnMove(InputValue value)
+	{
+		move = value.Get<Vector2>();
+
+		if (printDebug) { Helper.PrintTime("Gunner -- OnMove" + "[ " + move + " ]"); }
+	}
+
+	void OnJobSwap(InputValue value)
+	{
+		JobSwap = value.Get<float>() <= 0.5f ? false : true;
+
+		if (printDebug) { Helper.PrintTime("Gunner -- OnJobSwap" + "[ " + JobSwap + " ]"); }
+	}
+
+	void OnMapToggle(InputValue value)
+	{
+		MapToggle = value.Get<float>() <= 0.5f ? false : true;
+
+		if (printDebug) { Helper.PrintTime("Gunner -- OnMapToggle" + "[ " + MapToggle + " ]"); }
+	}
+
+	void OnShoot(InputValue value)
+	{
+		Shoot = value.Get<float>() <= 0.5f ? false : true;
+
+		if (printDebug) { Helper.PrintTime("Gunner -- OnShoot" + "[ " + Shoot + " ]"); }
+	}
+
+	void OnChangeWeapons(InputValue value)
+	{
+		ChangeWeapons = value.Get<float>() <= 0.5f ? false : true;
+
+		if (printDebug) { Helper.PrintTime("Gunner -- OnChangeWeapons" + "[ " + ChangeWeapons + " ]"); }
+	}
+	#endregion
 }
