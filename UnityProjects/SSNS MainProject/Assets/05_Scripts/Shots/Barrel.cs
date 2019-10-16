@@ -17,18 +17,17 @@ public class Barrel : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		counter += Time.deltaTime;
+	}
+
+	// Shoot if you can
+	public void Shoot()
+	{
 		// Check if a projectile can be fired
 		if (counter > fireRate)
 		{
-			if (Input.GetAxis("Fire1") > 0)
-			{
-				Instantiate(type, transform.position, transform.rotation);
-				counter = 0;
-			}
-		}
-		else
-		{
-			counter += Time.deltaTime;
+			Instantiate(type, transform.position, transform.rotation);
+			counter = 0;
 		}
 	}
 }
