@@ -71,12 +71,9 @@ public class PilotController : MonoBehaviour
 	{
 		if (ship)
 		{
-			float x = Input.GetAxis("JHorizontal") * Time.deltaTime * simulatedRotation.x;
-			float y = Input.GetAxis("JVertical") * Time.deltaTime * simulatedRotation.y;
-
-			// MOVE the ship model
-			ship.transform.Rotate(-y, 0.0f, -x);
-
+            // MOVE the ship model
+			ship.transform.Rotate(-move.y, 0.0f, -move.x);
+            
 			// BOOST the ship forward
 			if (boost)
 			{

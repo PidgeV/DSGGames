@@ -11,37 +11,41 @@ using UnityEngine.InputSystem;
 
 public class NoJobInputs : MonoBehaviour
 {
-	void OnMove(InputValue value)
-	{
-	}
+    void OnMove(InputValue value)
+    {
+    }
 
-	void OnEnter()
-	{
-	}
+    void OnEnter()
+    {
+    }
 
-	void OnBack()
-	{
-	}
+    void OnBack()
+    {
+    }
 
-	// Removes the NoJobInputs and gives the player the PlayerInput 
-	void OnConvertToPiolet()
-	{
-		Debug.Log("Converting.. [ Pilot Inputs Activated ]");
+    // Removes the NoJobInputs and gives the player the PlayerInput 
+    void OnConvertToPiolet()
+    {
+        Debug.Log("Converting.. [ Pilot Inputs Activated ]");
 
-		gameObject.AddComponent<ShipInput>();
-		gameObject.GetComponent<PlayerInput>().SwitchCurrentActionMap("Ship");
+        gameObject.AddComponent<ShipInput>();
 
-		Destroy(this);
-	}
+        gameObject.GetComponent<PlayerInput>().defaultActionMap = "Ship";
+        gameObject.GetComponent<PlayerInput>().SwitchCurrentActionMap("Ship");
 
-	// Removes the NoJobInputs and gives the player the GunnerInputs 
-	void OnConvertToGunner()
-	{
-		Debug.Log("Converting.. [ Gunner Inputs Activated ]");
+        Destroy(this);
+    }
 
-		gameObject.AddComponent<GunnerInput>();
-		gameObject.GetComponent<PlayerInput>().SwitchCurrentActionMap("Gunner");
+    // Removes the NoJobInputs and gives the player the GunnerInputs 
+    void OnConvertToGunner()
+    {
+        Debug.Log("Converting.. [ Gunner Inputs Activated ]");
 
-		Destroy(this);
-	}
+        gameObject.AddComponent<GunnerInput>();
+
+        gameObject.GetComponent<PlayerInput>().defaultActionMap = "Gunner";
+        gameObject.GetComponent<PlayerInput>().SwitchCurrentActionMap("Gunner");
+
+        Destroy(this);
+    }
 }

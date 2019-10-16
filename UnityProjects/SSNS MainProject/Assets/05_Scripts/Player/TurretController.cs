@@ -22,7 +22,7 @@ public class TurretController : MonoBehaviour
 		transform.localRotation = Quaternion.Euler(turretRotation.x, turretRotation.y, 0.0f);
 
 		// Rotate the turret
-		if (lockToShipRotation)
+		if (!lockToShipRotation)
 		{
 			// If we use localRotation it locks the rotation to the ship
 			transform.localRotation = Quaternion.Euler(turretRotation.x, turretRotation.y, 0.0f);
