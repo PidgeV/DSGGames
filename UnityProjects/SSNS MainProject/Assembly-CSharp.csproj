@@ -69,18 +69,19 @@
     <Compile Include="Assets\05_Scripts\Inputs\GunnerInput.cs" />
     <Compile Include="Assets\05_Scripts\Inputs\NoJobInputs.cs" />
     <Compile Include="Assets\05_Scripts\Inputs\ShipInput.cs" />
+    <Compile Include="Assets\05_Scripts\Player\DebugControllers\PilotController.cs" />
+    <Compile Include="Assets\05_Scripts\Player\DebugControllers\TurretController.cs" />
     <Compile Include="Assets\05_Scripts\Player\Dial.cs" />
-    <Compile Include="Assets\05_Scripts\Player\PilotController.cs" />
     <Compile Include="Assets\05_Scripts\Player\RingControl.cs" />
     <Compile Include="Assets\05_Scripts\Player\TestPlayer.cs" />
-    <Compile Include="Assets\05_Scripts\Player\TurretController.cs" />
     <Compile Include="Assets\05_Scripts\Shots\Barrel.cs" />
     <Compile Include="Assets\05_Scripts\Shots\Bullet.cs" />
     <Compile Include="Assets\05_Scripts\Shots\Damage.cs" />
     <Compile Include="Assets\05_Scripts\Shots\HealthAndShields.cs" />
     <Compile Include="Assets\05_Scripts\Shots\Stuff I Dident want to mess with\BulletScript.cs" />
     <Compile Include="Assets\05_Scripts\Shots\Stuff I Dident want to mess with\ShootingController.cs" />
-    <Compile Include="Assets\fpsTest\fpsPlayer.cs" />
+    <Compile Include="Assets\05_Scripts\UI\Menu.cs" />
+    <Compile Include="Assets\05_Scripts\UI\UIManager.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/GitHub/DSGGames/UnityProjects/SSNS MainProject/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Redicle
   - Target
+  - Menu
   layers:
   - Default
   - TransparentFX
