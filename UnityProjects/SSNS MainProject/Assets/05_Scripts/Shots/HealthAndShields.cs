@@ -62,8 +62,8 @@ public class HealthAndShields : MonoBehaviour
     }
 
 	// Damage the ship
-	void TakeDamage(float damage)
-	{
+	void TakeDamage(float damage)	{
+
 		// Damage the shield
 		shield -= damage;
 

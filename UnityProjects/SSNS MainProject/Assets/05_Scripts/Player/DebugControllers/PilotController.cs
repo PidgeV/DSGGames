@@ -22,7 +22,7 @@ public class PilotController : MonoBehaviour
 
 	[Space(10)]
 	[Tooltip("This is the speed the ship model turns")]
-	public Vector2 simulatedRotation = new Vector2(70.0f, 50.0f);
+	public Vector2 simulatedRotation = new Vector2(40f, 40f);
 	public float simulatedBoost = 0.2f;
 	#endregion
 
@@ -67,13 +67,13 @@ public class PilotController : MonoBehaviour
 	}
 
 	// This updates the ship model
-	public void SetShipTransfrom(Vector2 move, bool boost )
+	public void SetShipTransfrom(Vector2 move, bool boost)
 	{
 		if (ship)
 		{
-            // MOVE the ship model
-			ship.transform.Rotate(-move.y * Time.deltaTime, 0.0f, -move.x * Time.deltaTime);
-            
+			// MOVE the ship model
+			ship.transform.Rotate(-move.y * Time.deltaTime * simulatedRotation.y, 0.0f, -move.x * Time.deltaTime * simulatedRotation.x);
+
 			// BOOST the ship forward
 			if (boost)
 			{
@@ -81,7 +81,6 @@ public class PilotController : MonoBehaviour
 			}
 
 			// Slowly move the ship back to its initial position
-			// ship.transform.localRotation = Quaternion.Lerp(ship.transform.localRotation, Quaternion.Euler(0, 0, new Quaternion(0f, 0f, dialManager.GetRotation(), 1f).z), 0.05f);
 			ship.transform.localRotation = Quaternion.Lerp(ship.transform.localRotation, Quaternion.identity, 0.05f);
 			ship.transform.localPosition = Vector3.Lerp(ship.transform.localPosition, Vector3.zero, 0.02f);
 		}
