@@ -63,6 +63,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\05_Scripts\Enemies\ChaserEnemy.cs" />
     <Compile Include="Assets\05_Scripts\Environment\SimpleCameraController.cs" />
     <Compile Include="Assets\05_Scripts\Environment\TargetMove.cs" />
     <Compile Include="Assets\05_Scripts\GameManager.cs" />
@@ -75,10 +76,12 @@
     <Compile Include="Assets\05_Scripts\Player\Dial.cs" />
     <Compile Include="Assets\05_Scripts\Player\RingControl.cs" />
     <Compile Include="Assets\05_Scripts\Player\TestPlayer.cs" />
+    <Compile Include="Assets\05_Scripts\RandomPosition.cs" />
     <Compile Include="Assets\05_Scripts\Shots\Barrel.cs" />
     <Compile Include="Assets\05_Scripts\Shots\Bullet.cs" />
     <Compile Include="Assets\05_Scripts\Shots\Damage.cs" />
     <Compile Include="Assets\05_Scripts\Shots\HealthAndShields.cs" />
+    <Compile Include="Assets\05_Scripts\Shots\InterceptCalculationClass.cs" />
     <Compile Include="Assets\05_Scripts\Shots\Stuff I Dident want to mess with\BulletScript.cs" />
     <Compile Include="Assets\05_Scripts\Shots\Stuff I Dident want to mess with\ShootingController.cs" />
     <Compile Include="Assets\05_Scripts\UI\Menu.cs" />

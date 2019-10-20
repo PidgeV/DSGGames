@@ -5,7 +5,7 @@ using UnityEngine;
 // NOTE -- To work you should have a collider on this gameobject WITH IsTrigger set to true
 //		   You also need a Rigidbody that is NOT kinematic
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Collider))]
 public class HealthAndShields : MonoBehaviour
 {
 	[Space(10)]
@@ -49,17 +49,17 @@ public class HealthAndShields : MonoBehaviour
 		}
 	}
 
-	private void OnTriggerEnter(Collider other)
-	{
-		// We get the DAMAGE component from a gameobject
-		Damage hit = other.GetComponent<Damage>();
+    private void OnCollisionEnter(Collision collision)
+    {
+        // We get the DAMAGE component from a gameobject
+        Damage hit = collision.gameObject.GetComponent<Damage>();
 
-		// If it doesn't have one we move on
-		if (hit)
-		{
-			TakeDamage(hit.damage);
-		}
-	}
+        // If it doesn't have one we move on
+        if (hit)
+        {
+            TakeDamage(hit.damage);
+        }
+    }
 
 	// Damage the ship
 	void TakeDamage(float damage)
