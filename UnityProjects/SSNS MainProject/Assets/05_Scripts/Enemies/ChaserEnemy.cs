@@ -7,11 +7,15 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class ChaserEnemy : InterceptCalculationClass
 {
+    [Header("Green: forward direction and collision check.")]
+    [Header("Red: intercept calculation.")]
+    [Header("Blue: Velocity and collision check.")]
+    public bool debugDraw = false;
+    
+    [Space(15)]
     public GameObject player;
     [Tooltip("Enemy will fly to these in preperation for its next attempt")]
     public GameObject[] resetPositions;
-
-    public bool debugDraw = false;
     public LayerMask obstacleLayer;
     public float collisionCheckDistance = 150f;
     [Space(15)]
@@ -49,7 +53,7 @@ public class ChaserEnemy : InterceptCalculationClass
     // Start is called before the first frame update
     void Start()
     {
-        target = player;
+        target = resetPositions[Random.Range(0, resetPositions.Length)];
         rbSelf = GetComponent<Rigidbody>();
         rbTarget = target.GetComponent<Rigidbody>();
 
@@ -141,7 +145,19 @@ public class ChaserEnemy : InterceptCalculationClass
     {
         RaycastHit hitInfo;
 
+        //Check direction facing
         if (Physics.SphereCast(transform.position, 5,transform.forward, out hitInfo, collisionCheckDistance, obstacleLayer))
+        {
+            // Get the desired direction we need to move to move around  the obstacle. Transform to world co-ordinates (gets the obstacleMoveDirection wrt the current foward direction).
+            Vector3 turnDir = transform.TransformDirection(obstacleAvoidDirection);
+            turnDir.Normalize();
+
+            dir += turnDir;
+            obstacleHit = true;
+        }
+
+        //Check where velocity is moving ship
+        else if (Physics.SphereCast(transform.position, 5, rbSelf.velocity, out hitInfo, collisionCheckDistance, obstacleLayer))
         {
             // Get the desired direction we need to move to move around  the obstacle. Transform to world co-ordinates (gets the obstacleMoveDirection wrt the current foward direction).
             Vector3 turnDir = transform.TransformDirection(obstacleAvoidDirection);
@@ -173,8 +189,9 @@ public class ChaserEnemy : InterceptCalculationClass
     {
         if (debugDraw)
         {
-            Debug.DrawRay(transform.position, transform.forward * collisionCheckDistance, Color.green); //Forward ray
+            Debug.DrawRay(transform.position, transform.forward.normalized * collisionCheckDistance, Color.green); //Forward ray
             Debug.DrawRay(transform.position, interceptPoint - transform.position, Color.red); // Intercept point
+            if(rbSelf) Debug.DrawRay(transform.position, rbSelf.velocity, Color.blue); //Velocity ray
         }
     }
 }
