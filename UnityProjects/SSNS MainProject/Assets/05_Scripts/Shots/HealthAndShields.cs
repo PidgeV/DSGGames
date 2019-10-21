@@ -83,7 +83,7 @@ public class HealthAndShields : MonoBehaviour
 		}
 
 		// TEMP -- COLOR THE THINGS YOU HIT
-		gameObject.GetComponent<Renderer>().material.SetColor("_BaseColor", Color.blue);
+		if(gameObject.GetComponent<Renderer>())  gameObject.GetComponent<Renderer>().material.SetColor("_BaseColor", Color.blue);
 	}
 
 	// When life is 0 this is called by TakeDamage()
