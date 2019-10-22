@@ -146,7 +146,7 @@ public class ChaserEnemy : InterceptCalculationClass
         RaycastHit hitInfo;
 
         //Check direction facing
-        if (Physics.SphereCast(transform.position, 5,transform.forward, out hitInfo, collisionCheckDistance, obstacleLayer))
+        if (Physics.SphereCast(transform.position, raySize, transform.forward.normalized, out hitInfo, collisionCheckDistance, obstacleLayer))
         {
             // Get the desired direction we need to move to move around  the obstacle. Transform to world co-ordinates (gets the obstacleMoveDirection wrt the current foward direction).
             Vector3 turnDir = transform.TransformDirection(obstacleAvoidDirection);
@@ -157,7 +157,7 @@ public class ChaserEnemy : InterceptCalculationClass
         }
 
         //Check where velocity is moving ship
-        else if (Physics.SphereCast(transform.position, 5, rbSelf.velocity, out hitInfo, collisionCheckDistance, obstacleLayer))
+        else if (Physics.SphereCast(transform.position, raySize, rbSelf.velocity.normalized, out hitInfo, collisionCheckDistance, obstacleLayer))
         {
             // Get the desired direction we need to move to move around  the obstacle. Transform to world co-ordinates (gets the obstacleMoveDirection wrt the current foward direction).
             Vector3 turnDir = transform.TransformDirection(obstacleAvoidDirection);
@@ -191,7 +191,11 @@ public class ChaserEnemy : InterceptCalculationClass
         {
             Debug.DrawRay(transform.position, transform.forward.normalized * collisionCheckDistance, Color.green); //Forward ray
             Debug.DrawRay(transform.position, interceptPoint - transform.position, Color.red); // Intercept point
-            if(rbSelf) Debug.DrawRay(transform.position, rbSelf.velocity, Color.blue); //Velocity ray
+            if (rbSelf)
+            {
+                //Vector3 dir = rbSelf.velocity;
+                Debug.DrawRay(transform.position, rbSelf.velocity.normalized * collisionCheckDistance, Color.blue); //Velocity ray
+            }
         }
     }
 }
