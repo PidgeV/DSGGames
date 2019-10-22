@@ -6,6 +6,14 @@
             "id": "6e31f1b3-8adf-4069-b7e0-ed7d565641e5",
             "actions": [
                 {
+                    "name": "KeyboardMove",
+                    "type": "Value",
+                    "id": "2284d4f7-d2b8-4102-9188-233765abfae2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Move",
                     "type": "Value",
                     "id": "4799965c-6fa6-4d59-b16d-c1443f6c91ea",
@@ -63,17 +71,17 @@
                 },
                 {
                     "name": "Horizontal",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "11942f55-4f13-4d03-96b0-d5c5aac7fca1",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press(behavior=2)"
                 },
                 {
                     "name": "Vertical",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "9c601b27-e871-4b50-b235-d091c2788fd0",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press(behavior=2)"
                 }
@@ -232,6 +240,61 @@
                     "action": "Vertical",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "WASD",
+                    "id": "b2b1e7fe-9ab1-4a3d-9304-27ffd1f126dd",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "KeyboardMove",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "1b0d4d55-2c91-4396-8f83-d5f4110cbabe",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "KeyboardMove",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "256278be-dae7-407d-8369-cbf52870bec3",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "KeyboardMove",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "6161bd97-0bd2-41d7-9b8b-2a18228afbe0",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "KeyboardMove",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "610093f3-94a8-405c-806f-2165dab4a8af",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "KeyboardMove",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         },

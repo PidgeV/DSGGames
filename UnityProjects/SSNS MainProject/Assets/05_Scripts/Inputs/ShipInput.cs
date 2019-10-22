@@ -48,14 +48,11 @@ public class ShipInput : MonoBehaviour
 
 	#region Input Functions
 
-	void OnHorizontal(InputValue value)
+	void OnKeyboardMove(InputValue value)
 	{
-		move.y = -value.Get<float>();
-	}
+		move = value.Get<Vector2>();
 
-	void OnVertical(InputValue value)
-	{
-		move.x = -value.Get<float>();
+		if (printDebug) { Helper.PrintTime("Ship -- OnKeyboardMove" + "[ " + move + " ]"); }
 	}
 
 	void OnMove(InputValue value)
