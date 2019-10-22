@@ -443,7 +443,7 @@
                     "type": "Value",
                     "id": "157052c2-85ea-44c1-920a-aacf1630a6e7",
                     "expectedControlType": "",
-                    "processors": "",
+                    "processors": "Scale(factor=2)",
                     "interactions": ""
                 },
                 {

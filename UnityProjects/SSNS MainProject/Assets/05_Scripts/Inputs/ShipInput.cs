@@ -15,8 +15,6 @@ public class ShipInput : MonoBehaviour
 
 	// If you want to know if a button is being held down 
 	// You can reference these
-	public bool RotateLeft = false;
-	public bool RotateRight = false;
 	public bool MapToggle = false;
 	public bool Boosting = false;
 	public bool JobSwap = false;
@@ -29,6 +27,15 @@ public class ShipInput : MonoBehaviour
 	{
 		if (controller)
 		{
+			//if (controller.AIMode)
+			//{
+			// This is where an AI controller can take over
+			//}
+			//else
+			//{
+			//	controller.Move(move);
+			//}
+
 			controller.Move(move);
 			controller.Boost(Boosting);
 			controller.SetShipTransfrom(move, Boosting);
@@ -52,56 +59,85 @@ public class ShipInput : MonoBehaviour
 	{
 		move = value.Get<Vector2>();
 
+		#region Debug
+
 		if (printDebug) { Helper.PrintTime("Ship -- OnKeyboardMove" + "[ " + move + " ]"); }
+
+		#endregion
 	}
 
 	void OnMove(InputValue value)
 	{
 		move = value.Get<Vector2>();
 
+		#region Debug
+
 		if (printDebug) { Helper.PrintTime("Ship -- OnMove" + "[ " + move + " ]"); }
+
+		#endregion
 	}
 
 	void OnBoost(InputValue value)
 	{
-		Boosting = value.Get<float>() <= 0.5f ? false : true;
+		Boosting = value.isPressed;
+
+		#region Debug
 
 		if (printDebug) { Helper.PrintTime("Ship -- OnBoost" + " [" + Boosting + "]"); }
+
+		#endregion
 	}
 
 	void OnJobSwap(InputValue value)
 	{
-		JobSwap = value.Get<float>() <= 0.5f ? false : true;
+		JobSwap = value.isPressed;
+
+		#region Debug
 
 		if (printDebug) { Helper.PrintTime("Ship -- OnJobSwap" + "[ " + JobSwap + " ]"); }
+
+		#endregion
 	}
 
 	void OnMapToggle(InputValue value)
 	{
-		MapToggle = value.Get<float>() <= 0.5f ? false : true;
+		MapToggle = value.isPressed;
+
+		#region Debug
 
 		if (printDebug) { Helper.PrintTime("Ship -- OnMapToggle" + "[ " + MapToggle + " ]"); }
-	}
 
-	void OnRotateLeft(InputValue value)
-	{
-		RotateLeft = value.Get<float>() <= 0.5f ? false : true;
-
-		if (printDebug) { Helper.PrintTime("Ship -- OnRotateLeft" + "[ " + RotateLeft + " ]"); }
-	}
-
-	void OnRotateRight(InputValue value)
-	{
-		RotateRight = value.Get<float>() <= 0.5f ? false : true;
-
-		if (printDebug) { Helper.PrintTime("Ship -- OnRotateRight" + "[ " + RotateRight + " ]"); }
+		#endregion
 	}
 
 	void OnBreak(InputValue value)
 	{
-		Break = value.Get<float>() <= 0.5f ? false : true;
+		Break = value.isPressed;
+
+		#region Debug
 
 		if (printDebug) { Helper.PrintTime("Ship -- OnBreak" + "[ " + Break + " ]"); }
+
+		#endregion
 	}
+
+	void OnRotateLeft(InputValue value)
+	{
+		#region Debug
+
+		if (printDebug) { Helper.PrintTime("Ship -- OnBreak" + "[ " + Break + " ]"); }
+
+		#endregion
+	}
+
+	void OnRotateRight(InputValue value)
+	{
+		#region Debug
+
+		if (printDebug) { Helper.PrintTime("Ship -- OnBreak" + "[ " + Break + " ]"); }
+
+		#endregion
+	}
+
 	#endregion
 }

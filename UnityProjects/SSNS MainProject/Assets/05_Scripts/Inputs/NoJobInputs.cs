@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 // The NoJobInputs is the default class for inputs 
 // When a new controller connects it is of type NoJobInputs
 
+// [WILL BE REMOVED]
 // Click right on the d-pad to become a Gunner
 // Click left on the d-pad to become a Piolet 
 
@@ -37,7 +38,66 @@ public class NoJobInputs : MonoBehaviour
 
 	#region Input Functions
 
-	void OnConvertKeyboard()
+	void OnMove(InputValue value)
+	{
+		Vector2 input = value.Get<Vector2>();
+
+		if (input.x < -0.5f)
+		{
+			Helper.PrintTime("Left");
+		}
+		else if (input.x > 0.5f)
+		{
+			Helper.PrintTime("Right");
+		}
+		else if (input.y > 0.5f)
+		{
+			Helper.PrintTime("Up");
+		}
+		else if (input.y < -0.5f)
+		{
+			Helper.PrintTime("Down");
+		}
+
+		#region Debug
+
+		if (printDebug) { Helper.PrintTime("Controller -- OnMove" + "[ " + move + " ]"); }
+
+		#endregion
+	}
+
+	void OnEnter(InputValue value)
+	{
+		Enter = value.isPressed;
+
+		#region Debug
+
+		if (printDebug) { Helper.PrintTime("Ship -- OnEnter" + " [" + Enter + "]"); }
+
+		#endregion
+	}
+
+	void OnBack(InputValue value)
+	{
+		Back = value.isPressed;
+
+		#region Debug
+
+		if (printDebug) { Helper.PrintTime("Ship -- OnBack" + " [" + Back + "]"); }
+
+		#endregion
+	}
+
+	#endregion
+
+	// This is used to auto change to gunner or a pilot
+	// This is used for debugging the roles and inputs currency
+	// [WILL BE REMOVED]
+	#region Testing Controller Jobs
+
+	// CONTROLLER
+	// Removes the NoJobInputs and gives the player the PlayerInput 
+	void OnConvertToPiolet()
 	{
 		Debug.Log("Converting.. [ Pilot Inputs Activated ]");
 
@@ -53,36 +113,9 @@ public class NoJobInputs : MonoBehaviour
 		Destroy(this);
 	}
 
-	void OnMove(InputValue value)
-	{
-		move = value.Get<Vector2>();
-
-		if (printDebug) { Helper.PrintTime("Controller -- OnMove" + "[ " + move + " ]"); }
-	}
-
-	void OnEnter(InputValue value)
-	{
-		Enter = value.Get<float>() <= 0.5f ? false : true;
-
-		if (printDebug) { Helper.PrintTime("Ship -- OnEnter" + " [" + Enter + "]"); }
-	}
-
-	void OnBack(InputValue value)
-	{
-		Back = value.Get<float>() <= 0.5f ? false : true;
-
-		if (printDebug) { Helper.PrintTime("Ship -- OnBack" + " [" + Back + "]"); }
-	}
-
-	#endregion
-
-	// This is used to auto change to gunner or a pilot
-	// This is used for debugging the roles and inputs currency
-	// [WILL BE REMOVED]
-	#region Testing Controller Jobs
-
+	// KAYBOARD
 	// Removes the NoJobInputs and gives the player the PlayerInput 
-	void OnConvertToPiolet()
+	void OnConvertKeyboard()
 	{
 		Debug.Log("Converting.. [ Pilot Inputs Activated ]");
 

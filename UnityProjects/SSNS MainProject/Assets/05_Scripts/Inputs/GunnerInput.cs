@@ -28,6 +28,15 @@ public class GunnerInput : MonoBehaviour
 	{
 		if (controller)
 		{
+			//if (controller.AIMode)
+			//{
+			// This is where an AI controller can take over
+			//}
+			//else
+			//{
+			//	controller.Move(move);
+			//}
+
 			controller.Move(move);
 		}
 	}
@@ -44,39 +53,59 @@ public class GunnerInput : MonoBehaviour
 	//		   [Part of unitys new input system]
 
 	#region Input Functions
+
 	void OnMove(InputValue value)
 	{
 		move = value.Get<Vector2>();
 
+		#region Debug
+
 		if (printDebug) { Helper.PrintTime("Gunner -- OnMove" + "[ " + move + " ]"); }
+
+		#endregion
 	}
 
 	void OnJobSwap(InputValue value)
 	{
-		JobSwap = value.Get<float>() <= 0.5f ? false : true;
+		JobSwap = value.isPressed;
+
+		#region Debug
 
 		if (printDebug) { Helper.PrintTime("Gunner -- OnJobSwap" + "[ " + JobSwap + " ]"); }
+
+		#endregion
 	}
 
 	void OnMapToggle(InputValue value)
 	{
-		MapToggle = value.Get<float>() <= 0.5f ? false : true;
+		MapToggle = value.isPressed;
 
+		#region Debug
 		if (printDebug) { Helper.PrintTime("Gunner -- OnMapToggle" + "[ " + MapToggle + " ]"); }
+		#endregion
 	}
 
 	void OnShoot(InputValue value)
 	{
-		Shoot = value.Get<float>() <= 0.5f ? false : true;
+		Shoot = value.isPressed;
+
+		#region Debug
 
 		if (printDebug) { Helper.PrintTime("Gunner -- OnShoot" + "[ " + Shoot + " ]"); }
+
+		#endregion
 	}
 
 	void OnChangeWeapons(InputValue value)
 	{
 		weaponSwap = value.Get<Vector2>();
 
+		#region Debug
+
 		if (printDebug) { Helper.PrintTime("Gunner -- OnChangeWeapons" + "[ " + weaponSwap + " ]"); }
+
+		#endregion
 	}
+
 	#endregion
 }
