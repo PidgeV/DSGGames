@@ -47,6 +47,17 @@ public class ShipInput : MonoBehaviour
 	//		   [Part of unitys new input system]
 
 	#region Input Functions
+
+	void OnHorizontal(InputValue value)
+	{
+		move.y = -value.Get<float>();
+	}
+
+	void OnVertical(InputValue value)
+	{
+		move.x = -value.Get<float>();
+	}
+
 	void OnMove(InputValue value)
 	{
 		move = value.Get<Vector2>();

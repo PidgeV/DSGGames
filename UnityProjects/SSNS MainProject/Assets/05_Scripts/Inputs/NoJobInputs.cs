@@ -23,11 +23,11 @@ public class NoJobInputs : MonoBehaviour
 	public bool printDebug = false;
 
 	private void Start()
-	{			
+	{
 	}
 
 	private void Update()
-	{		
+	{
 	}
 
 	// IF YOU WANT CODE TO ACTIVATE ON A BUTTON CLICK USE THESE
@@ -36,6 +36,23 @@ public class NoJobInputs : MonoBehaviour
 	//		   [Part of unitys new input system]
 
 	#region Input Functions
+
+	void OnConvertKeyboard()
+	{
+		Debug.Log("Converting.. [ Pilot Inputs Activated ]");
+
+		gameObject.AddComponent<ShipInput>();
+
+		// THIS IS A PLACEHOLDER FRO NOW -- FIND A BETTER WAY OF SETTING THE SHIPS 
+		gameObject.GetComponent<ShipInput>().GiveController(FindObjectOfType<PilotController>());
+
+
+		gameObject.GetComponent<PlayerInput>().defaultActionMap = "Ship";
+		gameObject.GetComponent<PlayerInput>().SwitchCurrentActionMap("Ship");
+
+		Destroy(this);
+	}
+
 	void OnMove(InputValue value)
 	{
 		move = value.Get<Vector2>();
@@ -43,47 +60,49 @@ public class NoJobInputs : MonoBehaviour
 		if (printDebug) { Helper.PrintTime("Controller -- OnMove" + "[ " + move + " ]"); }
 	}
 
-    void OnEnter(InputValue value)
+	void OnEnter(InputValue value)
 	{
 		Enter = value.Get<float>() <= 0.5f ? false : true;
 
 		if (printDebug) { Helper.PrintTime("Ship -- OnEnter" + " [" + Enter + "]"); }
 	}
 
-    void OnBack(InputValue value)
-    {
+	void OnBack(InputValue value)
+	{
 		Back = value.Get<float>() <= 0.5f ? false : true;
 
 		if (printDebug) { Helper.PrintTime("Ship -- OnBack" + " [" + Back + "]"); }
 	}
+
 	#endregion
 
 	// This is used to auto change to gunner or a pilot
 	// This is used for debugging the roles and inputs currency
 	// [WILL BE REMOVED]
 	#region Testing Controller Jobs
+
 	// Removes the NoJobInputs and gives the player the PlayerInput 
 	void OnConvertToPiolet()
-    {
-        Debug.Log("Converting.. [ Pilot Inputs Activated ]");
+	{
+		Debug.Log("Converting.. [ Pilot Inputs Activated ]");
 
-        gameObject.AddComponent<ShipInput>();
+		gameObject.AddComponent<ShipInput>();
 
 		// THIS IS A PLACEHOLDER FRO NOW -- FIND A BETTER WAY OF SETTING THE SHIPS 
-        gameObject.GetComponent<ShipInput>().GiveController(FindObjectOfType<PilotController>());
-		
+		gameObject.GetComponent<ShipInput>().GiveController(FindObjectOfType<PilotController>());
+
 
 		gameObject.GetComponent<PlayerInput>().defaultActionMap = "Ship";
-        gameObject.GetComponent<PlayerInput>().SwitchCurrentActionMap("Ship");
+		gameObject.GetComponent<PlayerInput>().SwitchCurrentActionMap("Ship");
 
-        Destroy(this);
-    }
+		Destroy(this);
+	}
 
-    // Removes the NoJobInputs and gives the player the GunnerInputs 
-    void OnConvertToGunner()
-    {
-        Debug.Log("Converting.. [ Gunner Inputs Activated ]");
-		
+	// Removes the NoJobInputs and gives the player the GunnerInputs 
+	void OnConvertToGunner()
+	{
+		Debug.Log("Converting.. [ Gunner Inputs Activated ]");
+
 
 		gameObject.AddComponent<GunnerInput>();
 
@@ -91,9 +110,10 @@ public class NoJobInputs : MonoBehaviour
 		gameObject.GetComponent<GunnerInput>().GiveController(FindObjectOfType<TurretController>());
 
 		gameObject.GetComponent<PlayerInput>().defaultActionMap = "Gunner";
-        gameObject.GetComponent<PlayerInput>().SwitchCurrentActionMap("Gunner");
+		gameObject.GetComponent<PlayerInput>().SwitchCurrentActionMap("Gunner");
 
-        Destroy(this);
+		Destroy(this);
 	}
+
 	#endregion
 }
