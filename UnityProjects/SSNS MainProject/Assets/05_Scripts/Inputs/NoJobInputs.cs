@@ -20,15 +20,60 @@ public class NoJobInputs : MonoBehaviour
 	public bool Enter = false;
 	public bool Back = false;
 
+	#region Menu Navigation
+
+	// The menu the is currently selected 
+	public MenuElement selectedMenu;
+
+	float menuCounter = 0f;
+	float menuChangeTime = 0.15f;
+
+	#endregion
+
 	// DEBUG
 	public bool printDebug = false;
 
+	// Start is called before the first frame update
 	private void Start()
 	{
+		MenuElement initialMenu = GameObject.FindGameObjectWithTag("FirstMenuElement").GetComponent<MenuElement>();
+
+		selectedMenu = initialMenu;
 	}
 
 	private void Update()
 	{
+		// Increment the timer
+		menuCounter += Time.deltaTime;
+		
+		if (menuCounter > menuChangeTime)
+		{
+			// Reset the counter
+			menuCounter = 0f;
+
+			float sensitivity = 0.5f;
+
+			if (move.x < -sensitivity)
+			{
+				// LEFT
+				selectedMenu.TransitionElement(this, Helper.eMenuDirection.LEFT);
+			}
+			else if (move.x > sensitivity)
+			{
+				// RIGHT
+				selectedMenu.TransitionElement(this, Helper.eMenuDirection.RIGHT);
+			}
+			else if (move.y > sensitivity)
+			{
+				// UP
+				selectedMenu.TransitionElement(this, Helper.eMenuDirection.UP);
+			}
+			else if (move.y < -sensitivity)
+			{
+				// DOWN
+				selectedMenu.TransitionElement(this, Helper.eMenuDirection.DOWN);
+			}
+		}
 	}
 
 	// IF YOU WANT CODE TO ACTIVATE ON A BUTTON CLICK USE THESE
@@ -40,24 +85,7 @@ public class NoJobInputs : MonoBehaviour
 
 	void OnMove(InputValue value)
 	{
-		Vector2 input = value.Get<Vector2>();
-
-		if (input.x < -0.5f)
-		{
-			Helper.PrintTime("Left");
-		}
-		else if (input.x > 0.5f)
-		{
-			Helper.PrintTime("Right");
-		}
-		else if (input.y > 0.5f)
-		{
-			Helper.PrintTime("Up");
-		}
-		else if (input.y < -0.5f)
-		{
-			Helper.PrintTime("Down");
-		}
+		move = value.Get<Vector2>();
 
 		#region Debug
 

@@ -76,3 +76,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d71c56b565a3db4a85a9ac66f9c8674, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  move: {x: 0, y: 0}
+  Enter: 0
+  Back: 0
+  initialMenu: {fileID: 0}
+  selectedMenu: {fileID: 0}
+  printDebug: 0
