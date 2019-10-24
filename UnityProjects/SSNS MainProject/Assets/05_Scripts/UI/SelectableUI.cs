@@ -1,23 +1,47 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-// The MenuElements Class represents elements in a menu the player can select
+// The Selectable UI script holds what should be switched to, On input
 
+/// <summary>
+/// A selectable element in a Menu
+/// </summary>
 public class SelectableUI : MonoBehaviour
 {
+	private Button button;
+
+	// Start is called before the first frame update
+	private void Start()
+	{
+		button = GetComponent<Button>();
+	}
+
+	/// <summary>
+	/// Use the Button
+	/// </summary>
+	public void Press()
+	{
+		if (button)
+		{
+			Debug.Log("test");
+			button.onClick.Invoke();
+		}
+	}
+
 	#region Transition
 
-	// LEFT
+	/// <summary> What to change to when hitting LEFT </summary>
 	public SelectableUI TransitionLeft;
 
-	// RIGHT
+	/// <summary> What to change to when hitting RIGHT </summary>
 	public SelectableUI TransitionRight;
 
-	// UP
+	/// <summary> What to change to when hitting UP </summary>
 	public SelectableUI TransitionUp;
 
-	// DOWN
+	/// <summary> What to change to when hitting DOWN </summary>
 	public SelectableUI TransitionDown;
 
 	#endregion

@@ -917,7 +917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 789e2d084d8705841b67add82a20fd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingSelection: {fileID: 428625849}
+  StartingSelection: {fileID: 428625849}
 --- !u!1 &203910391
 GameObject:
   m_ObjectHideFlags: 0
@@ -1181,7 +1181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 789e2d084d8705841b67add82a20fd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingSelection: {fileID: 371809039}
+  StartingSelection: {fileID: 371809039}
 --- !u!1 &213468643
 GameObject:
   m_ObjectHideFlags: 0
@@ -3064,7 +3064,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 789e2d084d8705841b67add82a20fd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingSelection: {fileID: 203910396}
+  StartingSelection: {fileID: 203910396}
 --- !u!1 &837129205
 GameObject:
   m_ObjectHideFlags: 0
@@ -4898,8 +4898,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0029d2681608234a84f22b2b9ffe1d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingMenu: {fileID: 713883184}
-  selector: {fileID: 37768355}
+  StartingMenu: {fileID: 713883184}
+  Selector: {fileID: 37768355}
 --- !u!4 &1414875885
 Transform:
   m_ObjectHideFlags: 0
@@ -5027,7 +5027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 789e2d084d8705841b67add82a20fd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingSelection: {fileID: 326213465}
+  StartingSelection: {fileID: 326213465}
 --- !u!1 &1484726983
 GameObject:
   m_ObjectHideFlags: 0
@@ -5371,7 +5371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 789e2d084d8705841b67add82a20fd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingSelection: {fileID: 388955771}
+  StartingSelection: {fileID: 388955771}
 --- !u!1 &1558717904
 GameObject:
   m_ObjectHideFlags: 0
@@ -5820,7 +5820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b14498fb2cdc65c43bd27f5a21721106, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  players: []
+  Players: []
 --- !u!4 &1671315349
 Transform:
   m_ObjectHideFlags: 0
@@ -6397,7 +6397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 789e2d084d8705841b67add82a20fd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingSelection: {fileID: 942861634}
+  StartingSelection: {fileID: 942861634}
 --- !u!1 &1836569279
 GameObject:
   m_ObjectHideFlags: 0
@@ -6512,7 +6512,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 789e2d084d8705841b67add82a20fd12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingSelection: {fileID: 1509056743}
+  StartingSelection: {fileID: 1509056743}
 --- !u!1 &1880631722
 GameObject:
   m_ObjectHideFlags: 0

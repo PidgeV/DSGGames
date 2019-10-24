@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The Singleton to the PlayerManager Script
+/// </summary>
 public class PlayerManager : MonoBehaviour
 {
-	// Singleton
+	// The Singleton reference
 	public  static PlayerManager Instance { get { return instance; } }
 	private static PlayerManager instance;
 
-	// The Players currently active
-	public List<Controller> players;
+	/// <summary> The list of Players currently active </summary>
+	public List<Controller> Players;
 
 	// Setting up the Singleton
 	private void Awake()
@@ -24,18 +27,33 @@ public class PlayerManager : MonoBehaviour
 		}
 	}
 
-	// When a player used unity input system to join let us know
-	public void OnPlayerJoined()
+	/// <summary>
+	/// When a player joins this is called from the Controller base class
+	/// </summary>
+	public PlayerData Join(Controller newPlayer)
 	{
-		Helper.PrintTime("A New Player Has Joined");
-	}
-
-	// When a controller  joins is uses start to add itself to players
-	public void Join(Controller newPlayer)
-	{
-		if (!players.Contains(newPlayer))
+		if (Players.Contains(newPlayer))
 		{
-			players.Add(newPlayer);
+			return null;
 		}
+
+		Players.Add(newPlayer);
+
+		return new PlayerData(Players.Count - 1);
+	}
+}
+
+/// <summary>
+/// The Player Data Class holds the data for a Player / Controller
+/// </summary>
+public class PlayerData
+{
+	/// <summary> The position in the PlayerManager.Players List  </summary>
+	public int ID = 0;
+
+	// The Constructor
+	public PlayerData(int iD)
+	{
+		ID = iD;
 	}
 }

@@ -4,11 +4,14 @@ using UnityEngine;
 
 // NOTE -- This class is mainly used for clarity.
 
-// The Menu Class represents large Menus as opposed to,
-// The MenuElements Class witch  represent elements in a menu the player can select
+// The Menu class represents large Menus, as opposed to, The MenuElements class 
+// witch represents a single element in a menu that the player can select
 
+/// <summary>
+/// A Game Menu
+/// </summary>
 public class Menu : MonoBehaviour
 {
-	// The first item to select when entering a menu
-	public SelectableUI startingSelection;
+	/// <summary> The first element that should be selected on entering a new menu </summary>
+	public SelectableUI StartingSelection;
 }

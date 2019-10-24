@@ -15,15 +15,10 @@ public class NoJobInputs : Controller
 	// The last input -- This is the same as Input.GetAxis();
 	public Vector2 move = new Vector2();
 
-	// If you want to know if a button is being held down 
-	// You can reference these
-	public bool Enter = false;
-	public bool Back = false;
-
 	#region Menu Navigation
 
 	// The sensitivity of an input to register for a menu change [ 0 - 1]
-	float sensitivity = 0.4f;
+	float sensitivity = 0.2f;
 
 	// The Time since our last menu input
 	float menuCounter = 0f;
@@ -109,22 +104,23 @@ public class NoJobInputs : Controller
 
 	void OnEnter(InputValue value)
 	{
-		Enter = value.isPressed;
+		if (value.isPressed)
+		{
+			UIManager.Instance.Enter();
+		}
 
 		#region Debug
 
-		if (printDebug) { Helper.PrintTime("Ship -- OnEnter" + " [" + Enter + "]"); }
+		if (printDebug) { Helper.PrintTime("Ship -- OnEnter" + " [" + value.isPressed + "]"); }
 
 		#endregion
 	}
 
 	void OnBack(InputValue value)
 	{
-		Back = value.isPressed;
-
 		#region Debug
 
-		if (printDebug) { Helper.PrintTime("Ship -- OnBack" + " [" + Back + "]"); }
+		if (printDebug) { Helper.PrintTime("Ship -- OnBack" + " [" + value.isPressed + "]"); }
 
 		#endregion
 	}

@@ -7,23 +7,27 @@ using static Helper;
 
 // NOTE -- Use the Tag "Menu" on all the parent items [Canvass] per menu
 
-// The UI Manager controlles the game menus
-// This is mainly controlled through the public ChangeMenu() function allowing you to transition menus
+// The UI Manager controlles the games menus
+// This is mainly controlled through the public ChangeMenu() function, allowing you to transition menus
+
+/// <summary>
+/// The Singleton to the UIManager Script
+/// </summary>
 public class UIManager : MonoBehaviour
 {
-	// Singleton
+	// The Singleton reference
 	public  static UIManager Instance { get { return instance; } }
 	private static UIManager instance;
 
-	// The current menu
+	/// <summary> The first Menu to load on start </summary>
+	public  Menu StartingMenu;
 	private Menu currentMenu;
-	public  Menu startingMenu;
-
-	// current seelection
+	
+	/// <summary> The current Menu that is selected </summary>
 	private SelectableUI currentlySelected;
 
-	// This should be a pnl
-	public Image selector;
+	/// <summary> A Reference to the selector gameobject </summary>
+	public Image Selector;
 
 	// Setting up the Singleton
 	private void Awake()
@@ -48,10 +52,38 @@ public class UIManager : MonoBehaviour
 		}
 
 		// Change to the starting menu
-		ChangeMenu(startingMenu);
+		ChangeMenu(StartingMenu);
 	}
 
-	// Change the menu and keep the last menu
+	/// <summary>
+	///  When the Quit Button is pressed
+	/// </summary>
+	public void Quit()
+	{
+		// Application.Quit();
+		Helper.PrintTime("You are quitting!");
+	}
+	
+	/// <summary>
+	///  When the Start Game Button is pressed
+	/// </summary>
+	public void StartGame()
+	{
+		Helper.PrintTime("You are going into game!");
+	}
+
+	/// <summary>
+	/// Try to use what is selected
+	/// </summary>
+	public void Enter()
+	{
+		currentlySelected.Press();
+	}
+
+	/// <summary>
+	///  Change the currently selected Menu
+	/// </summary>
+	/// <param name="newMenu">The menu to change to </param>
 	public void ChangeMenu(Menu newMenu)
 	{
 		if (currentMenu)
@@ -61,25 +93,14 @@ public class UIManager : MonoBehaviour
 
 		currentMenu = newMenu;
 		currentMenu.gameObject.SetActive(true);
-
-		// Change to the starting selected element
-		UpdateElement(currentMenu.startingSelection);
+		
+		UpdateElement(currentMenu.StartingSelection);
 	}
-
-	// Quit the game
-	public void Quit()
-	{
-		// Application.Quit();
-		Helper.PrintTime("You are quitting!");
-	}
-
-	// Start the game 
-	public void StartGame()
-	{
-		Helper.PrintTime("You are going into game!");
-	}
-
-	// Move the selected Menu
+	
+	/// <summary>
+	/// Handles a Menu change based on a given direction
+	/// </summary>
+	/// <param name="direction">The direction that was pressed</param>
 	public void TransitionElement(eMenuDirection direction)
 	{
 		switch (direction)
@@ -108,35 +129,55 @@ public class UIManager : MonoBehaviour
 		}
 	}
 
-	//
+	/// <summary>
+	/// Re-Target a new Menu element
+	/// </summary>
+	/// <param name="newTarget">The direction to handle</param>
 	public void UpdateElement(SelectableUI newTarget)
 	{
-		// If the new target is null we don't do anything
+		// This Method takes in a direction and tries to move the Selector to any
+		// selectable menus  in that direction
+		
+		// First we check if the menu that we currently are at is null
 		if (newTarget == null)
 		{
+			// If it is null, that means the direction we inputted leads to nothing
+
+			// If what we are currently at is not active, that means we have just switched menus
 			if (!currentlySelected.gameObject.activeSelf)
 			{
-				selector.gameObject.SetActive(false);
+				// So We Want to disable ourselves and do nothing
+				Selector.gameObject.SetActive(false);
 			}
 
+			// If we are active and the input leads to nothing, that means we can't go there. So do nothing
 			return;
 		}
 
-		selector.gameObject.SetActive(true);
+		// If the new target is NOT null
 
-		// Set the selector  to a child of the canvas in a menu
-		selector.transform.parent = newTarget.GetComponentInParent<Canvas>().gameObject.transform;
+		// We want to make sure our Selector is active
+		Selector.gameObject.SetActive(true);
+		
+		// We then set our current parent to the active Menu / Canvas
+		Selector.transform.parent = newTarget.GetComponentInParent<Canvas>().gameObject.transform;
 
-		// Set the new target	
+		// We want to move ourselves to the top of the siblings 
+		Selector.transform.SetSiblingIndex(0);
+
+		// Set ourselves to the new target
 		currentlySelected = newTarget;
 
-		// SET new POSITION
-		selector.transform.position = newTarget.transform.position;
+		// Finally we have to update our selector
+		// We need to reposition it and resize it depending on what's selected
 
-		// SET new SIZE
+		// POSITION
+		Selector.transform.position = newTarget.transform.position;
+
+		// SIZE
 		Vector2 newSize = newTarget.GetComponent<RectTransform>().sizeDelta;
 		Vector2 boarder = Vector2.one * 15.0f;
 
-		selector.rectTransform.sizeDelta = newSize + boarder;
+		Selector.rectTransform.sizeDelta = newSize + boarder;
 	}
 }
