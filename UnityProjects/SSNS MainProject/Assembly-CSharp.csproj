@@ -67,6 +67,7 @@
     <Compile Include="Assets\05_Scripts\Environment\TargetMove.cs" />
     <Compile Include="Assets\05_Scripts\GameManager.cs" />
     <Compile Include="Assets\05_Scripts\Helper.cs" />
+    <Compile Include="Assets\05_Scripts\Inputs\Controller.cs" />
     <Compile Include="Assets\05_Scripts\Inputs\GunnerInput.cs" />
     <Compile Include="Assets\05_Scripts\Inputs\NoJobInputs.cs" />
     <Compile Include="Assets\05_Scripts\Inputs\PlayerManager.cs" />
@@ -85,7 +86,7 @@
     <Compile Include="Assets\05_Scripts\Shots\Stuff I Dident want to mess with\BulletScript.cs" />
     <Compile Include="Assets\05_Scripts\Shots\Stuff I Dident want to mess with\ShootingController.cs" />
     <Compile Include="Assets\05_Scripts\UI\Menu.cs" />
-    <Compile Include="Assets\05_Scripts\UI\MenuElement.cs" />
+    <Compile Include="Assets\05_Scripts\UI\SelectableUI.cs" />
     <Compile Include="Assets\05_Scripts\UI\UIManager.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/GitHub/DSGGames/UnityProjects/SSNS MainProject/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>

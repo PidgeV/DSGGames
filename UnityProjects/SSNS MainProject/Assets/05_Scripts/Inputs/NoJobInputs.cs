@@ -10,7 +10,7 @@ using UnityEngine.InputSystem;
 // Click right on the d-pad to become a Gunner
 // Click left on the d-pad to become a Piolet 
 
-public class NoJobInputs : MonoBehaviour
+public class NoJobInputs : Controller
 {
 	// The last input -- This is the same as Input.GetAxis();
 	public Vector2 move = new Vector2();
@@ -22,10 +22,13 @@ public class NoJobInputs : MonoBehaviour
 
 	#region Menu Navigation
 
-	// The menu the is currently selected 
-	public MenuElement selectedMenu;
+	// The sensitivity of an input to register for a menu change [ 0 - 1]
+	float sensitivity = 0.4f;
 
+	// The Time since our last menu input
 	float menuCounter = 0f;
+
+	// The Minimum  time between menu inputs
 	float menuChangeTime = 0.15f;
 
 	#endregion
@@ -36,45 +39,55 @@ public class NoJobInputs : MonoBehaviour
 	// Start is called before the first frame update
 	private void Start()
 	{
-		MenuElement initialMenu = GameObject.FindGameObjectWithTag("FirstMenuElement").GetComponent<MenuElement>();
-
-		selectedMenu = initialMenu;
+		// Join the game
+		JoinGame();
 	}
 
 	private void Update()
 	{
+		HandleMenuInputs();
+	}
+
+	// The Standard methods like HandleMenuInputs()
+	#region Class Methods
+
+	private void HandleMenuInputs()
+	{
 		// Increment the timer
 		menuCounter += Time.deltaTime;
-		
+
 		if (menuCounter > menuChangeTime)
 		{
 			// Reset the counter
 			menuCounter = 0f;
 
-			float sensitivity = 0.5f;
-
+			// LEFT
 			if (move.x < -sensitivity)
 			{
-				// LEFT
-				selectedMenu.TransitionElement(this, Helper.eMenuDirection.LEFT);
+				UIManager.Instance.TransitionElement(Helper.eMenuDirection.LEFT);
 			}
-			else if (move.x > sensitivity)
+
+			// RIGHT
+			if (move.x > sensitivity)
 			{
-				// RIGHT
-				selectedMenu.TransitionElement(this, Helper.eMenuDirection.RIGHT);
+				UIManager.Instance.TransitionElement(Helper.eMenuDirection.RIGHT);
 			}
-			else if (move.y > sensitivity)
+
+			// UP
+			if (move.y > sensitivity)
 			{
-				// UP
-				selectedMenu.TransitionElement(this, Helper.eMenuDirection.UP);
+				UIManager.Instance.TransitionElement(Helper.eMenuDirection.UP);
 			}
-			else if (move.y < -sensitivity)
+
+			// DOWN
+			if (move.y < -sensitivity)
 			{
-				// DOWN
-				selectedMenu.TransitionElement(this, Helper.eMenuDirection.DOWN);
+				UIManager.Instance.TransitionElement(Helper.eMenuDirection.DOWN);
 			}
 		}
 	}
+
+	#endregion
 
 	// IF YOU WANT CODE TO ACTIVATE ON A BUTTON CLICK USE THESE
 

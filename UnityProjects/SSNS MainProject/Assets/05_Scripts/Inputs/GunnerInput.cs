@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 // NOTE -- This script shoud not be on anything by default
 //           It is given to an Input Object after the player selects their role
 
-public class GunnerInput : MonoBehaviour
+public class GunnerInput : Controller
 {
 	public TurretController controller;
 
