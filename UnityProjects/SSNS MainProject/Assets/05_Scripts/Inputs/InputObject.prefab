@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 807003690540446572}
   - component: {fileID: 807003690540446573}
-  - component: {fileID: 9084094107012790673}
+  - component: {fileID: 3149275968840380891}
   m_Layer: 0
   m_Name: InputObject
   m_TagString: Untagged
@@ -64,7 +64,7 @@ MonoBehaviour:
   m_DefaultActionMap: 17018e8b-530b-425f-b5fa-32947213d900
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &9084094107012790673
+--- !u!114 &3149275968840380891
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -73,12 +73,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 807003690540446575}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d71c56b565a3db4a85a9ac66f9c8674, type: 3}
+  m_Script: {fileID: 11500000, guid: 03f1a70ff9f2c0e42a7e741a92415011, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  move: {x: 0, y: 0}
-  Enter: 0
-  Back: 0
-  initialMenu: {fileID: 0}
-  selectedMenu: {fileID: 0}
+  MenuMode: 0
+  Sensitivity: 0.2
   printDebug: 0

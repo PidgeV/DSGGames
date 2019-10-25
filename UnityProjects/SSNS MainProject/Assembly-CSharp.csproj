@@ -69,7 +69,7 @@
     <Compile Include="Assets\05_Scripts\Helper.cs" />
     <Compile Include="Assets\05_Scripts\Inputs\Controller.cs" />
     <Compile Include="Assets\05_Scripts\Inputs\GunnerInput.cs" />
-    <Compile Include="Assets\05_Scripts\Inputs\NoJobInputs.cs" />
+    <Compile Include="Assets\05_Scripts\Inputs\IdleInputs.cs" />
     <Compile Include="Assets\05_Scripts\Inputs\PlayerManager.cs" />
     <Compile Include="Assets\05_Scripts\Inputs\ShipInput.cs" />
     <Compile Include="Assets\05_Scripts\Player\DebugControllers\PilotController.cs" />

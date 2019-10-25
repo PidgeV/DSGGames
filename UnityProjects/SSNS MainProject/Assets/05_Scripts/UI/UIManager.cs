@@ -22,7 +22,9 @@ public class UIManager : MonoBehaviour
 	/// <summary> The first Menu to load on start </summary>
 	public  Menu StartingMenu;
 	private Menu currentMenu;
-	
+
+	private Menu lastMenu;
+
 	/// <summary> The current Menu that is selected </summary>
 	private SelectableUI currentlySelected;
 
@@ -81,22 +83,43 @@ public class UIManager : MonoBehaviour
 	}
 
 	/// <summary>
-	///  Change the currently selected Menu
+	/// Change the currently selected Menu
 	/// </summary>
-	/// <param name="newMenu">The menu to change to </param>
+	/// <param name="newMenu">The new Menu to display</param>
+	/// <param name="allowReturn">If the player can return to the last menu</param>
 	public void ChangeMenu(Menu newMenu)
-	{
+	{ 
+		// Turn off the old menu
 		if (currentMenu)
 		{
 			currentMenu.gameObject.SetActive(false);
 		}
 
+		// Set our last Menu 
+		lastMenu = currentMenu;
+
+		// Update the current menu to the new menu
 		currentMenu = newMenu;
+
+		// Turn on the new menu
 		currentMenu.gameObject.SetActive(true);
 		
+		// Target the initial target when loading a new menu
 		UpdateElement(currentMenu.StartingSelection);
 	}
 	
+	/// <summary>
+	/// Returns to the last menu
+	/// </summary>
+	public void ReturnToLastMenu()
+	{
+		if (lastMenu)
+		{
+			ChangeMenu(lastMenu);
+			lastMenu = null;
+		}
+	}
+
 	/// <summary>
 	/// Handles a Menu change based on a given direction
 	/// </summary>

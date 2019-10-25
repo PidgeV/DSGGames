@@ -49,11 +49,11 @@ public class PlayerManager : MonoBehaviour
 public class PlayerData
 {
 	/// <summary> The position in the PlayerManager.Players List  </summary>
-	public int ID = 0;
+ 	public int playerID = 0;
 
 	// The Constructor
-	public PlayerData(int iD)
+	public PlayerData(int newID)
 	{
-		ID = iD;
+		playerID = newID;
 	}
 }

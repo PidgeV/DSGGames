@@ -13,7 +13,7 @@ public class SelectableUI : MonoBehaviour
 	private Button button;
 
 	// Start is called before the first frame update
-	private void Start()
+	private void Awake()
 	{
 		button = GetComponent<Button>();
 	}
@@ -25,7 +25,6 @@ public class SelectableUI : MonoBehaviour
 	{
 		if (button)
 		{
-			Debug.Log("test");
 			button.onClick.Invoke();
 		}
 	}

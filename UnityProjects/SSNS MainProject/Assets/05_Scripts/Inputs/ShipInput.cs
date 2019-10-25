@@ -6,12 +6,15 @@ using UnityEngine.InputSystem;
 // NOTE -- This script shoud not be on anything by default
 //           It is given to an Input Object after the player selects their role
 
+/// <summary>
+/// The Ship Input script controls inputs for a Pilot Controller
+/// </summary>
 public class ShipInput : Controller
 {
 	public PilotController controller;
 
 	// The last input -- This is the same as Input.GetAxis();
-	public Vector2 move = new Vector2();
+	Vector2 move = new Vector2();
 
 	// If you want to know if a button is being held down 
 	// You can reference these
@@ -19,27 +22,31 @@ public class ShipInput : Controller
 	public bool Boosting = false;
 	public bool JobSwap = false;
 	public bool Break = false;
-
-	// DEBUG
-	public bool printDebug = false;
-
+	
 	private void Update()
 	{
-		if (controller)
+		if (MenuMode)
 		{
-			//if (controller.AIMode)
-			//{
-			// This is where an AI controller can take over
-			//}
-			//else
-			//{
-			//	controller.Move(move);
-			//}
+			// Increment the timer
+			menuCounter += Time.deltaTime;
 
-			controller.Move(move);
-			controller.Boost(Boosting);
-			controller.SetShipTransfrom(move, Boosting);
+			if (menuCounter > menuChangeTime)
+			{
+				// Reset the counter
+				menuCounter = 0f;
+
+				SendMenuInput(move);
+			}
 		}
+		else
+		{
+			if (controller)
+			{
+				controller.Move(move);
+				controller.Boost(Boosting);
+				controller.SetShipTransfrom(move, Boosting);
+			}
+		}		
 	}
 
 	// You NEED to give this script a PilotController for it to update anything

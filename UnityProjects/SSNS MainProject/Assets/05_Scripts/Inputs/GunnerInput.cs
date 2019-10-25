@@ -6,6 +6,9 @@ using UnityEngine.InputSystem;
 // NOTE -- This script shoud not be on anything by default
 //           It is given to an Input Object after the player selects their role
 
+/// <summary>
+/// The Gunner Input script controls inputs for a Gunner Controller
+/// </summary>
 public class GunnerInput : Controller
 {
 	public TurretController controller;
@@ -21,23 +24,27 @@ public class GunnerInput : Controller
 	public bool JobSwap = false;
 	public bool Shoot = false;
 
-	// DEBUG
-	public bool printDebug = false;
-
 	private void Update()
 	{
-		if (controller)
+		if (MenuMode)
 		{
-			//if (controller.AIMode)
-			//{
-			// This is where an AI controller can take over
-			//}
-			//else
-			//{
-			//	controller.Move(move);
-			//}
+			// Increment the timer
+			menuCounter += Time.deltaTime;
 
-			controller.Move(move);
+			if (menuCounter > menuChangeTime)
+			{
+				// Reset the counter
+				menuCounter = 0f;
+
+				SendMenuInput(move);
+			}
+		}
+		else
+		{
+			if (controller)
+			{
+				controller.Move(move);
+			}
 		}
 	}
 
