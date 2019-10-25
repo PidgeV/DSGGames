@@ -22,7 +22,13 @@ public class ShipInput : Controller
 	public bool Boosting = false;
 	public bool JobSwap = false;
 	public bool Break = false;
-	
+
+	// OnDestroy is called when the gameobject is destroyed 
+	private void OnDestroy()
+	{
+		LeaveGame();
+	}
+
 	private void Update()
 	{
 		if (MenuMode)
@@ -61,17 +67,6 @@ public class ShipInput : Controller
 	//		   [Part of unitys new input system]
 
 	#region Input Functions
-
-	void OnKeyboardMove(InputValue value)
-	{
-		move = value.Get<Vector2>();
-
-		#region Debug
-
-		if (printDebug) { Helper.PrintTime("Ship -- OnKeyboardMove" + "[ " + move + " ]"); }
-
-		#endregion
-	}
 
 	void OnMove(InputValue value)
 	{

@@ -24,6 +24,12 @@ public class GunnerInput : Controller
 	public bool JobSwap = false;
 	public bool Shoot = false;
 
+	// OnDestroy is called when the gameobject is destroyed 
+	private void OnDestroy()
+	{
+		LeaveGame();
+	}
+
 	private void Update()
 	{
 		if (MenuMode)

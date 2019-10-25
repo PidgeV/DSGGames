@@ -23,6 +23,12 @@ public class IdleInputs : Controller
 		MenuMode = true;
 	}
 
+	// OnDestroy is called when the gameobject is destroyed 
+	private void OnDestroy()
+	{
+		LeaveGame();
+	}
+
 	private void Update()
 	{
 		if (MenuMode)
@@ -96,28 +102,9 @@ public class IdleInputs : Controller
 	// This is used for debugging the roles and inputs currency
 	// [WILL BE REMOVED]
 	#region Testing Controller Jobs
-
-	// CONTROLLER
+		
 	// Removes the NoJobInputs and gives the player the PlayerInput 
 	void OnConvertToPiolet()
-	{
-		Debug.Log("Converting.. [ Pilot Inputs Activated ]");
-
-		gameObject.AddComponent<ShipInput>();
-
-		// THIS IS A PLACEHOLDER FRO NOW -- FIND A BETTER WAY OF SETTING THE SHIPS 
-		gameObject.GetComponent<ShipInput>().GiveController(FindObjectOfType<PilotController>());
-		gameObject.GetComponent<ShipInput>().PlayerData = this.PlayerData;
-
-		gameObject.GetComponent<PlayerInput>().defaultActionMap = "Ship";
-		gameObject.GetComponent<PlayerInput>().SwitchCurrentActionMap("Ship");
-
-		Destroy(this);
-	}
-
-	// KAYBOARD
-	// Removes the NoJobInputs and gives the player the PlayerInput 
-	void OnConvertKeyboard()
 	{
 		Debug.Log("Converting.. [ Pilot Inputs Activated ]");
 

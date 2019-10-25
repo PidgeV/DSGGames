@@ -39,6 +39,15 @@ public class Controller : MonoBehaviour
 	}
 
 	/// <summary>
+	/// When a player / controller leaves the game this is called from a derived class.
+	/// The LeaveGame() function cleans up this player's data.
+	/// </summary>
+	public void LeaveGame()
+	{
+		PlayerManager.Instance.Disconnect(PlayerData);
+	}
+
+	/// <summary>
 	/// Send an input direction to the Menu
 	/// </summary>
 	public void SendMenuInput(Vector2 input)
