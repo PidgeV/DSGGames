@@ -389,7 +389,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &7878452995472688948
 Transform:
   m_ObjectHideFlags: 0
@@ -438,6 +438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c5a3cd6654346d4c8d96027cfdd78a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugDraw: 1
   player: {fileID: 0}
   resetPositions:
   - {fileID: 0}
@@ -453,21 +454,33 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  debugDraw: 1
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 256
-  collisionCheckDistance: 100
+  collisionCheckDistance: 75
   regularSpeed: 75
   chargeSpeed: 150
-  acceleration: 20
-  chargeAcceleration: 40
+  acceleration: 30
+  chargeAcceleration: 50
   rotationForce: 2
-  distanceToTarget: 10
+  distanceToTarget: 9
   calculateInterval: 0.05
   damageDivision: 1
   avoidTime: 1
-  raySize: 10
+  raySize: 15
 --- !u!114 &7878452995472688947
 MonoBehaviour:
   m_ObjectHideFlags: 0

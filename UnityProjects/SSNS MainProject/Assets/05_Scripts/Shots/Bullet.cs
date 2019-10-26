@@ -6,23 +6,32 @@ using UnityEngine;
 //		   The Damage script holds the damage members for any collidables including bullets
 
 // The Bullet Class keeps track of how long a projectile should stay alive and how / how fast it should move
+[RequireComponent(typeof(Rigidbody))]
 public class Bullet : MonoBehaviour
 {
 	// The time the projectile is alive after its Instantiated
-	public float lifetime = 0.8f;
+	public float lifetime = 10f;
 
 	// The speed the projectile moves
+    [Tooltip("Speed in m/s")]
 	public float speed = 50.0f;
 
 	// A counter till the projectile will be destroyed
 	float counter = 0.0f;
 
-	// Update is called once per frame
-	void Update()
-	{
-		// Move the projectile forward
-		transform.position += transform.forward * Time.deltaTime * speed;
+    private void Start()
+    {
+        //Propel bullet on spawn
+        Vector3 rotation = transform.forward;
+        rotation.Normalize();
 
+        Rigidbody rb = GetComponent<Rigidbody>();
+        rb.velocity = rotation * speed;
+    }
+
+    // Update is called once per frame
+    void Update()
+	{
 		// Check if the projectile has to be destroyed
 		if (counter > lifetime)
 		{
@@ -33,4 +42,14 @@ public class Bullet : MonoBehaviour
 			counter += Time.deltaTime;
 		}
 	}
+
+    private void OnCollisionEnter(Collision collision)
+    {
+            Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject);
+    }
 }
