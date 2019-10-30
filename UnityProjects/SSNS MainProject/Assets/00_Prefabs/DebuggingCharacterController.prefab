@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6311488307546452695}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,9 +45,9 @@ GameObject:
   - component: {fileID: 6311488307660015730}
   - component: {fileID: 293799785}
   - component: {fileID: 293799787}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: DebuggingCharacterController
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,8 +82,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ship: {fileID: 6311488307546452692}
+  acceleration: 40
   speed: 10
-  boost: 2
+  boostMultiplier: 2
   rotationSpeed: 75
   simulatedRotation: {x: 55, y: 30}
   simulatedBoost: 3
@@ -104,8 +105,8 @@ MonoBehaviour:
   maxShield: 100
   life: 12
   shield: 12
-  armor: 1
-  regenSpeed: 1
+  armor: 10
+  regenSpeed: 2
 --- !u!54 &293799785
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -114,9 +115,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6311488307660015734}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 1
-  m_AngularDrag: 1
+  m_Mass: 30
+  m_Drag: 1.8
+  m_AngularDrag: 5
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -133,7 +134,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.7325135, y: 1.4273272, z: 0.5935695}
+  m_Size: {x: 2.23, y: 0.86, z: 2.15}
   m_Center: {x: -0.006503761, y: 0.21366358, z: 0.20321524}
 --- !u!1 &6311488307962374894
 GameObject:
@@ -145,7 +146,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6311488307962374889}
   - component: {fileID: 6311488307962374888}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: DialManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +191,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6311488308364198417}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ShipModel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -222,7 +223,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6311488308673513972}
   - component: {fileID: 6311488308673513975}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -268,7 +269,7 @@ GameObject:
   - component: {fileID: 6311488308848312269}
   - component: {fileID: 6311488308848312270}
   - component: {fileID: 6311488308848312271}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Reticle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -348,7 +349,7 @@ GameObject:
   - component: {fileID: 6311488309082105206}
   - component: {fileID: 6311488309082105201}
   - component: {fileID: 850206607}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GunnerCamera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -381,12 +382,12 @@ Camera:
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
+  m_projectionMatrixMode: 2
   m_GateFitMode: 2
   m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
+  m_FocalLength: 14.3010435
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -394,8 +395,8 @@ Camera:
     width: 1
     height: 0.5
   near clip plane: 0.01
-  far clip plane: 1000
-  field of view: 50
+  far clip plane: 15000
+  field of view: 80
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -408,7 +409,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 0
   m_AllowMSAA: 0
-  m_AllowDynamicResolution: 0
+  m_AllowDynamicResolution: 1
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -446,10 +447,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   volumeAnchorOverride: {fileID: 0}
-  antialiasing: 0
+  antialiasing: 3
   SMAAQuality: 2
-  dithering: 0
-  stopNaNs: 0
+  dithering: 1
+  stopNaNs: 1
   physicalParameters:
     m_Iso: 200
     m_ShutterSpeed: 0.005
@@ -460,7 +461,7 @@ MonoBehaviour:
     m_Anamorphism: 0
   flipYMode: 0
   fullscreenPassthrough: 0
-  allowDynamicResolution: 0
+  allowDynamicResolution: 1
   customRenderingSettings: 0
   invertFaceCulling: 0
   probeLayerMask:
@@ -538,7 +539,7 @@ GameObject:
   - component: {fileID: 6311488309083270446}
   - component: {fileID: 6311488309083270447}
   - component: {fileID: 2360347289715566052}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: ShipCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -570,12 +571,12 @@ Camera:
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_projectionMatrixMode: 1
+  m_projectionMatrixMode: 2
   m_GateFitMode: 2
   m_FOVAxisMode: 0
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
-  m_FocalLength: 50
+  m_FocalLength: 14.3010435
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -583,8 +584,8 @@ Camera:
     width: 1
     height: 0.5
   near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 45
+  far clip plane: 15000
+  field of view: 80
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -597,7 +598,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 0
   m_AllowMSAA: 0
-  m_AllowDynamicResolution: 0
+  m_AllowDynamicResolution: 1
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -629,10 +630,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1
   volumeAnchorOverride: {fileID: 0}
-  antialiasing: 0
+  antialiasing: 3
   SMAAQuality: 2
-  dithering: 0
-  stopNaNs: 0
+  dithering: 1
+  stopNaNs: 1
   physicalParameters:
     m_Iso: 200
     m_ShutterSpeed: 0.005
@@ -643,7 +644,7 @@ MonoBehaviour:
     m_Anamorphism: 0
   flipYMode: 0
   fullscreenPassthrough: 0
-  allowDynamicResolution: 0
+  allowDynamicResolution: 1
   customRenderingSettings: 0
   invertFaceCulling: 0
   probeLayerMask:
@@ -720,6 +721,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 2a616e2962c97454694661c9c0f57cf1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -692157946723186161, guid: 2a616e2962c97454694661c9c0f57cf1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2627645908932362778, guid: 2a616e2962c97454694661c9c0f57cf1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -307102812808688555, guid: 2a616e2962c97454694661c9c0f57cf1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753727868843937155, guid: 2a616e2962c97454694661c9c0f57cf1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8201011668193494629, guid: 2a616e2962c97454694661c9c0f57cf1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 2a616e2962c97454694661c9c0f57cf1,
         type: 3}

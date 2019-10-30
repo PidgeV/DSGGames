@@ -18,10 +18,7 @@ public class ChaserEnemy : InterceptCalculationClass
     public GameObject[] resetPositions;
     public LayerMask obstacleLayer;
     public float collisionCheckDistance = 150f;
-    [Space(15)]
-    [Tooltip("The speed the ship will travel in meters per second")]
-    public float regularSpeed = 150f;
-    public float chargeSpeed = 400f;
+
     [Space(15)]
     [Tooltip("The acceleration of the ship in meters per second")]
     public float acceleration = 20f;
@@ -96,7 +93,7 @@ public class ChaserEnemy : InterceptCalculationClass
 
             AvoidObstacles(ref direction); // will change direction towards the right if an obstacle is in the way
 
-            //rotation
+            //Rotation
             if (!obstacleHit && obstacleTimer == 0)
             {
                 direction = interceptPoint - transform.position; // sets desired direction to target intercept point
@@ -119,24 +116,14 @@ public class ChaserEnemy : InterceptCalculationClass
                 transform.rotation = Quaternion.Slerp(transform.rotation, rot, rotationForce * Time.deltaTime);
             }
 
-            //Move
+            //Movement
             if (target.Equals(player) && !obstacleHit)
             {
-                rbSelf.AddForce(transform.forward.normalized * chargeAcceleration);
-
-                if (rbSelf.velocity.magnitude >= chargeSpeed)
-                {
-                    rbSelf.velocity = rbSelf.velocity.normalized * chargeSpeed;
-                }
+                rbSelf.AddForce(transform.forward.normalized * chargeAcceleration, ForceMode.Acceleration);
             }
             else
             {
-                rbSelf.AddForce(transform.forward.normalized * acceleration);
-
-                if (rbSelf.velocity.magnitude >= regularSpeed)
-                {
-                    rbSelf.velocity = rbSelf.velocity.normalized * regularSpeed;
-                }
+                rbSelf.AddForce(transform.forward.normalized * acceleration, ForceMode.Acceleration);
             }
         }
     }

@@ -16,14 +16,12 @@ public class FighterEnemy : InterceptCalculationClass
     public GameObject[] resetPositions;
     public LayerMask obstacleLayer;
     public float collisionCheckDistance = 100f;
-    [Space(15)]
-    [Tooltip("The speed the ship will travel in meters per second")]
-    public float speed = 150f;
+
     [Space(15)]
     [Tooltip("The acceleration of the ship in meters per second")]
     public float acceleration = 20f;
     [Tooltip("The speed the ship will rotate")]
-    public float rotationForce = 1f;
+    public float rotationForce = 2f;
 
     [Space(15)]
     [Tooltip("Distance to target to allow ship to choose a new target.")]
@@ -58,7 +56,8 @@ public class FighterEnemy : InterceptCalculationClass
     // Start is called before the first frame update
     void Start()
     {
-        target = resetPositions[Random.Range(0, resetPositions.Length)];
+        //target = resetPositions[Random.Range(0, resetPositions.Length)];
+        target = player;
         rbSelf = GetComponent<Rigidbody>();
         rbTarget = target.GetComponent<Rigidbody>();
 
@@ -68,7 +67,7 @@ public class FighterEnemy : InterceptCalculationClass
     // Update is called once per frame
     void Update()
     {
-        ChooseTarget();
+        //ChooseTarget();
         Move();
         Shoot();
     }
@@ -82,7 +81,8 @@ public class FighterEnemy : InterceptCalculationClass
             //positions
             Vector3 targetPosition = target.transform.position;
             //velocities
-            Vector3 velocity = rbSelf ? rbSelf.velocity : Vector3.zero;
+            //Vector3 velocity = rbSelf ? rbSelf.velocity : Vector3.zero;
+            Vector3 velocity = Vector3.zero;
             Vector3 targetVelocity = rbTarget ? rbTarget.velocity : Vector3.zero;
 
             //calculate intercept
@@ -124,12 +124,7 @@ public class FighterEnemy : InterceptCalculationClass
             }
 
             //Move
-            rbSelf.AddForce(transform.forward.normalized * acceleration);
-
-            if (rbSelf.velocity.magnitude >= speed)
-            {
-                rbSelf.velocity = rbSelf.velocity.normalized * speed; //Limit velocity to speed
-            }
+            rbSelf.AddForce(transform.forward.normalized * acceleration, ForceMode.Acceleration);
         }
     }
 
@@ -182,14 +177,13 @@ public class FighterEnemy : InterceptCalculationClass
         {
             shotTimer += Time.deltaTime;
 
-            Quaternion lookRot = Quaternion.LookRotation(transform.forward);
             float distance = Vector3.Distance(interceptPoint, transform.position);
-            Vector3 predictedShotPos = transform.position + (transform.forward.normalized * distance);
-            float distanceFromPath = Vector3.Cross(transform.forward, interceptPoint - transform.position).magnitude;
+            float distanceFromSight = Vector3.Cross(transform.forward, interceptPoint - transform.position).magnitude;
 
-            if (distanceFromPath <= accuracy && shotTimer >= shotInterval)
+            if (distanceFromSight <= accuracy && shotTimer >= shotInterval)
             {
-                GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPos.transform.position, lookRot);
+                Quaternion lookRot = Quaternion.LookRotation(transform.forward);
+                Instantiate(bulletPrefab, bulletSpawnPos.transform.position, lookRot);
 
                 shotTimer = 0;
             }

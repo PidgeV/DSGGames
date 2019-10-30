@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
 public class PilotController : MonoBehaviour
 {
 	// This holds the added rotation from inputs
@@ -10,12 +11,13 @@ public class PilotController : MonoBehaviour
 
 	[Tooltip("A reference to the ship gameobject")]
 	public GameObject ship;
-	[Space(10)]
+    [Space(10)]
 
-	#region Ship Stats
-	[Tooltip("The Speed the ship flys")]
+    #region Ship Stats
+    [Tooltip("The Speed the ship flys")]
+    public float acceleration = 40f;
 	public float speed = 20.0f;
-	public float boost = 2.0f;
+	public float boostMultiplier = 2.0f;
 
 	[Tooltip("The speed you can turn left right up and down")]
 	public float rotationSpeed = 20.0f;
@@ -30,9 +32,12 @@ public class PilotController : MonoBehaviour
 	[Space(10)]
 	public Dial dialManager;
 
+    Rigidbody rb;
 	// Start is called before the first frame update
 	void Start()
 	{
+        rb = GetComponent<Rigidbody>();
+
 		if (!dialManager)
 		{
 			Debug.LogError("Why is there no Dial Manager?");
@@ -53,17 +58,21 @@ public class PilotController : MonoBehaviour
 
 	public void Boost(bool boosting)
 	{
-		// MOVE the ship forward
+		// MOVE the ship forward - Note speed is limited by the rigidbody drag
 		if (boosting)
 		{
 			// If we ARE boosting
-			transform.Translate(Vector3.forward * Time.deltaTime * speed * boost);
-		}
+			//transform.Translate(Vector3.forward * Time.deltaTime * speed * boost);
+            rb.AddForce(transform.forward.normalized * acceleration * boostMultiplier, ForceMode.Acceleration);
+        }
 		else
 		{
 			// If we are NOT boosting
-			transform.Translate(Vector3.forward * Time.deltaTime * speed);
-		}
+			//transform.Translate(Vector3.forward * Time.deltaTime * speed);
+            rb.AddForce(transform.forward.normalized * acceleration, ForceMode.Acceleration);
+        }
+
+        
 	}
 
 	// This updates the ship model
