@@ -16,14 +16,12 @@ using static Helper;
 public class UIManager : MonoBehaviour
 {
 	// The Singleton reference
-	public  static UIManager Instance { get { return instance; } }
+	public static UIManager Instance { get { return instance; } }
 	private static UIManager instance;
 
 	/// <summary> The first Menu to load on start </summary>
-	public  Menu StartingMenu;
+	public Menu StartingMenu;
 	private Menu currentMenu;
-
-	private Menu lastMenu;
 
 	/// <summary> The current Menu that is selected </summary>
 	private SelectableUI currentlySelected;
@@ -41,6 +39,7 @@ public class UIManager : MonoBehaviour
 		else
 		{
 			instance = this;
+			DontDestroyOnLoad(gameObject);
 		}
 	}
 
@@ -65,12 +64,13 @@ public class UIManager : MonoBehaviour
 		// Application.Quit();
 		Helper.PrintTime("You are quitting!");
 	}
-	
+
 	/// <summary>
 	///  When the Start Game Button is pressed
 	/// </summary>
 	public void StartGame()
 	{
+		PlayerManager.Instance.SetUpTeams();
 		Helper.PrintTime("You are going into game!");
 	}
 
@@ -88,35 +88,40 @@ public class UIManager : MonoBehaviour
 	/// <param name="newMenu">The new Menu to display</param>
 	/// <param name="allowReturn">If the player can return to the last menu</param>
 	public void ChangeMenu(Menu newMenu)
-	{ 
+	{
+		// Make sure we have a new menu
+		if (newMenu == null)
+		{
+			return;
+		}
+
 		// Turn off the old menu
 		if (currentMenu)
 		{
 			currentMenu.gameObject.SetActive(false);
 		}
 
-		// Set our last Menu 
-		lastMenu = currentMenu;
-
 		// Update the current menu to the new menu
 		currentMenu = newMenu;
 
 		// Turn on the new menu
 		currentMenu.gameObject.SetActive(true);
-		
+
 		// Target the initial target when loading a new menu
 		UpdateElement(currentMenu.StartingSelection);
 	}
-	
+
 	/// <summary>
 	/// Returns to the last menu
 	/// </summary>
 	public void ReturnToLastMenu()
 	{
-		if (lastMenu)
+		// Get The Menu Return Typr
+		MenuReturn menuReturn = currentMenu.GetComponent<MenuReturn>();
+
+		if (menuReturn)
 		{
-			ChangeMenu(lastMenu);
-			lastMenu = null;
+			menuReturn.ReturnToLastMenu(this);
 		}
 	}
 
@@ -160,7 +165,7 @@ public class UIManager : MonoBehaviour
 	{
 		// This Method takes in a direction and tries to move the Selector to any
 		// selectable menus  in that direction
-		
+
 		// First we check if the menu that we currently are at is null
 		if (newTarget == null)
 		{
@@ -181,7 +186,7 @@ public class UIManager : MonoBehaviour
 
 		// We want to make sure our Selector is active
 		Selector.gameObject.SetActive(true);
-		
+
 		// We then set our current parent to the active Menu / Canvas
 		Selector.transform.parent = newTarget.GetComponentInParent<Canvas>().gameObject.transform;
 

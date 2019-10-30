@@ -36,6 +36,11 @@ public class Controller : MonoBehaviour
 	public void JoinGame()
 	{
 		PlayerData = PlayerManager.Instance.Join(this);
+
+		// Update the Connections UI
+		PlayerManager.Instance.UpedatePlayerUI();
+
+		DontDestroyOnLoad(gameObject);
 	}
 
 	/// <summary>
@@ -52,6 +57,9 @@ public class Controller : MonoBehaviour
 	/// </summary>
 	public void SendMenuInput(Vector2 input)
 	{
+		if (PlayerData == null)
+			return;
+
 		// LEFT
 		if (input.x < -Sensitivity)
 		{

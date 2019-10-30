@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /// <summary>
 /// The Singleton to the PlayerManager Script
@@ -8,14 +10,24 @@ using UnityEngine;
 public class PlayerManager : MonoBehaviour
 {
 	// The Singleton reference
-	public  static PlayerManager Instance { get { return instance; } }
+	public static PlayerManager Instance { get { return instance; } }
 	private static PlayerManager instance;
+
+	private Color[] playerColors = new Color[0];
 
 	/// <summary> The list of Players currently active </summary>
 	public List<Controller> Players;
 
-	private Color[] playerColors = new Color[8] { Color.green, Color.red, Color.blue, Color.yellow,
-		                                          Color.cyan, Color.gray, Color.magenta, Color.white };
+	// List of connections
+	private List<GameObject> connections = new List<GameObject>();
+
+	// The Layout Group
+	public HorizontalLayoutGroup layoutGroup;
+
+	// The connections prefab
+	public GameObject connectionsPrefab;
+
+	public TeamController teamControllerPrefab;
 
 	// Setting up the Singleton
 	private void Awake()
@@ -27,7 +39,20 @@ public class PlayerManager : MonoBehaviour
 		else
 		{
 			instance = this;
+			DontDestroyOnLoad(gameObject);
 		}
+
+		playerColors = new Color[8]
+		{
+			Color.green,
+			Color.red,
+			Color.blue,
+			Color.yellow,
+			Color.cyan,
+			Color.gray,
+			Color.magenta,
+			Color.white
+		};
 	}
 
 	/// <summary>
@@ -75,6 +100,80 @@ public class PlayerManager : MonoBehaviour
 	{
 		Players[player.playerID] = null;
 	}
+
+	/// <summary>
+	/// Upedate the player UI Menu
+	/// </summary>
+	public void UpedatePlayerUI()
+	{
+		foreach (GameObject gameObject in connections)
+		{
+			Destroy(gameObject);
+		}
+		connections.Clear();
+
+		int index = 0;
+		foreach (Controller player in Players)
+		{
+			if (player)
+			{
+				connections.Add(GameObject.Instantiate(connectionsPrefab, layoutGroup.transform));
+				connections[connections.Count - 1].GetComponent<PlayerConnection>().Initialize(Players[index].PlayerData);
+			}
+
+			index++;
+		}
+	}
+
+	// Resets the connections
+	public void ClearPlayers()
+	{
+		foreach (GameObject gameObject in connections)
+		{
+			Destroy(gameObject);
+		}
+		connections.Clear();
+
+		foreach (Controller player in Players)
+		{
+			if (player)
+			{
+				Destroy(player.gameObject);
+			}
+		}
+	}
+
+	public void SetUpTeams()
+	{
+		TeamController teamController = null;
+
+		GameObject ship;
+
+		bool IsPilot = true;
+		for (int index = 0; index < Players.Count; index++)
+		{
+			if (IsPilot)
+			{
+				teamController = Instantiate(teamControllerPrefab);
+				DontDestroyOnLoad(teamController.gameObject);
+			}
+
+			if (IsPilot)
+			{
+				Players[index].gameObject.GetComponent<IdleInputs>().OnConvertToPiolet();
+				teamController.AssignController(Players[index].GetComponent<PilotController>());
+			}
+			else
+			{
+				Players[index].gameObject.GetComponent<IdleInputs>().OnConvertToGunner();
+				teamController.AssignController(Players[index].GetComponent<TurretController>());
+			}
+
+			IsPilot = !IsPilot;
+		}
+
+		SceneManager.LoadScene(1);
+	}
 }
 
 /// <summary>
@@ -87,6 +186,8 @@ public class PlayerData
 
 	/// <summary> The Color that represents this player </summary>
 	public Color playerColor;
+
+	public string GetName { get { return "Player " + (playerID + 1); } }
 
 	// The Constructor
 	public PlayerData(int newID, Color color)

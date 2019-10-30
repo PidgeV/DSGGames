@@ -70,9 +70,7 @@ public class PilotController : MonoBehaviour
 			// If we are NOT boosting
 			//transform.Translate(Vector3.forward * Time.deltaTime * speed);
             rb.AddForce(transform.forward.normalized * acceleration, ForceMode.Acceleration);
-        }
-
-        
+        }      
 	}
 
 	// This updates the ship model

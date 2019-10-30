@@ -59,7 +59,10 @@ public class IdleInputs : Controller
 
 	void OnMove(InputValue value)
 	{
-		lastInput = value.Get<Vector2>();
+		if ( PlayerData != null)
+		{
+			lastInput = value.Get<Vector2>();
+		}
 
 		#region Debug
 
@@ -70,7 +73,7 @@ public class IdleInputs : Controller
 
 	void OnEnter(InputValue value)
 	{
-		if (value.isPressed)
+		if (value.isPressed && PlayerData != null)
 		{
 			UIManager.Instance.Enter();
 		}
@@ -84,7 +87,7 @@ public class IdleInputs : Controller
 
 	void OnBack(InputValue value)
 	{
-		if (value.isPressed)
+		if (value.isPressed && PlayerData != null)
 		{
 			UIManager.Instance.ReturnToLastMenu();
 		}
@@ -104,7 +107,7 @@ public class IdleInputs : Controller
 	#region Testing Controller Jobs
 		
 	// Removes the NoJobInputs and gives the player the PlayerInput 
-	void OnConvertToPiolet()
+	public void OnConvertToPiolet()
 	{
 		Debug.Log("Converting.. [ Pilot Inputs Activated ]");
 
@@ -121,7 +124,7 @@ public class IdleInputs : Controller
 	}
 
 	// Removes the NoJobInputs and gives the player the GunnerInputs 
-	void OnConvertToGunner()
+	public void OnConvertToGunner()
 	{
 		Debug.Log("Converting.. [ Gunner Inputs Activated ]");
 
