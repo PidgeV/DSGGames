@@ -151,6 +151,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pilotController: {fileID: 6311488307660015728}
   turretController: {fileID: 6311488309082105201}
+  pilotCamera: {fileID: 6311488309083270446}
+  turretCamera: {fileID: 6311488309082105206}
 --- !u!1 &6311488307962374894
 GameObject:
   m_ObjectHideFlags: 0
@@ -732,6 +734,41 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6311488308364198417}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 2a616e2962c97454694661c9c0f57cf1,
+        type: 3}
+      propertyPath: m_Name
+      value: Model
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 2a616e2962c97454694661c9c0f57cf1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -692157946723186161, guid: 2a616e2962c97454694661c9c0f57cf1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2627645908932362778, guid: 2a616e2962c97454694661c9c0f57cf1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -307102812808688555, guid: 2a616e2962c97454694661c9c0f57cf1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1753727868843937155, guid: 2a616e2962c97454694661c9c0f57cf1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8201011668193494629, guid: 2a616e2962c97454694661c9c0f57cf1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 2a616e2962c97454694661c9c0f57cf1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -786,41 +823,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 2a616e2962c97454694661c9c0f57cf1,
-        type: 3}
-      propertyPath: m_Name
-      value: Model
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 2a616e2962c97454694661c9c0f57cf1,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -692157946723186161, guid: 2a616e2962c97454694661c9c0f57cf1,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2627645908932362778, guid: 2a616e2962c97454694661c9c0f57cf1,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: -307102812808688555, guid: 2a616e2962c97454694661c9c0f57cf1,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1753727868843937155, guid: 2a616e2962c97454694661c9c0f57cf1,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8201011668193494629, guid: 2a616e2962c97454694661c9c0f57cf1,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2a616e2962c97454694661c9c0f57cf1, type: 3}

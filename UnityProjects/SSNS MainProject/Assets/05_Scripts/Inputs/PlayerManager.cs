@@ -149,13 +149,21 @@ public class PlayerManager : MonoBehaviour
 
 		GameObject ship;
 
+		int cameraIndex = -1;
+
 		bool IsPilot = true;
 		for (int index = 0; index < Players.Count; index++)
 		{
 			if (IsPilot)
 			{
+				cameraIndex++;
 				teamController = Instantiate(teamControllerPrefab);
 				DontDestroyOnLoad(teamController.gameObject);
+
+				if (Display.displays.Length > cameraIndex && cameraIndex != 0)
+					Display.displays[cameraIndex].Activate();
+
+				teamController.SetCameras(cameraIndex);
 			}
 
 			if (IsPilot)

@@ -16,4 +16,13 @@ public class TeamController : MonoBehaviour
 	{
 		controller = turretController;
 	}
+
+	public Camera pilotCamera;
+	public Camera turretCamera;
+
+	public void SetCameras(int ID)
+	{
+		pilotCamera.targetDisplay = ID;
+		turretCamera.targetDisplay = ID;
+	}
 }
