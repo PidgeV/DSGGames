@@ -11,7 +11,9 @@ public class ChaserEnemy : InterceptCalculationClass
     [Header("Red: intercept calculation.")]
     [Header("Blue: Velocity and collision check.")]
     public bool debugDraw = false;
-    
+
+    public float dot;
+
     [Space(15)]
     public GameObject player;
     [Tooltip("Enemy will fly to these in preperation for its next attempt")]
@@ -24,11 +26,12 @@ public class ChaserEnemy : InterceptCalculationClass
     public float acceleration = 20f;
     public float chargeAcceleration = 50f;
     [Tooltip("The speed the ship will rotate")]
-    public float rotationForce = 1f;
-    
+    public float regRotationForce = 2f;
+    public float chargeRotationForce = 2f;
+
     [Space(15)]
     [Tooltip("Distance to target to allow ship to choose a new target.")]
-    public float distanceToTarget = 15;
+    public float distanceToTarget = 30f;
     [Tooltip("Time in seconds between trajectory calculations")]
     public float calculateInterval = 0.5f;
     [Tooltip("Will make damage the current speed divided by this number.")]
@@ -99,8 +102,19 @@ public class ChaserEnemy : InterceptCalculationClass
                 direction = interceptPoint - transform.position; // sets desired direction to target intercept point
 
                 //if no obstacles, allow rotation to desired direction
-                Quaternion rotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationForce * Time.deltaTime);
+                //Quaternion rotation = Quaternion.LookRotation(direction);
+                //transform.rotation = Quaternion.Slerp(transform.rotation, rotation, regRotationForce * Time.deltaTime);
+
+                if (target.Equals(player) && Vector3.Distance(transform.position, target.transform.position) <= distanceToTarget)
+                {
+                    Vector3 newDir = Vector3.RotateTowards(transform.forward, direction, chargeRotationForce * Time.deltaTime, 0);
+                    transform.rotation = Quaternion.LookRotation(newDir);
+                }
+                else
+                {
+                    Vector3 newDir = Vector3.RotateTowards(transform.forward, direction, regRotationForce * Time.deltaTime, 0);
+                    transform.rotation = Quaternion.LookRotation(newDir);
+                }
             }
             else
             {
@@ -112,18 +126,21 @@ public class ChaserEnemy : InterceptCalculationClass
                     obstacleHit = false;
                 }
 
-                Quaternion rot = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, rot, rotationForce * Time.deltaTime);
+                //Quaternion rot = Quaternion.LookRotation(direction);
+                //transform.rotation = Quaternion.Slerp(transform.rotation, rot, rotationForce * Time.deltaTime);
+
+                Vector3 newDir = Vector3.RotateTowards(transform.forward, direction, regRotationForce * Time.deltaTime, 0);
+                transform.rotation = Quaternion.LookRotation(newDir);
             }
 
             //Movement
             if (target.Equals(player) && !obstacleHit)
             {
-                rbSelf.AddForce(transform.forward.normalized * chargeAcceleration, ForceMode.Acceleration);
+                rbSelf.AddForce(transform.forward.normalized * chargeAcceleration, ForceMode.Acceleration); // charge if no obstacle and player is target
             }
             else
             {
-                rbSelf.AddForce(transform.forward.normalized * acceleration, ForceMode.Acceleration);
+                rbSelf.AddForce(transform.forward.normalized * acceleration, ForceMode.Acceleration); // move regular speed if obstacle is in the way or player is not target
             }
         }
     }
@@ -133,21 +150,11 @@ public class ChaserEnemy : InterceptCalculationClass
         RaycastHit hitInfo;
 
         //Check direction facing
-        if (Physics.SphereCast(transform.position, raySize, transform.forward.normalized, out hitInfo, collisionCheckDistance, obstacleLayer))
+        if (Physics.SphereCast(transform.position, raySize, transform.forward.normalized, out hitInfo, collisionCheckDistance, obstacleLayer) || 
+            Physics.SphereCast(transform.position, raySize, rbSelf.velocity.normalized, out hitInfo, collisionCheckDistance, obstacleLayer))
         {
             // Get the desired direction we need to move to move around  the obstacle. Transform to world co-ordinates (gets the obstacleMoveDirection wrt the current foward direction).
-            Vector3 turnDir = transform.TransformDirection(obstacleAvoidDirection);
-            turnDir.Normalize();
-
-            dir += turnDir;
-            obstacleHit = true;
-        }
-
-        //Check where velocity is moving ship
-        else if (Physics.SphereCast(transform.position, raySize, rbSelf.velocity.normalized, out hitInfo, collisionCheckDistance, obstacleLayer))
-        {
-            // Get the desired direction we need to move to move around  the obstacle. Transform to world co-ordinates (gets the obstacleMoveDirection wrt the current foward direction).
-            Vector3 turnDir = transform.TransformDirection(obstacleAvoidDirection);
+            Vector3 turnDir = transform.TransformDirection(transform.right);
             turnDir.Normalize();
 
             dir += turnDir;
@@ -159,15 +166,21 @@ public class ChaserEnemy : InterceptCalculationClass
     {
         if (target != null)
         {
-            if (Vector3.Distance(transform.position, target.transform.position) <= distanceToTarget && resetPositions.Length > 0) // change target when close enough
+            if (Vector3.Distance(transform.position, target.transform.position) <= distanceToTarget && resetPositions.Length > 0 && !target.Equals(player)) // change target when close enough
             {
-                if (target.Equals(player)) target = resetPositions[Random.Range(0, resetPositions.Length)]; //choose random one from list if player is current target
-                else if (player != null) target = player;   //Otherwise choose player
+                target = player;   //Otherwise choose player
             }
-        }
-        else
-        {
-            target = resetPositions[Random.Range(0, resetPositions.Length)];
+            else if (target.Equals(player) && Vector3.Distance(transform.position, target.transform.position) <= distanceToTarget)
+            {
+                dot = Vector3.Dot(transform.forward, player.transform.position - transform.position);
+
+                if (dot < 0)
+                {
+                    //missed player
+                    target = resetPositions[Random.Range(0, resetPositions.Length)];
+                    dot = 0;
+                }
+            }
         }
     }
 

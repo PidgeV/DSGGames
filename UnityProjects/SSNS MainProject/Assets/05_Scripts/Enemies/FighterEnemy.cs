@@ -24,8 +24,8 @@ public class FighterEnemy : InterceptCalculationClass
     public float rotationForce = 2f;
 
     [Space(15)]
-    [Tooltip("Distance to target to allow ship to choose a new target.")]
-    public float distanceToTarget = 50;
+    [Tooltip("Distance to maintain from target.")]
+    public float distanceToMaintain = 50f;
     [Tooltip("Time in seconds between trajectory calculations")]
     public float calculateInterval = 0.1f;
 
@@ -67,7 +67,6 @@ public class FighterEnemy : InterceptCalculationClass
     // Update is called once per frame
     void Update()
     {
-        //ChooseTarget();
         Move();
         Shoot();
     }
@@ -106,8 +105,8 @@ public class FighterEnemy : InterceptCalculationClass
                 direction = interceptPoint - transform.position; // sets desired direction to target intercept point
 
                 //if no obstacles, allow rotation to desired direction
-                Quaternion rotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, rotationForce * Time.deltaTime);
+                Vector3 newDir = Vector3.RotateTowards(transform.forward, direction, rotationForce * Time.deltaTime, 0);
+                transform.rotation = Quaternion.LookRotation(newDir);
             }
             else
             {
@@ -119,12 +118,22 @@ public class FighterEnemy : InterceptCalculationClass
                     obstacleHit = false;
                 }
 
-                Quaternion rot = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, rot, rotationForce * Time.deltaTime);
+                Vector3 newDir = Vector3.RotateTowards(transform.forward, direction, rotationForce * Time.deltaTime, 0);
+                transform.rotation = Quaternion.LookRotation(newDir);
             }
 
             //Move
-            rbSelf.AddForce(transform.forward.normalized * acceleration, ForceMode.Acceleration);
+            if (target.Equals(player))
+            {
+                //maintains a distance
+                float percent = Vector3.Distance(transform.position, target.transform.position) / distanceToMaintain;
+                if (percent > 1) percent = 1;
+                rbSelf.AddForce(transform.forward.normalized * acceleration * percent, ForceMode.Acceleration);
+            }
+            else
+            {
+                rbSelf.AddForce(transform.forward.normalized * acceleration, ForceMode.Acceleration);
+            }
         }
     }
 
@@ -155,29 +164,12 @@ public class FighterEnemy : InterceptCalculationClass
         }
     }
 
-    void ChooseTarget()
-    {
-        if (target != null)
-        {
-            if (Vector3.Distance(transform.position, target.transform.position) <= distanceToTarget && resetPositions.Length > 0) // change target when close enough
-            {
-                if (target.Equals(player)) target = resetPositions[Random.Range(0, resetPositions.Length)]; //choose random one from list if player is current target
-                else if (player != null) target = player;   //Otherwise choose player
-            }
-        }
-        else
-        {
-            target = resetPositions[Random.Range(0, resetPositions.Length)];
-        }
-    }
-
     void Shoot()
     {
-        if (target.Equals(player))
+        if (target.Equals(player) && !obstacleHit)
         {
             shotTimer += Time.deltaTime;
 
-            float distance = Vector3.Distance(interceptPoint, transform.position);
             float distanceFromSight = Vector3.Cross(transform.forward, interceptPoint - transform.position).magnitude;
 
             if (distanceFromSight <= accuracy && shotTimer >= shotInterval)

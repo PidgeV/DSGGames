@@ -419,7 +419,7 @@ Rigidbody:
   m_GameObject: {fileID: 7878452995472688951}
   serializedVersion: 2
   m_Mass: 200
-  m_Drag: 0.3
+  m_Drag: 1
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -438,7 +438,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c5a3cd6654346d4c8d96027cfdd78a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugDraw: 0
+  debugDraw: 1
+  dot: 0
   player: {fileID: 0}
   resetPositions:
   - {fileID: 0}
@@ -470,11 +471,12 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 256
-  collisionCheckDistance: 40
-  acceleration: 30
-  chargeAcceleration: 50
-  rotationForce: 2
-  distanceToTarget: 9
+  collisionCheckDistance: 50
+  acceleration: 50
+  chargeAcceleration: 200
+  regRotationForce: 2
+  chargeRotationForce: 0.1
+  distanceToTarget: 100
   calculateInterval: 0.05
   damageDivision: 1
   avoidTime: 1

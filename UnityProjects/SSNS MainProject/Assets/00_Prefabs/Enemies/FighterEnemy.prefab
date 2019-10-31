@@ -294,7 +294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 140c06a2424c7f14b96026bb2d950e25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugDraw: 0
+  debugDraw: 1
   player: {fileID: 0}
   bulletPrefab: {fileID: 4450240921679082262, guid: 31460afb2d57a1740a2902c36c19ba0e,
     type: 3}
@@ -329,11 +329,11 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   collisionCheckDistance: 20
-  acceleration: 35
-  rotationForce: 2.5
-  distanceToTarget: 50
+  acceleration: 50
+  rotationForce: 1
+  distanceToMaintain: 150
   calculateInterval: 0.1
-  accuracy: 4
+  accuracy: 1
   bulletSpawnPos: {fileID: 1864797949346244314}
   shotInterval: 0.2
   avoidTime: 0.2
