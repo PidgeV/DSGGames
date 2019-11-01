@@ -57,6 +57,11 @@ public class Controller : MonoBehaviour
 	/// </summary>
 	public void SendMenuInput(Vector2 input)
 	{
+		if (UIManager.Instance == null)
+		{
+			return;
+		}
+
 		if (PlayerData == null)
 			return;
 

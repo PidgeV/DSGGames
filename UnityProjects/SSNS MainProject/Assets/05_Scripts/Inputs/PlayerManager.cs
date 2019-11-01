@@ -117,8 +117,12 @@ public class PlayerManager : MonoBehaviour
 		{
 			if (player)
 			{
-				connections.Add(GameObject.Instantiate(connectionsPrefab, layoutGroup.transform));
-				connections[connections.Count - 1].GetComponent<PlayerConnection>().Initialize(Players[index].PlayerData);
+				if (connectionsPrefab)
+				{
+					connections.Add(GameObject.Instantiate(connectionsPrefab, layoutGroup.transform));
+					connections[connections.Count - 1].GetComponent<PlayerConnection>().Initialize(Players[index].PlayerData);
+
+				}
 			}
 
 			index++;

@@ -6,7 +6,7 @@ using UnityEngine;
 public class AsteroidSpawner : MonoBehaviour
 {
     public GameObject asteroidPrefab;
-    public GameObject player;
+	// public GameObject player;
     public int seed;
     public float minScale = 1;
     public float maxScale = 10;
@@ -26,7 +26,7 @@ public class AsteroidSpawner : MonoBehaviour
         bool foundPos;
 
         #region  Combine all of the meshes in the player so that we can check their bounds for new asteroids intersecting
-        MeshFilter[] playerMeshFilters = player.GetComponentsInChildren<MeshFilter>();
+        MeshFilter[] playerMeshFilters = GameObject.FindGameObjectWithTag("Player").GetComponentsInChildren<MeshFilter>();
         CombineInstance[] combine = new CombineInstance[playerMeshFilters.Length];
         
         for (int i = 0; i < playerMeshFilters.Length; i++)
