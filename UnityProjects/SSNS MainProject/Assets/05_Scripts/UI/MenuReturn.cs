@@ -2,15 +2,38 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/// <summary>
+/// Uses to determine the menu that should be returned to and how to behave
+/// </summary>
 public class MenuReturn : MonoBehaviour
 {
-	public enum MenuReturnType { DEFAULT, NONE, NO_RETURN, KEEP_LAST_OPEN }
+	// Menu Return Type Enumeration
+	public enum MenuReturnType
+	{
+		// Return to [target] menu
+		DEFAULT,
 
+		// Do NOT return to a menu
+		NONE,
+
+		// Do not let the player return to the last menu [ One way ]
+		NO_RETURN,
+
+		// Keep the last menu Open
+		KEEP_LAST_OPEN
+	}
+
+	/// <summary> The Menu Return Type </summary>
 	public MenuReturnType returnType = MenuReturnType.DEFAULT;
 
-	// The menu to return to
+	/// <summary> The Menu  to change to </summary>
 	public Menu targetMenu;
 
+	/// <summary>
+	///  Return to the last Menu
+	/// </summary>
+	/// <param name="manager">The Menu to change to</param>
 	public void ReturnToLastMenu(UIManager manager)
 	{
 		switch (returnType)
@@ -29,8 +52,7 @@ public class MenuReturn : MonoBehaviour
 			case MenuReturnType.KEEP_LAST_OPEN:
 				break;
 
-			default:break;
+			default: break;
 		}
-
 	}
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// The Selectable UI script holds what should be switched to, On input
+// The Selectable UI script holds what should be switched to on input
 
 /// <summary>
 /// A selectable element in a Menu

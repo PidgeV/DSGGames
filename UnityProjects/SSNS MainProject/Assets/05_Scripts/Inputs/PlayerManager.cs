@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+
 /// <summary>
 /// The Singleton to the PlayerManager Script
 /// </summary>
@@ -13,6 +14,7 @@ public class PlayerManager : MonoBehaviour
 	public static PlayerManager Instance { get { return instance; } }
 	private static PlayerManager instance;
 
+	// List of player colors
 	private Color[] playerColors = new Color[0];
 
 	/// <summary> The list of Players currently active </summary>
@@ -21,13 +23,17 @@ public class PlayerManager : MonoBehaviour
 	// List of connections
 	private List<GameObject> connections = new List<GameObject>();
 
-	// The Layout Group
+	/// <summary> Reference to the parent object [And RectTransform] for the Player Connections Menu </summary>
 	public HorizontalLayoutGroup layoutGroup;
+
+	#region Prefabs
 
 	// The connections prefab
 	public GameObject connectionsPrefab;
 
 	public TeamController teamControllerPrefab;
+
+	#endregion
 
 	// Setting up the Singleton
 	private void Awake()
@@ -54,6 +60,8 @@ public class PlayerManager : MonoBehaviour
 			Color.white
 		};
 	}
+
+	#region Add and Remove Players
 
 	/// <summary>
 	/// When a player joins this is called from the Controller base class
@@ -100,6 +108,8 @@ public class PlayerManager : MonoBehaviour
 	{
 		Players[player.playerID] = null;
 	}
+
+	#endregion
 
 	/// <summary>
 	/// Upedate the player UI Menu

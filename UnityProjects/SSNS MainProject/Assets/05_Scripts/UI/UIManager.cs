@@ -56,23 +56,7 @@ public class UIManager : MonoBehaviour
 		ChangeMenu(StartingMenu);
 	}
 
-	/// <summary>
-	///  When the Quit Button is pressed
-	/// </summary>
-	public void Quit()
-	{
-		// Application.Quit();
-		Helper.PrintTime("You are quitting!");
-	}
-
-	/// <summary>
-	///  When the Start Game Button is pressed
-	/// </summary>
-	public void StartGame()
-	{
-		PlayerManager.Instance.SetUpTeams();
-		Helper.PrintTime("You are going into game!");
-	}
+	#region Selectable UI Methods
 
 	/// <summary>
 	/// Try to use what is selected
@@ -80,49 +64,6 @@ public class UIManager : MonoBehaviour
 	public void Enter()
 	{
 		currentlySelected.Press();
-	}
-
-	/// <summary>
-	/// Change the currently selected Menu
-	/// </summary>
-	/// <param name="newMenu">The new Menu to display</param>
-	/// <param name="allowReturn">If the player can return to the last menu</param>
-	public void ChangeMenu(Menu newMenu)
-	{
-		// Make sure we have a new menu
-		if (newMenu == null)
-		{
-			return;
-		}
-
-		// Turn off the old menu
-		if (currentMenu)
-		{
-			currentMenu.gameObject.SetActive(false);
-		}
-
-		// Update the current menu to the new menu
-		currentMenu = newMenu;
-
-		// Turn on the new menu
-		currentMenu.gameObject.SetActive(true);
-
-		// Target the initial target when loading a new menu
-		UpdateElement(currentMenu.StartingSelection);
-	}
-
-	/// <summary>
-	/// Returns to the last menu
-	/// </summary>
-	public void ReturnToLastMenu()
-	{
-		// Get The Menu Return Typr
-		MenuReturn menuReturn = currentMenu.GetComponent<MenuReturn>();
-
-		if (menuReturn)
-		{
-			menuReturn.ReturnToLastMenu(this);
-		}
 	}
 
 	/// <summary>
@@ -208,4 +149,71 @@ public class UIManager : MonoBehaviour
 
 		Selector.rectTransform.sizeDelta = newSize + boarder;
 	}
+
+	#endregion
+
+	#region Menu Methods
+
+	/// <summary>
+	///  When the Quit Button is pressed
+	/// </summary>
+	public void Quit()
+	{
+		// Application.Quit();
+		Helper.PrintTime("You are quitting!");
+	}
+
+	/// <summary>
+	///  When the Start Game Button is pressed
+	/// </summary>
+	public void StartGame()
+	{
+		PlayerManager.Instance.SetUpTeams();
+		Helper.PrintTime("You are going into game!");
+	}
+
+	/// <summary>
+	/// Change the currently selected Menu
+	/// </summary>
+	/// <param name="newMenu">The new Menu to display</param>
+	/// <param name="allowReturn">If the player can return to the last menu</param>
+	public void ChangeMenu(Menu newMenu)
+	{
+		// Make sure we have a new menu
+		if (newMenu == null)
+		{
+			return;
+		}
+
+		// Turn off the old menu
+		if (currentMenu)
+		{
+			currentMenu.gameObject.SetActive(false);
+		}
+
+		// Update the current menu to the new menu
+		currentMenu = newMenu;
+
+		// Turn on the new menu
+		currentMenu.gameObject.SetActive(true);
+
+		// Target the initial target when loading a new menu
+		UpdateElement(currentMenu.StartingSelection);
+	}
+
+	/// <summary>
+	/// Returns to the last menu
+	/// </summary>
+	public void ReturnToLastMenu()
+	{
+		// Get The Menu Return Typr
+		MenuReturn menuReturn = currentMenu.GetComponent<MenuReturn>();
+
+		if (menuReturn)
+		{
+			menuReturn.ReturnToLastMenu(this);
+		}
+	}
+
+	#endregion
 }
