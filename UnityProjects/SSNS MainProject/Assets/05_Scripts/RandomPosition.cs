@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RandomPosition : MonoBehaviour
 {
+    public bool debug = false;
     public float radius = 500; // Radiuas from world center
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,9 @@ public class RandomPosition : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, radius);
+        if (debug)
+        {
+            Gizmos.DrawWireSphere(transform.position, radius);
+        }
     }
 }

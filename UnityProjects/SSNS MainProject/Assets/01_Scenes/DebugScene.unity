@@ -588,6 +588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   radius: 400
 --- !u!1 &78209097
 GameObject:
@@ -632,6 +633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   radius: 400
 --- !u!4 &86955867 stripped
 Transform:
@@ -682,6 +684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   radius: 400
 --- !u!1 &101038059
 GameObject:
@@ -2397,6 +2400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   radius: 400
 --- !u!1 &359761654
 GameObject:
@@ -3093,6 +3097,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   radius: 400
 --- !u!4 &471109031
 Transform:
@@ -3666,6 +3671,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   radius: 400
 --- !u!1 &663974965
 GameObject:
@@ -6058,6 +6064,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   radius: 400
 --- !u!1 &982154084
 GameObject:
@@ -6102,6 +6109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   radius: 400
 --- !u!1 &983656608
 GameObject:
@@ -6305,6 +6313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   radius: 400
 --- !u!1 &1014777463
 GameObject:
@@ -6780,6 +6789,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   radius: 400
 --- !u!1 &1119063282
 GameObject:
@@ -6824,6 +6834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   radius: 400
 --- !u!1001 &1124007292
 PrefabInstance:
@@ -7379,7 +7390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Profile: {fileID: 11400000, guid: d7c951bff0c988a4da01aaa8e3627d99, type: 2}
   m_StaticLightingSkyUniqueID: 2
-  m_SkySettings: {fileID: 1715525659}
+  m_SkySettings: {fileID: 1431678852}
   m_SkySettingsFromProfile: {fileID: 6014592461213497213, guid: d7c951bff0c988a4da01aaa8e3627d99,
     type: 2}
 --- !u!114 &1169003262
@@ -7456,6 +7467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   radius: 400
 --- !u!4 &1195285644 stripped
 Transform:
@@ -7965,6 +7977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   radius: 400
 --- !u!1 &1285145611
 GameObject:
@@ -8009,6 +8022,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   radius: 400
 --- !u!1 &1296026593
 GameObject:
@@ -8383,6 +8397,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   radius: 400
 --- !u!4 &1413055097 stripped
 Transform:
@@ -8609,6 +8624,82 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0b2ec02594fd284482a82862eb57737, type: 3}
+--- !u!114 &1431678852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3df29e7cc05fbec4aa43e06ea875565d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  rotation:
+    m_OverrideState: 0
+    m_Value: 0
+    min: 0
+    max: 360
+  skyIntensityMode:
+    m_OverrideState: 0
+    m_Value: 0
+  exposure:
+    m_OverrideState: 0
+    m_Value: 0
+  multiplier:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+  upperHemisphereLuxValue:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+  desiredLuxValue:
+    m_OverrideState: 0
+    m_Value: 20000
+  updateMode:
+    m_OverrideState: 0
+    m_Value: 0
+  updatePeriod:
+    m_OverrideState: 0
+    m_Value: 0
+    min: 0
+  includeSunInBaking:
+    m_OverrideState: 0
+    m_Value: 1
+  sunSize:
+    m_OverrideState: 0
+    m_Value: 0.04
+    min: 0
+    max: 1
+  sunSizeConvergence:
+    m_OverrideState: 0
+    m_Value: 5
+    min: 1
+    max: 10
+  atmosphereThickness:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+    max: 5
+  skyTint:
+    m_OverrideState: 0
+    m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    hdr: 0
+    showAlpha: 1
+    showEyeDropper: 1
+  groundColor:
+    m_OverrideState: 0
+    m_Value: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    hdr: 0
+    showAlpha: 1
+    showEyeDropper: 1
+  enableSunDisk:
+    m_OverrideState: 0
+    m_Value: 1
 --- !u!1 &1458153756
 GameObject:
   m_ObjectHideFlags: 0
@@ -9393,6 +9484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   radius: 400
 --- !u!1 &1504338843
 GameObject:
@@ -9881,6 +9973,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   radius: 400
 --- !u!4 &1574945457 stripped
 Transform:
@@ -9937,6 +10030,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   radius: 400
 --- !u!1 &1607046175
 GameObject:
@@ -9981,6 +10075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   radius: 400
 --- !u!1 &1637543626
 GameObject:
@@ -10025,6 +10120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   radius: 400
 --- !u!4 &1649016617 stripped
 Transform:
@@ -10081,6 +10177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   radius: 400
 --- !u!1 &1713126086
 GameObject:
@@ -10115,82 +10212,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1715525659
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3df29e7cc05fbec4aa43e06ea875565d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  active: 1
-  m_AdvancedMode: 0
-  rotation:
-    m_OverrideState: 0
-    m_Value: 0
-    min: 0
-    max: 360
-  skyIntensityMode:
-    m_OverrideState: 0
-    m_Value: 0
-  exposure:
-    m_OverrideState: 0
-    m_Value: 0
-  multiplier:
-    m_OverrideState: 0
-    m_Value: 1
-    min: 0
-  upperHemisphereLuxValue:
-    m_OverrideState: 0
-    m_Value: 1
-    min: 0
-  desiredLuxValue:
-    m_OverrideState: 0
-    m_Value: 20000
-  updateMode:
-    m_OverrideState: 0
-    m_Value: 0
-  updatePeriod:
-    m_OverrideState: 0
-    m_Value: 0
-    min: 0
-  includeSunInBaking:
-    m_OverrideState: 0
-    m_Value: 1
-  sunSize:
-    m_OverrideState: 0
-    m_Value: 0.04
-    min: 0
-    max: 1
-  sunSizeConvergence:
-    m_OverrideState: 0
-    m_Value: 5
-    min: 1
-    max: 10
-  atmosphereThickness:
-    m_OverrideState: 0
-    m_Value: 1
-    min: 0
-    max: 5
-  skyTint:
-    m_OverrideState: 0
-    m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    hdr: 0
-    showAlpha: 1
-    showEyeDropper: 1
-  groundColor:
-    m_OverrideState: 0
-    m_Value: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
-    hdr: 0
-    showAlpha: 1
-    showEyeDropper: 1
-  enableSunDisk:
-    m_OverrideState: 0
-    m_Value: 1
 --- !u!1001 &1734921812
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10453,6 +10474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   radius: 400
 --- !u!1 &1786095134
 GameObject:
@@ -10833,7 +10855,12 @@ PrefabInstance:
     - target: {fileID: 4368754689139208050, guid: 466cd8915437c6f448d60838cbf7b5ab,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368754689139208050, guid: 466cd8915437c6f448d60838cbf7b5ab,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4368754689139208048, guid: 466cd8915437c6f448d60838cbf7b5ab,
         type: 3}
@@ -10898,7 +10925,7 @@ PrefabInstance:
     - target: {fileID: 4368754689139208051, guid: 466cd8915437c6f448d60838cbf7b5ab,
         type: 3}
       propertyPath: maxAsteroids
-      value: 100
+      value: 8000
       objectReference: {fileID: 0}
     - target: {fileID: 4368754689139208051, guid: 466cd8915437c6f448d60838cbf7b5ab,
         type: 3}
@@ -10919,6 +10946,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368754689139208051, guid: 466cd8915437c6f448d60838cbf7b5ab,
+        type: 3}
+      propertyPath: materialTest
+      value: 
+      objectReference: {fileID: 2100000, guid: 53fbbf923d5009849b9621d23e1c7d36, type: 2}
+    - target: {fileID: 4368754689139208051, guid: 466cd8915437c6f448d60838cbf7b5ab,
+        type: 3}
+      propertyPath: combineMesh
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 466cd8915437c6f448d60838cbf7b5ab, type: 3}
@@ -11538,6 +11575,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   radius: 400
 --- !u!1 &1999687457
 GameObject:
@@ -11582,6 +11620,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   radius: 400
 --- !u!1 &2006780308
 GameObject:
@@ -11626,7 +11665,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   radius: 400
+--- !u!1 &2013921557 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4368754689139208050, guid: 466cd8915437c6f448d60838cbf7b5ab,
+    type: 3}
+  m_PrefabInstance: {fileID: 1928249825}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2013921560
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013921557}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 2
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &2013921561
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2013921557}
+  m_Mesh: {fileID: 0}
 --- !u!1001 &2017548499
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11976,6 +12068,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   radius: 400
 --- !u!1 &2086923073
 GameObject:
@@ -12940,11 +13033,6 @@ PrefabInstance:
       propertyPath: resetPositions.Array.data[25]
       value: 
       objectReference: {fileID: 471109029}
-    - target: {fileID: 58820780711503968, guid: a0b2ec02594fd284482a82862eb57737,
-        type: 3}
-      propertyPath: debugDraw
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0b2ec02594fd284482a82862eb57737, type: 3}
 --- !u!1001 &7878452995425161327

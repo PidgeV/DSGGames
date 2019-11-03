@@ -471,7 +471,7 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 256
-  collisionCheckDistance: 50
+  collisionCheckDistance: 75
   acceleration: 50
   chargeAcceleration: 200
   regRotationForce: 2
@@ -519,6 +519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debug: 0
   radius: 300
 --- !u!114 &86955871
 MonoBehaviour:

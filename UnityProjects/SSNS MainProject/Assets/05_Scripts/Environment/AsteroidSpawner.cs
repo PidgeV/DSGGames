@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class AsteroidSpawner : MonoBehaviour
 {
+    public bool combineMesh = false;
+
     public GameObject asteroidPrefab;
-	// public GameObject player;
+    public Material materialTest;
+    // public GameObject player;
     public int seed;
     public float minScale = 1;
     public float maxScale = 10;
@@ -27,7 +30,7 @@ public class AsteroidSpawner : MonoBehaviour
         #region  Combine all of the meshes in the player so that we can check their bounds for new asteroids intersecting
         MeshFilter[] playerMeshFilters = GameObject.FindGameObjectWithTag("Player").GetComponentsInChildren<MeshFilter>();
         CombineInstance[] combine = new CombineInstance[playerMeshFilters.Length];
-        
+
         for (int i = 0; i < playerMeshFilters.Length; i++)
         {
             combine[i].mesh = playerMeshFilters[i].sharedMesh;
@@ -74,13 +77,18 @@ public class AsteroidSpawner : MonoBehaviour
                 }
             }
         }
+
+        if (combineMesh)
+        {
+            CombineMeshes();
+        }
     }
 
-/// <summary>
-/// Spawns and returns a single asteroid with randomized scale, force, mass
-/// You must still set the position
-/// </summary>
-/// <returns></returns>
+    /// <summary>
+    /// Spawns and returns a single asteroid with randomized scale, force, mass
+    /// You must still set the position
+    /// </summary>
+    /// <returns></returns>
     GameObject SpawnSingleAsteroid()
     {
         GameObject newAsteroid = Instantiate(asteroidPrefab);
@@ -94,6 +102,30 @@ public class AsteroidSpawner : MonoBehaviour
         //newAsteroid.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
 
         return newAsteroid;
+    }
+
+    void CombineMeshes()
+    {
+        MeshFilter[] meshFilters = GetComponentsInChildren<MeshFilter>();
+        CombineInstance[] combine = new CombineInstance[meshFilters.Length];
+
+        for (int i = 0; i < meshFilters.Length; i++)
+        {
+            combine[i].mesh = meshFilters[i].mesh;
+            combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
+        }
+
+        foreach(GameObject go in asteroids)
+        {
+            Destroy(go);
+        }
+
+        MeshFilter filter = GetComponent<MeshFilter>();
+        filter.mesh = new Mesh();
+        filter.mesh.CombineMeshes(combine);
+
+        GetComponent<Renderer>().material = materialTest;
+        gameObject.SetActive(true);
     }
 
     private void OnDrawGizmos()
