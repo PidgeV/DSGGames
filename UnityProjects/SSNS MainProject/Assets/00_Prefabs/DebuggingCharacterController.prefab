@@ -85,10 +85,10 @@ MonoBehaviour:
   ship: {fileID: 6311488307546452692}
   acceleration: 40
   speed: 10
-  boostMultiplier: 2
-  rotationSpeed: 75
-  simulatedRotation: {x: 55, y: 30}
-  simulatedBoost: 3
+  boostMultiplier: 3
+  rotationSpeed: 65
+  simulatedRotation: {x: 75, y: 50}
+  simulatedBoost: 2.3
   dialManager: {fileID: 6311488307962374888}
 --- !u!114 &6311488307660015730
 MonoBehaviour:

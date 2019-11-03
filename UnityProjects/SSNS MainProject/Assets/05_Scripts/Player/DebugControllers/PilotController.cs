@@ -11,11 +11,11 @@ public class PilotController : MonoBehaviour
 
 	[Tooltip("A reference to the ship gameobject")]
 	public GameObject ship;
-    [Space(10)]
+	[Space(10)]
 
-    #region Ship Stats
-    [Tooltip("The Speed the ship flys")]
-    public float acceleration = 40f;
+	#region Ship Stats
+	[Tooltip("The Speed the ship flys")]
+	public float acceleration = 40f;
 	public float speed = 20.0f;
 	public float boostMultiplier = 2.0f;
 
@@ -32,11 +32,11 @@ public class PilotController : MonoBehaviour
 	[Space(10)]
 	public Dial dialManager;
 
-    Rigidbody rb;
+	Rigidbody rb;
 	// Start is called before the first frame update
 	void Start()
 	{
-        rb = GetComponent<Rigidbody>();
+		rb = GetComponent<Rigidbody>();
 
 		if (!dialManager)
 		{
@@ -50,10 +50,20 @@ public class PilotController : MonoBehaviour
 
 		// Add the input to our current ships rotation
 		// The reason I have a vector3 for it is so its consistent
-		shipRotation += newMove;
 
+		// Old
+		// shipRotation += newMove;
+
+		Transform newTransform = transform;
+
+		newTransform.Rotate(newMove.x, newMove.y, newMove.z);
+
+		transform.rotation = Quaternion.Lerp(transform.rotation, newTransform.rotation, 0.1f);
+
+
+		// Old
 		// Apply the rotation and move the shop forward
-		transform.localRotation = Quaternion.Euler(shipRotation.x, shipRotation.y, 0.0f);
+		//transform.localRotation = Quaternion.Euler(shipRotation.x, shipRotation.y, 0.0f);
 	}
 
 	public void Boost(bool boosting)
@@ -63,14 +73,20 @@ public class PilotController : MonoBehaviour
 		{
 			// If we ARE boosting
 			//transform.Translate(Vector3.forward * Time.deltaTime * speed * boost);
-            rb.AddForce(transform.forward.normalized * acceleration * boostMultiplier, ForceMode.Acceleration);
-        }
+			if (rb)
+			{
+				rb.AddForce(transform.forward.normalized * acceleration * boostMultiplier, ForceMode.Acceleration);
+			}
+		}
 		else
 		{
 			// If we are NOT boosting
 			//transform.Translate(Vector3.forward * Time.deltaTime * speed);
-            rb.AddForce(transform.forward.normalized * acceleration, ForceMode.Acceleration);
-        }      
+			if (rb)
+			{
+				rb.AddForce(transform.forward.normalized * acceleration, ForceMode.Acceleration);
+			}
+		}
 	}
 
 	// This updates the ship model

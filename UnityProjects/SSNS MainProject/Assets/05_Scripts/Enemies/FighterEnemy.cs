@@ -57,7 +57,10 @@ public class FighterEnemy : InterceptCalculationClass
     void Start()
     {
         //target = resetPositions[Random.Range(0, resetPositions.Length)];
-        target = player;
+
+        // target = player;
+		target = GameObject.FindGameObjectWithTag("Player");
+
         rbSelf = GetComponent<Rigidbody>();
         rbTarget = target.GetComponent<Rigidbody>();
 
