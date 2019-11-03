@@ -17,7 +17,6 @@ public class AsteroidSpawner : MonoBehaviour
     private GameObject[] asteroids;     //All the asteroids
     private Mesh totalPlayer;   //Used to test intersection with the players starting position
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -46,6 +45,8 @@ public class AsteroidSpawner : MonoBehaviour
             foundPos = false;
             asteroids[i] = SpawnSingleAsteroid();
 
+            asteroids[i].transform.parent = transform;
+
             //re-create new positons for the asteroid while we haven't found a valid one
             while (!foundPos)
             {
@@ -55,7 +56,7 @@ public class AsteroidSpawner : MonoBehaviour
                 pos.x = Random.Range(minPos, maxPos);
                 pos.y = Random.Range(minPos, maxPos);
                 pos.z = Random.Range(minPos, maxPos);
-                asteroids[i].transform.position = pos;
+                asteroids[i].transform.position = transform.position + pos;
 
                 //Test if the asteroid would intersect with any existing asteroid
                 for (int j = 0; j < i; j++)
@@ -89,9 +90,14 @@ public class AsteroidSpawner : MonoBehaviour
         Vector3 force = new Vector3(Random.Range(-maxForce, maxForce), Random.Range(-maxForce, maxForce), Random.Range(-maxForce, maxForce));
 
         newAsteroid.transform.localScale = scale2;
-        newAsteroid.GetComponent<Rigidbody>().mass *= scale * scale;// * scale;
-        newAsteroid.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
+        //newAsteroid.GetComponent<Rigidbody>().mass *= scale * scale;// * scale;
+        //newAsteroid.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
 
         return newAsteroid;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(transform.position, new Vector3(maxPos, maxPos, maxPos));
     }
 }
