@@ -51,6 +51,11 @@ public class ShipInput : Controller
 				controller.Move(move);
 				controller.Boost(Boosting);
 				controller.SetShipTransfrom(move, Boosting);
+
+				if (Break)
+				{
+					controller.Shoot();
+				}
 			}
 		}		
 	}

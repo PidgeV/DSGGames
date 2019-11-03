@@ -50,6 +50,11 @@ public class GunnerInput : Controller
 			if (controller)
 			{
 				controller.Move(move);
+
+				if (Shoot)
+				{
+					controller.Shoot();
+				}
 			}
 		}
 	}

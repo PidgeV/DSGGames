@@ -9,6 +9,9 @@ public class PilotController : MonoBehaviour
 	private Vector3 shipRotation = new Vector3();
 	private float currentRotation = 0.0f;
 
+	private bool canShoot = true;
+	public List<Barrel> barrels;
+
 	[Tooltip("A reference to the ship gameobject")]
 	public GameObject ship;
 	[Space(10)]
@@ -60,7 +63,6 @@ public class PilotController : MonoBehaviour
 
 		transform.rotation = Quaternion.Lerp(transform.rotation, newTransform.rotation, 0.1f);
 
-
 		// Old
 		// Apply the rotation and move the shop forward
 		//transform.localRotation = Quaternion.Euler(shipRotation.x, shipRotation.y, 0.0f);
@@ -110,6 +112,16 @@ public class PilotController : MonoBehaviour
 		else
 		{
 			Debug.LogError("Why is there no ship?");
+		}
+	}
+
+	public void Shoot()
+	{
+		if (canShoot)
+		{
+			// Shoot
+			foreach (Barrel barrel in barrels)
+				barrel.Shoot();
 		}
 	}
 }

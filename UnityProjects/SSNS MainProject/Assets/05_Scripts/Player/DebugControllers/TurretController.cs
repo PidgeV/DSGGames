@@ -8,7 +8,10 @@ public class TurretController : MonoBehaviour
 
 	public float speed = 75f;
 
-	public bool lockToShipRotation = false;
+	public bool canShoot = true;
+	public List<Barrel> barrels;
+
+	private bool lockToShipRotation = true;
 
 	public void Move(Vector2 move)
 	{
@@ -31,6 +34,16 @@ public class TurretController : MonoBehaviour
 		{
 			// If we use normal rotation it lets the turret rotate independently
 			transform.rotation = Quaternion.Euler(turretRotation.x, turretRotation.y, 0.0f);
+		}
+	}
+
+	public void Shoot()
+	{
+		if (canShoot)
+		{
+			// Shoot
+			foreach (Barrel barrel in barrels)
+				barrel.Shoot();
 		}
 	}
 }

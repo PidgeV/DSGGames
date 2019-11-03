@@ -171,7 +171,7 @@ public class PlayerManager : MonoBehaviour
 			if (IsPilot)
 			{
 				cameraIndex++;
-				teamController = Instantiate(teamControllerPrefab);
+				teamController = GameObject.Instantiate(teamControllerPrefab, new Vector3(Random.Range(-500, 500), Random.Range(-500, 500), Random.Range(-500, 500)), Quaternion.identity);
 				DontDestroyOnLoad(teamController.gameObject);
 
 				if (Display.displays.Length > cameraIndex && cameraIndex != 0)
