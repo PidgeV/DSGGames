@@ -62,13 +62,13 @@ public class AsteroidSpawner : MonoBehaviour
                 asteroids[i].transform.position = transform.position + pos;
 
                 //Test if the asteroid would intersect with any existing asteroid
-                for (int j = 0; j < i; j++)
-                {
-                    if (asteroids[j].GetComponent<MeshRenderer>().bounds.Intersects(asteroids[i].GetComponent<MeshRenderer>().bounds))
-                    {
-                        foundPos = false;
-                    }
-                }
+                //for (int j = 0; j < i; j++)
+                //{
+                //    if (asteroids[j].GetComponent<MeshRenderer>().bounds.Intersects(asteroids[i].GetComponent<MeshRenderer>().bounds))
+                //    {
+                //        foundPos = false;
+                //    }
+                //}
 
                 //Test if the asteroid would intersect with the player
                 if (totalPlayer.bounds.Intersects(asteroids[i].GetComponent<MeshRenderer>().bounds))

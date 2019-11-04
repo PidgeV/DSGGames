@@ -61,7 +61,7 @@ public class PilotController : MonoBehaviour
 
 		newTransform.Rotate(newMove.x, newMove.y, newMove.z);
 
-		transform.rotation = Quaternion.Lerp(transform.rotation, newTransform.rotation, 0.1f);
+		transform.rotation = Quaternion.Slerp(transform.rotation, newTransform.rotation, 0.1f);
 
 		// Old
 		// Apply the rotation and move the shop forward

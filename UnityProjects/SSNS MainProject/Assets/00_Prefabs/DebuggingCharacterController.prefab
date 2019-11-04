@@ -450,7 +450,6 @@ MonoBehaviour:
   canShoot: 1
   barrels:
   - {fileID: 6311488308673513975}
-  lockToShipRotation: 0
 --- !u!114 &850206607
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -785,11 +784,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6311488308364198417}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: b055bd8b6ace94d41a47f8892cf73109,
-        type: 3}
-      propertyPath: m_Name
-      value: PlayerShip
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: b055bd8b6ace94d41a47f8892cf73109,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -844,6 +838,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: b055bd8b6ace94d41a47f8892cf73109,
+        type: 3}
+      propertyPath: m_Name
+      value: PlayerShip
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b055bd8b6ace94d41a47f8892cf73109, type: 3}

@@ -60,6 +60,7 @@ public class FighterEnemy : InterceptCalculationClass
 
         // target = player;
 		target = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
 
         rbSelf = GetComponent<Rigidbody>();
         rbTarget = target.GetComponent<Rigidbody>();
