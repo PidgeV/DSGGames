@@ -116,7 +116,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1144622806519651424}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 14.893112, y: -5.25, z: 17.528553}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1144622807046144139}
@@ -152,7 +152,7 @@ Transform:
   m_GameObject: {fileID: 1144622807046144138}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 0.083426, z: 5}
+  m_LocalScale: {x: 21.533, y: 0.3592824, z: 21.533}
   m_Children: []
   m_Father: {fileID: 1144622806519651425}
   m_RootOrder: 0
@@ -245,7 +245,7 @@ Transform:
   m_GameObject: {fileID: 1144622807207847692}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_LocalScale: {x: 17.2264, y: 17.2264, z: 17.2264}
   m_Children:
   - {fileID: 1144622807294321502}
   m_Father: {fileID: 1144622806519651425}
@@ -439,10 +439,10 @@ MonoBehaviour:
   bulletSpawnPos: {fileID: 3683659405706188139}
   bulletPrefab: {fileID: 4450240921679082262, guid: 31460afb2d57a1740a2902c36c19ba0e,
     type: 3}
-  threatDistance: 150
+  threatDistance: 1200
   rotateSpeed: 1.5
   calculateInterval: 0.1
-  accuracy: 4
+  accuracy: 5
   shotInterval: 1
 --- !u!1 &3683659405706188139
 GameObject:

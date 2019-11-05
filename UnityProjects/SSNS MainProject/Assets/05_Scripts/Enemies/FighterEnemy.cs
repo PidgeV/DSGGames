@@ -59,7 +59,7 @@ public class FighterEnemy : InterceptCalculationClass
         //target = resetPositions[Random.Range(0, resetPositions.Length)];
 
         // target = player;
-		target = GameObject.FindGameObjectWithTag("Player");
+        target = GameObject.FindGameObjectWithTag("Player");
         player = GameObject.FindGameObjectWithTag("Player");
 
         rbSelf = GetComponent<Rigidbody>();
@@ -144,27 +144,33 @@ public class FighterEnemy : InterceptCalculationClass
     void AvoidObstacles(ref Vector3 dir)
     {
         RaycastHit hitInfo;
+        RaycastHit hitInfo2;
 
         //Check direction facing
-        if (Physics.SphereCast(transform.position, raySize, transform.forward.normalized, out hitInfo, collisionCheckDistance, obstacleLayer))
+        if (Physics.SphereCast(transform.position, raySize, transform.forward.normalized, out hitInfo, collisionCheckDistance, obstacleLayer)
+            || Physics.SphereCast(transform.position, raySize, rbSelf.velocity.normalized, out hitInfo, collisionCheckDistance, obstacleLayer))
         {
-            // Get the desired direction we need to move to move around  the obstacle. Transform to world co-ordinates (gets the obstacleMoveDirection wrt the current foward direction).
-            Vector3 turnDir = transform.TransformDirection(obstacleAvoidDirection);
-            turnDir.Normalize();
+            if (hitInfo.collider.GetComponent<Bullet>() != null) // If a bullet was detected
+            {
+                if (!hitInfo.collider.GetComponent<Bullet>().shooter.Equals(gameObject)) //If the bullet isn't one the fighter shot
+                {
+                    // Get the desired direction we need to move to move around  the obstacle. Transform to world co-ordinates (gets the obstacleMoveDirection wrt the current foward direction).
+                    Vector3 turnDir = transform.TransformDirection(obstacleAvoidDirection);
+                    turnDir.Normalize();
 
-            dir += turnDir;
-            obstacleHit = true;
-        }
+                    dir += turnDir;
+                    obstacleHit = true;
+                }
+            }
+            else
+            {
+                // Get the desired direction we need to move to move around  the obstacle. Transform to world co-ordinates (gets the obstacleMoveDirection wrt the current foward direction).
+                Vector3 turnDir = transform.TransformDirection(obstacleAvoidDirection);
+                turnDir.Normalize();
 
-        //Check where velocity is moving ship
-        else if (Physics.SphereCast(transform.position, raySize, rbSelf.velocity.normalized, out hitInfo, collisionCheckDistance, obstacleLayer))
-        {
-            // Get the desired direction we need to move to move around  the obstacle. Transform to world co-ordinates (gets the obstacleMoveDirection wrt the current foward direction).
-            Vector3 turnDir = transform.TransformDirection(obstacleAvoidDirection);
-            turnDir.Normalize();
-
-            dir += turnDir;
-            obstacleHit = true;
+                dir += turnDir;
+                obstacleHit = true;
+            }
         }
     }
 
@@ -179,7 +185,8 @@ public class FighterEnemy : InterceptCalculationClass
             if (distanceFromSight <= accuracy && shotTimer >= shotInterval)
             {
                 Quaternion lookRot = Quaternion.LookRotation(transform.forward);
-                Instantiate(bulletPrefab, bulletSpawnPos.transform.position, lookRot);
+                GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPos.transform.position, lookRot);
+                bullet.GetComponent<Bullet>().shooter = gameObject;
 
                 shotTimer = 0;
             }

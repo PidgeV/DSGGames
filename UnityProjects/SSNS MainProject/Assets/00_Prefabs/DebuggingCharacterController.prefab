@@ -86,7 +86,7 @@ MonoBehaviour:
   barrels:
   - {fileID: 16795103323464680}
   ship: {fileID: 6311488307546452692}
-  acceleration: 40
+  acceleration: 55
   speed: 10
   boostMultiplier: 3
   rotationSpeed: 65

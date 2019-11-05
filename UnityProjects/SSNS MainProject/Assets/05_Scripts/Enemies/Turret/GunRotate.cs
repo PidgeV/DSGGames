@@ -72,7 +72,8 @@ public class GunRotate : InterceptCalculationClass
             if (distanceFromSight <= accuracy && shotTimer >= shotInterval)
             {
                 Quaternion lookRot = Quaternion.LookRotation(transform.forward);
-                Instantiate(bulletPrefab, bulletSpawnPos.transform.position, lookRot);
+                GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPos.transform.position, lookRot);
+                bullet.GetComponent<Bullet>().shooter = gameObject;
 
                 shotTimer = 0;
             }

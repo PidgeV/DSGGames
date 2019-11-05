@@ -9,6 +9,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Bullet : MonoBehaviour
 {
+    public GameObject shooter;
     // The time the projectile is alive after its Instantiated
     public float lifetime = 10f;
 
