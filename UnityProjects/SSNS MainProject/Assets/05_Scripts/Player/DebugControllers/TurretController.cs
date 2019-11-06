@@ -35,7 +35,15 @@ public class TurretController : MonoBehaviour
 			// If we use normal rotation it lets the turret rotate independently
 			transform.rotation = Quaternion.Euler(turretRotation.x, turretRotation.y, 0.0f);
 		}
-	}
+
+        //Prevent ship from looking up  - Cant test so will need work
+        float dot = Vector3.Dot(transform.forward, transform.parent.transform.up);
+
+        if (dot < 0)
+        {
+            transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, 0, 0);
+        }
+    }
 
 	public void Shoot()
 	{
