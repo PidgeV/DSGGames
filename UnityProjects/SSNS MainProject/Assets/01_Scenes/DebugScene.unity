@@ -2810,82 +2810,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   debug: 0
   radius: 400
---- !u!114 &349747663
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3df29e7cc05fbec4aa43e06ea875565d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  active: 1
-  m_AdvancedMode: 0
-  rotation:
-    m_OverrideState: 0
-    m_Value: 0
-    min: 0
-    max: 360
-  skyIntensityMode:
-    m_OverrideState: 0
-    m_Value: 0
-  exposure:
-    m_OverrideState: 0
-    m_Value: 0
-  multiplier:
-    m_OverrideState: 0
-    m_Value: 1
-    min: 0
-  upperHemisphereLuxValue:
-    m_OverrideState: 0
-    m_Value: 1
-    min: 0
-  desiredLuxValue:
-    m_OverrideState: 0
-    m_Value: 20000
-  updateMode:
-    m_OverrideState: 0
-    m_Value: 0
-  updatePeriod:
-    m_OverrideState: 0
-    m_Value: 0
-    min: 0
-  includeSunInBaking:
-    m_OverrideState: 0
-    m_Value: 1
-  sunSize:
-    m_OverrideState: 0
-    m_Value: 0.04
-    min: 0
-    max: 1
-  sunSizeConvergence:
-    m_OverrideState: 0
-    m_Value: 5
-    min: 1
-    max: 10
-  atmosphereThickness:
-    m_OverrideState: 0
-    m_Value: 1
-    min: 0
-    max: 5
-  skyTint:
-    m_OverrideState: 0
-    m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    hdr: 0
-    showAlpha: 1
-    showEyeDropper: 1
-  groundColor:
-    m_OverrideState: 0
-    m_Value: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
-    hdr: 0
-    showAlpha: 1
-    showEyeDropper: 1
-  enableSunDisk:
-    m_OverrideState: 0
-    m_Value: 1
 --- !u!1 &359761654
 GameObject:
   m_ObjectHideFlags: 0
@@ -7029,6 +6953,82 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 20489197}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &913381036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3df29e7cc05fbec4aa43e06ea875565d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  rotation:
+    m_OverrideState: 0
+    m_Value: 0
+    min: 0
+    max: 360
+  skyIntensityMode:
+    m_OverrideState: 0
+    m_Value: 0
+  exposure:
+    m_OverrideState: 0
+    m_Value: 0
+  multiplier:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+  upperHemisphereLuxValue:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+  desiredLuxValue:
+    m_OverrideState: 0
+    m_Value: 20000
+  updateMode:
+    m_OverrideState: 0
+    m_Value: 0
+  updatePeriod:
+    m_OverrideState: 0
+    m_Value: 0
+    min: 0
+  includeSunInBaking:
+    m_OverrideState: 0
+    m_Value: 1
+  sunSize:
+    m_OverrideState: 0
+    m_Value: 0.04
+    min: 0
+    max: 1
+  sunSizeConvergence:
+    m_OverrideState: 0
+    m_Value: 5
+    min: 1
+    max: 10
+  atmosphereThickness:
+    m_OverrideState: 0
+    m_Value: 1
+    min: 0
+    max: 5
+  skyTint:
+    m_OverrideState: 0
+    m_Value: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    hdr: 0
+    showAlpha: 1
+    showEyeDropper: 1
+  groundColor:
+    m_OverrideState: 0
+    m_Value: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    hdr: 0
+    showAlpha: 1
+    showEyeDropper: 1
+  enableSunDisk:
+    m_OverrideState: 0
+    m_Value: 1
 --- !u!1 &952884387
 GameObject:
   m_ObjectHideFlags: 0
@@ -8728,7 +8728,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Profile: {fileID: 11400000, guid: d7c951bff0c988a4da01aaa8e3627d99, type: 2}
   m_StaticLightingSkyUniqueID: 2
-  m_SkySettings: {fileID: 349747663}
+  m_SkySettings: {fileID: 913381036}
   m_SkySettingsFromProfile: {fileID: 6014592461213497213, guid: d7c951bff0c988a4da01aaa8e3627d99,
     type: 2}
 --- !u!114 &1169003262
@@ -13238,8 +13238,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4368754689139208051, guid: 466cd8915437c6f448d60838cbf7b5ab,
         type: 3}
+      propertyPath: asteroidPrefabs.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4368754689139208051, guid: 466cd8915437c6f448d60838cbf7b5ab,
+        type: 3}
       propertyPath: maxScale
-      value: 100
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4368754689139208051, guid: 466cd8915437c6f448d60838cbf7b5ab,
         type: 3}
@@ -13276,6 +13281,36 @@ PrefabInstance:
       propertyPath: combineMesh
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4368754689139208051, guid: 466cd8915437c6f448d60838cbf7b5ab,
+        type: 3}
+      propertyPath: asteroidPrefabs.Array.data[0]
+      value: 
+      objectReference: {fileID: 6309071368717258258, guid: 88692091a44eeb24094d9aed7c61a88d,
+        type: 3}
+    - target: {fileID: 4368754689139208051, guid: 466cd8915437c6f448d60838cbf7b5ab,
+        type: 3}
+      propertyPath: asteroidPrefabs.Array.data[1]
+      value: 
+      objectReference: {fileID: 56720752552495293, guid: 3c88a883f832c884cbb80b26181606a3,
+        type: 3}
+    - target: {fileID: 4368754689139208051, guid: 466cd8915437c6f448d60838cbf7b5ab,
+        type: 3}
+      propertyPath: asteroidPrefabs.Array.data[2]
+      value: 
+      objectReference: {fileID: 8430503025590420019, guid: 615fc9350ce36cf46af47ce1727015a3,
+        type: 3}
+    - target: {fileID: 4368754689139208051, guid: 466cd8915437c6f448d60838cbf7b5ab,
+        type: 3}
+      propertyPath: asteroidPrefabs.Array.data[3]
+      value: 
+      objectReference: {fileID: 8755553170722625250, guid: a231b714607df5b4c9723a542528c97c,
+        type: 3}
+    - target: {fileID: 4368754689139208051, guid: 466cd8915437c6f448d60838cbf7b5ab,
+        type: 3}
+      propertyPath: asteroidPrefabs.Array.data[4]
+      value: 
+      objectReference: {fileID: 7947022241719225802, guid: 320b12c856a7bf04eb6f381fef1803ce,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 466cd8915437c6f448d60838cbf7b5ab, type: 3}
 --- !u!1 &1943042947
