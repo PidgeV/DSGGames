@@ -7,7 +7,7 @@ public class AsteroidSpawner : MonoBehaviour
 {
     public bool combineMesh = false;
 
-    public GameObject asteroidPrefab;
+    public GameObject[] asteroidPrefabs;
     public Material materialTest;
     // public GameObject player;
     public int seed;
@@ -91,13 +91,15 @@ public class AsteroidSpawner : MonoBehaviour
     /// <returns></returns>
     GameObject SpawnSingleAsteroid()
     {
-        GameObject newAsteroid = Instantiate(asteroidPrefab);
+        int rand = Random.Range(0, asteroidPrefabs.Length-1);
+        GameObject newAsteroid = Instantiate(asteroidPrefabs[rand]);
 
         float scale = Random.Range(minScale, maxScale);
         Vector3 scale2 = new Vector3(Random.Range(scale - 0.5f, scale + 0.5f), Random.Range(scale - 0.5f, scale + 0.5f), Random.Range(scale - 0.5f, scale + 0.5f));
         Vector3 force = new Vector3(Random.Range(-maxForce, maxForce), Random.Range(-maxForce, maxForce), Random.Range(-maxForce, maxForce));
 
         newAsteroid.transform.localScale = scale2;
+        newAsteroid.transform.localRotation = new Quaternion(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360),0);
         //newAsteroid.GetComponent<Rigidbody>().mass *= scale * scale;// * scale;
         //newAsteroid.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
 
