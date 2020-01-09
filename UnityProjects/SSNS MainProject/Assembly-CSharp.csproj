@@ -85,6 +85,7 @@
     <Compile Include="Assets\05_Scripts\Player\Miscellaneous\TestPlayer.cs" />
     <Compile Include="Assets\05_Scripts\Player\Miscellaneous\TurretController.cs" />
     <Compile Include="Assets\05_Scripts\Player\Player.cs" />
+    <Compile Include="Assets\05_Scripts\Player\ShipStats.cs" />
     <Compile Include="Assets\05_Scripts\Projectiles\Barrel.cs" />
     <Compile Include="Assets\05_Scripts\Projectiles\Bullet.cs" />
     <Compile Include="Assets\05_Scripts\Projectiles\Damage.cs" />

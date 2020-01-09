@@ -5,8 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Reward", menuName = "Rewards/New Reward")]
 public class Reward : ScriptableObject
 {
-	public string RewardName = "";
-	public string RewardDescription = "";
+	public string rewardName = "";
+	public string rewardDescription = "";
 
 	// the value of the reward
 	public float value = 0.0f;
@@ -17,7 +17,7 @@ public class Reward : ScriptableObject
 	/// <summary>
 	/// Use this reward on a gameobject
 	/// </summary>
-	public void UseReward(GameObject target)
+	public void UseReward(ShipStats target)
 	{
 		if (type == RewardsType.NoReward) {
 			return;
