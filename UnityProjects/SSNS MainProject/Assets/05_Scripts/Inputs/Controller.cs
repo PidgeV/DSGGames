@@ -1,92 +1,71 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 /// <summary>
-/// The base class that all input scripts inherit from.
+/// Controller reads inputs from a pluged in controller / player
 /// </summary>
-public class Controller : MonoBehaviour
+public abstract class Controller : MonoBehaviour
 {
-	/// <summary> The information about this player. </summary>
-	public PlayerData PlayerData;
+	/// <summary>buttons is the REAL values that represents this contrller</summary>
+	public ControllerActions ControllerInput = new ControllerActions();
 
-	#region Menu Navigation
+	/// <summary>When the left joystick is pressed</summary>
+	public virtual void OnLeftStick(InputValue input) { ControllerInput.LeftStick = input.Get<Vector2>(); }
+	/// <summary>When the right joystick is pressed</summary>
+	public virtual void OnRightStick(InputValue input) { ControllerInput.RightStick = input.Get<Vector2>(); }
 
-	/// <summary> If the player is controlling a Menu. </summary>
-	public bool MenuMode = false;
+	/// <summary>When the DPad is pressed</summary>
+	public virtual void OnDPad(InputValue input) { ControllerInput.DPad = input.Get<Vector2>(); }
 
-	/// <summary> The sensitivity of an input to register for a menu change [ 0 - 1]. </summary>
-	public float Sensitivity = 0.2f;
+	/// <summary>When the left trigger is pressed</summary>
+	public virtual void OnLeftTrigger(InputValue input) { ControllerInput.LeftTrigger = input.Get<float>(); }
+	/// <summary>When the right trigger is pressed</summary>
+	public virtual void OnRightTrigger(InputValue input) { ControllerInput.RightTrigger = input.Get<float>(); }
+	/// <summary>When the left Bumper is pressed</summary>
+	public virtual void OnLeftBumper(InputValue input) { ControllerInput.LeftBumper = input.Get<float>(); }
+	/// <summary>When the right Bumper is pressed</summary>
+	public virtual void OnRightBumper(InputValue input) { ControllerInput.RightBumper = input.Get<float>(); }
 
-	// The Time since our last menu input
-	protected float menuCounter = 0f;
+	/// <summary>When the a button is pressed</summary>
+	public virtual void OnA(InputValue input) { ControllerInput.A = input.Get<float>(); }
+	/// <summary>When the b button is pressed</summary>
+	public virtual void OnB(InputValue input) { ControllerInput.B = input.Get<float>(); }
+	/// <summary>When the y button is pressed</summary>
+	public virtual void OnY(InputValue input) { ControllerInput.Y = input.Get<float>(); }
+	/// <summary>When the x button is pressed</summary>
+	public virtual void OnX(InputValue input) { ControllerInput.X = input.Get<float>(); }
+}
 
-	// The Minimum  time between menu inputs
-	protected float menuChangeTime = 0.15f;
+/// <summary>
+/// ControllerActions holds values for each button on a controller
+/// </summary>
+public class ControllerActions
+{
+	/// <summary>XBox Controller's [ Left Joystick ]</summary>
+	public Vector2 LeftStick = new Vector2(0, 0);
+	/// <summary>XBox Controller's [ Right Joystick ]</summary>
+	public Vector2 RightStick = new Vector2(0, 0);
 
-	#endregion
+	/// <summary>XBox Controller's [ Directional Pad ]</summary>
+	public Vector2 DPad = new Vector2(0, 0);
 
-	// DEBUG
-	public bool printDebug = false;
+	/// <summary>XBox Controller's [ Left Trigger ]</summary>
+	public float LeftTrigger = 0.0f;
+	/// <summary>XBox Controller's [ Right Trigger ]</summary>
+	public float RightTrigger = 0.0f;
+	/// <summary>XBox Controller's [ Left Bumper ]</summary>
+	public float LeftBumper = 0.0f;
+	/// <summary>XBox Controller's [ Right Bumper ]</summary>
+	public float RightBumper = 0.0f;
 
-	/// <summary>
-	/// When a player / controller joins the game this is called from a derived class.
-	/// The JoinGame() function initializes this player's data.
-	/// </summary>
-	public void JoinGame()
-	{
-		PlayerData = PlayerManager.Instance.Join(this);
-
-		// Update the Connections UI
-		PlayerManager.Instance.UpedatePlayerUI();
-
-		DontDestroyOnLoad(gameObject);
-	}
-
-	/// <summary>
-	/// When a player / controller leaves the game this is called from a derived class.
-	/// The LeaveGame() function cleans up this player's data.
-	/// </summary>
-	public void LeaveGame()
-	{
-		PlayerManager.Instance.Disconnect(PlayerData);
-	}
-
-	/// <summary>
-	/// Send an input direction to the Menu
-	/// </summary>
-	public void SendMenuInput(Vector2 input)
-	{
-		if (UIManager.Instance == null)
-		{
-			return;
-		}
-
-		if (PlayerData == null)
-			return;
-
-		// LEFT
-		if (input.x < -Sensitivity)
-		{
-			UIManager.Instance.TransitionElement(Helper.eMenuDirection.LEFT);
-		}
-
-		// RIGHT
-		if (input.x > Sensitivity)
-		{
-			UIManager.Instance.TransitionElement(Helper.eMenuDirection.RIGHT);
-		}
-
-		// UP
-		if (input.y > Sensitivity)
-		{
-			UIManager.Instance.TransitionElement(Helper.eMenuDirection.UP);
-		}
-
-		// DOWN
-		if (input.y < -Sensitivity)
-		{
-			UIManager.Instance.TransitionElement(Helper.eMenuDirection.DOWN);
-		}
-	}
+	/// <summary>XBox Controller's [ A Button ]</summary>
+	public float A = 0.0f;
+	/// <summary>XBox Controller's [ B Button ]</summary>
+	public float B = 0.0f;
+	/// <summary>XBox Controller's [ Y Button ]</summary>
+	public float Y = 0.0f;
+	/// <summary>XBox Controller's [ X Button ]</summary>
+	public float X = 0.0f;
 }
