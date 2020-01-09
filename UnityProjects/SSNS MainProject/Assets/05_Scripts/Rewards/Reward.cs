@@ -19,11 +19,74 @@ public class Reward : ScriptableObject
 	/// </summary>
 	public void UseReward(ShipStats target)
 	{
+		Debug.Log("You are applying the reward " + type.ToString() + " to the player!");
+
 		if (type == RewardsType.NoReward) {
 			return;
 		}
+		else
+		{
+			switch (type) {
 
+				case RewardsType.ExtraHealth:
+					target.MaxHealth += value;
+					target.CurrentHealth += value;
+					break;
 
+				case RewardsType.ExtraShield:
+					target.MaxShield += value;
+					target.CurrentShield += value;
+					break;
+
+				case RewardsType.ExtraDamage:
+					target.BaseDamage += value;
+					break;
+
+				case RewardsType.ShipSpeed:
+					target.ShipSpeed += value;
+					break;
+
+				case RewardsType.BoostSpeed:
+					target.BoostSpeed += value;
+					break;
+
+				case RewardsType.FiringSpeed:
+					target.FireRate += value;
+					break;
+
+				case RewardsType.HealthDamageReduction:
+					target.HealthDamageReduction += value;
+					break;
+
+				case RewardsType.ShieldDamageReduction:
+					target.ShieldDamageReduction += value;
+					break;
+
+				case RewardsType.FullHealthRestore:
+					target.CurrentHealth = target.MaxHealth;
+					break;
+
+				case RewardsType.IncreasedRegenSpeed:
+					target.ShieldRegenPercent += value;
+					break;
+
+				case RewardsType.RegenDelayReduction:
+					target.ShieldRegenDelay += value;
+					break;
+
+				case RewardsType.BoostGaugeInncrase:
+					target.MaxBoostGauge += value;
+					break;
+
+				case RewardsType.ReserveShield:
+					target.ReserveShield = true;
+					break;
+
+				case RewardsType.ShieldBreakEMP:
+					target.ShieldBreakEMP = true;
+					break;
+			}
+		}
 	}
 }
 

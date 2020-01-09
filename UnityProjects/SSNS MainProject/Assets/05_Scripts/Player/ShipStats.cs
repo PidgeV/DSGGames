@@ -10,11 +10,14 @@ public class ShipStats : ScriptableObject
 	public string ShipDescription;
 
 	// Ship properties
-	public int MaxHealth = 10;
-	public int MaxShield = 10;
+	public float MaxHealth = 10;
+	public float MaxShield = 10;
+	public float CurrentHealth = 0;
+	public float CurrentShield = 0;
 
 	public float ShipSpeed = 15f;
 	public float BoostSpeed = 30f;
+	public float FireRate = 0.1f;
 
 	public float BaseDamage = 1f;
 
