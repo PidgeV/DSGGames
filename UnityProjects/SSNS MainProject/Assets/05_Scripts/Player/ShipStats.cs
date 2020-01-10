@@ -6,30 +6,43 @@ using UnityEngine;
 public class ShipStats : ScriptableObject
 {
 	// Ship description
-	public string ShipName;
-	public string ShipDescription;
+	public string shipName;
+	public string shipDescription;
 
 	// Ship properties
-	public float MaxHealth = 10;
-	public float MaxShield = 10;
-	public float CurrentHealth = 0;
-	public float CurrentShield = 0;
+	// The max values for this ships health and shield
+	public float maxHealth = 20f;
+	public float maxShield = 15f;
 
-	public float ShipSpeed = 15f;
-	public float BoostSpeed = 30f;
-	public float FireRate = 0.1f;
+	// The current values for this ships health and shield
+	public float currentHealth = 0f;
+	public float currentShield = 0f;
 
-	public float BaseDamage = 1f;
+	// The speed the ship moves per second
+	public float shipSpeed = 15f;
 
-	public float HealthDamageReduction = 0.0f;
-	public float ShieldDamageReduction = 0.0f;
+	// The speed the ship moves per second when boosting
+	public float boostSpeed = 30f;
 
-	public float ShieldRegenPercent = 0.05f;
-	public float ShieldRegenDelay = 2f;
+	// The delay between shots for the players basic weapon
+	public float fireRate = 0.1f;
 
-	public float BoostGauge = 5f;
-	public float MaxBoostGauge = 5f;
+	// The base damage for the player basic gun
+	public float baseDamage = 1f;
 
-	public bool ReserveShield = false;
-	public bool ShieldBreakEMP = false;
+	// Reductions of damage for this ship
+	public float healthDamageReduction = 0.0f;
+	public float shieldDamageReduction = 0.0f;
+
+	// Shield regen properties
+	public float shieldRegenPercent = 0.1f;
+	public float shieldRegenDelay = 3f;
+
+	// This ships boost gauge values
+	public float boostGauge = 0f;
+	public float maxBoostGauge = 5f;
+
+	// Extra ship abilities
+	public bool reserveShield = false;
+	public bool shieldBreakEMP = false;
 }

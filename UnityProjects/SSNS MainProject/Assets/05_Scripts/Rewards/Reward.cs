@@ -29,61 +29,61 @@ public class Reward : ScriptableObject
 			switch (type) {
 
 				case RewardsType.ExtraHealth:
-					target.MaxHealth += value;
-					target.CurrentHealth += value;
+					target.maxHealth += value;
+					target.currentHealth += value;
 					break;
 
 				case RewardsType.ExtraShield:
-					target.MaxShield += value;
-					target.CurrentShield += value;
+					target.maxShield += value;
+					target.currentShield += value;
 					break;
 
 				case RewardsType.ExtraDamage:
-					target.BaseDamage += value;
+					target.baseDamage += value;
 					break;
 
 				case RewardsType.ShipSpeed:
-					target.ShipSpeed += value;
+					target.shipSpeed += value;
 					break;
 
 				case RewardsType.BoostSpeed:
-					target.BoostSpeed += value;
+					target.boostSpeed += value;
 					break;
 
 				case RewardsType.FiringSpeed:
-					target.FireRate += value;
+					target.fireRate += value;
 					break;
 
 				case RewardsType.HealthDamageReduction:
-					target.HealthDamageReduction += value;
+					target.healthDamageReduction += value;
 					break;
 
 				case RewardsType.ShieldDamageReduction:
-					target.ShieldDamageReduction += value;
+					target.shieldDamageReduction += value;
 					break;
 
 				case RewardsType.FullHealthRestore:
-					target.CurrentHealth = target.MaxHealth;
+					target.currentHealth = target.maxHealth;
 					break;
 
 				case RewardsType.IncreasedRegenSpeed:
-					target.ShieldRegenPercent += value;
+					target.shieldRegenPercent += value;
 					break;
 
 				case RewardsType.RegenDelayReduction:
-					target.ShieldRegenDelay += value;
+					target.shieldRegenDelay += value;
 					break;
 
-				case RewardsType.BoostGaugeInncrase:
-					target.MaxBoostGauge += value;
+				case RewardsType.BoostGaugeIncrease:
+					target.maxBoostGauge += value;
 					break;
 
 				case RewardsType.ReserveShield:
-					target.ReserveShield = true;
+					target.reserveShield = true;
 					break;
 
 				case RewardsType.ShieldBreakEMP:
-					target.ShieldBreakEMP = true;
+					target.shieldBreakEMP = true;
 					break;
 			}
 		}
@@ -118,7 +118,7 @@ public enum RewardsType
 	RegenDelayReduction,
 
 	// Boost gauge
-	BoostGaugeInncrase,
+	BoostGaugeIncrease,
 
 	// Special effects
 	ReserveShield,
