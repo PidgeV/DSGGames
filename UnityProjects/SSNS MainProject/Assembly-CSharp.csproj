@@ -204,6 +204,9 @@
     <Reference Include="Unity.Physics.Editor">
       <HintPath>D:/GitHub/DSGGames/UnityProjects/SSNS MainProject/Library/ScriptAssemblies/Unity.Physics.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>D:/GitHub/DSGGames/UnityProjects/SSNS MainProject/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Postprocessing.Runtime">
       <HintPath>D:/GitHub/DSGGames/UnityProjects/SSNS MainProject/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
     </Reference>
@@ -239,9 +242,6 @@
     </Reference>
     <Reference Include="Unity.Transforms.Hybrid">
       <HintPath>D:/GitHub/DSGGames/UnityProjects/SSNS MainProject/Library/ScriptAssemblies/Unity.Transforms.Hybrid.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>D:/GitHub/DSGGames/UnityProjects/SSNS MainProject/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>D:/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
