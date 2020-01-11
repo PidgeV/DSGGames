@@ -19,30 +19,41 @@ public class ShipStats : ScriptableObject
 	public float currentShield = 0f;
 
 	// The speed the ship moves per second
-	public float shipSpeed = 15f;
-
-	// The speed the ship moves per second when boosting
-	public float boostSpeed = 30f;
+	public float acceleration = 15f;
 
 	// The delay between shots for the players basic weapon
 	public float fireRate = 0.1f;
 
-	// The base damage for the player basic gun
-	public float baseDamage = 1f;
-
-	// Reductions of damage for this ship
-	public float healthDamageReduction = 0.0f;
-	public float shieldDamageReduction = 0.0f;
-
-	// Shield regen properties
-	public float shieldRegenPercent = 0.1f;
-	public float shieldRegenDelay = 3f;
-
+    //Player things
+    [Header("Player ship stats")]
 	// This ships boost gauge values
 	public float boostGauge = 0f;
 	public float maxBoostGauge = 5f;
 
-	// Extra ship abilities
-	public bool reserveShield = false;
+    // The speed the ship moves per second when boosting
+    public float boostAcceleration = 30f;
+
+    // The base damage for the player basic gun
+    public float baseDamage = 1f; //-----------------------------Why is this not just damage on the bullets and stuff? -Blake botch
+
+    // Reductions of damage for this ship
+    public float healthDamageReduction = 0.0f;
+    public float shieldDamageReduction = 0.0f;
+
+    // Shield regen properties
+    public float shieldRegenPercent = 0.1f;
+    public float shieldRegenDelay = 3f;
+
+    // Extra ship abilities
+    public bool reserveShield = false;
 	public bool shieldBreakEMP = false;
+
+    //Basic Enemy things
+    [Header("Enemy Stats")]
+    public float regRotationForce = 2f;
+
+    //Charger things
+    [Header("Charger stats")]
+    public float chargeAcceleration = 50f;
+    public float chargeRotationForce = 2f;
 }

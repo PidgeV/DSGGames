@@ -42,12 +42,12 @@ public class Reward : ScriptableObject
 					target.baseDamage += value;
 					break;
 
-				case RewardsType.ShipSpeed:
-					target.shipSpeed += value;
+				case RewardsType.ShipAcceleration:
+					target.acceleration += value;
 					break;
 
-				case RewardsType.BoostSpeed:
-					target.boostSpeed += value;
+				case RewardsType.BoostAcceleration:
+					target.boostAcceleration += value;
 					break;
 
 				case RewardsType.FiringSpeed:
@@ -101,8 +101,8 @@ public enum RewardsType
 	ExtraShield,
 	ExtraDamage,
 
-	ShipSpeed,
-	BoostSpeed,
+	ShipAcceleration,
+	BoostAcceleration,
 
 	FiringSpeed,
 

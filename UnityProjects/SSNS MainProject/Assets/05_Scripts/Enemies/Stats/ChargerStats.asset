@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1a40360ee7d95e4f825a99c277d2b9e, type: 3}
+  m_Name: ChargerStats
+  m_EditorClassIdentifier: 
+  shipName: Charger Rawr
+  shipDescription: Raw raw rarara, Raw Raw rarara
+  maxHealth: 20
+  maxShield: 15
+  currentHealth: 0
+  currentShield: 0
+  acceleration: 75
+  fireRate: 0.1
+  boostGauge: 0
+  maxBoostGauge: 5
+  boostAcceleration: 30
+  baseDamage: 1
+  healthDamageReduction: 0
+  shieldDamageReduction: 0
+  shieldRegenPercent: 0.1
+  shieldRegenDelay: 3
+  reserveShield: 0
+  shieldBreakEMP: 0
+  regRotationForce: 115
+  chargeAcceleration: 200
+  chargeRotationForce: 25

@@ -12,7 +12,8 @@ public class ChaserEnemy : InterceptCalculationClass
     [Header("Blue: Velocity and collision check.")]
     public bool debugDraw = false;
 
-    public float dot;
+    //Math thing for later
+    float dot;
 
     [Space(15)]
     public GameObject player;
