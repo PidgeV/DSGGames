@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2686716003124266479}
   - component: {fileID: 8535914018573891862}
   - component: {fileID: 1107501255974450563}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SNSS_Lmain_Asteroid005
   m_TagString: Untagged
   m_Icon: {fileID: 0}

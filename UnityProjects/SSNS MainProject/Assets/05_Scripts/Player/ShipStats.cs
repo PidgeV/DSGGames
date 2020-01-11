@@ -47,13 +47,4 @@ public class ShipStats : ScriptableObject
     // Extra ship abilities
     public bool reserveShield = false;
 	public bool shieldBreakEMP = false;
-
-    //Basic Enemy things
-    [Header("Enemy Stats")]
-    public float regRotationForce = 2f;
-
-    //Charger things
-    [Header("Charger stats")]
-    public float chargeAcceleration = 50f;
-    public float chargeRotationForce = 2f;
 }

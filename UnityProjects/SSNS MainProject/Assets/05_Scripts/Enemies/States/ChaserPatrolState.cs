@@ -30,6 +30,7 @@ namespace Complete
             distance = waypointDistance;
             playerDist = playerDistance;
             randomPoint = randomizePoint;
+            stateID = FSMStateID.Patrolling;
 
             EnterStateInit();
         }
@@ -74,6 +75,10 @@ namespace Complete
                 }
             }
             //Else dead transition to dead
+            else if(controller.Health <= 0)
+            {
+                controller.PerformTransition(Transition.NoHealth);
+            }
         }
 
         IEnumerator PlayerInVision()

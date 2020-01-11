@@ -12,25 +12,29 @@ namespace Complete
         {
             destroyed = destroyedPrefab;
             controller = enemyController;
+            stateID = FSMStateID.Dead;
         }
 
         public override void Act()
         {
             //Spawn
-            Transform trans = controller.gameObject.transform;
-            GameObject tempObj = Object.Instantiate(destroyed, trans.position, trans.rotation);
+            if (destroyed != null)
+            {
+                Transform trans = controller.gameObject.transform;
+                GameObject tempObj = Object.Instantiate(destroyed, trans.position, trans.rotation);
 
-            //Set velocity
-            Rigidbody rb = tempObj.GetComponent<Rigidbody>();
-            if(rb)
-            {
-                rb.velocity = controller.gameObject.GetComponent<Rigidbody>().velocity;
-            }
-            else
-            {
-                tempObj.AddComponent(typeof(Rigidbody));
-                rb = tempObj.GetComponent<Rigidbody>();
-                rb.velocity = controller.gameObject.GetComponent<Rigidbody>().velocity;
+                //Set velocity
+                Rigidbody rb = tempObj.GetComponent<Rigidbody>();
+                if (rb)
+                {
+                    rb.velocity = controller.gameObject.GetComponent<Rigidbody>().velocity;
+                }
+                else
+                {
+                    tempObj.AddComponent(typeof(Rigidbody));
+                    rb = tempObj.GetComponent<Rigidbody>();
+                    rb.velocity = controller.gameObject.GetComponent<Rigidbody>().velocity;
+                }
             }
 
             //Destroy original object

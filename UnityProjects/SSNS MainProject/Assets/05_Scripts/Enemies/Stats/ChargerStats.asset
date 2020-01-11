@@ -30,6 +30,6 @@ MonoBehaviour:
   shieldRegenDelay: 3
   reserveShield: 0
   shieldBreakEMP: 0
-  regRotationForce: 115
+  regRotationForce: 125
   chargeAcceleration: 200
   chargeRotationForce: 25
