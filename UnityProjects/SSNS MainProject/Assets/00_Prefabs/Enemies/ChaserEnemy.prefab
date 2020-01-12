@@ -379,10 +379,9 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 256
-  collisionCheckDistance: 200
+  collisionCheckDistance: 150
   waypointDistance: 150
-  playerDistance: 100
-  calculateInterval: 0.5
+  playerDistance: 400
   rbSelf: {fileID: 3107085776561158192}
   raySize: 8.5
 --- !u!114 &5702806089406881496

@@ -69,7 +69,8 @@
     <Compile Include="Assets\05_Scripts\Enemies\StateMachine\AdvancedFSM.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\StateMachine\FSM.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\StateMachine\FSMState.cs" />
-    <Compile Include="Assets\05_Scripts\Enemies\States\ChaserPatrolState.cs" />
+    <Compile Include="Assets\05_Scripts\Enemies\States\ChargerStates\ChargerAttackState.cs" />
+    <Compile Include="Assets\05_Scripts\Enemies\States\ChargerStates\ChaserPatrolState.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\States\DeadState.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Stats\ChargerStats.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Turret\GunRotate.cs" />

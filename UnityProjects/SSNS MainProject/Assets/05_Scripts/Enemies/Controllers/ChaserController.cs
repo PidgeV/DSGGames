@@ -27,17 +27,11 @@ namespace Complete
         [Space(15)]
         [SerializeField] float waypointDistance = 50f;
         [SerializeField] float playerDistance = 100f;
-        [Tooltip("Time in seconds between trajectory calculations")]
-        [SerializeField] float calculateInterval = 0.5f;
       
-        Rigidbody rbTarget;
         public Rigidbody rbSelf;
-        Vector3 interceptPoint;
 
         [Tooltip("Size of ray for collision checking. Larger numbers will mean the avoidance is larger")]
         [SerializeField] float raySize = 7.5f;
-
-        GameObject target;
 
         Player player;
 
@@ -98,5 +92,6 @@ namespace Complete
         public float Acceleration { get { return stats.acceleration; } }
         public float ChargeAcceleration { get { return stats.chargeAcceleration; } }
         public float Health {  get { return stats.currentHealth; } }
+        public Player Player { get { return player; } }
     }
 }
