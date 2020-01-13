@@ -8,8 +8,12 @@ namespace Complete
     {
         ChaserController controller;
         private Player player;
+        private GameObject target;
         Vector3 interceptPoint;
         float dotProduct;
+        GameObject[] resetPositions;
+        bool randomPoint;
+        int currentPoint = 0;
 
         //Obstacle variables
         Vector3 obstacleAvoidDirection = Vector3.right;
@@ -18,10 +22,13 @@ namespace Complete
         float avoidTime = 2f;
 
         //constructor
-        public ChargerAttackState(ChaserController chaserController, Player playerObj)
+        public ChargerAttackState(ChaserController chaserController, Player playerObj, GameObject[] wayPoints, bool randomizePoint = false)
         {
             controller = chaserController;
             player = playerObj;
+            target = player.gameObject;
+            resetPositions = wayPoints;
+            randomPoint = randomizePoint;
 
             stateID = FSMStateID.Attacking;
         }
@@ -34,12 +41,17 @@ namespace Complete
 
         public override void Reason()
         {
-
+            ChooseTarget();
+            //Else dead transition to dead
+            if (controller.Health <= 0)
+            {
+                controller.PerformTransition(Transition.NoHealth);
+            }
         }
 
         public override void EnterStateInit()
         {
-
+            
         }
 
         //Calculates the intercept point
@@ -92,7 +104,14 @@ namespace Complete
                 }
 
                 //Movement
-                controller.rbSelf.AddForce(controller.transform.forward.normalized * controller.Acceleration, ForceMode.Acceleration); // move regular speed if obstacle is in the way or player is not target
+                if (!obstacleHit)
+                {
+                    controller.rbSelf.AddForce(controller.transform.forward.normalized * controller.ChargeAcceleration, ForceMode.Acceleration); // charge if there's no obstacle
+                }
+                else
+                {
+                    controller.rbSelf.AddForce(controller.transform.forward.normalized * controller.Acceleration, ForceMode.Acceleration); // move regular speed if an obstacle is in the way
+                }
             }
         }
 
@@ -112,6 +131,43 @@ namespace Complete
 
                 dir += turnDir;
                 obstacleHit = true;
+            }
+        }
+
+        void ChooseTarget()
+        {
+            if (target != null)
+            {
+                if (!target.Equals(player.gameObject) &&
+                    Vector3.Distance(controller.transform.position, target.transform.position) <= controller.WaypointDistance &&
+                    resetPositions.Length > 0) // change target when close enough
+                {
+                    target = player.gameObject;   //Otherwise choose player
+                }
+                else if (target.Equals(player.gameObject) &&
+                    Vector3.Distance(controller.transform.position, target.transform.position) <= controller.PlayerDistance)
+                {
+                    dotProduct = Vector3.Dot(controller.transform.forward, player.transform.position - controller.transform.position);
+
+                    if (dotProduct < 0 && randomPoint)
+                    {
+                        //missed player
+                        target = resetPositions[Random.Range(0, resetPositions.Length)];
+                        dotProduct = 0;
+                    }
+                    else if (dotProduct < 0 && !randomPoint)
+                    {
+                        //missed player
+                        currentPoint++;
+                        if (currentPoint >= resetPositions.Length) currentPoint = 0;
+                        target = resetPositions[currentPoint];
+                        dotProduct = 0;
+                    }
+                }
+            }
+            else
+            {
+                target = player.gameObject;
             }
         }
     }

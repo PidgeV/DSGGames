@@ -26,7 +26,9 @@ namespace Complete
 
         [Space(15)]
         [SerializeField] float waypointDistance = 50f;
+        public float WaypointDistance { get { return waypointDistance; } }
         [SerializeField] float playerDistance = 100f;
+        public float PlayerDistance { get { return playerDistance; } }
       
         public Rigidbody rbSelf;
 
@@ -39,12 +41,17 @@ namespace Complete
         {
             DeadState deadState = new DeadState(this, destroyedPrefab);
             ChaserPatrolState patrol = new ChaserPatrolState(this, player, waypoints, waypointDistance, playerDistance, true);
+            ChargerAttackState attack = new ChargerAttackState(this, player, waypoints, true);
 
             patrol.AddTransition(Transition.NoHealth, FSMStateID.Dead);
             patrol.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
 
+            attack.AddTransition(Transition.NoHealth, FSMStateID.Dead);
+            //What's the difference between saw player and attack transition?
+
             AddFSMState(patrol);
             AddFSMState(deadState);
+            AddFSMState(attack);
         }
 
         protected override void Initialize()

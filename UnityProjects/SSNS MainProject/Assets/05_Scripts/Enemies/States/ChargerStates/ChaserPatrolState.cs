@@ -60,7 +60,7 @@ namespace Complete
                 {
                     patrolID++;
 
-                    if (patrolID > waypoints.Length) patrolID = 0;
+                    if (patrolID >= waypoints.Length) patrolID = 0;
                 }
             }
 
