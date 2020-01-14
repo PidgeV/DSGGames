@@ -14,11 +14,11 @@ public class FollowPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void FixedUpdate()
     {
-        transform.position = target.transform.position;
+        if (target != null) transform.position = target.transform.position;
     }
 }
