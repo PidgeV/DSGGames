@@ -8,12 +8,8 @@ namespace Complete
     {
         ChaserController controller;
         private Player player;
-        private GameObject target;
         Vector3 interceptPoint;
         float dotProduct;
-        GameObject[] resetPositions;
-        bool randomPoint;
-        int currentPoint = 0;
 
         //Obstacle variables
         Vector3 obstacleAvoidDirection = Vector3.right;
@@ -21,14 +17,13 @@ namespace Complete
         float obstacleTimer = 0;
         float avoidTime = 2f;
 
+        float maxSpeed = 0;
+
         //constructor
-        public ChargerAttackState(ChaserController chaserController, Player playerObj, GameObject[] wayPoints, bool randomizePoint = false)
+        public ChargerAttackState(ChaserController chaserController, Player playerObj)
         {
             controller = chaserController;
             player = playerObj;
-            target = player.gameObject;
-            resetPositions = wayPoints;
-            randomPoint = randomizePoint;
 
             stateID = FSMStateID.Attacking;
         }
@@ -41,7 +36,24 @@ namespace Complete
 
         public override void Reason()
         {
-            ChooseTarget();
+            if (player == null)
+            {
+                controller.PerformTransition(Transition.Patrol);
+            }
+            else
+            {
+
+                CalcDotProduct();
+
+                maxSpeed = Mathf.Max(maxSpeed, controller.rbSelf.velocity.magnitude);
+
+                float distance = Vector3.Distance(controller.transform.position, player.transform.position);
+                if (dotProduct < 0 && distance < 100)
+                {
+                    controller.PerformTransition(Transition.Patrol); //Go to patrolling
+                }
+            }
+
             //Else dead transition to dead
             if (controller.Health <= 0)
             {
@@ -51,7 +63,7 @@ namespace Complete
 
         public override void EnterStateInit()
         {
-            
+            //Debug.Log("Attacking");
         }
 
         //Calculates the intercept point
@@ -65,7 +77,7 @@ namespace Complete
             Vector3 targetVelocity = rbTarget ? rbTarget.velocity : Vector3.zero;
 
             //calculate intercept
-            interceptPoint = InterceptCalculationClass.FirstOrderIntercept(controller.transform.position, velocity, controller.rbSelf.velocity.magnitude, targetPosition, targetVelocity);
+            interceptPoint = InterceptCalculationClass.FirstOrderIntercept(controller.transform.position, velocity, maxSpeed, targetPosition, targetVelocity);
         }
 
         //Moves
@@ -83,8 +95,12 @@ namespace Complete
                 if (!obstacleHit && obstacleTimer == 0)
                 {
                     direction = interceptPoint - controller.transform.position; // sets desired direction to target intercept point
+                    //direction = player.transform.position - controller.transform.position; // sets desired direction to target intercept point
 
+
+                    //Vector3 newDir = Vector3.RotateTowards(controller.transform.forward, direction, controller.ChargeRotationForce * Time.deltaTime, 0);
                     Vector3 newDir = Vector3.RotateTowards(controller.transform.forward, direction, controller.RegRotationForce * Time.deltaTime, 0);
+
                     Quaternion rot = Quaternion.LookRotation(newDir);
                     controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, rot, Time.deltaTime);
                 }
@@ -104,7 +120,7 @@ namespace Complete
                 }
 
                 //Movement
-                if (!obstacleHit)
+                if (!obstacleHit && LineOfSight() && dotProduct > 0.95f)
                 {
                     controller.rbSelf.AddForce(controller.transform.forward.normalized * controller.ChargeAcceleration, ForceMode.Acceleration); // charge if there's no obstacle
                 }
@@ -120,10 +136,8 @@ namespace Complete
             RaycastHit hitInfo;
 
             //Check direction facing
-            if (Physics.SphereCast(controller.transform.position, controller.RaySize, controller.transform.forward.normalized,
-                out hitInfo, controller.CollisionCheckDistance, controller.ObstacleLayer) ||
-                Physics.SphereCast(controller.transform.position, controller.RaySize, controller.rbSelf.velocity.normalized,
-                out hitInfo, controller.CollisionCheckDistance, controller.ObstacleLayer))
+            if (Physics.SphereCast(controller.transform.position, controller.RaySize, controller.transform.forward.normalized, out hitInfo, controller.CollisionCheckDistance, controller.ObstacleLayer) ||
+                Physics.SphereCast(controller.transform.position, controller.RaySize, controller.rbSelf.velocity.normalized, out hitInfo, controller.CollisionCheckDistance, controller.ObstacleLayer))
             {
                 // Get the desired direction we need to move to move around  the obstacle. Transform to world co-ordinates (gets the obstacleMoveDirection wrt the current foward direction).
                 Vector3 turnDir = controller.transform.TransformDirection(hitInfo.normal + Vector3.right);
@@ -134,41 +148,27 @@ namespace Complete
             }
         }
 
-        void ChooseTarget()
+        void CalcDotProduct()
         {
-            if (target != null)
+            if (player != null)
             {
-                if (!target.Equals(player.gameObject) &&
-                    Vector3.Distance(controller.transform.position, target.transform.position) <= controller.WaypointDistance &&
-                    resetPositions.Length > 0) // change target when close enough
-                {
-                    target = player.gameObject;   //Otherwise choose player
-                }
-                else if (target.Equals(player.gameObject) &&
-                    Vector3.Distance(controller.transform.position, target.transform.position) <= controller.PlayerDistance)
-                {
-                    dotProduct = Vector3.Dot(controller.transform.forward, player.transform.position - controller.transform.position);
+                dotProduct = Vector3.Dot(controller.transform.forward.normalized, (player.transform.position - controller.transform.position).normalized);
+                //Debug.Log(dotProduct);
+            }
+        }
 
-                    if (dotProduct < 0 && randomPoint)
-                    {
-                        //missed player
-                        target = resetPositions[Random.Range(0, resetPositions.Length)];
-                        dotProduct = 0;
-                    }
-                    else if (dotProduct < 0 && !randomPoint)
-                    {
-                        //missed player
-                        currentPoint++;
-                        if (currentPoint >= resetPositions.Length) currentPoint = 0;
-                        target = resetPositions[currentPoint];
-                        dotProduct = 0;
-                    }
-                }
-            }
-            else
+        bool LineOfSight()
+        {
+            //Raycast to see if there is a straight shot to the intercept point
+            Ray ray = new Ray(controller.transform.position, interceptPoint);
+            RaycastHit[] hitInfo = Physics.RaycastAll(ray);
+
+            if (hitInfo.Length <= 1 && !obstacleHit && dotProduct > 0.8f) //Because I dont want to exclude itself from collision detection
             {
-                target = player.gameObject;
+                return true;
             }
+
+            return false;
         }
     }
 }

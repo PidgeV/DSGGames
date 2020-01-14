@@ -17,6 +17,7 @@ namespace Complete
         NoHealth,
         SawPlayer,
         Attack,
+        Patrol,
     }
 
     public enum FSMStateID
