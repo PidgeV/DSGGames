@@ -4,8 +4,12 @@ using UnityEngine;
 
 namespace Complete
 {
+    /// <summary>
+    /// This state is meant to be used for an enemie once it has been killed
+    /// </summary>
     public class DeadState : FSMState
     {
+        /// <summary> This gameobject holds the prefab for the destroyed enemy </summary>
         private GameObject destroyed;
         private AdvancedFSM controller;
         public DeadState(AdvancedFSM enemyController, GameObject destroyedPrefab)
@@ -17,7 +21,7 @@ namespace Complete
 
         public override void Act()
         {
-            //Spawn
+            //Spawn the destroyed version of the enemy
             if (destroyed != null)
             {
                 Transform trans = controller.gameObject.transform;

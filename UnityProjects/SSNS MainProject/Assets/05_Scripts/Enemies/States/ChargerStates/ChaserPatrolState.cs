@@ -82,10 +82,13 @@ namespace Complete
                 {
                     //Debug.DrawLine(controller.transform.position, player.transform.position);
 
-                    if (PlayerInVision() && timer > timeAfterTransition) // in vision and has been patrolling for minimum time. This is to prevent the ai staying in attack mode and acting weird
+                    if (timer >= timeAfterTransition)
                     {
                         timer = 0f;
-                        controller.PerformTransition(Transition.SawPlayer);
+                        if (PlayerInVision()) // in vision and has been patrolling for minimum time. This is to prevent the ai staying in attack mode and acting weird
+                        {
+                            controller.PerformTransition(Transition.SawPlayer);
+                        }
                     }
                 }
             }
@@ -163,9 +166,9 @@ namespace Complete
 
             //Check direction facing
             if (Physics.SphereCast(controller.transform.position, controller.RaySize, controller.transform.forward.normalized,
-                out hitInfo, controller.CollisionCheckDistance, controller.ObstacleLayer) ||
-                Physics.SphereCast(controller.transform.position, controller.RaySize, controller.rbSelf.velocity.normalized,
-                out hitInfo, controller.CollisionCheckDistance, controller.ObstacleLayer))
+                out hitInfo, controller.CollisionCheckDistance, controller.ObstacleLayer))// ||
+                //Physics.SphereCast(controller.transform.position, controller.RaySize, controller.rbSelf.velocity.normalized,
+                //out hitInfo, controller.CollisionCheckDistance, controller.ObstacleLayer))
             {
                 // Get the desired direction we need to move to move around  the obstacle. Transform to world co-ordinates (gets the obstacleMoveDirection wrt the current foward direction).
                 Vector3 turnDir = controller.transform.TransformDirection(hitInfo.normal + Vector3.right);

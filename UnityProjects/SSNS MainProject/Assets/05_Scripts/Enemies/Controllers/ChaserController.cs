@@ -56,7 +56,10 @@ namespace Complete
         protected override void Initialize()
         {
             //Pretty self explainatory
-            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            if (GameObject.FindGameObjectWithTag("Player") != null)
+            {
+                player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            }
             stats.currentHealth = stats.maxHealth;
             ConstructFSM();
 
