@@ -20,18 +20,14 @@ namespace Complete
         float obstacleTimer = 0;
         float avoidTime = 2f;
 
-        //Timer for staying in patrol;
-        private float timer = 0f;
-        private float timeAfterTransition = 10f;
-
         //Constructor
         public ChaserPatrolState(ChaserController enemyController, Player playerObj, GameObject[] wayPoints, float waypointDistance, float playerDistance, bool randomizePoint = false)
         {
             controller = enemyController;
             player = playerObj;
             waypoints = wayPoints;
-            distance = (waypointDistance * 12); // Multiply for meters to units. 12 units/meter
-            playerDist = (playerDistance * 12); 
+            distance = waypointDistance;
+            playerDist = playerDistance;
             randomPoint = randomizePoint;
             stateID = FSMStateID.Patrolling;
 
@@ -47,17 +43,12 @@ namespace Complete
         //Initialize on entering state
         public override void EnterStateInit()
         {
-            //Debug.Log("Patrolling");
+
         }
 
 
         public override void Reason()
         {
-            if(timer < timeAfterTransition)
-            {
-                timer += Time.deltaTime;
-            }
-
             //Check distance to waypoint
             if (Vector3.Distance(controller.transform.position, waypoints[patrolID].transform.position) < distance)
             {
@@ -69,17 +60,16 @@ namespace Complete
                 {
                     patrolID++;
 
-                    if (patrolID >= waypoints.Length) patrolID = 0;
+                    if (patrolID > waypoints.Length) patrolID = 0;
                 }
             }
 
-            if (player != null)
+            //Check distance to player
+            if (Vector3.Distance(controller.transform.position, player.gameObject.transform.position) < playerDist)
             {
-                float pDist = Vector3.Distance(controller.transform.position, player.gameObject.transform.position);
-
-                //Check distance to player
-                if (pDist < playerDist)
+                if (PlayerInVision())
                 {
+<<<<<<< HEAD
                     //Debug.DrawLine(controller.transform.position, player.transform.position);
 
                     if (timer >= timeAfterTransition)
@@ -90,6 +80,9 @@ namespace Complete
                             controller.PerformTransition(Transition.SawPlayer);
                         }
                     }
+=======
+                    controller.PerformTransition(Transition.SawPlayer);
+>>>>>>> parent of c3e206489... Merge branch 'Trixie-Test'
                 }
             }
             //Else dead transition to dead
@@ -104,20 +97,17 @@ namespace Complete
             Vector3 dir = player.transform.position - controller.transform.position;
             Ray ray = new Ray(controller.transform.position, dir);
             RaycastHit hitInfo;
-            LayerMask layerMask = LayerMask.GetMask("Obstacles");
-            layerMask += LayerMask.GetMask("Player"); //Add player layer to obstacles
 
-            Physics.Raycast(ray, out hitInfo, Mathf.Infinity, layerMask);
+            Physics.Raycast(ray, out hitInfo);
 
-            if (hitInfo.collider != null)
+            if (hitInfo.collider.gameObject.Equals(player.gameObject))
             {
-                //Debug.Log(hitInfo.collider.gameObject.name);
-                if (hitInfo.collider.gameObject.Equals(player.gameObject))
-                {
-                    return true;
-                }
+                return true;
             }
-            return false;
+            else
+            {
+                return false;
+            }
         }
 
         //Moves

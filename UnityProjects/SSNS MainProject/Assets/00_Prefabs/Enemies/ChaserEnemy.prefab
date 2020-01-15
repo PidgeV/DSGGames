@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3865445014128588202}
   - component: {fileID: 2708352023725181379}
   - component: {fileID: 8398187736804739916}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Cube (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 3107085776189510405}
   - component: {fileID: 3107085776189510424}
   - component: {fileID: 3107085776189510427}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Cube (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 3107085776206292360}
   - component: {fileID: 3107085776206292367}
   - component: {fileID: 3107085776206292366}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -250,8 +250,7 @@ GameObject:
   - component: {fileID: 5065271178767460442}
   - component: {fileID: 2083052501916966413}
   - component: {fileID: 5702806089406881496}
-  - component: {fileID: 725005335}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: ChaserEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,7 +286,7 @@ Rigidbody:
   m_GameObject: {fileID: 3107085776561158194}
   serializedVersion: 2
   m_Mass: 200
-  m_Drag: 10
+  m_Drag: 1
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -333,7 +332,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  radius: 200
+  radius: 1000
 --- !u!114 &5065271178767460442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,93 +374,14 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  debugDraw: 1
+  debugDraw: 0
   stats: {fileID: 5702806089406881496}
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 256
   collisionCheckDistance: 150
-  waypointDistanceMeters: 50
-  playerDistanceMeters: 400
+  waypointDistance: 150
+  playerDistance: 400
   rbSelf: {fileID: 3107085776561158192}
   raySize: 8.5
 --- !u!114 &5702806089406881496
@@ -482,23 +402,10 @@ MonoBehaviour:
   maxShield: 15
   currentHealth: 0
   currentShield: 0
-  acceleration: 1000
-  regRotationForce: 200
-  chargeAcceleration: 3000
-  chargeRotationForce: 25
---- !u!114 &725005335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3107085776561158194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 48901a74a34a93249835e8beb8ed2146, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
+  acceleration: 75
+  regRotationForce: 100
+  chargeAcceleration: 400
+  chargeRotationForce: 5
 --- !u!1 &3107085776864953468
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,7 +417,7 @@ GameObject:
   - component: {fileID: 3107085776864953469}
   - component: {fileID: 3107085776864953456}
   - component: {fileID: 3107085776864953459}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -588,7 +495,7 @@ GameObject:
   - component: {fileID: 3107085777028335533}
   - component: {fileID: 3107085777028335520}
   - component: {fileID: 3107085777028335523}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Cube (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -666,7 +573,7 @@ GameObject:
   - component: {fileID: 3107085777227567399}
   - component: {fileID: 3107085777227567418}
   - component: {fileID: 3107085777227567397}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Cube (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

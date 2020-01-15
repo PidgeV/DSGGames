@@ -9,7 +9,6 @@ public class RandomPosition : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        radius *= 12;
         Vector3 newPos = Vector3.zero;
 
         newPos.x = Random.Range(-radius, radius);
