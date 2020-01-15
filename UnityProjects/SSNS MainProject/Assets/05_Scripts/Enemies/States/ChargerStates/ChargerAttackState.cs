@@ -102,13 +102,19 @@ namespace Complete
 
             //Check direction facing
 <<<<<<< HEAD
+<<<<<<< HEAD
             if (Physics.SphereCast(controller.transform.position, controller.RaySize, controller.transform.forward.normalized, out hitInfo, controller.CollisionCheckDistance, controller.ObstacleLayer))// ||
                 //Physics.SphereCast(controller.transform.position, controller.RaySize, controller.rbSelf.velocity.normalized, out hitInfo, controller.CollisionCheckDistance, controller.ObstacleLayer))
 =======
+=======
+>>>>>>> parent of c3e206489... Merge branch 'Trixie-Test'
             if (Physics.SphereCast(controller.transform.position, controller.RaySize, controller.transform.forward.normalized,
                 out hitInfo, controller.CollisionCheckDistance, controller.ObstacleLayer) ||
                 Physics.SphereCast(controller.transform.position, controller.RaySize, controller.rbSelf.velocity.normalized,
                 out hitInfo, controller.CollisionCheckDistance, controller.ObstacleLayer))
+<<<<<<< HEAD
+>>>>>>> parent of c3e206489... Merge branch 'Trixie-Test'
+=======
 >>>>>>> parent of c3e206489... Merge branch 'Trixie-Test'
             {
                 // Get the desired direction we need to move to move around  the obstacle. Transform to world co-ordinates (gets the obstacleMoveDirection wrt the current foward direction).

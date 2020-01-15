@@ -70,6 +70,7 @@ namespace Complete
                 if (PlayerInVision())
                 {
 <<<<<<< HEAD
+<<<<<<< HEAD
                     //Debug.DrawLine(controller.transform.position, player.transform.position);
 
                     if (timer >= timeAfterTransition)
@@ -80,6 +81,9 @@ namespace Complete
                             controller.PerformTransition(Transition.SawPlayer);
                         }
                     }
+=======
+                    controller.PerformTransition(Transition.SawPlayer);
+>>>>>>> parent of c3e206489... Merge branch 'Trixie-Test'
 =======
                     controller.PerformTransition(Transition.SawPlayer);
 >>>>>>> parent of c3e206489... Merge branch 'Trixie-Test'
