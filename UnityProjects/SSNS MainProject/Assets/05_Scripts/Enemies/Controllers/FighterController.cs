@@ -61,7 +61,7 @@ namespace Complete
 
             AddFSMState(patrol);
             AddFSMState(deadState);
-            //AddFSMState(attack);
+            AddFSMState(attack);
         }
 
         protected override void Initialize()

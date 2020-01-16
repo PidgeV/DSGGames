@@ -114,7 +114,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 494}
   m_MaxSize: {x: 14004, y: 14044}
   vertical: 0
-  controlID: 157
+  controlID: 74
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 494}
   m_MaxSize: {x: 10002, y: 14044}
   vertical: 1
-  controlID: 83
+  controlID: 75
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 222}
   m_MaxSize: {x: 8006, y: 4022}
   vertical: 0
-  controlID: 84
+  controlID: 76
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -184,8 +184,8 @@ MonoBehaviour:
     y: 0
     width: 240
     height: 704
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 222}
+  m_MaxSize: {x: 4002, y: 4022}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -265,8 +265,8 @@ MonoBehaviour:
     y: 0
     width: 322
     height: 987
-  m_MinSize: {x: 277, y: 122}
-  m_MaxSize: {x: 4002, y: 4022}
+  m_MinSize: {x: 275, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -471,9 +471,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 3ceaffff
-      m_LastClickedID: -5572
-      m_ExpandedIDs: 76d3ffff9ef7ffff34290400
+      m_SelectedIDs: 8a2b0000
+      m_LastClickedID: 0
+      m_ExpandedIDs: 6efbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -533,9 +533,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -22.610573, y: -200.04265, z: 51.09867}
+    m_Target: {x: -429.46887, y: -24.86943, z: 256.35205}
     speed: 2
-    m_Value: {x: -22.610573, y: -200.04265, z: 51.09867}
+    m_Value: {x: -429.46887, y: -24.86943, z: 256.35205}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -564,13 +564,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.0010403043, y: 0.838274, z: -0.0011450107, w: -0.54545933}
+    m_Target: {x: 0.10337468, y: 0.4790786, z: 0.057335544, w: -0.8699114}
     speed: 2
-    m_Value: {x: -0.0010401839, y: 0.83817697, z: -0.0011448782, w: -0.5453962}
+    m_Value: {x: 0.10205781, y: 0.47910762, z: 0.05660993, w: -0.8699629}
   m_Size:
-    m_Target: 89.31576
+    m_Target: 665.78186
     speed: 2
-    m_Value: 93.52435
+    m_Value: 697.15375
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -635,20 +635,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/00_Prefabs/Enemies
+    - Assets/05_Scripts/Enemies/Obselete
   m_ViewMode: 1
   m_StartGridSize: 89
   m_LastFolders:
-  - Assets/00_Prefabs/Enemies
+  - Assets/05_Scripts/Enemies/Obselete
   m_LastFoldersGridSize: 89
   m_LastProjectPath: D:\Git\DSGGames\UnityProjects\SSNS MainProject
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: e84f0000
-    m_LastClickedID: 20456
-    m_ExpandedIDs: 000000000a4b0000e84f000086510000005300005e5400006a540000a05400004e550000f65800001860000066880400688804006a88040000ca9a3b
+    scrollPos: {x: 0, y: 180}
+    m_SelectedIDs: 88560000
+    m_LastClickedID: 22152
+    m_ExpandedIDs: 00000000504400006a490000204b0000b44c0000244e0000304e0000684e0000184f0000de520000765a000076840400788404007a84040000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -676,7 +676,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000000a4b000086510000005300005e5400006a540000a0540000f658000066880400688804006a880400
+    m_ExpandedIDs: 00000000504400006a490000204b0000b44c0000244e0000304e0000684e0000184f0000de520000765a000076840400788404007a840400
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -703,7 +703,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c623000000000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0

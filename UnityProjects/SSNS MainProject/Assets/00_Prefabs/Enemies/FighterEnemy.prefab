@@ -276,7 +276,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 58820780711503999}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
   m_Name: 
@@ -328,13 +328,13 @@ MonoBehaviour:
   fireRate: 0.2
   maxHealth: 10
   currentHealth: 0
-  regRotationForce: 10
-  acceleration: 75
+  regRotationForce: 200
+  acceleration: 1000
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 256
   collisionCheckDistance: 150
-  waypointDistanceMeters: 50
+  waypointDistanceMeters: 100
   playerDistanceMeters: 400
   rbSelf: {fileID: 58820780711503997}
   raySize: 8.5
