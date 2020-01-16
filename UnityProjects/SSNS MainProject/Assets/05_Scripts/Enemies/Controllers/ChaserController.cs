@@ -25,8 +25,8 @@ namespace Complete
         [SerializeField] float collisionCheckDistance = 150f;
 
         [Space(15)]
-        [SerializeField] float waypointDistance = 50f;
-        [SerializeField] float playerDistance = 100f;
+        [SerializeField] float waypointDistanceMeters = 50f;
+        [SerializeField] float playerDistanceMeters = 100f;
       
         public Rigidbody rbSelf;
 
@@ -38,22 +38,25 @@ namespace Complete
         private void ConstructFSM()
         {
             DeadState deadState = new DeadState(this, destroyedPrefab);
-            ChaserPatrolState patrol = new ChaserPatrolState(this, player, waypoints, waypointDistance, playerDistance, true);
+            ChaserPatrolState patrol = new ChaserPatrolState(this, player, waypoints, waypointDistanceMeters, playerDistanceMeters, true);
+            ChargerAttackState attack = new ChargerAttackState(this, player);
 
             patrol.AddTransition(Transition.NoHealth, FSMStateID.Dead);
-            patrol.AddTransition(Transition.SawPlayer, FSMStateID.Chasing);
+            patrol.AddTransition(Transition.SawPlayer, FSMStateID.Attacking); //Change this
+
+            attack.AddTransition(Transition.NoHealth, FSMStateID.Dead);
+            attack.AddTransition(Transition.Patrol, FSMStateID.Patrolling);
+            //What's the difference between saw player and attack transition?
 
             AddFSMState(patrol);
             AddFSMState(deadState);
+            AddFSMState(attack);
         }
 
         protected override void Initialize()
         {
             //Pretty self explainatory
-            if (GameObject.FindGameObjectWithTag("Player") != null)
-            {
-                player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-            }
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             stats.currentHealth = stats.maxHealth;
             ConstructFSM();
 
@@ -87,6 +90,9 @@ namespace Complete
             }
         }
 
+        //Getters
+        public float PlayerDistance { get { return playerDistanceMeters; } }
+        public float WaypointDistance { get { return waypointDistanceMeters; } }
         public float CollisionCheckDistance { get { return collisionCheckDistance; } }
         public LayerMask ObstacleLayer { get { return obstacleLayer; } }
         public float RaySize {  get { return raySize; } }

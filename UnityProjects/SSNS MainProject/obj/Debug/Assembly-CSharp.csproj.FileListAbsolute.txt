@@ -633,3 +633,5 @@ D:\Git\DSGGames\UnityProjects\SSNS MainProject\obj\Debug\Assembly-CSharp.csproj.
 D:\Git\DSGGames\UnityProjects\SSNS MainProject\obj\Debug\Assembly-CSharp.csproj.CopyComplete
 D:\Git\DSGGames\UnityProjects\SSNS MainProject\obj\Debug\Assembly-CSharp.dll
 D:\Git\DSGGames\UnityProjects\SSNS MainProject\obj\Debug\Assembly-CSharp.pdb
+D:\Git\DSGGames\UnityProjects\SSNS MainProject\Temp\bin\Debug\Unity.2D.Sprite.Editor.dll
+D:\Git\DSGGames\UnityProjects\SSNS MainProject\Temp\bin\Debug\Unity.2D.Sprite.Editor.pdb

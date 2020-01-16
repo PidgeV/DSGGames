@@ -20,14 +20,18 @@ namespace Complete
         float obstacleTimer = 0;
         float avoidTime = 2f;
 
+        //Timer for staying in patrol;
+        private float timer = 0f;
+        private float timeAfterTransition = 10f;
+
         //Constructor
         public ChaserPatrolState(ChaserController enemyController, Player playerObj, GameObject[] wayPoints, float waypointDistance, float playerDistance, bool randomizePoint = false)
         {
             controller = enemyController;
             player = playerObj;
             waypoints = wayPoints;
-            distance = waypointDistance;
-            playerDist = playerDistance;
+            distance = (waypointDistance * 12); // Multiply for meters to units. 12 units/meter
+            playerDist = (playerDistance * 12); 
             randomPoint = randomizePoint;
             stateID = FSMStateID.Patrolling;
 
@@ -43,12 +47,17 @@ namespace Complete
         //Initialize on entering state
         public override void EnterStateInit()
         {
-
+            //Debug.Log("Patrolling");
         }
 
 
         public override void Reason()
         {
+            if(timer < timeAfterTransition)
+            {
+                timer += Time.deltaTime;
+            }
+
             //Check distance to waypoint
             if (Vector3.Distance(controller.transform.position, waypoints[patrolID].transform.position) < distance)
             {
@@ -60,33 +69,24 @@ namespace Complete
                 {
                     patrolID++;
 
-                    if (patrolID > waypoints.Length) patrolID = 0;
+                    if (patrolID >= waypoints.Length) patrolID = 0;
                 }
             }
 
-            //Check distance to player
-            if (Vector3.Distance(controller.transform.position, player.gameObject.transform.position) < playerDist)
+            if (player != null)
             {
-                if (PlayerInVision())
+                float pDist = Vector3.Distance(controller.transform.position, player.gameObject.transform.position);
+
+                //Check distance to player
+                if (pDist < playerDist)
                 {
-<<<<<<< HEAD
-<<<<<<< HEAD
                     //Debug.DrawLine(controller.transform.position, player.transform.position);
 
-                    if (timer >= timeAfterTransition)
+                    if (PlayerInVision() && timer > timeAfterTransition) // in vision and has been patrolling for minimum time. This is to prevent the ai staying in attack mode and acting weird
                     {
                         timer = 0f;
-                        if (PlayerInVision()) // in vision and has been patrolling for minimum time. This is to prevent the ai staying in attack mode and acting weird
-                        {
-                            controller.PerformTransition(Transition.SawPlayer);
-                        }
+                        controller.PerformTransition(Transition.SawPlayer);
                     }
-=======
-                    controller.PerformTransition(Transition.SawPlayer);
->>>>>>> parent of c3e206489... Merge branch 'Trixie-Test'
-=======
-                    controller.PerformTransition(Transition.SawPlayer);
->>>>>>> parent of c3e206489... Merge branch 'Trixie-Test'
                 }
             }
             //Else dead transition to dead
@@ -101,17 +101,20 @@ namespace Complete
             Vector3 dir = player.transform.position - controller.transform.position;
             Ray ray = new Ray(controller.transform.position, dir);
             RaycastHit hitInfo;
+            LayerMask layerMask = LayerMask.GetMask("Obstacles");
+            layerMask += LayerMask.GetMask("Player"); //Add player layer to obstacles
 
-            Physics.Raycast(ray, out hitInfo);
+            Physics.Raycast(ray, out hitInfo, Mathf.Infinity, layerMask);
 
-            if (hitInfo.collider.gameObject.Equals(player.gameObject))
+            if (hitInfo.collider != null)
             {
-                return true;
+                //Debug.Log(hitInfo.collider.gameObject.name);
+                if (hitInfo.collider.gameObject.Equals(player.gameObject))
+                {
+                    return true;
+                }
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         //Moves
@@ -160,9 +163,9 @@ namespace Complete
 
             //Check direction facing
             if (Physics.SphereCast(controller.transform.position, controller.RaySize, controller.transform.forward.normalized,
-                out hitInfo, controller.CollisionCheckDistance, controller.ObstacleLayer))// ||
-                //Physics.SphereCast(controller.transform.position, controller.RaySize, controller.rbSelf.velocity.normalized,
-                //out hitInfo, controller.CollisionCheckDistance, controller.ObstacleLayer))
+                out hitInfo, controller.CollisionCheckDistance, controller.ObstacleLayer) ||
+                Physics.SphereCast(controller.transform.position, controller.RaySize, controller.rbSelf.velocity.normalized,
+                out hitInfo, controller.CollisionCheckDistance, controller.ObstacleLayer))
             {
                 // Get the desired direction we need to move to move around  the obstacle. Transform to world co-ordinates (gets the obstacleMoveDirection wrt the current foward direction).
                 Vector3 turnDir = controller.transform.TransformDirection(hitInfo.normal + Vector3.right);
