@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 544}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -45,7 +45,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
-  m_MinSize: {x: 950, y: 544}
+  m_MinSize: {x: 950, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &3
 MonoBehaviour:
@@ -471,9 +471,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 32daffff
+      m_SelectedIDs: 24d1ffff
+      m_LastClickedID: -11996
+      m_ExpandedIDs: 6efbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -533,9 +533,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -26.954193, y: -232.10045, z: -1.9159496}
+    m_Target: {x: -26.784351, y: -232.30269, z: -0.18612838}
     speed: 2
-    m_Value: {x: -26.954193, y: -232.10045, z: -1.9159496}
+    m_Value: {x: -26.784351, y: -232.30269, z: -0.18612838}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -564,9 +564,9 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.0033901525, y: -0.69520575, z: -0.0029297755, w: 0.71891826}
+    m_Target: {x: 0.0021442224, y: -0.64742434, z: 0.0021512706, w: 0.76223814}
     speed: 2
-    m_Value: {x: -0.0033898568, y: -0.6951451, z: -0.0029295199, w: 0.71885556}
+    m_Value: {x: 0.0021310905, y: -0.65192926, z: 0.0021639087, w: 0.7582738}
   m_Size:
     m_Target: 13.480613
     speed: 2
@@ -635,20 +635,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/00_Prefabs/Enemies
   m_ViewMode: 1
   m_StartGridSize: 89
   m_LastFolders:
-  - Assets
+  - Assets/00_Prefabs/Enemies
   m_LastFoldersGridSize: 89
   m_LastProjectPath: C:\Users\Blake\Documents\GitHub\DSGGames\UnityProjects\SSNS MainProject
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 84570000
-    m_LastClickedID: 22404
-    m_ExpandedIDs: 0000000084570000e45a0000825d0000905e00009c5e0000c25e0000428f0400448f0400468f040000ca9a3b
+    m_SelectedIDs: 6a490000
+    m_LastClickedID: 18794
+    m_ExpandedIDs: 0000000050440000f6480000b24c0000244e0000304e0000684e0000785a0000ae830400b0830400b283040000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -676,7 +676,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000084570000605c0000825d0000905e00009c5e0000c25e00000a620000428f0400448f0400468f0400
+    m_ExpandedIDs: 0000000050440000f6480000b24c0000244e0000304e0000684e0000ae830400b0830400b2830400
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -728,7 +728,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 40}
+    m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 89
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 180
