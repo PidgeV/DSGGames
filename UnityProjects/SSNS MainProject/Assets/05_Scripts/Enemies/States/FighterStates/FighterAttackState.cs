@@ -49,7 +49,7 @@ namespace Complete
             {
                 controller.PerformTransition(Transition.Patrol);
             }
-            else
+            //else
             {
                 //CalcDotProduct();
 
