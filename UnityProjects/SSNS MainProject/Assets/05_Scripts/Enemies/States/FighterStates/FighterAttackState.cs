@@ -20,9 +20,12 @@ namespace Complete
         float avoidTime = 2f;
         float shotTimer = 0.0f;
         float shotInterval = 1.0f;
+        float intervalTime = 0.0f;
+        float calculateInterval = 0.1f;
         float maxSpeed = 0;
         GameObject bulletPrefab;
         GameObject bulletSpawnPos;
+        Rigidbody rbPlayer;
 
         public FighterAttackState(FighterController enemyController, Player playerObj, GameObject bullet, GameObject bulletShootPos, float distanceNeedToMaintain, float accuracyForShot, float fireRate)
         {
@@ -33,6 +36,7 @@ namespace Complete
             bulletPrefab = bullet;
             bulletSpawnPos = bulletShootPos;
             shotInterval = fireRate;
+            rbPlayer = player.GetComponent<Rigidbody>();
 
             stateID = FSMStateID.Attacking;
         }
@@ -49,8 +53,9 @@ namespace Complete
             {
                 controller.PerformTransition(Transition.Patrol);
             }
-            //else
+            else
             {
+                CalculateIntercept();
                 //CalcDotProduct();
 
                 //maxSpeed = Mathf.Max(maxSpeed, controller.rbSelf.velocity.magnitude);
@@ -154,6 +159,27 @@ namespace Complete
 
                 dir += turnDir;
                 obstacleHit = true;
+            }
+        }
+
+        //Calculates the intercept point
+        void CalculateIntercept()
+        {
+            intervalTime += Time.deltaTime;
+            //while (true)
+            if(intervalTime >= calculateInterval)
+            {
+                intervalTime = 0.0f;
+                //yield return new WaitForSeconds(calculateInterval);
+                //positions
+                Vector3 targetPosition = player.transform.position;
+                //velocities
+                //Vector3 velocity = rbSelf ? rbSelf.velocity : Vector3.zero;
+                Vector3 velocity = Vector3.zero;
+                Vector3 targetVelocity = rbPlayer ? rbPlayer.velocity : Vector3.zero;
+
+                //calculate intercept
+                interceptPoint = InterceptCalculationClassNoMono.FirstOrderIntercept(controller.transform.position, velocity, bulletPrefab.GetComponent<Bullet>().speed, targetPosition, targetVelocity);
             }
         }
 
