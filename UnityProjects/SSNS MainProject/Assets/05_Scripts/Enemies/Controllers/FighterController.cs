@@ -104,10 +104,8 @@ namespace Complete
         public LayerMask ObstacleLayer { get { return obstacleLayer; } }
         public float RaySize {  get { return raySize; } }
         public float RegRotationForce { get { return stats.regRotationForce; } }
-        public float ChargeRotationForce {  get { return stats.chargeRotationForce; } }
         public float Acceleration { get { return stats.acceleration; } }
-        public float ChargeAcceleration { get { return stats.chargeAcceleration; } }
-        public float Health {  get { return stats.currentHealth; } }
+        public int Health {  get { return stats.currentHealth; } }
         public Player Player { get { return player; } }
     }
 }
