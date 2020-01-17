@@ -351,7 +351,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   debugDraw: 1
-  fireRate: 0.2
+  fireRate: 0.6
   maxHealth: 10
   currentHealth: 0
   regRotationForce: 300
@@ -367,7 +367,7 @@ MonoBehaviour:
   bullet: {fileID: 4450240921679082262, guid: 31460afb2d57a1740a2902c36c19ba0e, type: 3}
   bulletShootPos: {fileID: 1864797949346244314}
   distanceNeedToMaintain: 150
-  accuracyForShot: 1
+  accuracyForShot: 2
 --- !u!1 &58820781145363505
 GameObject:
   m_ObjectHideFlags: 0
@@ -760,7 +760,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1864797949346244314}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -11.91}
+  m_LocalPosition: {x: 0, y: 0, z: 9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 58820780711503996}
@@ -781,7 +781,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 7bfe49ea07dd0b74cb5ab634823a1f5c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.00015187263
+      value: -0.00015258789
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 7bfe49ea07dd0b74cb5ab634823a1f5c,
         type: 3}
@@ -796,22 +796,22 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 7bfe49ea07dd0b74cb5ab634823a1f5c,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.000000021855694
+      value: 1.1859695e-14
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 7bfe49ea07dd0b74cb5ab634823a1f5c,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 7bfe49ea07dd0b74cb5ab634823a1f5c,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -8.881784e-16
+      value: -0.000000021855696
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 7bfe49ea07dd0b74cb5ab634823a1f5c,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.0000006258487
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 7bfe49ea07dd0b74cb5ab634823a1f5c,
         type: 3}
@@ -826,7 +826,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 7bfe49ea07dd0b74cb5ab634823a1f5c,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -180.00002
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 7bfe49ea07dd0b74cb5ab634823a1f5c,
         type: 3}
