@@ -17,7 +17,7 @@ namespace Complete
         Vector3 obstacleAvoidDirection = Vector3.right;
         bool obstacleHit = false;
         float obstacleTimer = 0;
-        float avoidTime = 2f;
+        float avoidTime = 0.5f;
         float shotTimer = 0.0f;
         float shotInterval = 0.2f;
         float intervalTime = 0.0f;
