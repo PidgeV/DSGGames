@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Rendering;
+using UnityEngine.Experimental.Rendering.HDPipeline;
 
 /// <summary>
 /// Keybindings:
@@ -9,6 +10,7 @@ using UnityEngine;
 /// Number keys are to switch between cameras
 /// M to spawn charger enemy
 /// N to spawn fighter enemy
+/// T randomizes skybox
 /// </summary>
 public class DemoManager : MonoBehaviour
 {
@@ -18,6 +20,10 @@ public class DemoManager : MonoBehaviour
     [SerializeField] GameObject chargerPrefab;
     [SerializeField] GameObject fighterPrefab;
     [SerializeField] Transform enemySpawnLocation;
+
+    [SerializeField] Cubemap[] skyboxes;
+    [SerializeField] Volume profile;
+    HDRISky skybox;
 
     [SerializeField] GameObject playerObj;
     GameObject spawnedEnemy;
@@ -38,6 +44,11 @@ public class DemoManager : MonoBehaviour
     {
         ChangeCamera();
         SpawnEnemy();
+
+        if(Input.GetKeyDown(KeyCode.T))
+        {
+            RandomizeSkybox();
+        }
     }
 
     void ChangeCamera()
@@ -98,5 +109,12 @@ public class DemoManager : MonoBehaviour
                 Debug.LogError("Spawn location missing. Please give Demo Manager an enemy spawn location.");
             }
         }
+    }
+
+    void RandomizeSkybox()
+    {
+        profile.profile.TryGet(out skybox);
+
+        skybox.hdriSky.Override(skyboxes[Random.Range(0, skyboxes.Length)]);
     }
 }
