@@ -144,7 +144,7 @@ public class FighterEnemy : InterceptCalculationClass
     void AvoidObstacles(ref Vector3 dir)
     {
         RaycastHit hitInfo;
-        RaycastHit hitInfo2;
+        //RaycastHit hitInfo2;
 
         //Check direction facing
         if (Physics.SphereCast(transform.position, raySize, transform.forward.normalized, out hitInfo, collisionCheckDistance, obstacleLayer)

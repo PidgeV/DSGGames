@@ -16,7 +16,7 @@ public class ShipController : Controller
     [SerializeField]
     private bool drawDebug;
 
-    private Camera camera;
+    private Camera cam;
     private Rigidbody rigid;
 
     private float thrustSpeed;
@@ -42,8 +42,8 @@ public class ShipController : Controller
     private void Awake()
     {
         // Sets camera to top half screen
-        camera = GetComponent<PlayerInput>().camera;
-        camera.rect = new Rect(0, 0.5f, 1.0f, 0.5f);
+        cam = GetComponent<PlayerInput>().camera;
+        cam.rect = new Rect(0, 0.5f, 1.0f, 0.5f);
 
         rigid = GetComponent<Rigidbody>();
 

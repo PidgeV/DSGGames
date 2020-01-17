@@ -324,6 +324,31 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   debugDraw: 1
   fireRate: 0.2
   maxHealth: 10
@@ -335,7 +360,7 @@ MonoBehaviour:
     m_Bits: 256
   collisionCheckDistance: 150
   waypointDistanceMeters: 100
-  playerDistanceMeters: 400
+  playerDistanceMeters: 1000
   rbSelf: {fileID: 58820780711503997}
   raySize: 8.5
   bullet: {fileID: 4450240921679082262, guid: 31460afb2d57a1740a2902c36c19ba0e, type: 3}

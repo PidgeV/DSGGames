@@ -8,7 +8,7 @@ namespace Complete
     public class FighterController : AdvancedFSM
     {
         [SerializeField] GameObject destroyedPrefab;
-        [SerializeField] GameObject[] waypoints;
+        public GameObject[] waypoints;
       
         [Header("Green: forward direction and collision check.")]
         [Header("Red: intercept calculation.")]
@@ -40,7 +40,7 @@ namespace Complete
         [Tooltip("Size of ray for collision checking. Larger numbers will mean the avoidance is larger")]
         [SerializeField] float raySize = 7.5f;
 
-        Player player;
+        GameObject player;
         [SerializeField] GameObject bullet;
         [SerializeField] GameObject bulletShootPos;
         [SerializeField] float distanceNeedToMaintain;
@@ -69,7 +69,7 @@ namespace Complete
             //Pretty self explainatory
             if (GameObject.FindGameObjectWithTag("Player") != null)
             {
-                player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+                player = GameObject.FindGameObjectWithTag("Player");
             }
             currentHealth = maxHealth;
             ConstructFSM();
@@ -110,15 +110,9 @@ namespace Complete
         public float CollisionCheckDistance { get { return collisionCheckDistance; } }
         public LayerMask ObstacleLayer { get { return obstacleLayer; } }
         public float RaySize {  get { return raySize; } }
-<<<<<<< HEAD
-        public float RegRotationForce { get { return stats.regRotationForce; } }
-        public float Acceleration { get { return stats.acceleration; } }
-        public int Health {  get { return stats.currentHealth; } }
-=======
         public float RegRotationForce { get { return regRotationForce; } }
         public float Acceleration { get { return acceleration; } }
         public float Health {  get { return currentHealth; } }
->>>>>>> origin/Trixie-Test
-        public Player Player { get { return player; } }
+        public GameObject Player { get { return player; } }
     }
 }

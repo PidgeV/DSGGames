@@ -6,7 +6,7 @@ namespace Complete
 {
     public class ChaserPatrolState : FSMState
     {
-        private Player player;
+        private GameObject player;
         private ChaserController controller;
         private GameObject[] waypoints;
         private float distance;
@@ -30,7 +30,7 @@ namespace Complete
 
 
         //Constructor
-        public ChaserPatrolState(ChaserController enemyController, Player playerObj, GameObject[] wayPoints, float waypointDistance, float playerDistance, bool randomizePoint = false)
+        public ChaserPatrolState(ChaserController enemyController, GameObject playerObj, GameObject[] wayPoints, float waypointDistance, float playerDistance, bool randomizePoint = false)
         {
             controller = enemyController;
             player = playerObj;
@@ -91,12 +91,6 @@ namespace Complete
                 {
                     //Debug.DrawLine(controller.transform.position, player.transform.position);
 
-<<<<<<< HEAD
-                    if (PlayerInVision() && timer > timeAfterTransition) // in vision and has been patrolling for minimum time. This is to prevent the ai staying in attack mode and acting weird
-                    {
-                        timer = 0f;
-                        controller.PerformTransition(Transition.SawPlayer);
-=======
                     if (timer2 >= timeOftenCheck)
                     {
                         timer2 = 0f;
@@ -106,7 +100,6 @@ namespace Complete
                             timer1 = 0f;
                             controller.PerformTransition(Transition.SawPlayer);
                         }
->>>>>>> origin/Trixie-Test
                     }
                 }
             }

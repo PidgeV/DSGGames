@@ -7,7 +7,7 @@ namespace Complete
     public class ChargerAttackState : FSMState
     {
         ChaserController controller;
-        private Player player;
+        private GameObject player;
         Vector3 interceptPoint;
         float dotProduct;
 
@@ -20,7 +20,7 @@ namespace Complete
         float maxSpeed = 0;
 
         //constructor
-        public ChargerAttackState(ChaserController chaserController, Player playerObj)
+        public ChargerAttackState(ChaserController chaserController, GameObject playerObj)
         {
             controller = chaserController;
             player = playerObj;

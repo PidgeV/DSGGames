@@ -10,7 +10,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody))]
 public class TestPlayer : MonoBehaviour
 {
-    Rigidbody rigidbody;
+    Rigidbody rb;
     public float currentSpeed = 0;
     [Space(10)]
     public float minSpeed = 5f;
@@ -28,7 +28,7 @@ public class TestPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -70,7 +70,7 @@ public class TestPlayer : MonoBehaviour
             transform.Rotate(ringDir * rotateSpeed * Time.deltaTime);
         }
 
-        rigidbody.velocity = transform.forward * currentSpeed;
+        rb.velocity = transform.forward * currentSpeed;
 
         Debug.DrawRay(transform.position, transform.forward * 100, Color.red);
     }

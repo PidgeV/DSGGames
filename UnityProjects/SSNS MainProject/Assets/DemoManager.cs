@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Experimental.Rendering.HDPipeline;
+using Complete;
 
 /// <summary>
 /// Keybindings:
@@ -15,6 +16,8 @@ using UnityEngine.Experimental.Rendering.HDPipeline;
 public class DemoManager : MonoBehaviour
 {
     Camera enabledCam;
+    [SerializeField] GameObject[] waypoints;
+
     [Tooltip("Can use up to 10 cameras")]
     [SerializeField] Camera[] cameras;
     [SerializeField] GameObject chargerPrefab;
@@ -88,6 +91,7 @@ public class DemoManager : MonoBehaviour
                     Destroy(spawnedEnemy);
                 }
                 spawnedEnemy = Instantiate(chargerPrefab, enemySpawnLocation.position, enemySpawnLocation.rotation);
+                spawnedEnemy.GetComponent<ChaserController>().waypoints = waypoints;
             }
             else
             {
@@ -103,6 +107,7 @@ public class DemoManager : MonoBehaviour
                     Destroy(spawnedEnemy);
                 }
                 spawnedEnemy = Instantiate(fighterPrefab, enemySpawnLocation.position, enemySpawnLocation.rotation);
+                spawnedEnemy.GetComponent<FighterController>().waypoints = waypoints;
             }
             else
             {

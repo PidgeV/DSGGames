@@ -6,7 +6,7 @@ namespace Complete
 {
     public class FighterAttackState : FSMState
     {
-        private Player player;
+        private GameObject player;
         private FighterController controller;
         Vector3 interceptPoint;
         float dotProduct;
@@ -19,7 +19,7 @@ namespace Complete
         float obstacleTimer = 0;
         float avoidTime = 2f;
         float shotTimer = 0.0f;
-        float shotInterval = 1.0f;
+        float shotInterval = 0.2f;
         float intervalTime = 0.0f;
         float calculateInterval = 0.1f;
         float maxSpeed = 0;
@@ -27,7 +27,7 @@ namespace Complete
         GameObject bulletSpawnPos;
         Rigidbody rbPlayer;
 
-        public FighterAttackState(FighterController enemyController, Player playerObj, GameObject bullet, GameObject bulletShootPos, float distanceNeedToMaintain, float accuracyForShot, float fireRate)
+        public FighterAttackState(FighterController enemyController, GameObject playerObj, GameObject bullet, GameObject bulletShootPos, float distanceNeedToMaintain, float accuracyForShot, float fireRate)
         {
             controller = enemyController;
             player = playerObj;
@@ -78,7 +78,7 @@ namespace Complete
         {
             //Debug.Log("Attacking");
         }
-        
+
         //Moves
         void Move()
         {
@@ -115,12 +115,10 @@ namespace Complete
                 }
 
                 //Move
-                {
-                    //maintains a distance
-                    float percent = Vector3.Distance(controller.transform.position, player.transform.position) / distanceToMaintain;
-                    if (percent > 1) percent = 1;
-                    controller.rbSelf.AddForce(controller.transform.forward.normalized * controller.Acceleration * percent, ForceMode.Acceleration);
-                }
+                //maintains a distance
+                //float percent = Vector3.Distance(controller.transform.position, player.transform.position) / distanceToMaintain;
+                //if (percent > 1) percent = 1;
+                controller.rbSelf.AddForce(controller.transform.forward.normalized * controller.Acceleration /** percent*/, ForceMode.Acceleration);
             }
         }
 
@@ -135,7 +133,7 @@ namespace Complete
                 if (distanceFromSight <= accuracy && shotTimer >= shotInterval)
                 {
                     Quaternion lookRot = Quaternion.LookRotation(controller.transform.forward);
-                    GameObject bullet = GameObject.Instantiate(bulletPrefab, bulletSpawnPos.transform.position, lookRot);
+                    GameObject bullet = Object.Instantiate(bulletPrefab, bulletSpawnPos.transform.position, lookRot);
                     bullet.GetComponent<Bullet>().shooter = controller.gameObject;
 
                     shotTimer = 0;
@@ -167,7 +165,7 @@ namespace Complete
         {
             intervalTime += Time.deltaTime;
             //while (true)
-            if(intervalTime >= calculateInterval)
+            if (intervalTime >= calculateInterval)
             {
                 intervalTime = 0.0f;
                 //yield return new WaitForSeconds(calculateInterval);

@@ -6,7 +6,7 @@ namespace Complete
 {
     public class FighterPatrolState : FSMState
     {
-        private Player player;
+        private GameObject player;
         private FighterController controller;
         private GameObject[] waypoints;
         private float distance;
@@ -22,13 +22,13 @@ namespace Complete
 
         //Timer for staying in patrol;
         private float timer1 = 0f;
-        private float timeAfterTransition = 10f;
+        private float timeAfterTransition = 1f;
         //Timer for how often to check for seeing the player
         private float timer2 = 0f;
         private float timeOftenCheck = 1.0f;
 
         //Constructor
-        public FighterPatrolState(FighterController enemyController, Player playerObj, GameObject[] wayPoints, float waypointDistance, float playerDistance, bool randomizePoint = false)
+        public FighterPatrolState(FighterController enemyController, GameObject playerObj, GameObject[] wayPoints, float waypointDistance, float playerDistance, bool randomizePoint = false)
         {
             controller = enemyController;
             player = playerObj;

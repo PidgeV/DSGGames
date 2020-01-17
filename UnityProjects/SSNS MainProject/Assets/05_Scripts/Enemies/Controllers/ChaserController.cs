@@ -8,7 +8,7 @@ namespace Complete
     public class ChaserController : AdvancedFSM
     {
         [SerializeField] GameObject destroyedPrefab;
-        [SerializeField] GameObject[] waypoints;
+        public GameObject[] waypoints;
       
         [Header("Green: forward direction and collision check.")]
         [Header("Red: intercept calculation.")]
@@ -33,7 +33,7 @@ namespace Complete
         [Tooltip("Size of ray for collision checking. Larger numbers will mean the avoidance is larger")]
         [SerializeField] float raySize = 7.5f;
 
-        Player player;
+        GameObject player;
 
         private void ConstructFSM()
         {
@@ -56,7 +56,7 @@ namespace Complete
         protected override void Initialize()
         {
             //Pretty self explainatory
-            player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            player = GameObject.FindGameObjectWithTag("Player");
             stats.currentHealth = stats.maxHealth;
             ConstructFSM();
 
@@ -101,6 +101,6 @@ namespace Complete
         public float Acceleration { get { return stats.acceleration; } }
         public float ChargeAcceleration { get { return stats.chargeAcceleration; } }
         public float Health {  get { return stats.currentHealth; } }
-        public Player Player { get { return player; } }
+        public GameObject Player { get { return player; } }
     }
 }

@@ -16,7 +16,7 @@ public class TurretController : Controller
     [SerializeField]
     private bool drawDebug;
 
-    private Camera camera;
+    private Camera cam;
 
     Vector2 rotation;
 
@@ -35,8 +35,8 @@ public class TurretController : Controller
     void Awake()
     {
         // Sets camera to bottom half screen
-        camera = GetComponent<PlayerInput>().camera;
-        camera.rect = new Rect(0, 0, 1.0f, 0.5f);
+        cam = GetComponent<PlayerInput>().camera;
+        cam.rect = new Rect(0, 0, 1.0f, 0.5f);
     }
 
     // Update is called once per frame
@@ -51,7 +51,7 @@ public class TurretController : Controller
         // Applys stick movement to overall rotation while clamping it so it doesn't clip into into the ship
         rotation = new Vector2(rotation.x + rotate.x, Mathf.Clamp(rotation.y + rotate.y, -180, 0));
 
-        Quaternion yaw = Quaternion.Euler(0f, 0f, rotation.x);
+        Quaternion yaw = Quaternion.Euler(0f, rotation.x, 0f);
         Quaternion pitch = Quaternion.Euler(-rotation.y, 0f, 0f);
 
         transform.localRotation = Quaternion.Slerp(transform.localRotation, yaw * pitch, 20 * Time.deltaTime);
