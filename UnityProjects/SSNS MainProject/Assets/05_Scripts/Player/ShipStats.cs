@@ -18,33 +18,51 @@ public class ShipStats : ScriptableObject
 	public float currentHealth = 0f;
 	public float currentShield = 0f;
 
-	// The speed the ship moves per second
-	public float acceleration = 15f;
+	// Acceleration and deacceleration of the ship's speed
+	public float shipAcceleration = .3f;
+	public float shipDeceleration = .01f;
+
+    // Acceleration and deacceleration for the ship's rotation
+    public float shipRotAcceleration = 5;
+    public float shipRotDeceleration = 2;
+
+    // Min and max thruster speed of the ship
+    public float minThrustSpeed = 15f;
+	public float maxThrustSpeed = 50f;
+
+	// The speed the ship moves per second when boosting
+	public float boostSpeed = 30f;
+
+	// The speed of strafing
+	public float strafeSpeed = 30f;
+
+	// The speed that the ship rotates
+	public float rotationSpeed = 5f;
 
 	// The delay between shots for the players basic weapon
 	public float fireRate = 0.1f;
 
-    //Player things
-    [Header("Player ship stats")]
+	// The base damage for the player basic gun
+	public float baseDamage = 1f;
+
+	// Reductions of damage for this ship
+	public float healthDamageReduction = 0.0f;
+	public float shieldDamageReduction = 0.0f;
+
+	// Shield regen properties
+	public float shieldRegenPercent = 0.1f;
+	public float shieldRegenDelay = 3f;
+
 	// This ships boost gauge values
-	public float boostGauge = 0f;
 	public float maxBoostGauge = 5f;
 
-    // The speed the ship moves per second when boosting
-    public float boostAcceleration = 30f;
+	// The amount boosting uses the meter every second
+	public float boostGaugeConsumeAmount = 2.5f;
 
-    // The base damage for the player basic gun
-    public float baseDamage = 1f; //-----------------------------Why is this not just damage on the bullets and stuff? -Blake botch
+	// The amount boosting recharges the meter every second
+	public float boostGaugeRechargeAmount = 1.5f;
 
-    // Reductions of damage for this ship
-    public float healthDamageReduction = 0.0f;
-    public float shieldDamageReduction = 0.0f;
-
-    // Shield regen properties
-    public float shieldRegenPercent = 0.1f;
-    public float shieldRegenDelay = 3f;
-
-    // Extra ship abilities
-    public bool reserveShield = false;
+	// Extra ship abilities
+	public bool reserveShield = false;
 	public bool shieldBreakEMP = false;
 }

@@ -43,11 +43,7 @@ public class Reward : ScriptableObject
 					break;
 
 				case RewardsType.ShipAcceleration:
-					target.acceleration += value;
-					break;
-
-				case RewardsType.BoostAcceleration:
-					target.boostAcceleration += value;
+					target.shipAcceleration += value;
 					break;
 
 				case RewardsType.FiringSpeed:

@@ -13,3 +13,28 @@ MonoBehaviour:
   m_Name: DefaultShipStats
   m_EditorClassIdentifier: 
   shipName: 
+  shipDescription: 
+  maxHealth: 20
+  maxShield: 15
+  currentHealth: 0
+  currentShield: 0
+  shipAcceleration: 20
+  shipDeceleration: 15
+  shipRotAcceleration: 5
+  shipRotDeceleration: 2
+  minThrustSpeed: 20
+  maxThrustSpeed: 40
+  boostSpeed: 30
+  strafeSpeed: 15
+  rotationSpeed: 2
+  fireRate: 0.1
+  baseDamage: 1
+  healthDamageReduction: 0
+  shieldDamageReduction: 0
+  shieldRegenPercent: 0.1
+  shieldRegenDelay: 3
+  maxBoostGauge: 5
+  boostGaugeConsumeAmount: 1.8
+  boostGaugeRechargeAmount: 0.8
+  reserveShield: 0
+  shieldBreakEMP: 0
