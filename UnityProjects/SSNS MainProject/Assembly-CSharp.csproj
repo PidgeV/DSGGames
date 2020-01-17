@@ -101,6 +101,7 @@
     <Compile Include="Assets\05_Scripts\Projectiles\Damage.cs" />
     <Compile Include="Assets\05_Scripts\Projectiles\HealthAndShields.cs" />
     <Compile Include="Assets\05_Scripts\Projectiles\InterceptCalculationClass.cs" />
+    <Compile Include="Assets\05_Scripts\Projectiles\InterceptCalculationClassNoMono.cs" />
     <Compile Include="Assets\05_Scripts\Projectiles\Stuff I Dident want to mess with\BulletScript.cs" />
     <Compile Include="Assets\05_Scripts\Projectiles\Stuff I Dident want to mess with\ShootingController.cs" />
     <Compile Include="Assets\05_Scripts\Rewards\Reward.cs" />

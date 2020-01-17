@@ -21,8 +21,11 @@ namespace Complete
         float avoidTime = 2f;
 
         //Timer for staying in patrol;
-        private float timer = 0f;
+        private float timer1 = 0f;
         private float timeAfterTransition = 10f;
+        //Timer for how often to check for seeing the player
+        private float timer2 = 0f;
+        private float timeOftenCheck = 1.0f;
 
         //Constructor
         public FighterPatrolState(FighterController enemyController, Player playerObj, GameObject[] wayPoints, float waypointDistance, float playerDistance, bool randomizePoint = false)
@@ -53,9 +56,13 @@ namespace Complete
 
         public override void Reason()
         {
-            if (timer < timeAfterTransition)
+            if (timer1 < timeAfterTransition)
             {
-                timer += Time.deltaTime;
+                timer1 += Time.deltaTime;
+            }
+            if (timer2 < timeOftenCheck)
+            {
+                timer2 += Time.deltaTime;
             }
 
             //Check distance to waypoint
@@ -78,15 +85,16 @@ namespace Complete
                 float pDist = Vector3.Distance(controller.transform.position, player.gameObject.transform.position);
 
                 //Check distance to player
-                if (pDist < playerDist)
+                if (pDist < playerDist && timer1 >= timeAfterTransition)
                 {
                     //Debug.DrawLine(controller.transform.position, player.transform.position);
 
-                    if (timer >= timeAfterTransition)
+                    if (timer2 >= timeOftenCheck)
                     {
-                        timer = 0f;
+                        timer2 = 0f;
                         if (PlayerInVision()) // in vision and has been patrolling for minimum time. This is to prevent the ai staying in attack mode and acting weird
                         {
+                            timer1 = 0f;
                             controller.PerformTransition(Transition.SawPlayer);
                         }
                     }

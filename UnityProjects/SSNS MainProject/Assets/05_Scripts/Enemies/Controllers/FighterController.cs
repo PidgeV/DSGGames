@@ -15,7 +15,14 @@ namespace Complete
         [Header("Blue: Velocity and collision check.")]
         [SerializeField] bool debugDraw = false;
 
-        [SerializeField] FighterStats stats;
+        [SerializeField] float fireRate;//FighterStats stats;
+        [SerializeField] float maxHealth;
+        [SerializeField] float currentHealth;
+
+        [SerializeField] float regRotationForce;
+        [SerializeField] float acceleration;
+
+
 
         //MAth things for later. To store the dot product
         float dotProduct;
@@ -43,7 +50,7 @@ namespace Complete
         {
             DeadState deadState = new DeadState(this, destroyedPrefab);
             FighterPatrolState patrol = new FighterPatrolState(this, player, waypoints, waypointDistanceMeters, playerDistanceMeters, true);
-            FighterAttackState attack = new FighterAttackState(this, player, bullet, bulletShootPos, distanceNeedToMaintain, accuracyForShot, stats.fireRate);
+            FighterAttackState attack = new FighterAttackState(this, player, bullet, bulletShootPos, distanceNeedToMaintain, accuracyForShot, fireRate);
 
             patrol.AddTransition(Transition.NoHealth, FSMStateID.Dead);
             patrol.AddTransition(Transition.SawPlayer, FSMStateID.Attacking); //Change this
@@ -54,7 +61,7 @@ namespace Complete
 
             AddFSMState(patrol);
             AddFSMState(deadState);
-            //AddFSMState(attack);
+            AddFSMState(attack);
         }
 
         protected override void Initialize()
@@ -64,7 +71,7 @@ namespace Complete
             {
                 player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             }
-            stats.currentHealth = stats.maxHealth;
+            currentHealth = maxHealth;
             ConstructFSM();
 
         }
@@ -103,9 +110,15 @@ namespace Complete
         public float CollisionCheckDistance { get { return collisionCheckDistance; } }
         public LayerMask ObstacleLayer { get { return obstacleLayer; } }
         public float RaySize {  get { return raySize; } }
+<<<<<<< HEAD
         public float RegRotationForce { get { return stats.regRotationForce; } }
         public float Acceleration { get { return stats.acceleration; } }
         public int Health {  get { return stats.currentHealth; } }
+=======
+        public float RegRotationForce { get { return regRotationForce; } }
+        public float Acceleration { get { return acceleration; } }
+        public float Health {  get { return currentHealth; } }
+>>>>>>> origin/Trixie-Test
         public Player Player { get { return player; } }
     }
 }
