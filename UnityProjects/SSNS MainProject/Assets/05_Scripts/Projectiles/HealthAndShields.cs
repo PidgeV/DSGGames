@@ -27,6 +27,9 @@ public class HealthAndShields : MonoBehaviour
 	[Range(1, 99)]
 	// The PERCENT of shield that is regenerated per second
 	public float regenSpeed = 1f;
+	internal bool godmode;
+
+	public bool godMode = false;
 
 	// Start is called before the first frame update
 	void Start()
