@@ -8,6 +8,7 @@ TagManager:
   - Target
   - Menu
   - FirstMenuElement
+  - Ship
   layers:
   - Default
   - TransparentFX

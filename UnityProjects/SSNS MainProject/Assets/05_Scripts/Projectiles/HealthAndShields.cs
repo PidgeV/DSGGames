@@ -92,6 +92,8 @@ public class HealthAndShields : MonoBehaviour
 	// When life is 0 this is called by TakeDamage()
 	void OnDeath()
 	{
-		Destroy(gameObject);
+		if (godmode == false) {
+			Destroy(gameObject);
+		}
 	}
 }

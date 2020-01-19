@@ -18,12 +18,12 @@ MonoBehaviour:
   maxShield: 15
   currentHealth: 0
   currentShield: 0
-  shipAcceleration: 20
-  shipDeceleration: 15
+  shipAcceleration: 5
+  shipDeceleration: 2
   shipRotAcceleration: 5
-  shipRotDeceleration: 2
-  minThrustSpeed: 20
-  maxThrustSpeed: 40
+  shipRotDeceleration: 25
+  minThrustSpeed: 2
+  maxThrustSpeed: 5
   boostSpeed: 30
   strafeSpeed: 15
   rotationSpeed: 2

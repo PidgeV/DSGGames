@@ -9,95 +9,92 @@ public class Player : Controller
 	// This players role
 	public PlayerRole myRole = PlayerRole.None;
 
-	// This players Camera
-	[HideInInspector] private Camera myCamera;
+	testShipController controller;
 
 	// Start is called before the first frame update
-	private void Start()
+	private void Awake()
 	{
-		// Get the camera from this player AND print a error if it cant be found
-		if ((myCamera = GetComponentInChildren<Camera>()) == null) {
-			Debug.LogError("You dont appear to have a camera script on this players or its children");
+		foreach (GameObject ship in GameObject.FindGameObjectsWithTag("Ship")) {
+			if (ship.TryGetComponent<testShipController>(out testShipController shipController))
+			{
+				controller = shipController;
+				controller.JoinShip(this);
+				break;
+			}
 		}
-
-		// Initialize this players role
-		InitializeRole(myRole);
 	}
 
-	/// <summary>
-	/// Initialize this players new role
-	/// </summary>
-	public void InitializeRole(PlayerRole newRole)
+	/// <summary> Spawn the players role </summary>
+	public void SwapRole()
 	{
-		float screenPercentX = 1.0f;
-		float screenPercentY = 1.0f;
-
-		float cameraPos = (int)myRole * 0.5f;
-
-		// Set the players new role
-		myRole = newRole;
-
-		// If we dont have a camera do nothing
-		if (myCamera == null)
+		if (myRole == PlayerRole.None)
 		{
-			return;
+			Debug.Log("You cannot swap rolls if you do not have one!");
 		}
 		else
 		{
-			// If this player does not have a role
-			if (myRole == PlayerRole.None && myCamera)
-			{
-				screenPercentX = 1.0f;
-				screenPercentY = 1.0f;
-				cameraPos = 0.0f;
+			if (myRole == PlayerRole.Pilot) {
+				myRole = PlayerRole.Gunner;
+				return;
 			}
 
-			// If this player is a PILOT
-			if (myRole == PlayerRole.Pilot && myCamera)
-			{
-				screenPercentX = 1.0f;
-				screenPercentY = 0.5f;
+			if (myRole == PlayerRole.Gunner) {
+				myRole = PlayerRole.Pilot;
+				return;
 			}
-
-			// If this player is a GUNNER
-			if (myRole == PlayerRole.Gunner && myCamera)
-			{
-				screenPercentX = 1.0f;
-				screenPercentY = 0.5f;
-			}
-
-			// Set the new camera rect
-			myCamera.rect = new Rect(0, cameraPos, screenPercentX, screenPercentY);
-		}	
+		}
 	}
 
 	// Used to move the player
 	public override void OnLeftStick(InputValue input)
 	{
-		if (myRole == PlayerRole.Pilot)
-		{
+		if (myRole == PlayerRole.Pilot) {
 			// Rotate the player ship
+			controller.SteerShip(input.Get<Vector2>());
 		}
 
-		if (myRole == PlayerRole.Gunner)
-		{
-			//  Move the player camera
+		if (myRole == PlayerRole.Gunner) {
+			// Move the player camera
+			controller.MoveGun(input.Get<Vector2>());
+		}
+	}	
+
+	// Used to move the player
+	public override void OnRightStick(InputValue input)
+	{
+		if (myRole == PlayerRole.Pilot) {
+			// Rotate the player ship
+			controller.StrafeShip(input.Get<Vector2>());
+		}
+
+		if (myRole == PlayerRole.Gunner) {
+			// Move the player camera
+			controller.MoveGun(input.Get<Vector2>());
+		}
+	}
+
+	// Called when this player uses the DPad
+	public override void OnDPad(InputValue input)
+	{
+		// NOTE -- The DPad does nothing for the pilot
+
+		if (myRole == PlayerRole.Gunner) {
+			// Change the current weapon
+			controller.SwapWeapon(input.Get<Vector2>());
 		}
 	}
 
 	// Called when this player presses the A button
 	public override void OnA(InputValue input)
 	{
-		Debug.Log("A");
-
-		if (myRole == PlayerRole.Pilot)
-		{
+		if (myRole == PlayerRole.Pilot) {
 			// Boost the ship
+			controller.Boost(input.isPressed);
 		}
 
-		if (myRole == PlayerRole.Gunner)
-		{
+		if (myRole == PlayerRole.Gunner) {
 			// Make the gunner shoot
+			controller.Shoot(input.isPressed);
 		}
 	}
 
@@ -106,12 +103,14 @@ public class Player : Controller
 	{
 		// TODO -- We gota go over what the B button does..
 
-		if (myRole == PlayerRole.Pilot)
-		{
+		if (myRole == PlayerRole.Pilot) {
+			// Boost the ship
+			controller.Boost(input.isPressed);
 		}
 
-		if (myRole == PlayerRole.Gunner)
-		{
+		if (myRole == PlayerRole.Gunner) {
+			// Make the gunner shoot
+			controller.Shoot(input.isPressed);
 		}
 	}
 
@@ -119,50 +118,69 @@ public class Player : Controller
 	// Used to toggle the map on or off
 	public override void OnX(InputValue input)
 	{
+		controller.ToggleMap(input.isPressed);
 	}
 
 	// Called when this player presses the Y button
 	// Used to ask for a role swap
 	public override void OnY(InputValue input)
 	{
+		controller.TriggerRoleSwap(input.isPressed);
 	}
 
-	// Called when this player uses the DPad button
-	public override void OnDPad(InputValue input)
-	{
-		// NOT -- The DPad does nothing for the pilot
-
-		if (myRole == PlayerRole.Gunner)
-		{
-			// Change the current weapon
-		}
-	}
-
-	// Called when this player presses the Left Trigger button
+	// Called when this player presses the Left Trigger
 	public override void OnLeftTrigger(InputValue input)
 	{
-		if (myRole == PlayerRole.Pilot)
-		{
+		if (myRole == PlayerRole.Pilot) {
 			// Boost the ship
+			controller.RotateShip(input.Get<float>());
 		}
 
-		if (myRole == PlayerRole.Gunner)
-		{
+		if (myRole == PlayerRole.Gunner) {
 			// Make the gunner shoot
+			controller.Shoot(input.isPressed);
 		}
 	}
 
-	// Called when this player presses the Right Trigger button
+	// Called when this player presses the Right Trigger
 	public override void OnRightTrigger(InputValue input)
 	{
-		if (myRole == PlayerRole.Pilot)
-		{
+		if (myRole == PlayerRole.Pilot) {
 			// Boost the ship
+			controller.RotateShip(-input.Get<float>());
 		}
 
-		if (myRole == PlayerRole.Gunner)
-		{
+		if (myRole == PlayerRole.Gunner) {
 			// Make the gunner shoot
+			controller.Shoot(input.isPressed);
 		}
 	}
+
+	//// Called when this player presses the Left Bumper 
+	//public override void OnLeftBumper(InputValue input)
+	//{
+	//	if (myRole == PlayerRole.Pilot) {
+	//		// Boost the ship
+	//		controller.RotateShip(input.Get<float>());
+	//	}
+
+	//	if (myRole == PlayerRole.Gunner) {
+	//		// Make the gunner shoot
+	//		controller.Shoot(input.isPressed);
+	//	}
+	//}
+
+	//// Called when this player presses the Right Bumper 
+	//public override void OnRightBumper(InputValue input)
+	//{
+	//	if (myRole == PlayerRole.Pilot) {
+	//		// Boost the ship
+	//		controller.RotateShip(-input.Get<float>());
+	//	}
+
+	//	if (myRole == PlayerRole.Gunner) {
+	//		// Make the gunner shoot
+	//		controller.Shoot(input.isPressed);
+	//	}
+	//}
 }

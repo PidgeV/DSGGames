@@ -81,7 +81,7 @@ public class DemoManagerMenu : MonoBehaviour
 	public void SpawnCharger()
 	{
 		// Spawn enemies using the SpawnEnemy() method in DemoManager
-		demoManager.SpawnEnemy(demoManager.chargerPrefab, Vector3.zero, Input.GetKey(KeyCode.LeftShift) ? 10 : 1);
+		demoManager.SpawnEnemy( demoManager.chargerPrefab, Vector3.zero, Input.GetKey(KeyCode.LeftShift) ? 10 : 1);
 	}
 
 	/// <summary>
@@ -90,7 +90,7 @@ public class DemoManagerMenu : MonoBehaviour
 	public void SpawnFighter()
 	{
 		// Spawn enemies using the SpawnEnemy() method in DemoManager
-		demoManager.SpawnEnemy(demoManager.fighterPrefab, Vector3.zero, Input.GetKey(KeyCode.LeftShift) ? 10 : 1);
+		demoManager.SpawnEnemy( demoManager.fighterPrefab, Vector3.zero, Input.GetKey(KeyCode.LeftShift) ? 10 : 1);
 	}
 
 	/// <summary>
