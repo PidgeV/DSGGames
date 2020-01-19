@@ -128,13 +128,11 @@ public class DemoManager : MonoBehaviour
 		// Find the player
 		playerObj = GameObject.FindGameObjectWithTag("Player");
 
-		if (playerObj == null)
-		{
+		if (playerObj == null) {
 			Debug.Log("We could not find a player object!");
 		}
 
-		if (cameras.Length > 0)
-		{
+		if (cameras.Length > 0) {
 			// Loop through each camera and disable them
 			foreach (Camera camera in cameras)
 			{
@@ -146,8 +144,7 @@ public class DemoManager : MonoBehaviour
 		}
 
 		// Try to get a reference to the Skybox
-		if (profile = GameObject.FindObjectOfType<Volume>())
-		{
+		if (profile = GameObject.FindObjectOfType<Volume>()) {
 			profile.profile.TryGet(out skybox);
 		}
 		else
@@ -159,14 +156,12 @@ public class DemoManager : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (Input.GetKeyDown(skyBox_Change) && skybox)
-		{
+		if (Input.GetKeyDown(skyBox_Change) && skybox) {
 			// Change the skybox to the next in the list
 			ToggleSkybox();
 		}
 
-		if (Input.GetKeyDown(player_Godmode) && playerObj)
-		{
+		if (Input.GetKeyDown(player_Godmode) && playerObj) {
 			// Toggle on god mode for the player
 			if (playerObj.TryGetComponent<HealthAndShields>(out HealthAndShields healthAndShields))
 			{
@@ -174,20 +169,17 @@ public class DemoManager : MonoBehaviour
 			}
 		}
 
-		if (Input.GetKeyDown(player_Teleport) && playerObj)
-		{
+		if (Input.GetKeyDown(player_Teleport) && playerObj) {
 			// TODO -- TP the player to a location
 			// Using the hotkey it could tp the player to 0 0 0 
 			TeleportPlayer();
 		}
 
-		if (Input.GetKeyDown(demo_PauseGame))
-		{
+		if (Input.GetKeyDown(demo_PauseGame)) {
 			// TODO -- Pause the game
 		}
 
-		if (Input.GetKeyDown(demo_ToggleWindow) && DemoMenu)
-		{
+		if (Input.GetKeyDown(demo_ToggleWindow) && DemoMenu) {
 			DemoMenu.ToggleMenu(!DemoMenu.visible);
 		}
 
@@ -198,6 +190,25 @@ public class DemoManager : MonoBehaviour
 		SpawnEnemy();
 	}
 
+	private void OnGUI()
+	{
+		if (DemoMenu.visible == false)
+		{
+			// Screen
+			float X = Screen.width;
+			float Y = Screen.height;
+
+			Rect demoRect = new Rect(X - 230 - 5, Y - 25, 230, 20);
+			Rect demoArea = new Rect(X - 230 + 5, Y - 25, 230, 20);
+
+			GUI.Box(demoRect, "");
+
+			GUILayout.BeginArea(demoArea);
+			GUILayout.Label("Press [Tab] to open the demo helper");
+			GUILayout.EndArea();
+		}
+	}
+
 	/// <summary>
 	/// Read input for Spawning enemies
 	/// </summary>
@@ -206,14 +217,12 @@ public class DemoManager : MonoBehaviour
 		// NOTE -- If shift is held down it will spawn 10 enemies instead of 1
 
 		// Spawn Chargers
-		if (Input.GetKeyDown(spawn_Charger) && chargerPrefab)
-		{
+		if (Input.GetKeyDown(spawn_Charger) && chargerPrefab) {
 			SpawnEnemy(chargerPrefab, Vector3.zero, Input.GetKey(KeyCode.LeftShift) ? 10 : 1);
 		}
 
 		// Spawn Fighters
-		if (Input.GetKeyDown(spawn_Fighter) && fighterPrefab)
-		{
+		if (Input.GetKeyDown(spawn_Fighter) && fighterPrefab) {
 			SpawnEnemy(fighterPrefab, Vector3.zero, Input.GetKey(KeyCode.LeftShift) ? 10 : 1);
 		}
 	}
@@ -254,14 +263,12 @@ public class DemoManager : MonoBehaviour
 			#region Settings the wapoints 
 
 			// Set waypoints for each enemy
-			if (newEnemy.TryGetComponent<ChaserController>(out ChaserController chaserController))
-			{
+			if (newEnemy.TryGetComponent<ChaserController>(out ChaserController chaserController)) {
 				chaserController.waypoints = waypoints;
 			}
 
 			// Set waypoints for each enemy
-			if (newEnemy.TryGetComponent<FighterController>(out FighterController fighterController))
-			{
+			if (newEnemy.TryGetComponent<FighterController>(out FighterController fighterController)) {
 				fighterController.waypoints = waypoints;
 			}
 
@@ -275,32 +282,27 @@ public class DemoManager : MonoBehaviour
 	void ChangeCamera()
 	{
 		// Camera 1
-		if (Input.GetKeyDown(camera_01) && cameras.Length >= 1)
-		{
+		if (Input.GetKeyDown(camera_01) && cameras.Length >= 1) {
 			UpdateActiveCamera(cameras[0]);
 		}
 
 		// Camera 2
-		if (Input.GetKeyDown(camera_02) && cameras.Length >= 2)
-		{
+		if (Input.GetKeyDown(camera_02) && cameras.Length >= 2) {
 			UpdateActiveCamera(cameras[1]);
 		}
 
 		// Camera 3
-		if (Input.GetKeyDown(camera_03) && cameras.Length >= 3)
-		{
+		if (Input.GetKeyDown(camera_03) && cameras.Length >= 3) {
 			UpdateActiveCamera(cameras[2]);
 		}
 
 		// [Unused] Camera 4
-		if (Input.GetKeyDown(camera_04) && cameras.Length >= 4)
-		{
+		if (Input.GetKeyDown(camera_04) && cameras.Length >= 4) {
 			UpdateActiveCamera(cameras[3]);
 		}
 
 		// [Unused] Camera 5
-		if (Input.GetKeyDown(camera_05) && cameras.Length >= 5)
-		{
+		if (Input.GetKeyDown(camera_05) && cameras.Length >= 5) {
 			UpdateActiveCamera(cameras[4]);
 		}
 	}
