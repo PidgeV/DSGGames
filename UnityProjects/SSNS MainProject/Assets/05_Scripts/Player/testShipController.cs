@@ -3,17 +3,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO -- Link Health Shield and Boost Sliders
+// TODO -- Menu Navigation
+// TODO -- Player Score
+// TODO -- Leaving Play Area
+
+// NOTE -- Rigidbody Ref [ Mass (500), Drag (20), Angular Drag (10) ]
+
 [RequireComponent(typeof(Rigidbody))]
 public class testShipController : MonoBehaviour
 {
 	/// <summary> The transformation of the ship model </summary>
+	[Header("Ship Model")]
 	[SerializeField] private Transform ship;
 
 	/// <summary> Reference to the pilot and the gunner </summary>
+	[Header("Players")]
 	[HideInInspector] public Player player1;
 	[HideInInspector] public Player player2;
 
 	/// <summary> [Reference] My Cameras </summary>
+	[Header("Cameras")]
 	[SerializeField] private Camera pilotCamera;
 	[SerializeField] private Camera gunnerCamera;
 
@@ -21,6 +31,7 @@ public class testShipController : MonoBehaviour
 	Rigidbody rigidbody;
 
 	/// <summary> Reference to the stats for this ship </summary>
+	[Header("Ship Stats")]
 	public ShipStats stats;
 
 	// number of people controlling this ship
@@ -44,9 +55,9 @@ public class testShipController : MonoBehaviour
 	private Vector3 finalRollRotation;
 	private Vector3 finalRotation;
 
-	public bool strafing;
-	public bool rotating;
-	public bool boosting;
+	private bool strafing;
+	private bool rotating;
+	private bool boosting;
 	private bool roleSwap;
 	private bool shooting;
 	private bool inversed;
@@ -85,10 +96,6 @@ public class testShipController : MonoBehaviour
 			// Set the max values
 			durability.maxShield = stats.maxShield;
 			durability.maxLife = stats.maxHealth;
-
-			// TODO -- Set the Damage reduction
-			// durability.shieldRedu = stats.healthDamageReduction;
-			// durability.lifeRedu = stats.shieldDamageReduction;
 		}
 	}
 
@@ -286,7 +293,7 @@ public class testShipController : MonoBehaviour
 	{
 		// Rotation
 		Quaternion currentRot = ship.transform.localRotation;
-		Quaternion targetRot = Quaternion.Euler(0, 0, -velocity.y * 10);
+		Quaternion targetRot = Quaternion.Euler(0, 0, -velocity.y * 25);
 
 		ship.transform.localRotation = Quaternion.Lerp(currentRot, targetRot, 0.1f);
 
