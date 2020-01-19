@@ -7,6 +7,10 @@ using UnityEngine;
 // TODO -- Menu Navigation
 // TODO -- Player Score
 // TODO -- Leaving Play Area
+// TODO -- Press A to Join
+// TODO -- Mouse controls
+// TODO -- Less movemement flexibility while boosting
+// ect..
 
 // NOTE -- Rigidbody Ref [ Mass (500), Drag (20), Angular Drag (10) ]
 
@@ -60,7 +64,9 @@ public class testShipController : MonoBehaviour
 	private bool boosting;
 	private bool roleSwap;
 	private bool shooting;
-	private bool inversed;
+
+	[Header("Controls")]
+	public bool invertedControls;
 
 	// Our boost gauge value
 	float boostGauge = 0f;
@@ -293,9 +299,9 @@ public class testShipController : MonoBehaviour
 	{
 		// Rotation
 		Quaternion currentRot = ship.transform.localRotation;
-		Quaternion targetRot = Quaternion.Euler(0, 0, -velocity.y * 25);
+		Quaternion targetRot = Quaternion.Euler(0, 0, -velocity.y * 50);
 
-		ship.transform.localRotation = Quaternion.Lerp(currentRot, targetRot, 0.1f);
+		ship.transform.localRotation = Quaternion.Lerp(currentRot, targetRot, 0.025f);
 
 		// Translation	
 		Vector3 currentPos = ship.transform.localPosition;
@@ -326,7 +332,7 @@ public class testShipController : MonoBehaviour
 		else
 		{
 		    // Check if we want inverted controls
-			if (inversed == true)
+			if (invertedControls == true)
 			{
 				rotateDirection = new Vector2(velocity.y, velocity.x);
 			}
