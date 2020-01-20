@@ -14,7 +14,7 @@ public class Player : Controller
 	// Start is called before the first frame update
 	private void Awake()
 	{
-		foreach (GameObject ship in GameObject.FindGameObjectsWithTag("Ship")) {
+		foreach (GameObject ship in GameObject.FindGameObjectsWithTag("Player")) {
 			if (ship.TryGetComponent<testShipController>(out testShipController shipController))
 			{
 				controller = shipController;

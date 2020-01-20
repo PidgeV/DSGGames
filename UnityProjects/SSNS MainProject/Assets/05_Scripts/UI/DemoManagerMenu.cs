@@ -54,7 +54,7 @@ public class DemoManagerMenu : MonoBehaviour
 			}
 		}
 
-		playerGodmode.color = playerHp.godmode ? Color.green : Color.red;
+		playerGodmode.color = playerHp.enabled ? Color.green : Color.red;
 	}
 
 	/// <summary>
@@ -106,7 +106,7 @@ public class DemoManagerMenu : MonoBehaviour
 	/// </summary>
 	public void SetPlayerGodMode()
 	{
-		playerHp.godmode = !playerHp.godmode;
+		playerHp.enabled = !playerHp.enabled;
 	}
 
 	/// <summary>

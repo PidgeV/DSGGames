@@ -109,7 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
   lifetime: 5
-  speed: 250
+  speed: 150
 --- !u!114 &3914930520208039227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48901a74a34a93249835e8beb8ed2146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 40
+  damage: 5
 --- !u!54 &-5304832730458768805
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -367,7 +367,7 @@ MonoBehaviour:
   bullet: {fileID: 4450240921679082262, guid: 31460afb2d57a1740a2902c36c19ba0e, type: 3}
   bulletShootPos: {fileID: 1864797949346244314}
   distanceNeedToMaintain: 150
-  accuracyForShot: 2
+  accuracyForShot: 5
 --- !u!1 &58820781145363505
 GameObject:
   m_ObjectHideFlags: 0

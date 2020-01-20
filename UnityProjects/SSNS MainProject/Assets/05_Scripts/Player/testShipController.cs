@@ -52,7 +52,8 @@ public class testShipController : MonoBehaviour
 	// number of people controlling this ship
 	int numberOfPlayers = 0;
 
-	#region Ship Properties
+    #region Ship Properties
+    private HealthAndShields shipHP;
 
 	private float thrustSpeed;
 	private float strafeSpeed;
@@ -77,10 +78,11 @@ public class testShipController : MonoBehaviour
 	private bool shooting;
 
 	[Header("Controls")]
-	public bool invertedControls;
+    [SerializeField] bool invertedControls;
+    [SerializeField] bool limitRotation;
 
-	// Our boost gauge value
-	float boostGauge = 0f;
+    // Our boost gauge value
+    float boostGauge = 0f;
 
 	// the counter to our next shot
 	float shotCounter = 0f;
@@ -112,13 +114,14 @@ public class testShipController : MonoBehaviour
 		healthImage = slider_Health.gameObject.GetComponentInChildren<Image>();
 		shieldImage = slider_Shield.gameObject.GetComponentInChildren<Image>();
 
+        TryGetComponent<HealthAndShields>(out shipHP);
 		// Set the max values of our health and shields
-		if (gameObject.TryGetComponent<HealthAndShields>(out HealthAndShields durability))
-		{
-			// Set the max values
-			durability.maxShield = stats.maxShield;
-			durability.maxLife = stats.maxHealth;
-		}
+		//if (gameObject.TryGetComponent<HealthAndShields>(out HealthAndShields durability))
+		//{
+		//	// Set the max values
+		//	durability.maxShield = stats.maxShield;
+		//	durability.maxLife = stats.maxHealth;
+		//}
 	}
 
 	private void Update()
@@ -130,7 +133,7 @@ public class testShipController : MonoBehaviour
 
 		// We never want the gunner to be upsidedown 
 		// relative to the players ship
-		if (gunRotation.y < -75) {
+		if (gunRotation.y < -75 && limitRotation) {
 			gunRotation.y = -75;
 		}
 
@@ -275,6 +278,9 @@ public class testShipController : MonoBehaviour
 			boostImage.color = Color.Lerp(Color.red, Color.yellow, 1 / stats.maxBoostGauge * boostGauge);
 		}
 
+        slider_Health.value = 1/shipHP.MaxLife * shipHP.life;
+        slider_Shield.value = 1 / shipHP.MaxShield * shipHP.shield;
+
 		// Shooting
 		if (shooting)
 		{
@@ -304,7 +310,7 @@ public class testShipController : MonoBehaviour
 	/// </summary>
 	public void Shoot()
 	{
-		Debug.Log("Shoot!");
+		//Debug.Log("Shoot!");
 
 		shotCounter = 0f;
 	}
@@ -314,22 +320,22 @@ public class testShipController : MonoBehaviour
 	/// </summary>
 	public void UpdateShipModel(Vector3 velocity)
 	{
-		// Rotation
-		Quaternion currentRot = ship.transform.localRotation;
-		Quaternion targetRot = Quaternion.Euler(0, 0, -velocity.y * 50);
+        // Rotation
+        Quaternion currentRot = ship.transform.localRotation;
+        Quaternion targetRot = Quaternion.Euler(velocity.x * 15, velocity.z * 10, -velocity.y * 50);
 
-		ship.transform.localRotation = Quaternion.Lerp(currentRot, targetRot, 0.025f);
+        ship.transform.localRotation = Quaternion.Slerp(currentRot, targetRot, 0.1f);
 
-		// Translation	
-		Vector3 currentPos = ship.transform.localPosition;
-		Vector3 targetPos = new Vector3(-velocity.y, velocity.x, 0) * 10;
+        // Translation	
+        Vector3 currentPos = ship.transform.localPosition;
+		Vector3 targetPos = new Vector3(-velocity.y, velocity.x, 0) * 5;
 
-		ship.transform.localPosition = Vector3.Lerp(currentPos, targetPos, 0.01f);
+		ship.transform.localPosition = Vector3.Lerp(currentPos, targetPos, 0.1f);
 
 		// Camera
 		Vector3 targetCameraPos = boosting ? new Vector3(0, 7, -35) : new Vector3(0, 7, -25);
 
-		pilotCamera.transform.localPosition = Vector3.Lerp(pilotCamera.transform.localPosition, targetCameraPos, 0.01f);
+		pilotCamera.transform.localPosition = Vector3.Slerp(pilotCamera.transform.localPosition, targetCameraPos, 0.01f);
 	}
 
 	/// <summary> 

@@ -73,7 +73,6 @@ namespace Complete
 
             currentHealth = maxHealth;
             ConstructFSM();
-
         }
         protected override void FSMUpdate()
         {

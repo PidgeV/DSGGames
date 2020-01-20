@@ -122,7 +122,7 @@ namespace Complete
 
             if (hitInfo.collider != null)
             {
-                //Debug.Log(hitInfo.collider.gameObject.name);
+                Debug.Log(hitInfo.collider.gameObject.name);
                 if (hitInfo.collider.gameObject.Equals(player.gameObject))
                 {
                     return true;

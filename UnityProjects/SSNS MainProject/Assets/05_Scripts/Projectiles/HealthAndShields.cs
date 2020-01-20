@@ -8,49 +8,52 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class HealthAndShields : MonoBehaviour
 {
-	[Space(10)]
-	// The MAX life the ship has
-	public float maxLife = 100f;
+    [Space(10)]
+    // The MAX life the ship has
+    [SerializeField] float maxLife = 100f;
+    public float MaxLife { get { return maxLife; } }
 
-	// The MAX shield the ship has
-	public float maxShield = 100f;
+    // The MAX shield the ship has
+    [SerializeField] float maxShield = 100f;
+    public float MaxShield { get { return maxShield; } }
 
-	[Space(10)]
-	public float life;
-	public float shield;
+    [Space(10)]
+    public float life;
+    public float shield;
 
-	[Space(10)]
-	[Range(1, 99)]
-	// The PERCENT of damage that is reduced when taking a hit to LIFE 
-	public float armor = 1f;
+    [Space(10)]
+    [Range(1, 99)]
+    // The PERCENT of damage that is reduced when taking a hit to LIFE 
+    public float armor = 1f;
 
-	[Range(1, 99)]
-	// The PERCENT of shield that is regenerated per second
-	public float regenSpeed = 1f;
-	internal bool godmode;
+    [Range(1, 99)]
+    // The PERCENT of shield that is regenerated per second
+    public float regenSpeed = 1f;
 
-	public bool godMode = false;
+    // Start is called before the first frame update
+    void Start()
+    {
+        life = maxLife;
+        shield = maxShield;
+    }
 
-	// Start is called before the first frame update
-	void Start()
-	{
-		life = maxLife;
-		shield = maxShield;
-	}
+    // Update is called once per frame
+    void Update()
+    {
+        // If we have more then 0 life we can regen shields
+        if (life > 0)
+        {
+            // Calculating the amount we need to heal WITH regen Speed
+            float amountToHeal = shield + (maxShield * regenSpeed / 100f) * Time.deltaTime;
 
-	// Update is called once per frame
-	void Update()
-	{
-		// If we have more then 0 life we can regen shields
-		if (life > 0)
-		{
-			// Calculating the amount we need to heal WITH regen Speed
-			float amountToHeal = shield + (maxShield * regenSpeed / 100f) * Time.deltaTime;
-
-			// Clamp out shield to the max shield
-			shield = Mathf.Clamp(amountToHeal, -Mathf.Infinity, maxShield);
-		}
-	}
+            // Clamp out shield to the max shield
+            shield = Mathf.Clamp(amountToHeal, -Mathf.Infinity, maxShield);
+        }
+        else
+        {
+            OnDeath();
+        }
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -64,36 +67,42 @@ public class HealthAndShields : MonoBehaviour
         }
     }
 
-	// Damage the ship
-	void TakeDamage(float damage)	{
+    // Damage the ship
+    void TakeDamage(float damage)
+    {
 
-		// Damage the shield
-		shield -= damage;
+        // Damage the shield
+        shield -= damage;
 
-		// If we have negative shields we can take it away from your life pool
-		if (shield < 0)
-		{
-			// Apply the armor reduction
-			life += -Mathf.Abs(shield / armor);
-			shield = 0;
-		}
+        // If we have negative shields we can take it away from your life pool
+        if (shield < 0)
+        {
+            // Apply the armor reduction
+            life += -Mathf.Abs(shield / armor);
+            shield = 0;
+        }
 
-		// If we are dead cann OnDeath()
-		if (life <= 0)
-		{
-			life = 0;
-			OnDeath();
-		}
+        // If we are dead cann OnDeath()
+        if (life <= 0)
+        {
+            life = 0;
+            OnDeath();
+        }
 
-		// TEMP -- COLOR THE THINGS YOU HIT
-		if(gameObject.GetComponent<Renderer>())  gameObject.GetComponent<Renderer>().material.SetColor("_BaseColor", Color.blue);
-	}
+        // TEMP -- COLOR THE THINGS YOU HIT
+        if (gameObject.GetComponent<Renderer>()) gameObject.GetComponent<Renderer>().material.SetColor("_BaseColor", Color.blue);
+    }
 
-	// When life is 0 this is called by TakeDamage()
-	void OnDeath()
-	{
-		if (godmode == false) {
-			Destroy(gameObject);
-		}
-	}
+    // When life is 0 this is called by TakeDamage()
+    void OnDeath()
+    {
+        Destroy(gameObject);
+    }
+
+    public void Heal(int amountToHeal)
+    {
+        life += amountToHeal;
+
+        if (life > maxLife) life = maxLife;
+    }
 }

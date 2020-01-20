@@ -86,37 +86,38 @@ public class DemoManager : MonoBehaviour
 	public KeyCode demo_ToggleWindow = KeyCode.Tab;
 	public KeyCode demo_PauseGame = KeyCode.P;
 
-	#endregion
+    #endregion
 
-	// TODO -- Play Animations
-	#region Play Animations
+    // TODO -- Play Animations
+    #region Play Animations
 
-	// Cinematics
-	// Open -> MainMenu
-	// MainMenu -> Options
-	// MainMenu -> GameSetup
-	// GameSetup -> NewGame / LoadGame
+    // Cinematics
+    // Open -> MainMenu
+    // MainMenu -> Options
+    // MainMenu -> GameSetup
+    // GameSetup -> NewGame / LoadGame
 
-	// (Player) Entering a new node
-	// (Player) Wapring to the next node
+    // (Player) Entering a new node
+    // (Player) Wapring to the next node
 
-	// (Player) Game Over
+    // (Player) Game Over
 
-	// (Dreadnove) Warp into scene
-	// (Dreadnove) Part Destruction
-	// (Dreadnove) Shields up
-	// (Dreadnove) Shields down
+    // (Dreadnove) Warp into scene
+    // (Dreadnove) Part Destruction
+    // (Dreadnove) Shields up
+    // (Dreadnove) Shields down
 
-	// ect
+    // ect
 
-	#endregion
+    #endregion
 
-	// TODO -- Scene Manager
-	#region Scene Manager
+    // TODO -- Scene Manager
+    #region Scene Manager
 
-	// Kill all the enemies in the scene
-	// Reset the scene
-	// Load a new scene
+    // Kill all the enemies in the scene
+    // Reset the scene
+    // Load a new scene
+    List<GameObject> enemies = new List<GameObject>();
 
 	#endregion
 
@@ -126,7 +127,7 @@ public class DemoManager : MonoBehaviour
 		DemoMenu.gameObject.SetActive(true);
 
 		// Find the player
-		playerObj = GameObject.FindGameObjectWithTag("Ship");
+		playerObj = GameObject.FindGameObjectWithTag("Player");
 
 		if (playerObj == null) {
 			Debug.Log("We could not find a player object!");
@@ -164,8 +165,8 @@ public class DemoManager : MonoBehaviour
 		if (Input.GetKeyDown(player_Godmode) && playerObj) {
 			// Toggle on god mode for the player
 			if (playerObj.TryGetComponent<HealthAndShields>(out HealthAndShields healthAndShields)) {
-				healthAndShields.godmode = !healthAndShields.godmode;
-			}
+				healthAndShields.enabled = !healthAndShields.enabled;
+            }
 		}
 
 		if (Input.GetKeyDown(player_Teleport) && playerObj) {
@@ -213,19 +214,22 @@ public class DemoManager : MonoBehaviour
 	/// </summary>
 	void SpawnEnemy()
 	{
-		// NOTE -- If shift is held down it will spawn 10 enemies instead of 1
+        // NOTE -- If shift is held down it will spawn 10 enemies instead of 1
 
-		// TODO -- Something about this does not work. It does try to spawn 10. 
-		//		   But I think they instently die
+        // TODO -- Something about this does not work. It does try to spawn 10. 
+        //		   But I think they instently die
+
+        //Randomized Vector3
+        Vector3 randVector = new Vector3(Random.Range(-50, 50), Random.Range(-50, 50), Random.Range(-50, 50));
 
 		// Spawn Chargers
 		if (Input.GetKeyDown(spawn_Charger) && chargerPrefab) {
-			SpawnEnemy( chargerPrefab, Vector3.zero, (Input.GetKey(KeyCode.LeftShift) ? 10 : 1));
+			SpawnEnemy( chargerPrefab, transform.position + randVector, (Input.GetKey(KeyCode.LeftShift) ? 10 : 1));
 		}
 
 		// Spawn Fighters
 		if (Input.GetKeyDown(spawn_Fighter) && fighterPrefab) {
-			SpawnEnemy( fighterPrefab, Vector3.zero, (Input.GetKey(KeyCode.LeftShift) ? 10 : 1));
+			SpawnEnemy( fighterPrefab, transform.position + randVector, (Input.GetKey(KeyCode.LeftShift) ? 10 : 1));
 		}
 	}
 
@@ -259,6 +263,7 @@ public class DemoManager : MonoBehaviour
 		{
 			// Instantiate
 			GameObject newEnemy = Instantiate(enemy, position, Quaternion.identity);
+            enemies.Add(newEnemy);
 
 			// TODO -- We should find a better way to do this
 			#region Settings the wapoints 
@@ -267,15 +272,26 @@ public class DemoManager : MonoBehaviour
 			if (newEnemy.TryGetComponent<ChaserController>(out ChaserController chaserController)) {
 				chaserController.waypoints = waypoints;
 			}
-
 			// Set waypoints for each enemy
-			if (newEnemy.TryGetComponent<FighterController>(out FighterController fighterController)) {
+			else if (newEnemy.TryGetComponent<FighterController>(out FighterController fighterController)) {
 				fighterController.waypoints = waypoints;
 			}
-
 			#endregion
 		}
 	}
+
+    /// <summary>
+    /// Does what it says it does
+    /// </summary>
+    public void DestroyAllEnemies()
+    {
+        foreach(GameObject enemy in enemies)
+        {
+            Destroy(enemy);
+        }
+
+        enemies.Clear();
+    }
 
 	/// <summary>
 	/// Handle the changing of cameras in the scene
