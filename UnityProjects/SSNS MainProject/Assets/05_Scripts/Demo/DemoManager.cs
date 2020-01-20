@@ -126,7 +126,7 @@ public class DemoManager : MonoBehaviour
 		DemoMenu.gameObject.SetActive(true);
 
 		// Find the player
-		playerObj = GameObject.FindGameObjectWithTag("Player");
+		playerObj = GameObject.FindGameObjectWithTag("Ship");
 
 		if (playerObj == null) {
 			Debug.Log("We could not find a player object!");
@@ -163,8 +163,7 @@ public class DemoManager : MonoBehaviour
 
 		if (Input.GetKeyDown(player_Godmode) && playerObj) {
 			// Toggle on god mode for the player
-			if (playerObj.TryGetComponent<HealthAndShields>(out HealthAndShields healthAndShields))
-			{
+			if (playerObj.TryGetComponent<HealthAndShields>(out HealthAndShields healthAndShields)) {
 				healthAndShields.godmode = !healthAndShields.godmode;
 			}
 		}
@@ -243,7 +242,7 @@ public class DemoManager : MonoBehaviour
 	/// </summary>
 	public void TeleportPlayer()
 	{
-		foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player")) {
+		foreach (GameObject player in GameObject.FindGameObjectsWithTag("Ship")) {
 			player.transform.position = Vector3.zero;
 		}
 	}

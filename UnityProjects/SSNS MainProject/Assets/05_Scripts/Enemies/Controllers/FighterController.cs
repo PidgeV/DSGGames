@@ -67,10 +67,10 @@ namespace Complete
         protected override void Initialize()
         {
             //Pretty self explainatory
-            if (GameObject.FindGameObjectWithTag("Player") != null)
-            {
+            if (GameObject.FindGameObjectWithTag("Player") != null) {
                 player = GameObject.FindGameObjectWithTag("Player");
             }
+
             currentHealth = maxHealth;
             ConstructFSM();
 

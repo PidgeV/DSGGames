@@ -115,7 +115,6 @@ D:\GitHub\DSGGames\UnityProjects\SSNS MainProject\Temp\bin\Debug\System.Xml.XmlD
 D:\GitHub\DSGGames\UnityProjects\SSNS MainProject\Temp\bin\Debug\System.Xml.XmlSerializer.dll
 D:\GitHub\DSGGames\UnityProjects\SSNS MainProject\Temp\bin\Debug\System.Xml.XPath.dll
 D:\GitHub\DSGGames\UnityProjects\SSNS MainProject\Temp\bin\Debug\System.Xml.XPath.XDocument.dll
-D:\GitHub\DSGGames\UnityProjects\SSNS MainProject\Temp\bin\Debug\Unity.CollabProxy.Editor.dll
 D:\GitHub\DSGGames\UnityProjects\SSNS MainProject\Temp\bin\Debug\Unity.InputSystem.dll
 D:\GitHub\DSGGames\UnityProjects\SSNS MainProject\Temp\bin\Debug\Unity.Postprocessing.Editor.dll
 D:\GitHub\DSGGames\UnityProjects\SSNS MainProject\Temp\bin\Debug\Unity.Postprocessing.Runtime.dll
@@ -213,7 +212,6 @@ D:\GitHub\DSGGames\UnityProjects\SSNS MainProject\Temp\bin\Debug\Unity.VisualEff
 D:\GitHub\DSGGames\UnityProjects\SSNS MainProject\Temp\bin\Debug\Unity.TextMeshPro.Editor.pdb
 D:\GitHub\DSGGames\UnityProjects\SSNS MainProject\Temp\bin\Debug\UnityEngine.UI.pdb
 D:\GitHub\DSGGames\UnityProjects\SSNS MainProject\Temp\bin\Debug\Unity.Timeline.pdb
-D:\GitHub\DSGGames\UnityProjects\SSNS MainProject\Temp\bin\Debug\Unity.CollabProxy.Editor.pdb
 D:\GitHub\DSGGames\UnityProjects\SSNS MainProject\Temp\bin\Debug\Unity.RenderPipelines.HighDefinition.Runtime.pdb
 D:\GitHub\DSGGames\UnityProjects\SSNS MainProject\Temp\bin\Debug\Unity.Postprocessing.Editor.pdb
 D:\GitHub\DSGGames\UnityProjects\SSNS MainProject\Temp\bin\Debug\Unity.Rider.Editor.pdb
@@ -580,3 +578,5 @@ D:\Git\DSGGames\UnityProjects\SSNS MainProject\obj\Debug\Assembly-CSharp.dll
 D:\Git\DSGGames\UnityProjects\SSNS MainProject\obj\Debug\Assembly-CSharp.pdb
 D:\Git\DSGGames\UnityProjects\SSNS MainProject\Temp\bin\Debug\Unity.2D.Sprite.Editor.dll
 D:\Git\DSGGames\UnityProjects\SSNS MainProject\Temp\bin\Debug\Unity.2D.Sprite.Editor.pdb
+D:\GitHub\DSGGames\UnityProjects\SSNS MainProject\Temp\bin\Debug\Unity.2D.Sprite.Editor.dll
+D:\GitHub\DSGGames\UnityProjects\SSNS MainProject\Temp\bin\Debug\Unity.2D.Sprite.Editor.pdb

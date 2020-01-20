@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 // TODO -- Link Health Shield and Boost Sliders
 // TODO -- Menu Navigation
@@ -30,6 +31,16 @@ public class testShipController : MonoBehaviour
 	[Header("Cameras")]
 	[SerializeField] private Camera pilotCamera;
 	[SerializeField] private Camera gunnerCamera;
+
+
+	[Header("Sliders")]
+	[SerializeField] private Slider slider_Health;
+	[SerializeField] private Slider slider_Shield;
+	[SerializeField] private Slider slider_Boost;
+
+	private Image healthImage;
+	private Image shieldImage;
+	private Image boostImage;
 
 	/// <summary> [Reference] My Rigidbody </summary>
 	Rigidbody rigidbody;
@@ -95,6 +106,11 @@ public class testShipController : MonoBehaviour
 
 		// Get components
 		rigidbody = gameObject.GetComponent<Rigidbody>();
+
+		// Get the images for the sliders
+		boostImage = slider_Boost.gameObject.GetComponentInChildren<Image>();
+		healthImage = slider_Health.gameObject.GetComponentInChildren<Image>();
+		shieldImage = slider_Shield.gameObject.GetComponentInChildren<Image>();
 
 		// Set the max values of our health and shields
 		if (gameObject.TryGetComponent<HealthAndShields>(out HealthAndShields durability))
@@ -210,10 +226,14 @@ public class testShipController : MonoBehaviour
 
 			// Reduce the boost gauge
 			boostGauge = Mathf.Clamp(boostGauge - stats.boostGaugeConsumeAmount * Time.deltaTime, 0, stats.maxBoostGauge);
+			slider_Boost.value = 1 / stats.maxBoostGauge * boostGauge;
+
+			// Set the color of the boost slider
+			boostImage.color = Color.Lerp(Color.red, Color.yellow, 1 / stats.maxBoostGauge * boostGauge);
 
 			// Turn off boosting
 			if (boostGauge <= 0) {
-				//boosting = false;
+				boosting = false;
 			}
 		}
 		// Else if we are NOT boosting and our thrustSpeed is over our maxThrustSpeed
@@ -237,13 +257,6 @@ public class testShipController : MonoBehaviour
 		// Move the ship model
 		UpdateShipModel(rotateDirection);
 
-		// Move the Camera
-		// Get the target camera position
-		Vector3 targetCameraPos = boosting ? new Vector3(0, 7, -35) : new Vector3(0, 7, -25);
-
-		// Lerp the camera to that position
-		pilotCamera.transform.localPosition = Vector3.Lerp(pilotCamera.transform.localPosition, targetCameraPos, 0.01f);
-
 		// Boost Gauge 
 		if (boostGauge < stats.maxBoostGauge && boosting == false)
 		{
@@ -256,6 +269,10 @@ public class testShipController : MonoBehaviour
 			if (boostGauge > stats.maxBoostGauge) {
 				boostGauge = stats.maxBoostGauge;
 			}
+
+			slider_Boost.value = 1 / stats.maxBoostGauge * boostGauge;
+			// Set the color of the boost slider
+			boostImage.color = Color.Lerp(Color.red, Color.yellow, 1 / stats.maxBoostGauge * boostGauge);
 		}
 
 		// Shooting
@@ -308,6 +325,11 @@ public class testShipController : MonoBehaviour
 		Vector3 targetPos = new Vector3(-velocity.y, velocity.x, 0) * 10;
 
 		ship.transform.localPosition = Vector3.Lerp(currentPos, targetPos, 0.01f);
+
+		// Camera
+		Vector3 targetCameraPos = boosting ? new Vector3(0, 7, -35) : new Vector3(0, 7, -25);
+
+		pilotCamera.transform.localPosition = Vector3.Lerp(pilotCamera.transform.localPosition, targetCameraPos, 0.01f);
 	}
 
 	/// <summary> 
