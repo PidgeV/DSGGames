@@ -86,6 +86,7 @@ public class testShipController : MonoBehaviour
 	[Header("Controls")]
     [SerializeField] bool invertedControls;
     [SerializeField] bool limitRotation;
+    [SerializeField] bool unlimitedBoost;
 
     // Our boost gauge value
     float boostGauge = 0f;
@@ -167,12 +168,31 @@ public class testShipController : MonoBehaviour
 
 		float ship_MinSpeed = 50f;
 		float ship_MaxSpeed = 100f;
-		float ship_MaxBoostSpeed = 150f;
+		float ship_MaxBoostSpeed = 850f;
 		float ship_MaxStrafeSpeed = 150f;
 
 		float boost_multiplier = 1.4f;
 
 		float rotation_MaxSpeed = 2f;
+
+
+		#region NumberRef
+		//float ship_Acceleration = 25f * Time.deltaTime;
+		//float ship_Deceleration = 50f * Time.deltaTime;
+
+		//float rotation_Acceleration = 5f * Time.deltaTime;
+		//float rotation_Deceleration = 5f * Time.deltaTime;
+
+		//float ship_MinSpeed = 50f;
+		//float ship_MaxSpeed = 100f;
+		//float ship_MaxBoostSpeed = 150f;
+		//float ship_MaxStrafeSpeed = 150f;
+
+		//float boost_multiplier = 1.4f;
+
+		//float rotation_MaxSpeed = 2f;
+		#endregion
+
 
 		// Steer Ship
 		#region Steer Ship
@@ -241,7 +261,7 @@ public class testShipController : MonoBehaviour
 			boostImage.color = Color.Lerp(Color.red, Color.yellow, 1 / myStats.maxBoostGauge * boostGauge);
 
 			// Turn off boosting
-			if (boostGauge <= 0) {
+			if (boostGauge <= 0 && unlimitedBoost == false) {
 				boosting = false;
 			}
 		}
