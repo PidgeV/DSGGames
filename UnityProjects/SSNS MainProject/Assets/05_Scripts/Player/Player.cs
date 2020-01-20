@@ -55,7 +55,7 @@ public class Player : Controller
 
 		if (myRole == PlayerRole.Gunner) {
 			// Move the player camera
-			controller.MoveGun(input.Get<Vector2>());
+			controller.AimGun(input.Get<Vector2>());
 		}
 	}	
 
@@ -69,7 +69,7 @@ public class Player : Controller
 
 		if (myRole == PlayerRole.Gunner) {
 			// Move the player camera
-			controller.MoveGun(input.Get<Vector2>());
+			controller.AimGun(input.Get<Vector2>());
 		}
 	}
 

@@ -13,6 +13,10 @@ using UnityEngine.UI;
 // TODO -- Less movemement flexibility while boosting
 // ect..
 
+// NOTE -- Scriptable Object
+// -> ShipStats this ships stats (Max HP, Speed ect)
+// -> ShipBehaviour this ships (model) movements (How the model moves)
+
 // NOTE -- Rigidbody Ref [ Mass (500), Drag (20), Angular Drag (10) ]
 
 [RequireComponent(typeof(Rigidbody))]
@@ -47,12 +51,14 @@ public class testShipController : MonoBehaviour
 
 	/// <summary> Reference to the stats for this ship </summary>
 	[Header("Ship Stats")]
-	public ShipStats stats;
+	public ShipStats myStats;
+	public ShipBehaviour myBehaviour;
 
 	// number of people controlling this ship
 	int numberOfPlayers = 0;
 
     #region Ship Properties
+
     private HealthAndShields shipHP;
 
 	private float thrustSpeed;
@@ -104,7 +110,7 @@ public class testShipController : MonoBehaviour
 		pilotCamera.rect = new Rect(0, 0.5f, 1.0f, 0.5f);
 
 		// Set the max values of our boost Gauge
-		boostGauge = stats.maxBoostGauge;
+		boostGauge = myStats.maxBoostGauge;
 
 		// Get components
 		rigidbody = gameObject.GetComponent<Rigidbody>();
@@ -228,11 +234,11 @@ public class testShipController : MonoBehaviour
 			thrustSpeed = Mathf.Clamp(thrustSpeed + (ship_Acceleration * boost_multiplier), ship_MinSpeed, ship_MaxBoostSpeed);
 
 			// Reduce the boost gauge
-			boostGauge = Mathf.Clamp(boostGauge - stats.boostGaugeConsumeAmount * Time.deltaTime, 0, stats.maxBoostGauge);
-			slider_Boost.value = 1 / stats.maxBoostGauge * boostGauge;
+			boostGauge = Mathf.Clamp(boostGauge - myStats.boostGaugeConsumeAmount * Time.deltaTime, 0, myStats.maxBoostGauge);
+			slider_Boost.value = 1 / myStats.maxBoostGauge * boostGauge;
 
 			// Set the color of the boost slider
-			boostImage.color = Color.Lerp(Color.red, Color.yellow, 1 / stats.maxBoostGauge * boostGauge);
+			boostImage.color = Color.Lerp(Color.red, Color.yellow, 1 / myStats.maxBoostGauge * boostGauge);
 
 			// Turn off boosting
 			if (boostGauge <= 0) {
@@ -261,7 +267,7 @@ public class testShipController : MonoBehaviour
 		UpdateShipModel(rotateDirection);
 
 		// Boost Gauge 
-		if (boostGauge < stats.maxBoostGauge && boosting == false)
+		if (boostGauge < myStats.maxBoostGauge && boosting == false)
 		{
 			float rechargeRate = 1.5f;
 
@@ -269,22 +275,24 @@ public class testShipController : MonoBehaviour
 			boostGauge += rechargeRate * Time.deltaTime;
 
 			// Clamp the boost gauge to our maxBoostGauge 
-			if (boostGauge > stats.maxBoostGauge) {
-				boostGauge = stats.maxBoostGauge;
+			if (boostGauge > myStats.maxBoostGauge) {
+				boostGauge = myStats.maxBoostGauge;
 			}
 
-			slider_Boost.value = 1 / stats.maxBoostGauge * boostGauge;
+			// Boost Slider
+			slider_Boost.value = (1 / myStats.maxBoostGauge) * boostGauge;
+
 			// Set the color of the boost slider
-			boostImage.color = Color.Lerp(Color.red, Color.yellow, 1 / stats.maxBoostGauge * boostGauge);
+			boostImage.color = Color.Lerp(Color.red, Color.yellow, (1 / myStats.maxBoostGauge) * boostGauge);
 		}
 
-        slider_Health.value = 1/shipHP.MaxLife * shipHP.life;
-        slider_Shield.value = 1 / shipHP.MaxShield * shipHP.shield;
+		slider_Health.value = (1 / shipHP.MaxLife) * shipHP.life;
+		slider_Shield.value = (1 / shipHP.MaxShield) * shipHP.shield;
 
 		// Shooting
 		if (shooting)
 		{
-			if (shotCounter > stats.fireRate) {
+			if (shotCounter > myStats.fireRate) {
 				Shoot();
 			}
 		}
@@ -320,28 +328,33 @@ public class testShipController : MonoBehaviour
 	/// </summary>
 	public void UpdateShipModel(Vector3 velocity)
 	{
-        // Rotation
+		// Rotation	
         Quaternion currentRot = ship.transform.localRotation;
-        Quaternion targetRot = Quaternion.Euler(velocity.x * 15, velocity.z * 10, -velocity.y * 50);
+        Quaternion targetRot = Quaternion.Euler
+			(
+				 velocity.x * myBehaviour.xRot,
+				 velocity.z * myBehaviour.yRot,
+				-velocity.y * myBehaviour.zRot
+			);
 
-        ship.transform.localRotation = Quaternion.Slerp(currentRot, targetRot, 0.1f);
+		ship.transform.localRotation = Quaternion.Slerp(currentRot, targetRot, myBehaviour.RotSpeed);
 
-        // Translation	
+		// Translation
         Vector3 currentPos = ship.transform.localPosition;
-		Vector3 targetPos = new Vector3(-velocity.y, velocity.x, 0) * 5;
+		Vector3 targetPos = new Vector3(-velocity.y, velocity.x, 0) * myBehaviour.moveScale;
 
-		ship.transform.localPosition = Vector3.Lerp(currentPos, targetPos, 0.1f);
+		ship.transform.localPosition = Vector3.Lerp(currentPos, targetPos, myBehaviour.moveSpeed);
 
 		// Camera
-		Vector3 targetCameraPos = boosting ? new Vector3(0, 7, -35) : new Vector3(0, 7, -25);
+		Vector3 targetCameraPos = boosting ? myBehaviour.boostPos : myBehaviour.normalPos;
 
-		pilotCamera.transform.localPosition = Vector3.Slerp(pilotCamera.transform.localPosition, targetCameraPos, 0.01f);
+		pilotCamera.transform.localPosition = Vector3.Slerp(pilotCamera.transform.localPosition, targetCameraPos, myBehaviour.cameraSpeed);
 	}
 
 	/// <summary> 
 	/// Move the gunners camera
 	/// </summary>
-	public void MoveGun(Vector2 velocity)
+	public void AimGun(Vector2 velocity)
 	{
 		gunVelocity = new Vector2(velocity.x, velocity.y) * gunRotationSpeed;
 	}
@@ -414,7 +427,7 @@ public class testShipController : MonoBehaviour
 		// If were currently looking for a role swap
 		if (roleSwap == true && pressed == true)
 		{
-			// This means that both players are holding down the role swap button
+			// This means that BOTH players are holding down the role swap button
 			SwapRoles();
 		}
 		else
@@ -504,7 +517,7 @@ public class testShipController : MonoBehaviour
 	{
 		// If our boost gauge is more than 5% full we allow the player to boost
 		// This is to avoid stuttering  on a 0% gauge
-		if (boostGauge > stats.maxBoostGauge * 0.05f) {
+		if (boostGauge > myStats.maxBoostGauge * 0.05f) {
 			boosting = pressed;
 		}
 		else
