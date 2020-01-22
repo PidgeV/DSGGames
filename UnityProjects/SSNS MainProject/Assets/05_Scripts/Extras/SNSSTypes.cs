@@ -10,4 +10,6 @@ namespace SNSSTypes
 		Pilot,
 		None
 	};
+
+    public enum ShotType { Regular, Energy, Laser, Charged, Missiles }
 }
