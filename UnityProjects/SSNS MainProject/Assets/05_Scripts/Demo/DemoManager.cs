@@ -118,6 +118,7 @@ public class DemoManager : MonoBehaviour
     // Reset the scene
     // Load a new scene
     List<GameObject> enemies = new List<GameObject>();
+    [SerializeField] float timeScale;
 
 	#endregion
 
@@ -157,15 +158,17 @@ public class DemoManager : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (Input.GetKeyDown(skyBox_Change) && skybox) {
+        if (Time.timeScale != timeScale) Time.timeScale = timeScale;
+
+        if (Input.GetKeyDown(skyBox_Change) && skybox) {
 			// Change the skybox to the next in the list
 			ToggleSkybox();
 		}
 
 		if (Input.GetKeyDown(player_Godmode) && playerObj) {
 			// Toggle on god mode for the player
-			if (playerObj.TryGetComponent<HealthAndShields>(out HealthAndShields healthAndShields)) {
-				healthAndShields.enabled = !healthAndShields.enabled;
+			if (playerObj.TryGetComponent(out HealthAndShields healthAndShields)) {
+				healthAndShields.invincible = !healthAndShields.invincible;
             }
 		}
 

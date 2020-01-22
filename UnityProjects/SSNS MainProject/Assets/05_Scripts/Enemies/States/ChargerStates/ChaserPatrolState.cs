@@ -53,6 +53,7 @@ namespace Complete
         public override void EnterStateInit()
         {
             //Debug.Log("Patrolling");
+            controller.hitPlayer = false;
         }
 
 

@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48901a74a34a93249835e8beb8ed2146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 50
+  damage: 20
 --- !u!65 &3107085776561158199
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -107,12 +107,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21bcb8e5aef53064495f71d628833b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 100
-  maxShield: 50
+  maxLife: 50
+  maxShield: 25
   life: 10
   shield: 10
   armor: 1
   regenSpeed: 1
+  invincible: 0
 --- !u!114 &2083052501916966413
 MonoBehaviour:
   m_ObjectHideFlags: 0

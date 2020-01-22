@@ -22,8 +22,6 @@ namespace Complete
         [SerializeField] float regRotationForce;
         [SerializeField] float acceleration;
 
-
-
         //MAth things for later. To store the dot product
         float dotProduct;
 
@@ -43,14 +41,14 @@ namespace Complete
         GameObject player;
         [SerializeField] GameObject bullet;
         [SerializeField] GameObject bulletShootPos;
-        [SerializeField] float distanceNeedToMaintain;
+        //[SerializeField] float distanceNeedToMaintain;
         [SerializeField] float accuracyForShot;
 
         private void ConstructFSM()
         {
             DeadState deadState = new DeadState(this, destroyedPrefab);
             FighterPatrolState patrol = new FighterPatrolState(this, player, waypoints, waypointDistanceMeters, playerDistanceMeters, true);
-            FighterAttackState attack = new FighterAttackState(this, player, bullet, bulletShootPos, distanceNeedToMaintain, accuracyForShot, fireRate);
+            FighterAttackState attack = new FighterAttackState(this, player, bullet, bulletShootPos);
 
             patrol.AddTransition(Transition.NoHealth, FSMStateID.Dead);
             patrol.AddTransition(Transition.SawPlayer, FSMStateID.Attacking); //Change this
@@ -113,5 +111,7 @@ namespace Complete
         public float Acceleration { get { return acceleration; } }
         public float Health {  get { return currentHealth; } }
         public GameObject Player { get { return player; } }
+        public float Accuracy { get { return accuracyForShot; } }
+        public float FireRate { get { return fireRate; } }
     }
 }

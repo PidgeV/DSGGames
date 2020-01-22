@@ -12,4 +12,13 @@ public class Damage : MonoBehaviour
     {
         damage = newDamage;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        HealthAndShields hpTemp;
+        if(collision.gameObject.TryGetComponent(out hpTemp))
+        {
+            hpTemp.TakeDamage(damage);
+        }
+    }
 }

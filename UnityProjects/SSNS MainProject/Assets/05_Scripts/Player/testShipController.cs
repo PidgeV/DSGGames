@@ -56,6 +56,7 @@ public class testShipController : MonoBehaviour
 
 	// number of people controlling this ship
 	int numberOfPlayers = 0;
+    public float speed;
 
     #region Ship Properties
 
@@ -168,13 +169,14 @@ public class testShipController : MonoBehaviour
 
 		float ship_MinSpeed = 50f;
 		float ship_MaxSpeed = 100f;
-		float ship_MaxBoostSpeed = 850f;
+		float ship_MaxBoostSpeed = 300f;
 		float ship_MaxStrafeSpeed = 150f;
 
-		float boost_multiplier = 1.4f;
+		float boost_multiplier = 2.4f;
 
 		float rotation_MaxSpeed = 2f;
 
+        speed = rigidbody.velocity.magnitude;
 
 		#region NumberRef
 		//float ship_Acceleration = 25f * Time.deltaTime;
@@ -250,11 +252,12 @@ public class testShipController : MonoBehaviour
 		// If were boosting
 		if (boosting)
 		{
-			// Increase our speed when boosting
-			thrustSpeed = Mathf.Clamp(thrustSpeed + (ship_Acceleration * boost_multiplier), ship_MinSpeed, ship_MaxBoostSpeed);
+            // Increase our speed when boosting
+            if (rigidbody.velocity.magnitude < ship_MaxBoostSpeed) thrustSpeed = Mathf.Clamp(thrustSpeed + (ship_Acceleration * boost_multiplier), ship_MinSpeed, ship_MaxBoostSpeed);
+            
 
-			// Reduce the boost gauge
-			boostGauge = Mathf.Clamp(boostGauge - myStats.boostGaugeConsumeAmount * Time.deltaTime, 0, myStats.maxBoostGauge);
+            // Reduce the boost gauge
+            boostGauge = Mathf.Clamp(boostGauge - myStats.boostGaugeConsumeAmount * Time.deltaTime, 0, myStats.maxBoostGauge);
 			slider_Boost.value = 1 / myStats.maxBoostGauge * boostGauge;
 
 			// Set the color of the boost slider
@@ -362,6 +365,10 @@ public class testShipController : MonoBehaviour
 		// Translation
         Vector3 currentPos = ship.transform.localPosition;
 		Vector3 targetPos = new Vector3(-velocity.y, velocity.x, 0) * myBehaviour.moveScale;
+
+        if (targetPos.y < 0) {
+            targetPos.y *= 0.4f;
+        }
 
 		ship.transform.localPosition = Vector3.Lerp(currentPos, targetPos, myBehaviour.moveSpeed);
 
@@ -537,7 +544,7 @@ public class testShipController : MonoBehaviour
 	{
 		// If our boost gauge is more than 5% full we allow the player to boost
 		// This is to avoid stuttering  on a 0% gauge
-		if (boostGauge > myStats.maxBoostGauge * 0.05f) {
+		if (boostGauge > myStats.maxBoostGauge * 0.1f) {
 			boosting = pressed;
 		}
 		else

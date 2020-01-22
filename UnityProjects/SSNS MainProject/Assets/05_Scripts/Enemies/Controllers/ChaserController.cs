@@ -34,6 +34,7 @@ namespace Complete
         [SerializeField] float raySize = 7.5f;
 
         GameObject player;
+        public bool hitPlayer = false;
 
         private void ConstructFSM()
         {
@@ -73,6 +74,14 @@ namespace Complete
         protected override void FSMFixedUpdate()
         {
             //Guess we needed this
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if(collision.gameObject.Equals(player) && CurrentStateID == FSMStateID.Attacking)
+            {
+                hitPlayer = true;
+            }
         }
 
         //Draw debug rays

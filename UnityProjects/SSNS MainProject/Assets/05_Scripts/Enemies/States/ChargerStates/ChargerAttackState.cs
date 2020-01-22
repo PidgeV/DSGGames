@@ -36,7 +36,7 @@ namespace Complete
 
         public override void Reason()
         {
-            if (player == null)
+            if (player == null || controller.hitPlayer)
             {
                 controller.PerformTransition(Transition.Patrol);
             }

@@ -33,7 +33,7 @@ MonoBehaviour:
   shieldDamageReduction: 0
   shieldRegenPercent: 0.1
   shieldRegenDelay: 3
-  maxBoostGauge: 25
+  maxBoostGauge: 10
   boostGaugeConsumeAmount: 1.8
   boostGaugeRechargeAmount: 0.8
   reserveShield: 0

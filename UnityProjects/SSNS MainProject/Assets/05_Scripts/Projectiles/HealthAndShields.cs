@@ -30,6 +30,8 @@ public class HealthAndShields : MonoBehaviour
     // The PERCENT of shield that is regenerated per second
     public float regenSpeed = 1f;
 
+    public bool invincible;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,42 +57,44 @@ public class HealthAndShields : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        // We get the DAMAGE component from a gameobject
-        Damage hit = collision.gameObject.GetComponent<Damage>();
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    // We get the DAMAGE component from a gameobject
+    //    Damage hit = collision.gameObject.GetComponent<Damage>();
 
-        // If it doesn't have one we move on
-        if (hit)
-        {
-            TakeDamage(hit.damage);
-        }
-    }
+    //    // If it doesn't have one we move on
+    //    if (hit)
+    //    {
+    //        TakeDamage(hit.damage);
+    //    }
+    //}
 
     // Damage the ship
-    void TakeDamage(float damage)
+    public void TakeDamage(float damage)
     {
-
-        // Damage the shield
-        shield -= damage;
-
-        // If we have negative shields we can take it away from your life pool
-        if (shield < 0)
+        if (!invincible)
         {
-            // Apply the armor reduction
-            life += -Mathf.Abs(shield / armor);
-            shield = 0;
-        }
+            // Damage the shield
+            shield -= damage;
 
-        // If we are dead cann OnDeath()
-        if (life <= 0)
-        {
-            life = 0;
-            OnDeath();
-        }
+            // If we have negative shields we can take it away from your life pool
+            if (shield < 0)
+            {
+                // Apply the armor reduction
+                life += -Mathf.Abs(shield / armor);
+                shield = 0;
+            }
 
-        // TEMP -- COLOR THE THINGS YOU HIT
-        if (gameObject.GetComponent<Renderer>()) gameObject.GetComponent<Renderer>().material.SetColor("_BaseColor", Color.blue);
+            // If we are dead cann OnDeath()
+            if (life <= 0)
+            {
+                life = 0;
+                OnDeath();
+            }
+
+            // TEMP -- COLOR THE THINGS YOU HIT
+            if (gameObject.GetComponent<Renderer>()) gameObject.GetComponent<Renderer>().material.SetColor("_BaseColor", Color.blue);
+        }
     }
 
     // When life is 0 this is called by TakeDamage()

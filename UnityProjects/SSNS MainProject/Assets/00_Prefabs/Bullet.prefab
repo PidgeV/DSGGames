@@ -109,7 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
   lifetime: 5
-  speed: 150
+  speed: 350
 --- !u!114 &3914930520208039227
 MonoBehaviour:
   m_ObjectHideFlags: 0

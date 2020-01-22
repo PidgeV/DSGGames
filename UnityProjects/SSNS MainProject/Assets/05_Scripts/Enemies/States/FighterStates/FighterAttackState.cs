@@ -9,17 +9,13 @@ namespace Complete
         private GameObject player;
         private FighterController controller;
         Vector3 interceptPoint;
-        float dotProduct;
-        float distanceToMaintain;
-        float accuracy;
 
         //Obstacle variables
         Vector3 obstacleAvoidDirection = Vector3.right;
         bool obstacleHit = false;
         float obstacleTimer = 0;
-        float avoidTime = 0.5f;
+        float avoidTime = 0.7f;
         float shotTimer = 0.0f;
-        float shotInterval = 0.2f;
         float intervalTime = 0.0f;
         float calculateInterval = 0.1f;
         float maxSpeed = 0;
@@ -27,18 +23,16 @@ namespace Complete
         GameObject bulletSpawnPos;
         Rigidbody rbPlayer;
 
-        public FighterAttackState(FighterController enemyController, GameObject playerObj, GameObject bullet, GameObject bulletShootPos, float distanceNeedToMaintain, float accuracyForShot, float fireRate)
+        public FighterAttackState(FighterController enemyController, GameObject playerObj, GameObject bullet, GameObject bulletShootPos)
         {
             controller = enemyController;
             player = playerObj;
-            distanceToMaintain = distanceNeedToMaintain;
-            accuracy = accuracyForShot;
             bulletPrefab = bullet;
             bulletSpawnPos = bulletShootPos;
-            shotInterval = fireRate;
-            rbPlayer = player.GetComponent<Rigidbody>();
 
             stateID = FSMStateID.Attacking;
+
+            rbPlayer = player.GetComponent<Rigidbody>();
         }
 
         public override void Act()
@@ -49,6 +43,11 @@ namespace Complete
 
         public override void Reason()
         {
+            if(Vector3.Distance(player.transform.position, controller.transform.position) < 250)
+            {
+                controller.PerformTransition(Transition.Patrol);
+            }
+
             if (player == null)
             {
                 controller.PerformTransition(Transition.Patrol);
@@ -56,15 +55,6 @@ namespace Complete
             else
             {
                 CalculateIntercept();
-                //CalcDotProduct();
-
-                //maxSpeed = Mathf.Max(maxSpeed, controller.rbSelf.velocity.magnitude);
-
-                //float distance = Vector3.Distance(controller.transform.position, player.transform.position);
-                //if (dotProduct < 0 && distance < 100)
-                //{
-                //    controller.PerformTransition(Transition.Patrol); //Go to patrolling
-                //}
             }
 
             //Else dead transition to dead
@@ -130,7 +120,7 @@ namespace Complete
 
                 float distanceFromSight = Vector3.Cross(controller.transform.forward, interceptPoint - controller.transform.position).magnitude;
 
-                if (distanceFromSight <= accuracy && shotTimer >= shotInterval)
+                if (distanceFromSight <= controller.Accuracy && shotTimer >= controller.FireRate)
                 {
                     Quaternion lookRot = Quaternion.LookRotation(controller.transform.forward);
                     GameObject bullet = Object.Instantiate(bulletPrefab, bulletSpawnPos.transform.position, lookRot);
@@ -149,7 +139,7 @@ namespace Complete
             if (Physics.SphereCast(controller.transform.position, controller.RaySize, controller.transform.forward.normalized, out hitInfo, controller.CollisionCheckDistance, controller.ObstacleLayer))/* || Physics.SphereCast(controller.transform.position, controller.RaySize, controller.rbSelf.velocity.normalized, out hitInfo, controller.CollisionCheckDistance, controller.ObstacleLayer))*/
             {
                 // Get the desired direction we need to move to move around  the obstacle. Transform to world co-ordinates (gets the obstacleMoveDirection wrt the current foward direction).
-                Vector3 turnDir = controller.transform.TransformDirection(hitInfo.normal + Vector3.right);
+                Vector3 turnDir = controller.transform.TransformDirection(hitInfo.normal);
                 turnDir.Normalize();
 
                 dir += turnDir;
@@ -177,6 +167,5 @@ namespace Complete
                 interceptPoint = InterceptCalculationClassNoMono.FirstOrderIntercept(controller.transform.position, velocity, bulletPrefab.GetComponent<Bullet>().speed, targetPosition, targetVelocity);
             }
         }
-
     }
 }

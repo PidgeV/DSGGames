@@ -22,7 +22,7 @@ namespace Complete
 
         //Timer for staying in patrol;
         private float timer1 = 0f;
-        private float timeAfterTransition = 1f;
+        private float timeAfterTransition = 10f;
         //Timer for how often to check for seeing the player
         private float timer2 = 0f;
         private float timeOftenCheck = 1.0f;
