@@ -123,7 +123,7 @@ public class DemoManager : MonoBehaviour
 	#endregion
 
 	// Start is called before the first frame update
-	void Awake()
+	void Start()
 	{
 		DemoMenu.gameObject.SetActive(true);
 
@@ -249,7 +249,7 @@ public class DemoManager : MonoBehaviour
 	/// </summary>
 	public void TeleportPlayer()
 	{
-		foreach (GameObject player in GameObject.FindGameObjectsWithTag("Ship")) {
+		foreach (GameObject player in GameObject.FindGameObjectsWithTag("Player")) {
 			player.transform.position = Vector3.zero;
 		}
 	}

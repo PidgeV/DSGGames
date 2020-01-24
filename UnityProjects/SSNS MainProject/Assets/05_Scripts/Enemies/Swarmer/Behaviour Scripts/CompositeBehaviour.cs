@@ -7,6 +7,7 @@ public class CompositeBehaviour : FlockBehaviour
 {
     public FlockBehaviour[] behaviours;
     public float[] weights;
+    public int t = 0;
 
     public override Vector3 CalculateMove(FlockAgent agent, List<Transform> context, Flock flock)
     {
@@ -19,7 +20,6 @@ public class CompositeBehaviour : FlockBehaviour
 
         //Setup move
         Vector3 move = Vector3.zero;
-
         //iterate through the behaviours
         for (int i = 0; i < behaviours.Length; i++)
         {

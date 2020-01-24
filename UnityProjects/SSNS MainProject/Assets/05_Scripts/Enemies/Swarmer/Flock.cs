@@ -14,7 +14,7 @@ public class Flock : MonoBehaviour
     public bool useAllAgents = false;
     public Vector3 target;
 
-    [Range(10, 500)]
+    [Range(1, 500)]
     public int startingCount = 250;
     const float agentDensity = 0.1f;
 
@@ -33,6 +33,9 @@ public class Flock : MonoBehaviour
     public float SquareAvoidanceRadius { get { return sqrAvoidanceRadius; } }
 
     GameObject player;
+
+    int incrementCount = 0;
+    int incrementAmount = 100;
 
     // Start is called before the first frame update
     void Start()
@@ -62,7 +65,9 @@ public class Flock : MonoBehaviour
     {
         //target = player.transform.position;
         List<Transform> context = new List<Transform>();
-        Vector3 move;
+        Vector3 move = Vector3.zero;
+
+        
 
         foreach (FlockAgent agent in agents)
         {
@@ -86,6 +91,7 @@ public class Flock : MonoBehaviour
 
             agent.Move(move);
         }
+        //Debug.Log("Movement: " + move);
     }
 
     /// <summary>

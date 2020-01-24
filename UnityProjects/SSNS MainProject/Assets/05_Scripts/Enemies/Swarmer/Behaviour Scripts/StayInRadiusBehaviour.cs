@@ -12,13 +12,14 @@ public class StayInRadiusBehaviour : FlockBehaviour
         Vector3 target = flock.target;
         Vector3 centerOffset = target - agent.transform.position;
         float t = centerOffset.magnitude / radius;
-
+        //If inside radius return a zero vector3 so that its not taken into account when moving
         if (t < 0.9f)
         {
-            //Debug.Log(t + ", " + centerOffset + ", " + center);
+            //Debug.Log("Inside radius.");
             return Vector3.zero;
         }
+        //Debug.Log("Not inside radius.");
 
-        return target * t * t;
+        return centerOffset * t * t;
     }
 }
