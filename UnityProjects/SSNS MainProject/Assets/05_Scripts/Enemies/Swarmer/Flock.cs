@@ -9,7 +9,7 @@ using Complete;
 /// </summary>
 public class Flock : MonoBehaviour
 {
-    
+
     public FlockAgent agentPrefab;
     List<FlockAgent> agents = new List<FlockAgent>();
     public FlockBehaviour behaviour;
@@ -28,10 +28,6 @@ public class Flock : MonoBehaviour
     #endregion
 
     #region Swarm Agent Variables
-    [Header("NOTE: Highly inefficient.")]
-    public bool useAllAgents = false;
-    
-
     [Range(1, 500)]
     public int startingCount = 250;
     const float agentDensity = 0.1f;
@@ -54,6 +50,8 @@ public class Flock : MonoBehaviour
 
     int incrementCount = 0;
     int incrementAmount = 100;
+
+    public int SwarmCount { get { return agents.Count; } }
 
     #endregion
 
@@ -82,7 +80,6 @@ public class Flock : MonoBehaviour
                 Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f)),
                 transform);
             newAgent.name = "Agent" + i;
-            newAgent.agentCount = i;
             newAgent.transform.parent = transform;
             agents.Add(newAgent);
         }
@@ -98,19 +95,12 @@ public class Flock : MonoBehaviour
         List<Transform> context = new List<Transform>();
         Vector3 move = Vector3.zero;
 
-        
+
 
         foreach (FlockAgent agent in agents)
         {
 
-            if (!useAllAgents)
-            {
-                GetNearbyNeighbours(agent, context);
-            }
-            else
-            {
-                GetOtherAgents(agent, context);
-            }
+            GetNearbyNeighbours(agent, context);
 
             move = behaviour.CalculateMove(agent, context, this);
 
@@ -146,17 +136,8 @@ public class Flock : MonoBehaviour
         }
     }
 
-    void GetOtherAgents(FlockAgent agent, List<Transform> context)
+    public void DestroySwarm()
     {
-        context.Clear();
-
-        //Use swarm instead of neighbours
-        foreach (FlockAgent a in agents)
-        {
-            if (a.agentCount != agent.agentCount)
-            {
-                context.Add(a.transform);
-            }
-        }
+        Destroy(gameObject);
     }
 }

@@ -8,7 +8,8 @@ namespace Complete
     {
         public GameObject[] waypoints;
 
-        [SerializeField] float speed;
+        [SerializeField] float patrolSpeed;
+        [SerializeField] float attackSpeed;
 
         [SerializeField] float attackStateRadius;
         [SerializeField] float patrolStateRadius;
@@ -19,7 +20,8 @@ namespace Complete
 
         public float WaypointDistance { get { return waypointDistanceMeters; } }
         public float PlayerDistance { get { return playerDistanceMeters; } }
-        public float Speed { get { return speed; } }
+        public float PatrolSpeed { get { return patrolSpeed; } }
+        public float AttackSpeed { get { return attackSpeed; } }
         public float AttackRadius { get { return attackStateRadius; } }
         public float PatrolRadius { get { return patrolStateRadius; } }
 
@@ -45,14 +47,18 @@ namespace Complete
 
         void ConstructFSM()
         {
+            Flock swarm = transform.parent.GetComponent<Flock>();
             //States
-            SwarmLeaderPatrolState patrol = new SwarmLeaderPatrolState(this, transform.parent.GetComponent<Flock>(), waypoints);
+            SwarmLeaderPatrolState patrol = new SwarmLeaderPatrolState(this, swarm, waypoints);
+            SwarmLeaderAttackState attack = new SwarmLeaderAttackState(this, swarm);
 
             //Transitions
-            //patrol.AddTransition(Transition.SawPlayer, FSMStateID.Attacking);
+            patrol.AddTransition(Transition.Attack, FSMStateID.Attacking);
+            patrol.AddTransition(Transition.Patrol, FSMStateID.Patrolling);
 
             //Add states
             AddFSMState(patrol);
+            AddFSMState(attack);
         }
     }
 }

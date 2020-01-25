@@ -13,14 +13,16 @@ namespace Complete
 
         private int patrolID = 0;
         private bool randomPoint;
-        public SwarmLeaderPatrolState(FlockLeaderController leader, Flock flockObj, GameObject[] wayPoints, bool randomize = true)
+        public SwarmLeaderPatrolState(FlockLeaderController leader, Flock swarmObj, GameObject[] wayPoints, bool randomize = true)
         {
             controller = leader;
-            swarm = flockObj;
             waypoints = wayPoints;
             randomPoint = randomize;
+            swarm = swarmObj;
+            swarm.swarmFollowRadius = controller.PatrolRadius;
 
             if (randomPoint) patrolID = Random.Range(0, waypoints.Length);
+
 
             stateID = FSMStateID.Patrolling;
         }
@@ -37,7 +39,7 @@ namespace Complete
                 //Check distance to player
                 if (Vector3.Distance(controller.transform.position, player.transform.position) <= controller.PlayerDistance) 
                 {
-                    //controller.PerformTransition(Transition.SawPlayer);
+                    controller.PerformTransition(Transition.Attack);
                 }
             }
             else
@@ -72,7 +74,7 @@ namespace Complete
             if (waypoints[patrolID] != null)
             {
                 //Move towards position. No need to worry about obstacles or 
-                controller.transform.position = Vector3.MoveTowards(controller.transform.position, waypoints[patrolID].transform.position, controller.Speed * Time.deltaTime);
+                controller.transform.position = Vector3.MoveTowards(controller.transform.position, waypoints[patrolID].transform.position, controller.PatrolSpeed * Time.deltaTime);
             }
             else
             {
