@@ -33,8 +33,8 @@ namespace Complete
             controller = enemyController;
             player = playerObj;
             waypoints = wayPoints;
-            distance = (waypointDistance * 12); // Multiply for meters to units. 12 units/meter
-            playerDist = (playerDistance * 12);
+            distance = waypointDistance;
+            playerDist = playerDistance;
             randomPoint = randomizePoint;
             stateID = FSMStateID.Patrolling;
 

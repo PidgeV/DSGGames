@@ -1,18 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Complete;
 
+/// <summary>
+/// The Main flock class used to spawn agents and leader.
+/// Be sure to set the waypoints after spawning.
+/// </summary>
 public class Flock : MonoBehaviour
 {
+    
     public FlockAgent agentPrefab;
     List<FlockAgent> agents = new List<FlockAgent>();
     public FlockBehaviour behaviour;
 
     [SerializeField] LayerMask agentLayer;
 
-    [Tooltip("NOTE: Highly inefficient.")]
+    #region Flock Leader Variables
+    [SerializeField] GameObject flockLeaderPrefab;
+    private GameObject flockLeader;
+    public float swarmFollowRadius = 75f;
+
+    [SerializeField] GameObject[] waypoints;
+    public GameObject[] WayPoints { set { waypoints = value; } } // used to set waypoints when spawning swarm. Game Manager should set when spawning the object
+
+    public Vector3 FlockLeaderPosition { get { return flockLeader.transform.position; } }
+    #endregion
+
+    #region Swarm Agent Variables
+    [Header("NOTE: Highly inefficient.")]
     public bool useAllAgents = false;
-    public Vector3 target;
+    
 
     [Range(1, 500)]
     public int startingCount = 250;
@@ -37,6 +55,8 @@ public class Flock : MonoBehaviour
     int incrementCount = 0;
     int incrementAmount = 100;
 
+    #endregion
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +64,16 @@ public class Flock : MonoBehaviour
         //sqrNeighbourRadius = Mathf.Pow(neighbourRadius, 2);
         sqrAvoidanceRadius = Mathf.Pow(avoidanceRadius, 2);
 
+        //Spawn Leader
+        flockLeader = Instantiate(
+                flockLeaderPrefab,
+                transform.position + Random.insideUnitSphere * startingCount * agentDensity,
+                Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f)),
+                transform);
+        flockLeader.GetComponent<FlockLeaderController>().waypoints = waypoints; //set waypoints of target leader
+        flockLeader.transform.parent = transform;
+
+        //Spawn all swarm agents
         for (int i = 0; i < startingCount; i++)
         {
             FlockAgent newAgent = Instantiate(
@@ -57,6 +87,7 @@ public class Flock : MonoBehaviour
             agents.Add(newAgent);
         }
 
+        //Look for player
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
