@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Assets\05_Scripts\Demo\DemoManager.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Controllers\ChaserController.cs" />
+    <Compile Include="Assets\05_Scripts\Enemies\Controllers\CruiserController.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Controllers\FighterController.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Obselete\ChaserEnemy.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Obselete\FighterEnemy.cs" />
@@ -72,6 +73,8 @@
     <Compile Include="Assets\05_Scripts\Enemies\StateMachine\FSMState.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\States\ChargerStates\ChargerAttackState.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\States\ChargerStates\ChaserPatrolState.cs" />
+    <Compile Include="Assets\05_Scripts\Enemies\States\CruiserStates\CruiserAttackState.cs" />
+    <Compile Include="Assets\05_Scripts\Enemies\States\CruiserStates\CruiserPatrolState.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\States\DeadState.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\States\FighterStates\FighterAttackState.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\States\FighterStates\FighterPatrolState.cs" />
