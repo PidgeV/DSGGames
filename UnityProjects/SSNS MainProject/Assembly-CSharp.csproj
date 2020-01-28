@@ -101,6 +101,7 @@
     <Compile Include="Assets\05_Scripts\Environment\TargetMove.cs" />
     <Compile Include="Assets\05_Scripts\Extras\Helper.cs" />
     <Compile Include="Assets\05_Scripts\Extras\RandomPosition.cs" />
+    <Compile Include="Assets\05_Scripts\Extras\Rotate.cs" />
     <Compile Include="Assets\05_Scripts\Extras\SNSSTypes.cs" />
     <Compile Include="Assets\05_Scripts\GameManager.cs" />
     <Compile Include="Assets\05_Scripts\Inputs\Controller.cs" />
@@ -126,7 +127,6 @@
     <Compile Include="Assets\05_Scripts\UI\OptionsMenu.cs" />
     <Compile Include="Assets\05_Scripts\UI\SetupMenu.cs" />
     <Compile Include="Assets\05_Scripts\UI\UIManager.cs" />
-    <Compile Include="Assets\09_Effects\VFX\Scripts\Rotate.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/DSGGames/UnityProjects/SSNS MainProject/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
