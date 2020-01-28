@@ -25,6 +25,12 @@ namespace Complete
 
         public override void Reason()
         {
+            if (swarm.defendMode)
+            {
+                //Enter defend state mode
+                controller.PerformTransition(Transition.Defend);
+            }
+
             if (player == null)
             {
                 player = GameObject.FindGameObjectWithTag("Player");

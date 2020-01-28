@@ -24,6 +24,9 @@ public class Flock : MonoBehaviour
     [SerializeField] GameObject[] waypoints;
     public GameObject[] WayPoints { set { waypoints = value; } } // used to set waypoints when spawning swarm. Game Manager should set when spawning the object
 
+    public GameObject defenseTarget; //If null the swarm will not defende anything and go to patrol state.
+    [HideInInspector] public bool defendMode = false;
+
     public Vector3 FlockLeaderPosition { get { return flockLeader.transform.position; } }
     #endregion
 
