@@ -70,6 +70,7 @@ public class testAreaSpawner : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireSphere(transform.position, AreaManager.Instance.AreaSize);
+        if (AreaManager.Instance)
+            Gizmos.DrawWireSphere(transform.position, AreaManager.Instance.AreaSize);
     }
 }
