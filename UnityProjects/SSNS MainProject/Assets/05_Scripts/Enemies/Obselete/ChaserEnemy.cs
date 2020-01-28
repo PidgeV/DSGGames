@@ -67,7 +67,7 @@ public class ChaserEnemy : InterceptCalculationClass
         ChooseTarget();
         Move();
 
-        GetComponent<Damage>().ChangeDamage(rbSelf.velocity.magnitude / damageDivision); //  changes damage to the speed it is travelling at during collision
+        GetComponent<Damage>().ChangeDamage((int)(rbSelf.velocity.magnitude / damageDivision), 0); //  changes damage to the speed it is travelling at during collision
     }
 
     //Calculates the intercept point

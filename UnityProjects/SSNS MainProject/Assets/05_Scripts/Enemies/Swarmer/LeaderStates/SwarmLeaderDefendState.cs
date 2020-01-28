@@ -18,6 +18,8 @@ namespace Complete
             controller = leaderController;
             swarm = flock;
 
+            swarm.swarmFollowRadius = controller.DefenseRadius; //Set swarm freedom radius to defense radius
+
             stateID = FSMStateID.Defend;
         }
 
@@ -28,9 +30,8 @@ namespace Complete
 
         public override void Reason()
         {
-            if(swarm.defenseTarget == null || !swarm.defendMode)
+            if(swarm.defenseTarget == null)
             {
-                swarm.defendMode = false;
                 controller.PerformTransition(Transition.Patrol);
             }
         }
@@ -42,6 +43,11 @@ namespace Complete
                 //Moves swarm towards the ship to defend
                 controller.transform.position = Vector3.MoveTowards(controller.transform.position, swarm.defenseTarget.transform.position, controller.PatrolSpeed * Time.deltaTime);
             }
+        }
+
+        public override void EnterStateInit()
+        {
+            swarm.swarmFollowRadius = controller.DefenseRadius; //Set swarm freedom radius to defense radius
         }
     }
 }

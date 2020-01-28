@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace SNSSTypes
 {
-	public enum PlayerRole
-	{
-		Gunner,
-		Pilot,
-		None
-	};
+    public enum PlayerRole
+    {
+        Gunner,
+        Pilot,
+        None
+    };
 
-    public enum ShotType { Regular, Energy, Laser, Charged, Missiles }
+    public enum WeaponType { Regular, Energy, Laser, Charged, Missiles }
 }

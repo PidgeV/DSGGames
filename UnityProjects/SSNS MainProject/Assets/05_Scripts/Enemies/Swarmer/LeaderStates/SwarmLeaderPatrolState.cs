@@ -8,7 +8,6 @@ namespace Complete
     {
         FlockLeaderController controller;
         Flock swarm;
-        GameObject player;
         GameObject[] waypoints;
 
         private int patrolID = 0;
@@ -34,23 +33,23 @@ namespace Complete
 
         public override void Reason()
         {
-            if(swarm.defendMode)
+            if(swarm.defenseTarget != null)
             {
                 //Enter defend state mode
                 controller.PerformTransition(Transition.Defend);
             }
 
-            if(player != null)
+            if(swarm.player != null)
             {
                 //Check distance to player
-                if (Vector3.Distance(controller.transform.position, player.transform.position) <= controller.PlayerDistance) 
+                if (Vector3.Distance(controller.transform.position, swarm.player.transform.position) <= controller.PlayerDistance) 
                 {
                     controller.PerformTransition(Transition.Attack);
                 }
             }
             else
             {
-                player = GameObject.FindGameObjectWithTag("Player");
+                swarm.player = GameObject.FindGameObjectWithTag("Player");
             }
 
             //Check waypoint distance

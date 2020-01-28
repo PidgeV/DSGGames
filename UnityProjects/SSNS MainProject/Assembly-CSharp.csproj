@@ -83,6 +83,7 @@
     <Compile Include="Assets\05_Scripts\Enemies\Stats\FighterStats.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Swarmer\Behaviour Scripts\AlignmentBehaviour.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Swarmer\Behaviour Scripts\AvoidanceBehaviour.cs" />
+    <Compile Include="Assets\05_Scripts\Enemies\Swarmer\Behaviour Scripts\AvoidObstacles.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Swarmer\Behaviour Scripts\CohesionBehaviour.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Swarmer\Behaviour Scripts\CompositeBehaviour.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Swarmer\Behaviour Scripts\StayInRadiusBehaviour.cs" />

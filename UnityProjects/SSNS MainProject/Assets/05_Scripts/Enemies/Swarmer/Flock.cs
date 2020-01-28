@@ -11,27 +11,28 @@ public class Flock : MonoBehaviour
 {
 
     public FlockAgent agentPrefab;
-    List<FlockAgent> agents = new List<FlockAgent>();
+    public List<FlockAgent> agents = new List<FlockAgent>();
     public FlockBehaviour behaviour;
 
     [SerializeField] LayerMask agentLayer;
+    [SerializeField] LayerMask obstacleLayers;
 
     #region Flock Leader Variables
     [SerializeField] GameObject flockLeaderPrefab;
     private GameObject flockLeader;
+    
     public float swarmFollowRadius = 75f;
 
     [SerializeField] GameObject[] waypoints;
     public GameObject[] WayPoints { set { waypoints = value; } } // used to set waypoints when spawning swarm. Game Manager should set when spawning the object
 
-    public GameObject defenseTarget; //If null the swarm will not defende anything and go to patrol state.
-    [HideInInspector] public bool defendMode = false;
+    public GameObject defenseTarget; //If made null the swarm will enter patrol state and the leadre will act normally, if not null it will enter defense state.
 
     public Vector3 FlockLeaderPosition { get { return flockLeader.transform.position; } }
     #endregion
 
     #region Swarm Agent Variables
-    [Range(1, 500)]
+    [Range(1, 300)]
     public int startingCount = 250;
     const float agentDensity = 0.1f;
 
@@ -43,13 +44,15 @@ public class Flock : MonoBehaviour
     public float neighbourRadius = 40f;
     [Range(1f, 50f)]
     public float avoidanceRadius = 20f;
+    [Range(1, 200)]
+    public float obstacleDistance = 50f;
 
     float sqrMaxSpeed;
     float sqrNeighbourRadius;
     float sqrAvoidanceRadius;
     public float SquareAvoidanceRadius { get { return sqrAvoidanceRadius; } }
 
-    GameObject player;
+    [HideInInspector] public GameObject player; //Remove at some point and look for the player status inside Game Manager. Or use a function from the Game Manager
 
     int incrementCount = 0;
     int incrementAmount = 100;
@@ -83,12 +86,13 @@ public class Flock : MonoBehaviour
                 Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f)),
                 transform);
             newAgent.name = "Agent" + i;
-            newAgent.transform.parent = transform;
+            newAgent.Initialize(this);
             agents.Add(newAgent);
         }
 
         //Look for player
         player = GameObject.FindGameObjectWithTag("Player");
+        StartCoroutine(DestroySwarm());
     }
 
     // Update is called once per frame
@@ -96,51 +100,72 @@ public class Flock : MonoBehaviour
     {
         //target = player.transform.position;
         List<Transform> context = new List<Transform>();
+        List<Transform> obstacles = new List<Transform>();
         Vector3 move = Vector3.zero;
 
-
-
+        //Loop through each agent and run the behaviours
         foreach (FlockAgent agent in agents)
         {
 
-            GetNearbyNeighbours(agent, context);
+            context = GetNearbyNeighbours(agent, context); //Use the physics engine to get nearby agents
+            obstacles = GetNearbyObstacles(agent, obstacles);
 
-            move = behaviour.CalculateMove(agent, context, this);
+            move = behaviour.CalculateMove(agent, context, this, obstacles); //Move the agent with the behaviour object
 
-            move *= driveFactor;
+            move *= driveFactor; //Multiply the movement by the drive factor
             if (move.sqrMagnitude > sqrMaxSpeed)
             {
-                move = move.normalized * maxSpeed;
+                move = move.normalized * maxSpeed; //lower speed to max speed
             }
 
-            agent.Move(move);
+            agent.Move(move); //Move agent
         }
         //Debug.Log("Movement: " + move);
     }
 
     /// <summary>
     /// Gets a list of transforms for objects in the neighbourRadius on the specified layer. This will return the list of transforms inside the radius.
+    /// It will also filter agents based on what swarm they are supposed to follow
     /// </summary>
     /// <param name="agent"></param>
     /// <returns></returns>
-    void GetNearbyNeighbours(FlockAgent agent, List<Transform> context)
+    List<Transform> GetNearbyNeighbours(FlockAgent agent, List<Transform> context)
     {
-        //List<Transform> context = new List<Transform>();
         context.Clear();
 
         Collider[] contextColliders = Physics.OverlapSphere(agent.transform.position, neighbourRadius, agentLayer);
 
         foreach (Collider c in contextColliders)
         {
-            if (c != agent.AgentCollider)
+            FlockAgent item = c.GetComponent<FlockAgent>();
+            if (c != agent.AgentCollider && item != null && item.swarm == agent.swarm)
             {
                 context.Add(c.transform);
             }
         }
+
+        return context;
     }
 
-    public void DestroySwarm()
+    List<Transform> GetNearbyObstacles(FlockAgent agent, List<Transform> obstacles)
     {
+        obstacles.Clear();
+
+        Collider[] obstacleColliders = Physics.OverlapSphere(agent.transform.position, obstacleDistance, obstacleLayers);
+
+        foreach(Collider c in obstacleColliders)
+        {
+            obstacles.Add(c.transform);
+        }
+
+        return obstacles;
+    }
+
+    IEnumerator DestroySwarm()
+    {
+        while (agents.Count > 0) yield return new WaitForSeconds(0.5f);
+
         Destroy(gameObject);
     }
+
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShotInfo : MonoBehaviour
 {
-    public SNSSTypes.ShotType type;
+    public SNSSTypes.WeaponType weapon;
     [SerializeField] private float spawnTime;
     [SerializeField] private float lifeTime;
     private float lifeTimer = 0;

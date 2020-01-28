@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4611535051391601174}
   - component: {fileID: 7837389085969643247}
   - component: {fileID: 7561501912465322482}
+  - component: {fileID: 7763341427077600367}
   m_Layer: 8
   m_Name: SNSS_Lmain_Asteroid003
   m_TagString: Untagged
@@ -93,3 +94,17 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 2549131064281601682, guid: 4ca2e5c48044f3b4f8ca9f5e6ea77bf5, type: 3}
+--- !u!114 &7763341427077600367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8430503025590420019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48901a74a34a93249835e8beb8ed2146, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kineticDamage: 5
+  energyDamage: 5
