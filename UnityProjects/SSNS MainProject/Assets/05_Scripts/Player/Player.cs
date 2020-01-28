@@ -47,113 +47,179 @@ public class Player : Controller
 
 	// Used to move the player
 	public override void OnLeftStick(InputValue input)
-	{
-		if (myRole == PlayerRole.Pilot) {
-			// Rotate the player ship
-			controller.SteerShip(input.Get<Vector2>());
-		}
+    {
+        if (GameManager.Instance.GameState == GameState.BATTLE)
+        {
+            if (myRole == PlayerRole.Pilot) {
+			    // Rotate the player ship
+			    controller.SteerShip(input.Get<Vector2>());
+		    }
 
-		if (myRole == PlayerRole.Gunner) {
-			// Move the player camera
-			controller.AimGun(input.Get<Vector2>());
-		}
-	}	
+		    if (myRole == PlayerRole.Gunner) {
+			    // Move the player camera
+			    controller.AimGun(input.Get<Vector2>());
+            }
+        }
+        else if (GameManager.Instance.GameState == GameState.NODE_SELECTION)
+        {
+            float value = 0;
+            if (myRole == PlayerRole.Pilot)
+            {
+                value = input.Get<Vector2>().x;
+            }
+            else if (myRole == PlayerRole.Gunner)
+            {
+                value = -input.Get<Vector2>().y;
+            }
+
+            if (value >= 0.05f)
+            {
+                NodeManager.Instance.SelectRightNode(myRole);
+            }
+            else if (value <= -0.05f)
+            {
+                NodeManager.Instance.SelectLeftNode(myRole);
+            }
+        }
+    }	
 
 	// Used to move the player
 	public override void OnRightStick(InputValue input)
-	{
-		if (myRole == PlayerRole.Pilot) {
-			// Rotate the player ship
-			controller.StrafeShip(input.Get<Vector2>());
-		}
+    {
+        if (GameManager.Instance.GameState == GameState.BATTLE)
+        {
+            if (myRole == PlayerRole.Pilot)
+            {
+                // Rotate the player ship
+                controller.StrafeShip(input.Get<Vector2>());
+            }
 
-		if (myRole == PlayerRole.Gunner) {
-			// Move the player camera
-			controller.AimGun(input.Get<Vector2>());
-		}
+            if (myRole == PlayerRole.Gunner)
+            {
+                // Move the player camera
+                controller.AimGun(input.Get<Vector2>());
+            }
+        }
 	}
 
 	// Called when this player uses the DPad
 	public override void OnDPad(InputValue input)
-	{
-		// NOTE -- The DPad does nothing for the pilot
+    {
+        if (GameManager.Instance.GameState == GameState.BATTLE)
+        {
+            // NOTE -- The DPad does nothing for the pilot
 
-		if (myRole == PlayerRole.Gunner) {
-			// Change the current weapon
-			controller.SwapWeapon(input.Get<Vector2>());
-		}
-	}
+            if (myRole == PlayerRole.Gunner) {
+			    // Change the current weapon
+			    controller.SwapWeapon(input.Get<Vector2>());
+            }
+        }
+    }
 
 	// Called when this player presses the A button
 	public override void OnA(InputValue input)
-	{
-		if (myRole == PlayerRole.Pilot) {
-			// Boost the ship
-			controller.Boost(input.isPressed);
-		}
+    {
+        if (GameManager.Instance.GameState == GameState.BATTLE)
+        {
+            if (myRole == PlayerRole.Pilot)
+            {
+                // Boost the ship
+                controller.Boost(input.isPressed);
+            }
 
-		if (myRole == PlayerRole.Gunner) {
-			// Make the gunner shoot
-			controller.Shoot(input.isPressed);
-		}
-	}
+            if (myRole == PlayerRole.Gunner)
+            {
+                // Make the gunner shoot
+                controller.Shoot(input.isPressed);
+            }
+        }
+        else if (GameManager.Instance.GameState == GameState.NODE_SELECTION)
+        {
+            NodeManager.Instance.PlayerConfirm(myRole, true);
+        }
+    }
 
 	// Called when this player presses the B button
 	public override void OnB(InputValue input)
-	{
-		// TODO -- We gota go over what the B button does..
+    {
+        if (GameManager.Instance.GameState == GameState.BATTLE)
+        {
+            // TODO -- We gota go over what the B button does..
 
-		if (myRole == PlayerRole.Pilot) {
-			// Boost the ship
-			controller.Boost(input.isPressed);
-		}
+            if (myRole == PlayerRole.Pilot)
+            {
+                // Boost the ship
+                controller.Boost(input.isPressed);
+            }
 
-		if (myRole == PlayerRole.Gunner) {
-			// Make the gunner shoot
-			controller.Shoot(input.isPressed);
-		}
-	}
+            if (myRole == PlayerRole.Gunner)
+            {
+                // Make the gunner shoot
+                controller.Shoot(input.isPressed);
+            }
+        }
+        else if (GameManager.Instance.GameState == GameState.NODE_SELECTION)
+        {
+            NodeManager.Instance.PlayerConfirm(myRole, false);
+        }
+    }
 
 	// Called when this player presses the X button
 	// Used to toggle the map on or off
 	public override void OnX(InputValue input)
-	{
-		controller.ToggleMap(input.isPressed);
+    {
+        if (GameManager.Instance.GameState == GameState.BATTLE)
+        {
+            controller.ToggleMap(input.isPressed);
+        }
 	}
 
 	// Called when this player presses the Y button
 	// Used to ask for a role swap
 	public override void OnY(InputValue input)
-	{
-		controller.TriggerRoleSwap(input.isPressed);
+    {
+        if (GameManager.Instance.GameState == GameState.BATTLE)
+        {
+            controller.TriggerRoleSwap(input.isPressed);
+        }
 	}
 
 	// Called when this player presses the Left Trigger
 	public override void OnLeftTrigger(InputValue input)
-	{
-		if (myRole == PlayerRole.Pilot) {
-			// Boost the ship
-			controller.RotateShip(input.Get<float>());
-		}
+    {
+        if (GameManager.Instance.GameState == GameState.BATTLE)
+        {
+            if (myRole == PlayerRole.Pilot)
+            {
+                // Boost the ship
+                controller.RotateShip(input.Get<float>());
+            }
 
-		if (myRole == PlayerRole.Gunner) {
-			// Make the gunner shoot
-			controller.Shoot(input.isPressed);
-		}
+            if (myRole == PlayerRole.Gunner)
+            {
+                // Make the gunner shoot
+                controller.Shoot(input.isPressed);
+            }
+        }
 	}
 
 	// Called when this player presses the Right Trigger
 	public override void OnRightTrigger(InputValue input)
-	{
-		if (myRole == PlayerRole.Pilot) {
-			// Boost the ship
-			controller.RotateShip(-input.Get<float>());
-		}
+    {
+        if (GameManager.Instance.GameState == GameState.BATTLE)
+        {
+            if (myRole == PlayerRole.Pilot)
+            {
+                // Boost the ship
+                controller.RotateShip(-input.Get<float>());
+            }
 
-		if (myRole == PlayerRole.Gunner) {
-			// Make the gunner shoot
-			controller.Shoot(input.isPressed);
-		}
+            if (myRole == PlayerRole.Gunner)
+            {
+                // Make the gunner shoot
+                controller.Shoot(input.isPressed);
+            }
+        }
 	}
 
 	//// Called when this player presses the Left Bumper 

@@ -100,6 +100,8 @@ public class HealthAndShields : MonoBehaviour
     // When life is 0 this is called by TakeDamage()
     void OnDeath()
     {
+        AreaManager.Instance.OnEnemyDeath(gameObject);
+
         Destroy(gameObject);
     }
 

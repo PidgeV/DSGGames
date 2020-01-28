@@ -118,6 +118,8 @@ public class testShipController : MonoBehaviour
 
     #endregion
 
+    private bool stopThrust;
+
     // Initialization
     private void Awake()
     {
@@ -316,6 +318,10 @@ public class testShipController : MonoBehaviour
         {
             // Clamp our thrust Speed to our max thrust speed
             thrustSpeed = Mathf.Clamp(thrustSpeed - ship_Deceleration, ship_MaxSpeed, ship_MaxBoostSpeed);
+        }
+        else if (stopThrust)
+        {
+            thrustSpeed = Mathf.Clamp(thrustSpeed - ship_Deceleration, 0, ship_MaxSpeed);
         }
         // Else were not boosting so we increase our ships normal speed
         else
@@ -653,4 +659,6 @@ public class testShipController : MonoBehaviour
             boosting = false;
         }
     }
+
+    public bool StopThrust { set { stopThrust = value; } }
 }

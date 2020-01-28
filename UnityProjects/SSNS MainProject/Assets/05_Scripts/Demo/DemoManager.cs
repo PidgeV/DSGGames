@@ -60,6 +60,7 @@ public class DemoManager : MonoBehaviour
 	// Spawn inputs
 	public KeyCode spawn_Charger = KeyCode.M;
 	public KeyCode spawn_Fighter = KeyCode.N;
+    public KeyCode kill_enemies = KeyCode.L;
 
 	#endregion
 
@@ -184,10 +185,15 @@ public class DemoManager : MonoBehaviour
 
 		if (Input.GetKeyDown(demo_ToggleWindow) && DemoMenu) {
 			DemoMenu.ToggleMenu(!DemoMenu.visible);
-		}
+        }
 
-		// Read and Act on inputs for the camera
-		ChangeCamera();
+        if (Input.GetKeyDown(kill_enemies))
+        {
+            AreaManager.Instance.KillEnemies();
+        }
+
+        // Read and Act on inputs for the camera
+        ChangeCamera();
 
 		// Spawn enemies into the scene for testing
 		SpawnEnemy();

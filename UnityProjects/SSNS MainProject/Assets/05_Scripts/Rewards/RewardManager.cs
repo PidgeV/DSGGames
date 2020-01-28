@@ -10,6 +10,8 @@ public class RewardManager : MonoBehaviour
 	/// <summary> The Reward manager singleton </summary>
 	public static RewardManager Instance;
 
+    public RewardUI rewardUI;
+
 	// Start is called before the first frame update
 	void Awake()
 	{
