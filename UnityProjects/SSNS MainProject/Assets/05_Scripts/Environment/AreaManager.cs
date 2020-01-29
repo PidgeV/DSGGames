@@ -116,7 +116,7 @@ public class AreaManager : MonoBehaviour
         foreach(GameObject enemy in currentArea.enemies.ToArray())
         {
             HealthAndShields health = enemy.GetComponent<HealthAndShields>();
-            health.TakeDamage(100000000);
+            health.TakeDamage(100000000, 100000000);
         }
     }
 

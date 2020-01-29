@@ -86,12 +86,9 @@ public class HealthAndShields : MonoBehaviour
     // When life is 0 this is called by TakeDamage()
     IEnumerator OnDeath()
     {
-<<<<<<< HEAD
-        AreaManager.Instance.OnEnemyDeath(gameObject);
+        if(AreaManager.Instance != null) AreaManager.Instance.OnEnemyDeath(gameObject);
 
-=======
         yield return new WaitForSeconds(0.1f);
->>>>>>> Blakes-Branch
         Destroy(gameObject);
     }
 

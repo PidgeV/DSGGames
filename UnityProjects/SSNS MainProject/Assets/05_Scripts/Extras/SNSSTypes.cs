@@ -11,9 +11,6 @@ namespace SNSSTypes
         None
     };
 
-<<<<<<< HEAD
-    public enum ShotType { Regular, Energy, Laser, Charged, Missiles }
-
     public enum NodeType
     {
         Tutorial,
@@ -38,7 +35,5 @@ namespace SNSSTypes
         MiniBoss,
         Boss
     }
-=======
     public enum WeaponType { Regular, Energy, Laser, Charged, Missiles }
->>>>>>> Blakes-Branch
 }

@@ -103,7 +103,7 @@ public class AsteroidSpawner : MonoBehaviour
         //newAsteroid.GetComponent<Rigidbody>().mass *= scale * scale;// * scale;
         //newAsteroid.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
 
-        AreaManager.Instance.OnObjectAdd(newAsteroid);
+        if(AreaManager.Instance != null) AreaManager.Instance.OnObjectAdd(newAsteroid);
 
         return newAsteroid;
     }

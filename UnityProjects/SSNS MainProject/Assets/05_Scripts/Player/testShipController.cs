@@ -23,8 +23,8 @@ using UnityEngine.UI;
 public class testShipController : MonoBehaviour
 {
     #region Shooting things
-    [SerializeField] ShotType startingShot;
-    [HideInInspector] public ShotType currentShot;
+    [SerializeField] WeaponType startingWeapon;
+    [HideInInspector] public WeaponType currentWeapon;
     private ShotInfo currentShotInfo;
     [SerializeField] ShotInfo[] shots;
     [SerializeField] Transform shotSpawnLocation;
@@ -142,10 +142,10 @@ public class testShipController : MonoBehaviour
         TryGetComponent<HealthAndShields>(out shipHP);
 
 		//
-        currentShot = startingShot;
+        currentWeapon = startingWeapon;
 
         foreach (ShotInfo s in shots) {
-            if (s.type == currentShot)
+            if (s.weapon == currentWeapon)
 			{
                 currentShotInfo = s;
             }
@@ -163,10 +163,10 @@ public class testShipController : MonoBehaviour
         #region Shooting Logic
 
         shotTimer += Time.deltaTime;
-        if (currentShot != currentShotInfo.type)
+        if (currentWeapon != currentShotInfo.weapon)
         {
             foreach (ShotInfo s in shots) {
-                if (s.type == currentShot)
+                if (s.weapon == currentWeapon)
                 {
                     currentShotInfo = s;
                 }
@@ -429,22 +429,22 @@ public class testShipController : MonoBehaviour
         {
             shotTimer = 0;
 
-            switch (currentShot)
+            switch (currentWeapon)
             {
-                case ShotType.Regular:
+                case WeaponType.Regular:
                     Quaternion rot = Quaternion.LookRotation(shotSpawnLocation.transform.forward);
                     GameObject shot = Instantiate(currentShotInfo.gameObject, shotSpawnLocation);
                     shot.transform.rotation = rot;
                     Debug.Log("Shot Rotation: " + shot.transform.eulerAngles);
                     break;
-                case ShotType.Energy:
+                case WeaponType.Energy:
                     break;
-                case ShotType.Laser:
+                case WeaponType.Laser:
                     //Raycast instead of instantiate for instant movement
                     break;
-                case ShotType.Charged:
+                case WeaponType.Charged:
                     break;
-                case ShotType.Missiles:
+                case WeaponType.Missiles:
                     break;
             }
         }

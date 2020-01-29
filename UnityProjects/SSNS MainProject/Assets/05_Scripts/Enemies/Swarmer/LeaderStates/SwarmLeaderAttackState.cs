@@ -38,6 +38,7 @@ namespace Complete
                 {
                     //If no player can be found then go to patrol state
                     controller.PerformTransition(Transition.Patrol);
+                    return;
                 }
             }
 
