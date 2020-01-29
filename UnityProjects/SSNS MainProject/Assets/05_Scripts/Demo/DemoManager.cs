@@ -68,12 +68,6 @@ public class DemoManager : MonoBehaviour
 	#region Change Skybox
 
 	[Header("Skybox")]
-	[SerializeField] Cubemap[] skyboxes; // List of skyboxes in game
-
-	HDRISky skybox;
-	Volume profile;
-
-	int skyboxIndex = 1;
 
 	// Skybox inputs
 	public KeyCode skyBox_Change = KeyCode.U;
@@ -145,15 +139,6 @@ public class DemoManager : MonoBehaviour
 			enabledCam = cameras[0];
 			enabledCam.enabled = true;
 		}
-
-		// Try to get a reference to the Skybox
-		if (profile = GameObject.FindObjectOfType<Volume>()) {
-			profile.profile.TryGet(out skybox);
-		}
-		else
-		{
-			Debug.LogError("We could not find the Volume profile in your scene");
-		}
 	}
 
 	// Update is called once per frame
@@ -161,9 +146,9 @@ public class DemoManager : MonoBehaviour
 	{
         if (Time.timeScale != timeScale) Time.timeScale = timeScale;
 
-        if (Input.GetKeyDown(skyBox_Change) && skybox) {
-			// Change the skybox to the next in the list
-			ToggleSkybox();
+        if (Input.GetKeyDown(skyBox_Change)) {
+            // Change the skybox to the next in the list
+            ToggleSkybox();
 		}
 
 		if (Input.GetKeyDown(player_Godmode) && playerObj) {
@@ -247,7 +232,7 @@ public class DemoManager : MonoBehaviour
 	/// </summary>
 	public void ToggleSkybox()
 	{
-		skybox.hdriSky.Override(skyboxes[(skyboxIndex++ % skyboxes.Length)]);
+        SkyboxManager.Instance.LoopSkybox();
 	}
 
 	/// <summary>

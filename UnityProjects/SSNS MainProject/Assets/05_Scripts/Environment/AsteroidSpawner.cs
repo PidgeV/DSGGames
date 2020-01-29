@@ -17,7 +17,7 @@ public class AsteroidSpawner : MonoBehaviour
     public float minPos = -100;
     public float maxPos = 100;
     public float maxForce = 5;
-    private GameObject[] asteroids;     //All the asteroids
+    public GameObject[] asteroids;     //All the asteroids
     private Mesh totalPlayer;   //Used to test intersection with the players starting position
 
     // Start is called before the first frame update
@@ -47,8 +47,6 @@ public class AsteroidSpawner : MonoBehaviour
             Vector3 pos = new Vector3();
             foundPos = false;
             asteroids[i] = SpawnSingleAsteroid();
-
-            asteroids[i].transform.parent = transform;
 
             //re-create new positons for the asteroid while we haven't found a valid one
             while (!foundPos)

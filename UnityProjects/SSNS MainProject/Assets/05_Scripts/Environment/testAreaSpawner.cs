@@ -9,6 +9,7 @@ public class testAreaSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject fighterPrefab;
     [SerializeField] private GameObject chaserPrefab;
+    [SerializeField] private GameObject swarmerPrefab;
 
     private AsteroidSpawner asteroidSpawner;
 
@@ -50,6 +51,20 @@ public class testAreaSpawner : MonoBehaviour
 
             Complete.ChaserController controller = enemy.GetComponent<Complete.ChaserController>();
             controller.waypoints = new GameObject[] { gameObject };
+
+            AreaManager.Instance.OnObjectAdd(enemy, true);
+
+            yield return null;
+        }
+
+        for (int j = 0; j < random.Next(2, 2); j++)
+        {
+            GameObject enemy = Instantiate<GameObject>(swarmerPrefab);
+            enemy.transform.position = transform.position + Vector3.one * random.Next(100, AreaManager.Instance.AreaSize / 2);
+            enemy.transform.parent = transform;
+
+            Flock controller = enemy.GetComponent<Flock>();
+            controller.WayPoints = asteroidSpawner.asteroids;
 
             AreaManager.Instance.OnObjectAdd(enemy, true);
 

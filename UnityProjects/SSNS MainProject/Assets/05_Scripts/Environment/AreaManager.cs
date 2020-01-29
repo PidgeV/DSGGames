@@ -100,10 +100,12 @@ public class AreaManager : MonoBehaviour
     {
         if (enemy)
         {
+            gObject.transform.parent = currentArea.enemiesParent;
             currentArea.enemies.Add(gObject);
         }
         else
         {
+            gObject.transform.parent = currentArea.obstacleParent;
             currentArea.objects.Add(gObject);
         }
     }
@@ -179,6 +181,8 @@ public class AreaManager : MonoBehaviour
     class Area
     {
         public Transform parent;
+        public Transform obstacleParent;
+        public Transform enemiesParent;
         public Vector3 location;
         public List<GameObject> objects;
         public List<GameObject> enemies;
@@ -186,6 +190,10 @@ public class AreaManager : MonoBehaviour
         public Area(string name)
         {
             parent = new GameObject("Area: " + name).transform;
+            obstacleParent = new GameObject("Obstacles").transform;
+            obstacleParent.parent = parent;
+            enemiesParent = new GameObject("Enemies").transform;
+            enemiesParent.parent = parent;
             objects = new List<GameObject>();
             enemies = new List<GameObject>();
         }

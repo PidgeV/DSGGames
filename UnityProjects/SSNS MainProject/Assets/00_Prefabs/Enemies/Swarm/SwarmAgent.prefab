@@ -5015,7 +5015,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swarm: {fileID: 0}
-  explosionVFXPrefab: {fileID: 0}
+  explosionVFXPrefab: {fileID: 4814854336648323653, guid: 428a07eb300045945a363fa54421b206,
+    type: 3}
 --- !u!135 &3499003128886577437
 SphereCollider:
   m_ObjectHideFlags: 0
