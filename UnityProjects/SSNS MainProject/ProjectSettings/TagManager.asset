@@ -9,6 +9,7 @@ TagManager:
   - Menu
   - FirstMenuElement
   - Ship
+  - Controller
   layers:
   - Default
   - TransparentFX
