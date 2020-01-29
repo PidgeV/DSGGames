@@ -7,6 +7,8 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
     [ExecuteAlways]
     public class StaticLightingSky : MonoBehaviour
     {
+        public bool dynamicLighting = false;
+
         [SerializeField]
         VolumeProfile m_Profile;
         [SerializeField, FormerlySerializedAs("m_BakingSkyUniqueID")]
@@ -128,6 +130,8 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
                 }
 
                 m_LastComputedHash = m_SkySettingsFromProfile.GetHashCode();
+                SkyManager.RegisterStaticLightingSky(this);
+                if(dynamicLighting) Reset();
             }
         }
 
