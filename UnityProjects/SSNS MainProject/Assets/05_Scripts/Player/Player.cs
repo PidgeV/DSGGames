@@ -31,7 +31,7 @@ public class Player : Controller
 	//
 	private void Update()
 	{
-		if (currentState != GameManager.Instance.GameState)
+		if (GameManager.Instance && currentState != GameManager.Instance.GameState)
 		{
 			currentState = GameManager.Instance.GameState;
 			SetPlayerActions(currentState);

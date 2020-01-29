@@ -433,9 +433,9 @@ public class testShipController : MonoBehaviour
             {
                 case WeaponType.Regular:
                     Quaternion rot = Quaternion.LookRotation(shotSpawnLocation.transform.forward);
-                    GameObject shot = Instantiate(currentShotInfo.gameObject, shotSpawnLocation);
+                    GameObject shot = Instantiate(currentShotInfo.gameObject, shotSpawnLocation.position, Quaternion.identity);
                     shot.transform.rotation = rot;
-                    Debug.Log("Shot Rotation: " + shot.transform.eulerAngles);
+					Debug.Log("Shot Rotation: " + shot.transform.eulerAngles);
                     break;
                 case WeaponType.Energy:
                     break;

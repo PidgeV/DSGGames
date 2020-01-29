@@ -13,7 +13,7 @@ public class NodeManager : MonoBehaviour
     #region Constant Values
 
     private const float MAX_SELECT_TIME = 30f;
-    private const float CONFIRM_TIME = 10f;
+    private const float CONFIRM_TIME = 5f;
     private const float SELECT_DELAY = 0.5f;
 
     #endregion
