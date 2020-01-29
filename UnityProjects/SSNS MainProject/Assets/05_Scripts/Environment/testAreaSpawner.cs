@@ -19,8 +19,9 @@ public class testAreaSpawner : MonoBehaviour
 
         if (asteroidSpawner)
         {
-            asteroidSpawner.minPos = -AreaManager.Instance.AreaSize;
-            asteroidSpawner.maxPos = AreaManager.Instance.AreaSize;
+            asteroidSpawner.minPos = -AreaManager.Instance.AreaSize * 1.2f;
+            asteroidSpawner.maxPos = AreaManager.Instance.AreaSize * 1.2f;
+            asteroidSpawner.maxAsteroids = AreaManager.Instance.AreaSize / 3;
         }
     }
 
@@ -64,7 +65,11 @@ public class testAreaSpawner : MonoBehaviour
             enemy.transform.parent = transform;
 
             Flock controller = enemy.GetComponent<Flock>();
-            controller.WayPoints = asteroidSpawner.asteroids;
+
+            if (asteroidSpawner != null)
+                controller.WayPoints = asteroidSpawner.asteroids;
+            else
+                controller.WayPoints = new GameObject[] { gameObject };
 
             AreaManager.Instance.OnObjectAdd(enemy, true);
 

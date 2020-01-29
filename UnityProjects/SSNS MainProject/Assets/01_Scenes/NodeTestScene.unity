@@ -5194,8 +5194,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skyboxes:
-  - {fileID: 8900000, guid: 7fb6ef3104dd8934a9c914a6f4cec9eb, type: 3}
+  - {fileID: 8900000, guid: b5eefe626616dbf4d9e95903457640c2, type: 3}
+  - {fileID: 8900000, guid: c4dccfead118b204a979ca14549a7d65, type: 3}
   - {fileID: 8900000, guid: 19c9ee1a792233241b5a0dc077587353, type: 3}
+  - {fileID: 8900000, guid: 300bd079323cbea439860bc61916d9dc, type: 3}
+  - {fileID: 8900000, guid: 67b50d59e1367cb4abb4cbfe8aae7904, type: 3}
 --- !u!1 &1358243537
 GameObject:
   m_ObjectHideFlags: 0
@@ -5251,7 +5254,7 @@ MonoBehaviour:
       s_nodeReward: {fileID: 104563134}
   portalPrefab: {fileID: 1868919731537730778, guid: 1e56637677db1a14a88e4c7b994093a8,
     type: 3}
-  startNode: {fileID: 1868809350}
+  startNode: {fileID: 674794684}
   timedChoice: 0
   maxPortalDistance: 350
   confirmedP1: 0
@@ -5649,7 +5652,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db3ed55f045d18545a556a09e2edf72c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  areaSize: 3000
+  areaSize: 5000
   lastArea:
     parent: {fileID: 0}
     obstacleParent: {fileID: 0}
@@ -6590,7 +6593,7 @@ MonoBehaviour:
   speed: 0
   invertedControls: 0
   limitRotation: 0
-  unlimitedBoost: 1
+  unlimitedBoost: 0
 --- !u!65 &1794198770
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6621,8 +6624,8 @@ MonoBehaviour:
   life: 0
   shield: 0
   regenSpeed: 7
-  regenDelay: 1
-  invincible: 1
+  regenDelay: 2
+  invincible: 0
   regen: 1
 --- !u!1 &1824598181
 GameObject:

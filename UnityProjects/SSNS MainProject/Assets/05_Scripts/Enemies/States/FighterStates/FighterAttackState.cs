@@ -43,18 +43,22 @@ namespace Complete
 
         public override void Reason()
         {
-            if(Vector3.Distance(player.transform.position, controller.transform.position) < 250)
-            {
-                controller.PerformTransition(Transition.Patrol);
-            }
-
             if (player == null)
             {
-                controller.PerformTransition(Transition.Patrol);
+                player = GameObject.FindGameObjectWithTag("Player");
+
+                if (player == null)
+                {
+                    controller.PerformTransition(Transition.Patrol);
+                    return;
+                }
             }
-            else
+
+            CalculateIntercept();
+
+            if (Vector3.Distance(player.transform.position, controller.transform.position) < 250)
             {
-                CalculateIntercept();
+                controller.PerformTransition(Transition.Patrol);
             }
 
             //Else dead transition to dead

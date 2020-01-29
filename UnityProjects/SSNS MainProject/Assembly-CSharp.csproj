@@ -131,6 +131,7 @@
     <Compile Include="Assets\05_Scripts\Rewards\Reward.cs" />
     <Compile Include="Assets\05_Scripts\Rewards\RewardManager.cs" />
     <Compile Include="Assets\05_Scripts\Rewards\RewardUI.cs" />
+    <Compile Include="Assets\05_Scripts\TimedDestroy.cs" />
     <Compile Include="Assets\05_Scripts\UI\DemoManagerMenu.cs" />
     <Compile Include="Assets\05_Scripts\UI\Fade.cs" />
     <Compile Include="Assets\05_Scripts\UI\MainMenu.cs" />

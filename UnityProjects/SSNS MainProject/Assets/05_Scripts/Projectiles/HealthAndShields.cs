@@ -36,6 +36,8 @@ public class HealthAndShields : MonoBehaviour
     {
         life = maxLife;
         shield = maxShield;
+
+        StartCoroutine(RegenDelayReset());
     }
 
     // Update is called once per frame

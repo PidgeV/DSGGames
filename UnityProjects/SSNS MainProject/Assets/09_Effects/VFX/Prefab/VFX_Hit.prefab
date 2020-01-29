@@ -4820,6 +4820,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5907587832293136876}
+  - component: {fileID: -7951838786424442101}
   m_Layer: 0
   m_Name: VFX_Hit
   m_TagString: Untagged
@@ -4845,6 +4846,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-7951838786424442101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4814854336648323653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7586ed83c40d0142b9e10ee2bb3776c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeToDestroy: 1
 --- !u!1 &5315067687964442883
 GameObject:
   m_ObjectHideFlags: 0

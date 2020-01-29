@@ -73,15 +73,16 @@ public class AreaManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator DestroyLastArea()
     {
-        // Destroys the objects in the last area
-        foreach(GameObject go in lastArea.objects)
-        {
-            Destroy(go);
+        yield return null;
+        //// Destroys the objects in the last area
+        //foreach(GameObject go in lastArea.objects)
+        //{
+        //    Destroy(go);
 
-            yield return null;
-        }
+        //    yield return null;
+        //}
 
-        // Destroys the parent of the area
+        //// Destroys the parent of the area
         if (lastArea != null && lastArea.parent != null)
             Destroy(lastArea.parent.gameObject);
 
@@ -115,11 +116,22 @@ public class AreaManager : MonoBehaviour
     /// </summary>
     public void KillEnemies()
     {
-        foreach(GameObject enemy in currentArea.enemies.ToArray())
+        foreach (GameObject enemy in currentArea.enemies.ToArray())
         {
-            HealthAndShields health = enemy.GetComponent<HealthAndShields>();
-            health.TakeDamage(100000000, 100000000);
+            if (enemy.TryGetComponent(out HealthAndShields health))
+            {
+                health.TakeDamage(100000000, 100000000);
+            }
+            else if (enemy.TryGetComponent(out Flock swarm))
+            {
+                foreach (FlockAgent agent in swarm.agents)
+                {
+                    agent.GetComponent<HealthAndShields>().TakeDamage(100000000, 100000000);
+                }
+            }
         }
+
+        currentArea.enemies.Clear();
     }
 
     /// <summary>
@@ -165,7 +177,7 @@ public class AreaManager : MonoBehaviour
             lastAreaDestroyed = false;
 
             NodeManager.Instance.ArrivedNextNode();
-            GameManager.Instance.shipController.transform.position = currentArea.location;
+            GameManager.Instance.shipController.transform.position = currentArea.location - Vector3.forward * areaSize;
             SkyboxManager.Instance.SwitchToSkybox(NodeManager.Instance.CurrentNode.Skybox);
             GameManager.Instance.SwitchState(SNSSTypes.GameState.BATTLE);
         }
