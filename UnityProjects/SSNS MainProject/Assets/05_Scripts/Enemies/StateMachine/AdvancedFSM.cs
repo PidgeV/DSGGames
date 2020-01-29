@@ -18,6 +18,7 @@ namespace Complete
         SawPlayer,
         Attack,
         Patrol,
+        Defend,
     }
 
     public enum FSMStateID
@@ -27,6 +28,7 @@ namespace Complete
         Chasing,
         Attacking,
         Dead,
+        Defend,
     }
 
     public class AdvancedFSM : FSM

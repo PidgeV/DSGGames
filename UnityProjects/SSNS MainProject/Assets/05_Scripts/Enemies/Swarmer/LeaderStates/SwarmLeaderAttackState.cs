@@ -8,7 +8,6 @@ namespace Complete
     {
         FlockLeaderController controller;
         Flock swarm;
-        GameObject player;
 
         public SwarmLeaderAttackState(FlockLeaderController leader, Flock swarmObj)
         {
@@ -25,20 +24,31 @@ namespace Complete
 
         public override void Reason()
         {
-            if (player == null)
+            if (swarm.defenseTarget != null)
             {
-                player = GameObject.FindGameObjectWithTag("Player");
+                //Enter defend state mode
+                controller.PerformTransition(Transition.Defend);
+            }
 
-                if (player == null)
+            if (swarm.player == null)
+            {
+                swarm.player = GameObject.FindGameObjectWithTag("Player");
+
+                if (swarm.player == null)
                 {
                     //If no player can be found then go to patrol state
                     controller.PerformTransition(Transition.Patrol);
                 }
             }
 
-            if(Vector3.Distance(controller.transform.position, player.transform.position) <= 100f)
+            //Determining agent freedom from leader
+            if(Vector3.Distance(controller.transform.position, swarm.player.transform.position) <= 100f)
             {
                 swarm.swarmFollowRadius = controller.AttackRadius;
+            }
+            else if(swarm.swarmFollowRadius == controller.AttackRadius)
+            {
+                swarm.swarmFollowRadius = controller.PatrolRadius;
             }
         }
 
@@ -50,10 +60,10 @@ namespace Complete
 
         void Move()
         {
-            if (player != null)
+            if (swarm.player != null)
             {
                 //Move towards position. No need to worry about obstacles or 
-                controller.transform.position = Vector3.MoveTowards(controller.transform.position, player.transform.position, controller.AttackSpeed * Time.deltaTime);
+                controller.transform.position = Vector3.MoveTowards(controller.transform.position, swarm.player.transform.position, controller.AttackSpeed * Time.deltaTime);
             }
         }
     }

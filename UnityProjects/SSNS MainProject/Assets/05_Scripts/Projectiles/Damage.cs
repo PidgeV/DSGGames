@@ -3,22 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // When two gameObjects collide they look for this script
+[RequireComponent(typeof(Collider))]
 public class Damage : MonoBehaviour
 {
 	// The damage whatever collides with the gameObject holding this script should take
-	public float damage = 5f;
+	public int kineticDamage = 5;
+    public int energyDamage = 5;
 
-    public void ChangeDamage(float newDamage)
+    public void ChangeDamage(int kinetic, int energy)
     {
-        damage = newDamage;
+        kineticDamage = kinetic;
+        energyDamage = energy;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        HealthAndShields hpTemp;
-        if(collision.gameObject.TryGetComponent(out hpTemp))
+        if(collision.gameObject.TryGetComponent(out HealthAndShields hpTemp))
         {
-            hpTemp.TakeDamage(damage);
+            hpTemp.TakeDamage(kineticDamage, energyDamage);
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.TryGetComponent(out HealthAndShields hpTemp))
+        {
+            hpTemp.TakeDamage(kineticDamage, energyDamage);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.TryGetComponent(out HealthAndShields hpTemp))
+        {
+            hpTemp.TakeDamage(kineticDamage, energyDamage);
         }
     }
 }

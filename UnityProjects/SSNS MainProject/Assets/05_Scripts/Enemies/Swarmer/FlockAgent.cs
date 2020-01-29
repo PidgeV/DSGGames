@@ -6,6 +6,7 @@ using UnityEngine.Experimental.VFX;
 [RequireComponent(typeof(Collider))]
 public class FlockAgent : MonoBehaviour
 {
+    public Flock swarm;
     Collider agentCollider;
     public Collider AgentCollider { get { return agentCollider; } }
     [SerializeField] GameObject explosionVFXPrefab;
@@ -14,6 +15,12 @@ public class FlockAgent : MonoBehaviour
     void Start()
     {
         agentCollider = GetComponent<Collider>();
+    }
+
+    public void Initialize(Flock swarmObj)
+    {
+        swarm = swarmObj;
+        transform.parent = swarm.transform;
     }
 
     public void Move(Vector3 velocity)
@@ -26,5 +33,10 @@ public class FlockAgent : MonoBehaviour
     {
         if(explosionVFXPrefab != null) Instantiate(explosionVFXPrefab, transform.position, transform.rotation);
         Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        swarm.agents.Remove(this);
     }
 }

@@ -13,6 +13,7 @@ namespace Complete
 
         [SerializeField] float attackStateRadius;
         [SerializeField] float patrolStateRadius;
+        [SerializeField] float defenseStateRadius;
 
         [Space(15)]
         [SerializeField] float waypointDistanceMeters = 75f;
@@ -24,10 +25,11 @@ namespace Complete
         public float AttackSpeed { get { return attackSpeed; } }
         public float AttackRadius { get { return attackStateRadius; } }
         public float PatrolRadius { get { return patrolStateRadius; } }
+        public float DefenseRadius { get { return defenseStateRadius; } }
 
         protected override void FSMFixedUpdate()
         {
-            base.FSMFixedUpdate();
+            
         }
 
         protected override void FSMUpdate()
@@ -51,12 +53,19 @@ namespace Complete
             //States
             SwarmLeaderPatrolState patrol = new SwarmLeaderPatrolState(this, swarm, waypoints);
             SwarmLeaderAttackState attack = new SwarmLeaderAttackState(this, swarm);
+            SwarmLeaderDefendState defend = new SwarmLeaderDefendState(this, swarm);
 
             //Transitions
             patrol.AddTransition(Transition.Attack, FSMStateID.Attacking);
             patrol.AddTransition(Transition.Patrol, FSMStateID.Patrolling);
+            
+            attack.AddTransition(Transition.Patrol, FSMStateID.Patrolling);
+            attack.AddTransition(Transition.Defend, FSMStateID.Defend);
+
+            defend.AddTransition(Transition.Patrol, FSMStateID.Patrolling);
 
             //Add states
+            AddFSMState(defend);
             AddFSMState(patrol);
             AddFSMState(attack);
         }

@@ -9,7 +9,7 @@ public class CompositeBehaviour : FlockBehaviour
     public float[] weights;
     public int t = 0;
 
-    public override Vector3 CalculateMove(FlockAgent agent, List<Transform> context, Flock flock)
+    public override Vector3 CalculateMove(FlockAgent agent, List<Transform> context, Flock flock, List<Transform> obstacles)
     {
         //Handle data mismatch
         if (weights.Length != behaviours.Length)
@@ -23,7 +23,7 @@ public class CompositeBehaviour : FlockBehaviour
         //iterate through the behaviours
         for (int i = 0; i < behaviours.Length; i++)
         {
-            Vector3 partialMove = behaviours[i].CalculateMove(agent, context, flock) * weights[i];
+            Vector3 partialMove = behaviours[i].CalculateMove(agent, context, flock, obstacles) * weights[i];
 
             if (partialMove != Vector3.zero)
             {

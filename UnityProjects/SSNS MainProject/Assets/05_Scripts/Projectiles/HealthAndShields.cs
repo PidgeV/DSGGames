@@ -23,14 +23,13 @@ public class HealthAndShields : MonoBehaviour
 
     [Space(10)]
     [Range(1, 99)]
-    // The PERCENT of damage that is reduced when taking a hit to LIFE 
-    public float armor = 1f;
-
-    [Range(1, 99)]
     // The PERCENT of shield that is regenerated per second
-    public float regenSpeed = 1f;
+    public int regenSpeed = 5;
+    public float regenDelay = 1f;
 
     public bool invincible;
+
+    public bool regen = true;
 
     // Start is called before the first frame update
     void Start()
@@ -43,13 +42,13 @@ public class HealthAndShields : MonoBehaviour
     void Update()
     {
         // If we have more then 0 life we can regen shields
-        if (life > 0)
+        if (life > 0 && regen)
         {
             // Calculating the amount we need to heal WITH regen Speed
             float amountToHeal = shield + (maxShield * regenSpeed / 100f) * Time.deltaTime;
 
             // Clamp out shield to the max shield
-            shield = Mathf.Clamp(amountToHeal, -Mathf.Infinity, maxShield);
+            shield = Mathf.Clamp(amountToHeal, 0, maxShield);
         }
         else
         {
@@ -57,51 +56,42 @@ public class HealthAndShields : MonoBehaviour
         }
     }
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    // We get the DAMAGE component from a gameobject
-    //    Damage hit = collision.gameObject.GetComponent<Damage>();
-
-    //    // If it doesn't have one we move on
-    //    if (hit)
-    //    {
-    //        TakeDamage(hit.damage);
-    //    }
-    //}
-
     // Damage the ship
-    public void TakeDamage(float damage)
+    public void TakeDamage(float kineticDamage, float energyDamage )
     {
         if (!invincible)
         {
+            regen = false;
             // Damage the shield
-            shield -= damage;
+            shield = Mathf.Clamp(shield - energyDamage, 0, maxShield);
 
             // If we have negative shields we can take it away from your life pool
-            if (shield < 0)
+            if (shield == 0)
             {
-                // Apply the armor reduction
-                life += -Mathf.Abs(shield / armor);
-                shield = 0;
+                life -= kineticDamage;
             }
 
             // If we are dead cann OnDeath()
             if (life <= 0)
             {
                 life = 0;
-                OnDeath();
+                StartCoroutine(OnDeath());
             }
 
             // TEMP -- COLOR THE THINGS YOU HIT
-            if (gameObject.GetComponent<Renderer>()) gameObject.GetComponent<Renderer>().material.SetColor("_BaseColor", Color.blue);
+            //if (gameObject.GetComponent<Renderer>()) gameObject.GetComponent<Renderer>().material.SetColor("_BaseColor", Color.blue);
         }
     }
 
     // When life is 0 this is called by TakeDamage()
-    void OnDeath()
+    IEnumerator OnDeath()
     {
+<<<<<<< HEAD
         AreaManager.Instance.OnEnemyDeath(gameObject);
 
+=======
+        yield return new WaitForSeconds(0.1f);
+>>>>>>> Blakes-Branch
         Destroy(gameObject);
     }
 
@@ -110,5 +100,15 @@ public class HealthAndShields : MonoBehaviour
         life += amountToHeal;
 
         if (life > maxLife) life = maxLife;
+    }
+
+    IEnumerator RegenDelayReset()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(regenDelay);
+
+            regen = true;
+        }
     }
 }

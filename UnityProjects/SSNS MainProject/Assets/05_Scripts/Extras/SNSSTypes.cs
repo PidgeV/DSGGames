@@ -4,13 +4,14 @@ using UnityEngine;
 
 namespace SNSSTypes
 {
-	public enum PlayerRole
-	{
-		Gunner,
-		Pilot,
-		None
-	};
+    public enum PlayerRole
+    {
+        Gunner,
+        Pilot,
+        None
+    };
 
+<<<<<<< HEAD
     public enum ShotType { Regular, Energy, Laser, Charged, Missiles }
 
     public enum NodeType
@@ -37,4 +38,7 @@ namespace SNSSTypes
         MiniBoss,
         Boss
     }
+=======
+    public enum WeaponType { Regular, Energy, Laser, Charged, Missiles }
+>>>>>>> Blakes-Branch
 }
