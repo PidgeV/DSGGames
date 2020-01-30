@@ -22,9 +22,6 @@ public class NewDemoManager : MonoBehaviour
 	[SerializeField] private RectTransform loadsRect;
 
 	[Space(5)]
-	[SerializeField] private GameObject playerPrefab;
-
-	[Space(5)]
 	[SerializeField] private GameObject enemy_Charger;
 	[SerializeField] private GameObject enemy_Fighter;
 	[SerializeField] private GameObject enemy_Cargo;
@@ -48,13 +45,15 @@ public class NewDemoManager : MonoBehaviour
 	Vector3 initialPos = Vector3.zero;
 	Vector3 targetPos = Vector3.zero;
 
+	GameObject playerObj;
+
 	// Is this menu open ?
 	private bool visible = false;
 
 	// Start is called before the first frame update
 	void Start()
     {
-		GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+		playerObj = GameObject.FindGameObjectWithTag("Player");
 
 		if (playerObj)
 		{
@@ -334,17 +333,20 @@ public class NewDemoManager : MonoBehaviour
 	/// </summary>
 	public void RespawnPlayer()
 	{
-		GameManager.Instance.shipController.gameObject.SetActive(true);
-
-		GameManager.Instance.shipController.transform.rotation = Quaternion.Euler(Vector3.zero);
-
-		if (AreaManager.Instance)
+		if (playerObj)
 		{
-			GameManager.Instance.shipController.transform.position = AreaManager.Instance.PlayerDestination;
-		}
-		else
-		{
-			GameManager.Instance.transform.position = Vector3.zero;
+			playerObj.gameObject.SetActive(true);
+
+			playerObj.transform.rotation = Quaternion.Euler(Vector3.zero);
+
+			if (AreaManager.Instance)
+			{
+				playerObj.transform.position = AreaManager.Instance.PlayerDestination;
+			}
+			else
+			{
+				playerObj.transform.position = Vector3.zero;
+			}
 		}
 	}
 
@@ -396,15 +398,20 @@ public class NewDemoManager : MonoBehaviour
 			// TODO -- We should find a better way to do this
 			#region Settings the wapoints 
 
-			// Set waypoints for each enemy
-			//if (newEnemy.TryGetComponent<ChaserController>(out ChaserController chaserController)) {
-			//	chaserController.waypoints = new GameObject[0];
-			//}
+			//Set waypoints for each enemy
+			if (newEnemy.TryGetComponent(out ChaserController chaserController))
+			{
+				chaserController.waypoints = new GameObject[] { gameObject };
+			}
+			else if (newEnemy.TryGetComponent(out FighterController fighterController))
+			{
+				fighterController.waypoints = new GameObject[] { gameObject };
+			}
+			else if (newEnemy.TryGetComponent(out Flock swarmerController))
+			{
+				swarmerController.WayPoints = new GameObject[] { gameObject };
+			}
 
-			//// Set waypoints for each enemy
-			//else if (newEnemy.TryGetComponent<FighterController>(out FighterController fighterController)) {
-			//	fighterController.waypoints = new GameObject[0];
-			//}
 			#endregion
 		}
 	}

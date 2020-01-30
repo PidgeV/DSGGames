@@ -92,12 +92,13 @@ public class HealthAndShields : MonoBehaviour
 
         if (CompareTag("Player"))
         {
-            gameObject.SetActive(false);
 
             life = maxLife;
             shield = maxShield;
 
             StartCoroutine(RegenDelayReset());
+
+            gameObject.SetActive(false);
         }
         else
             Destroy(gameObject);
