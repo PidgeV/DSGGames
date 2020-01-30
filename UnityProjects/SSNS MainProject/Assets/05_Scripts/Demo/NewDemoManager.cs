@@ -46,6 +46,8 @@ public class NewDemoManager : MonoBehaviour
 	Vector3 targetPos = Vector3.zero;
 
 	GameObject playerObj;
+	Vector3 originalPos;
+	Quaternion originalRot;
 
 	// Is this menu open ?
 	private bool visible = false;
@@ -54,6 +56,8 @@ public class NewDemoManager : MonoBehaviour
 	void Start()
     {
 		playerObj = GameObject.FindGameObjectWithTag("Player");
+		originalPos = playerObj.transform.position;
+		originalRot = playerObj.transform.rotation;
 
 		if (playerObj)
 		{
@@ -337,15 +341,15 @@ public class NewDemoManager : MonoBehaviour
 		{
 			playerObj.gameObject.SetActive(true);
 
-			playerObj.transform.rotation = Quaternion.Euler(Vector3.zero);
-
 			if (AreaManager.Instance)
 			{
+				playerObj.transform.rotation = Quaternion.Euler(Vector3.zero);
 				playerObj.transform.position = AreaManager.Instance.PlayerDestination;
 			}
 			else
 			{
-				playerObj.transform.position = Vector3.zero;
+				playerObj.transform.position = originalPos;
+				playerObj.transform.rotation = originalRot;
 			}
 		}
 	}
