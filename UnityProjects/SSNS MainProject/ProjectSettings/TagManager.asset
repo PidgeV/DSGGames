@@ -10,6 +10,7 @@ TagManager:
   - FirstMenuElement
   - Ship
   - Controller
+  - Enemy
   layers:
   - Default
   - TransparentFX

@@ -186,21 +186,7 @@ public class DemoManager : MonoBehaviour
 
 	private void OnGUI()
 	{
-		if (DemoMenu.visible == false)
-		{
-			// Screen
-			float X = Screen.width;
-			float Y = Screen.height;
 
-			Rect demoRect = new Rect(X - 230 - 5, Y - 25, 230, 20);
-			Rect demoArea = new Rect(X - 230 + 5, Y - 25, 230, 20);
-
-			GUI.Box(demoRect, "");
-
-			GUILayout.BeginArea(demoArea);
-			GUILayout.Label("Press [Tab] to open the demo helper");
-			GUILayout.EndArea();
-		}
 	}
 
 	/// <summary>

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2212086307816132560}
   m_Layer: 0
   m_Name: Swarm
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -63,4 +63,5 @@ MonoBehaviour:
   maxSpeed: 200
   neighbourRadius: 15
   avoidanceRadius: 10
+  obstacleDistance: 50
   player: {fileID: 0}

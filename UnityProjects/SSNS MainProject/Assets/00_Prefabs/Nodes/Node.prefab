@@ -297,10 +297,10 @@ MonoBehaviour:
   nodeInfo:
     name: E-14
     depth: -1
-    skybox: 0
+    skybox: 4
     type: 0
     nodeEvent: {fileID: 11400000, guid: 9ecc1b07f8c45124a808e107f922b4fd, type: 2}
-    reward: {fileID: 0}
+    reward: {fileID: 11400000, guid: b0cd3c33a2e10a544a5746932cecad8c, type: 2}
     parents: []
     children:
     - {fileID: 0}

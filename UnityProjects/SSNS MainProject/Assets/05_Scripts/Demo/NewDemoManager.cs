@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class NewDemoManager : MonoBehaviour
@@ -10,12 +11,15 @@ public class NewDemoManager : MonoBehaviour
 	[SerializeField] private Button button;
 	[SerializeField] private Button value;
 	[SerializeField] private Button vector;
+	[SerializeField] private Button toggle;
+	[SerializeField] private Button space;
 
 	[Space(5)]
 	[SerializeField] private RectTransform playerRect;
 	[SerializeField] private RectTransform sceneRect;
 	[SerializeField] private RectTransform cameraRect;
 	[SerializeField] private RectTransform spawnRect;
+	[SerializeField] private RectTransform loadsRect;
 
 	[Space(5)]
 	[SerializeField] private GameObject enemy_Charger;
@@ -32,7 +36,9 @@ public class NewDemoManager : MonoBehaviour
 	public KeyCode demo_ToggleWindow = KeyCode.Tab;
 
 	// This menus Rect
+	private HealthAndShields player;
 	private RectTransform menuRect;
+	private Image playerGodmode;
 
 	// Menu positions
 	Vector3 hiddenPos = Vector3.zero;
@@ -40,11 +46,30 @@ public class NewDemoManager : MonoBehaviour
 	Vector3 targetPos = Vector3.zero;
 
 	// Is this menu open ?
-	public bool visible = false;
+	private bool visible = false;
 
 	// Start is called before the first frame update
 	void Start()
     {
+		GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+
+		if (playerObj)
+		{
+			playerObj.TryGetComponent<HealthAndShields>(out player);
+		}
+
+		if (cameras.Length > 0)
+		{
+			// Loop through each camera and disable them
+			foreach (Camera camera in cameras)
+			{
+				camera.enabled = false;
+			}
+
+			enabledCam = cameras[0];
+			enabledCam.enabled = true;
+		}
+
 		if (gameObject.TryGetComponent<RectTransform>(out RectTransform rectTransform))
 		{
 			initialPos = rectTransform.position;
@@ -81,6 +106,10 @@ public class NewDemoManager : MonoBehaviour
 		}
 
 		HotKeys();
+
+		if (playerGodmode && player) {
+			playerGodmode.color = player.invincible ? Color.green : Color.red;
+		}
 	}
 
 	/// <summary>
@@ -88,8 +117,9 @@ public class NewDemoManager : MonoBehaviour
 	/// </summary>
 	private void HotKeys()
 	{
-		if (Input.GetKeyDown(demo_ToggleWindow)) {
-		ToggleMenu(!visible);
+		if (Input.GetKeyDown(demo_ToggleWindow))
+		{
+			ToggleMenu(!visible);
 		}
 	}
 
@@ -98,8 +128,12 @@ public class NewDemoManager : MonoBehaviour
 	/// </summary>
 	private void Buttons()
 	{
-		Button btn_Godmode = CreateButton(button, playerRect, "Toggle Godmode [n/a]");
-		btn_Godmode.onClick.AddListener(() => { Debug.LogError("I DONT DO ANYTHING RIGHT NOW REEE [n/a]"); });
+		// Player
+		Button btn_Godmode = CreateButton(toggle, playerRect, "Toggle Godmode [n/a]");
+		playerGodmode = btn_Godmode.transform.GetChild(1).GetComponentInChildren<Image>();
+		btn_Godmode.onClick.AddListener(() => {
+			ToggleGodmode();
+		});
 
 		Button btn_TeleportPlayer = CreateButton(vector, playerRect, "Teleport Player [n/a]");
 		btn_TeleportPlayer.onClick.AddListener(() => {
@@ -107,7 +141,7 @@ public class NewDemoManager : MonoBehaviour
 		});
 
 
-
+		// Spawn Enemies
 		Button btn_Spawn_Fighter = CreateButton(button, spawnRect, "Spawn Fighter [n/a]");
 		btn_Spawn_Fighter.onClick.AddListener(() => { SpawnEnemy_Fighter();
 		});
@@ -129,28 +163,93 @@ public class NewDemoManager : MonoBehaviour
 		});
 
 
-
+		// Cameras
 		Button btn_Camera01 = CreateButton(button, cameraRect, "Camera 01 [n/a]");
 		btn_Camera01.onClick.AddListener(() => {
-			UpdateActiveCamera(cameras[0]);
+			if (cameras.Length > 0)
+			{
+				UpdateActiveCamera(cameras[0]);
+			}
 		});
 
 		Button btn_Camera02 = CreateButton(button, cameraRect, "Camera 02 [n/a]");
 		btn_Camera02.onClick.AddListener(() => {
-			UpdateActiveCamera(cameras[1]);
+			if (cameras.Length > 1)
+			{
+				UpdateActiveCamera(cameras[1]);
+			}
 		});
 
 		Button btn_Camera03 = CreateButton(button, cameraRect, "Camera 03 [n/a]");
 		btn_Camera03.onClick.AddListener(() => {
-			UpdateActiveCamera(cameras[2]);
+			if (cameras.Length > 2)
+			{
+				UpdateActiveCamera(cameras[2]);
+			}
 		});
+		btn_Camera03.interactable = false;
+
+		Button btn_Camera04 = CreateButton(button, cameraRect, "Camera 04 [n/a]");
+		btn_Camera04.onClick.AddListener(() => {
+			if (cameras.Length > 3)
+			{
+				UpdateActiveCamera(cameras[3]);
+			}
+		});
+		btn_Camera04.interactable = false;
+
+		Button btn_Camera05 = CreateButton(button, cameraRect, "Camera 05 [n/a]");
+		btn_Camera05.onClick.AddListener(() => {
+			if (cameras.Length > 4)
+			{
+				UpdateActiveCamera(cameras[4]);
+			}
+		});
+		btn_Camera05.interactable = false;
+
+		Button btn_Camera06 = CreateButton(button, cameraRect, "Camera 06 [n/a]");
+		btn_Camera06.onClick.AddListener(() => {
+			if (cameras.Length > 5)
+			{
+				UpdateActiveCamera(cameras[5]);
+			}
+		});
+		btn_Camera06.interactable = false;
 
 
-
+		// Sky box
 		Button btn_ToggleSkybox = CreateButton(button, sceneRect, "Toggle Skybox [n/a]");
 		btn_ToggleSkybox.onClick.AddListener(() => {
 			SkyboxManager.Instance.LoopSkybox();
 		});	
+
+
+		// Kill all enemies
+		Button btn_KillAllEnemies = CreateButton(button, sceneRect, "Kill All Enemies [n/a]");
+		btn_KillAllEnemies.onClick.AddListener(() => {
+			KillAllEnemies();
+		});
+
+
+		// Loas scenes
+		// MAIN MENU
+		Button btn_LoadScene_01 = CreateButton(button, loadsRect, "[01]");
+		btn_LoadScene_01.onClick.AddListener(() => {
+			SceneManager.LoadScene(0);
+		});
+
+		// NODE TEST
+		Button btn_LoadScene_02 = CreateButton(button, loadsRect, "[02]");
+		btn_LoadScene_02.onClick.AddListener(() => {
+			SceneManager.LoadScene(1);
+			Debug.Log("Load Scene 02");
+		});
+
+		// DEMO SCENE
+		Button btn_LoadScene_03 = CreateButton(button, loadsRect, "[03]");
+		btn_LoadScene_03.onClick.AddListener(() => {
+			SceneManager.LoadScene(2);
+		});
 
 		#region Example Buttons
 
@@ -174,19 +273,32 @@ public class NewDemoManager : MonoBehaviour
 		#endregion
 	}
 
-	private Button CreateButton(Button prefab, Transform parent, string name)
+	private Button CreateButton(Button prefab, Transform parent, string name = "")
 	{
 		// Make the button
 		Button newButton = GameObject.Instantiate(prefab, parent);
 
 		// Name the button
-		newButton.GetComponentInChildren<Text>().text = name;
+		if (name != "") {
+			newButton.GetComponentInChildren<Text>().text = name;
+		}
 
 		// return the button
 		return newButton;
 	}
 
 	#region Helper Methods
+
+	/// <summary>
+	/// Toggle the players invincible state
+	/// </summary>
+	public void ToggleGodmode()
+	{
+		if (player)
+		{
+			player.invincible = !player.invincible;
+		}
+	}
 
 	/// <summary>
 	/// Move the player to a location
@@ -211,6 +323,25 @@ public class NewDemoManager : MonoBehaviour
 		// Enable the new camera
 		enabledCam = newCamera;
 		enabledCam.enabled = true;
+	}
+
+	/// <summary>
+	/// Find and Kill all enemies in the scene
+	/// </summary>
+	public void KillAllEnemies()
+	{
+		foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy")) {
+
+			if (enemy.TryGetComponent(out HealthAndShields health)) {
+				health.TakeDamage(Mathf.Infinity, Mathf.Infinity);
+			}
+			else if (enemy.TryGetComponent(out Flock swarm))
+			{
+				foreach (FlockAgent agent in swarm.agents) {
+					agent.GetComponent<HealthAndShields>().TakeDamage(Mathf.Infinity, Mathf.Infinity);
+				}
+			}
+		}
 	}
 
 	/// <summary>
