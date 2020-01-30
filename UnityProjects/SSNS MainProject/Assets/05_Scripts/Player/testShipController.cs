@@ -49,10 +49,9 @@ public class testShipController : MonoBehaviour
     [SerializeField] private Camera gunnerCamera;
 
 
-    [Header("Sliders")]
-    [SerializeField] private Slider slider_Health;
-    [SerializeField] private Slider slider_Shield;
-    [SerializeField] private Slider slider_Boost;
+    private Slider slider_Health;
+    private Slider slider_Shield;
+    private Slider slider_Boost;
 
     private Image healthImage;
     private Image shieldImage;
@@ -132,6 +131,10 @@ public class testShipController : MonoBehaviour
 
         // Get components
         rigidbody = gameObject.GetComponent<Rigidbody>();
+
+        slider_Health = GameObject.Find("[Slider] Health").GetComponent<Slider>();
+        slider_Shield = GameObject.Find("[Slider] Shield").GetComponent<Slider>();
+        slider_Boost = GameObject.Find("[Slider] Boost").GetComponent<Slider>();
 
         // Get the images for the sliders
         boostImage = slider_Boost.gameObject.GetComponentInChildren<Image>();
@@ -418,12 +421,22 @@ public class testShipController : MonoBehaviour
 		// Set the camera to its target rotation
 		gunnerCamera.transform.LookAt(gunHelper.position + gunHelper.forward * 300);
 	}
-	#endregion
 
-	/// <summary> 
-	/// Make the ship shoot
-	/// </summary>
-	public void Shoot()
+    private void OnDestroy()
+    {
+        if (player1)
+            Destroy(player1.gameObject);
+
+        if (player2)
+            Destroy(player2.gameObject);
+    }
+
+    #endregion
+
+    /// <summary> 
+    /// Make the ship shoot
+    /// </summary>
+    public void Shoot()
     {
         if (shotTimer > currentShotInfo.FireRate)
         {

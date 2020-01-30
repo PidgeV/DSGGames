@@ -88,10 +88,19 @@ public class HealthAndShields : MonoBehaviour
     // When life is 0 this is called by TakeDamage()
     IEnumerator OnDeath()
     {
-        if(AreaManager.Instance != null) AreaManager.Instance.OnEnemyDeath(gameObject);
-
         yield return new WaitForSeconds(0.1f);
-        Destroy(gameObject);
+
+        if (CompareTag("Player"))
+        {
+            gameObject.SetActive(false);
+
+            life = maxLife;
+            shield = maxShield;
+
+            StartCoroutine(RegenDelayReset());
+        }
+        else
+            Destroy(gameObject);
     }
 
     public void Heal(int amountToHeal)

@@ -22,6 +22,9 @@ public class NewDemoManager : MonoBehaviour
 	[SerializeField] private RectTransform loadsRect;
 
 	[Space(5)]
+	[SerializeField] private GameObject playerPrefab;
+
+	[Space(5)]
 	[SerializeField] private GameObject enemy_Charger;
 	[SerializeField] private GameObject enemy_Fighter;
 	[SerializeField] private GameObject enemy_Cargo;
@@ -135,11 +138,16 @@ public class NewDemoManager : MonoBehaviour
 			ToggleGodmode();
 		});
 
+		Button btn_RespawnPlayer = CreateButton(button, playerRect, "Respawn Player");
+		btn_RespawnPlayer.onClick.AddListener(() =>
+		{
+			RespawnPlayer();
+		});
+
 		Button btn_TeleportPlayer = CreateButton(vector, playerRect, "Teleport Player [n/a]");
 		btn_TeleportPlayer.onClick.AddListener(() => {
 			TeleportPlayer(btn_TeleportPlayer.GetComponent<DemoValue>().GetValue);
 		});
-
 
 		// Spawn Enemies
 		Button btn_Spawn_Fighter = CreateButton(button, spawnRect, "Spawn Fighter [n/a]");
@@ -230,6 +238,15 @@ public class NewDemoManager : MonoBehaviour
 			KillAllEnemies();
 		});
 
+		// Lock Choices for node selection
+		Button btn_LockAll = CreateButton(button, sceneRect, "Lock Node Choices");
+		btn_LockAll.onClick.AddListener(() => {
+			if (NodeManager.Instance)
+			{
+				NodeManager.Instance.LockChoice(SNSSTypes.PlayerRole.Pilot, true);
+				NodeManager.Instance.LockChoice(SNSSTypes.PlayerRole.Gunner, true);
+			}
+		});
 
 		// Loas scenes
 		// MAIN MENU
@@ -309,6 +326,25 @@ public class NewDemoManager : MonoBehaviour
 		if (player)
 		{
 			player.transform.position = position;
+		}
+	}
+
+	/// <summary>
+	/// Respawns the player
+	/// </summary>
+	public void RespawnPlayer()
+	{
+		GameManager.Instance.shipController.gameObject.SetActive(true);
+
+		GameManager.Instance.shipController.transform.rotation = Quaternion.Euler(Vector3.zero);
+
+		if (AreaManager.Instance)
+		{
+			GameManager.Instance.shipController.transform.position = AreaManager.Instance.PlayerDestination;
+		}
+		else
+		{
+			GameManager.Instance.transform.position = Vector3.zero;
 		}
 	}
 

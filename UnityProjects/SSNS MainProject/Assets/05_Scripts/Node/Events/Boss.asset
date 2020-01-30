@@ -15,3 +15,4 @@ MonoBehaviour:
   eventType: 3
   prefabsToSpawn:
   - {fileID: 184070561958212582, guid: 5837d80a12565c04285329df35a7c154, type: 3}
+  areaSize: 5000

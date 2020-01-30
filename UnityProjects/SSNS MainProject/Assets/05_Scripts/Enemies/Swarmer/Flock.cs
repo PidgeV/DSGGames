@@ -34,7 +34,7 @@ public class Flock : MonoBehaviour
     #region Swarm Agent Variables
     [Range(1, 300)]
     public int startingCount = 250;
-    const float agentDensity = 0.1f;
+    const float agentDensity = 0.3f;
 
     [Range(1f, 1000f)]
     public float driveFactor = 10f;
@@ -121,6 +121,9 @@ public class Flock : MonoBehaviour
             agent.Move(move); //Move agent
         }
         //Debug.Log("Movement: " + move);
+
+        if (agents.Count == 0)
+            Destroy(gameObject);
     }
 
     /// <summary>

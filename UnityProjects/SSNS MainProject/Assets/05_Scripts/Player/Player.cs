@@ -217,23 +217,23 @@ public class Player : Controller
 
 		if (value >= 0.05f)
 		{
-			NodeManager.Instance.SelectRightNode(myRole);
+			NodeManager.Instance.SelectNodeChoice(myRole, 1);
 		}
 		else if (value <= -0.05f)
 		{
-			NodeManager.Instance.SelectLeftNode(myRole);
+			NodeManager.Instance.SelectNodeChoice(myRole, -1);
 		}
 	}
 
 	public void OnConfirm(InputValue input)
 	{
 		Debug.Log("OnConfirm");
-		NodeManager.Instance.PlayerConfirm(myRole, true);
+		NodeManager.Instance.LockChoice(myRole, true);
 	}
 
 	public void OnDecline(InputValue input)
 	{
-		NodeManager.Instance.PlayerConfirm(myRole, false);
+		NodeManager.Instance.LockChoice(myRole, false);
 	}
 	#endregion
 }

@@ -10,6 +10,8 @@ using SNSSTypes;
 /// </summary>
 public class Node : MonoBehaviour, IEnumerable<Node>
 {
+    private static int maxDepth;
+
     [SerializeField] GameObject linePrefab;
 
     [Header("Visual Image Components")]
@@ -60,6 +62,12 @@ public class Node : MonoBehaviour, IEnumerable<Node>
 
         // TODO: Make it so that switching nodes is never the same skybox
         nodeInfo.skybox = random.Next(SkyboxManager.Instance.SkyboxAmount);
+    }
+
+    private void Awake()
+    {
+        if (Depth > maxDepth)
+            maxDepth = Depth;
     }
 
     private void Start()
@@ -119,6 +127,7 @@ public class Node : MonoBehaviour, IEnumerable<Node>
 
     #region Variable Getters & Setters
 
+    public int MaxDepth { get { return maxDepth; } }
     public NodeInfo NodeInfo { get { return nodeInfo; } }
     public string NodeName { get { return nodeInfo.name; } }
     public int Depth { get { return nodeInfo.depth; } }
@@ -139,7 +148,7 @@ public class Node : MonoBehaviour, IEnumerable<Node>
         private Node startNode;
         private Node currentNode;
         private int currentDepth;
-        private List<Node> depthNodes;
+        private Node[] depthNodes;
         private int depthIndex;
 
         public Node Current => currentNode;
@@ -169,22 +178,22 @@ public class Node : MonoBehaviour, IEnumerable<Node>
 
                 currentDepth++;
 
-                FindNodes(startNode);
+                depthNodes = NodeManager.Instance.FindNodes(currentDepth);
             }
             else
             {
 
-                if (depthNodes.Count == 0) return false;
+                if (depthNodes.Length == 0) return false;
 
                 currentNode = depthNodes[depthIndex];
 
                 depthIndex++;
 
-                if (depthIndex >= depthNodes.Count)
+                if (depthIndex >= depthNodes.Length)
                 {
                     currentDepth++;
 
-                    FindNodes(startNode);
+                    depthNodes = NodeManager.Instance.FindNodes(currentDepth);
 
                     depthIndex = 0;
                 }
@@ -199,31 +208,8 @@ public class Node : MonoBehaviour, IEnumerable<Node>
         {
             currentNode = null;
             currentDepth = startNode.Depth;
-            depthNodes = new List<Node>();
+            depthNodes = null;
             depthIndex = 0;
-        }
-
-        private void FindNodes(Node node)
-        {
-            if (node == startNode)
-                depthNodes.Clear();
-
-            if (!depthNodes.Contains(node))
-            {
-                if (node == null) return;
-
-                if (node.Depth == currentDepth)
-                {
-                    depthNodes.Add(node);
-                }
-                else
-                {
-                    foreach (Node n in node.Children)
-                    {
-                        FindNodes(n);
-                    }
-                }
-            }
         }
     }
 }

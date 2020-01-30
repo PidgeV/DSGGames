@@ -22,6 +22,7 @@ public class testAreaSpawner : MonoBehaviour
             asteroidSpawner.minPos = -AreaManager.Instance.AreaSize * 1.2f;
             asteroidSpawner.maxPos = AreaManager.Instance.AreaSize * 1.2f;
             asteroidSpawner.maxAsteroids = AreaManager.Instance.AreaSize / 3;
+            asteroidSpawner.maxScale = AreaManager.Instance.AreaSize / 200;
         }
     }
 
@@ -35,7 +36,7 @@ public class testAreaSpawner : MonoBehaviour
             for (int j = 0; j < random.Next(2, 10); j++)
             {
                 GameObject enemy = Instantiate<GameObject>(fighterPrefab);
-                enemy.transform.position = transform.position + Vector3.one * random.Next(100, AreaManager.Instance.AreaSize / 2);
+                enemy.transform.position = transform.position + Vector3.one * random.Next((int)(-AreaManager.Instance.AreaSize / 1.5f), (int)(AreaManager.Instance.AreaSize / 1.5f));
                 enemy.transform.parent = transform;
 
                 Complete.FighterController controller = enemy.GetComponent<Complete.FighterController>();
@@ -49,7 +50,7 @@ public class testAreaSpawner : MonoBehaviour
             for (int j = 0; j < random.Next(2, 10); j++)
             {
                 GameObject enemy = Instantiate<GameObject>(chaserPrefab);
-                enemy.transform.position = transform.position + Vector3.one * random.Next(100, AreaManager.Instance.AreaSize / 2);
+                enemy.transform.position = transform.position + Vector3.one * random.Next((int)(-AreaManager.Instance.AreaSize / 1.5f), (int)(AreaManager.Instance.AreaSize / 1.5f));
                 enemy.transform.parent = transform;
 
                 Complete.ChaserController controller = enemy.GetComponent<Complete.ChaserController>();
@@ -60,14 +61,14 @@ public class testAreaSpawner : MonoBehaviour
                 yield return null;
             }
 
-            for (int j = 0; j < random.Next(2, 2); j++)
+            for (int j = 0; j < random.Next(5); j++)
             {
                 GameObject enemy = Instantiate<GameObject>(swarmerPrefab);
-                enemy.transform.position = transform.position + Vector3.one * random.Next(100, AreaManager.Instance.AreaSize / 2);
+                enemy.transform.position = transform.position + Vector3.one * random.Next((int)(-AreaManager.Instance.AreaSize / 1.5f), (int)(AreaManager.Instance.AreaSize / 1.5f));
                 enemy.transform.parent = transform;
 
                 Flock controller = enemy.GetComponent<Flock>();
-                controller.startingCount = 50;
+                controller.startingCount = random.Next(20, 50);
 
                 if (asteroidSpawner != null)
                     controller.WayPoints = asteroidSpawner.asteroids;

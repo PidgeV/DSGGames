@@ -15,3 +15,4 @@ MonoBehaviour:
   eventType: 0
   prefabsToSpawn:
   - {fileID: 8057410561316126089, guid: d1c2643c6a95dfb4c8373d7fefcfb4f0, type: 3}
+  - {fileID: 8464054742834353141, guid: f3149f3ba7921454b844f858390c7b62, type: 3}

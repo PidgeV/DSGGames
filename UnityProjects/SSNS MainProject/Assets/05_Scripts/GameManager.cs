@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
+    public bool debug;
+
     [HideInInspector] public testShipController shipController;
 
     [SerializeField] private GameState gameState = GameState.NODE_TRANSITION;
@@ -46,7 +48,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.NODE_SELECTION:
                 shipController.StopThrust = true;
-                NodeManager.Instance.SelectNextNode();
+                NodeManager.Instance.BeginNodeSelection();
                 break;
             case GameState.NODE_TRANSITION:
                 shipController.StopThrust = false;

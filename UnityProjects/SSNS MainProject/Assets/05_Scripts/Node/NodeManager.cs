@@ -33,9 +33,9 @@ public class NodeManager : MonoBehaviour
     [SerializeField] private int maxPortalDistance = 350;
 
     [Header("Confirm Values")]
-    [SerializeField] bool confirmedP1;
+    [SerializeField] bool lockedP1;
 
-    [SerializeField] bool confirmedP2;
+    [SerializeField] bool lockedP2;
 
     #endregion
 
@@ -75,10 +75,21 @@ public class NodeManager : MonoBehaviour
 
     #endregion
 
+    // TODO: Add later
+    #region Depth Selection
+
+    //private Node[] depthNodes;
+
+    //private int selectedDepth;
+
+    //private bool mapPreview;
+
+    #endregion
+
     /// <summary>
     /// Begins next selection for next node
     /// </summary>
-    public void SelectNextNode()
+    public void BeginNodeSelection()
     {
         if (Choices.Length == 0) // If there is no choices left then game is over
         {
@@ -89,9 +100,8 @@ public class NodeManager : MonoBehaviour
             selectingNode = true;
             rotateToPortal = true;
 
-            // Selects the middle choice as default
-            selectedIndexP1 = Choices.Length / 2;
-            selectedIndexP2 = Choices.Length / 2;
+            //selectedDepth = currentNode.Depth + 1;
+            //depthNodes = FindNodes(selectedDepth);
 
             // Changes the time based on if there is more then 1 choice
             if (Choices.Length > 1)
@@ -107,8 +117,9 @@ public class NodeManager : MonoBehaviour
 
             // Spawn the portals and update the information for the nodes
             SpawnPortals();
-            PilotNodeUpdate(selectedIndexP1);
-            GunnerNodeUpdate(selectedIndexP2);
+
+            // Selects the middle choice as default
+            NodeUpdate(Choices.Length / 2);
 
             // Enable all node UI
             nodeUI.FadeGroups(true, true, true);
@@ -116,9 +127,44 @@ public class NodeManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Called when arrived at next node
+    /// Ends node selection and switches to node transition
     /// </summary>
-    public void ArrivedNextNode()
+    /// <param name="node">Next node to travel to</param>
+    public void TravelToNode(Node node)
+    {
+        // Resets all boolean variables
+        selectingNode = false;
+        nodeSelected = false;
+        lockedP1 = false;
+        lockedP2 = false;
+
+        // Stores the last node
+        lastNode = currentNode;
+
+        currentNode = node;
+
+        // Destroys the portal parent
+        if (portals != null)
+        {
+            Destroy(portals[0].transform.parent.gameObject);
+        }
+
+        lastNode.ResetColor();
+
+        currentNode.ActiveColor();
+
+        // Hides all UI except the gunner
+        nodeUI.FadeGroups(false, false, true);
+
+
+        // Switches state to node transition to load next area
+        GameManager.Instance.SwitchState(GameState.NODE_TRANSITION);
+    }
+
+    /// <summary>
+    /// Hides all UI that is tied to nodes
+    /// </summary>
+    public void HideAllNodeUI()
     {
         // Disable all node UI
         nodeUI.FadeGroups(false, false, false);
@@ -128,120 +174,191 @@ public class NodeManager : MonoBehaviour
             lastNode.ResetColor();
     }
 
+    #region Player Selection
+
     /// <summary>
-    /// Select the left node for the player role
+    /// Select the node in the provided direction for the player role
     /// </summary>
     /// <param name="role">The player's role</param>
-    public void SelectLeftNode(PlayerRole role)
+    /// <param name="direction">The direction of the selection</param>
+    public void SelectNodeChoice(PlayerRole role, int direction)
     {
         if (selectingNode)
         {
+            direction = Mathf.Clamp(direction, -1, 1);
+
             // Checks if the player hasn't confirmed for each role
-            if (role == PlayerRole.Pilot && timeSinceChangeP1 == 0 && !confirmedP1)
+            if ((role == PlayerRole.Pilot && timeSinceChangeP1 == 0 && !lockedP1) || (role == PlayerRole.Gunner && timeSinceChangeP2 == 0 && !lockedP2))
             {
-                PilotNodeUpdate(Mathf.Clamp(selectedIndexP1 - 1, 0, Choices.Length - 1));
-            }
-            else if (role == PlayerRole.Gunner && timeSinceChangeP2 == 0 && !confirmedP2)
-            {
-                GunnerNodeUpdate(Mathf.Clamp(selectedIndexP2 - 1, 0, Choices.Length - 1));
+                NodeUpdate(role, selectedIndexP2 + direction);
             }
         }
     }
 
     /// <summary>
-    /// Select the right node for the player role
+    /// Select the depth
     /// </summary>
-    /// <param name="role">The player's role</param>
-    public void SelectRightNode(PlayerRole role)
-    {
-        if (selectingNode)
-        {
-            // Checks if the player hasn't confirmed for each role
-            if (role == PlayerRole.Pilot && timeSinceChangeP1 == 0 && !confirmedP1)
-            {
-                PilotNodeUpdate(Mathf.Clamp(selectedIndexP1 + 1, 0, Choices.Length - 1));
-            }
-            else if (role == PlayerRole.Gunner && timeSinceChangeP2 == 0 && !confirmedP2)
-            {
-                GunnerNodeUpdate(Mathf.Clamp(selectedIndexP2 + 1, 0, Choices.Length - 1));
-            }
-        }
-    }
+    /// <param name="direction">The direction of the selection</param>
+    //public void SelectNodeDepth(int direction)
+    //{
+    //    if (selectingNode && mapPreview)
+    //    {
+    //        direction = Mathf.Clamp(direction, -1, 1);
+
+    //        if (GameManager.Instance.debug)
+    //        {
+    //            selectedDepth = Mathf.Clamp(selectedDepth + direction, startNode.Depth, startNode.MaxDepth);
+    //        }
+    //        else
+    //        {
+    //            selectedDepth = Mathf.Clamp(selectedDepth + direction, currentNode.Depth, startNode.MaxDepth);
+    //        }
+
+    //        if (selectedDepth == currentNode.Depth + 1)
+    //            depthNodes = null;
+    //        else
+    //            depthNodes = FindNodes(selectedDepth);
+    //    }
+    //}
 
     /// <summary>
-    /// Confirms node choice for the player role
+    /// Locks node choice for the player role
     /// </summary>
     /// <param name="role">The player's role</param>
-    /// <param name="confirm">Whether to confirm choice</param>
-    public void PlayerConfirm(PlayerRole role, bool confirm)
+    /// <param name="locked">Whether to confirm choice</param>
+    public void LockChoice(PlayerRole role, bool locked)
     {
         // Checks if both player's haven't confirmed
-        if (selectingNode && !(confirmedP1 && confirmedP2))
+        if (selectingNode && !(lockedP1 && lockedP2))
         {
             if (role == PlayerRole.Pilot)
             {
-                confirmedP1 = confirm;
+                lockedP1 = locked;
             }
             else if (role == PlayerRole.Gunner)
             {
-                confirmedP2 = confirm;
+                if (GameManager.Instance.debug)
+                {
+                }
+                else
+                    lockedP2 = locked;
             }
         }
     }
 
     /// <summary>
-    /// Updates the information for the node for the pilot
+    /// Updates the information for the node for the provided role
     /// </summary>
+    /// <param name="role">The role to update</param>
     /// <param name="newNodeIndex">The node to select</param>
-    private void PilotNodeUpdate(int newNodeIndex)
+    private void NodeUpdate(PlayerRole role, int newNodeIndex)
     {
-        timeSinceChangeP1 = SELECT_DELAY;
-        selectedIndexP1 = newNodeIndex;
-        rotateToPortal = true;
+        if (role == PlayerRole.Pilot)
+        {
+            newNodeIndex = Mathf.Clamp(newNodeIndex, 0, Choices.Length - 1);
 
-        // Updates the node UI for the pilot
-        #region UI 
+            timeSinceChangeP1 = SELECT_DELAY;
+            selectedIndexP1 = newNodeIndex;
+            rotateToPortal = true;
 
-        NodeInfo selectedNode = Choices[selectedIndexP1].NodeInfo;
+            // Updates the node UI for the pilot
+            #region UI 
 
-        NodeInfo leftNode = null;
-        NodeInfo rightNode = null;
+            NodeInfo selectedNode = Choices[selectedIndexP1].NodeInfo;
 
-        int leftNodeP1 = selectedIndexP1 - 1;
-        int rightNodeP1 = selectedIndexP1 + 1;
+            NodeInfo leftNode = null;
+            NodeInfo rightNode = null;
 
-        if (leftNodeP1 >= 0)
-            leftNode = Choices[leftNodeP1].NodeInfo;
+            int leftNodeP1 = selectedIndexP1 - 1;
+            int rightNodeP1 = selectedIndexP1 + 1;
 
-        if (rightNodeP1 < Choices.Length)
-            rightNode = Choices[rightNodeP1].NodeInfo;
+            if (leftNodeP1 >= 0)
+                leftNode = Choices[leftNodeP1].NodeInfo;
 
-        nodeUI.UpdatePilot(selectedNode, leftNode, rightNode);
+            if (rightNodeP1 < Choices.Length)
+                rightNode = Choices[rightNodeP1].NodeInfo;
 
-        #endregion
+            nodeUI.UpdatePilot(selectedNode, leftNode, rightNode);
+
+            #endregion
+        }
+        else if (role == PlayerRole.Gunner)
+        {
+            timeSinceChangeP2 = SELECT_DELAY;
+            Choices[selectedIndexP2].ResetColor();
+            selectedIndexP2 = newNodeIndex;
+
+            // Updates the node UI for the gunner
+            #region UI
+
+            currentNode.ActiveColor();
+
+            Choices[selectedIndexP2].DestinationColor();
+
+            nodeUI.UpdateGunner(Choices[selectedIndexP2].NodeInfo, currentNode.NodeInfo);
+
+            #endregion
+        }
     }
 
     /// <summary>
-    /// Updates the information for the node for the gunner
+    /// Updates the information for the node for both players
     /// </summary>
     /// <param name="newNodeIndex">The node to select</param>
-    private void GunnerNodeUpdate(int newNodeIndex)
+    private void NodeUpdate(int newNodeIndex)
     {
-        timeSinceChangeP2 = SELECT_DELAY;
-        Choices[selectedIndexP2].ResetColor();
-        selectedIndexP2 = newNodeIndex;
-
-        // Updates the node UI for the gunner
-        #region UI
-
-        currentNode.ActiveColor();
-
-        Choices[selectedIndexP2].DestinationColor();
-
-        nodeUI.UpdateGunner(Choices[selectedIndexP2].NodeInfo, currentNode.NodeInfo);
-
-        #endregion
+        NodeUpdate(PlayerRole.Pilot, newNodeIndex);
+        NodeUpdate(PlayerRole.Gunner, newNodeIndex);
     }
+
+    #endregion
+
+    #region Node Depth Finder
+
+    /// <summary>
+    /// Find all nodes at depth
+    /// </summary>
+    /// <param name="depth">The depth to find nodes at</param>
+    /// <returns></returns>
+    public Node[] FindNodes(int depth)
+    {
+        List<Node> nodes = new List<Node>();
+
+        FindNodes(ref nodes, depth, startNode);
+
+        return nodes.ToArray();
+    }
+
+    /// <summary>
+    /// Recursion method for finding nodes at depth
+    /// </summary>
+    /// <param name="nodes">Stores all nodes at depth</param>
+    /// <param name="depth">The depth to find it at</param>
+    /// <param name="node">Current node</param>
+    private void FindNodes(ref List<Node> nodes, int depth, Node node)
+    {
+        if (node == startNode)
+            nodes.Clear();
+
+        if (!nodes.Contains(node))
+        {
+            if (node == null) return;
+
+            if (node.Depth == depth)
+            {
+                nodes.Add(node);
+            }
+            else
+            {
+                foreach (Node n in node.Children)
+                {
+                    FindNodes(ref nodes, depth, n);
+                }
+            }
+        }
+    }
+
+    #endregion
 
     /// <summary>
     /// Spawns portals in-front of the player
@@ -281,36 +398,6 @@ public class NodeManager : MonoBehaviour
 
             portals[i] = portal;
         }
-    }
-
-    /// <summary>
-    /// Ends node selection and switches to node transition
-    /// </summary>
-    /// <param name="nodeIndex">Next node to travel to</param>
-    private void NextNodeConfirmed(int nodeIndex)
-    {
-        // Resets all boolean variables
-        selectingNode = false;
-        nodeSelected = false;
-        confirmedP1 = false;
-        confirmedP2 = false;
-
-        // Stores the last node
-        lastNode = currentNode;
-
-        currentNode = Choices[nodeIndex];
-
-        // Destroys the portal parent
-        if (portals != null)
-        {
-            Destroy(portals[0].transform.parent.gameObject);
-        }
-
-        // Hides all UI except the gunner
-        nodeUI.FadeGroups(false, false, true);
-
-        // Switches state to node transition to load next area
-        GameManager.Instance.SwitchState(GameState.NODE_TRANSITION);
     }
 
     /// <summary>
@@ -374,18 +461,14 @@ public class NodeManager : MonoBehaviour
         {
             n.GenerateNode();
         }
+
+        AreaManager.Instance.AreaLoaded += HideAllNodeUI;
     }
 
     private void Update()
     {
         if (selectingNode)
         {
-            // If both players have confirmed lower time to confirm time
-            if (confirmedP1 && confirmedP2 && timeBeforeSelection > CONFIRM_TIME)
-            {
-                timeBeforeSelection = CONFIRM_TIME;
-            }
-
             if (timedChoice || timeBeforeSelection <= CONFIRM_TIME)
                 timeBeforeSelection -= Time.deltaTime;
 
@@ -406,8 +489,7 @@ public class NodeManager : MonoBehaviour
                     }
                 }
 
-                PilotNodeUpdate(selectedIndex);
-                GunnerNodeUpdate(selectedIndex);
+                NodeUpdate(selectedIndex);
 
                 selectingNode = false;
                 nodeSelected = true;
@@ -416,15 +498,20 @@ public class NodeManager : MonoBehaviour
             // If timer is below confirm time and neither have choosen randomize player choices
             else if (timeBeforeSelection <= CONFIRM_TIME)
             {
-                if (!confirmedP1 || !confirmedP2)
+                if (!lockedP1 || !lockedP2)
                 {
-                    confirmedP1 = true;
-                    confirmedP2 = true;
+                    lockedP1 = true;
+                    lockedP2 = true;
 
                     // Updates the selected nodes with random node choice
-                    PilotNodeUpdate(random.Next(Choices.Length));
-                    GunnerNodeUpdate(random.Next(Choices.Length));
+                    NodeUpdate(PlayerRole.Pilot, random.Next(Choices.Length));
+                    NodeUpdate(PlayerRole.Gunner, random.Next(Choices.Length));
                 }
+            }
+            // If both players have confirmed lower time to confirm time
+            else if (lockedP1 && lockedP2)
+            {
+                timeBeforeSelection = CONFIRM_TIME;
             }
 
             timeSinceChangeP1 -= Time.deltaTime;
@@ -441,7 +528,7 @@ public class NodeManager : MonoBehaviour
 
             // Update selection UI
             nodeUI.UpdateTimer((int)timeBeforeSelection);
-            nodeUI.UpdateConfirm(confirmedP1, confirmedP2);
+            nodeUI.UpdateConfirm(lockedP1, lockedP2);
         }
 
         // Rotates to portal
@@ -451,13 +538,15 @@ public class NodeManager : MonoBehaviour
         if (nodeSelected && !rotateToPortal)
         {
             nodeSelected = false;
-            NextNodeConfirmed(selectedIndexP1);
+            TravelToNode(Choices[selectedIndexP1]);
         }
     }
 
     public Node[] Choices { get { return currentNode.Children; } }
     public Node StartNode { get { return startNode; } }
     public Node CurrentNode { get { return currentNode; } }
+
+    //public bool MapPreview { get { return mapPreview; } set { mapPreview = value; } }
 
     private float DistanceBetweenPortals { get { return maxPortalDistance / (Choices.Length == 1 ? 2 : (Choices.Length - 1)); } }
 }

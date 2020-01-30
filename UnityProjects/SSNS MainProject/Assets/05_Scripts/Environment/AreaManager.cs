@@ -10,7 +10,10 @@ public class AreaManager : MonoBehaviour
 {
     public static AreaManager Instance;
 
-    [SerializeField] private int areaSize;
+    public delegate void AreaLoadEventHandler();
+
+    public event AreaLoadEventHandler AreaLoaded;
+
     [SerializeField] private Area lastArea;
     [SerializeField] private Area currentArea;
 
@@ -49,7 +52,8 @@ public class AreaManager : MonoBehaviour
         lastArea = currentArea;
         currentArea = new Area(nodeInfo.name)
         {
-            location = lastArea.location + Vector3.forward * 10000
+            location = lastArea.location + Vector3.forward * 10000,
+            size = nodeInfo.nodeEvent.areaSize
         };
 
         // Spawns all prefabs
@@ -93,7 +97,6 @@ public class AreaManager : MonoBehaviour
 
     /// <summary>
     /// Adds object to the area
-    /// TODO: Disable enemy AI until player arrives at area
     /// </summary>
     /// <param name="gObject">The object that is needed to be added to the area</param>
     /// <param name="enemy">Whether it's an enemy or not</param>
@@ -101,13 +104,11 @@ public class AreaManager : MonoBehaviour
     {
         if (enemy)
         {
-            gObject.transform.parent = currentArea.enemiesParent;
-            currentArea.enemies.Add(gObject);
+            gObject.transform.parent = currentArea.enemies;
         }
         else
         {
-            gObject.transform.parent = currentArea.obstacleParent;
-            currentArea.objects.Add(gObject);
+            gObject.transform.parent = currentArea.obstacles;
         }
     }
 
@@ -116,31 +117,13 @@ public class AreaManager : MonoBehaviour
     /// </summary>
     public void KillEnemies()
     {
-        foreach (GameObject enemy in currentArea.enemies.ToArray())
+        foreach(GameObject enemy in currentArea.enemies)
         {
-            if (enemy.TryGetComponent(out HealthAndShields health))
-            {
-                health.TakeDamage(100000000, 100000000);
-            }
-            else if (enemy.TryGetComponent(out Flock swarm))
-            {
-                foreach (FlockAgent agent in swarm.agents)
-                {
-                    agent.GetComponent<HealthAndShields>().TakeDamage(100000000, 100000000);
-                }
-            }
+            HealthAndShields healthAndShields = enemy.GetComponent<HealthAndShields>();
+
+            if (healthAndShields)
+                healthAndShields.TakeDamage(10000000, 1000000);
         }
-
-        currentArea.enemies.Clear();
-    }
-
-    /// <summary>
-    /// Removes enemy from area
-    /// </summary>
-    /// <param name="enemy">The enemy to remove</param>
-    public void OnEnemyDeath(GameObject enemy)
-    {
-        currentArea.enemies.Remove(enemy);
     }
 
     /// <summary>
@@ -176,47 +159,56 @@ public class AreaManager : MonoBehaviour
             nextAreaLoaded = false;
             lastAreaDestroyed = false;
 
-            NodeManager.Instance.ArrivedNextNode();
-            GameManager.Instance.shipController.transform.position = currentArea.location - Vector3.forward * areaSize;
+            AreaLoaded?.Invoke();
+
+            currentArea.enemies.gameObject.SetActive(true);
+            currentArea.obstacles.gameObject.SetActive(true);
+
+            // TODO: Should be in the testShipController
+            GameManager.Instance.shipController.transform.position = PlayerDestination;
+            GameManager.Instance.shipController.transform.rotation = Quaternion.Euler(0, 0, 0);
+
             SkyboxManager.Instance.SwitchToSkybox(NodeManager.Instance.CurrentNode.Skybox);
             GameManager.Instance.SwitchState(SNSSTypes.GameState.BATTLE);
         }
     }
 
-    public int AreaSize { get { return areaSize; } }
-    public bool EnemiesDead { get { return currentArea.enemies == null || currentArea.enemies.Count == 0; } }
+    public int AreaSize { get { return currentArea.size; } }
+    public bool EnemiesDead { get { return currentArea.enemies.childCount == 0; } }
 
-    /// <summary>
-    /// Class that stores all the area info
-    /// </summary>
-    [System.Serializable]
-    class Area
+    public Vector3 PlayerDestination { get { return currentArea.location - Vector3.forward * currentArea.size; } }
+}
+
+/// <summary>
+/// Class that stores all the area info
+/// </summary>
+[System.Serializable]
+public class Area
+{
+    public Transform parent;
+    public Transform obstacles;
+    public Transform enemies;
+    public Vector3 location;
+    public int size;
+
+    public Area(string name)
     {
-        public Transform parent;
-        public Transform obstacleParent;
-        public Transform enemiesParent;
-        public Vector3 location;
-        public List<GameObject> objects;
-        public List<GameObject> enemies;
+        parent = new GameObject("Area: " + name).transform;
+        obstacles = new GameObject("Obstacles").transform;
+        obstacles.parent = parent;
+        obstacles.gameObject.SetActive(false);
+        enemies = new GameObject("Enemies").transform;
+        enemies.parent = parent;
+        enemies.gameObject.SetActive(false);
+    }
 
-        public Area(string name)
-        {
-            parent = new GameObject("Area: " + name).transform;
-            obstacleParent = new GameObject("Obstacles").transform;
-            obstacleParent.parent = parent;
-            enemiesParent = new GameObject("Enemies").transform;
-            enemiesParent.parent = parent;
-            objects = new List<GameObject>();
-            enemies = new List<GameObject>();
-        }
-
-        ~Area()
-        {
-            parent = null;
-            location = Vector3.zero;
-            objects = null;
-            enemies = null;
-            System.GC.EndNoGCRegion();
-        }
+    ~Area()
+    {
+        parent = null;
+        obstacles = null;
+        enemies = null;
+        location = Vector3.zero;
+        size = 0;
+        System.GC.EndNoGCRegion();
     }
 }
