@@ -9,6 +9,7 @@ using UnityEngine.Experimental.Rendering.HDPipeline;
 /// </summary>
 public class SkyboxManager : MonoBehaviour
 {
+    [SerializeField]StaticLightingSky skyLighting;
     public static SkyboxManager Instance;
 
     [SerializeField] Cubemap[] skyboxes; // List of skyboxes in game
@@ -49,6 +50,8 @@ public class SkyboxManager : MonoBehaviour
         skyboxIndex = index;
 
         skybox.hdriSky.Override(skyboxes[skyboxIndex]);
+
+        StartCoroutine(ChangeSkyLighting());
     }
 
     /// <summary>
@@ -58,6 +61,13 @@ public class SkyboxManager : MonoBehaviour
     public void LoopSkybox()
     {
         SwitchToSkybox((skyboxIndex + 1) % skyboxes.Length);
+    }
+
+    IEnumerator ChangeSkyLighting()
+    {
+        skyLighting.enabled = false;
+        yield return new WaitForFixedUpdate();
+        skyLighting.enabled = true;
     }
 
     public int SkyboxAmount { get { return skyboxes.Length; } }

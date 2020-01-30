@@ -141,7 +141,6 @@
     <Compile Include="Assets\05_Scripts\UI\OptionsMenu.cs" />
     <Compile Include="Assets\05_Scripts\UI\SetupMenu.cs" />
     <Compile Include="Assets\05_Scripts\UI\UIManager.cs" />
-    <Compile Include="Assets\ForceDynamicSkyLighting.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>C:/Users/Blake/Documents/GitHub/DSGGames/UnityProjects/SSNS MainProject/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
