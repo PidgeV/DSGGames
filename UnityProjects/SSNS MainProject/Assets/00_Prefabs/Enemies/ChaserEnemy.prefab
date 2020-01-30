@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 725005335}
   m_Layer: 9
   m_Name: ChaserEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67,7 +67,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48901a74a34a93249835e8beb8ed2146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  kineticDamage: 5
+  energyDamage: 5
 --- !u!65 &3107085776561158199
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -111,9 +112,10 @@ MonoBehaviour:
   maxShield: 25
   life: 10
   shield: 10
-  armor: 1
   regenSpeed: 1
+  regenDelay: 1
   invincible: 0
+  regen: 1
 --- !u!114 &2083052501916966413
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,6 +140,7 @@ MonoBehaviour:
   playerDistanceMeters: 2000
   rbSelf: {fileID: 3107085776561158192}
   raySize: 8.5
+  hitPlayer: 0
 --- !u!114 &5702806089406881496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,7 +175,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48901a74a34a93249835e8beb8ed2146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 10
+  kineticDamage: 5
+  energyDamage: 5
 --- !u!1001 &5876668022152648955
 PrefabInstance:
   m_ObjectHideFlags: 0
