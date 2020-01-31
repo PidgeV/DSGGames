@@ -37,6 +37,7 @@ public class FlockAgent : MonoBehaviour
 
     private void OnDestroy()
     {
-        swarm.agents.Remove(this);
+        if (swarm)
+            swarm.agents.Remove(this);
     }
 }

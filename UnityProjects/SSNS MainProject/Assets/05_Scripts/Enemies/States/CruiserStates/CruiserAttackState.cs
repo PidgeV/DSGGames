@@ -88,7 +88,7 @@ public class CruiserAttackState : FSMState
 				}
 				else
 				{
-					Vector3 direction = (myController.player.transform.position - myController.transform.position).normalized ;
+					Vector3 direction = (myController.player.transform.position - myController.transform.position).normalized;
 
 					float speed = 55f * 12f;
 

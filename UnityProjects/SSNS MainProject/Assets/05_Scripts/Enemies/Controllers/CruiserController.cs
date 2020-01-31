@@ -16,7 +16,7 @@ public class CruiserController : AdvancedFSM
 	[HideInInspector] public Rigidbody myRigidbody;
 
 	// State Dependencies
-	[HideInInspector] public float DetectionRange = 1500;
+	public float DetectionRange = 1500;
 	[HideInInspector] public float AttackRange = 800;
 	[HideInInspector] public float LostRange = 2000;
 

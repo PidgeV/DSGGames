@@ -234,7 +234,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6552152225560632426}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &6552152224462578534
 Camera:
@@ -276,7 +276,7 @@ Camera:
   m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
+  m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!81 &6552152224462578535
@@ -446,7 +446,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6552152225560632426}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &6552152224837182052
 Camera:
@@ -488,7 +488,7 @@ Camera:
   m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
-  m_OcclusionCulling: 1
+  m_OcclusionCulling: 0
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
 --- !u!114 &6552152224837182042
@@ -766,8 +766,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 6552152224837182043}
   - {fileID: 6552152224462578533}
+  - {fileID: 6552152224837182043}
   - {fileID: 6552152224488707099}
   - {fileID: 6552152225189396121}
   m_Father: {fileID: 0}
@@ -948,15 +948,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.3165499
       objectReference: {fileID: 0}
-    - target: {fileID: 1225102731379926711, guid: 633f381299eb47344bda0c5b2efc8d8c,
-        type: 3}
-      propertyPath: moveWithTransform
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926708, guid: 633f381299eb47344bda0c5b2efc8d8c,
         type: 3}
       propertyPath: m_RenderAlignment
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102731379926711, guid: 633f381299eb47344bda0c5b2efc8d8c,
+        type: 3}
+      propertyPath: moveWithTransform
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 633f381299eb47344bda0c5b2efc8d8c, type: 3}
@@ -1063,15 +1063,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.3165499
       objectReference: {fileID: 0}
-    - target: {fileID: 1225102731379926711, guid: 633f381299eb47344bda0c5b2efc8d8c,
-        type: 3}
-      propertyPath: moveWithTransform
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926708, guid: 633f381299eb47344bda0c5b2efc8d8c,
         type: 3}
       propertyPath: m_RenderAlignment
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102731379926711, guid: 633f381299eb47344bda0c5b2efc8d8c,
+        type: 3}
+      propertyPath: moveWithTransform
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 633f381299eb47344bda0c5b2efc8d8c, type: 3}
@@ -1178,15 +1178,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.0083869
       objectReference: {fileID: 0}
-    - target: {fileID: 1225102731379926711, guid: 633f381299eb47344bda0c5b2efc8d8c,
-        type: 3}
-      propertyPath: moveWithTransform
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926708, guid: 633f381299eb47344bda0c5b2efc8d8c,
         type: 3}
       propertyPath: m_RenderAlignment
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102731379926711, guid: 633f381299eb47344bda0c5b2efc8d8c,
+        type: 3}
+      propertyPath: moveWithTransform
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 633f381299eb47344bda0c5b2efc8d8c, type: 3}
@@ -1293,15 +1293,15 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.0083869
       objectReference: {fileID: 0}
-    - target: {fileID: 1225102731379926711, guid: 633f381299eb47344bda0c5b2efc8d8c,
-        type: 3}
-      propertyPath: moveWithTransform
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926708, guid: 633f381299eb47344bda0c5b2efc8d8c,
         type: 3}
       propertyPath: m_RenderAlignment
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102731379926711, guid: 633f381299eb47344bda0c5b2efc8d8c,
+        type: 3}
+      propertyPath: moveWithTransform
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 633f381299eb47344bda0c5b2efc8d8c, type: 3}

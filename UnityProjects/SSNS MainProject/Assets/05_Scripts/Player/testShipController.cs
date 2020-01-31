@@ -295,8 +295,12 @@ public class testShipController : MonoBehaviour
         // Ship Thrust
         #region Ship Thrust
 
+        if (stopThrust)
+        {
+            thrustSpeed = Mathf.Clamp(thrustSpeed - ship_Deceleration, 0, ship_MaxSpeed);
+        }
         // If were boosting
-        if (boosting)
+        else if (boosting)
         {
             // Increase our speed when boosting
             if (rigidbody.velocity.magnitude < ship_MaxBoostSpeed) thrustSpeed = Mathf.Clamp(thrustSpeed + (ship_Acceleration * boost_multiplier), ship_MinSpeed, ship_MaxBoostSpeed);
@@ -321,10 +325,6 @@ public class testShipController : MonoBehaviour
         {
             // Clamp our thrust Speed to our max thrust speed
             thrustSpeed = Mathf.Clamp(thrustSpeed - ship_Deceleration, ship_MaxSpeed, ship_MaxBoostSpeed);
-        }
-        else if (stopThrust)
-        {
-            thrustSpeed = Mathf.Clamp(thrustSpeed - ship_Deceleration, 0, ship_MaxSpeed);
         }
         // Else were not boosting so we increase our ships normal speed
         else

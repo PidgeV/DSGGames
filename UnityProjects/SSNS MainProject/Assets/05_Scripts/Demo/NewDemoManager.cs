@@ -35,6 +35,9 @@ public class NewDemoManager : MonoBehaviour
 	[Space(5)]
 	public KeyCode demo_ToggleWindow = KeyCode.Tab;
 
+	[Space(5)]
+	[SerializeField] RectTransform hud;
+
 	// This menus Rect
 	private HealthAndShields player;
 	private RectTransform menuRect;
@@ -56,8 +59,12 @@ public class NewDemoManager : MonoBehaviour
 	void Start()
     {
 		playerObj = GameObject.FindGameObjectWithTag("Player");
-		originalPos = playerObj.transform.position;
-		originalRot = playerObj.transform.rotation;
+
+		if (playerObj)
+		{
+			originalPos = playerObj.transform.position;
+			originalRot = playerObj.transform.rotation;
+		}
 
 		if (playerObj)
 		{
@@ -175,57 +182,13 @@ public class NewDemoManager : MonoBehaviour
 
 
 		// Cameras
-		Button btn_Camera01 = CreateButton(button, cameraRect, "Camera 01 [n/a]");
-		btn_Camera01.onClick.AddListener(() => {
-			if (cameras.Length > 0)
-			{
-				UpdateActiveCamera(cameras[0]);
-			}
-		});
-
-		Button btn_Camera02 = CreateButton(button, cameraRect, "Camera 02 [n/a]");
-		btn_Camera02.onClick.AddListener(() => {
-			if (cameras.Length > 1)
-			{
-				UpdateActiveCamera(cameras[1]);
-			}
-		});
-
-		Button btn_Camera03 = CreateButton(button, cameraRect, "Camera 03 [n/a]");
-		btn_Camera03.onClick.AddListener(() => {
-			if (cameras.Length > 2)
-			{
-				UpdateActiveCamera(cameras[2]);
-			}
-		});
-		btn_Camera03.interactable = false;
-
-		Button btn_Camera04 = CreateButton(button, cameraRect, "Camera 04 [n/a]");
-		btn_Camera04.onClick.AddListener(() => {
-			if (cameras.Length > 3)
-			{
-				UpdateActiveCamera(cameras[3]);
-			}
-		});
-		btn_Camera04.interactable = false;
-
-		Button btn_Camera05 = CreateButton(button, cameraRect, "Camera 05 [n/a]");
-		btn_Camera05.onClick.AddListener(() => {
-			if (cameras.Length > 4)
-			{
-				UpdateActiveCamera(cameras[4]);
-			}
-		});
-		btn_Camera05.interactable = false;
-
-		Button btn_Camera06 = CreateButton(button, cameraRect, "Camera 06 [n/a]");
-		btn_Camera06.onClick.AddListener(() => {
-			if (cameras.Length > 5)
-			{
-				UpdateActiveCamera(cameras[5]);
-			}
-		});
-		btn_Camera06.interactable = false;
+		foreach(Camera camera in cameras)
+		{
+			Button btn_Camera = CreateButton(button, cameraRect, "Camera " + camera.name.Replace("[Camera] ", ""));
+			btn_Camera.onClick.AddListener(() => {
+				UpdateActiveCamera(camera);
+			});
+		}
 
 
 		// Sky box
@@ -251,25 +214,16 @@ public class NewDemoManager : MonoBehaviour
 			}
 		});
 
-		// Loas scenes
+		// Loads scenes
 		// MAIN MENU
-		Button btn_LoadScene_01 = CreateButton(button, loadsRect, "[01]");
-		btn_LoadScene_01.onClick.AddListener(() => {
-			SceneManager.LoadScene(0);
-		});
+		for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
+		{
+			int sceneIndex = i;
 
-		// NODE TEST
-		Button btn_LoadScene_02 = CreateButton(button, loadsRect, "[02]");
-		btn_LoadScene_02.onClick.AddListener(() => {
-			SceneManager.LoadScene(1);
-			Debug.Log("Load Scene 02");
-		});
-
-		// DEMO SCENE
-		Button btn_LoadScene_03 = CreateButton(button, loadsRect, "[03]");
-		btn_LoadScene_03.onClick.AddListener(() => {
-			SceneManager.LoadScene(2);
-		});
+			CreateButton(button, loadsRect, "[" + (i + 1) + "]").onClick.AddListener(() => {
+				SceneManager.LoadScene(sceneIndex);
+			});
+		}
 
 		#region Example Buttons
 
@@ -325,7 +279,6 @@ public class NewDemoManager : MonoBehaviour
 	/// </summary>
 	public void TeleportPlayer(Vector3 position)
 	{
-		GameObject player = GameObject.FindGameObjectWithTag("Player");
 		if (player)
 		{
 			player.transform.position = position;
@@ -339,8 +292,6 @@ public class NewDemoManager : MonoBehaviour
 	{
 		if (playerObj)
 		{
-			playerObj.gameObject.SetActive(true);
-
 			if (AreaManager.Instance)
 			{
 				playerObj.transform.rotation = Quaternion.Euler(Vector3.zero);
@@ -351,6 +302,8 @@ public class NewDemoManager : MonoBehaviour
 				playerObj.transform.position = originalPos;
 				playerObj.transform.rotation = originalRot;
 			}
+
+			playerObj.gameObject.SetActive(true);
 		}
 	}
 
@@ -359,6 +312,30 @@ public class NewDemoManager : MonoBehaviour
 	/// </summary>
 	public void UpdateActiveCamera(Camera newCamera)
 	{
+		if (player)
+		{
+			if (newCamera.name.Contains("Pilot"))
+			{
+				hud.gameObject.SetActive(true);
+				player.invincible = false;
+			}
+			else
+			{
+				hud.gameObject.SetActive(false);
+				player.invincible = true;
+			}
+		}
+		
+		if (enabledCam.TryGetComponent(out ToggleObjects oldToggle))
+		{
+			oldToggle.HideEverything(false);
+		}
+
+		if (newCamera.TryGetComponent(out ToggleObjects newToggle))
+		{
+			newToggle.HideEverything(true);
+		}
+
 		// Disable the old camera
 		enabledCam.enabled = false;
 

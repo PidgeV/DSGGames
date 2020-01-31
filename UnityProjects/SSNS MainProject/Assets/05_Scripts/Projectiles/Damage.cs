@@ -24,13 +24,13 @@ public class Damage : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.TryGetComponent(out HealthAndShields hpTemp))
-        {
-            hpTemp.TakeDamage(kineticDamage, energyDamage);
-        }
-    }
+    //private void OnCollisionStay(Collision collision)
+    //{
+    //    if (collision.gameObject.TryGetComponent(out HealthAndShields hpTemp))
+    //    {
+    //        hpTemp.TakeDamage(kineticDamage, energyDamage);
+    //    }
+    //}
 
     private void OnTriggerEnter(Collider other)
     {

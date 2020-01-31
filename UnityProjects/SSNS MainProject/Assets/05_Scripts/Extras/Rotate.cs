@@ -4,17 +4,18 @@ using UnityEngine;
 
 public class Rotate : MonoBehaviour
 {
-    public float X, Y, Z;
-    public GameObject pickup;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private int speed = 20;
+    [SerializeField] private Vector3 rotationDir = Vector3.zero;
+
+    private void Awake()
     {
-        
+        if (rotationDir == Vector3.zero)
+            rotationDir = Vector3.up;
     }
 
     // Update is called once per frame
     void Update()
     {
-        pickup.transform.Rotate(X, Y, Z, Space.Self);
+        transform.rotation *= Quaternion.Euler(rotationDir * speed * Time.deltaTime);
     }
 }
