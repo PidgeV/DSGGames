@@ -46,8 +46,8 @@ MonoBehaviour:
   waypoints: []
   patrolSpeed: 75
   attackSpeed: 150
-  attackStateRadius: 10
+  attackStateRadius: 5
   patrolStateRadius: 150
-  defenseStateRadius: 20
+  defenseStateRadius: 10
   waypointDistanceMeters: 75
   playerDistanceMeters: 20000

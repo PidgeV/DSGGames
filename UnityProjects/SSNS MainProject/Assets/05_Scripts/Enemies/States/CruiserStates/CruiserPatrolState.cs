@@ -98,6 +98,8 @@ public class CruiserPatrolState : FSMState
 			{
 				patrolID++;
 
+                Debug.Log("Changing States");
+
 				if (patrolID >= patrolPoints.Count) patrolID = 0;
 			}
 		}
