@@ -173,7 +173,13 @@ public class AreaManager : MonoBehaviour
         }
     }
 
-    public int AreaSize { get { return currentArea.size; } }
+	//
+	private void OnDrawGizmos()
+	{
+		Gizmos.DrawWireSphere(currentArea.location, currentArea.size);
+	}
+
+	public int AreaSize { get { return currentArea.size; } }
     public bool EnemiesDead { get { return currentArea.enemies.childCount == 0; } }
 
     public Vector3 PlayerDestination { get { return currentArea.location - Vector3.forward * currentArea.size; } }

@@ -37,7 +37,7 @@ public class Player : Controller
 			SetPlayerActions(currentState);
 		}
 	}
-	 
+
 	//
 	public void SetPlayerActions(GameState currentState)
 	{
