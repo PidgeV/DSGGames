@@ -8,116 +8,132 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class HealthAndShields : MonoBehaviour
 {
-    [Space(10)]
-    // The MAX life the ship has
-    [SerializeField] float maxLife = 100f;
-    public float MaxLife { get { return maxLife; } }
+	[Space(10)]
+	// The MAX life the ship has
+	[SerializeField] float maxLife = 100f;
+	public float MaxLife { get { return maxLife; } }
 
-    // The MAX shield the ship has
-    [SerializeField] float maxShield = 100f;
-    public float MaxShield { get { return maxShield; } }
+	// The MAX shield the ship has
+	[SerializeField] float maxShield = 100f;
+	public float MaxShield { get { return maxShield; } }
 
-    [Space(10)]
-    public float life;
-    public float shield;
+	[Space(10)]
+	public float life;
+	public float shield;
 
-    [Space(10)]
-    [Range(1, 99)]
-    // The PERCENT of shield that is regenerated per second
-    public int regenSpeed = 5;
-    public float regenDelay = 1f;
+	[Space(10)]
+	[Range(1, 99)]
+	// The PERCENT of shield that is regenerated per second
+	public int regenSpeed = 5;
+	public float regenDelay = 1f;
 
-    public bool invincible;
+	public bool invincible;
 
-    public bool regen = true;
+	public bool regen = true;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        life = maxLife;
-        shield = maxShield;
+	// Start is called before the first frame update
+	void Start()
+	{
+		life = maxLife;
+		shield = maxShield;
 
-        StartCoroutine(RegenDelayReset());
-    }
+		ShieldProjector shieldProjector = gameObject.GetComponentInChildren<ShieldProjector>();
 
-    // Update is called once per frame
-    void Update()
-    {
-        // If we have more then 0 life we can regen shields
-        if (life > 0 && regen)
-        {
-            // Calculating the amount we need to heal WITH regen Speed
-            float amountToHeal = shield + (maxShield * regenSpeed / 100f) * Time.deltaTime;
+		if (shieldProjector) {
+			shieldProjector.onShieldHit += OnShieldHit;
+		}
 
-            // Clamp out shield to the max shield
-            shield = Mathf.Clamp(amountToHeal, 0, maxShield);
-        }
-        else
-        {
-            OnDeath();
-        }
-    }
+		StartCoroutine(RegenDelayReset());
+	}
 
-    // Damage the ship
-    public void TakeDamage(float kineticDamage, float energyDamage )
-    {
-        if (!invincible)
-        {
-            regen = false;
-            // Damage the shield
-            shield = Mathf.Clamp(shield - energyDamage, 0, maxShield);
+	// Update is called once per frame
+	void Update()
+	{
+		// If we have more then 0 life we can regen shields
+		if (life > 0 && regen)
+		{
+			// Calculating the amount we need to heal WITH regen Speed
+			float amountToHeal = shield + (maxShield * regenSpeed / 100f) * Time.deltaTime;
 
-            // If we have negative shields we can take it away from your life pool
-            if (shield == 0)
-            {
-                life -= kineticDamage;
-            }
+			// Clamp out shield to the max shield
+			shield = Mathf.Clamp(amountToHeal, 0, maxShield);
+		}
+		else
+		{
+			OnDeath();
+		}
+	}
 
-            // If we are dead cann OnDeath()
-            if (life <= 0)
-            {
-                life = 0;
-                StartCoroutine(OnDeath());
-            }
+	// Called by the Shield system script
+	public void OnShieldHit(GameObject attacker)
+	{
+		if (attacker.TryGetComponent<Damage>(out Damage damage))
+		{
+			Debug.Log("Damage Taken:( KineticDamage: " + damage.kineticDamage + ", EnergyDamage: " + damage.energyDamage + ")");
+			TakeDamage(damage.kineticDamage, damage.energyDamage);
+		}
+	}
 
-            // TEMP -- COLOR THE THINGS YOU HIT
-            //if (gameObject.GetComponent<Renderer>()) gameObject.GetComponent<Renderer>().material.SetColor("_BaseColor", Color.blue);
-        }
-    }
+	// Damage the ship
+	public void TakeDamage(float kineticDamage, float energyDamage)
+	{
+		if (!invincible)
+		{
+			regen = false;
+			// Damage the shield
+			shield = Mathf.Clamp(shield - energyDamage, 0, maxShield);
 
-    // When life is 0 this is called by TakeDamage()
-    IEnumerator OnDeath()
-    {
-        yield return new WaitForSeconds(0.1f);
+			// If we have negative shields we can take it away from your life pool
+			if (shield == 0)
+			{
+				life -= kineticDamage;
+			}
 
-        if (CompareTag("Player"))
-        {
+			// If we are dead cann OnDeath()
+			if (life <= 0)
+			{
+				life = 0;
+				StartCoroutine(OnDeath());
+			}
 
-            life = maxLife;
-            shield = maxShield;
+			// TEMP -- COLOR THE THINGS YOU HIT
+			//if (gameObject.GetComponent<Renderer>()) gameObject.GetComponent<Renderer>().material.SetColor("_BaseColor", Color.blue);
+		}
+	}
 
-            StartCoroutine(RegenDelayReset());
+	// When life is 0 this is called by TakeDamage()
+	IEnumerator OnDeath()
+	{
+		yield return new WaitForSeconds(0.1f);
 
-            gameObject.SetActive(false);
-        }
-        else
-            Destroy(gameObject);
-    }
+		if (CompareTag("Player"))
+		{
 
-    public void Heal(int amountToHeal)
-    {
-        life += amountToHeal;
+			life = maxLife;
+			shield = maxShield;
 
-        if (life > maxLife) life = maxLife;
-    }
+			StartCoroutine(RegenDelayReset());
 
-    IEnumerator RegenDelayReset()
-    {
-        while(true)
-        {
-            yield return new WaitForSeconds(regenDelay);
+			gameObject.SetActive(false);
+		}
+		else
+			Destroy(gameObject);
+	}
 
-            regen = true;
-        }
-    }
+	public void Heal(int amountToHeal)
+	{
+		life += amountToHeal;
+
+		if (life > maxLife) life = maxLife;
+	}
+
+	IEnumerator RegenDelayReset()
+	{
+		while (true)
+		{
+			yield return new WaitForSeconds(regenDelay);
+
+			regen = true;
+		}
+	}
 }

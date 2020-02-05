@@ -457,21 +457,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6608749523433535168, guid: eec2fe4ad0beacf4bbf9df2290479e47,
-        type: 3}
-      propertyPath: shieldMat
-      value: 
-      objectReference: {fileID: 1889161664}
-    - target: {fileID: 6608749523433535168, guid: eec2fe4ad0beacf4bbf9df2290479e47,
-        type: 3}
-      propertyPath: meshRenderer
-      value: 
-      objectReference: {fileID: 1889161664}
-    - target: {fileID: 3507114127983036335, guid: eec2fe4ad0beacf4bbf9df2290479e47,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: b67bb34e42234564ebf5d4b5b85fe739, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eec2fe4ad0beacf4bbf9df2290479e47, type: 3}
 --- !u!114 &867543126 stripped
@@ -1122,12 +1107,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!23 &1889161664 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 3507114127983036335, guid: eec2fe4ad0beacf4bbf9df2290479e47,
-    type: 3}
-  m_PrefabInstance: {fileID: 797532968}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1941099351 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6884217599703764722, guid: 1971746f0a6eeb84689a803e95c6fd4f,
