@@ -29,6 +29,7 @@ Material:
     m_Floats:
     - Vector1_557F6751: 1
     - Vector1_DB223A0A: 0.85
+    - _FresnelSize: 3
     - _IntersectionSize: 0.82
     - _PulseDistance: 0.2
     - _PulseSpeed: 1

@@ -8,7 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class HealthAndShields : MonoBehaviour
 {
-	[Space(10)]
+	[Space(5)]
 	// The MAX life the ship has
 	[SerializeField] float maxLife = 100f;
 	public float MaxLife { get { return maxLife; } }
@@ -17,11 +17,11 @@ public class HealthAndShields : MonoBehaviour
 	[SerializeField] float maxShield = 100f;
 	public float MaxShield { get { return maxShield; } }
 
-	[Space(10)]
+	[Space(5)]
 	public float life;
 	public float shield;
 
-	[Space(10)]
+	[Space(5)]
 	[Range(1, 99)]
 	// The PERCENT of shield that is regenerated per second
 	public int regenSpeed = 5;

@@ -48,7 +48,6 @@ public class testShipController : MonoBehaviour
     [SerializeField] private Camera pilotCamera;
     [SerializeField] private Camera gunnerCamera;
 
-
     private Slider slider_Health;
     private Slider slider_Shield;
     private Slider slider_Boost;
@@ -95,7 +94,8 @@ public class testShipController : MonoBehaviour
     private bool rotating;
     private bool boosting;
     private bool roleSwap;
-    private bool shooting;
+    private bool shooting_Gunner;
+    private bool shooting_Pilot;
 
     [Header("Controls")]
     [SerializeField] bool invertedControls;
@@ -154,6 +154,15 @@ public class testShipController : MonoBehaviour
             }
         }
     }
+
+	private void OnDestroy()
+	{
+		if (player1)
+			Destroy(player1.gameObject);
+
+		if (player2)
+			Destroy(player2.gameObject);
+	}
 
 	// Unity Methods and Events
 	#region Unity ( Update, FixedUpdate and LateUpdate )
@@ -364,8 +373,12 @@ public class testShipController : MonoBehaviour
         slider_Shield.value = (1 / shipHP.MaxShield) * shipHP.shield;
 
         // Shooting
-        if (shooting) {
+        if (shooting_Gunner) {
 			Shoot();
+		}
+
+		if (shooting_Pilot) {
+			ShipShoot();
 		}
 
         // Increment the shooter timer
@@ -422,15 +435,6 @@ public class testShipController : MonoBehaviour
 		gunnerCamera.transform.LookAt(gunHelper.position + gunHelper.forward * 300);
 	}
 
-    private void OnDestroy()
-    {
-        if (player1)
-            Destroy(player1.gameObject);
-
-        if (player2)
-            Destroy(player2.gameObject);
-    }
-
     #endregion
 
     /// <summary> 
@@ -462,6 +466,17 @@ public class testShipController : MonoBehaviour
             }
         }
     }
+
+	public void ShipShoot()
+	{
+		if (shotTimer > currentShotInfo.FireRate)
+		{
+			shotTimer = 0;
+			Quaternion rot = Quaternion.LookRotation(transform.forward);
+			GameObject shot = Instantiate(currentShotInfo.gameObject, transform.position + transform.forward * 10, Quaternion.identity);
+			shot.transform.rotation = rot;
+		}
+	}
 
     /// <summary> 
 	/// Move the ships model so it looks more like your controlling the ship 
@@ -651,9 +666,15 @@ public class testShipController : MonoBehaviour
     /// <summary>
 	/// Make the ship shoot 
 	/// </summary>
-    public void Shoot(bool pressed)
+    public void Shoot(PlayerRole role, bool pressed)
     {
-        shooting = pressed;
+		if (role == PlayerRole.Pilot) {
+			shooting_Pilot = pressed;
+		}
+
+		if (role == PlayerRole.Gunner) {
+			shooting_Gunner = pressed;
+		}
     }
 
     /// <summary> 

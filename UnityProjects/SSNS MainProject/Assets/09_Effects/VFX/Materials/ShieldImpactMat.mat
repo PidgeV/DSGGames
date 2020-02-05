@@ -34,4 +34,4 @@ Material:
     m_Colors:
     - _FresnelColor: {r: 128, g: 128, b: 128, a: 1}
     - _ImpactColor: {r: 24.45283, g: 1.406374, b: 0, a: 1}
-    - _ImpactPosition: {r: 0, g: 0, b: 0, a: 0}
+    - _ImpactPosition: {r: 0, g: 0.12, b: 0, a: 0}

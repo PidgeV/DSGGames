@@ -133,7 +133,7 @@ public class Player : Controller
 		if (myRole == PlayerRole.Gunner)
 		{
 			// Make the gunner shoot
-			controller.Shoot(input.isPressed);
+			controller.Shoot(myRole, input.isPressed);
 		}
 	}
 
@@ -151,7 +151,7 @@ public class Player : Controller
 		if (myRole == PlayerRole.Gunner)
 		{
 			// Make the gunner shoot
-			controller.Shoot(input.isPressed);
+			controller.Shoot(myRole, input.isPressed);
 		}
 	}
 
@@ -181,7 +181,7 @@ public class Player : Controller
 		if (myRole == PlayerRole.Gunner)
 		{
 			// Make the gunner shoot
-			controller.Shoot(input.isPressed);
+			controller.Shoot(myRole, input.isPressed);
 		}
 	}
 
@@ -197,9 +197,20 @@ public class Player : Controller
 		if (myRole == PlayerRole.Gunner)
 		{
 			// Make the gunner shoot
-			controller.Shoot(input.isPressed);
+			controller.Shoot(myRole, input.isPressed);
 		}
 	}
+
+	public override void OnRightBumper(InputValue input)
+	{
+		controller.Shoot(myRole, input.isPressed);
+	}
+
+	public override void OnLeftBumper(InputValue input)
+	{
+		controller.Shoot(myRole, input.isPressed);
+	}
+
 	#endregion
 
 	#region [Action Map] NodeMap

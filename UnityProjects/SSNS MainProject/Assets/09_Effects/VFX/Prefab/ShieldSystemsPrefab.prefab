@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6608749523433535167}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 11}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 17, y: 17, z: 17}
   m_Children:
   - {fileID: 7305077958315088166}
@@ -78,8 +78,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MeshRenderer: {fileID: 3507114127983036335}
   HitVFX: {fileID: 7243826775117591407}
-  fadeShield: 1
-  Color: {r: 0, g: 0.78431374, b: 6.964706, a: 1}
+  Color: {r: 0, g: 0.6901961, b: 5.992157, a: 1}
+  fadeType: 0
 --- !u!1001 &3283701313681787536
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -188,6 +188,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6608749523433535166}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: ef2e9fb1b426cfc488e933bc22bb8e37,
+        type: 3}
+      propertyPath: m_Name
+      value: Shield
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: ef2e9fb1b426cfc488e933bc22bb8e37,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -252,11 +257,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 99.99997
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: ef2e9fb1b426cfc488e933bc22bb8e37,
-        type: 3}
-      propertyPath: m_Name
-      value: Shield
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: ef2e9fb1b426cfc488e933bc22bb8e37,
         type: 3}
