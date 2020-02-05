@@ -4,19 +4,34 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using SNSSTypes;
 
+public enum ControlType
+{
+	CONTROLLER,
+	KEYBOARD_AND_MOUSE
+}
+
 public class Player : Controller
 {
-	// This players role
+	// This players role (Pilot or Gunner)
 	public PlayerRole myRole = PlayerRole.None;
-	private GameState currentState = GameState.BATTLE;
+
+	// The current gamestate
+	// This is used to change the playing action map to a menu action map
+	public GameState currentState = GameState.BATTLE;
+
+	// The Control Type (Controller or Keyboard)
+	public ControlType controlType = ControlType.CONTROLLER;
 
 	PlayerInput playerInput;
 	testShipController controller;
 
+	#region Unity Events
 	// Start is called before the first frame update
 	private void Awake()
 	{
 		playerInput = GetComponent<PlayerInput>();
+
+		// When a player starts the game this grabs an open ship
 		foreach (GameObject ship in GameObject.FindGameObjectsWithTag("Player"))
 		{
 			if (ship.TryGetComponent<testShipController>(out testShipController shipController))
@@ -31,15 +46,65 @@ public class Player : Controller
 	//
 	private void Update()
 	{
+		// Keep our GameState up to date with the GameManager
 		if (GameManager.Instance && currentState != GameManager.Instance.GameState)
 		{
 			currentState = GameManager.Instance.GameState;
-			SetPlayerActions(currentState);
+			SetPlayerActionMap(currentState);
 		}
+
+		#region Not Working
+		//// ONLY.. If were using a mouse and keyboard
+		//if (controlType == ControlType.KEYBOARD_AND_MOUSE)
+		//{
+		//	Vector2 screenCenter = new Vector2(Screen.width, Screen.height - (Screen.height / 2)) / 2f;
+		//	Vector2 mousePosition = Input.mousePosition;
+
+		//	if (myRole == PlayerRole.Gunner)
+		//	{
+		//		if (mousePosition.y < (Screen.height / 2))
+		//		{
+		//			Vector2 direction = mousePosition - screenCenter;
+
+		//			direction.x = direction.x / Screen.width;
+		//			direction.y = direction.y / Screen.height;
+
+		//			controller.AimGun(direction * 2);
+		//		}
+		//		else
+		//		{
+		//			controller.AimGun(new Vector2(0, 1));
+		//		}
+		//	}
+
+		//}
+		#endregion
 	}
 
+	// Draw the active player and there ControlType
+	private void OnGUI()
+	{
+		bool show = true;
+		if (show)
+		{
+			float x = 300;
+			float y = 25;
+
+			if (myRole == PlayerRole.Pilot)
+			{
+				GUI.Box(new Rect(0, 0, x, y), "Pilot: Controller Type - [ "+ controlType.ToString() + " ]");
+			}
+
+			if (myRole == PlayerRole.Gunner)
+			{
+				GUI.Box(new Rect(0, Screen.height - y, x, y), "Gunner: Controller Type - [ " + controlType.ToString() + " ]");
+			}
+		}
+	}
+	#endregion
+
 	//
-	public void SetPlayerActions(GameState currentState)
+	public void SetPlayerActionMap(GameState currentState)
 	{
 		if (currentState == GameState.NODE_SELECTION)
 		{
@@ -52,6 +117,41 @@ public class Player : Controller
 			playerInput.SwitchCurrentActionMap("Ship");
 		}
 	}
+
+	#region [Action Map] NodeMap
+	public void OnNavigate(InputValue input)
+	{
+		float value = 0;
+		if (myRole == PlayerRole.Pilot)
+		{
+			value = input.Get<Vector2>().x;
+		}
+		else if (myRole == PlayerRole.Gunner)
+		{
+			value = -input.Get<Vector2>().y;
+		}
+
+		if (value >= 0.05f)
+		{
+			NodeManager.Instance.SelectNodeChoice(myRole, 1);
+		}
+		else if (value <= -0.05f)
+		{
+			NodeManager.Instance.SelectNodeChoice(myRole, -1);
+		}
+	}
+
+	public void OnConfirm(InputValue input)
+	{
+		Debug.Log("OnConfirm");
+		NodeManager.Instance.LockChoice(myRole, true);
+	}
+	public void OnDecline(InputValue input)
+	{
+		NodeManager.Instance.LockChoice(myRole, false);
+	}
+
+	#endregion
 
 	#region [Action Map] Ship Controller
 	/// <summary> Spawn the players role </summary>
@@ -92,8 +192,6 @@ public class Player : Controller
 			controller.AimGun(input.Get<Vector2>());
 		}
 	}
-
-	// Used to move the player
 	public override void OnRightStick(InputValue input)
 	{
 		if (myRole == PlayerRole.Pilot)
@@ -120,8 +218,7 @@ public class Player : Controller
 			controller.SwapWeapon(input.Get<Vector2>());
 		}
 	}
-
-	// Called when this player presses the A button
+	
 	public override void OnA(InputValue input)
 	{
 		if (myRole == PlayerRole.Pilot)
@@ -136,8 +233,6 @@ public class Player : Controller
 			controller.Shoot(myRole, input.isPressed);
 		}
 	}
-
-	// Called when this player presses the B button
 	public override void OnB(InputValue input)
 	{
 		// TODO -- We gota go over what the B button does..
@@ -154,22 +249,15 @@ public class Player : Controller
 			controller.Shoot(myRole, input.isPressed);
 		}
 	}
-
-	// Called when this player presses the X button
-	// Used to toggle the map on or off
 	public override void OnX(InputValue input)
 	{
 		controller.ToggleMap(input.isPressed);
-	}
-
-	// Called when this player presses the Y button
-	// Used to ask for a role swap
+	}	
 	public override void OnY(InputValue input)
 	{
 		controller.TriggerRoleSwap(input.isPressed);
 	}
-
-	// Called when this player presses the Left Trigger
+	
 	public override void OnLeftTrigger(InputValue input)
 	{
 		if (myRole == PlayerRole.Pilot)
@@ -184,8 +272,6 @@ public class Player : Controller
 			controller.Shoot(myRole, input.isPressed);
 		}
 	}
-
-	// Called when this player presses the Right Trigger
 	public override void OnRightTrigger(InputValue input)
 	{
 		if (myRole == PlayerRole.Pilot)
@@ -205,46 +291,9 @@ public class Player : Controller
 	{
 		controller.Shoot(myRole, input.isPressed);
 	}
-
 	public override void OnLeftBumper(InputValue input)
 	{
-		controller.Shoot(myRole, input.isPressed);
-	}
-
-	#endregion
-
-	#region [Action Map] NodeMap
-	public void OnNavigate(InputValue input)
-	{
-		float value = 0;
-		if (myRole == PlayerRole.Pilot)
-		{
-			value = input.Get<Vector2>().x;
-		}
-		else if (myRole == PlayerRole.Gunner)
-		{
-			value = -input.Get<Vector2>().y;
-		}
-
-		if (value >= 0.05f)
-		{
-			NodeManager.Instance.SelectNodeChoice(myRole, 1);
-		}
-		else if (value <= -0.05f)
-		{
-			NodeManager.Instance.SelectNodeChoice(myRole, -1);
-		}
-	}
-
-	public void OnConfirm(InputValue input)
-	{
-		Debug.Log("OnConfirm");
-		NodeManager.Instance.LockChoice(myRole, true);
-	}
-
-	public void OnDecline(InputValue input)
-	{
-		NodeManager.Instance.LockChoice(myRole, false);
+		controller.LockOn(input.isPressed);
 	}
 	#endregion
 }

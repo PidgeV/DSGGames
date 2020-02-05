@@ -12,6 +12,7 @@ TagManager:
   - Controller
   - Enemy
   - CapitalShip
+  - Shield
   layers:
   - Default
   - TransparentFX

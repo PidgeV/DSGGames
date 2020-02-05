@@ -8,7 +8,7 @@
                 {
                     "name": "LeftStick",
                     "type": "Value",
-                    "id": "755807f5-2de2-4641-9c57-8b06ec12f217",
+                    "id": "ec33202a-5d87-4edb-8c98-0e28110c249f",
                     "expectedControlType": "Stick",
                     "processors": "",
                     "interactions": ""
@@ -16,7 +16,7 @@
                 {
                     "name": "RightStick",
                     "type": "Value",
-                    "id": "ec33202a-5d87-4edb-8c98-0e28110c249f",
+                    "id": "6b409a4e-bf39-4453-9baf-4b8c66ea98e6",
                     "expectedControlType": "Stick",
                     "processors": "",
                     "interactions": ""
@@ -24,7 +24,7 @@
                 {
                     "name": "DPad",
                     "type": "Value",
-                    "id": "6b409a4e-bf39-4453-9baf-4b8c66ea98e6",
+                    "id": "337eea80-2901-489b-bb0b-3cc3837e1076",
                     "expectedControlType": "Dpad",
                     "processors": "",
                     "interactions": ""
@@ -32,7 +32,7 @@
                 {
                     "name": "LeftTrigger",
                     "type": "Value",
-                    "id": "337eea80-2901-489b-bb0b-3cc3837e1076",
+                    "id": "7a4e3808-e578-4c49-9e42-961bcdb86be6",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
@@ -40,7 +40,7 @@
                 {
                     "name": "RightTrigger",
                     "type": "Value",
-                    "id": "7a4e3808-e578-4c49-9e42-961bcdb86be6",
+                    "id": "d07700a4-f707-4104-95b4-a903a31a3997",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
@@ -48,7 +48,7 @@
                 {
                     "name": "LeftBumper",
                     "type": "Button",
-                    "id": "d07700a4-f707-4104-95b4-a903a31a3997",
+                    "id": "ea7875fa-0ebe-4996-8a12-5748cb81db54",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press(behavior=2)"
@@ -56,7 +56,7 @@
                 {
                     "name": "RightBumper",
                     "type": "Button",
-                    "id": "ea7875fa-0ebe-4996-8a12-5748cb81db54",
+                    "id": "0a16c9d0-6630-4d85-9782-359f6b9f1548",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press(behavior=2)"
@@ -64,7 +64,7 @@
                 {
                     "name": "A",
                     "type": "Button",
-                    "id": "0a16c9d0-6630-4d85-9782-359f6b9f1548",
+                    "id": "dedadf66-ff38-471f-b29b-35ae3c26b013",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press(behavior=2)"
@@ -72,7 +72,7 @@
                 {
                     "name": "B",
                     "type": "Button",
-                    "id": "dedadf66-ff38-471f-b29b-35ae3c26b013",
+                    "id": "70dd5078-81ac-4388-8658-233b8789506f",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press(behavior=2)"
@@ -80,7 +80,7 @@
                 {
                     "name": "Y",
                     "type": "Button",
-                    "id": "70dd5078-81ac-4388-8658-233b8789506f",
+                    "id": "e6a570cb-9f30-40d3-970e-16a42a43205b",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press(behavior=2)"
@@ -88,7 +88,7 @@
                 {
                     "name": "X",
                     "type": "Button",
-                    "id": "e6a570cb-9f30-40d3-970e-16a42a43205b",
+                    "id": "c85fe9a5-90f9-4a49-88f4-e3bbb8defeea",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press(behavior=2)"
@@ -96,7 +96,7 @@
                 {
                     "name": "Select",
                     "type": "Button",
-                    "id": "c85fe9a5-90f9-4a49-88f4-e3bbb8defeea",
+                    "id": "01642af1-f791-433b-b0e1-0a1d691dd2e4",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "Press(behavior=2)"

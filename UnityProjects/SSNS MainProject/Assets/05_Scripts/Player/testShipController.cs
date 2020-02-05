@@ -94,6 +94,7 @@ public class testShipController : MonoBehaviour
     private bool rotating;
     private bool boosting;
     private bool roleSwap;
+    private bool lockOn;
     private bool shooting_Gunner;
     private bool shooting_Pilot;
 
@@ -109,7 +110,7 @@ public class testShipController : MonoBehaviour
     float shotCounter = 0f;
 
     //// The ships rotation speed
-    float gunRotationSpeed = 125f;
+    float gunRotationSpeed = 200f;
 
     // Gun Input
     Vector2 gunVelocity;
@@ -147,6 +148,7 @@ public class testShipController : MonoBehaviour
 		//
         currentWeapon = startingWeapon;
 
+		//
         foreach (ShotInfo s in shots) {
             if (s.weapon == currentWeapon)
 			{
@@ -404,35 +406,55 @@ public class testShipController : MonoBehaviour
 	/// LateUpdate is used to set the gunners camera, the reason for this is
 	/// because we need to know where the ship is after physics are applied
 	/// </summary>
+	public GameObject lockOnTarget;
 	private void LateUpdate()
 	{
-		// POSITION
-		// Where the camera SHOULD be relative to the ship model
-		Vector3 camPos = ship.transform.position + (-transform.up * 7);
-
-		// Move the camera to its correct position
-		gunnerCamera.transform.position = camPos;
-
-		// ROTATION
-		// Add the current input to the guns final rotation
-		gunRotation += (new Vector2(-gunVelocity.y, gunVelocity.x) * Time.deltaTime);
-
-		if (gunRotation.x < -80f) {
-			gunRotation.x = -80f;
+		if ( lockOn && lockOnTarget)
+		{
+			gunnerCamera.transform.LookAt(lockOnTarget.transform.position);
+			gunRotation = gunnerCamera.transform.eulerAngles;
 		}
+		else
+		{
+			// POSITION
+			// Where the camera SHOULD be relative to the ship model
+			Vector3 camPos = ship.transform.position + (-transform.up * 7);
 
-		if (gunRotation.x > 80f) {
-			gunRotation.x = 80f;
-		}
+			// Move the camera to its correct position
+			gunnerCamera.transform.position = camPos;
 
-		// Rotate the gun to its correct rotation
-		gunHelper.rotation = Quaternion.identity;
-		gunHelper.Rotate(gunRotation);
+			// ROTATION
+			// Add the current input to the guns final rotation
+			gunRotation += (new Vector2(-gunVelocity.y, gunVelocity.x) * Time.deltaTime);
 
-		// TODO -- We need to prevent the gunner from looking up
+			if (gunRotation.x < -80f) {
+				gunRotation.x = -80f;
+			}
 
-		// Set the camera to its target rotation
-		gunnerCamera.transform.LookAt(gunHelper.position + gunHelper.forward * 300);
+			if (gunRotation.x > 80f) {
+				gunRotation.x = 80f;
+			}
+
+			// Rotate the gun to its correct rotation
+			gunHelper.rotation = Quaternion.identity;
+			gunHelper.Rotate(gunRotation);
+
+			// TODO -- We need to prevent the gunner from looking up
+
+			// Set the camera to its target rotation
+			gunnerCamera.transform.LookAt(gunHelper.position + gunHelper.forward * 300);
+
+			RaycastHit hit;
+			// Does the ray intersect any objects excluding the player layer
+			if (lockOn == false && Physics.Raycast(gunnerCamera.transform.position, gunnerCamera.transform.forward, out hit, Mathf.Infinity))
+			{
+				if (hit.collider.gameObject.tag == "Enemy" ||
+					hit.collider.gameObject.tag == "Shield")
+				{
+					lockOnTarget = hit.collider.gameObject;
+				}
+			}
+		}	
 	}
 
     #endregion
@@ -642,6 +664,11 @@ public class testShipController : MonoBehaviour
     {
         // TODO -- ToggleMap();
     }
+
+	public void LockOn(bool pressed)
+	{
+		lockOn = pressed;
+	}
 
     /// <summary>
 	/// Change the roles of the players
