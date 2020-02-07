@@ -249,7 +249,7 @@ public class DemoManager : MonoBehaviour
 			#region Settings the wapoints 
 
 			// Set waypoints for each enemy
-			if (newEnemy.TryGetComponent<ChaserController>(out ChaserController chaserController)) {
+			if (newEnemy.TryGetComponent<ChargerController>(out ChargerController chaserController)) {
 				chaserController.waypoints = waypoints;
 			}
 			// Set waypoints for each enemy

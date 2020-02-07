@@ -39,7 +39,7 @@ public class testAreaSpawner : MonoBehaviour
                 enemy.transform.position = transform.position + Vector3.one * random.Next((int)(-AreaManager.Instance.AreaSize / 1.5f), (int)(AreaManager.Instance.AreaSize / 1.5f));
                 enemy.transform.parent = transform;
 
-                Complete.FighterController controller = enemy.GetComponent<Complete.FighterController>();
+                FighterController controller = enemy.GetComponent<FighterController>();
                 controller.waypoints = new GameObject[] { gameObject };
 
                 AreaManager.Instance.OnObjectAdd(enemy, true);
@@ -53,7 +53,7 @@ public class testAreaSpawner : MonoBehaviour
                 enemy.transform.position = transform.position + Vector3.one * random.Next((int)(-AreaManager.Instance.AreaSize / 1.5f), (int)(AreaManager.Instance.AreaSize / 1.5f));
                 enemy.transform.parent = transform;
 
-                Complete.ChaserController controller = enemy.GetComponent<Complete.ChaserController>();
+                ChargerController controller = enemy.GetComponent<ChargerController>();
                 controller.waypoints = new GameObject[] { gameObject };
 
                 AreaManager.Instance.OnObjectAdd(enemy, true);

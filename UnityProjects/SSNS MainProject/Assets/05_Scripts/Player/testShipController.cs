@@ -218,20 +218,20 @@ public class testShipController : MonoBehaviour
 
         #region Pilot Logic
 
-        float ship_Acceleration = 25f * Time.deltaTime;
-        float ship_Deceleration = 50f * Time.deltaTime;
+        //float ship_Acceleration = 25f * Time.deltaTime;
+        //float ship_Deceleration = 50f * Time.deltaTime;
 
-        float rotation_Acceleration = 5f * Time.deltaTime;
-        float rotation_Deceleration = 5f * Time.deltaTime;
+        //float rotation_Acceleration = 5f * Time.deltaTime;
+        //float rotation_Deceleration = 5f * Time.deltaTime;
 
-        float ship_MinSpeed = 50f;
-        float ship_MaxSpeed = 50f;
-        float ship_MaxBoostSpeed = 150f;
-        float ship_MaxStrafeSpeed = 100f;
+        //float ship_MinSpeed = 50f;
+        //float ship_MaxSpeed = 50f;
+        //float ship_MaxBoostSpeed = 150f;
+        //float ship_MaxStrafeSpeed = 100f;
 
-        float boost_multiplier = 2.4f;
+        //float boost_multiplier = 2.4f;
 
-        float rotation_MaxSpeed = 2f;
+        //float rotation_MaxSpeed = 2f;
 
         speed = rigidbody.velocity.magnitude;
 
@@ -258,11 +258,11 @@ public class testShipController : MonoBehaviour
 
         if (rotating)
         {
-            rotationSpeed = Mathf.Clamp(rotationSpeed + rotation_Acceleration, 0, rotation_MaxSpeed);
+            rotationSpeed = Mathf.Clamp(rotationSpeed + myStats.shipRotAcceleration, 0, myStats.rotationSpeed);
         }
         else
         {
-            rotationSpeed = Mathf.Clamp(rotationSpeed - rotation_Deceleration, 0, rotation_MaxSpeed);
+            rotationSpeed = Mathf.Clamp(rotationSpeed - myStats.shipRotAcceleration, 0, myStats.rotationSpeed);
         }
 
         finalRotation = rotateDirection * rotationSpeed;
@@ -274,16 +274,16 @@ public class testShipController : MonoBehaviour
         if (rollInput > 0)
         {
             rollDirection = 1;
-            rollSpeed = Mathf.Clamp(rollSpeed + rotation_Acceleration, 0, rotation_MaxSpeed);
+            rollSpeed = Mathf.Clamp(rollSpeed + myStats.shipRotAcceleration, 0, myStats.rotationSpeed);
         }
         else if (rollInput < 0)
         {
             rollDirection = -1;
-            rollSpeed = Mathf.Clamp(rollSpeed + rotation_Acceleration, 0, rotation_MaxSpeed);
+            rollSpeed = Mathf.Clamp(rollSpeed + myStats.shipRotAcceleration, 0, myStats.rotationSpeed);
         }
         else
         {
-            rollSpeed = Mathf.Clamp(rollSpeed - rotation_Deceleration, 0, rotation_MaxSpeed);
+            rollSpeed = Mathf.Clamp(rollSpeed - myStats.shipRotDeceleration, 0, myStats.rotationSpeed);
         }
 
         finalRollRotation = new Vector3(0, 0, rollDirection) * rollSpeed;
@@ -294,11 +294,11 @@ public class testShipController : MonoBehaviour
 
         if (strafing)
         {
-            strafeSpeed = Mathf.Clamp(strafeSpeed + ship_Acceleration * 2f, 0, ship_MaxStrafeSpeed);
+            strafeSpeed = Mathf.Clamp(strafeSpeed + myStats.shipAcceleration * 2f, 0, myStats.strafeSpeed);
         }
         else
         {
-            strafeSpeed = Mathf.Clamp(strafeSpeed - ship_Deceleration, 0, ship_MaxStrafeSpeed);
+            strafeSpeed = Mathf.Clamp(strafeSpeed - myStats.shipDeceleration, 0, myStats.strafeSpeed);
         }
         finalStrafeVelocity = strafeDirection * strafeSpeed;
         #endregion
@@ -308,13 +308,13 @@ public class testShipController : MonoBehaviour
 
         if (stopThrust)
         {
-            thrustSpeed = Mathf.Clamp(thrustSpeed - ship_Deceleration, 0, ship_MaxSpeed);
+            thrustSpeed = Mathf.Clamp(thrustSpeed - myStats.shipDeceleration, 0, myStats.thrustSpeed);
         }
         // If were boosting
         else if (boosting)
         {
             // Increase our speed when boosting
-            if (rigidbody.velocity.magnitude < ship_MaxBoostSpeed) thrustSpeed = Mathf.Clamp(thrustSpeed + (ship_Acceleration * boost_multiplier), ship_MinSpeed, ship_MaxBoostSpeed);
+            if (rigidbody.velocity.magnitude < myStats.boostSpeed) thrustSpeed = Mathf.Clamp(thrustSpeed + (myStats.thrustSpeed * 2.4f), myStats.thrustSpeed, myStats.boostSpeed);
 
 
             // Reduce the boost gauge
@@ -332,15 +332,15 @@ public class testShipController : MonoBehaviour
         }
         // Else if we are NOT boosting and our thrustSpeed is over our maxThrustSpeed
         // We need to smooth the transition from boosting to not boosting
-        else if (thrustSpeed > ship_MaxSpeed)
+        else if (thrustSpeed > myStats.thrustSpeed)
         {
             // Clamp our thrust Speed to our max thrust speed
-            thrustSpeed = Mathf.Clamp(thrustSpeed - ship_Deceleration, ship_MaxSpeed, ship_MaxBoostSpeed);
+            thrustSpeed = Mathf.Clamp(thrustSpeed - myStats.shipDeceleration, myStats.thrustSpeed, myStats.boostSpeed);
         }
         // Else were not boosting so we increase our ships normal speed
         else
         {
-            thrustSpeed = Mathf.Clamp(thrustSpeed - ship_Deceleration, ship_MinSpeed, ship_MaxSpeed);
+            thrustSpeed = myStats.thrustSpeed;
         }
 
         finalThrustVelocity = transform.forward * thrustSpeed;

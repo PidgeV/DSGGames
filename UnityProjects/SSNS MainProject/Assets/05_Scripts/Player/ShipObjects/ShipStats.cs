@@ -3,20 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Ship Stats", menuName = "Ship/New Ship Stats")]
+[System.Serializable]
 public class ShipStats : ScriptableObject
 {
 	// Ship description
-	public string shipName;
-	public string shipDescription;
+	[SerializeField] private string shipName;
+    [SerializeField] private string shipDescription;
 
 	// Ship properties
 	// The max values for this ships health and shield
 	public float maxHealth = 20f;
 	public float maxShield = 15f;
-
-	// The current values for this ships health and shield
-	public float currentHealth = 0f;
-	public float currentShield = 0f;
 
 	// Acceleration and deacceleration of the ship's speed
 	public float shipAcceleration = .3f;
@@ -27,8 +24,7 @@ public class ShipStats : ScriptableObject
     public float shipRotDeceleration = 2;
 
     // Min and max thruster speed of the ship
-    public float minThrustSpeed = 15f;
-	public float maxThrustSpeed = 50f;
+	public float thrustSpeed = 50f;
 
 	// The speed the ship moves per second when boosting
 	public float boostSpeed = 30f;
@@ -65,4 +61,7 @@ public class ShipStats : ScriptableObject
 	// Extra ship abilities
 	public bool reserveShield = false;
 	public bool shieldBreakEMP = false;
+
+    public string ShipName { get { return shipName; } }
+    public string ShipDescription { get { return shipDescription; } }
 }
