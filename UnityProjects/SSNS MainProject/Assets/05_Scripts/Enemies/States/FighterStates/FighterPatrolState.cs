@@ -143,10 +143,6 @@ namespace Complete
                 if (!obstacleHit && obstacleTimer == 0)
                 {
                     direction = waypoints[patrolID].transform.position - controller.transform.position; // sets desired direction to target intercept point
-
-                    Vector3 newDir = Vector3.RotateTowards(controller.transform.forward, direction, controller.RegRotationForce * Time.deltaTime, 0);
-                    Quaternion rot = Quaternion.LookRotation(newDir);
-                    controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, rot, Time.deltaTime);
                 }
                 else
                 {
@@ -157,11 +153,11 @@ namespace Complete
                         obstacleTimer = 0;
                         obstacleHit = false;
                     }
-
-                    Vector3 newDir = Vector3.RotateTowards(controller.transform.forward, direction, controller.RegRotationForce * Time.deltaTime, 0);
-                    Quaternion rot = Quaternion.LookRotation(newDir);
-                    controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, rot, Time.deltaTime);
                 }
+
+                Vector3 newDir = Vector3.RotateTowards(controller.transform.forward, direction, controller.RegRotationForce * Time.deltaTime, 0);
+                Quaternion rot = Quaternion.LookRotation(newDir);
+                controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, rot, Time.deltaTime);
 
                 //Movement
                 controller.rbSelf.AddForce(controller.transform.forward.normalized * controller.Acceleration, ForceMode.Acceleration); // move regular speed if obstacle is in the way or player is not target

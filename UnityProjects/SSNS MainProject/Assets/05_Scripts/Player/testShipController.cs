@@ -225,9 +225,9 @@ public class testShipController : MonoBehaviour
         float rotation_Deceleration = 5f * Time.deltaTime;
 
         float ship_MinSpeed = 50f;
-        float ship_MaxSpeed = 100f;
-        float ship_MaxBoostSpeed = 300f;
-        float ship_MaxStrafeSpeed = 150f;
+        float ship_MaxSpeed = 50f;
+        float ship_MaxBoostSpeed = 150f;
+        float ship_MaxStrafeSpeed = 100f;
 
         float boost_multiplier = 2.4f;
 
@@ -471,8 +471,8 @@ public class testShipController : MonoBehaviour
             switch (currentWeapon)
             {
                 case WeaponType.Regular:
-                    Quaternion rot = Quaternion.LookRotation(shotSpawnLocation.transform.forward);
-                    GameObject shot = Instantiate(currentShotInfo.gameObject, shotSpawnLocation.position, Quaternion.identity);
+                    Quaternion rot = Quaternion.LookRotation(shotSpawnLocation.transform.forward, shotSpawnLocation.transform.up);
+                    GameObject shot = Instantiate(currentShotInfo.gameObject, shotSpawnLocation.position + shotSpawnLocation.transform.forward * 5, Quaternion.identity);
                     shot.transform.rotation = rot;
 					Debug.Log("Shot Rotation: " + shot.transform.eulerAngles);
                     break;

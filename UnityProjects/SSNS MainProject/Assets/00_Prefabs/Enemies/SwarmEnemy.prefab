@@ -60,7 +60,7 @@ MonoBehaviour:
   defenseTarget: {fileID: 0}
   startingCount: 200
   driveFactor: 60
-  maxSpeed: 200
+  maxSpeed: 100
   neighbourRadius: 15
   avoidanceRadius: 10
   obstacleDistance: 50

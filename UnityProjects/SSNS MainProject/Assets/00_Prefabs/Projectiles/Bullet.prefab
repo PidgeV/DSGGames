@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4450240921679082262}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 5860339622417806582}
   m_Father: {fileID: 0}
@@ -47,8 +47,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 3, z: -15}
-  m_Center: {x: 0, y: 0, z: 8}
+  m_Size: {x: 3, y: 3, z: 4.8919806}
+  m_Center: {x: 0, y: 0, z: 2.9459908}
 --- !u!114 &7443416512928844744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,17 +178,17 @@ PrefabInstance:
     - target: {fileID: 8690222726650212484, guid: b309222978bfbf24588b8440137b48da,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.4
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8690222726650212484, guid: b309222978bfbf24588b8440137b48da,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.4
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 8690222726650212484, guid: b309222978bfbf24588b8440137b48da,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 50
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b309222978bfbf24588b8440137b48da, type: 3}

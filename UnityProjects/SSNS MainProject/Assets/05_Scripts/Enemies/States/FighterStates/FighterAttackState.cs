@@ -56,7 +56,7 @@ namespace Complete
 
             CalculateIntercept();
 
-            if (Vector3.Distance(player.transform.position, controller.transform.position) < 250)
+            if (Vector3.Distance(player.transform.position, controller.transform.position) < 150)
             {
                 controller.PerformTransition(Transition.Patrol);
             }
@@ -88,10 +88,6 @@ namespace Complete
                 if (!obstacleHit && obstacleTimer == 0)
                 {
                     direction = interceptPoint - controller.transform.position; // sets desired direction to target intercept point
-
-                    //if no obstacles, allow rotation to desired direction
-                    Vector3 newDir = Vector3.RotateTowards(controller.transform.forward, direction, controller.RegRotationForce * Time.deltaTime, 0);
-                    controller.transform.rotation = Quaternion.LookRotation(newDir);
                 }
                 else
                 {
@@ -102,17 +98,17 @@ namespace Complete
                         obstacleTimer = 0;
                         obstacleHit = false;
                     }
-
-                    Vector3 newDir = Vector3.RotateTowards(controller.transform.forward, direction, controller.RegRotationForce * Time.deltaTime, 0);
-                    Quaternion rot = Quaternion.LookRotation(newDir);
-                    controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, rot, Time.deltaTime);
                 }
+
+                Vector3 newDir = Vector3.RotateTowards(controller.transform.forward, direction, controller.RegRotationForce * Time.deltaTime, 0);
+                Quaternion rot = Quaternion.LookRotation(newDir);
+                controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, rot, Time.deltaTime);
 
                 //Move
                 //maintains a distance
-                //float percent = Vector3.Distance(controller.transform.position, player.transform.position) / distanceToMaintain;
-                //if (percent > 1) percent = 1;
-                controller.rbSelf.AddForce(controller.transform.forward.normalized * controller.Acceleration /** percent*/, ForceMode.Acceleration);
+                float percent = Vector3.Distance(controller.transform.position, player.transform.position) / 200;
+                if (percent > 1) percent = 1;
+                controller.rbSelf.AddForce(controller.transform.forward.normalized * controller.Acceleration * percent, ForceMode.Acceleration);
             }
         }
 

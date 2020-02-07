@@ -34,7 +34,7 @@ public class Flock : MonoBehaviour
     #region Swarm Agent Variables
     [Range(1, 300)]
     public int startingCount = 250;
-    const float agentDensity = 0.1f;
+    const float agentDensity = 0.8f;
 
     [Range(1f, 1000f)]
     public float driveFactor = 10f;

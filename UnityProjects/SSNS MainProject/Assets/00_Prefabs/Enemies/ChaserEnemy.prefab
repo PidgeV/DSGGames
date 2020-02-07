@@ -139,7 +139,7 @@ MonoBehaviour:
     m_Bits: 768
   collisionCheckDistance: 150
   waypointDistanceMeters: 50
-  playerDistanceMeters: 2000
+  playerDistanceMeters: 1000
   rbSelf: {fileID: 3107085776561158192}
   raySize: 8.5
   hitPlayer: 0
@@ -161,9 +161,9 @@ MonoBehaviour:
   maxShield: 15
   currentHealth: 0
   currentShield: 0
-  acceleration: 1000
+  acceleration: 800
   regRotationForce: 200
-  chargeAcceleration: 3000
+  chargeAcceleration: 2400
   chargeRotationForce: 25
 --- !u!114 &725005335
 MonoBehaviour:
@@ -186,11 +186,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3107085776561158193}
     m_Modifications:
-    - target: {fileID: 6608749523433535167, guid: eec2fe4ad0beacf4bbf9df2290479e47,
-        type: 3}
-      propertyPath: m_Name
-      value: ShieldSystemsPrefab
-      objectReference: {fileID: 0}
     - target: {fileID: 6608749523433535166, guid: eec2fe4ad0beacf4bbf9df2290479e47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -261,6 +256,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 14.28
       objectReference: {fileID: 0}
+    - target: {fileID: 6608749523433535167, guid: eec2fe4ad0beacf4bbf9df2290479e47,
+        type: 3}
+      propertyPath: m_Name
+      value: ShieldSystemsPrefab
+      objectReference: {fileID: 0}
     - target: {fileID: 875428957334134260, guid: eec2fe4ad0beacf4bbf9df2290479e47,
         type: 3}
       propertyPath: Color.r
@@ -296,11 +296,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3107085776561158193}
     m_Modifications:
-    - target: {fileID: 4352062692580032008, guid: 031a343789d91534a955b504675e986f,
-        type: 3}
-      propertyPath: m_Name
-      value: SNSS_ChargerShip_Model
-      objectReference: {fileID: 0}
     - target: {fileID: 738300261107272731, guid: 031a343789d91534a955b504675e986f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -356,6 +351,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4352062692580032008, guid: 031a343789d91534a955b504675e986f,
+        type: 3}
+      propertyPath: m_Name
+      value: SNSS_ChargerShip_Model
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 031a343789d91534a955b504675e986f, type: 3}
 --- !u!4 &6607033829388375264 stripped
@@ -371,11 +371,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3107085776561158193}
     m_Modifications:
-    - target: {fileID: 1225102729419275378, guid: 633f381299eb47344bda0c5b2efc8d8c,
-        type: 3}
-      propertyPath: m_Name
-      value: ThusterCone
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275373, guid: 633f381299eb47344bda0c5b2efc8d8c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -445,6 +440,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.50634
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102729419275378, guid: 633f381299eb47344bda0c5b2efc8d8c,
+        type: 3}
+      propertyPath: m_Name
+      value: ThusterCone
       objectReference: {fileID: 0}
     - target: {fileID: 1225102730936949429, guid: 633f381299eb47344bda0c5b2efc8d8c,
         type: 3}
