@@ -48,7 +48,9 @@ public class testShipController : MonoBehaviour
     /// <summary> [Reference] My Cameras </summary>
     [Header("Cameras")]
     [SerializeField] private Camera pilotCamera;
+    [SerializeField] private GameObject gunnerCamParent;
     [SerializeField] private Camera gunnerCamera;
+    Quaternion gunnerAim = Quaternion.identity;
 
     private Slider slider_Health;
     private Slider slider_Shield;
@@ -424,40 +426,51 @@ public class testShipController : MonoBehaviour
     {
         if (lockOn && lockOnTarget)
         {
-            gunnerCamera.transform.LookAt(lockOnTarget.transform.position);
+            float speed;
+            if(currentWeapon == WeaponType.Laser)
+            {
+                speed = Mathf.Infinity;
+            }
+            else
+            {
+                speed = currentShotInfo.Speed;
+            }
+
+            Vector3 intercept = InterceptCalculationClass.FirstOrderIntercept(shotSpawnLocation.position, Vector3.zero, speed, lockOnTarget.transform.position, lockOnTarget.GetComponent<Rigidbody>().velocity);
+            gunnerCamera.transform.LookAt(intercept);
             gunRotation = gunnerCamera.transform.eulerAngles;
         }
         else
         {
             // POSITION
             // Where the camera SHOULD be relative to the ship model
-            Vector3 camPos = ship.transform.position + (-transform.up * 7);
-
-            // Move the camera to its correct position
-            gunnerCamera.transform.position = camPos;
+            gunnerCamera.transform.position = ship.transform.position + (-transform.up * 7);
 
             // ROTATION
             // Add the current input to the guns final rotation
-            gunRotation += (new Vector2(-gunVelocity.y, gunVelocity.x) * Time.deltaTime);
+            gunnerAim *= Quaternion.Euler(new Vector2(-gunVelocity.y, gunVelocity.x) * Time.deltaTime);
+            gunnerCamParent.transform.rotation = gunnerAim;
 
-            if (gunRotation.x < -80f)
-            {
-                gunRotation.x = -80f;
-            }
+            //gunRotation += (new Vector2(-gunVelocity.y, gunVelocity.x) * Time.deltaTime);
 
-            if (gunRotation.x > 80f)
-            {
-                gunRotation.x = 80f;
-            }
+            //if (gunRotation.x < -80f)
+            //{
+            //    gunRotation.x = -80f;
+            //}
 
-            // Rotate the gun to its correct rotation
-            gunHelper.rotation = Quaternion.identity;
-            gunHelper.Rotate(gunRotation);
+            //if (gunRotation.x > 80f)
+            //{
+            //    gunRotation.x = 80f;
+            //}
 
-            // TODO -- We need to prevent the gunner from looking up
+            //// Rotate the gun to its correct rotation
+            //gunHelper.rotation = Quaternion.identity;
+            //gunHelper.Rotate(gunRotation);
 
-            // Set the camera to its target rotation
-            gunnerCamera.transform.LookAt(gunHelper.position + gunHelper.forward * 300);
+            //// TODO -- We need to prevent the gunner from looking up
+
+            //// Set the camera to its target rotation
+            //gunnerCamera.transform.LookAt(gunHelper.position + gunHelper.forward * 300);
 
             RaycastHit hit;
             // Does the ray intersect any objects excluding the player layer
