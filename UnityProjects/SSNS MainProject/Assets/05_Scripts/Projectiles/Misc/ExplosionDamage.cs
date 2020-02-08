@@ -24,15 +24,12 @@ public class ExplosionDamage : MonoBehaviour
             }
         }
 
-        Destroy(gameObject);
-    }
-
-    private void OnDestroy()
-    {
         if (explosionPrefab)
         {
             GameObject go = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             go.transform.localScale = new Vector3(radius, radius, radius);
         }
+
+        Destroy(gameObject);
     }
 }

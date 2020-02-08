@@ -20039,6 +20039,7 @@ GameObject:
   - component: {fileID: 8069464232013242456}
   - component: {fileID: 6373742027123135118}
   - component: {fileID: 7735083024966515877}
+  - component: {fileID: 3174877577753009043}
   m_Layer: 9
   m_Name: CruiserEnemy
   m_TagString: Enemy
@@ -20109,7 +20110,6 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 256
-  destroyedPrefab: {fileID: 0}
   myState: 1
 --- !u!65 &6373742027123135118
 BoxCollider:
@@ -20136,6 +20136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21bcb8e5aef53064495f71d628833b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyedPrefab: {fileID: 0}
   maxLife: 100
   maxShield: 100
   life: 0
@@ -20144,6 +20145,23 @@ MonoBehaviour:
   regenDelay: 1
   invincible: 0
   regen: 1
+--- !u!114 &3174877577753009043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8278412131455947766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24b5b28e4f0980544b45491faa221d63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  percentile: 25
+  pickups:
+  - {fileID: 2477320974579374103, guid: d715f361150123846a13955f9139b359, type: 3}
+  - {fileID: 6452195130534909010, guid: cde9d7517c334d249b9db3785a8b49cd, type: 3}
+  - {fileID: 7012702053293656162, guid: 86e0271b6a2f32b41baed24566648be4, type: 3}
 --- !u!1 &8575237048022052384
 GameObject:
   m_ObjectHideFlags: 0
@@ -29621,16 +29639,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7693469286925294298}
     m_Modifications:
-    - target: {fileID: 6608749523433535167, guid: eec2fe4ad0beacf4bbf9df2290479e47,
-        type: 3}
-      propertyPath: m_Name
-      value: ShieldSystemsPrefab
-      objectReference: {fileID: 0}
-    - target: {fileID: 6608749523433535167, guid: eec2fe4ad0beacf4bbf9df2290479e47,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 6608749523433535166, guid: eec2fe4ad0beacf4bbf9df2290479e47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -29701,6 +29709,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 34.189236
       objectReference: {fileID: 0}
+    - target: {fileID: 6608749523433535167, guid: eec2fe4ad0beacf4bbf9df2290479e47,
+        type: 3}
+      propertyPath: m_Name
+      value: ShieldSystemsPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608749523433535167, guid: eec2fe4ad0beacf4bbf9df2290479e47,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 875428957334134260, guid: eec2fe4ad0beacf4bbf9df2290479e47,
         type: 3}
       propertyPath: Color.g
@@ -29716,12 +29734,12 @@ PrefabInstance:
       propertyPath: Color.r
       value: 0.4412629
       objectReference: {fileID: 0}
-    - target: {fileID: 7243826775117591407, guid: eec2fe4ad0beacf4bbf9df2290479e47,
+    - target: {fileID: 2924828178972996467, guid: eec2fe4ad0beacf4bbf9df2290479e47,
         type: 3}
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 2924828178972996467, guid: eec2fe4ad0beacf4bbf9df2290479e47,
+    - target: {fileID: 7243826775117591407, guid: eec2fe4ad0beacf4bbf9df2290479e47,
         type: 3}
       propertyPath: m_Layer
       value: 9

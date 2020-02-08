@@ -90,6 +90,8 @@ GameObject:
   - component: {fileID: 3479560427852074020}
   - component: {fileID: 7166749475349393629}
   - component: {fileID: 1311062305739151627}
+  - component: {fileID: 6838835475976369472}
+  - component: {fileID: 7012702053293656162}
   m_Layer: 0
   m_Name: PickupBox_Missile
   m_TagString: Untagged
@@ -106,7 +108,7 @@ Transform:
   m_GameObject: {fileID: 8883841342790747137}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 6.2477927, y: 0.49000013, z: -10.797121}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 15, y: 15, z: 15}
   m_Children:
   - {fileID: 7489994264221460269}
   m_Father: {fileID: 0}
@@ -137,7 +139,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 95a6c4ff750bc1a46936afd6376a2803, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -170,7 +172,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b6c2ed29631b214682610dc08059550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  X: 0
-  Y: 1
-  Z: 1
-  pickup: {fileID: 8883841342790747137}
+  speed: 20
+  rotationDir: {x: 0, y: 0, z: 0}
+--- !u!65 &6838835475976369472
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8883841342790747137}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.0000002, z: 1.0000002}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &7012702053293656162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8883841342790747137}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdbd04ce47b77154c853eb166262d663, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: 4
+  ammoCount: 5
+  hitVFX: {fileID: 4814854336648323653, guid: 428a07eb300045945a363fa54421b206, type: 3}
+  vfxScale: 5

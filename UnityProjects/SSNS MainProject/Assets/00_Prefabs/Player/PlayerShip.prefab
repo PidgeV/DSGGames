@@ -778,9 +778,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6552152225560632426}
   - component: {fileID: 6552152225560632436}
-  - component: {fileID: 6552152225560632438}
   - component: {fileID: 6552152225560632437}
   - component: {fileID: 6552152225560632439}
+  - component: {fileID: 7592534721943838762}
   m_Layer: 10
   m_Name: PlayerShip
   m_TagString: Player
@@ -818,7 +818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d7f256e3ea645458bc4bda5ee01eb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingWeapon: 4
+  startingWeapon: 0
   currentWeapon: 0
   shots:
   - {fileID: 2533200590899523750, guid: 31460afb2d57a1740a2902c36c19ba0e, type: 3}
@@ -836,32 +836,13 @@ MonoBehaviour:
   myStats: {fileID: 11400000, guid: ec827265e03f9ea419ed67bf71905df8, type: 2}
   myBehaviour: {fileID: 11400000, guid: a083da76fd5d7f74aa99bf80151eb125, type: 2}
   speed: 0
+  shipHP: {fileID: 0}
   invertedControls: 0
   limitRotation: 0
   unlimitedBoost: 0
   ammoCount:
-    ammo: 000000000000000014000000000000000f000000
+    ammo: 0000000000000000000000000000000000000000
   lockOnTarget: {fileID: 0}
---- !u!114 &6552152225560632438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6552152225560632427}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21bcb8e5aef53064495f71d628833b37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxLife: 100
-  maxShield: 100
-  life: 0
-  shield: 0
-  regenSpeed: 7
-  regenDelay: 2
-  invincible: 0
-  regen: 1
 --- !u!54 &6552152225560632437
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -891,6 +872,27 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 18.599243, y: 5.470413, z: 18.627144}
   m_Center: {x: -0.24230957, y: 0.5056629, z: -0.68642807}
+--- !u!114 &7592534721943838762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6552152225560632427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21bcb8e5aef53064495f71d628833b37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToDestroy: {fileID: 6552152225560632427}
+  maxLife: 100
+  maxShield: 100
+  life: 0
+  shield: 0
+  regenSpeed: 7
+  regenDelay: 2
+  invincible: 0
+  regen: 1
 --- !u!1 &7598002879842317955
 GameObject:
   m_ObjectHideFlags: 0

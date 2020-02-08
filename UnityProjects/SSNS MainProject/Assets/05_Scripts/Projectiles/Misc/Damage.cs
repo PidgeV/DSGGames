@@ -6,9 +6,13 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class Damage : MonoBehaviour
 {
-	// The damage whatever collides with the gameObject holding this script should take
-	public int kineticDamage = 5;
-    public int energyDamage = 5;
+    [SerializeField] bool destroyOnHit = false;
+    // The damage whatever collides with the gameObject holding this script should take
+    [SerializeField] int kineticDamage = 5;
+    [SerializeField] int energyDamage = 5;
+
+    public int KineticDamage { get { return kineticDamage; } }
+    public int EnergyDamage { get { return energyDamage; } }
 
     public void ChangeDamage(int kinetic, int energy)
     {
@@ -18,25 +22,27 @@ public class Damage : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.TryGetComponent(out HealthAndShields hpTemp))
+        if (collision.gameObject.TryGetComponent(out HealthAndShields hpTemp))
         {
             hpTemp.TakeDamage(kineticDamage, energyDamage);
         }
-    }
 
-    //private void OnCollisionStay(Collision collision)
-    //{
-    //    if (collision.gameObject.TryGetComponent(out HealthAndShields hpTemp))
-    //    {
-    //        hpTemp.TakeDamage(kineticDamage, energyDamage);
-    //    }
-    //}
+        if (destroyOnHit)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.TryGetComponent(out HealthAndShields hpTemp))
         {
             hpTemp.TakeDamage(kineticDamage, energyDamage);
+        }
+
+        if(destroyOnHit)
+        {
+            Destroy(gameObject);
         }
     }
 }

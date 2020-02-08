@@ -147,6 +147,8 @@
     <Compile Include="Assets\05_Scripts\UI\Fade.cs" />
     <Compile Include="Assets\05_Scripts\UI\MainMenu.cs" />
     <Compile Include="Assets\05_Scripts\UI\OptionsMenu.cs" />
+    <Compile Include="Assets\05_Scripts\UI\Pickups\DropPickup.cs" />
+    <Compile Include="Assets\05_Scripts\UI\Pickups\Pickup.cs" />
     <Compile Include="Assets\05_Scripts\UI\SetupMenu.cs" />
     <Compile Include="Assets\05_Scripts\UI\UIManager.cs" />
     <Compile Include="Assets\07_Sprites\ShieldSystems.cs" />

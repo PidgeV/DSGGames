@@ -7,13 +7,10 @@ using UnityEngine;
 
 // The Bullet Class keeps track of how long a projectile should stay alive and how / how fast it should move
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(ShotInfo))]
 public class Bullet : MonoBehaviour
 {
     public GameObject shooter;
-
-    // The speed the projectile moves
-    [Tooltip("Speed in m/s")]
-    public float speed = 50.0f;
 
     private void Awake()
     {
@@ -22,6 +19,6 @@ public class Bullet : MonoBehaviour
         rotation.Normalize();
 
         Rigidbody rb = GetComponent<Rigidbody>();
-        rb.velocity = rotation * speed; // propel forward with set speed
+        rb.velocity = rotation * GetComponent<ShotInfo>().Speed; // propel forward with set speed
     }
 }

@@ -198,6 +198,7 @@ GameObject:
   - component: {fileID: 7891742998165567510}
   - component: {fileID: 7891742998165567511}
   - component: {fileID: 1824734136695229292}
+  - component: {fileID: -3965781394511685264}
   m_Layer: 9
   m_Name: FighterEnemy
   m_TagString: Enemy
@@ -288,6 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21bcb8e5aef53064495f71d628833b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyedPrefab: {fileID: 0}
   maxLife: 50
   maxShield: 25
   life: 10
@@ -308,8 +310,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d2999f0dd3562e4491c6267c683b923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyedPrefab: {fileID: 4814854336648323653, guid: 428a07eb300045945a363fa54421b206,
-    type: 3}
   waypoints: []
   debugDraw: 1
   fireRate: 0.2
@@ -328,6 +328,23 @@ MonoBehaviour:
   bullet: {fileID: 4450240921679082262, guid: 31460afb2d57a1740a2902c36c19ba0e, type: 3}
   bulletShootPos: {fileID: 1864797949346244314}
   accuracyForShot: 5
+--- !u!114 &-3965781394511685264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 58820780711503999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24b5b28e4f0980544b45491faa221d63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  percentile: 25
+  pickups:
+  - {fileID: 2477320974579374103, guid: d715f361150123846a13955f9139b359, type: 3}
+  - {fileID: 6452195130534909010, guid: cde9d7517c334d249b9db3785a8b49cd, type: 3}
+  - {fileID: 7012702053293656162, guid: 86e0271b6a2f32b41baed24566648be4, type: 3}
 --- !u!1 &58820781145363505
 GameObject:
   m_ObjectHideFlags: 0
@@ -1368,16 +1385,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 58820780711503996}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 7bfe49ea07dd0b74cb5ab634823a1f5c,
-        type: 3}
-      propertyPath: m_Name
-      value: SNSS_FighterShip
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 7bfe49ea07dd0b74cb5ab634823a1f5c,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 7bfe49ea07dd0b74cb5ab634823a1f5c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1447,6 +1454,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 7bfe49ea07dd0b74cb5ab634823a1f5c,
+        type: 3}
+      propertyPath: m_Name
+      value: SNSS_FighterShip
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 7bfe49ea07dd0b74cb5ab634823a1f5c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bfe49ea07dd0b74cb5ab634823a1f5c, type: 3}

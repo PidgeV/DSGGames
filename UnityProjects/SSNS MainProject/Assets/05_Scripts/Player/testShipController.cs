@@ -75,8 +75,7 @@ public class testShipController : MonoBehaviour
     #endregion
 
     #region Ship Properties
-
-    private HealthAndShields shipHP;
+    HealthAndShields shipHP;
 
     private float thrustSpeed;
     private float strafeSpeed;
@@ -120,7 +119,7 @@ public class testShipController : MonoBehaviour
     Vector2 gunVelocity;
     Vector2 gunRotation;
 
-    [SerializeField] AmmoCounter ammoCount;
+    public AmmoCounter ammoCount;
 
     #endregion
 
@@ -149,7 +148,7 @@ public class testShipController : MonoBehaviour
         shieldImage = slider_Shield.gameObject.GetComponentInChildren<Image>();
 
         // Get references
-        TryGetComponent(out shipHP);
+        if(!shipHP) TryGetComponent(out shipHP);
 
         //
         currentWeapon = startingWeapon;
@@ -427,7 +426,7 @@ public class testShipController : MonoBehaviour
         if (lockOn && lockOnTarget)
         {
             float speed;
-            if(currentWeapon == WeaponType.Laser)
+            if (currentWeapon == WeaponType.Laser)
             {
                 speed = Mathf.Infinity;
             }
@@ -492,48 +491,52 @@ public class testShipController : MonoBehaviour
     /// </summary>
     public void Shoot()
     {
-        if (currentWeapon == WeaponType.Laser)
+        Ray ray = new Ray(gunnerCamera.transform.position, gunnerCamera.transform.forward);
+        LayerMask layer = LayerMask.GetMask("Player");        
+
+        //If not hitting player collider
+        if (!Physics.Raycast(ray, 15f, layer))
         {
-            //LaserShot: Long, straight beam, near instant, aoe from origin
-            //Raycast instead of instantiate for instant movement
-            ammoCount.Take1Ammo(currentWeapon);
-
-            //Shoot laser here
-            laser.gameObject.SetActive(true);
-
-            LayerMask enemyLayer = LayerMask.GetMask("Enemies");
-            enemyLayer += LayerMask.GetMask("Swarm");
-            RaycastHit[] hits = Physics.SphereCastAll(shotSpawnLocation.transform.position, 15f, shotSpawnLocation.transform.forward.normalized, laser.Length, enemyLayer);
-
-            foreach(RaycastHit hit in hits)
+            if (currentWeapon == WeaponType.Laser)
             {
-                if(hit.collider.TryGetComponent(out HealthAndShields hp))
+                //LaserShot: Long, straight beam, near instant, aoe from origin
+                //Raycast instead of instantiate for instant movement
+                ammoCount.Take1Ammo(currentWeapon);
+
+                //Shoot laser here
+                laser.gameObject.SetActive(true);
+
+                LayerMask enemyLayer = LayerMask.GetMask("Enemies");
+                enemyLayer += LayerMask.GetMask("Swarm");
+                RaycastHit[] hits = Physics.SphereCastAll(shotSpawnLocation.transform.position, 15f, shotSpawnLocation.transform.forward.normalized, laser.Length, enemyLayer);
+
+                foreach (RaycastHit hit in hits)
                 {
-                    hp.TakeDamage(laser.Damage, laser.Damage);
+                    if (hit.collider.TryGetComponent(out HealthAndShields hp))
+                    {
+                        hp.TakeDamage(laser.Damage, laser.Damage);
+                    }
+                }
+
+                laser.SetLaser((shotSpawnLocation.transform.position + shotSpawnLocation.transform.forward.normalized) * laser.Length);
+            }
+            else if (shotTimer > currentShotInfo.FireRate)
+            {
+                shotTimer = 0;
+
+                if (ammoCount.HasAmmo(currentWeapon))
+                {
+                    ammoCount.Take1Ammo(currentWeapon);
+                    SpawnShot();
                 }
             }
-
-            laser.SetLaser((shotSpawnLocation.transform.position + shotSpawnLocation.transform.forward.normalized) * laser.Length);
         }
-        else if (shotTimer > currentShotInfo.FireRate)
-        {
-            shotTimer = 0;
-
-            if (ammoCount.HasAmmo(currentWeapon))
-            {
-                ammoCount.Take1Ammo(currentWeapon);
-                SpawnShot();
-            }
-        }
-
-
     }
 
     private void SpawnShot()
     {
         Quaternion rot = Quaternion.LookRotation(shotSpawnLocation.transform.forward);
         GameObject shot = Instantiate(currentShotInfo.gameObject, shotSpawnLocation.position, rot);
-        Debug.Log("Shot Rotation: " + shot.transform.eulerAngles);
     }
 
     public void ShipShoot()

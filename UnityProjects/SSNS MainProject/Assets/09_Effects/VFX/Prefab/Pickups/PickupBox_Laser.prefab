@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 5766492936871221687}
   - component: {fileID: 232563946367345998}
   - component: {fileID: 7504968092326847348}
+  - component: {fileID: 8572850459430836958}
+  - component: {fileID: 6452195130534909010}
   m_Layer: 0
   m_Name: PickupBox_Laser
   m_TagString: Untagged
@@ -28,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 1947505168511390098}
   m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 6.4808693, y: 0.49000013, z: -8.639099}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 15, y: 15, z: 15}
   m_Children:
   - {fileID: 5502713319626657142}
   - {fileID: 7504968093019809519}
@@ -94,10 +96,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b6c2ed29631b214682610dc08059550, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  X: 1
-  Y: 0
-  Z: 1
-  pickup: {fileID: 1947505168511390098}
+  speed: 20
+  rotationDir: {x: 0, y: 0, z: 0}
+--- !u!65 &8572850459430836958
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947505168511390098}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.0000002, z: 1.0000002}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6452195130534909010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1947505168511390098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdbd04ce47b77154c853eb166262d663, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: 2
+  ammoCount: 10
+  hitVFX: {fileID: 4814854336648323653, guid: 428a07eb300045945a363fa54421b206, type: 3}
+  vfxScale: 5
 --- !u!1 &7504968092633149294
 GameObject:
   m_ObjectHideFlags: 0
@@ -9727,11 +9756,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3268967336472552321}
     m_Modifications:
-    - target: {fileID: 3133795025857249393, guid: 1d8e860a9132b924e80e194a2546978d,
-        type: 3}
-      propertyPath: m_Name
-      value: LaserBeam (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 2628571849621842110, guid: 1d8e860a9132b924e80e194a2546978d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9801,6 +9825,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 0.1298
+      objectReference: {fileID: 0}
+    - target: {fileID: 3133795025857249393, guid: 1d8e860a9132b924e80e194a2546978d,
+        type: 3}
+      propertyPath: m_Name
+      value: LaserBeam (1)
       objectReference: {fileID: 0}
     - target: {fileID: 1323314881356603679, guid: 1d8e860a9132b924e80e194a2546978d,
         type: 3}

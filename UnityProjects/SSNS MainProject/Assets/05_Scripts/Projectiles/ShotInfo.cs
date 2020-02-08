@@ -6,6 +6,8 @@ public class ShotInfo : MonoBehaviour
 {
     public SNSSTypes.WeaponType weapon;
     [SerializeField] private float fireRate;
+    [Tooltip("Life in seconds, 0 for infinite life")]
+    [Range(0, 120)]
     [SerializeField] private float lifeTime;
     [SerializeField] private float speed;
     private float lifeTimer = 0;
@@ -15,7 +17,7 @@ public class ShotInfo : MonoBehaviour
 
     private void Update()
     {
-        if (weapon != SNSSTypes.WeaponType.Laser)
+        if (weapon != SNSSTypes.WeaponType.Laser || lifeTime != 0)
         {
             lifeTimer += Time.deltaTime;
 
