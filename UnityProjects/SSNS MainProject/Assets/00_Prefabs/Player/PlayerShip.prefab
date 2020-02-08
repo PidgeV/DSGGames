@@ -818,11 +818,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73d7f256e3ea645458bc4bda5ee01eb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startingWeapon: 0
+  startingWeapon: 4
   currentWeapon: 0
   shots:
   - {fileID: 2533200590899523750, guid: 31460afb2d57a1740a2902c36c19ba0e, type: 3}
   - {fileID: 8423215883985848745, guid: 1d8e860a9132b924e80e194a2546978d, type: 3}
+  - {fileID: 8606928732767624012, guid: 5587e9352546e994dbb9d12aca1a148d, type: 3}
   shotSpawnLocation: {fileID: 3342730296713813920}
   laser: {fileID: 1952644434706050021}
   ship: {fileID: 6552152225189396121}
@@ -839,7 +840,7 @@ MonoBehaviour:
   limitRotation: 0
   unlimitedBoost: 0
   ammoCount:
-    ammo: 0000000000000000140000000000000000000000
+    ammo: 000000000000000014000000000000000f000000
   lockOnTarget: {fileID: 0}
 --- !u!114 &6552152225560632438
 MonoBehaviour:
@@ -1575,13 +1576,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 875428957334134260, guid: eec2fe4ad0beacf4bbf9df2290479e47,
         type: 3}
-      propertyPath: fadeType
-      value: 2
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 875428957334134260, guid: eec2fe4ad0beacf4bbf9df2290479e47,
         type: 3}
-      propertyPath: m_Enabled
-      value: 0
+      propertyPath: fadeType
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eec2fe4ad0beacf4bbf9df2290479e47, type: 3}

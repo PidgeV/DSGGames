@@ -53,17 +53,20 @@ namespace Complete
             }
 
             //Check waypoint distance
-            if(Vector3.Distance(controller.transform.position, waypoints[patrolID].transform.position) <= controller.WaypointDistance) //Check distance to current waypoint
+            if (waypoints.Length > 0)
             {
-                if (randomPoint)
+                if (Vector3.Distance(controller.transform.position, waypoints[patrolID].transform.position) <= controller.WaypointDistance) //Check distance to current waypoint
                 {
-                    patrolID = Random.Range(0, waypoints.Length); //Choose random patrol point
-                }
-                else
-                {
-                    patrolID++;//Progress to next waypoint
+                    if (randomPoint)
+                    {
+                        patrolID = Random.Range(0, waypoints.Length); //Choose random patrol point
+                    }
+                    else
+                    {
+                        patrolID++;//Progress to next waypoint
 
-                    if (patrolID >= waypoints.Length) patrolID = 0; //Circle back to first waypoint
+                        if (patrolID >= waypoints.Length) patrolID = 0; //Circle back to first waypoint
+                    }
                 }
             }
         }
@@ -76,14 +79,10 @@ namespace Complete
 
         void Move()
         {
-            if (waypoints[patrolID] != null)
+            if (waypoints.Length > 0 && waypoints[patrolID] != null)
             {
                 //Move towards position. No need to worry about obstacles or 
                 controller.transform.position = Vector3.MoveTowards(controller.transform.position, waypoints[patrolID].transform.position, controller.PatrolSpeed * Time.deltaTime);
-            }
-            else
-            {
-                Debug.LogError("Null reference with waypoints.");
             }
         }
     }

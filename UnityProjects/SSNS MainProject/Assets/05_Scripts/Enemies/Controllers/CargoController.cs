@@ -6,9 +6,7 @@ namespace Complete
 {
     [RequireComponent(typeof(Rigidbody))]
     public class CargoController : AdvancedFSM
-    {
-        [SerializeField] GameObject destroyedPrefab;
-        
+    {        
         [Header("Green: forward direction and collision check.")]
         [Header("Red: intercept calculation.")]
         [Header("Blue: Velocity and collision check.")]
@@ -42,7 +40,7 @@ namespace Complete
 
         private void ConstructFSM()
         {
-            DeadState deadState = new DeadState(this, destroyedPrefab);
+            DeadState deadState = new DeadState(this);
             CargoPatrolState patrol = new CargoPatrolState(this, player, capitalShip);
 
             patrol.AddTransition(Transition.NoHealth, FSMStateID.Dead);

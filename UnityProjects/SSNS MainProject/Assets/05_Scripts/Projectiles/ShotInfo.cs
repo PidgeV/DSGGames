@@ -5,12 +5,12 @@ using UnityEngine;
 public class ShotInfo : MonoBehaviour
 {
     public SNSSTypes.WeaponType weapon;
-    [SerializeField] private float spawnTime;
+    [SerializeField] private float fireRate;
     [SerializeField] private float lifeTime;
     [SerializeField] private float speed;
     private float lifeTimer = 0;
 
-    public float FireRate { get { return spawnTime; } }
+    public float FireRate { get { return fireRate; } }
     public float Speed { get { return speed; } }
 
     private void Update()

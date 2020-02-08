@@ -7,7 +7,6 @@ namespace Complete
     [RequireComponent(typeof(Rigidbody))]
     public class FighterController : AdvancedFSM
     {
-        [SerializeField] GameObject destroyedPrefab;
         public GameObject[] waypoints;
       
         [Header("Green: forward direction and collision check.")]
@@ -46,7 +45,7 @@ namespace Complete
 
         private void ConstructFSM()
         {
-            DeadState deadState = new DeadState(this, destroyedPrefab);
+            DeadState deadState = new DeadState(this);
             FighterPatrolState patrol = new FighterPatrolState(this, player, waypoints, waypointDistanceMeters, playerDistanceMeters, true);
             FighterAttackState attack = new FighterAttackState(this, player, bullet, bulletShootPos);
 
