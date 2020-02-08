@@ -311,7 +311,7 @@ MonoBehaviour:
   destroyedPrefab: {fileID: 0}
   waypoints: []
   debugDraw: 1
-  fireRate: 0.3
+  fireRate: 0.2
   maxHealth: 10
   currentHealth: 0
   regRotationForce: 300

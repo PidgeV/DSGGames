@@ -35,5 +35,12 @@ namespace SNSSTypes
         MiniBoss,
         Boss
     }
-    public enum WeaponType { Regular, Energy, Laser, Charged, Missiles }
+
+    //RegularShot: Normal
+    //EnergyShot: Regular shot, but for shields
+    //ChargeShot: Charges over course of 1.5 seconds, then fires
+    //Missiles: Spawns many misiles to hit many enemies (think whistlin birds)
+    //LaserShot: Long, straight beam, near instant, aoe from origin
+
+    public enum WeaponType { Regular, Energy, Laser, Charged, Missiles, End }
 }

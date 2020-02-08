@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5435603039938376419}
   - component: {fileID: 4117082411526472239}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Trail (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6093508260522003352}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ThusterCone (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1286353108144483526}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ThusterCone (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3809613357729975240}
   - component: {fileID: 3387643104392773506}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Trail (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -347,7 +347,7 @@ GameObject:
   - component: {fileID: 6998117187419263928}
   - component: {fileID: 7599540405976825260}
   - component: {fileID: 2414165953376772927}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5082,7 +5082,7 @@ GameObject:
   - component: {fileID: 2109536431909141988}
   - component: {fileID: 3934893555661574062}
   - component: {fileID: 8061544911863567143}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9815,7 +9815,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7657631158218890008}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ThusterCone (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9847,7 +9847,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3684753019865363717}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ThusterCone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9881,7 +9881,7 @@ GameObject:
   - component: {fileID: 3950633901823587747}
   - component: {fileID: 4427635768001850206}
   - component: {fileID: 1705390083718307333}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14615,7 +14615,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1829704413721126680}
   - component: {fileID: 5603651653983397249}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Trail (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14750,7 +14750,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8319632312520311096}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ThusterCone (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14782,7 +14782,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1627203403615210081}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: ThusterCone (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14816,7 +14816,7 @@ GameObject:
   - component: {fileID: 5963861852230170019}
   - component: {fileID: 5963861852230170018}
   - component: {fileID: 5963861852230170021}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CruiserV3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14893,7 +14893,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3088397612300191358}
   - component: {fileID: 7000845646965769847}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Trail (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15030,7 +15030,7 @@ GameObject:
   - component: {fileID: 7244403177028256524}
   - component: {fileID: 8752913276013479823}
   - component: {fileID: 5215302687293399882}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19764,7 +19764,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5050165960410290376}
   - component: {fileID: 3041341918109800957}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Trail (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19900,7 +19900,7 @@ GameObject:
   m_Component:
   - component: {fileID: 730898642273909702}
   - component: {fileID: 767022004214818981}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Trail (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20039,7 +20039,7 @@ GameObject:
   - component: {fileID: 8069464232013242456}
   - component: {fileID: 6373742027123135118}
   - component: {fileID: 7735083024966515877}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CruiserEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -20155,7 +20155,7 @@ GameObject:
   - component: {fileID: 4999678853073641369}
   - component: {fileID: 1289545357240737817}
   - component: {fileID: 6541968788642947428}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24890,7 +24890,7 @@ GameObject:
   - component: {fileID: 2805891055677053329}
   - component: {fileID: 1185149426838939259}
   - component: {fileID: 4761454480205271901}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29626,6 +29626,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShieldSystemsPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 6608749523433535167, guid: eec2fe4ad0beacf4bbf9df2290479e47,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 6608749523433535166, guid: eec2fe4ad0beacf4bbf9df2290479e47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -29710,6 +29715,16 @@ PrefabInstance:
         type: 3}
       propertyPath: Color.r
       value: 0.4412629
+      objectReference: {fileID: 0}
+    - target: {fileID: 7243826775117591407, guid: eec2fe4ad0beacf4bbf9df2290479e47,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2924828178972996467, guid: eec2fe4ad0beacf4bbf9df2290479e47,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eec2fe4ad0beacf4bbf9df2290479e47, type: 3}

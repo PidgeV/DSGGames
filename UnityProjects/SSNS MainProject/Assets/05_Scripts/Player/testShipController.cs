@@ -29,6 +29,8 @@ public class testShipController : MonoBehaviour
     [SerializeField] ShotInfo[] shots;
     [SerializeField] Transform shotSpawnLocation;
 
+    [SerializeField] LaserBehaviour laser;
+
     private float shotTimer;
     #endregion
 
@@ -116,6 +118,8 @@ public class testShipController : MonoBehaviour
     Vector2 gunVelocity;
     Vector2 gunRotation;
 
+    [SerializeField] AmmoCounter ammoCount;
+
     #endregion
 
     private bool stopThrust;
@@ -142,44 +146,46 @@ public class testShipController : MonoBehaviour
         healthImage = slider_Health.gameObject.GetComponentInChildren<Image>();
         shieldImage = slider_Shield.gameObject.GetComponentInChildren<Image>();
 
-		// Get references
-        TryGetComponent<HealthAndShields>(out shipHP);
+        // Get references
+        TryGetComponent(out shipHP);
 
-		//
+        //
         currentWeapon = startingWeapon;
 
-		//
-        foreach (ShotInfo s in shots) {
+        //
+        foreach (ShotInfo s in shots)
+        {
             if (s.weapon == currentWeapon)
-			{
+            {
                 currentShotInfo = s;
             }
         }
     }
 
-	private void OnDestroy()
-	{
-		if (player1)
-			Destroy(player1.gameObject);
+    private void OnDestroy()
+    {
+        if (player1)
+            Destroy(player1.gameObject);
 
-		if (player2)
-			Destroy(player2.gameObject);
-	}
+        if (player2)
+            Destroy(player2.gameObject);
+    }
 
-	// Unity Methods and Events
-	#region Unity ( Update, FixedUpdate and LateUpdate )
+    // Unity Methods and Events
+    #region Unity ( Update, FixedUpdate and LateUpdate )
 
-	/// <summary>
-	/// Used for all the non physics calculations
-	/// </summary>
-	private void Update()
+    /// <summary>
+    /// Used for all the non physics calculations
+    /// </summary>
+    private void Update()
     {
         #region Shooting Logic
 
         shotTimer += Time.deltaTime;
         if (currentWeapon != currentShotInfo.weapon)
         {
-            foreach (ShotInfo s in shots) {
+            foreach (ShotInfo s in shots)
+            {
                 if (s.weapon == currentWeapon)
                 {
                     currentShotInfo = s;
@@ -231,7 +237,7 @@ public class testShipController : MonoBehaviour
 
         float boost_multiplier = 2.4f;
 
-        float rotation_MaxSpeed = 2f;
+        float rotation_MaxSpeed = 5f;
 
         speed = rigidbody.velocity.magnitude;
 
@@ -360,7 +366,8 @@ public class testShipController : MonoBehaviour
             boostGauge += rechargeRate * Time.deltaTime;
 
             // Clamp the boost gauge to our maxBoostGauge 
-            if (boostGauge > myStats.maxBoostGauge) {
+            if (boostGauge > myStats.maxBoostGauge)
+            {
                 boostGauge = myStats.maxBoostGauge;
             }
 
@@ -375,21 +382,27 @@ public class testShipController : MonoBehaviour
         slider_Shield.value = (1 / shipHP.MaxShield) * shipHP.shield;
 
         // Shooting
-        if (shooting_Gunner) {
-			Shoot();
-		}
+        if (shooting_Gunner)
+        {
+            Shoot();
+        }
+        else
+        {
+            laser.gameObject.SetActive(false);
+        }
 
-		if (shooting_Pilot) {
-			ShipShoot();
-		}
+        if (shooting_Pilot)
+        {
+            ShipShoot();
+        }
 
         // Increment the shooter timer
         shotCounter += Time.deltaTime;
     }
 
-	/// <summary>
-	/// FixedUpdate is used for physic calculations
-	/// </summary>
+    /// <summary>
+    /// FixedUpdate is used for physic calculations
+    /// </summary>
     private void FixedUpdate()
     {
         // Apply physics to rigidbody
@@ -402,60 +415,62 @@ public class testShipController : MonoBehaviour
         rigidbody.AddRelativeForce(finalStrafeVelocity, ForceMode.VelocityChange);
     }
 
-	/// <summary>
-	/// LateUpdate is used to set the gunners camera, the reason for this is
-	/// because we need to know where the ship is after physics are applied
-	/// </summary>
-	public GameObject lockOnTarget;
-	private void LateUpdate()
-	{
-		if ( lockOn && lockOnTarget)
-		{
-			gunnerCamera.transform.LookAt(lockOnTarget.transform.position);
-			gunRotation = gunnerCamera.transform.eulerAngles;
-		}
-		else
-		{
-			// POSITION
-			// Where the camera SHOULD be relative to the ship model
-			Vector3 camPos = ship.transform.position + (-transform.up * 7);
+    /// <summary>
+    /// LateUpdate is used to set the gunners camera, the reason for this is
+    /// because we need to know where the ship is after physics are applied
+    /// </summary>
+    public GameObject lockOnTarget;
+    private void LateUpdate()
+    {
+        if (lockOn && lockOnTarget)
+        {
+            gunnerCamera.transform.LookAt(lockOnTarget.transform.position);
+            gunRotation = gunnerCamera.transform.eulerAngles;
+        }
+        else
+        {
+            // POSITION
+            // Where the camera SHOULD be relative to the ship model
+            Vector3 camPos = ship.transform.position + (-transform.up * 7);
 
-			// Move the camera to its correct position
-			gunnerCamera.transform.position = camPos;
+            // Move the camera to its correct position
+            gunnerCamera.transform.position = camPos;
 
-			// ROTATION
-			// Add the current input to the guns final rotation
-			gunRotation += (new Vector2(-gunVelocity.y, gunVelocity.x) * Time.deltaTime);
+            // ROTATION
+            // Add the current input to the guns final rotation
+            gunRotation += (new Vector2(-gunVelocity.y, gunVelocity.x) * Time.deltaTime);
 
-			if (gunRotation.x < -80f) {
-				gunRotation.x = -80f;
-			}
+            if (gunRotation.x < -80f)
+            {
+                gunRotation.x = -80f;
+            }
 
-			if (gunRotation.x > 80f) {
-				gunRotation.x = 80f;
-			}
+            if (gunRotation.x > 80f)
+            {
+                gunRotation.x = 80f;
+            }
 
-			// Rotate the gun to its correct rotation
-			gunHelper.rotation = Quaternion.identity;
-			gunHelper.Rotate(gunRotation);
+            // Rotate the gun to its correct rotation
+            gunHelper.rotation = Quaternion.identity;
+            gunHelper.Rotate(gunRotation);
 
-			// TODO -- We need to prevent the gunner from looking up
+            // TODO -- We need to prevent the gunner from looking up
 
-			// Set the camera to its target rotation
-			gunnerCamera.transform.LookAt(gunHelper.position + gunHelper.forward * 300);
+            // Set the camera to its target rotation
+            gunnerCamera.transform.LookAt(gunHelper.position + gunHelper.forward * 300);
 
-			RaycastHit hit;
-			// Does the ray intersect any objects excluding the player layer
-			if (lockOn == false && Physics.Raycast(gunnerCamera.transform.position, gunnerCamera.transform.forward, out hit, Mathf.Infinity))
-			{
-				if (hit.collider.gameObject.tag == "Enemy" ||
-					hit.collider.gameObject.tag == "Shield")
-				{
-					lockOnTarget = hit.collider.gameObject;
-				}
-			}
-		}	
-	}
+            RaycastHit hit;
+            // Does the ray intersect any objects excluding the player layer
+            if (lockOn == false && Physics.Raycast(gunnerCamera.transform.position, gunnerCamera.transform.forward, out hit, Mathf.Infinity))
+            {
+                if (hit.collider.gameObject.tag == "Enemy" ||
+                    hit.collider.gameObject.tag == "Shield")
+                {
+                    lockOnTarget = hit.collider.gameObject;
+                }
+            }
+        }
+    }
 
     #endregion
 
@@ -464,41 +479,60 @@ public class testShipController : MonoBehaviour
     /// </summary>
     public void Shoot()
     {
-        if (shotTimer > currentShotInfo.FireRate)
+        if (currentWeapon == WeaponType.Laser)
+        {
+            //LaserShot: Long, straight beam, near instant, aoe from origin
+            //Raycast instead of instantiate for instant movement
+            ammoCount.Take1Ammo(currentWeapon);
+
+            //Shoot laser here
+            laser.gameObject.SetActive(true);
+
+            LayerMask enemyLayer = LayerMask.GetMask("Enemies");
+            enemyLayer += LayerMask.GetMask("Swarm");
+            RaycastHit[] hits = Physics.SphereCastAll(shotSpawnLocation.transform.position, 15f, shotSpawnLocation.transform.forward.normalized, laser.Length, enemyLayer);
+
+            foreach(RaycastHit hit in hits)
+            {
+                if(hit.collider.TryGetComponent(out HealthAndShields hp))
+                {
+                    hp.TakeDamage(laser.Damage, laser.Damage);
+                }
+            }
+
+            laser.SetLaser((shotSpawnLocation.transform.position + shotSpawnLocation.transform.forward.normalized) * laser.Length);
+        }
+        else if (shotTimer > currentShotInfo.FireRate)
         {
             shotTimer = 0;
 
-            switch (currentWeapon)
+            if (ammoCount.HasAmmo(currentWeapon))
             {
-                case WeaponType.Regular:
-                    Quaternion rot = Quaternion.LookRotation(shotSpawnLocation.transform.forward);
-                    GameObject shot = Instantiate(currentShotInfo.gameObject, shotSpawnLocation.position, Quaternion.identity);
-                    shot.transform.rotation = rot;
-					Debug.Log("Shot Rotation: " + shot.transform.eulerAngles);
-                    break;
-                case WeaponType.Energy:
-                    break;
-                case WeaponType.Laser:
-                    //Raycast instead of instantiate for instant movement
-                    break;
-                case WeaponType.Charged:
-                    break;
-                case WeaponType.Missiles:
-                    break;
+                ammoCount.Take1Ammo(currentWeapon);
+                SpawnShot();
             }
         }
+
+
     }
 
-	public void ShipShoot()
-	{
-		if (shotTimer > currentShotInfo.FireRate)
-		{
-			shotTimer = 0;
-			Quaternion rot = Quaternion.LookRotation(transform.forward);
-			GameObject shot = Instantiate(currentShotInfo.gameObject, transform.position + transform.forward * 10, Quaternion.identity);
-			shot.transform.rotation = rot;
-		}
-	}
+    private void SpawnShot()
+    {
+        Quaternion rot = Quaternion.LookRotation(shotSpawnLocation.transform.forward);
+        GameObject shot = Instantiate(currentShotInfo.gameObject, shotSpawnLocation.position, rot);
+        Debug.Log("Shot Rotation: " + shot.transform.eulerAngles);
+    }
+
+    public void ShipShoot()
+    {
+        if (shotTimer > currentShotInfo.FireRate)
+        {
+            shotTimer = 0;
+            Quaternion rot = Quaternion.LookRotation(transform.forward);
+            GameObject shot = Instantiate(currentShotInfo.gameObject, transform.position + transform.forward * 10, Quaternion.identity);
+            shot.transform.rotation = rot;
+        }
+    }
 
     /// <summary> 
 	/// Move the ships model so it looks more like your controlling the ship 
@@ -622,53 +656,53 @@ public class testShipController : MonoBehaviour
         }
     }
 
-	/// <summary> 
-	/// Add a player to the ship 
-	/// </summary>
-	public void JoinShip(Player newPlayer)
-	{
-		// Check if we are the first player to join
-		if (player1)
-		{
-			// If we have a pilot
+    /// <summary> 
+    /// Add a player to the ship 
+    /// </summary>
+    public void JoinShip(Player newPlayer)
+    {
+        // Check if we are the first player to join
+        if (player1)
+        {
+            // If we have a pilot
 
-			// Make the new player a gunner
-			player2 = newPlayer;
-			player2.myRole = PlayerRole.Gunner;
-		}
-		else
-		{
-			// If we dont have a pilot
+            // Make the new player a gunner
+            player2 = newPlayer;
+            player2.myRole = PlayerRole.Gunner;
+        }
+        else
+        {
+            // If we dont have a pilot
 
-			// Make the new player a pilot
-			player1 = newPlayer;
-			player1.myRole = PlayerRole.Pilot;
-		}
+            // Make the new player a pilot
+            player1 = newPlayer;
+            player1.myRole = PlayerRole.Pilot;
+        }
 
-		// Increment the number of players
-		numberOfPlayers++;
-	}
+        // Increment the number of players
+        numberOfPlayers++;
+    }
 
-	/// <summary>
-	/// Toggle the ships map
-	/// </summary>
-	public void SwapWeapon(Vector2 velocity)
+    /// <summary>
+    /// Toggle the ships map
+    /// </summary>
+    public void SwapWeapon(Vector2 velocity)
     {
         // TODO -- SpawnWeapon();
     }
 
-	/// <summary> 
-	/// Toggle the ships map
-	/// </summary>
-	public void ToggleMap(bool pressed)
+    /// <summary> 
+    /// Toggle the ships map
+    /// </summary>
+    public void ToggleMap(bool pressed)
     {
         // TODO -- ToggleMap();
     }
 
-	public void LockOn(bool pressed)
-	{
-		lockOn = pressed;
-	}
+    public void LockOn(bool pressed)
+    {
+        lockOn = pressed;
+    }
 
     /// <summary>
 	/// Change the roles of the players
@@ -695,13 +729,15 @@ public class testShipController : MonoBehaviour
 	/// </summary>
     public void Shoot(PlayerRole role, bool pressed)
     {
-		if (role == PlayerRole.Pilot) {
-			shooting_Pilot = pressed;
-		}
+        if (role == PlayerRole.Pilot)
+        {
+            shooting_Pilot = pressed;
+        }
 
-		if (role == PlayerRole.Gunner) {
-			shooting_Gunner = pressed;
-		}
+        if (role == PlayerRole.Gunner)
+        {
+            shooting_Gunner = pressed;
+        }
     }
 
     /// <summary> 

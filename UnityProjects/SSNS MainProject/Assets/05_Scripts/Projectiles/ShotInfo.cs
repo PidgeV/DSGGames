@@ -13,8 +13,11 @@ public class ShotInfo : MonoBehaviour
 
     private void Update()
     {
-        lifeTimer += Time.deltaTime;
+        if (weapon != SNSSTypes.WeaponType.Laser)
+        {
+            lifeTimer += Time.deltaTime;
 
-        if (lifeTimer >= lifeTime) Destroy(gameObject);
+            if (lifeTimer >= lifeTime) Destroy(gameObject);
+        }
     }
 }
