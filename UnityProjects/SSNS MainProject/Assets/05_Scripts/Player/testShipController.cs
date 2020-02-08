@@ -148,7 +148,7 @@ public class testShipController : MonoBehaviour
         shieldImage = slider_Shield.gameObject.GetComponentInChildren<Image>();
 
         // Get references
-        if(!shipHP) TryGetComponent(out shipHP);
+        if (!shipHP) TryGetComponent(out shipHP);
 
         //
         currentWeapon = startingWeapon;
@@ -436,8 +436,8 @@ public class testShipController : MonoBehaviour
             }
 
             Vector3 intercept = InterceptCalculationClass.FirstOrderIntercept(shotSpawnLocation.position, Vector3.zero, speed, lockOnTarget.transform.position, lockOnTarget.GetComponent<Rigidbody>().velocity);
-            gunnerCamera.transform.LookAt(intercept);
-            gunRotation = gunnerCamera.transform.eulerAngles;
+            gunnerCamParent.transform.LookAt(intercept);
+            //gunRotation = gunnerCamera.transform.eulerAngles;
         }
         else
         {
@@ -492,7 +492,7 @@ public class testShipController : MonoBehaviour
     public void Shoot()
     {
         Ray ray = new Ray(gunnerCamera.transform.position, gunnerCamera.transform.forward);
-        LayerMask layer = LayerMask.GetMask("Player");        
+        LayerMask layer = LayerMask.GetMask("Player");
 
         //If not hitting player collider
         if (!Physics.Raycast(ray, 15f, layer))
@@ -518,7 +518,7 @@ public class testShipController : MonoBehaviour
                     }
                 }
 
-                laser.SetLaser((shotSpawnLocation.transform.position + shotSpawnLocation.transform.forward.normalized) * laser.Length);
+                laser.SetLaser(shotSpawnLocation.transform.position + shotSpawnLocation.transform.forward.normalized * laser.Length);
             }
             else if (shotTimer > currentShotInfo.FireRate)
             {
@@ -700,11 +700,33 @@ public class testShipController : MonoBehaviour
     }
 
     /// <summary>
-    /// Toggle the ships map
+    /// Swap the ships weapon
     /// </summary>
-    public void SwapWeapon(Vector2 velocity)
+    public void SwapWeapon(Vector2 dInput)
     {
-        // TODO -- SpawnWeapon();
+        if (dInput.x > 0)
+        {
+            currentWeapon = WeaponType.Laser;
+        }
+        else if (dInput.x < 0)
+        {
+            currentWeapon = WeaponType.Missiles;
+        }
+        else if (dInput.y > 0)
+        {
+            //currentWeapon = WeaponType.Charged;
+        }
+        else if (dInput.y < 0)
+        {
+            if(currentWeapon == WeaponType.Regular)
+            {
+                currentWeapon = WeaponType.Energy;
+            }
+            else
+            {
+                currentWeapon = WeaponType.Regular;
+            }
+        }
     }
 
     /// <summary> 

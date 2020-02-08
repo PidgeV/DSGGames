@@ -1195,6 +1195,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6552152225560632436, guid: 86d3091828ccf4547a5bea3fb00cb441,
+        type: 3}
+      propertyPath: ammoCount.ammo.Array.data[0]
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552152225560632436, guid: 86d3091828ccf4547a5bea3fb00cb441,
+        type: 3}
+      propertyPath: ammoCount.ammo.Array.data[1]
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552152225560632436, guid: 86d3091828ccf4547a5bea3fb00cb441,
+        type: 3}
+      propertyPath: ammoCount.ammo.Array.data[2]
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552152225560632436, guid: 86d3091828ccf4547a5bea3fb00cb441,
+        type: 3}
+      propertyPath: ammoCount.ammo.Array.data[3]
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 6552152225560632436, guid: 86d3091828ccf4547a5bea3fb00cb441,
+        type: 3}
+      propertyPath: ammoCount.ammo.Array.data[4]
+      value: 600
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86d3091828ccf4547a5bea3fb00cb441, type: 3}
 --- !u!1001 &6884217599411297701
@@ -1412,7 +1437,7 @@ PrefabInstance:
     - target: {fileID: 3673733850238593188, guid: 1971746f0a6eeb84689a803e95c6fd4f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000091552734
+      value: 0.000076293945
       objectReference: {fileID: 0}
     - target: {fileID: 3673733850238593188, guid: 1971746f0a6eeb84689a803e95c6fd4f,
         type: 3}
@@ -1422,7 +1447,7 @@ PrefabInstance:
     - target: {fileID: 3673733849977251074, guid: 1971746f0a6eeb84689a803e95c6fd4f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.000038146973
+      value: 0.000030517578
       objectReference: {fileID: 0}
     - target: {fileID: 3673733849977251074, guid: 1971746f0a6eeb84689a803e95c6fd4f,
         type: 3}
