@@ -21,4 +21,16 @@ public class Bullet : MonoBehaviour
         Rigidbody rb = GetComponent<Rigidbody>();
         rb.velocity = rotation * GetComponent<ShotInfo>().Speed; // propel forward with set speed
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        StartCoroutine(DestroyBullet());
+    }
+
+    IEnumerator DestroyBullet()
+    {
+        yield return new WaitForEndOfFrame();
+
+        Destroy(gameObject);
+    }
 }

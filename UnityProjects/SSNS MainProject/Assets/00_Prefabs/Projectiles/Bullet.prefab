@@ -62,7 +62,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shooter: {fileID: 0}
-  speed: 500
 --- !u!114 &3914930520208039227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75,8 +74,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48901a74a34a93249835e8beb8ed2146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyOnHit: 0
   kineticDamage: 5
-  energyDamage: 5
+  energyDamage: 1
 --- !u!54 &-5304832730458768805
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: 0
-  fireRate: 0
+  fireRate: 0.1
   lifeTime: 5
   speed: 500
 --- !u!1001 &3012279576347739250
@@ -184,7 +184,7 @@ PrefabInstance:
     - target: {fileID: 8690222726650212484, guid: b309222978bfbf24588b8440137b48da,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 50
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 5675246219238425239, guid: b309222978bfbf24588b8440137b48da,
         type: 3}

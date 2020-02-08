@@ -824,6 +824,7 @@ MonoBehaviour:
   - {fileID: 2533200590899523750, guid: 31460afb2d57a1740a2902c36c19ba0e, type: 3}
   - {fileID: 8423215883985848745, guid: 1d8e860a9132b924e80e194a2546978d, type: 3}
   - {fileID: 8606928732767624012, guid: 5587e9352546e994dbb9d12aca1a148d, type: 3}
+  - {fileID: 2533200590899523750, guid: 3b677ceb74ae31b4fa791919b59499df, type: 3}
   shotSpawnLocation: {fileID: 3342730296713813920}
   laser: {fileID: 1952644434706050021}
   ship: {fileID: 6552152225189396121}
@@ -836,7 +837,6 @@ MonoBehaviour:
   myStats: {fileID: 11400000, guid: ec827265e03f9ea419ed67bf71905df8, type: 2}
   myBehaviour: {fileID: 11400000, guid: a083da76fd5d7f74aa99bf80151eb125, type: 2}
   speed: 0
-  shipHP: {fileID: 0}
   invertedControls: 0
   limitRotation: 0
   unlimitedBoost: 0
