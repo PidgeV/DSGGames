@@ -87,11 +87,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6608749523433535166}
     m_Modifications:
-    - target: {fileID: 5266171281214306815, guid: b9048ee1f6b3b8d46a2a7682ceaffd9b,
-        type: 3}
-      propertyPath: m_Name
-      value: ShieldImpactPrefab
-      objectReference: {fileID: 0}
     - target: {fileID: 5256498188492510134, guid: b9048ee1f6b3b8d46a2a7682ceaffd9b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -162,6 +157,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 5266171281214306815, guid: b9048ee1f6b3b8d46a2a7682ceaffd9b,
+        type: 3}
+      propertyPath: m_Name
+      value: ShieldImpactPrefab
+      objectReference: {fileID: 0}
     - target: {fileID: 8450949704887167430, guid: b9048ee1f6b3b8d46a2a7682ceaffd9b,
         type: 3}
       propertyPath: m_Enabled
@@ -188,11 +188,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6608749523433535166}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: ef2e9fb1b426cfc488e933bc22bb8e37,
-        type: 3}
-      propertyPath: m_Name
-      value: Shield
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: ef2e9fb1b426cfc488e933bc22bb8e37,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -257,6 +252,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 99.99997
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: ef2e9fb1b426cfc488e933bc22bb8e37,
+        type: 3}
+      propertyPath: m_Name
+      value: Shield
       objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: ef2e9fb1b426cfc488e933bc22bb8e37,
         type: 3}

@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5963861852230170022}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalPosition: {x: 0, y: 0, z: -0}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children:
   - {fileID: 2470074376971044593}
   - {fileID: 847491573805769267}
@@ -161,7 +161,6 @@ MonoBehaviour:
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 256
-  destroyedPrefab: {fileID: 0}
   myState: 1
 --- !u!65 &6373742027123135118
 BoxCollider:
@@ -174,8 +173,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 75.18, y: 35.4804, z: 153.64725}
-  m_Center: {x: -0.88596725, y: -1.2306557, z: -7.024811}
+  m_Size: {x: 106.53564, y: 44.068756, z: 174.78824}
+  m_Center: {x: 0, y: -1.4031792, z: -2.0840912}
 --- !u!114 &7735083024966515877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,6 +187,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21bcb8e5aef53064495f71d628833b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectToDestroy: {fileID: 0}
   maxLife: 100
   maxShield: 100
   life: 0
@@ -203,11 +203,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5963861852230170019}
     m_Modifications:
-    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyThruster (4)
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275373, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -263,6 +258,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyThruster (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -277,16 +287,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 4.0697207
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59d053a849b18994bae25015b58df19c, type: 3}
@@ -303,11 +303,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5963861852230170019}
     m_Modifications:
-    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyThruster
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275373, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -363,20 +358,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
+    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 6.0172706
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 6.0172706
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 6.0172706
+      propertyPath: m_Name
+      value: EnemyThruster
       objectReference: {fileID: 0}
     - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
@@ -393,6 +378,21 @@ PrefabInstance:
       propertyPath: m_Time
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 6.0172706
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 6.0172706
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 6.0172706
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59d053a849b18994bae25015b58df19c, type: 3}
 --- !u!4 &847491573805769267 stripped
@@ -408,11 +408,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5963861852230170019}
     m_Modifications:
-    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyThruster (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275373, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -468,6 +463,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyThruster (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -482,16 +492,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 4.0697207
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59d053a849b18994bae25015b58df19c, type: 3}
@@ -508,11 +508,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5963861852230170019}
     m_Modifications:
-    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyThruster (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275373, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -568,20 +563,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
+    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 6.0172706
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 6.0172706
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 6.0172706
+      propertyPath: m_Name
+      value: EnemyThruster (1)
       objectReference: {fileID: 0}
     - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
@@ -598,6 +583,21 @@ PrefabInstance:
       propertyPath: m_Time
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 6.0172706
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 6.0172706
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 6.0172706
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59d053a849b18994bae25015b58df19c, type: 3}
 --- !u!4 &6109052517669329339 stripped
@@ -613,11 +613,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5963861852230170019}
     m_Modifications:
-    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyThruster (5)
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275373, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -673,6 +668,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyThruster (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -687,16 +697,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 4.0697207
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59d053a849b18994bae25015b58df19c, type: 3}
@@ -713,11 +713,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5963861852230170019}
     m_Modifications:
-    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyThruster (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275373, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -773,6 +768,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyThruster (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -787,16 +797,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 4.0697207
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59d053a849b18994bae25015b58df19c, type: 3}
@@ -813,11 +813,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5963861852230170019}
     m_Modifications:
-    - target: {fileID: 6608749523433535167, guid: eec2fe4ad0beacf4bbf9df2290479e47,
-        type: 3}
-      propertyPath: m_Name
-      value: ShieldSystemsPrefab
-      objectReference: {fileID: 0}
     - target: {fileID: 6608749523433535166, guid: eec2fe4ad0beacf4bbf9df2290479e47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -887,6 +882,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 34.189243
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608749523433535167, guid: eec2fe4ad0beacf4bbf9df2290479e47,
+        type: 3}
+      propertyPath: m_Name
+      value: ShieldSystemsPrefab
       objectReference: {fileID: 0}
     - target: {fileID: 875428957334134260, guid: eec2fe4ad0beacf4bbf9df2290479e47,
         type: 3}

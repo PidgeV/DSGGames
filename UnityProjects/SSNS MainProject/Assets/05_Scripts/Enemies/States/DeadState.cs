@@ -5,14 +5,11 @@ using UnityEngine;
 public class DeadState : FSMState
 {
     private AdvancedFSM controller;
-    public DeadState(AdvancedFSM enemyController, GameObject destroyedPrefab)
+    public DeadState(AdvancedFSM enemyController)
     {
-        private AdvancedFSM controller;
-        public DeadState(AdvancedFSM enemyController)
-        {
-            controller = enemyController;
-            stateID = FSMStateID.Dead;
-        }
+        controller = enemyController;
+        stateID = FSMStateID.Dead;
+    }
 
     public override void Act()
     {

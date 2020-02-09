@@ -5,7 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class ChargerController : AdvancedFSM
 {
-    [SerializeField] GameObject destroyedPrefab;
     public GameObject[] waypoints;
 
     [Header("Green: forward direction and collision check.")]
@@ -36,7 +35,7 @@ public class ChargerController : AdvancedFSM
 
     private void ConstructFSM()
     {
-        DeadState deadState = new DeadState(this, destroyedPrefab);
+        DeadState deadState = new DeadState(this);
         ChargerPatrolState patrol = new ChargerPatrolState(this, player, waypoints, waypointDistanceMeters, playerDistanceMeters, true);
         ChargerAttackState attack = new ChargerAttackState(this, player);
 

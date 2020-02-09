@@ -157,8 +157,8 @@ public class FighterAttackState : FSMState
             //positions
             Vector3 targetPosition = player.transform.position;
             //velocities
-            //Vector3 velocity = rbSelf ? rbSelf.velocity : Vector3.zero;
-            Vector3 velocity = Vector3.zero;
+            Vector3 velocity = controller.rbSelf ? controller.rbSelf.velocity : Vector3.zero;
+            //Vector3 velocity = Vector3.zero;
             Vector3 targetVelocity = rbPlayer ? rbPlayer.velocity : Vector3.zero;
 
             //calculate intercept

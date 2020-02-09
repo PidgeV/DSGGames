@@ -49,6 +49,8 @@ public class FighterPatrolState : FSMState
     public override void EnterStateInit()
     {
         //Debug.Log("Patrolling");
+        timer1 = 0f;
+        timer2 = 0f;
     }
 
 

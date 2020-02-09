@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3107085776561158192}
   - component: {fileID: 3107085776561158198}
   - component: {fileID: 3107085776561158199}
-  - component: {fileID: 5065271178767460443}
   - component: {fileID: 5065271178767460442}
   - component: {fileID: 2083052501916966413}
   - component: {fileID: 5702806089406881496}
@@ -67,6 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48901a74a34a93249835e8beb8ed2146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyOnHit: 0
   kineticDamage: 2
   energyDamage: 2
 --- !u!65 &3107085776561158199
@@ -82,20 +82,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.93, y: 3.69, z: 16.15}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5065271178767460443
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3107085776561158194}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95cb8525ba7c3834ea4026df8de768e9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  debug: 0
-  radius: 200
 --- !u!114 &5065271178767460442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,6 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21bcb8e5aef53064495f71d628833b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectToDestroy: {fileID: 0}
   maxLife: 50
   maxShield: 25
   life: 10
@@ -128,7 +115,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a1176cb7a12e094f8443583782d7e76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destroyedPrefab: {fileID: 0}
   waypoints: []
   debugDraw: 1
   stats: {fileID: 5702806089406881496}
@@ -175,6 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48901a74a34a93249835e8beb8ed2146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyOnHit: 0
   kineticDamage: 5
   energyDamage: 5
 --- !u!1 &7920635045528217331
@@ -264,11 +251,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6607033829388375264}
     m_Modifications:
-    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyThruster
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275373, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -324,6 +306,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyThruster
+      objectReference: {fileID: 0}
     - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
@@ -354,11 +341,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6607033829388375264}
     m_Modifications:
-    - target: {fileID: 6608749523433535167, guid: eec2fe4ad0beacf4bbf9df2290479e47,
-        type: 3}
-      propertyPath: m_Name
-      value: ShieldSystemsPrefab
-      objectReference: {fileID: 0}
     - target: {fileID: 6608749523433535166, guid: eec2fe4ad0beacf4bbf9df2290479e47,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -428,6 +410,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 14.280004
+      objectReference: {fileID: 0}
+    - target: {fileID: 6608749523433535167, guid: eec2fe4ad0beacf4bbf9df2290479e47,
+        type: 3}
+      propertyPath: m_Name
+      value: ShieldSystemsPrefab
       objectReference: {fileID: 0}
     - target: {fileID: 875428957334134260, guid: eec2fe4ad0beacf4bbf9df2290479e47,
         type: 3}

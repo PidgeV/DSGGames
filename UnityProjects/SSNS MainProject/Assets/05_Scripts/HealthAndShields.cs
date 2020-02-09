@@ -44,6 +44,11 @@ public class HealthAndShields : MonoBehaviour
         if (shieldProjector)
         {
             shieldProjector.onShieldHit += OnShieldHit;
+
+            if (TryGetComponent<Collider>(out Collider collider) && shieldProjector.TryGetComponent<Collider>(out Collider shieldCollider))
+            {
+                Physics.IgnoreCollision(collider, shieldCollider);
+            }
         }
 
         StartCoroutine(RegenDelayReset());
