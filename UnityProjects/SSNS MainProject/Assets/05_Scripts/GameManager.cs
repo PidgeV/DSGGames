@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void UpdateState()
     {
-        HealthAndShields healthAndShields = GameManager.Instance.shipController.GetComponent<HealthAndShields>();
+        HealthAndShields healthAndShields = Instance.shipController.GetComponent<HealthAndShields>();
 
         switch (gameState)
         {

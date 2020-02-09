@@ -33,9 +33,6 @@ public class CruiserController : AdvancedFSM
 	[Header("obstacle Layer")]
 	public LayerMask obstacleLayer;
 
-	// My components
-	[Header("On Death")]
-	[SerializeField] private GameObject destroyedPrefab;
 
 	// What should I be doing when an enemy is in range
 	[Header("Cruiser State")]
@@ -83,7 +80,7 @@ public class CruiserController : AdvancedFSM
 	private void ConstructFSM()
 	{
 		// Dead State
-		DeadState deadState = new DeadState(this, destroyedPrefab);
+		DeadState deadState = new DeadState(this);
 
 		// Attacking
 		CruiserAttackState attackState = new CruiserAttackState(this);

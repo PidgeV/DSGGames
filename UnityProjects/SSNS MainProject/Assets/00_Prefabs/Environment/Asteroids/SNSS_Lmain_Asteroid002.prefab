@@ -106,5 +106,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48901a74a34a93249835e8beb8ed2146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kineticDamage: 5
-  energyDamage: 5
+  kineticDamage: 500
+  energyDamage: 500

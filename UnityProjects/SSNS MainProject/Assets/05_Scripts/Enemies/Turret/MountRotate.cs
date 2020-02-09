@@ -67,7 +67,7 @@ public class MountRotate : InterceptCalculationClass
                 Vector3 targetVelocity = rbTarget ? rbTarget.velocity : Vector3.zero;
 
                 //calculate intercept
-                interceptPoint = FirstOrderIntercept(transform.position, velocity, bulletPrefab.GetComponent<Bullet>().speed, targetPosition, targetVelocity);
+                interceptPoint = FirstOrderIntercept(transform.position, velocity, bulletPrefab.GetComponent<ShotInfo>().Speed, targetPosition, targetVelocity);
             }
         }
     }

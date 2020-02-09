@@ -162,7 +162,7 @@ public class FighterAttackState : FSMState
             Vector3 targetVelocity = rbPlayer ? rbPlayer.velocity : Vector3.zero;
 
             //calculate intercept
-            interceptPoint = InterceptCalculationClassNoMono.FirstOrderIntercept(controller.transform.position, velocity, bulletPrefab.GetComponent<Bullet>().speed, targetPosition, targetVelocity);
+            interceptPoint = InterceptCalculationClassNoMono.FirstOrderIntercept(controller.transform.position, velocity, bulletPrefab.GetComponent<ShotInfo>().Speed, targetPosition, targetVelocity);
         }
     }
 }
