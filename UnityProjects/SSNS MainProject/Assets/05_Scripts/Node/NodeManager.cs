@@ -13,7 +13,7 @@ public class NodeManager : MonoBehaviour
     #region Constant Values
 
     private const float MAX_SELECT_TIME = 30f;
-    private const float CONFIRM_TIME = 5f;
+    private const float MIN_SELECT_TIME = 5f;
     private const float SELECT_DELAY = 0.5f;
 
     #endregion
@@ -28,14 +28,7 @@ public class NodeManager : MonoBehaviour
 
     [SerializeField] private Node startNode;
 
-    [SerializeField] private bool timedChoice = true;
-
     [SerializeField] private int maxPortalDistance = 350;
-
-    [Header("Confirm Values")]
-    [SerializeField] bool lockedP1;
-
-    [SerializeField] bool lockedP2;
 
     #endregion
 
@@ -58,8 +51,7 @@ public class NodeManager : MonoBehaviour
 
     #region Player Selection Variables
 
-    private int selectedIndexP1;
-    private int selectedIndexP2;
+    private int selectedIndex;
 
     private bool selectingNode;
     private bool nodeSelected;
@@ -70,19 +62,7 @@ public class NodeManager : MonoBehaviour
 
     private float timeBeforeSelection;
 
-    private float timeSinceChangeP1;
-    private float timeSinceChangeP2;
-
-    #endregion
-
-    // TODO: Add later
-    #region Depth Selection
-
-    //private Node[] depthNodes;
-
-    //private int selectedDepth;
-
-    //private bool mapPreview;
+    private float timeSinceChange;
 
     #endregion
 
@@ -100,19 +80,13 @@ public class NodeManager : MonoBehaviour
             selectingNode = true;
             rotateToPortal = true;
 
-            //selectedDepth = currentNode.Depth + 1;
-            //depthNodes = FindNodes(selectedDepth);
-
-            // Changes the time based on if there is more then 1 choice
             if (Choices.Length > 1)
             {
                 timeBeforeSelection = MAX_SELECT_TIME;
             }
             else
             {
-                timeBeforeSelection = CONFIRM_TIME;
-
-                selectedIndexP1 = selectedIndexP2 = 0;
+                timeBeforeSelection = MIN_SELECT_TIME;
             }
 
             // Spawn the portals and update the information for the nodes
@@ -135,8 +109,6 @@ public class NodeManager : MonoBehaviour
         // Resets all boolean variables
         selectingNode = false;
         nodeSelected = false;
-        lockedP1 = false;
-        lockedP2 = false;
 
         // Stores the last node
         lastNode = currentNode;
@@ -181,67 +153,15 @@ public class NodeManager : MonoBehaviour
     /// </summary>
     /// <param name="role">The player's role</param>
     /// <param name="direction">The direction of the selection</param>
-    public void SelectNodeChoice(PlayerRole role, int direction)
+    public void SelectNodeChoice(int direction)
     {
         if (selectingNode)
         {
             direction = Mathf.Clamp(direction, -1, 1);
 
-            // Checks if the player hasn't confirmed for each role
-            if ((role == PlayerRole.Pilot && timeSinceChangeP1 == 0 && !lockedP1) || (role == PlayerRole.Gunner && timeSinceChangeP2 == 0 && !lockedP2))
+            if (timeSinceChange == 0)
             {
-                NodeUpdate(role, selectedIndexP2 + direction);
-            }
-        }
-    }
-
-    /// <summary>
-    /// Select the depth
-    /// </summary>
-    /// <param name="direction">The direction of the selection</param>
-    //public void SelectNodeDepth(int direction)
-    //{
-    //    if (selectingNode && mapPreview)
-    //    {
-    //        direction = Mathf.Clamp(direction, -1, 1);
-
-    //        if (GameManager.Instance.debug)
-    //        {
-    //            selectedDepth = Mathf.Clamp(selectedDepth + direction, startNode.Depth, startNode.MaxDepth);
-    //        }
-    //        else
-    //        {
-    //            selectedDepth = Mathf.Clamp(selectedDepth + direction, currentNode.Depth, startNode.MaxDepth);
-    //        }
-
-    //        if (selectedDepth == currentNode.Depth + 1)
-    //            depthNodes = null;
-    //        else
-    //            depthNodes = FindNodes(selectedDepth);
-    //    }
-    //}
-
-    /// <summary>
-    /// Locks node choice for the player role
-    /// </summary>
-    /// <param name="role">The player's role</param>
-    /// <param name="locked">Whether to confirm choice</param>
-    public void LockChoice(PlayerRole role, bool locked)
-    {
-        // Checks if both player's haven't confirmed
-        if (selectingNode && !(lockedP1 && lockedP2))
-        {
-            if (role == PlayerRole.Pilot)
-            {
-                lockedP1 = locked;
-            }
-            else if (role == PlayerRole.Gunner)
-            {
-                if (GameManager.Instance.debug)
-                {
-                }
-                else
-                    lockedP2 = locked;
+                NodeUpdate(selectedIndex + direction);
             }
         }
     }
@@ -251,64 +171,38 @@ public class NodeManager : MonoBehaviour
     /// </summary>
     /// <param name="role">The role to update</param>
     /// <param name="newNodeIndex">The node to select</param>
-    private void NodeUpdate(PlayerRole role, int newNodeIndex)
-    {
-        if (role == PlayerRole.Pilot)
-        {
-            newNodeIndex = Mathf.Clamp(newNodeIndex, 0, Choices.Length - 1);
-
-            timeSinceChangeP1 = SELECT_DELAY;
-            selectedIndexP1 = newNodeIndex;
-            rotateToPortal = true;
-
-            // Updates the node UI for the pilot
-            #region UI 
-
-            NodeInfo selectedNode = Choices[selectedIndexP1].NodeInfo;
-
-            NodeInfo leftNode = null;
-            NodeInfo rightNode = null;
-
-            int leftNodeP1 = selectedIndexP1 - 1;
-            int rightNodeP1 = selectedIndexP1 + 1;
-
-            if (leftNodeP1 >= 0)
-                leftNode = Choices[leftNodeP1].NodeInfo;
-
-            if (rightNodeP1 < Choices.Length)
-                rightNode = Choices[rightNodeP1].NodeInfo;
-
-            nodeUI.UpdatePilot(selectedNode, leftNode, rightNode);
-
-            #endregion
-        }
-        else if (role == PlayerRole.Gunner)
-        {
-            timeSinceChangeP2 = SELECT_DELAY;
-            Choices[selectedIndexP2].ResetColor();
-            selectedIndexP2 = newNodeIndex;
-
-            // Updates the node UI for the gunner
-            #region UI
-
-            currentNode.ActiveColor();
-
-            Choices[selectedIndexP2].DestinationColor();
-
-            nodeUI.UpdateGunner(Choices[selectedIndexP2].NodeInfo, currentNode.NodeInfo);
-
-            #endregion
-        }
-    }
-
-    /// <summary>
-    /// Updates the information for the node for both players
-    /// </summary>
-    /// <param name="newNodeIndex">The node to select</param>
     private void NodeUpdate(int newNodeIndex)
     {
-        NodeUpdate(PlayerRole.Pilot, newNodeIndex);
-        NodeUpdate(PlayerRole.Gunner, newNodeIndex);
+        newNodeIndex = Mathf.Clamp(newNodeIndex, 0, Choices.Length - 1);
+
+        timeSinceChange = SELECT_DELAY;
+        selectedIndex = newNodeIndex;
+        rotateToPortal = true;
+
+        // Updates the node UI for the pilot
+        #region UI 
+
+        NodeInfo selectedNode = Choices[selectedIndex].NodeInfo;
+
+        NodeInfo leftNode = null;
+        NodeInfo rightNode = null;
+
+        int leftNodeP1 = selectedIndex - 1;
+        int rightNodeP1 = selectedIndex + 1;
+
+        if (leftNodeP1 >= 0)
+            leftNode = Choices[leftNodeP1].NodeInfo;
+
+        if (rightNodeP1 < Choices.Length)
+            rightNode = Choices[rightNodeP1].NodeInfo;
+
+        nodeUI.UpdatePilot(selectedNode, leftNode, rightNode);
+
+        currentNode.ActiveColor();
+        Choices[selectedIndex].ResetColor();
+        Choices[selectedIndex].DestinationColor();
+
+        #endregion
     }
 
     #endregion
@@ -409,7 +303,7 @@ public class NodeManager : MonoBehaviour
         if (portals == null || !rotateToPortal) return;
 
         // Finds the direction to the portal
-        Vector3 portalDir = (portals[selectedIndexP1].transform.position - GameManager.Instance.shipController.transform.position).normalized;
+        Vector3 portalDir = (portals[selectedIndex].transform.position - GameManager.Instance.shipController.transform.position).normalized;
 
         // Finds the angle between
         float angle = Vector3.SignedAngle(GameManager.Instance.shipController.transform.forward, portalDir, GameManager.Instance.shipController.transform.up);
@@ -469,66 +363,26 @@ public class NodeManager : MonoBehaviour
     {
         if (selectingNode)
         {
-            if (timedChoice || timeBeforeSelection <= CONFIRM_TIME)
-                timeBeforeSelection -= Time.deltaTime;
+            timeBeforeSelection -= Time.deltaTime;
 
             // If timer hits 0 select node based on player selections
             if (timeBeforeSelection <= 0) 
             {
                 timeBeforeSelection = 0;
 
-                int selectedIndex = selectedIndexP1;
-
-                if (selectedIndexP1 != selectedIndexP2)
-                {
-                    switch (random.Next(2))
-                    {
-                        case 1:
-                            selectedIndex = selectedIndexP2;
-                            break;
-                    }
-                }
-
-                NodeUpdate(selectedIndex);
-
                 selectingNode = false;
                 nodeSelected = true;
 
             }
-            // If timer is below confirm time and neither have choosen randomize player choices
-            else if (timeBeforeSelection <= CONFIRM_TIME)
-            {
-                if (!lockedP1 || !lockedP2)
-                {
-                    lockedP1 = true;
-                    lockedP2 = true;
 
-                    // Updates the selected nodes with random node choice
-                    NodeUpdate(PlayerRole.Pilot, random.Next(Choices.Length));
-                    NodeUpdate(PlayerRole.Gunner, random.Next(Choices.Length));
-                }
-            }
-            // If both players have confirmed lower time to confirm time
-            else if (lockedP1 && lockedP2)
+            timeSinceChange -= Time.deltaTime;
+            if (timeSinceChange <= 0)
             {
-                timeBeforeSelection = CONFIRM_TIME;
-            }
-
-            timeSinceChangeP1 -= Time.deltaTime;
-            if (timeSinceChangeP1 <= 0)
-            {
-                timeSinceChangeP1 = 0;
-            }
-
-            timeSinceChangeP2 -= Time.deltaTime;
-            if (timeSinceChangeP2 <= 0)
-            {
-                timeSinceChangeP2 = 0;
+                timeSinceChange = 0;
             }
 
             // Update selection UI
             nodeUI.UpdateTimer((int)timeBeforeSelection);
-            nodeUI.UpdateConfirm(lockedP1, lockedP2);
         }
 
         // Rotates to portal
@@ -538,7 +392,7 @@ public class NodeManager : MonoBehaviour
         if (nodeSelected && !rotateToPortal)
         {
             nodeSelected = false;
-            TravelToNode(Choices[selectedIndexP1]);
+            TravelToNode(Choices[selectedIndex]);
         }
     }
 

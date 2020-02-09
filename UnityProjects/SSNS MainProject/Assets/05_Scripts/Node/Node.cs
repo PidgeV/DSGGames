@@ -135,7 +135,6 @@ public class Node : MonoBehaviour, IEnumerable<Node>
     public NodeType Type { get { return nodeInfo.type; } }
     public NodeEvent Event { get { return nodeInfo.nodeEvent; } }
     public Reward Reward { get { return nodeInfo.reward; } }
-    public Node[] Parents { get { return nodeInfo.parents; } }
     public Node[] Children { get { return nodeInfo.children; } }
 
     #endregion
@@ -226,6 +225,5 @@ public class NodeInfo
     public NodeType type;
     public NodeEvent nodeEvent;
     [HideInInspector] public Reward reward;
-    public Node[] parents;
     public Node[] children;
 }

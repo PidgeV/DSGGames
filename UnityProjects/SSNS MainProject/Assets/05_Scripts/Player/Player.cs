@@ -121,34 +121,17 @@ public class Player : Controller
 	#region [Action Map] NodeMap
 	public void OnNavigate(InputValue input)
 	{
-		float value = 0;
 		if (myRole == PlayerRole.Pilot)
 		{
-			value = input.Get<Vector2>().x;
+			if (input.Get<Vector2>().x >= 0.05f)
+			{
+				NodeManager.Instance.SelectNodeChoice(1);
+			}
+			else if (input.Get<Vector2>().x <= -0.05f)
+			{
+				NodeManager.Instance.SelectNodeChoice(-1);
+			}
 		}
-		else if (myRole == PlayerRole.Gunner)
-		{
-			value = -input.Get<Vector2>().y;
-		}
-
-		if (value >= 0.05f)
-		{
-			NodeManager.Instance.SelectNodeChoice(myRole, 1);
-		}
-		else if (value <= -0.05f)
-		{
-			NodeManager.Instance.SelectNodeChoice(myRole, -1);
-		}
-	}
-
-	public void OnConfirm(InputValue input)
-	{
-		Debug.Log("OnConfirm");
-		NodeManager.Instance.LockChoice(myRole, true);
-	}
-	public void OnDecline(InputValue input)
-	{
-		NodeManager.Instance.LockChoice(myRole, false);
 	}
 
 	#endregion

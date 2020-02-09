@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1225102729419275373}
   m_Layer: 0
-  m_Name: ThusterCone
+  m_Name: EnemyThruster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,7 +102,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Time: 2
+  m_Time: 0.5
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 3
@@ -132,7 +132,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.17647058, g: 1, b: 0.9999998, a: 1}
+      key0: {r: 1, g: 0.19276674, b: 0.17647058, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 0.41960785}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -4858,7 +4858,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7c1286c04bea4c14dbc4504cc9e3b61b, type: 2}
+  - {fileID: 2100000, guid: 97b725aa6aa003d4ca46914e3ca8d0c5, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0

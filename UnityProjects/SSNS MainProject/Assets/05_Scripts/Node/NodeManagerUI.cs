@@ -52,70 +52,12 @@ public struct NodeManagerUI
     }
 
     /// <summary>
-    /// Update the gunner's node information
-    /// </summary>
-    /// <param name="selectedNode">The gunner's currently selected node</param>
-    /// <param name="currentNode">The current node that the ship is on</param>
-    public void UpdateGunner(NodeInfo selectedNode, NodeInfo currentNode)
-    {
-        // Updates the current node info
-        #region Current Node
-
-        gunnerNodeUI.c_nodeName.text = currentNode.name;
-        gunnerNodeUI.c_nodeType.text = "Type: " + System.Enum.GetName(typeof(NodeType), currentNode.type);
-
-        if (currentNode.reward)
-            gunnerNodeUI.c_nodeReward.text = selectedNode.reward.rewardName;
-
-        #endregion
-
-        // Updates the selected node info
-        #region Selected Node
-
-        gunnerNodeUI.s_nodeName.text = selectedNode.name;
-        gunnerNodeUI.s_nodeType.text = "Type: " + System.Enum.GetName(typeof(NodeType), selectedNode.type);
-
-        if (selectedNode.reward)
-            gunnerNodeUI.s_nodeReward.text = selectedNode.reward.rewardName;
-
-        #endregion
-    }
-
-    /// <summary>
     /// Updates the selection timer
     /// </summary>
     /// <param name="time">The time that the selection is at</param>
     public void UpdateTimer(int time)
     {
         selectionUI.confirmTime.text = time.ToString("00"); // Formats it to double digits
-    }
-
-    /// <summary>
-    /// Updates the confirm icons
-    /// --TODO
-    /// - Probably will be changed as for now just changes the text color
-    /// </summary>
-    /// <param name="confirm1">Whether the pilot confirmed</param>
-    /// <param name="confirm2">Whether the gunner confirmed</param>
-    public void UpdateConfirm(bool confirm1, bool confirm2)
-    {
-        if (confirm1)
-        {
-            selectionUI.pilotConfirm.color = Color.green;
-        }
-        else
-        {
-            selectionUI.pilotConfirm.color = Color.red;
-        }
-
-        if (confirm2)
-        {
-            selectionUI.gunnerConfirm.color = Color.green;
-        }
-        else
-        {
-            selectionUI.gunnerConfirm.color = Color.red;
-        }
     }
 
     /// <summary>
@@ -141,8 +83,6 @@ public struct SelectionInfoUI
     public Fade groupFade;
 
     public Text confirmTime;
-    public Text pilotConfirm;
-    public Text gunnerConfirm;
 }
 
 /// <summary>
@@ -171,16 +111,4 @@ public struct PilotNodeUI
 public struct GunnerNodeUI
 {
     public Fade groupFade;
-
-    [Header("Current Node UI")]
-    public Text c_nodeName;
-    public Text c_nodeType;
-    public Text c_nodeDifficulty;
-    public Text c_nodeReward;
-
-    [Header("Selected Node UI")]
-    public Text s_nodeName;
-    public Text s_nodeType;
-    public Text s_nodeDifficulty;
-    public Text s_nodeReward;
 }

@@ -204,16 +204,6 @@ public class NewDemoManager : MonoBehaviour
 			KillAllEnemies();
 		});
 
-		// Lock Choices for node selection
-		Button btn_LockAll = CreateButton(button, sceneRect, "Lock Node Choices");
-		btn_LockAll.onClick.AddListener(() => {
-			if (NodeManager.Instance)
-			{
-				NodeManager.Instance.LockChoice(SNSSTypes.PlayerRole.Pilot, true);
-				NodeManager.Instance.LockChoice(SNSSTypes.PlayerRole.Gunner, true);
-			}
-		});
-
 		// Loads scenes
 		// MAIN MENU
 		for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)

@@ -54,7 +54,7 @@ public class FighterAttackState : FSMState
 
         CalculateIntercept();
 
-        if (Vector3.Distance(player.transform.position, controller.transform.position) < 150)
+        if (Vector3.Distance(player.transform.position, controller.transform.position) < controller.CloseDistance)
         {
             controller.PerformTransition(Transition.Patrol);
         }
@@ -104,9 +104,9 @@ public class FighterAttackState : FSMState
 
             //Move
             //maintains a distance
-            float percent = Vector3.Distance(controller.transform.position, player.transform.position) / 200;
-            if (percent > 1) percent = 1;
-            controller.rbSelf.AddForce(controller.transform.forward.normalized * controller.Acceleration * percent, ForceMode.Acceleration);
+            //float percent = Vector3.Distance(controller.transform.position, player.transform.position) / 200;
+            //if (percent > 1) percent = 1;
+            controller.rbSelf.AddForce(controller.transform.forward.normalized * controller.Acceleration /** percent*/, ForceMode.Acceleration);
         }
     }
 

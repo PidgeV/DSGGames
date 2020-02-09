@@ -30,6 +30,8 @@ public class FighterController : AdvancedFSM
     [Space(15)]
     [SerializeField] float waypointDistanceMeters = 50f;
     [SerializeField] float playerDistanceMeters = 100f;
+    [SerializeField] float followDistance = 100;
+    [SerializeField] float closeDistance = 90;
 
     public Rigidbody rbSelf;
 
@@ -103,6 +105,8 @@ public class FighterController : AdvancedFSM
     //Getters
     public float PlayerDistance { get { return playerDistanceMeters; } }
     public float WaypointDistance { get { return waypointDistanceMeters; } }
+    public float FollowDistance { get { return followDistance; } }
+    public float CloseDistance { get { return closeDistance; } }
     public float CollisionCheckDistance { get { return collisionCheckDistance; } }
     public LayerMask ObstacleLayer { get { return obstacleLayer; } }
     public float RaySize { get { return raySize; } }
