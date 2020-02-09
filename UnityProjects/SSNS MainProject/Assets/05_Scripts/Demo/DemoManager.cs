@@ -154,7 +154,7 @@ public class DemoManager : MonoBehaviour
 		if (Input.GetKeyDown(player_Godmode) && playerObj) {
 			// Toggle on god mode for the player
 			if (playerObj.TryGetComponent(out HealthAndShields healthAndShields)) {
-				healthAndShields.invincible = !healthAndShields.invincible;
+				healthAndShields.Invincible = !healthAndShields.Invincible;
             }
 		}
 

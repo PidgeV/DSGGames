@@ -320,8 +320,8 @@ public class testShipController : MonoBehaviour
             boostImage.color = Color.Lerp(Color.red, Color.yellow, (1 / myStats.maxBoostGauge) * boostGauge);
         }
 
-        slider_Health.value = (1 / shipHP.MaxLife) * shipHP.life;
-        slider_Shield.value = (1 / shipHP.MaxShield) * shipHP.shield;
+        slider_Health.value = (1 / shipHP.MaxLife) * shipHP.currentLife;
+        slider_Shield.value = (1 / shipHP.MaxShield) * shipHP.currentShield;
 
         // Shooting
         if (shooting_Gunner)

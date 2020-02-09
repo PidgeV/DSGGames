@@ -121,7 +121,7 @@ public class NewDemoManager : MonoBehaviour
 		HotKeys();
 
 		if (playerGodmode && player) {
-			playerGodmode.color = player.invincible ? Color.green : Color.red;
+			playerGodmode.color = player.Invincible ? Color.green : Color.red;
 		}
 	}
 
@@ -260,7 +260,7 @@ public class NewDemoManager : MonoBehaviour
 	{
 		if (player)
 		{
-			player.invincible = !player.invincible;
+			player.Invincible = !player.Invincible;
 		}
 	}
 
@@ -307,12 +307,12 @@ public class NewDemoManager : MonoBehaviour
 			if (newCamera.name.Contains("Pilot"))
 			{
 				hud.gameObject.SetActive(true);
-				player.invincible = false;
+				player.Invincible = false;
 			}
 			else
 			{
 				hud.gameObject.SetActive(false);
-				player.invincible = true;
+				player.Invincible = true;
 			}
 		}
 		

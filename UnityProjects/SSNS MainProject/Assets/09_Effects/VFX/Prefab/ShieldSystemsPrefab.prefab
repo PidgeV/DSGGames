@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 875428957334134260}
   m_Layer: 0
   m_Name: ShieldSystemsPrefab
-  m_TagString: Shield
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -76,10 +76,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef5227dfa6fe724096ffbda88a48183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MeshRenderer: {fileID: 3507114127983036335}
+  ShieldMeshRenderer: {fileID: 3507114127983036335}
+  shipCollider: {fileID: 0}
+  ImpactVFX: {fileID: 7243826775117591407}
   HitVFX: {fileID: 7243826775117591407}
-  Color: {r: 0, g: 0.6901961, b: 5.992157, a: 1}
-  fadeType: 0
+  BaseColor: {r: 0, g: 5.992157, b: 0.21960784, a: 0.39215687}
+  BrokenColor: {r: 6.6415095, g: 0.05952795, b: 0, a: 0.39215687}
+  DamagePercent: 1
+  fadeType: 1
+  ResizeShield: 0
 --- !u!1001 &3283701313681787536
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -161,6 +166,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ShieldImpactPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 5266171281214306815, guid: b9048ee1f6b3b8d46a2a7682ceaffd9b,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8450949704887167430, guid: b9048ee1f6b3b8d46a2a7682ceaffd9b,
         type: 3}
@@ -253,16 +263,21 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 99.99997
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: ef2e9fb1b426cfc488e933bc22bb8e37,
-        type: 3}
-      propertyPath: m_Name
-      value: Shield
-      objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: ef2e9fb1b426cfc488e933bc22bb8e37,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: b67bb34e42234564ebf5d4b5b85fe739, type: 2}
+    - target: {fileID: -927199367670048503, guid: ef2e9fb1b426cfc488e933bc22bb8e37,
+        type: 3}
+      propertyPath: m_Name
+      value: Shield
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: ef2e9fb1b426cfc488e933bc22bb8e37,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef2e9fb1b426cfc488e933bc22bb8e37, type: 3}
 --- !u!4 &2219230507918033248 stripped

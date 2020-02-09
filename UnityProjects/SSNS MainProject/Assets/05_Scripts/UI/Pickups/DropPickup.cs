@@ -8,7 +8,15 @@ public class DropPickup : MonoBehaviour
     [SerializeField] float percentile = 10f;
     [SerializeField] Pickup[] pickups;
 
-    public void AttemptPickupSpawn()
+	private void Start()
+	{
+		if (TryGetComponent<HealthAndShields>(out HealthAndShields health))
+		{
+			health.onDeath += AttemptPickupSpawn;
+		}
+	}
+
+	public void AttemptPickupSpawn()
     {
         if (Random.Range(1, 101) < percentile)
         {

@@ -42,12 +42,11 @@ public class GameManager : MonoBehaviour
         switch (gameState)
         {
             case GameState.BATTLE:
-                healthAndShields.invincible = false;
+                healthAndShields.Invincible = false;
                 break;
             case GameState.BATTLE_END:
-                healthAndShields.Heal(100);
-                healthAndShields.shield = 100;
-                healthAndShields.invincible = true;
+				healthAndShields.ResetValues();
+                healthAndShields.Invincible = true;
                 AreaManager.Instance.EndArea();
                 break;
             case GameState.PAUSE:

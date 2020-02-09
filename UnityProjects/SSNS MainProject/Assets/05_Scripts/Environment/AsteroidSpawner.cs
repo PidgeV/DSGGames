@@ -132,6 +132,6 @@ public class AsteroidSpawner : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireCube(transform.position, new Vector3(maxPos, maxPos, maxPos));
+      //  Gizmos.DrawWireCube(transform.position, new Vector3(maxPos, maxPos, maxPos));
     }
 }

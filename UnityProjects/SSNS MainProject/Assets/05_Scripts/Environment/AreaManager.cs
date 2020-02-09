@@ -16,6 +16,9 @@ public class AreaManager : MonoBehaviour
 
     [SerializeField] private Area lastArea;
     [SerializeField] private Area currentArea;
+    [SerializeField] private GameObject areaEffectPrefab;
+
+   private GameObject areaEffect;
 
     private bool nextAreaLoaded;
     private bool lastAreaDestroyed;
@@ -29,8 +32,10 @@ public class AreaManager : MonoBehaviour
     {
         areaEnded = true;
 
-        // Grabs current reward and uses it on the ship
-        Reward reward = NodeManager.Instance.CurrentNode.Reward;
+		//Destroy(areaEffect);
+
+		// Grabs current reward and uses it on the ship
+		Reward reward = NodeManager.Instance.CurrentNode.Reward;
         reward.UseReward(GameManager.Instance.shipController.myStats);
 
         // Updates the ui for the reward
@@ -68,7 +73,10 @@ public class AreaManager : MonoBehaviour
         if (lastArea != null && lastArea.parent != null)
             lastArea.parent.gameObject.SetActive(false);
 
-        StartCoroutine(DestroyLastArea());
+		//areaEffect = GameObject.Instantiate(areaEffectPrefab, currentArea.location, Quaternion.identity);
+		//areaEffect.transform.localScale = Vector3.one * currentArea.size * 2;
+
+		StartCoroutine(DestroyLastArea());
     }
 
     /// <summary>
@@ -78,13 +86,13 @@ public class AreaManager : MonoBehaviour
     private IEnumerator DestroyLastArea()
     {
         yield return null;
-        //// Destroys the objects in the last area
-        //foreach(GameObject go in lastArea.objects)
-        //{
-        //    Destroy(go);
+		//// Destroys the objects in the last area
+		//foreach(GameObject go in lastArea.objects)
+		//{
+		//    Destroy(go);
 
-        //    yield return null;
-        //}
+		//    yield return null;
+		//}
 
         //// Destroys the parent of the area
         if (lastArea != null && lastArea.parent != null)

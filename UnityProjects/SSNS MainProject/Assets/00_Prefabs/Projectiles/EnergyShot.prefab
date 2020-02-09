@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3914930520208039227}
   - component: {fileID: -5304832730458768805}
   - component: {fileID: 2533200590899523750}
+  - component: {fileID: 1434235076147051434}
   m_Layer: 0
   m_Name: EnergyShot
   m_TagString: Untagged
@@ -91,7 +92,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 1
 --- !u!114 &2533200590899523750
 MonoBehaviour:
@@ -108,7 +109,19 @@ MonoBehaviour:
   weapon: 1
   fireRate: 0.1
   lifeTime: 5
-  speed: 500
+  speed: 850
+--- !u!114 &1434235076147051434
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4450240921679082262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e2614cb825d20d4cba0c39ee1db7217, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3012279576347739250
 PrefabInstance:
   m_ObjectHideFlags: 0
