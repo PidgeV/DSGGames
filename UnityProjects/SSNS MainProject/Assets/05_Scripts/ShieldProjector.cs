@@ -32,6 +32,7 @@ public class ShieldProjector : MonoBehaviour
 	[ColorUsage(true, true)] public Color BrokenColor;
 
 	[Header("Effects")]
+	[SerializeField] GameObject DissolveVFX;
 	[SerializeField] GameObject ImpactVFX;
 	[SerializeField] GameObject HitVFX;
 
@@ -43,7 +44,6 @@ public class ShieldProjector : MonoBehaviour
 
 	// The damage percent is the smount of shield remaining. 0 - 1
 	 float DamagePercent = 1;
-
 
 	[Header("Shield Properties")]
 	public float ShieldSize = 1.0f;
@@ -106,14 +106,16 @@ public class ShieldProjector : MonoBehaviour
 	{
 		float newPercent = 1 / max * current;
 
-		// If our shield is at 1%
-		if (newPercent <= 0)
+		// If our shield is at 0%
+		if (newPercent <= 0 && DamagePercent > 0)
 		{
 			// Invoke the On Shield Break Event
 			if (onShieldBreak != null)
 			{
 				onShieldBreak.Invoke();
 			}
+
+			SpawnShieldDissolve();
 
 			UpdateShieldCollider(false);
 		}
@@ -171,6 +173,23 @@ public class ShieldProjector : MonoBehaviour
 
 		// Destroy the new impact object after 2 seconds
 		Destroy(impact, 2);
+	}
+
+	// Spawn a shield dissolve object
+	void SpawnShieldDissolve()
+	{
+		if (DissolveVFX == null)
+		{
+			// Do nothing
+			return;
+		}
+
+		GameObject dissolve = Instantiate(DissolveVFX, ShieldMeshRenderer.transform.parent) as GameObject;
+		
+		dissolve.transform.localScale = Vector3.one * ShieldSize * 2;
+		dissolve.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", GetColor);
+
+		Destroy(dissolve, 2);
 	}
 
 	// Fade the shield impact objects

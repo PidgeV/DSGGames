@@ -152,6 +152,7 @@
     <Compile Include="Assets\05_Scripts\UI\SetupMenu.cs" />
     <Compile Include="Assets\05_Scripts\UI\UIManager.cs" />
     <Compile Include="Assets\DelayCollider.cs" />
+    <Compile Include="Assets\ShieldDissolve.cs" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/GitHub/DSGGames/UnityProjects/SSNS MainProject/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

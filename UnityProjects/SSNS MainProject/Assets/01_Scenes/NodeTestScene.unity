@@ -1185,6 +1185,12 @@ PrefabInstance:
       propertyPath: ResizeShield
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8087334148456617673, guid: 86d3091828ccf4547a5bea3fb00cb441,
+        type: 3}
+      propertyPath: DissolveVFX
+      value: 
+      objectReference: {fileID: 3815312508183173413, guid: ddffe4b2b0537394db51f273f9c2d557,
+        type: 3}
     - target: {fileID: 7041625874788612961, guid: 86d3091828ccf4547a5bea3fb00cb441,
         type: 3}
       propertyPath: m_LocalRotation.x
@@ -1210,6 +1216,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6552152225560632436, guid: 86d3091828ccf4547a5bea3fb00cb441,
+        type: 3}
+      propertyPath: myBehaviour
+      value: 
+      objectReference: {fileID: 11400000, guid: a083da76fd5d7f74aa99bf80151eb125,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86d3091828ccf4547a5bea3fb00cb441, type: 3}
 --- !u!1001 &6884217599411297701
