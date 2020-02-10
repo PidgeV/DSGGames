@@ -22,23 +22,38 @@ public class ShieldProjector : MonoBehaviour
 	private List<Material> objectsToFade = new List<Material>();
 
 
+	[Header("Shield Renderer")]
 	[SerializeField] MeshRenderer ShieldMeshRenderer;
-	[SerializeField] Collider shipCollider;
-	[SerializeField] GameObject ImpactVFX;
-	[SerializeField] GameObject HitVFX;
 
-	Collider shieldCollider;
 
+	// The initial and final color of a shield
+	[Header("Colors")]
 	[ColorUsage(true, true)] public Color BaseColor;
 	[ColorUsage(true, true)] public Color BrokenColor;
 
-	// The damage percent is the smount of shield remaining. 0 - 1
-	[SerializeField, Range(0, 1)] float DamagePercent = 1;
+	[Header("Effects")]
+	[SerializeField] GameObject ImpactVFX;
+	[SerializeField] GameObject HitVFX;
 
+
+	// The current collider that is on this ship
+	Collider shipCollider;
+	SphereCollider shieldCollider;
+
+
+	// The damage percent is the smount of shield remaining. 0 - 1
+	 float DamagePercent = 1;
+
+
+	[Header("Shield Properties")]
+	public float ShieldSize = 1.0f;
+	public bool ResizeShield = false;
+
+
+	// Hows does the shield fade out
+	[Header("Shiled Behaviour")]
 	[SerializeField] FadeType fadeType = FadeType.NO_FADE;
 
-	//
-	public bool ResizeShield = false;
 
 	// Get the current color of the shield between the base color and the broken color
 	public Color GetColor { get { return Color.Lerp(BrokenColor, BaseColor, DamagePercent); } }
@@ -49,12 +64,14 @@ public class ShieldProjector : MonoBehaviour
 		ShieldMeshRenderer.material.SetColor("_BaseColor", BaseColor);
 		ShieldMeshRenderer.material.SetColor("_FresnelColor", BaseColor);
 
-		shieldCollider = gameObject.GetComponent<SphereCollider>();
-
-		if (ResizeShield && shipCollider)
-		{
+		if (gameObject.TryGetComponent<Collider>(out shipCollider)) {
 			shipCollider.enabled = false;
 		}
+
+		shieldCollider = gameObject.AddComponent<SphereCollider>();
+		shieldCollider.radius = ShieldSize;
+
+		ShieldMeshRenderer.gameObject.transform.localScale *= ShieldSize;
 	}
 
 	// Update is called once per frame
@@ -62,7 +79,7 @@ public class ShieldProjector : MonoBehaviour
 	{
 		// The shader for the impact objects used object space, I believe that is why the object using the shader (the shield)
 		// needs to not be rotated. This like makes sure the impact shader works
-		transform.rotation = Quaternion.identity;
+		ShieldMeshRenderer.gameObject.transform.rotation = Quaternion.identity;
 
 		FadeShieldImpacts();
 		FadeShieldShader();
@@ -130,8 +147,16 @@ public class ShieldProjector : MonoBehaviour
 	// Handle the spawning and despawning of of a impact effect
 	void SpawnShieldImpact(Collision collision)
 	{
+		if (DamagePercent <= 0)
+		{
+			// Do nothing
+			return;
+		}
+
 		// Spawn in a Impact effect object
-		GameObject impact = Instantiate(ImpactVFX, transform) as GameObject;
+		GameObject impact = Instantiate(ImpactVFX, ShieldMeshRenderer.transform.parent) as GameObject;
+		impact.transform.localScale = Vector3.one * ShieldSize * 2;
+
 		//GameObject hit = Instantiate(HitVFX, collision.contacts[0].point, Quaternion.identity) as GameObject;
 
 		// Get that objects material

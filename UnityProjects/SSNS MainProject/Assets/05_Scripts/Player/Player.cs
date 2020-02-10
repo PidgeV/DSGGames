@@ -80,27 +80,6 @@ public class Player : Controller
 		//}
 		#endregion
 	}
-
-	// Draw the active player and there ControlType
-	private void OnGUI()
-	{
-		bool show = true;
-		if (show)
-		{
-			float x = 300;
-			float y = 25;
-
-			if (myRole == PlayerRole.Pilot)
-			{
-				GUI.Box(new Rect(0, 0, x, y), "Pilot: Controller Type - [ "+ controlType.ToString() + " ]");
-			}
-
-			if (myRole == PlayerRole.Gunner)
-			{
-				GUI.Box(new Rect(0, Screen.height - y, x, y), "Gunner: Controller Type - [ " + controlType.ToString() + " ]");
-			}
-		}
-	}
 	#endregion
 
 	//

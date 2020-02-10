@@ -29,8 +29,8 @@ public class HealthAndShields : MonoBehaviour
 
 
 	// Can we regenerate our shield
-	[SerializeField] float regenDelay = 0;
-	[SerializeField] float regenInterval = 5;
+	public float regenInterval = 5;
+	private float regenDelay = 0;
 	public bool CanRegen { get { return Time.realtimeSinceStartup > regenDelay; } }
 
 

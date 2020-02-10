@@ -17,7 +17,7 @@ public class DelayCollider : MonoBehaviour
 
 	IEnumerator Delay()
 	{
-		yield return new WaitForSeconds(0.01f);
+		yield return new WaitForSeconds(0.1f);
 		collider.enabled = true;
 	}
 }
