@@ -478,6 +478,11 @@ public class testShipController : MonoBehaviour
     {
         Quaternion rot = Quaternion.LookRotation(shotSpawnLocation.transform.forward);
         GameObject shot = Instantiate(currentShotInfo.gameObject, shotSpawnLocation.position, rot);
+
+        if(TryGetComponent(out ShieldProjector shield))
+        {
+            shield.IgnoreCollider(shot.GetComponent<Collider>());
+        }
     }
 
     public void ShipShoot()

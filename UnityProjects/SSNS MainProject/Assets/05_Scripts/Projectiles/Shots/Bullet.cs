@@ -22,22 +22,6 @@ public class Bullet : MonoBehaviour
         rb.velocity = rotation * GetComponent<ShotInfo>().Speed; // propel forward with set speed
     }
 
-    private void Start()
-    {
-        if (shooter)
-        {
-            ShieldProjector shield = shooter.GetComponentInChildren<ShieldProjector>();
-
-            if (shield)
-            {
-                if (shield.TryGetComponent<Collider>(out Collider shieldCollider) && TryGetComponent<Collider>(out Collider collider))
-                {
-                    Physics.IgnoreCollision(collider, shieldCollider, true);
-                }
-            }
-        }
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         StartCoroutine(DestroyBullet());

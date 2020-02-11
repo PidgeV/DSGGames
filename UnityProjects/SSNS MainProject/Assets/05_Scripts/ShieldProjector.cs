@@ -64,14 +64,16 @@ public class ShieldProjector : MonoBehaviour
 		ShieldMeshRenderer.material.SetColor("_BaseColor", BaseColor);
 		ShieldMeshRenderer.material.SetColor("_FresnelColor", BaseColor);
 
-		if (gameObject.TryGetComponent<Collider>(out shipCollider)) {
-			shipCollider.enabled = false;
-		}
+		//if (gameObject.TryGetComponent<Collider>(out shipCollider)) {
+		//	shipCollider.enabled = false;
+		//}
 
 		shieldCollider = gameObject.AddComponent<SphereCollider>();
 		shieldCollider.radius = ShieldSize;
 
 		ShieldMeshRenderer.gameObject.transform.localScale *= ShieldSize;
+
+        //Physics.IgnoreCollision(shipCollider, shieldCollider);
 	}
 
 	// Update is called once per frame
@@ -141,7 +143,7 @@ public class ShieldProjector : MonoBehaviour
 	{
 		if (ResizeShield && shipCollider != null)
 		{
-			shipCollider.enabled = !shieldEnabled;
+			//shipCollider.enabled = !shieldEnabled;
 			shieldCollider.enabled = shieldEnabled;
 		}
 	}
@@ -252,4 +254,9 @@ public class ShieldProjector : MonoBehaviour
 			ShieldMeshRenderer.material.SetFloat("_FresnelSize", 3);
 		}
 	}
+
+    public void IgnoreCollider(Collider collider)
+    {
+        Physics.IgnoreCollision(shieldCollider, collider);
+    }
 }
