@@ -12,7 +12,7 @@ public class NodeManager : MonoBehaviour
 
     #region Constant Values
 
-    private const float MAX_SELECT_TIME = 30f;
+    private const float MAX_SELECT_TIME = 10f;
     private const float MIN_SELECT_TIME = 5f;
     private const float SELECT_DELAY = 0.5f;
 
@@ -304,6 +304,7 @@ public class NodeManager : MonoBehaviour
 
         // Finds the direction to the portal
         Vector3 portalDir = (portals[selectedIndex].transform.position - GameManager.Instance.shipController.transform.position).normalized;
+        Debug.Log(selectedIndex);
 
         // Finds the angle between
         float angle = Vector3.SignedAngle(GameManager.Instance.shipController.transform.forward, portalDir, GameManager.Instance.shipController.transform.up);
@@ -320,6 +321,12 @@ public class NodeManager : MonoBehaviour
             if (angle < 0)
             {
                 dir *= Vector2.left;
+            }
+
+            if (Mathf.Abs(dir.x) <= 0.3f)
+            {
+                dir = Vector2.zero;
+                rotateToPortal = false;
             }
         }
         else

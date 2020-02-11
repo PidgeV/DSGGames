@@ -34,7 +34,7 @@ public class Player : Controller
 		// When a player starts the game this grabs an open ship
 		foreach (GameObject ship in GameObject.FindGameObjectsWithTag("Player"))
 		{
-			if (ship.TryGetComponent<testShipController>(out testShipController shipController))
+			if (ship.TryGetComponent(out testShipController shipController))
 			{
 				controller = shipController;
 				controller.JoinShip(this);
@@ -217,7 +217,7 @@ public class Player : Controller
 	}	
 	public override void OnY(InputValue input)
 	{
-		controller.TriggerRoleSwap(input.isPressed);
+        if(myRole != PlayerRole.None) controller.TriggerRoleSwap(input.isPressed);
 	}
 	
 	public override void OnLeftTrigger(InputValue input)

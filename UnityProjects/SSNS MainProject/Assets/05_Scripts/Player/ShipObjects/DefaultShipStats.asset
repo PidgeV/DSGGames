@@ -14,26 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipName: 
   shipDescription: 
-  maxHealth: 20
-  maxShield: 15
-  currentHealth: 0
-  currentShield: 0
-  shipAcceleration: 0
+  maxHealth: 40
+  maxShield: 60
+  shipAcceleration: 50
   shipDeceleration: 2
   shipRotAcceleration: 5
   shipRotDeceleration: 25
-  minThrustSpeed: 0
-  maxThrustSpeed: 0
-  boostSpeed: 0
+  thrustSpeed: 50
+  boostSpeed: 125
   strafeSpeed: 15
   rotationSpeed: 2
-  fireRate: 0
-  baseDamage: 1
-  healthDamageReduction: 0
-  shieldDamageReduction: 0
-  shieldRegenPercent: 0.1
-  shieldRegenDelay: 3
-  maxBoostGauge: 10
+  fireRate: -0.2
+  baseDamage: 4
+  healthDamageReduction: 4
+  shieldDamageReduction: 4
+  shieldRegenPercent: 0.85
+  shieldRegenDelay: 0
+  maxBoostGauge: 35
   boostGaugeConsumeAmount: 1.8
   boostGaugeRechargeAmount: 0.8
   reserveShield: 0

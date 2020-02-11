@@ -77,6 +77,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControllerID: -1
-  myRole: 0
+  myRole: 2
   currentState: 1
   controlType: 1

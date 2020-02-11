@@ -89,7 +89,7 @@ MonoBehaviour:
   waypointDistanceMeters: 50
   playerDistanceMeters: 1000
   rbSelf: {fileID: 3107085776561158192}
-  raySize: 8.5
+  raySize: 20
   hitPlayer: 0
 --- !u!114 &5065271178767460442
 MonoBehaviour:
@@ -105,7 +105,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxLife: 50
   maxShield: 25
-  regenDelay: 1
   regenInterval: 5
   currentLife: 0
   currentShield: 0
@@ -127,6 +126,7 @@ MonoBehaviour:
   ShieldMeshRenderer: {fileID: 3354876196551011726}
   BaseColor: {r: 6.5882354, g: 4.2352943, b: 0.34509805, a: 1}
   BrokenColor: {r: 7.1215687, g: 0.4392157, b: 0, a: 1}
+  DissolveVFX: {fileID: 0}
   ImpactVFX: {fileID: 5266171281214306815, guid: b9048ee1f6b3b8d46a2a7682ceaffd9b,
     type: 3}
   HitVFX: {fileID: 0}
