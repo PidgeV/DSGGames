@@ -95,6 +95,8 @@ GameObject:
   - component: {fileID: 1039778297502390844}
   - component: {fileID: -217250903857280724}
   - component: {fileID: -153405604314178641}
+  - component: {fileID: 2208477368515088055}
+  - component: {fileID: 1488303829716995618}
   m_Layer: 11
   m_Name: SwarmAgent
   m_TagString: Enemy
@@ -203,6 +205,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48901a74a34a93249835e8beb8ed2146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyOnHit: 0
   kineticDamage: 2
   energyDamage: 2
 --- !u!114 &-217250903857280724
@@ -219,12 +222,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxLife: 5
   maxShield: 0
-  life: 0
-  shield: 0
+  regenInterval: 5
+  currentLife: 0
+  currentShield: 0
+  Invincible: 0
+  DestroyOnDeath: 1
   regenSpeed: 5
-  regenDelay: 1
-  invincible: 0
-  regen: 1
 --- !u!54 &-153405604314178641
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -241,6 +244,38 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2208477368515088055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6258311400090120682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6286453dae1153842b3a801a13a42fe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisScore: 5
+  typeOfHit: 0
+  goHit: {fileID: 0}
+  playerText: {fileID: 0}
+--- !u!114 &1488303829716995618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6258311400090120682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6286453dae1153842b3a801a13a42fe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisScore: 50
+  typeOfHit: 1
+  goHit: {fileID: 6258311400090120682}
+  playerText: {fileID: 0}
 --- !u!1001 &6573042713272321355
 PrefabInstance:
   m_ObjectHideFlags: 0

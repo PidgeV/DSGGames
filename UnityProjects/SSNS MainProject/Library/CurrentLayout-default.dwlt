@@ -114,7 +114,7 @@ MonoBehaviour:
   m_MinSize: {x: 683, y: 494}
   m_MaxSize: {x: 14004, y: 14044}
   vertical: 0
-  controlID: 4243
+  controlID: 2872
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -139,7 +139,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 494}
   m_MaxSize: {x: 10002, y: 14044}
   vertical: 1
-  controlID: 4244
+  controlID: 2873
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -164,7 +164,7 @@ MonoBehaviour:
   m_MinSize: {x: 406, y: 222}
   m_MaxSize: {x: 8006, y: 4022}
   vertical: 0
-  controlID: 4245
+  controlID: 2874
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -301,7 +301,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_VSyncEnabled: 0
   m_MaximizeOnPlay: 1
-  m_Gizmos: 1
+  m_Gizmos: 0
   m_Stats: 1
   m_SelectedSizes: 05000000000000000000000000000000000000000000000000000000000000000000000000000000
   m_TargetDisplay: 0
@@ -383,9 +383,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 72e5ffff
-      m_LastClickedID: -6798
-      m_ExpandedIDs: 2ee5ffff3ce5ffff74e5ffff
+      m_SelectedIDs: 74580000
+      m_LastClickedID: 22644
+      m_ExpandedIDs: 20f6ffff68f6ffff6ef6ffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -445,9 +445,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -1804.1897, y: 7.6143475, z: 8.62626}
+    m_Target: {x: 571.1892, y: 249.33539, z: 1353.7404}
     speed: 2
-    m_Value: {x: -1804.1897, y: 7.6143475, z: 8.62626}
+    m_Value: {x: 571.1892, y: 249.33539, z: 1353.7404}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -476,13 +476,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.12891996, y: -0.56253535, z: 0.08933912, w: 0.8117607}
+    m_Target: {x: 0.031475946, y: 0.034476016, z: -0.0010866248, w: 0.99891114}
     speed: 2
-    m_Value: {x: -0.12891996, y: 0.56253535, z: -0.08933912, w: -0.8117607}
+    m_Value: {x: -0.031475946, y: -0.034476016, z: 0.0010866247, w: -0.99891114}
   m_Size:
-    m_Target: 43.571648
+    m_Target: 2123.9832
     speed: 2
-    m_Value: 43.571648
+    m_Value: 2123.9832
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -547,20 +547,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/00_Prefabs/Projectiles
+    - Assets/05_Scripts
   m_ViewMode: 1
   m_StartGridSize: 89
   m_LastFolders:
-  - Assets/00_Prefabs/Projectiles
+  - Assets/05_Scripts
   m_LastFoldersGridSize: 89
   m_LastProjectPath: C:\DSGGames\UnityProjects\SSNS MainProject
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 8a530000
-    m_LastClickedID: 21386
-    m_ExpandedIDs: 00000000984d0000e64d0000d0510000be520000c6530000f2530000825400001e55000058550000e455000096570000a85b0000e25b00003467000036670000386700003a6700003c6700003e67000040670000426700004467000046670000486700004a67000000ca9a3b
+    scrollPos: {x: 0, y: 120}
+    m_SelectedIDs: b64d0000
+    m_LastClickedID: 19894
+    m_ExpandedIDs: 000000009a450000ec4500009c4a0000a84b0000ce4c00000c4d0000b64d0000684e0000a44e0000484f0000645100002e56000072560000586400005a6400005c6400005e64000060640000626400006464000066640000686400006a6400006c6400006e64000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -588,7 +588,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000984d0000e64d0000d0510000be520000c6530000f2530000825400001e55000058550000e455000096570000a85b0000e25b00003467000036670000386700003a6700003c6700003e67000040670000426700004467000046670000486700004a67000000ca9a3b
+    m_ExpandedIDs: 000000009a450000ec4500009c4a0000a84b0000ce4c00000c4d0000b64d0000684e0000a44e0000484f0000645100002e56000072560000586400005a6400005c6400005e64000060640000626400006464000066640000686400006a6400006c6400006e64000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -640,7 +640,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 0}
+    m_ScrollPosition: {x: 0, y: 35}
     m_GridSize: 89
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 180
