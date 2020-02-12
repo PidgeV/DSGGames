@@ -91,7 +91,7 @@ MonoBehaviour:
   waypointDistanceMeters: 50
   playerDistanceMeters: 1000
   rbSelf: {fileID: 3107085776561158192}
-  raySize: 8.5
+  raySize: 20
   hitPlayer: 0
 --- !u!114 &5065271178767460442
 MonoBehaviour:

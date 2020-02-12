@@ -80,7 +80,7 @@ MonoBehaviour:
   playerDistanceMeters: 10000
   closeDistance: 80
   rbSelf: {fileID: 58820780711503997}
-  raySize: 12
+  raySize: 25
   bullet: {fileID: 4450240921679082262, guid: 31460afb2d57a1740a2902c36c19ba0e, type: 3}
   bulletShootPos: {fileID: 1864797949346244314}
   accuracyForShot: 30

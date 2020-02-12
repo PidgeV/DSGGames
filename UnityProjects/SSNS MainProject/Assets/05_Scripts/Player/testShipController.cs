@@ -262,7 +262,8 @@ public class testShipController : MonoBehaviour
         else if (boosting)
         {
             // Increase our speed when boosting
-            if (rigidbody.velocity.magnitude < myStats.boostSpeed) thrustSpeed = Mathf.Clamp(thrustSpeed + (myStats.thrustSpeed * 2.4f), myStats.thrustSpeed, myStats.boostSpeed);
+            if (rigidbody.velocity.magnitude < myStats.boostSpeed)
+                thrustSpeed = Mathf.Clamp(thrustSpeed + (myStats.thrustSpeed * 2.4f * Time.deltaTime), myStats.thrustSpeed, myStats.boostSpeed);
 
 
             // Reduce the boost gauge
@@ -376,7 +377,7 @@ public class testShipController : MonoBehaviour
                 speed = currentShotInfo.Speed;
             }
 
-            Vector3 intercept = InterceptCalculationClass.FirstOrderIntercept(shotSpawnLocation.position, Vector3.zero, speed, lockOnTarget.transform.position, lockOnTarget.GetComponent<Rigidbody>().velocity);
+            Vector3 intercept = InterceptCalculationClass.FirstOrderIntercept(shotSpawnLocation.position, rigidbody.velocity, speed, lockOnTarget.transform.position, lockOnTarget.GetComponent<Rigidbody>().velocity);
             gunnerCamParent.transform.LookAt(intercept);
             //gunRotation = gunnerCamera.transform.eulerAngles;
         }
@@ -455,7 +456,7 @@ public class testShipController : MonoBehaviour
                 {
                     if (hit.collider.TryGetComponent(out HealthAndShields hp))
                     {
-                        hp.TakeDamage(laser.Damage, laser.Damage);
+                        hp.TakeDamage(laser.Damage / 10, laser.Damage);
                     }
                 }
 
@@ -471,6 +472,10 @@ public class testShipController : MonoBehaviour
                     SpawnShot();
                 }
             }
+        }
+        else
+        {
+            laser.gameObject.SetActive(false);
         }
     }
 
@@ -629,8 +634,16 @@ public class testShipController : MonoBehaviour
             // If we have a pilot
 
             // Make the new player a gunner
-            player2 = newPlayer;
-            player2.myRole = PlayerRole.Gunner;
+            if (player1.myRole == PlayerRole.Pilot)
+            {
+                player2 = newPlayer;
+                player2.myRole = PlayerRole.Gunner;
+            }
+            else
+            {
+                player2 = newPlayer;
+                player2.myRole = PlayerRole.Pilot;
+            }
         }
         else
         {

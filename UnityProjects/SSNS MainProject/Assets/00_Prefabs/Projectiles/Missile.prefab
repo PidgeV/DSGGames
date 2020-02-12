@@ -161,8 +161,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2560
   radius: 50
-  kineticDamage: 25
-  energyDamage: 25
+  kineticDamage: 10
+  energyDamage: 5
 --- !u!114 &8606928732767624012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,7 +177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: 4
   fireRate: 0.5
-  lifeTime: 60
+  lifeTime: 15
   speed: 125
 --- !u!114 &3544337122324690651
 MonoBehaviour:
