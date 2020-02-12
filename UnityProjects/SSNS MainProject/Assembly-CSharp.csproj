@@ -62,6 +62,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\05_Scripts\Area\AreaManager.cs" />
+    <Compile Include="Assets\05_Scripts\Area\DreadnovaSpawner.cs" />
+    <Compile Include="Assets\05_Scripts\Area\SpawnBehaviour.cs" />
+    <Compile Include="Assets\05_Scripts\Area\testAreaSpawner.cs" />
+    <Compile Include="Assets\05_Scripts\Area\TutorialSpawner.cs" />
+    <Compile Include="Assets\05_Scripts\Area\WaveBehaviour.cs" />
     <Compile Include="Assets\05_Scripts\Demo\DemoManager.cs" />
     <Compile Include="Assets\05_Scripts\Demo\DemoValue.cs" />
     <Compile Include="Assets\05_Scripts\Demo\NewDemoManager.cs" />
@@ -100,13 +106,10 @@
     <Compile Include="Assets\05_Scripts\Enemies\Swarmer\LeaderStates\SwarmLeaderPatrolState.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Turret\GunRotate.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Turret\MountRotate.cs" />
-    <Compile Include="Assets\05_Scripts\Environment\AreaManager.cs" />
     <Compile Include="Assets\05_Scripts\Environment\AsteroidSpawner.cs" />
-    <Compile Include="Assets\05_Scripts\Environment\PlayAreaSizeReference.cs" />
     <Compile Include="Assets\05_Scripts\Environment\SimpleCameraController.cs" />
     <Compile Include="Assets\05_Scripts\Environment\SkyboxManager.cs" />
     <Compile Include="Assets\05_Scripts\Environment\TargetMove.cs" />
-    <Compile Include="Assets\05_Scripts\Environment\testAreaSpawner.cs" />
     <Compile Include="Assets\05_Scripts\Extras\Helper.cs" />
     <Compile Include="Assets\05_Scripts\Extras\RandomPosition.cs" />
     <Compile Include="Assets\05_Scripts\Extras\Rotate.cs" />

@@ -6,7 +6,6 @@ public class FighterPatrolState : FSMState
 {
     private GameObject player;
     private FighterController controller;
-    private GameObject[] waypoints;
     private float distance;
     private float playerDist;
     private int patrolID = 0;
@@ -26,11 +25,10 @@ public class FighterPatrolState : FSMState
     private float timeOftenCheck = 1.0f;
 
     //Constructor
-    public FighterPatrolState(FighterController enemyController, GameObject playerObj, GameObject[] wayPoints, float waypointDistance, float playerDistance, bool randomizePoint = false)
+    public FighterPatrolState(FighterController enemyController, GameObject playerObj, float waypointDistance, float playerDistance, bool randomizePoint = false)
     {
         controller = enemyController;
         player = playerObj;
-        waypoints = wayPoints;
         distance = waypointDistance;
         playerDist = playerDistance;
         randomPoint = randomizePoint;
@@ -66,17 +64,17 @@ public class FighterPatrolState : FSMState
         }
 
         //Check distance to waypoint
-        if (Vector3.Distance(controller.transform.position, waypoints[patrolID].transform.position) < distance)
+        if (Vector3.Distance(controller.transform.position, controller.waypoints[patrolID].transform.position) < distance)
         {
             if (randomPoint)
             {
-                patrolID = Random.Range(0, waypoints.Length);
+                patrolID = Random.Range(0, controller.waypoints.Length);
             }
             else
             {
                 patrolID++;
 
-                if (patrolID >= waypoints.Length) patrolID = 0;
+                if (patrolID >= controller.waypoints.Length) patrolID = 0;
             }
         }
 
@@ -131,7 +129,7 @@ public class FighterPatrolState : FSMState
     //Moves
     void Move()
     {
-        if (waypoints[patrolID] != null)
+        if (controller.waypoints[patrolID] != null)
         {
             //Calculate direction
             Vector3 direction = controller.transform.forward; // sets forward
@@ -142,7 +140,7 @@ public class FighterPatrolState : FSMState
             //Rotation
             if (!obstacleHit && obstacleTimer == 0)
             {
-                direction = waypoints[patrolID].transform.position - controller.transform.position; // sets desired direction to target intercept point
+                direction = controller.waypoints[patrolID].transform.position - controller.transform.position; // sets desired direction to target intercept point
             }
             else
             {

@@ -77,7 +77,7 @@ MonoBehaviour:
     m_Bits: 768
   collisionCheckDistance: 150
   waypointDistanceMeters: 100
-  playerDistanceMeters: 10000
+  playerDistanceMeters: 500
   closeDistance: 80
   rbSelf: {fileID: 58820780711503997}
   raySize: 25

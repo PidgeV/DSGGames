@@ -5,8 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class ChargerController : AdvancedFSM
 {
-    public GameObject[] waypoints;
-
     [Header("Green: forward direction and collision check.")]
     [Header("Red: intercept calculation.")]
     [Header("Blue: Velocity and collision check.")]
@@ -36,7 +34,7 @@ public class ChargerController : AdvancedFSM
     private void ConstructFSM()
     {
         DeadState deadState = new DeadState(this);
-        ChargerPatrolState patrol = new ChargerPatrolState(this, player, waypoints, waypointDistanceMeters, playerDistanceMeters, true);
+        ChargerPatrolState patrol = new ChargerPatrolState(this, player, waypointDistanceMeters, playerDistanceMeters, true);
         ChargerAttackState attack = new ChargerAttackState(this, player);
 
         patrol.AddTransition(Transition.NoHealth, FSMStateID.Dead);

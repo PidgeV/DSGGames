@@ -372,15 +372,15 @@ public class NewDemoManager : MonoBehaviour
 			//Set waypoints for each enemy
 			if (newEnemy.TryGetComponent(out ChargerController chaserController))
 			{
-				chaserController.waypoints = new GameObject[] { gameObject };
+				chaserController.waypoints = new Transform[] { transform };
 			}
 			else if (newEnemy.TryGetComponent(out FighterController fighterController))
 			{
-				fighterController.waypoints = new GameObject[] { gameObject };
+				fighterController.waypoints = new Transform[] { transform };
 			}
 			else if (newEnemy.TryGetComponent(out Flock swarmerController))
 			{
-				swarmerController.WayPoints = new GameObject[] { gameObject };
+				swarmerController.WayPoints = new Transform[] { transform };
 			}
 
 			#endregion

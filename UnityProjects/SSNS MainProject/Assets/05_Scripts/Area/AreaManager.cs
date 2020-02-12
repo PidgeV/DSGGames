@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SNSSTypes;
 
 /// <summary>
 /// Manager that handles each area (node)
@@ -14,15 +15,21 @@ public class AreaManager : MonoBehaviour
 
     public event AreaLoadEventHandler AreaLoaded;
 
+    private const int MIN_TRAVEL_TIME = 10;
+
     [SerializeField] private Area lastArea;
     [SerializeField] private Area currentArea;
     [SerializeField] private GameObject areaEffectPrefab;
 
-   private GameObject areaEffect;
+    private AreaState state;
+
+    private GameObject areaEffect;
 
     private bool nextAreaLoaded;
     private bool lastAreaDestroyed;
     private bool areaEnded;
+
+    private float transitionTime;
 
     /// <summary>
     /// Ends the area giving the ship the node's reward 
@@ -32,10 +39,10 @@ public class AreaManager : MonoBehaviour
     {
         areaEnded = true;
 
-		//Destroy(areaEffect);
+        //Destroy(areaEffect);
 
-		// Grabs current reward and uses it on the ship
-		Reward reward = NodeManager.Instance.CurrentNode.Reward;
+        // Grabs current reward and uses it on the ship
+        Reward reward = NodeManager.Instance.CurrentNode.Reward;
         reward.UseReward(GameManager.Instance.shipController.myStats);
 
         // Updates the ui for the reward
@@ -73,10 +80,8 @@ public class AreaManager : MonoBehaviour
         if (lastArea != null && lastArea.parent != null)
             lastArea.parent.gameObject.SetActive(false);
 
-		//areaEffect = GameObject.Instantiate(areaEffectPrefab, currentArea.location, Quaternion.identity);
-		//areaEffect.transform.localScale = Vector3.one * currentArea.size * 2;
-
-		StartCoroutine(DestroyLastArea());
+        StartCoroutine(TransitionAreas());
+        StartCoroutine(DestroyLastArea());
     }
 
     /// <summary>
@@ -86,21 +91,26 @@ public class AreaManager : MonoBehaviour
     private IEnumerator DestroyLastArea()
     {
         yield return null;
-		//// Destroys the objects in the last area
-		//foreach(GameObject go in lastArea.objects)
-		//{
-		//    Destroy(go);
 
-		//    yield return null;
-		//}
-
-        //// Destroys the parent of the area
+        // Destroys the parent of the area
         if (lastArea != null && lastArea.parent != null)
             Destroy(lastArea.parent.gameObject);
 
         lastArea = null;
 
         lastAreaDestroyed = true;
+    }
+
+    /// <summary>
+    /// Transitions between areas
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator TransitionAreas()
+    {
+        //areaEffect = GameObject.Instantiate(areaEffectPrefab, currentArea.location, Quaternion.identity);
+        //areaEffect.transform.localScale = Vector3.one * currentArea.size * 2;
+
+        yield return new WaitForSeconds(MIN_TRAVEL_TIME);
     }
 
     /// <summary>

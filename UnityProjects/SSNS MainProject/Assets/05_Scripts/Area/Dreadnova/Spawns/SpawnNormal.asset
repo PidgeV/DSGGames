@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d4d18ae2f5f16c459b4a3ef940b232a, type: 3}
+  m_Name: SpawnNormal
+  m_EditorClassIdentifier: 
+  fighterPrefab: {fileID: 58820780711503999, guid: 412fb68aa6718b248a7adb1e254193c0,
+    type: 3}
+  chargerPrefab: {fileID: 3107085776561158194, guid: 0bb00d2ff3a929e4c9d818bdf52479d9,
+    type: 3}
+  swarmerPrefab: {fileID: 2212086307816132563, guid: 01e0ea9331425964888c9f346c3a8fed,
+    type: 3}
+  cruiserPrefab: {fileID: 8278412131455947766, guid: d70f243484b0f1349aa7336d65b5ffc7,
+    type: 3}
+  cargoPrefab: {fileID: 3107085776561158194, guid: ec334dcaca7277c4f90e6774cbc973fe,
+    type: 3}
+  spawns:
+  - type: 0
+    count: 15
+  - type: 1
+    count: 20
+  - type: 2
+    count: 1

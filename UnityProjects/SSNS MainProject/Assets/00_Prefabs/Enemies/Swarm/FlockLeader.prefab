@@ -50,4 +50,4 @@ MonoBehaviour:
   patrolStateRadius: 150
   defenseStateRadius: 10
   waypointDistanceMeters: 75
-  playerDistanceMeters: 20000
+  playerDistanceMeters: 500

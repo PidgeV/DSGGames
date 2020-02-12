@@ -6,7 +6,6 @@ public class ChargerPatrolState : FSMState
 {
     private GameObject player;
     private ChargerController controller;
-    private GameObject[] waypoints;
     private float distance;
     private float playerDist;
     private int patrolID = 0;
@@ -28,11 +27,10 @@ public class ChargerPatrolState : FSMState
 
 
     //Constructor
-    public ChargerPatrolState(ChargerController enemyController, GameObject playerObj, GameObject[] wayPoints, float waypointDistance, float playerDistance, bool randomizePoint = false)
+    public ChargerPatrolState(ChargerController enemyController, GameObject playerObj, float waypointDistance, float playerDistance, bool randomizePoint = false)
     {
         controller = enemyController;
         player = playerObj;
-        waypoints = wayPoints;
         distance = (waypointDistance * 12); // Multiply for meters to units. 12 units/meter
         playerDist = (playerDistance * 12);
         randomPoint = randomizePoint;
@@ -67,17 +65,17 @@ public class ChargerPatrolState : FSMState
         }
 
         //Check distance to waypoint
-        if (Vector3.Distance(controller.transform.position, waypoints[patrolID].transform.position) < distance)
+        if (Vector3.Distance(controller.transform.position, controller.waypoints[patrolID].transform.position) < distance)
         {
             if (randomPoint)
             {
-                patrolID = Random.Range(0, waypoints.Length);
+                patrolID = Random.Range(0, controller.waypoints.Length);
             }
             else
             {
                 patrolID++;
 
-                if (patrolID >= waypoints.Length) patrolID = 0;
+                if (patrolID >= controller.waypoints.Length) patrolID = 0;
             }
         }
 
@@ -133,7 +131,7 @@ public class ChargerPatrolState : FSMState
     //Moves
     void Move()
     {
-        if (waypoints[patrolID] != null)
+        if (controller.waypoints[patrolID] != null)
         {
             //Calculate direction
             Vector3 direction = controller.transform.forward; // sets forward
@@ -144,7 +142,7 @@ public class ChargerPatrolState : FSMState
             //Rotation
             if (!obstacleHit && obstacleTimer == 0)
             {
-                direction = waypoints[patrolID].transform.position - controller.transform.position; // sets desired direction to target intercept point
+                direction = controller.waypoints[patrolID].transform.position - controller.transform.position; // sets desired direction to target intercept point
 
                 Vector3 newDir = Vector3.RotateTowards(controller.transform.forward, direction, controller.RegRotationForce * Time.deltaTime, 0);
                 Quaternion rot = Quaternion.LookRotation(newDir);

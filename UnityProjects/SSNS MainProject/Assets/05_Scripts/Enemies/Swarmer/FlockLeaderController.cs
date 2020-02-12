@@ -6,8 +6,6 @@ namespace Complete
 {
     public class FlockLeaderController : AdvancedFSM
     {
-        public GameObject[] waypoints;
-
         [SerializeField] float patrolSpeed;
         [SerializeField] float attackSpeed;
 

@@ -23,8 +23,8 @@ public class Flock : MonoBehaviour
     
     public float swarmFollowRadius = 75f;
 
-    [SerializeField] GameObject[] waypoints;
-    public GameObject[] WayPoints { set { waypoints = value; } } // used to set waypoints when spawning swarm. Game Manager should set when spawning the object
+    [SerializeField] Transform[] waypoints;
+    public Transform[] WayPoints { set { waypoints = value; } } // used to set waypoints when spawning swarm. Game Manager should set when spawning the object
 
     public GameObject defenseTarget; //If made null the swarm will enter patrol state and the leadre will act normally, if not null it will enter defense state.
 

@@ -32,6 +32,8 @@ using System.Collections.Generic;
 
 public class AdvancedFSM : FSM
 {
+    public Transform[] waypoints;
+
     private List<FSMState> fsmStates;
 
     //The fsmStates are not changing directly but updated by using transitions

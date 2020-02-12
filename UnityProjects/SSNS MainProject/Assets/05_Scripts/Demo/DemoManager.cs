@@ -53,7 +53,7 @@ public class DemoManager : MonoBehaviour
 	[Header("Enemy Spawning")]
 	public GameObject chargerPrefab;
 	public GameObject fighterPrefab;
-	[SerializeField] GameObject[] waypoints;
+	[SerializeField] Transform[] waypoints;
 
 	GameObject spawnedEnemy;
 
