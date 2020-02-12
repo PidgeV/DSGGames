@@ -117,8 +117,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21bcb8e5aef53064495f71d628833b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 50
-  maxShield: 25
+  maxLife: 1000
+  maxShield: 2000
   regenInterval: 5
   currentLife: 0
   currentShield: 0
@@ -193,7 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6286453dae1153842b3a801a13a42fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisScore: 40
+  hitScore: 40
   typeOfHit: 0
   goHit: {fileID: 3107085776561158194}
   playerText: {fileID: 0}
@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6286453dae1153842b3a801a13a42fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisScore: 2000
+  hitScore: 2000
   typeOfHit: 1
   goHit: {fileID: 0}
   playerText: {fileID: 0}
@@ -460,11 +460,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3107085776561158193}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: 308f2050128b6b449a1c38e0b00e23fa,
-        type: 3}
-      propertyPath: m_Name
-      value: SNSS_CargoShip
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 308f2050128b6b449a1c38e0b00e23fa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -519,6 +514,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 308f2050128b6b449a1c38e0b00e23fa,
+        type: 3}
+      propertyPath: m_Name
+      value: SNSS_CargoShip
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 308f2050128b6b449a1c38e0b00e23fa, type: 3}

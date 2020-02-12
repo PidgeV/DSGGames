@@ -99,7 +99,7 @@ public class HealthAndShields : MonoBehaviour
 	/// <summary> When the shield it hit </summary>
 	public void OnShieldHit(GameObject attacker)
 	{
-		if (attacker.TryGetComponent<Damage>(out Damage damage))
+		if (attacker.TryGetComponent(out Damage damage))
 		{
 			// PrintDamage(damage.kineticDamage, damage.energyDamage);
 			TakeDamage(damage.KineticDamage, damage.EnergyDamage);

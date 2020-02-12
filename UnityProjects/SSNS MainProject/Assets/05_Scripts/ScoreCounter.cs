@@ -6,13 +6,13 @@ using UnityEngine.UI;
 public class ScoreCounter : MonoBehaviour
 {
     [SerializeField] static int Score;
-    [SerializeField] int thisScore;
+    [SerializeField] int hitScore;
 
     enum TypeOfHit { ShieldHit, DestroyHit };
     [SerializeField] TypeOfHit typeOfHit;
 
     [Header("Only Include if Neccessary")]
-    [Tooltip("The Game Obect that will be hit. Not used OnDestroy")]
+    [Tooltip("Used if there is no HealthAndShields component on this object.")]
     [SerializeField] GameObject goHit;
     [Tooltip("The UI element for the player text, only is used if tag is player")]
     [SerializeField] Text playerText;
@@ -22,16 +22,24 @@ public class ScoreCounter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (playerText == null) playerText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
+
         Score = 0;
         if (typeOfHit == TypeOfHit.ShieldHit)
         {
+
             if (goHit != null )//&& goHit.GetComponent<HealthAndShields>())
             {
                 goHit.GetComponent<HealthAndShields>().onLifeChange += OnShieldHit;
                 goHit.GetComponent<HealthAndShields>().onShieldChange += OnShieldHit;
             }
+            else if (TryGetComponent(out HealthAndShields health))
+            {
+                health.onLifeChange += OnShieldHit;
+                health.onShieldChange += OnShieldHit;
+            }
         }
-        if (gameObject.tag == "Player")
+        if (tag == "Player")
         {
             isPlayer = true;
         }
@@ -51,7 +59,7 @@ public class ScoreCounter : MonoBehaviour
         if (hitThisFrame == false)
         {
             hitThisFrame = true;
-            Score += thisScore;
+            Score += hitScore;
         }
     }
 
@@ -59,7 +67,7 @@ public class ScoreCounter : MonoBehaviour
     {
         if (typeOfHit == TypeOfHit.DestroyHit)
         {
-            Score += thisScore;
+            Score += hitScore;
         }
     }
 }

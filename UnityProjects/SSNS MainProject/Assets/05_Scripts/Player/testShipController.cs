@@ -30,6 +30,7 @@ public class testShipController : MonoBehaviour
     [SerializeField] Transform shotSpawnLocation;
 
     [SerializeField] LaserBehaviour laser;
+    private ChargedShotBehaviour chargedShot;
 
     private float shotTimer;
     #endregion
@@ -332,6 +333,11 @@ public class testShipController : MonoBehaviour
         else
         {
             laser.gameObject.SetActive(false);
+            if (chargedShot)
+            {
+                chargedShot.HasShot = true;
+                chargedShot = null;
+            }
         }
 
         if (shooting_Pilot)
@@ -462,8 +468,23 @@ public class testShipController : MonoBehaviour
 
                 laser.SetLaser(shotSpawnLocation.transform.position + shotSpawnLocation.transform.forward.normalized * laser.Length);
             }
+            else if(currentWeapon == WeaponType.Charged)
+            {
+                //Spawn then parent to the gunner. Store gameobject to check in update.
+                if(!chargedShot)
+                {
+                    Quaternion rot = Quaternion.LookRotation(shotSpawnLocation.transform.forward);
+                    chargedShot = Instantiate(currentShotInfo.gameObject, shotSpawnLocation.position, rot).GetComponent<ChargedShotBehaviour>();
+                    chargedShot.transform.parent = shotSpawnLocation.transform;
+                    if (TryGetComponent(out ShieldProjector shield))
+                    {
+                        shield.IgnoreCollider(chargedShot.GetComponent<Collider>());
+                    }
+                }
+            }
             else if (shotTimer > currentShotInfo.FireRate)
             {
+                laser.gameObject.SetActive(false);
                 shotTimer = 0;
 
                 if (ammoCount.HasAmmo(currentWeapon))
@@ -673,7 +694,7 @@ public class testShipController : MonoBehaviour
         }
         else if (dInput.y > 0)
         {
-            //currentWeapon = WeaponType.Charged;
+            currentWeapon = WeaponType.Charged;
         }
         else if (dInput.y < 0)
         {

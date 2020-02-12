@@ -133,6 +133,7 @@
     <Compile Include="Assets\05_Scripts\Projectiles\Misc\ExplosionDamage.cs" />
     <Compile Include="Assets\05_Scripts\Projectiles\ShotInfo.cs" />
     <Compile Include="Assets\05_Scripts\Projectiles\Shots\Bullet.cs" />
+    <Compile Include="Assets\05_Scripts\Projectiles\Shots\ChargedShotBehaviour.cs" />
     <Compile Include="Assets\05_Scripts\Projectiles\Shots\LaserBehaviour.cs" />
     <Compile Include="Assets\05_Scripts\Projectiles\Shots\MissileBehaviour.cs" />
     <Compile Include="Assets\05_Scripts\Projectiles\Stuff I Dident want to mess with\BulletScript.cs" />
