@@ -2,23 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainMenu : MonoBehaviour
+public class MainMenu : Menu
 {
-	/// <summary>
-	///  When the Start Game button is pressed
-	/// </summary>
-	public void OpenSetupGame(GameObject setupMenu)
-	{
-		UIManager.Instance.ChangeMenu(setupMenu, gameObject);
-	}
-
-	/// <summary>
-	///  When the Options button is pressed
-	/// </summary>
-	public void OpenOptions(GameObject optionsMenu)
-	{
-		UIManager.Instance.ChangeMenu(optionsMenu, gameObject);
-	}
+	public override void InitializeMenu() { }
+	public override void PlayTransition() { }
+	public override void UpdateMenu() { }
 
 	/// <summary>
 	///  When the Quit Button is pressed

@@ -2,13 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OptionsMenu : MonoBehaviour
+public class OptionsMenu : Menu
 {
-	/// <summary>
-	///  When the Return button is pressed
-	/// </summary>
-	public void ReturnToMainMenu(GameObject mainMenu)
+	public override void InitializeMenu() { }
+	public override void UpdateMenu() { }
+
+	public override void PlayTransition()
 	{
-		UIManager.Instance.ChangeMenu(mainMenu, gameObject);
+		if (transition == null)
+		{
+			// Do nothing
+			return;
+		}
+		else
+		{
+			transition.SetTrigger("TransitionToOptions");
+		}
 	}
 }
