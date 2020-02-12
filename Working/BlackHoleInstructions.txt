@@ -1,0 +1,12 @@
+They SUCK
+
+
+1.They spawn something
+2.//Graphic
+Get all objects within range, pull in a rotating way
+Pull into middle
+Gets exponentially stronger while closer to middle
+When in middle, extra damage
+Fling them out from the center once reached
+
+

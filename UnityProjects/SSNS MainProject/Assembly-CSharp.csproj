@@ -102,9 +102,11 @@
     <Compile Include="Assets\05_Scripts\Enemies\Turret\MountRotate.cs" />
     <Compile Include="Assets\05_Scripts\Environment\AreaManager.cs" />
     <Compile Include="Assets\05_Scripts\Environment\AsteroidSpawner.cs" />
+    <Compile Include="Assets\05_Scripts\Environment\Blackhole.cs" />
     <Compile Include="Assets\05_Scripts\Environment\PlayAreaSizeReference.cs" />
     <Compile Include="Assets\05_Scripts\Environment\SimpleCameraController.cs" />
     <Compile Include="Assets\05_Scripts\Environment\SkyboxManager.cs" />
+    <Compile Include="Assets\05_Scripts\Environment\SpawnBlackhole.cs" />
     <Compile Include="Assets\05_Scripts\Environment\TargetMove.cs" />
     <Compile Include="Assets\05_Scripts\Environment\testAreaSpawner.cs" />
     <Compile Include="Assets\05_Scripts\Extras\Helper.cs" />
