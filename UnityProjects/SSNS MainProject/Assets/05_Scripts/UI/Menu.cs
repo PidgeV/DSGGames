@@ -49,6 +49,7 @@ public abstract class Menu : MonoBehaviour
 	/// <summary> Handle closing the current Menu </summary> 
 	public virtual void CloseMenu()
 	{
+		PlayExitTransition();
 		gameObject.SetActive(false);
 	}
 
@@ -56,5 +57,14 @@ public abstract class Menu : MonoBehaviour
 	public virtual void ReturnToLastMenu()
 	{
 		OpenMenu(parentMenu, false);
+	}
+
+	/// <summary> Play the exit transition for this Menu </summary>
+	public virtual void PlayExitTransition()
+	{
+		if (transition)
+		{
+			transition.SetTrigger("Exit");
+		}
 	}
 }

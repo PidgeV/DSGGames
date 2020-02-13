@@ -18,27 +18,23 @@ public class CinematicController : MonoBehaviour
     void Update()
     {
 		if (Input.GetMouseButtonDown(0)) {
-			SkipIntroCinematic();
+			EndIntroCinematic();
 		}
     }
 	
-	public void SkipIntroCinematic()
+	public void EndIntroCinematic()
 	{
 		Animator animator = GetComponent<Animator>();
 
-		if (animator && canSkip)
-		{
-			animator.Play("Intro_Animation", 0, 0.85f);
-			DisableSkip();
+		if (animator && canSkip) {
+			animator.Play("Intro_Animation", 0, 0.95f);
+			animator.SetTrigger("TransitionToMain");
 		}
-	}
 
-	public void DisableSkip()
-	{
 		canSkip = false;
 	}
 
-	public void InitializeMenus()
+	public void InitializeFirstMenus()
 	{
 		firstMenu.SetActive(true);
 	}
