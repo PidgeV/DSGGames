@@ -27,6 +27,7 @@ public class CinematicController : MonoBehaviour
 		Animator animator = GetComponent<Animator>();
 
 		if (animator && canSkip) {
+			TurnOffTrails();
 			animator.Play("Intro_Animation", 0, 0.95f);
 			animator.SetTrigger("TransitionToMain");
 		}
@@ -37,5 +38,16 @@ public class CinematicController : MonoBehaviour
 	public void InitializeFirstMenus()
 	{
 		firstMenu.SetActive(true);
+	}
+
+	public void TurnOnTrails()
+	{
+		TrailRenderer[] trails = GameObject.FindObjectsOfType<TrailRenderer>();
+		foreach (TrailRenderer trail in trails) { trail.emitting = true; }
+	}
+	public void TurnOffTrails()
+	{
+		TrailRenderer[] trails = GameObject.FindObjectsOfType<TrailRenderer>();
+		foreach (TrailRenderer trail in trails) { trail.emitting = false;  }
 	}
 }

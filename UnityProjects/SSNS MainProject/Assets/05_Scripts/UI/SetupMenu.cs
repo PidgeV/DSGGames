@@ -25,5 +25,6 @@ public class SetupMenu : Menu
 	/// </summary>
 	public void StartGame()
 	{
+		transition.SetTrigger("PlayGame");
 	}
 }
