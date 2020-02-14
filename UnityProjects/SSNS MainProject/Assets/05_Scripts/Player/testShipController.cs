@@ -334,7 +334,8 @@ public class testShipController : MonoBehaviour
         }
         else
         {
-            laser.gameObject.SetActive(false);
+            laser.fadeIn = false;
+
             if (chargedShot)
             {
                 chargedShot.HasShot = true;
@@ -449,12 +450,10 @@ public class testShipController : MonoBehaviour
         {
             if (currentWeapon == WeaponType.Laser)
             {
+                laser.fadeIn = true;
                 //LaserShot: Long, straight beam, near instant, aoe from origin
                 //Raycast instead of instantiate for instant movement
                 ammoCount.Take1Ammo(currentWeapon);
-
-                //Shoot laser here
-                laser.gameObject.SetActive(true);
 
                 LayerMask enemyLayer = LayerMask.GetMask("Enemies");
                 enemyLayer += LayerMask.GetMask("Swarm");
@@ -467,11 +466,10 @@ public class testShipController : MonoBehaviour
                         hp.TakeDamage(laser.Damage / 10, laser.Damage);
                     }
                 }
-
-                laser.SetLaser(shotSpawnLocation.transform.position + shotSpawnLocation.transform.forward.normalized * laser.Length);
             }
-            else if(currentWeapon == WeaponType.Charged && shotTimer > currentShotInfo.FireRate)
+            else if (currentWeapon == WeaponType.Charged && shotTimer > currentShotInfo.FireRate)
             {
+                laser.fadeIn = false;
                 shotTimer = 0;
                 //Spawn then parent to the gunner. Store gameobject to check in update.
                 if (!chargedShot)
@@ -487,7 +485,7 @@ public class testShipController : MonoBehaviour
             }
             else if (shotTimer > currentShotInfo.FireRate)
             {
-                laser.gameObject.SetActive(false);
+                laser.fadeIn = false;
                 shotTimer = 0;
 
                 if (ammoCount.HasAmmo(currentWeapon))
@@ -497,10 +495,6 @@ public class testShipController : MonoBehaviour
                 }
             }
         }
-        else
-        {
-            laser.gameObject.SetActive(false);
-        }
     }
 
     private void SpawnShot()
@@ -508,7 +502,7 @@ public class testShipController : MonoBehaviour
         Quaternion rot = Quaternion.LookRotation(shotSpawnLocation.transform.forward);
         GameObject shot = Instantiate(currentShotInfo.gameObject, shotSpawnLocation.position, rot);
 
-        if(TryGetComponent(out ShieldProjector shield))
+        if (TryGetComponent(out ShieldProjector shield))
         {
             shield.IgnoreCollider(shot.GetComponent<Collider>());
         }
@@ -701,7 +695,7 @@ public class testShipController : MonoBehaviour
         }
         else if (dInput.y < 0)
         {
-            if(currentWeapon == WeaponType.Regular)
+            if (currentWeapon == WeaponType.Regular)
             {
                 currentWeapon = WeaponType.Energy;
             }

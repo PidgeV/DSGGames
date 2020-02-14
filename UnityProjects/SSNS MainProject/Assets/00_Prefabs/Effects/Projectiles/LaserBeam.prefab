@@ -71,7 +71,7 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 6.01}
+  - {x: 0, y: 0, z: 500}
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 2
@@ -133,7 +133,7 @@ LineRenderer:
     alignment: 0
     textureMode: 0
     shadowBias: 0.5
-    generateLightingData: 0
+    generateLightingData: 1
   m_UseWorldSpace: 0
   m_Loop: 0
 --- !u!1 &3133795025857249393
@@ -148,8 +148,8 @@ GameObject:
   - component: {fileID: 8654692695027044684}
   - component: {fileID: 8423215883985848745}
   - component: {fileID: 2646903599100677691}
-  - component: {fileID: 2122161597243502202}
   - component: {fileID: 7553022902259861813}
+  - component: {fileID: 2122161597243502202}
   m_Layer: 0
   m_Name: LaserBeam
   m_TagString: Untagged
@@ -185,9 +185,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbc30a0579b477449897f1180caffc0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  laserLine: {fileID: 1060758584632850065}
+  laserParticle: {fileID: 281559281928473976}
   line: {fileID: 1060758584632850065}
-  laserLength: 400
+  laserLength: 5000
   laserDamagePerSecond: 50
+  fadeIn: 0
 --- !u!114 &8423215883985848745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,8 +205,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: 2
   fireRate: 0
-  lifeTime: 1
-  speed: 0
+  lifeTime: 0
+  speed: 9999999
 --- !u!82 &2646903599100677691
 AudioSource:
   m_ObjectHideFlags: 0
@@ -215,8 +218,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 6642bb7b51fad2a44bc263afab74a59f, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
+  m_PlayOnAwake: 1
+  m_Volume: 0
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -300,20 +303,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2122161597243502202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3133795025857249393}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9c6878e50214ee4fb16172cb56075b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startSound: {fileID: 7553022902259861813}
-  constantSound: {fileID: 2646903599100677691}
 --- !u!82 &7553022902259861813
 AudioSource:
   m_ObjectHideFlags: 0
@@ -410,6 +399,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2122161597243502202
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3133795025857249393}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9c6878e50214ee4fb16172cb56075b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  otherSound: {fileID: 7553022902259861813}
+  constantSound: {fileID: 2646903599100677691}
+  startSound: {fileID: 8300000, guid: d8db728f11a511141aab99ebf4d2c393, type: 3}
+  disableSound: {fileID: 8300000, guid: 9986af6f94e185e4082da8a51820f9c2, type: 3}
 --- !u!1 &9040998462252930463
 GameObject:
   m_ObjectHideFlags: 0
