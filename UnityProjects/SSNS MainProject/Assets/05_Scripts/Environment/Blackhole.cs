@@ -5,12 +5,14 @@ using UnityEngine;
 public class Blackhole : MonoBehaviour
 {
     List<GameObject> gos = new List<GameObject>();
-    [SerializeField] float rotBase = 0.1f;
-    [SerializeField] float rotTime = 0.5f;
+    [SerializeField] float rotBase = 10.0f;
+    [SerializeField] float rotTime = 3.0f;
+    [SerializeField] float pullForce = 0.001f;
+
     // Start is called before the first frame update
     void Start()
     {
-        //StartCoroutine(MoveGOs());    
+    
     }
 
     // Update is called once per frame
@@ -18,40 +20,17 @@ public class Blackhole : MonoBehaviour
     {
         transform.rotation = Quaternion.Lerp(transform.rotation,
             Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z + rotBase * Time.deltaTime), rotTime);
-        //transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z + 1);
-        foreach (GameObject go in gos)
+        
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.TryGetComponent(out Rigidbody rb))
         {
-            if (go.TryGetComponent(out Rigidbody rb))
-            {
-                //rb.AddForce(transform.forward.normalized * 100, ForceMode.Force);
-                go.transform.RotateAround(gameObject.transform.position, Vector3.up, rotBase * Time.deltaTime);
-            }
+            other.gameObject.transform.RotateAround(gameObject.transform.position, Vector3.up, rotBase * Time.deltaTime);
+            
+            other.gameObject.transform.position = Vector3.Lerp(other.gameObject.transform.position, transform.position, pullForce);
+           
         }
-    }
-
-    IEnumerator MoveGOs()
-    {
-        while (true)
-        {
-            foreach (GameObject go in gos)
-            {
-                if (go.TryGetComponent<Rigidbody>(out Rigidbody rb))
-                {
-                    rb.AddForce(transform.forward.normalized*100, ForceMode.Force);
-                }
-            }
-            yield return new WaitForSeconds(0.5f);
-        }
-
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        gos.Add(other.gameObject);
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        gos.Remove(other.gameObject);
     }
 }
