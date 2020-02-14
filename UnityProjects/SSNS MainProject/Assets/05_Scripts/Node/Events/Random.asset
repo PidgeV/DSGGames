@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: Random
   m_EditorClassIdentifier: 
   eventType: 1
-  prefabsToSpawn: []
+  prefabsToSpawn:
+  - {fileID: 8464054742834353141, guid: f3149f3ba7921454b844f858390c7b62, type: 3}
+  areaSize: 1000

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8535914018573891862}
   - component: {fileID: 1107501255974450563}
   - component: {fileID: 6608905911133954688}
+  - component: {fileID: 1157291926335224692}
   m_Layer: 8
   m_Name: SNSS_Lmain_Asteroid005
   m_TagString: Untagged
@@ -106,5 +107,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48901a74a34a93249835e8beb8ed2146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  destroyOnHit: 0
   kineticDamage: 500
   energyDamage: 500
+--- !u!54 &1157291926335224692
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7947022241719225802}
+  serializedVersion: 2
+  m_Mass: 99999
+  m_Drag: 99999
+  m_AngularDrag: 99999
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 1

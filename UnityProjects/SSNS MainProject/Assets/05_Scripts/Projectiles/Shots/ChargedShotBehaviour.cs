@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(ShotInfo))]
 public class ChargedShotBehaviour : MonoBehaviour
 {
+    [SerializeField] GameObject explosionPrefab;
     [Range(1, 15)]
     [SerializeField] float maxChargeTime = 5f;
     
@@ -80,5 +81,17 @@ public class ChargedShotBehaviour : MonoBehaviour
         {
             health.TakeDamage(currentDamage, currentDamage);
         }
+
+        if (explosionPrefab)
+        {
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity); //spawn the explosion
+        }
+
+        Destroy(gameObject);
+    }
+
+    public float GetDamagePercentage()
+    {
+        return currentDamage / maxDamage;
     }
 }
