@@ -80,7 +80,10 @@ public class FighterAttackState : FSMState
             Vector3 direction = controller.transform.forward; // sets forward
             direction.Normalize();
 
-            AvoidObstacles(ref direction); // will change direction towards the right if an obstacle is in the way
+            if (controller.AvoidObstacles(ref direction)) // will change direction towards the right if an obstacle is in the way
+            {
+                obstacleHit = true;
+            }
 
             //rotation
             if (!obstacleHit && obstacleTimer == 0)
@@ -100,19 +103,16 @@ public class FighterAttackState : FSMState
 
             Vector3 newDir = Vector3.RotateTowards(controller.transform.forward, direction, controller.RegRotationForce * Time.deltaTime, 0);
             Quaternion rot = Quaternion.LookRotation(newDir);
-            controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, rot, Time.deltaTime);
+            controller.transform.rotation = Quaternion.Lerp(controller.transform.rotation, rot, controller.RegRotationForce * Time.deltaTime);
 
             //Move
-            //maintains a distance
-            //float percent = Vector3.Distance(controller.transform.position, player.transform.position) / 200;
-            //if (percent > 1) percent = 1;
-            controller.rbSelf.AddForce(controller.transform.forward.normalized * controller.Acceleration /** percent*/, ForceMode.Acceleration);
+            controller.rbSelf.AddForce(controller.transform.forward.normalized * controller.Acceleration , ForceMode.Acceleration);
         }
     }
 
     void Shoot()
     {
-        if (!obstacleHit)
+        if (!obstacleHit && controller.PlayerInVision())
         {
             shotTimer += Time.deltaTime;
 
@@ -126,22 +126,6 @@ public class FighterAttackState : FSMState
 
                 shotTimer = 0;
             }
-        }
-    }
-
-    void AvoidObstacles(ref Vector3 dir)
-    {
-        RaycastHit hitInfo;
-
-        //Check direction facing
-        if (Physics.SphereCast(controller.transform.position, controller.RaySize, controller.transform.forward.normalized, out hitInfo, controller.CollisionCheckDistance, controller.ObstacleLayer))/* || Physics.SphereCast(controller.transform.position, controller.RaySize, controller.rbSelf.velocity.normalized, out hitInfo, controller.CollisionCheckDistance, controller.ObstacleLayer))*/
-        {
-            // Get the desired direction we need to move to move around  the obstacle. Transform to world co-ordinates (gets the obstacleMoveDirection wrt the current foward direction).
-            Vector3 turnDir = controller.transform.TransformDirection(hitInfo.normal);
-            turnDir.Normalize();
-
-            dir += turnDir;
-            obstacleHit = true;
         }
     }
 

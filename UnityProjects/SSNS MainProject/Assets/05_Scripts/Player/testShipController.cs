@@ -32,7 +32,7 @@ public class testShipController : MonoBehaviour
     [SerializeField] LaserBehaviour laser;
     private ChargedShotBehaviour chargedShot;
 
-    private float shotTimer;
+    private float shotTimer = Mathf.Infinity;
     #endregion
 
     #region Other Things
@@ -129,6 +129,8 @@ public class testShipController : MonoBehaviour
     // Initialization
     private void Awake()
     {
+        Physics.IgnoreLayerCollision(13, 13); // cause projectiles to ignore projectiles
+
         // Set the cameras size and positions
         gunnerCamera.rect = new Rect(0, 0.0f, 1.0f, 0.5f);
         pilotCamera.rect = new Rect(0, 0.5f, 1.0f, 0.5f);
@@ -468,10 +470,11 @@ public class testShipController : MonoBehaviour
 
                 laser.SetLaser(shotSpawnLocation.transform.position + shotSpawnLocation.transform.forward.normalized * laser.Length);
             }
-            else if(currentWeapon == WeaponType.Charged)
+            else if(currentWeapon == WeaponType.Charged && shotTimer > currentShotInfo.FireRate)
             {
+                shotTimer = 0;
                 //Spawn then parent to the gunner. Store gameobject to check in update.
-                if(!chargedShot)
+                if (!chargedShot)
                 {
                     Quaternion rot = Quaternion.LookRotation(shotSpawnLocation.transform.forward);
                     chargedShot = Instantiate(currentShotInfo.gameObject, shotSpawnLocation.position, rot).GetComponent<ChargedShotBehaviour>();

@@ -94,7 +94,7 @@ public class ChargerPatrolState : FSMState
                 {
                     timer2 = 0f;
 
-                    if (PlayerInVision()) // in vision and has been patrolling for minimum time. This is to prevent the ai staying in attack mode and acting weird
+                    if (controller.PlayerInVision()) // in vision and has been patrolling for minimum time. This is to prevent the ai staying in attack mode and acting weird
                     {
                         timer1 = 0f;
                         controller.PerformTransition(Transition.SawPlayer);
@@ -109,27 +109,6 @@ public class ChargerPatrolState : FSMState
         }
     }
 
-    private bool PlayerInVision()
-    {
-        Vector3 dir = player.transform.position - controller.transform.position;
-        Ray ray = new Ray(controller.transform.position, dir);
-        RaycastHit hitInfo;
-        LayerMask layerMask = LayerMask.GetMask("Obstacles");
-        layerMask += LayerMask.GetMask("Player"); //Add player layer to obstacles
-
-        Physics.Raycast(ray, out hitInfo, Mathf.Infinity, layerMask);
-
-        if (hitInfo.collider != null)
-        {
-            Debug.Log(hitInfo.collider.gameObject.name);
-            if (hitInfo.collider.gameObject.Equals(player.gameObject))
-            {
-                return true;
-            }
-        }
-        return false;
-    }
-
     //Moves
     void Move()
     {
@@ -139,16 +118,15 @@ public class ChargerPatrolState : FSMState
             Vector3 direction = controller.transform.forward; // sets forward
             direction.Normalize();
 
-            AvoidObstacles(ref direction); // will change direction towards the right if an obstacle is in the way
+            if(controller.AvoidObstacles(ref direction)) // will change direction towards the right if an obstacle is in the way
+            {
+                obstacleHit = true;
+            }
 
             //Rotation
             if (!obstacleHit && obstacleTimer == 0)
             {
                 direction = waypoints[patrolID].transform.position - controller.transform.position; // sets desired direction to target intercept point
-
-                Vector3 newDir = Vector3.RotateTowards(controller.transform.forward, direction, controller.RegRotationForce * Time.deltaTime, 0);
-                Quaternion rot = Quaternion.LookRotation(newDir);
-                controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, rot, Time.deltaTime);
             }
             else
             {
@@ -159,33 +137,15 @@ public class ChargerPatrolState : FSMState
                     obstacleTimer = 0;
                     obstacleHit = false;
                 }
-
-                Vector3 newDir = Vector3.RotateTowards(controller.transform.forward, direction, controller.RegRotationForce * Time.deltaTime, 0);
-                Quaternion rot = Quaternion.LookRotation(newDir);
-                controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, rot, Time.deltaTime);
             }
+
+
+            Vector3 newDir = Vector3.RotateTowards(controller.transform.forward, direction, controller.RegRotationForce * Time.deltaTime, 0);
+            Quaternion rot = Quaternion.LookRotation(newDir);
+            controller.transform.rotation = Quaternion.Lerp(controller.transform.rotation, rot, controller.RegRotationForce * Time.deltaTime);
 
             //Movement
             controller.rbSelf.AddForce(controller.transform.forward.normalized * controller.Acceleration, ForceMode.Acceleration); // move regular speed if obstacle is in the way or player is not target
-        }
-    }
-
-    void AvoidObstacles(ref Vector3 dir)
-    {
-        RaycastHit hitInfo;
-
-        //Check direction facing
-        if (Physics.SphereCast(controller.transform.position, controller.RaySize, controller.transform.forward.normalized,
-            out hitInfo, controller.CollisionCheckDistance, controller.ObstacleLayer) ||
-            Physics.SphereCast(controller.transform.position, controller.RaySize, controller.rbSelf.velocity.normalized,
-            out hitInfo, controller.CollisionCheckDistance, controller.ObstacleLayer))
-        {
-            // Get the desired direction we need to move to move around  the obstacle. Transform to world co-ordinates (gets the obstacleMoveDirection wrt the current foward direction).
-            Vector3 turnDir = controller.transform.TransformDirection(hitInfo.normal + Vector3.right);
-            turnDir.Normalize();
-
-            dir += turnDir;
-            obstacleHit = true;
         }
     }
 }

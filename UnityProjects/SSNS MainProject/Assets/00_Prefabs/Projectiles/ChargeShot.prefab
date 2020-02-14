@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 3448381019093904584}
   - component: {fileID: 1904393377374886570}
   - component: {fileID: 2650163542115975439}
-  m_Layer: 0
+  - component: {fileID: -235943445137922597}
+  - component: {fileID: 7271389079199752486}
+  m_Layer: 13
   m_Name: ChargeShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,9 +63,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: 3
-  fireRate: 1
-  lifeTime: 37
-  speed: 75
+  fireRate: 2.5
+  lifeTime: 30
+  speed: 100
 --- !u!114 &2650163542115975439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,11 +78,122 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d8bd7779c3f26e43b3e6e222f4bd82d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxChargeTime: 5
-  minDamage: 10
+  explosionPrefab: {fileID: 5179261112806450194, guid: 0e0fd50f7d74668488ab8ed8b39ca2a9,
+    type: 3}
+  maxChargeTime: 3
+  minDamage: 5
   maxDamage: 50
   minScale: 0.25
   maxScale: 2
+--- !u!82 &-235943445137922597
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110116227568893219}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 8b09efc62bceaee4283c5f37be55a7fd, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 70
+  DopplerLevel: 1
+  MinDistance: 50
+  MaxDistance: 200
+  Pan2D: 0
+  rolloffMode: 1
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &7271389079199752486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110116227568893219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b51c4684a35424e999ab8d574632b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shotSound: {fileID: 8300000, guid: ce146abd8ad460c40acae661bad9f88d, type: 3}
 --- !u!1 &3848061135014179330
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,7 +205,7 @@ GameObject:
   - component: {fileID: 4612751860101972925}
   - component: {fileID: 8561223593931804943}
   - component: {fileID: 7589595058455186059}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particle System (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4846,7 +4959,7 @@ GameObject:
   - component: {fileID: 7540789505533435401}
   - component: {fileID: 8821694938403182346}
   - component: {fileID: 1982907164545755625}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
