@@ -75,7 +75,7 @@ public class ChargerController : AdvancedFSM
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.Equals(player) && CurrentStateID == FSMStateID.Attacking)
+        if (player && collision.gameObject.Equals(player) && CurrentStateID == FSMStateID.Attacking)
         {
             hitPlayer = true;
         }
@@ -94,6 +94,48 @@ public class ChargerController : AdvancedFSM
                 Debug.DrawRay(transform.position, rbSelf.velocity.normalized * collisionCheckDistance, Color.blue); //Velocity ray
             }
         }
+    }
+
+    public bool PlayerInVision()
+    {
+        Vector3 dir = player.transform.position - transform.position;
+        Ray ray = new Ray(transform.position, dir);
+        RaycastHit hitInfo;
+        LayerMask layerMask = LayerMask.GetMask("Obstacles");
+        layerMask += LayerMask.GetMask("Player"); //Add player layer to obstacles
+        layerMask += LayerMask.GetMask("Enemies");
+
+        Physics.Raycast(ray, out hitInfo, Mathf.Infinity, layerMask);
+
+        if (hitInfo.collider != null)
+        {
+            Debug.Log(hitInfo.collider.gameObject.name);
+            if (hitInfo.collider.gameObject.Equals(player.gameObject))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public bool AvoidObstacles(ref Vector3 dir)
+    {
+        RaycastHit hitInfo;
+
+        //Check direction facing
+        if (Physics.SphereCast(transform.position, RaySize, transform.forward.normalized,
+            out hitInfo, CollisionCheckDistance, ObstacleLayer) /*||
+            Physics.SphereCast(controller.transform.position, controller.RaySize, controller.rbSelf.velocity.normalized,
+            out hitInfo, controller.CollisionCheckDistance, controller.ObstacleLayer)*/)
+        {
+            // Get the desired direction we need to move to move around  the obstacle. Transform to world co-ordinates (gets the obstacleMoveDirection wrt the current foward direction).
+            Vector3 turnDir = transform.TransformDirection(hitInfo.normal * 2);
+            turnDir.Normalize();
+
+            dir += turnDir;
+            return true;
+        }
+        return false;
     }
 
     //Getters
