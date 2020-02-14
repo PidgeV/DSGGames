@@ -18,6 +18,15 @@ public class AvoidObstacles : FlockBehaviour
         {
             nAvoid++;
             avoidanceMove += agent.transform.position - t.position;
+
+            //Attempt to evade trajectory of enemy ships
+            if(t.TryGetComponent(out Rigidbody rb))
+            {
+                if(rb.velocity != Vector3.zero)
+                {
+                    avoidanceMove += Vector3.Cross(agent.transform.forward, t.forward);
+                }
+            }
         }
 
         if (nAvoid > 0) avoidanceMove /= nAvoid;

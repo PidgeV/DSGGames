@@ -153,10 +153,10 @@ MonoBehaviour:
   maxShield: 15
   currentHealth: 0
   currentShield: 0
-  acceleration: 800
-  regRotationForce: 200
-  chargeAcceleration: 2400
-  chargeRotationForce: 25
+  acceleration: 100
+  regRotationForce: 10
+  chargeAcceleration: 250
+  chargeRotationForce: 2
 --- !u!54 &3107085776561158192
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -166,7 +166,7 @@ Rigidbody:
   m_GameObject: {fileID: 3107085776561158194}
   serializedVersion: 2
   m_Mass: 200
-  m_Drag: 10
+  m_Drag: 1
   m_AngularDrag: 2
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -291,6 +291,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6607033829388375264}
     m_Modifications:
+    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyThruster
+      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275373, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -346,11 +351,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyThruster
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
@@ -381,6 +381,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3107085776561158193}
     m_Modifications:
+    - target: {fileID: 645844403578658387, guid: c0c0ed7488653d34baf9950ba7dc7311,
+        type: 3}
+      propertyPath: m_Name
+      value: Shield
+      objectReference: {fileID: 0}
     - target: {fileID: 4516505457575865408, guid: c0c0ed7488653d34baf9950ba7dc7311,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -435,11 +440,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 645844403578658387, guid: c0c0ed7488653d34baf9950ba7dc7311,
-        type: 3}
-      propertyPath: m_Name
-      value: Shield
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0c0ed7488653d34baf9950ba7dc7311, type: 3}

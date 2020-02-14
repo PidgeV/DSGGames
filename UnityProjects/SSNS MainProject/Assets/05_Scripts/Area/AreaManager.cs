@@ -71,9 +71,17 @@ public class AreaManager : MonoBehaviour
         // Spawns all prefabs
         foreach (GameObject go in nodeInfo.nodeEvent.prefabsToSpawn)
         {
-            GameObject spawnedGO = Instantiate<GameObject>(go);
+            GameObject spawnedGO = Instantiate(go);
             spawnedGO.transform.parent = currentArea.parent;
             spawnedGO.transform.position = currentArea.location;
+
+            //Adjust smoke to random variable for now
+            if(spawnedGO.TryGetComponent(out AdjustParticleSpaceSmoke smoke))
+            {
+                Vector3 size = new Vector3(Instance.AreaSize * 1.1f, Instance.AreaSize * 1.1f, Instance.AreaSize * 1.1f);
+                smoke.ChangeSize(size);
+                smoke.ChangeCapacity((int)(Mathf.Sqrt(size.x * size.y * size.z) / 500));
+            }
         }
 
         // Disables the last area
