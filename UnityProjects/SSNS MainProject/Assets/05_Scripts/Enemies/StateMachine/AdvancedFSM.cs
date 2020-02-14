@@ -14,6 +14,7 @@ using System.Collections.Generic;
     {
         None = 0,
         NoHealth,
+        NoShield,
         SawPlayer,
         Attack,
         Patrol,
@@ -23,6 +24,7 @@ using System.Collections.Generic;
     public enum FSMStateID
     {
         None = 0,
+        Spawned,
         Patrolling,
         Chasing,
         Attacking,

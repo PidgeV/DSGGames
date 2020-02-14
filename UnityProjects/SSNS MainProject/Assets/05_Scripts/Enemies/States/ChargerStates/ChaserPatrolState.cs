@@ -124,7 +124,7 @@ public class ChargerPatrolState : FSMState
             //Rotation
             if (!obstacleHit && obstacleTimer == 0)
             {
-                direction = waypoints[patrolID].transform.position - controller.transform.position; // sets desired direction to target intercept point
+                direction = controller.waypoints[patrolID].transform.position - controller.transform.position; // sets desired direction to target intercept point
             }
             else
             {

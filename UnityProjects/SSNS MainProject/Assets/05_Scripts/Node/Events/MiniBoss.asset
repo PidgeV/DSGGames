@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 995b72f791929c843bcfde9a052502c8, type: 3}
-  m_Name: Miniboss
-  m_EditorClassIdentifier:
+  m_Name: MiniBoss
+  m_EditorClassIdentifier: 
   eventType: 2
   prefabsToSpawn:
-  - {fileID: 8464054742834353141, guid: f3149f3ba7921454b844f858390c7b62, type: 3}
+  - {fileID: 184070561958212582, guid: fcfddcdf652d8ac4a81e12c2df8fa063, type: 3}
   areaSize: 5000
