@@ -456,6 +456,13 @@ public class testShipController : MonoBehaviour
                     if (hit.collider.TryGetComponent(out HealthAndShields hp))
                     {
                         hp.TakeDamage(laser.Damage, laser.Damage);
+                        if (hit.collider.TryGetComponent(out ScoreCounter[] sc))
+                        {
+                            foreach (ScoreCounter sc1 in sc)
+                            {
+                                sc1.Hit();
+                            }
+                        }
                     }
                 }
 
@@ -479,7 +486,12 @@ public class testShipController : MonoBehaviour
         Quaternion rot = Quaternion.LookRotation(shotSpawnLocation.transform.forward);
         GameObject shot = Instantiate(currentShotInfo.gameObject, shotSpawnLocation.position, rot);
 
-        if(TryGetComponent(out ShieldProjector shield))
+        if(shot.TryGetComponent(out ShotThing st))
+        {
+            st.whoSent = ShotThing.shotFrom.Player;
+        }
+
+        if (TryGetComponent(out ShieldProjector shield))
         {
             shield.IgnoreCollider(shot.GetComponent<Collider>());
         }
@@ -664,7 +676,7 @@ public class testShipController : MonoBehaviour
         }
         else if (dInput.y < 0)
         {
-            if(currentWeapon == WeaponType.Regular)
+            if (currentWeapon == WeaponType.Regular)
             {
                 currentWeapon = WeaponType.Energy;
             }

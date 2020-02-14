@@ -12,8 +12,8 @@ public class ScoreCounter : MonoBehaviour
     [SerializeField] TypeOfHit typeOfHit;
 
     [Header("Only Include if Neccessary")]
-    [Tooltip("The Game Obect that will be hit. Not used OnDestroy")]
-    [SerializeField] GameObject goHit;
+    //[Tooltip("Used if there is no HealthAndShields component on this object.")]
+    //[SerializeField] GameObject goHit;
     [Tooltip("The UI element for the player text, only is used if tag is player")]
     [SerializeField] Text playerText;
     bool isPlayer = false;
@@ -23,14 +23,19 @@ public class ScoreCounter : MonoBehaviour
     void Start()
     {
         Score = 0;
-        if (typeOfHit == TypeOfHit.ShieldHit)
-        {
-            if (goHit != null )//&& goHit.GetComponent<HealthAndShields>())
-            {
-                goHit.GetComponent<HealthAndShields>().onLifeChange += OnShieldHit;
-                goHit.GetComponent<HealthAndShields>().onShieldChange += OnShieldHit;
-            }
-        }
+        //if (typeOfHit == TypeOfHit.ShieldHit)
+        //{
+        //    if (goHit != null )//&& goHit.GetComponent<HealthAndShields>())
+        //    {
+        //        goHit.GetComponent<HealthAndShields>().onLifeChange += OnShieldHit;
+        //        goHit.GetComponent<HealthAndShields>().onShieldChange += OnShieldHit;
+        //    }
+        //    else if(TryGetComponent(out HealthAndShields has))
+        //    {
+        //        has.GetComponent<HealthAndShields>().onLifeChange += OnShieldHit;
+        //        has.GetComponent<HealthAndShields>().onShieldChange += OnShieldHit;
+        //    }
+        //}
         if (gameObject.tag == "Player")
         {
             isPlayer = true;
@@ -43,16 +48,46 @@ public class ScoreCounter : MonoBehaviour
         {
             playerText.text = "Score: " + Score;
         }
-        hitThisFrame = false;
+        //hitThisFrame = false;
     }
 
-    void OnShieldHit(float current, float max)
+    //void OnShieldHit(float current, float max)
+    //{
+    //    if (hitThisFrame == false && TryGetComponent(out ShotThing shot) && shot.whoSent == ShotThing.shotFrom.Player)
+    //    {
+    //        hitThisFrame = true;
+    //        Score += thisScore;
+    //    }
+    //}
+
+    /// <summary>
+    /// Only call with null go if it's the laser shooting
+    /// </summary>
+    /// <param name="thingShot"></param>
+    public void Hit(GameObject thingShot = null)
     {
-        if (hitThisFrame == false)
+        if (thingShot == null)
         {
-            hitThisFrame = true;
-            Score += thisScore;
+            if (typeOfHit == TypeOfHit.ShieldHit)
+            {
+                Score += thisScore;
+            }
         }
+        else if (thingShot.TryGetComponent(out ShotThing st))
+        {
+
+            if (st.whoSent == ShotThing.shotFrom.Player && typeOfHit == TypeOfHit.ShieldHit)
+            {
+                Score += thisScore;
+            }
+        }
+
+    }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Hit(collision.gameObject);
     }
 
     private void OnDestroy()
