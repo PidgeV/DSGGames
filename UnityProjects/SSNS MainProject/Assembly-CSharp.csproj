@@ -213,6 +213,7 @@
     <Compile Include="Assets\Cinemachine\Timeline\CinemachineShot.cs" />
     <Compile Include="Assets\Cinemachine\Timeline\CinemachineTrack.cs" />
     <Compile Include="Assets\DelayCollider.cs" />
+    <Compile Include="Assets\GameTimer.cs" />
     <Compile Include="Assets\ScoreDisplay.cs" />
     <Compile Include="Assets\ShieldDissolve.cs" />
     <Compile Include="Assets\TestGunController.cs" />
