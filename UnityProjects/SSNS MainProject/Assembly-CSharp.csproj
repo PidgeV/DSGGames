@@ -157,7 +157,7 @@
     <Compile Include="Assets\05_Scripts\UI\Pickups\Pickup.cs" />
     <Compile Include="Assets\05_Scripts\UI\SetupMenu.cs" />
     <Compile Include="Assets\05_Scripts\UI\UIManager.cs" />
-    <Compile Include="Assets\Animations\Menus\CinematicController.cs" />
+    <Compile Include="Assets\Animations\Menus\Transitions\CinematicController.cs" />
     <Compile Include="Assets\CameraLookAtPoint.cs" />
     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineBlendListCamera.cs" />
     <Compile Include="Assets\Cinemachine\Base\Runtime\Behaviours\CinemachineBrain.cs" />
@@ -213,8 +213,11 @@
     <Compile Include="Assets\Cinemachine\Timeline\CinemachineShot.cs" />
     <Compile Include="Assets\Cinemachine\Timeline\CinemachineTrack.cs" />
     <Compile Include="Assets\DelayCollider.cs" />
+    <Compile Include="Assets\ScoreDisplay.cs" />
     <Compile Include="Assets\ShieldDissolve.cs" />
+    <Compile Include="Assets\TestGunController.cs" />
     <None Include="Assets\Cinemachine\ReleaseNotes.txt" />
+    <None Include="Assets\07_Sprites\Menus\MenuColorList.txt" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/GitHub/DSGGames/UnityProjects/SSNS MainProject/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

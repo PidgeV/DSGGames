@@ -14,6 +14,8 @@ public abstract class Menu : MonoBehaviour
 	public abstract void PlayTransition();
 	public abstract void UpdateMenu();
 
+	public float wait = 1f;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -28,29 +30,41 @@ public abstract class Menu : MonoBehaviour
 	/// <summary> Transition to a different menu from this menu </summary>
 	public virtual void OpenMenu(Menu newMenu)
 	{
-		newMenu.gameObject.SetActive(true);
+		StartCoroutine(ShowMenu(newMenu, newMenu.wait));
 		newMenu.parentMenu = this;
 		newMenu.PlayTransition();
 
-		CloseMenu();
 	}
 	public virtual void OpenMenu(Menu newMenu, bool updateParent = true)
 	{
-		newMenu.gameObject.SetActive(true);
+		StartCoroutine(ShowMenu(newMenu, newMenu.wait));
 		newMenu.PlayTransition();
 
 		if (updateParent == true) {
 			newMenu.parentMenu = this;
 		}
+	}
 
+	IEnumerator ShowMenu(Menu menu, float wait)
+	{
+		CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
+		canvasGroup.interactable = false;
+		canvasGroup.alpha = 0;
+
+		yield return new WaitForSeconds(wait);
+
+		canvasGroup.interactable = true;
+		canvasGroup.alpha = 1;
+
+		menu.gameObject.SetActive(true);
 		CloseMenu();
 	}
 
 	/// <summary> Handle closing the current Menu </summary> 
 	public virtual void CloseMenu()
 	{
-		PlayExitTransition();
 		gameObject.SetActive(false);
+		PlayExitTransition();
 	}
 
 	/// <summary> Return to the parent Menu </summary>
