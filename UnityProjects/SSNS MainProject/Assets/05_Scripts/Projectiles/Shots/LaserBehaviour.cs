@@ -36,13 +36,23 @@ public class LaserBehaviour : MonoBehaviour
             yield return new WaitForEndOfFrame();
 
             float fade;
-            if (fadeIn) fade = Mathf.Clamp((laserMaterials[0].GetFloat("Vector1_2C1D604B") - 0.5f * Time.deltaTime), 0.5f, 1);
-            else fade = Mathf.Clamp((laserMaterials[0].GetFloat("Vector1_2C1D604B") + 0.5f * Time.deltaTime), 0.5f, 1);
-
-            foreach (Material m in laserMaterials)
+            float fade2;
+            if (fadeIn)
             {
-                m.SetFloat("Vector1_2C1D604B", fade);
+                fade = Mathf.Clamp((laserMaterials[0].GetFloat("Vector1_2C1D604B") - 0.5f * Time.deltaTime), 0.5f, 1);
+                fade2 = Mathf.Clamp((laserMaterials[0].GetFloat("Vector1_2C1D604B") - 0.7f * Time.deltaTime), 0, 1);
             }
+            else
+            {
+                fade = Mathf.Clamp((laserMaterials[0].GetFloat("Vector1_2C1D604B") + 0.5f * Time.deltaTime), 0.5f, 1);
+                fade2 = Mathf.Clamp((laserMaterials[0].GetFloat("Vector1_2C1D604B") + 0.7f * Time.deltaTime), 0, 1);
+            }
+
+            laserMaterials[0].SetFloat("Vector1_2C1D604B", fade);
+            laserMaterials[1].SetFloat("Vector1_2C1D604B", fade2);
+
+            Debug.Log("Fading material: " + laserMaterials[0] + " to " + fade);
+            Debug.Log("Fading material: " + laserMaterials[1] + " to " + fade2);
         }
     }
 }

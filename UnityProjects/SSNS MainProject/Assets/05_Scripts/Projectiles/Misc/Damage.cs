@@ -11,6 +11,9 @@ public class Damage : MonoBehaviour
     [SerializeField] int kineticDamage = 5;
     [SerializeField] int energyDamage = 5;
 
+    [Space(10)]
+    [SerializeField] GameObject hitSoundObject;
+
     public int KineticDamage { get { return kineticDamage; } }
     public int EnergyDamage { get { return energyDamage; } }
 
@@ -22,6 +25,11 @@ public class Damage : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        //Spawn the hit sound Object and parent to what it hit. Do this in case the object is destroyed on hitting things
+        if (hitSoundObject)
+            Instantiate(hitSoundObject, transform.position, Quaternion.identity, collision.transform);
+
+        //Apply damage to things it hits
         if (collision.gameObject.TryGetComponent(out HealthAndShields hpTemp))
         {
             hpTemp.TakeDamage(kineticDamage, energyDamage);
@@ -35,6 +43,12 @@ public class Damage : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
+        //Spawn the hit sound Object and parent to what it hit. Do this in case the object is destroyed on hitting things
+        if (hitSoundObject)
+            Instantiate(hitSoundObject, other.transform);
+
+        //Apply damage to things it hits
         if (other.gameObject.TryGetComponent(out HealthAndShields hpTemp))
         {
             hpTemp.TakeDamage(kineticDamage, energyDamage);

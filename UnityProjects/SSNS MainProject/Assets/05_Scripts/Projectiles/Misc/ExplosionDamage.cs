@@ -11,6 +11,8 @@ public class ExplosionDamage : MonoBehaviour
     [SerializeField] float kineticDamage = 25f;
     [SerializeField] float energyDamage = 5f;
 
+    [SerializeField] GameObject tempExplosionSoundObject;
+
     private void OnCollisionEnter(Collision collision)
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, radius, enemyLayers);
@@ -29,6 +31,8 @@ public class ExplosionDamage : MonoBehaviour
             GameObject go = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
             go.transform.localScale = new Vector3(radius, radius, radius);
         }
+
+        if (tempExplosionSoundObject) Instantiate(tempExplosionSoundObject, transform.position, Quaternion.identity, collision.transform);
 
         Destroy(gameObject);
     }

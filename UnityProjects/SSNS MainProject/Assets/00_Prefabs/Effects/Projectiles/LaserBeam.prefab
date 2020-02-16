@@ -411,8 +411,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9c6878e50214ee4fb16172cb56075b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  otherSound: {fileID: 7553022902259861813}
-  constantSound: {fileID: 2646903599100677691}
+  StartStopSoundSource: {fileID: 7553022902259861813}
+  constantSoundSource: {fileID: 2646903599100677691}
   startSound: {fileID: 8300000, guid: d8db728f11a511141aab99ebf4d2c393, type: 3}
   disableSound: {fileID: 8300000, guid: 9986af6f94e185e4082da8a51820f9c2, type: 3}
 --- !u!1 &9040998462252930463

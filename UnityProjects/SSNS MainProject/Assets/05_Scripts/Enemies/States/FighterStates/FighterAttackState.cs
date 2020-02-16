@@ -124,6 +124,8 @@ public class FighterAttackState : FSMState
                 GameObject bullet = Object.Instantiate(bulletPrefab, bulletSpawnPos.transform.position, lookRot);
                 bullet.GetComponent<Bullet>().shooter = controller.gameObject;
 
+                controller.GetComponent<ShootingSoundController>().PlayShot(SNSSTypes.WeaponType.Energy);
+
                 shotTimer = 0;
             }
         }

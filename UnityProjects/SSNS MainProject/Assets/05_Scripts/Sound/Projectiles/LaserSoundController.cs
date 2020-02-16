@@ -9,8 +9,8 @@ using UnityEngine;
 [RequireComponent(typeof(LaserBehaviour))]
 public class LaserSoundController : MonoBehaviour
 {
-    [SerializeField] AudioSource otherSound;
-    [SerializeField] AudioSource constantSound;
+    [SerializeField] AudioSource StartStopSoundSource;
+    [SerializeField] AudioSource constantSoundSource;
 
     [SerializeField] AudioClip startSound;
     [SerializeField] AudioClip disableSound;
@@ -31,11 +31,11 @@ public class LaserSoundController : MonoBehaviour
             startLaser = laser.fadeIn;
 
             if (startLaser)
-                otherSound.clip = startSound;
+                StartStopSoundSource.clip = startSound;
             else
-                otherSound.clip = disableSound;
+                StartStopSoundSource.clip = disableSound;
 
-            otherSound.Play();
+            StartStopSoundSource.Play();
         }
     }
 
@@ -47,11 +47,11 @@ public class LaserSoundController : MonoBehaviour
             yield return null;
             if(startLaser)
             {
-                constantSound.volume = Mathf.Clamp(constantSound.volume + 0.7f * Time.deltaTime, 0, 1);
+                constantSoundSource.volume = Mathf.Clamp(constantSoundSource.volume + 0.7f * Time.deltaTime, 0, 1);
             }
             else
             {
-                constantSound.volume = Mathf.Clamp(constantSound.volume - 0.7f * Time.deltaTime, 0, 1);
+                constantSoundSource.volume = Mathf.Clamp(constantSoundSource.volume - 0.7f * Time.deltaTime, 0, 1);
             }
         }
     }

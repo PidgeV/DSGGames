@@ -28,6 +28,7 @@ public class testShipController : MonoBehaviour
     private ShotInfo currentShotInfo;
     [SerializeField] ShotInfo[] shots;
     [SerializeField] Transform shotSpawnLocation;
+    [SerializeField] ShootingSoundController shootingSoundController;
 
     [SerializeField] LaserBehaviour laser;
     private ChargedShotBehaviour chargedShot;
@@ -501,6 +502,8 @@ public class testShipController : MonoBehaviour
     {
         Quaternion rot = Quaternion.LookRotation(shotSpawnLocation.transform.forward);
         GameObject shot = Instantiate(currentShotInfo.gameObject, shotSpawnLocation.position, rot);
+
+        shootingSoundController.PlayShot(currentWeapon);
 
         if (TryGetComponent(out ShieldProjector shield))
         {

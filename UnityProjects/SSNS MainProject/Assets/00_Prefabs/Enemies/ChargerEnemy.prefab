@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 7371385028968951949}
   - component: {fileID: 5355516276204472101}
   - component: {fileID: -1809771570838268277}
-  m_Layer: 9
+  m_Layer: 12
   m_Name: ChargerEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -39,6 +39,7 @@ Transform:
   m_Children:
   - {fileID: 6607033829388375264}
   - {fileID: 65695769877998401}
+  - {fileID: 6520038216743598019}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -223,6 +224,50 @@ MonoBehaviour:
   - {fileID: 2477320974579374103, guid: d715f361150123846a13955f9139b359, type: 3}
   - {fileID: 6452195130534909010, guid: cde9d7517c334d249b9db3785a8b49cd, type: 3}
   - {fileID: 7012702053293656162, guid: 86e0271b6a2f32b41baed24566648be4, type: 3}
+--- !u!1 &6365095074926981506
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6520038216743598019}
+  - component: {fileID: 1584383492796318615}
+  m_Layer: 9
+  m_Name: Navigation Collider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6520038216743598019
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6365095074926981506}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3107085776561158193}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1584383492796318615
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6365095074926981506}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.93, y: 3.69, z: 16.15}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7920635045528217331
 GameObject:
   m_ObjectHideFlags: 0
