@@ -113,6 +113,7 @@
     <Compile Include="Assets\05_Scripts\Extras\RandomPosition.cs" />
     <Compile Include="Assets\05_Scripts\Extras\Rotate.cs" />
     <Compile Include="Assets\05_Scripts\Extras\SNSSTypes.cs" />
+    <Compile Include="Assets\05_Scripts\Extras\SpawnLookAt.cs" />
     <Compile Include="Assets\05_Scripts\Extras\ToggleObjects.cs" />
     <Compile Include="Assets\05_Scripts\GameManager.cs" />
     <Compile Include="Assets\05_Scripts\HealthAndShields.cs" />
