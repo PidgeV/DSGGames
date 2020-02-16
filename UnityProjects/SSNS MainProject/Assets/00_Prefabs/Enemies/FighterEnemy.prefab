@@ -127,7 +127,7 @@ MonoBehaviour:
   HitVFX: {fileID: 0}
   ShieldSize: 20
   ResizeShield: 0
-  fadeType: 2
+  fadeType: 1
 --- !u!54 &58820780711503997
 Rigidbody:
   m_ObjectHideFlags: 0

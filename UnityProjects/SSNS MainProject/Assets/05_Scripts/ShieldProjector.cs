@@ -117,6 +117,12 @@ public class ShieldProjector : MonoBehaviour
 				onShieldBreak.Invoke();
 			}
 
+			if (fadeType == FadeType.HALF_FADE)
+			{
+				// HALF_FADE means we fade the shield out so that only a small ring of color can be seen
+				ShieldMeshRenderer.material.SetColor("_BaseColor", Color.clear);
+			}
+
 			SpawnShieldDissolve();
 
 			UpdateShieldCollider(false);
@@ -129,6 +135,12 @@ public class ShieldProjector : MonoBehaviour
 			if (onShieldRegen != null)
 			{
 				onShieldRegen.Invoke();
+			}
+
+			if (fadeType == FadeType.HALF_FADE)
+			{
+				// HALF_FADE means we fade the shield out so that only a small ring of color can be seen
+				ShieldMeshRenderer.material.SetColor("_BaseColor", GetColor);
 			}
 
 			UpdateShieldCollider(true);

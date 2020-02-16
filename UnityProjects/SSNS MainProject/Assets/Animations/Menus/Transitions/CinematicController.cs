@@ -7,6 +7,12 @@ public class CinematicController : MonoBehaviour
 	[SerializeField] private GameObject shipModel;
 
 	bool canSkip = true;
+	public bool inTransition = false;
+
+	public void StartTransition()
+	{
+		inTransition = true;
+	}
 
 	// Start is called before the first frame update
 	void Start()
@@ -49,5 +55,9 @@ public class CinematicController : MonoBehaviour
 	public void ShowMainMenu()
 	{
 		mainMenu.SetActive(true);
+	}
+	public void HideMainMenu()
+	{
+		mainMenu.SetActive(false);
 	}
 }

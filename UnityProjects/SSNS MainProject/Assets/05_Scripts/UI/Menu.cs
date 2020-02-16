@@ -6,6 +6,7 @@ public abstract class Menu : MonoBehaviour
 {
 	/// <summary> The Animation that will play when transitioning to this Menu </summary>
 	[SerializeField] protected Animator transition;
+	[SerializeField] protected CinematicController cinematicController;
 	
 	/// <summary> The Menu that directed us to this Menu </summary>
 	Menu parentMenu;
@@ -14,11 +15,17 @@ public abstract class Menu : MonoBehaviour
 	public abstract void PlayTransition();
 	public abstract void UpdateMenu();
 
-	public float wait = 1f;
+	public float wait = 1.5f;
+
+	public void EndTransition()
+	{
+		cinematicController.inTransition = false;
+	}
 
 	// Start is called before the first frame update
 	void Start()
 	{
+		cinematicController = GameObject.FindObjectOfType<CinematicController>();
 		InitializeMenu();
 	}
 	// Update is called once per frame
@@ -30,6 +37,10 @@ public abstract class Menu : MonoBehaviour
 	/// <summary> Transition to a different menu from this menu </summary>
 	public virtual void OpenMenu(Menu newMenu)
 	{
+		//if (cinematicController && cinematicController.inTransition == false)
+		//{
+		//}
+
 		StartCoroutine(ShowMenu(newMenu, newMenu.wait));
 		newMenu.parentMenu = this;
 		newMenu.PlayTransition();
@@ -37,6 +48,10 @@ public abstract class Menu : MonoBehaviour
 	}
 	public virtual void OpenMenu(Menu newMenu, bool updateParent = true)
 	{
+		//if (cinematicController && cinematicController.inTransition == false)
+		//{
+		//}
+
 		StartCoroutine(ShowMenu(newMenu, newMenu.wait));
 		newMenu.PlayTransition();
 
@@ -47,6 +62,8 @@ public abstract class Menu : MonoBehaviour
 
 	IEnumerator ShowMenu(Menu menu, float wait)
 	{
+		cinematicController.inTransition = true;
+
 		CanvasGroup canvasGroup = GetComponent<CanvasGroup>();
 		canvasGroup.interactable = false;
 		canvasGroup.alpha = 0;
@@ -63,8 +80,8 @@ public abstract class Menu : MonoBehaviour
 	/// <summary> Handle closing the current Menu </summary> 
 	public virtual void CloseMenu()
 	{
-		gameObject.SetActive(false);
 		PlayExitTransition();
+		gameObject.SetActive(false);
 	}
 
 	/// <summary> Return to the parent Menu </summary>
