@@ -31,7 +31,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6552152225560632426}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &2283457397917619889
 Camera:
@@ -609,36 +609,6 @@ MonoBehaviour:
       enableFptlForForwardOpaque: 0
       enableBigTilePrepass: 0
       isFptlEnabled: 0
---- !u!1 &6552152224488707096
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6552152224488707099}
-  m_Layer: 10
-  m_Name: '[Helper] GunHelper'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6552152224488707099
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6552152224488707096}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -7, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 6552152225560632426}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6552152224837182040
 GameObject:
   m_ObjectHideFlags: 0
@@ -968,7 +938,7 @@ Transform:
   - {fileID: 7041625874788612961}
   - {fileID: 6552152225465961885}
   m_Father: {fileID: 6552152225560632426}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6552152225465961874
 GameObject:
@@ -1042,7 +1012,6 @@ Transform:
   m_Children:
   - {fileID: 6552152224462578533}
   - {fileID: 3155276496123978345}
-  - {fileID: 6552152224488707099}
   - {fileID: 6552152225189396121}
   - {fileID: 7599562730828728572}
   m_Father: {fileID: 0}
@@ -1083,22 +1052,19 @@ MonoBehaviour:
   shotSpawnLocation: {fileID: 2594745785068495667}
   shootingSoundController: {fileID: 7839859697822787228}
   laser: {fileID: 3100031125565054491}
+  ammoCount:
+    ammo: 5802000058020000580200005802000058020000
   ship: {fileID: 6552152225189396121}
-  gunHelper: {fileID: 6552152224488707099}
-  player1: {fileID: 0}
-  player2: {fileID: 0}
   pilotCamera: {fileID: 6552152224462578534}
   gunnerCamParent: {fileID: 2693596715748911909}
   gunnerCamera: {fileID: 6552152224837182052}
   myStats: {fileID: 11400000, guid: ec827265e03f9ea419ed67bf71905df8, type: 2}
   myBehaviour: {fileID: 11400000, guid: a083da76fd5d7f74aa99bf80151eb125, type: 2}
-  speed: 0
   invertedControls: 0
-  limitRotation: 0
   unlimitedBoost: 0
-  ammoCount:
-    ammo: 5802000058020000580200005802000058020000
-  lockOnTarget: {fileID: 0}
+  limitRotation: 0
+  player1: {fileID: 0}
+  player2: {fileID: 0}
 --- !u!114 &6552152225560632438
 MonoBehaviour:
   m_ObjectHideFlags: 0
