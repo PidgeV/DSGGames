@@ -23,7 +23,7 @@ public class Player : Controller
 	public ControlType controlType = ControlType.CONTROLLER;
 
 	PlayerInput playerInput;
-	testShipController controller;
+	ShipController controller;
 
 	#region Unity Events
 
@@ -34,7 +34,7 @@ public class Player : Controller
 		// When a player starts the game this grabs an open ship
 		foreach (GameObject ship in GameObject.FindGameObjectsWithTag("Player"))
 		{
-			if (ship.TryGetComponent(out testShipController shipController))
+			if (ship.TryGetComponent(out ShipController shipController))
 			{
 				controller = shipController;
 				controller.JoinShip(this);

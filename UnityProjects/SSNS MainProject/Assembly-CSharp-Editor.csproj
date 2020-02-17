@@ -105,6 +105,7 @@
     <Compile Include="Assets\Cinemachine\PostFX\Editor\CinemachinePostProcessingEditor.cs" />
     <Compile Include="Assets\Cinemachine\PostFX\Editor\PostFXAutoImport.cs" />
     <Compile Include="Assets\Cinemachine\Timeline\Editor\CinemachineShotEditor.cs" />
+    <Compile Include="Assets\Editor\ShipEditor.cs" />
     <Reference Include="UnityEditor.TestRunner">
       <HintPath>D:/GitHub/DSGGames/UnityProjects/SSNS MainProject/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
     </Reference>

@@ -17,7 +17,7 @@ public class Pickup : MonoBehaviour
 
         if (player && other.gameObject.Equals(player)) //If player is found to exist and player is the one colliding
         {
-            testShipController playerController = player.GetComponent<testShipController>();
+            ShipController playerController = player.GetComponent<ShipController>();
             playerController.ammoCount.SetAmmo(weapon, ammoCount);
 
             if (hitVFX)

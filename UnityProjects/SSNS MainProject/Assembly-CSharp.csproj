@@ -133,10 +133,10 @@
     <Compile Include="Assets\05_Scripts\Node\NodeManagerUI.cs" />
     <Compile Include="Assets\05_Scripts\Player\AmmoCounter.cs" />
     <Compile Include="Assets\05_Scripts\Player\Player.cs" />
+    <Compile Include="Assets\05_Scripts\Player\ShipController.cs" />
     <Compile Include="Assets\05_Scripts\Player\ShipObjects\ShipBehaviour.cs" />
     <Compile Include="Assets\05_Scripts\Player\ShipObjects\ShipStats.cs" />
     <Compile Include="Assets\05_Scripts\Player\ShootingSoundController.cs" />
-    <Compile Include="Assets\05_Scripts\Player\testShipController.cs" />
     <Compile Include="Assets\05_Scripts\Player\TurretController.cs" />
     <Compile Include="Assets\05_Scripts\Projectiles\Barrel.cs" />
     <Compile Include="Assets\05_Scripts\Projectiles\Intercept\InterceptCalculationClass.cs" />

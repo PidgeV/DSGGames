@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipName: Bread as Blake
   shipDescription: When lord Blake throws a chunk of bread, where does it go?
-  xRot: 10
+  xRot: 8
   yRot: 10
   zRot: 85
   RotSpeed: 0.01

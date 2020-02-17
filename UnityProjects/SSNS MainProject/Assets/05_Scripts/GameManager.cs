@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 
     public bool debug;
 
-    [HideInInspector] public testShipController shipController;
+    [HideInInspector] public ShipController shipController;
 
     [SerializeField] private GameState gameState = GameState.NODE_TRANSITION;
 
@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
 
-        shipController = GameObject.FindGameObjectWithTag("Player").GetComponent<testShipController>();
+        shipController = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipController>();
 
         random = new System.Random(seed);
     }
