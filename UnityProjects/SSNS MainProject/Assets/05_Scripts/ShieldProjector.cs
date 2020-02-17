@@ -47,7 +47,7 @@ public class ShieldProjector : MonoBehaviour
 	 float DamagePercent = 1;
 
 	[Header("Shield Properties")]
-	public float ShieldSize = 1.0f;
+	private float ShieldSize = 1.0f;
 	public bool ResizeShield = false;
 
 
@@ -65,9 +65,9 @@ public class ShieldProjector : MonoBehaviour
 		ShieldMeshRenderer.material.SetColor("_BaseColor", BaseColor);
 		ShieldMeshRenderer.material.SetColor("_FresnelColor", BaseColor);
 
-		if (gameObject.TryGetComponent<SphereCollider>(out shieldCollider))
+		if (gameObject.TryGetComponent(out shieldCollider))
 		{
-			shieldCollider.radius = ShieldSize;
+			ShieldSize = shieldCollider.radius;
 		}
 
 		ShieldMeshRenderer.gameObject.transform.localScale *= ShieldSize;

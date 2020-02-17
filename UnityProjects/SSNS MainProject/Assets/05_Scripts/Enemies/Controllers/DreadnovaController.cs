@@ -5,7 +5,6 @@ using UnityEngine;
 public class DreadnovaController : AdvancedFSM
 {
     [SerializeField] private HealthAndShields[] shieldGenerators;
-    [SerializeField] private bool generatorPhaseOnly = true;
 
     private DreadnovaSpawner spawner;
     private HealthAndShields health;
@@ -19,14 +18,19 @@ public class DreadnovaController : AdvancedFSM
         DeadState dead = new DeadState(this);
         DreadnovaSpawnState spawn = new DreadnovaSpawnState(this);
         DreadnovaShieldState shield = new DreadnovaShieldState(this, shieldGenerators);
+        DreadnovaEscapeState escape = new DreadnovaEscapeState(this);
 
         spawn.AddTransition(Transition.Defend, FSMStateID.Defend);
 
-        //shield.AddTransition(Transition.NoShield, FSMStateID.Attacking);
-        //shield.AddTransition(Transition.)
+        //shield.AddTransition(Transition.Attack, FSMStateID.Attacking);
+        shield.AddTransition(Transition.NoShield, FSMStateID.Running);
+        shield.AddTransition(Transition.NoHealth, FSMStateID.Dead);
+
+        escape.AddTransition(Transition.NoHealth, FSMStateID.Dead);
 
         AddFSMState(spawn);
         AddFSMState(shield);
+        AddFSMState(escape);
         AddFSMState(dead);
     }
 
@@ -46,7 +50,27 @@ public class DreadnovaController : AdvancedFSM
         }
     }
 
-    public bool GeneratorPhaseOnly { get { return generatorPhaseOnly; } }
+    public void Warp(bool warpIn)
+    {
+        // TODO: Warp effects
+        if (warpIn)
+        {
+
+        }
+        else
+        {
+
+        }
+    }
+
+    public void DestroyGenerators()
+    {
+        foreach (HealthAndShields generator in shieldGenerators)
+        {
+            generator.TakeDamage(Mathf.Infinity, Mathf.Infinity);
+        }
+    }
+
     public DreadnovaSpawner Spawner { get { return spawner; } }
     public HealthAndShields Health { get { return health; } }
     public GameObject Player { get { return player; } }

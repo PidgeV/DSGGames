@@ -65,10 +65,10 @@
     <Compile Include="Assets\05_Scripts\Area\AreaManager.cs" />
     <Compile Include="Assets\05_Scripts\Area\DreadnovaSpawner.cs" />
     <Compile Include="Assets\05_Scripts\Area\NodeSpawner.cs" />
-    <Compile Include="Assets\05_Scripts\Area\SpawnBehaviour.cs" />
+    <Compile Include="Assets\05_Scripts\Area\Spawns\WaveSpawn.cs" />
     <Compile Include="Assets\05_Scripts\Area\testAreaSpawner.cs" />
     <Compile Include="Assets\05_Scripts\Area\TutorialSpawner.cs" />
-    <Compile Include="Assets\05_Scripts\Area\WaveBehaviour.cs" />
+    <Compile Include="Assets\05_Scripts\Area\Wave Behaviours\WaveBehaviour.cs" />
     <Compile Include="Assets\05_Scripts\Demo\DemoManager.cs" />
     <Compile Include="Assets\05_Scripts\Demo\DemoValue.cs" />
     <Compile Include="Assets\05_Scripts\Demo\NewDemoManager.cs" />
@@ -89,6 +89,7 @@
     <Compile Include="Assets\05_Scripts\Enemies\States\CruiserStates\CruiserAttackState.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\States\CruiserStates\CruiserPatrolState.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\States\DeadState.cs" />
+    <Compile Include="Assets\05_Scripts\Enemies\States\DreadnovaStates\DreadnovaRunningState.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\States\DreadnovaStates\DreadnovaShieldState.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\States\DreadnovaStates\DreadnovaSpawnState.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\States\FighterStates\FighterAttackState.cs" />

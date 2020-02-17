@@ -490,7 +490,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 7959
+    m_Bits: 16151
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -992,6 +992,7 @@ GameObject:
   - component: {fileID: 6552152225560632437}
   - component: {fileID: 1872842347}
   - component: {fileID: 4376755382601005565}
+  - component: {fileID: 3879046701543306404}
   m_Layer: 10
   m_Name: PlayerShip
   m_TagString: Player
@@ -1108,8 +1109,7 @@ MonoBehaviour:
   ImpactVFX: {fileID: 5266171281214306815, guid: b9048ee1f6b3b8d46a2a7682ceaffd9b,
     type: 3}
   HitVFX: {fileID: 0}
-  ShieldSize: 15
-  ResizeShield: 1
+  ResizeShield: 0
   fadeType: 2
 --- !u!54 &6552152225560632437
 Rigidbody:
@@ -1239,6 +1239,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!135 &3879046701543306404
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6552152225560632427}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 15
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &3349900705016259160
 PrefabInstance:
   m_ObjectHideFlags: 0

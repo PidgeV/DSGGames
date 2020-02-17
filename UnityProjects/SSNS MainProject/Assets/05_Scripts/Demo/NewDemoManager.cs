@@ -204,6 +204,12 @@ public class NewDemoManager : MonoBehaviour
 			KillAllEnemies();
 		});
 
+		// Destroys the generators on the dreadnova
+		Button btn_DestroyGenerators = CreateButton(button, sceneRect, "Destroy Generators");
+		btn_DestroyGenerators.onClick.AddListener(() => {
+			DestroyGenerators();
+		});
+
 		// Loads scenes
 		// MAIN MENU
 		for (int i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
@@ -350,6 +356,17 @@ public class NewDemoManager : MonoBehaviour
 					agent.GetComponent<HealthAndShields>().TakeDamage(Mathf.Infinity, Mathf.Infinity);
 				}
 			}
+		}
+	}
+
+	/// <summary>
+	/// Find and Kill all enemies in the scene
+	/// </summary>
+	public void DestroyGenerators()
+	{
+		if (GameObject.FindGameObjectWithTag("CapitalShip").TryGetComponent(out DreadnovaController controller))
+		{
+			controller.DestroyGenerators();
 		}
 	}
 

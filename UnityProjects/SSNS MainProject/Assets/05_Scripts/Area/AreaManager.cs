@@ -32,6 +32,16 @@ public class AreaManager : MonoBehaviour
     private float transitionTime;
 
     /// <summary>
+    /// Determines if the player is outside the current area.
+    /// </summary>
+    /// <param name="player">The player's transform</param>
+    /// <returns>Whether the player is outside of the area</returns>
+    public bool IsPlayerOutside(Transform player)
+    {
+        return Vector3.Distance(player.position, currentArea.location) >= currentArea.size;
+    }
+
+    /// <summary>
     /// Ends the area giving the ship the node's reward 
     /// and waits for the UI to be hidden again before allowing next node selection
     /// </summary>

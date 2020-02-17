@@ -25,15 +25,17 @@ public class DreadnovaShieldState : FSMState
 
     public override void Act()
     {
-        if (!controller.GeneratorPhaseOnly && shieldAliveCount <= 0)
-        {
-            controller.PerformTransition(Transition.Attack);
-        }
     }
 
     public override void Reason()
     {
-
+        if (shieldAliveCount <= 0)
+        {
+            if (NodeManager.Instance.CurrentNode.Type == SNSSTypes.NodeType.MiniBoss)
+                controller.PerformTransition(Transition.NoShield);
+            else
+                controller.PerformTransition(Transition.Attack);
+        }
     }
 
     public void OnGeneratorDeath()

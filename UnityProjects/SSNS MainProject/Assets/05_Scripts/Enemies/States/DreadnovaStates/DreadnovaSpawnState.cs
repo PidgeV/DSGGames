@@ -13,12 +13,11 @@ public class DreadnovaSpawnState : FSMState
 
     public override void Act()
     {
-        // TODO: Warp in effect
-        controller.PerformTransition(Transition.Defend);
+        controller.Warp(true);
     }
 
     public override void Reason()
     {
-        //Do nothing
+        controller.PerformTransition(Transition.Defend);
     }
 }

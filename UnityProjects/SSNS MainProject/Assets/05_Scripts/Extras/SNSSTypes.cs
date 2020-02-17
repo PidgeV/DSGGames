@@ -15,6 +15,7 @@ namespace SNSSTypes
     {
         Tutorial,
         Reward,
+        MiniBoss,
         Boss
     }
 
@@ -40,14 +41,6 @@ namespace SNSSTypes
         APPLYING_REWARD,
         TRANSITION_BEGIN,
         TRANSITION_END
-    }
-
-    public enum NodeEventType
-    {
-        Tutorial,
-        Random,
-        MiniBoss,
-        Boss
     }
 
 	public enum FadeType
