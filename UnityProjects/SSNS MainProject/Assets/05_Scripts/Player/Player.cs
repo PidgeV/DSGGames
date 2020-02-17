@@ -26,7 +26,7 @@ public class Player : Controller
 	testShipController controller;
 
 	#region Unity Events
-	// Start is called before the first frame update
+
 	private void Awake()
 	{
 		playerInput = GetComponent<PlayerInput>();
@@ -43,7 +43,11 @@ public class Player : Controller
 		}
 	}
 
-	//
+	private void Start()
+	{
+		PlayerConnectionManager.Instance.Join(this);
+	}
+
 	private void Update()
 	{
 		// Keep our GameState up to date with the GameManager
@@ -180,7 +184,7 @@ public class Player : Controller
 			controller.SwapWeapon(input.Get<Vector2>());
 		}
 	}
-	
+
 	public override void OnA(InputValue input)
 	{
 		if (myRole == PlayerRole.Pilot)
@@ -214,12 +218,12 @@ public class Player : Controller
 	public override void OnX(InputValue input)
 	{
 		controller.ToggleMap(input.isPressed);
-	}	
+	}
 	public override void OnY(InputValue input)
 	{
-        if(myRole != PlayerRole.None) controller.TriggerRoleSwap(input.isPressed);
+		if (myRole != PlayerRole.None) controller.TriggerRoleSwap(input.isPressed);
 	}
-	
+
 	public override void OnLeftTrigger(InputValue input)
 	{
 		if (myRole == PlayerRole.Pilot)
@@ -257,5 +261,24 @@ public class Player : Controller
 	{
 		controller.LockOn(input.isPressed);
 	}
+	#endregion
+
+	#region [Action Map] Menu Navigation
+
+	public void OnNavigate()
+	{
+		// Unity automatically does this
+	}
+
+	public void OnSelect()
+	{
+		// Unity automatically does this
+	}
+
+	public void OnBack()
+	{
+		CinematicController.Instance.Return();
+	}
+
 	#endregion
 }

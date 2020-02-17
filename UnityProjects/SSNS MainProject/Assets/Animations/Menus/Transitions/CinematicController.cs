@@ -4,10 +4,20 @@ using UnityEngine;
 
 public class CinematicController : MonoBehaviour
 {
+	public static CinematicController Instance;
+
 	private Animator animator;
 	private GameObject ship;
 
-	// Start is called before the first frame update
+
+	bool canSkip = true;
+	public bool inTransition = false;
+
+
+	private void Awake()
+	{
+		Instance = this;
+	}
 	void Start()
 	{
 		ship = GameObject.FindGameObjectWithTag("Ship");
@@ -18,7 +28,6 @@ public class CinematicController : MonoBehaviour
 	{
 		animator.SetTrigger("TransitionToOptions");
 	}
-
 	public void TransitionMainTo_Setup()
 	{
 		animator.SetTrigger("TransitionToSetup");
@@ -28,7 +37,6 @@ public class CinematicController : MonoBehaviour
 	{
 		animator.SetTrigger("Exit");
 	}
-
 	public void TransitionSetupTo_Main()
 	{
 		animator.SetTrigger("Exit");
@@ -44,11 +52,10 @@ public class CinematicController : MonoBehaviour
 
 	}
 
-
-
-	bool canSkip = true;
-	public bool inTransition = false;
-
+	public void Return()
+	{
+		Debug.Log("??");
+	}
 
 	public void StartTransition()
 	{

@@ -2,29 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SetupMenu : Menu
+public class SetupMenu : MonoBehaviour
 {
-	public override void InitializeMenu() { }
-	public override void UpdateMenu() { }
+	[SerializeField] private GameObject playerOne;
+	[SerializeField] private GameObject playerTwo;
 
-	public override void PlayTransition()
+	List<Player> players;
+
+	private void OnEnable()
 	{
-		if (transition == null)
-		{
-			// Do nothing
-			return;
-		}
-		else
-		{
-			transition.SetTrigger("TransitionToSetup");
-		}
+		players = PlayerConnectionManager.Instance.players;
 	}
 
-	/// <summary>
-	/// Start or load a game
-	/// </summary>
-	public void StartGame()
+	private void Update()
 	{
-		transition.SetTrigger("PlayGame");
+		if (players.Count == 0)
+		{
+			playerOne.SetActive(false);
+			playerTwo.SetActive(false);
+		}
+		else if (players.Count == 1)
+		{
+			playerOne.SetActive(true);
+			playerTwo.SetActive(false);
+		}
+		else if (players.Count == 2)
+		{
+			playerOne.SetActive(true);
+			playerTwo.SetActive(true);
+		}
 	}
 }
