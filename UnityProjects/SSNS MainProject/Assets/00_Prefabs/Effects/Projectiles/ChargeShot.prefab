@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7434337872109609735}
   - component: {fileID: 5899795744726626741}
   - component: {fileID: 5655522749473172017}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particle System (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4763,7 +4763,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4631578106782141097}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: ChargeShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4797,7 +4797,7 @@ GameObject:
   - component: {fileID: 5731287498645405363}
   - component: {fileID: 6720267063259510704}
   - component: {fileID: 4371702247137380691}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -14,6 +14,7 @@ using System.Collections.Generic;
     {
         None = 0,
         NoHealth,
+        NoShield,
         SawPlayer,
         Attack,
         Patrol,
@@ -23,6 +24,7 @@ using System.Collections.Generic;
     public enum FSMStateID
     {
         None = 0,
+        Spawned,
         Patrolling,
         Chasing,
         Attacking,
@@ -32,6 +34,8 @@ using System.Collections.Generic;
 
 public class AdvancedFSM : FSM
 {
+    public Transform[] waypoints;
+
     private List<FSMState> fsmStates;
 
     //The fsmStates are not changing directly but updated by using transitions
@@ -40,6 +44,14 @@ public class AdvancedFSM : FSM
 
     private FSMState currentState;
     public FSMState CurrentState { get { return currentState; } }
+
+    public delegate void StateChange(FSMStateID stateID);
+
+    public event StateChange StateChanged;
+
+    public Vector3 spawnpoint;
+
+    public Vector3 spawnDestination;
 
     public AdvancedFSM()
     {
@@ -63,7 +75,9 @@ public class AdvancedFSM : FSM
         {
             fsmStates.Add(fsmState);
             currentState = fsmState;
+            currentState.EnterStateInit();
             currentStateID = fsmState.ID;
+            StateChanged?.Invoke(currentStateID);
             return;
         }
 
@@ -140,5 +154,7 @@ public class AdvancedFSM : FSM
                 break;
             }
         }
+
+        StateChanged?.Invoke(currentStateID);
     }
 }

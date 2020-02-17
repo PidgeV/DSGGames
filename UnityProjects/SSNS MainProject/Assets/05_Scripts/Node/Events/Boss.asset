@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   eventType: 3
   prefabsToSpawn:
-  - {fileID: 184070561958212582, guid: 5837d80a12565c04285329df35a7c154, type: 3}
+  - {fileID: 184070561958212582, guid: fcfddcdf652d8ac4a81e12c2df8fa063, type: 3}
   - {fileID: 8464054742834353141, guid: f3149f3ba7921454b844f858390c7b62, type: 3}
   areaSize: 5000
+  smokeAmount: 200000

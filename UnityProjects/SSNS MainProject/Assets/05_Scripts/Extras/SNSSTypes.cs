@@ -28,6 +28,20 @@ namespace SNSSTypes
         GAME_END
     }
 
+    public enum DreadnovaState
+    {
+        SHIELD_STAGE,
+        FINAL_STAGE
+    }
+
+    public enum AreaState
+    {
+        BATTLE,
+        APPLYING_REWARD,
+        TRANSITION_BEGIN,
+        TRANSITION_END
+    }
+
     public enum NodeEventType
     {
         Tutorial,
@@ -50,4 +64,6 @@ namespace SNSSTypes
 	//LaserShot: Long, straight beam, near instant, aoe from origin
 
 	public enum WeaponType { Regular, Energy, Laser, Charged, Missiles, End }
+
+    public enum EnemyType { FIGHTER, CHARGER, SWARMER, CRUISER, CARGO }
 }

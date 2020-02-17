@@ -5,8 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class ChargerController : AdvancedFSM
 {
-    public GameObject[] waypoints;
-
     [Header("Green: forward direction and collision check.")]
     [Header("Red: intercept calculation.")]
     [Header("Blue: Velocity and collision check.")]
@@ -36,8 +34,11 @@ public class ChargerController : AdvancedFSM
     private void ConstructFSM()
     {
         DeadState deadState = new DeadState(this);
-        ChargerPatrolState patrol = new ChargerPatrolState(this, player, waypoints, waypointDistanceMeters, playerDistanceMeters, true);
+        SpawnState spawnState = new SpawnState(this);
+        ChargerPatrolState patrol = new ChargerPatrolState(this, player, waypointDistanceMeters, playerDistanceMeters, true);
         ChargerAttackState attack = new ChargerAttackState(this, player);
+
+        spawnState.AddTransition(Transition.Patrol, FSMStateID.Patrolling);
 
         patrol.AddTransition(Transition.NoHealth, FSMStateID.Dead);
         patrol.AddTransition(Transition.SawPlayer, FSMStateID.Attacking); //Change this
@@ -46,6 +47,7 @@ public class ChargerController : AdvancedFSM
         attack.AddTransition(Transition.Patrol, FSMStateID.Patrolling);
         //What's the difference between saw player and attack transition?
 
+        AddFSMState(spawnState);
         AddFSMState(patrol);
         AddFSMState(deadState);
         AddFSMState(attack);

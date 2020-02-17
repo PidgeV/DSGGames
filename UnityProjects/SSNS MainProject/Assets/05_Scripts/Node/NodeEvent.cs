@@ -17,4 +17,7 @@ public class NodeEvent : ScriptableObject
     [Tooltip("The size of the area.")]
     [Range(1000, 5000)]
     public int areaSize = 1000;
+
+    [Tooltip("The amount of smoke to spawn")]
+    public int smokeAmount = 200;
 }

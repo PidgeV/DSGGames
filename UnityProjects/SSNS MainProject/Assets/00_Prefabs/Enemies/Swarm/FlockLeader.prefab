@@ -44,10 +44,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints: []
+  spawnpoint: {x: 0, y: 0, z: 0}
+  spawnDestination: {x: 0, y: 0, z: 0}
   patrolSpeed: 75
   attackSpeed: 150
   attackStateRadius: 5
   patrolStateRadius: 150
-  defenseStateRadius: 10
+  defenseStateRadius: 100
   waypointDistanceMeters: 75
-  playerDistanceMeters: 20000
+  playerDistanceMeters: 2000

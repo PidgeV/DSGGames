@@ -8,11 +8,11 @@ namespace Complete
     {
         FlockLeaderController controller;
         Flock swarm;
-        GameObject[] waypoints;
+        Transform[] waypoints;
 
         private int patrolID = 0;
         private bool randomPoint;
-        public SwarmLeaderPatrolState(FlockLeaderController leader, Flock swarmObj, GameObject[] wayPoints, bool randomize = true)
+        public SwarmLeaderPatrolState(FlockLeaderController leader, Flock swarmObj, Transform[] wayPoints, bool randomize = true)
         {
             controller = leader;
             waypoints = wayPoints;

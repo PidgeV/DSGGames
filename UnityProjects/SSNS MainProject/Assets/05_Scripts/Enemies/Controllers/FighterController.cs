@@ -5,8 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class FighterController : AdvancedFSM
 {
-    public GameObject[] waypoints;
-
     [Header("Green: forward direction and collision check.")]
     [Header("Red: intercept calculation.")]
     [Header("Blue: Velocity and collision check.")]
@@ -45,8 +43,11 @@ public class FighterController : AdvancedFSM
     private void ConstructFSM()
     {
         DeadState deadState = new DeadState(this);
-        FighterPatrolState patrol = new FighterPatrolState(this, player, waypoints, waypointDistanceMeters, playerDistanceMeters, true);
+        SpawnState spawnState = new SpawnState(this);
+        FighterPatrolState patrol = new FighterPatrolState(this, player, waypointDistanceMeters, playerDistanceMeters, true);
         FighterAttackState attack = new FighterAttackState(this, player, bullet, bulletShootPos);
+
+        spawnState.AddTransition(Transition.Patrol, FSMStateID.Patrolling);
 
         patrol.AddTransition(Transition.NoHealth, FSMStateID.Dead);
         patrol.AddTransition(Transition.SawPlayer, FSMStateID.Attacking); //Change this
@@ -55,9 +56,10 @@ public class FighterController : AdvancedFSM
         attack.AddTransition(Transition.Patrol, FSMStateID.Patrolling);
         //What's the difference between saw player and attack transition?
 
+        AddFSMState(spawnState);
         AddFSMState(patrol);
-        AddFSMState(deadState);
         AddFSMState(attack);
+        AddFSMState(deadState);
     }
 
     protected override void Initialize()
