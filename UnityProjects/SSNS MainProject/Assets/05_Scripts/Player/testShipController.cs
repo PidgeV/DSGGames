@@ -395,7 +395,7 @@ public class testShipController : MonoBehaviour
         {
             // POSITION
             // Where the camera SHOULD be relative to the ship model
-            gunnerCamera.transform.position = ship.transform.position + (ship.transform.up * -4);
+            gunnerCamera.transform.position = ship.transform.position + (ship.transform.up * -6);
 
             // ROTATION
             // Add the current input to the guns final rotation
