@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8690222726650212484}
   - component: {fileID: 415132958396779186}
   - component: {fileID: 6268536047333275211}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: BaseShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -12,9 +12,11 @@ using SNSSTypes;
 /// - Ships need to disable their colliders when spawned, preventing them from hurting themselves
 ///     - Probably inside the spawn state
 /// </summary>
-[System.Serializable]
+[RequireComponent(typeof(DreadnovaController))]
 public class DreadnovaSpawner : MonoBehaviour
 {
+    public delegate void EnemySpawned(GameObject enemy, int spawnIndex);
+
     [Header("Enemy Prefabs")]
     [SerializeField] private GameObject fighterPrefab;
     [SerializeField] private GameObject chargerPrefab;
@@ -22,71 +24,105 @@ public class DreadnovaSpawner : MonoBehaviour
     [SerializeField] private GameObject cruiserPrefab;
     [SerializeField] private GameObject cargoPrefab;
 
-    [SerializeField] private WaveBehaviour waveBehaviour;
+    [SerializeField] private WaveBehaviour shieldWaveBehaviour;
+    [SerializeField] private WaveBehaviour attackWaveBehaviour;
 
     [SerializeField] private Transform[] spawnpoints;
     [SerializeField] private Transform[] waypoints;
 
-    [SerializeField] private DreadnovaState state;
+    [SerializeField] private float distanceToTravelAway = 50;
 
-    [SerializeField] private float distanceToTravelAway = 100;
+    private DreadnovaController dreadnovaController;
+
+    private CargoController cargoController;
+
+    private WaveBehaviour currentWaveBehaviour;
+
+    private float timeBetweenEnemySpawns = 0.4f;
 
     private float waveTime;
     private int waveCount;
 
-    private DreadnovaSpawnInfo[] dreadnovaSpawns;
+    private float cargoTime;
 
-    private DreadnovaSpawnInfo[] FindUnseenSpawnpoints()
-    {
-        // TODO: Determine spawnpoints that aren't seen by the player
-        List<DreadnovaSpawnInfo> spawns = new List<DreadnovaSpawnInfo>();
-
-        foreach (DreadnovaSpawnInfo info in dreadnovaSpawns)
-        {
-            if (!info.enemy)
-            {
-                spawns.Add(info);
-            }
-        }
-
-        return spawns.ToArray();
-    }
-
-    private void Awake()
-    {
-        dreadnovaSpawns = new DreadnovaSpawnInfo[spawnpoints.Length];
-
-        for (int i = 0; i < spawnpoints.Length; i++)
-        {
-            dreadnovaSpawns[i].spawn = spawnpoints[i];
-            dreadnovaSpawns[i].destination = spawnpoints[i].position + spawnpoints[i].forward * distanceToTravelAway;
-        }
-    }
+    private int spawnIndex;
 
     // Start is called before the first frame update
     void Start()
     {
         AreaManager.Instance.OnSpawnFinished();
 
-        waveTime = waveBehaviour.TimeBetweenWaves;
+        waveTime = shieldWaveBehaviour.TimeBetweenWaves;
+
+        TryGetComponent(out dreadnovaController);
+
+        dreadnovaController.StateChanged += DreadnovaStateChange;
     }
 
     private void Update()
     {
-        waveTime += Time.deltaTime;
-
-        if (waveTime >= waveBehaviour.TimeBetweenWaves)
+        if (GameManager.Instance.GameState == GameState.BATTLE)
         {
-            waveTime = 0;
-            waveCount = (waveCount + 1) % waveBehaviour.Waves.Length;
+            if (AreaManager.Instance.EnemyCount <= currentWaveBehaviour.GetMaxEnemyCount(waveCount))
+            {
+                waveTime += Time.deltaTime;
 
-            StartCoroutine(SpawnWave());
+                if (waveTime >= currentWaveBehaviour.TimeBetweenWaves)
+                {
+                    waveTime = 0;
+                    waveCount = (waveCount + 1) % currentWaveBehaviour.Waves.Length;
+
+                    StartCoroutine(SpawnWave());
+                }
+            }
+
+            if (!cargoController)
+            {
+                cargoTime += Time.deltaTime;
+
+                if (cargoTime >= currentWaveBehaviour.TimeBetweenCargoSpawns)
+                {
+                    SpawnCargo();
+                }
+            }
         }
+    }
+
+    private void DreadnovaStateChange(FSMStateID stateID)
+    {
+        if (stateID == FSMStateID.Defend)
+        {
+            currentWaveBehaviour = shieldWaveBehaviour;
+        }
+        else if (stateID == FSMStateID.Attacking)
+        {
+            currentWaveBehaviour = attackWaveBehaviour;
+        }
+
+        if (!cargoController) SpawnCargo();
+    }
+
+    private void SpawnCargo()
+    {
+        Vector3 spawnpoint = AreaManager.Instance.FindRandomPosition;
+        Vector3 swarmerSpawnpoint = spawnpoint + Random.insideUnitSphere * 20;
+
+        GameObject cargo = SpawnEnemy(cargoPrefab, spawnpoint, spawnpoint);
+        GameObject swarmer = SpawnEnemy(swarmerPrefab, swarmerSpawnpoint, swarmerSpawnpoint);
+
+        cargo.TryGetComponent(out cargoController);
+
+        if (swarmer.TryGetComponent(out Flock flock))
+        {
+            flock.defenseTarget = cargo;
+        }
+
+        cargoTime = 0;
     }
 
     protected IEnumerator SpawnWave()
     {
-        SpawnBehaviour spawnBehaviour = waveBehaviour.Waves[waveCount];
+        SpawnBehaviour spawnBehaviour = shieldWaveBehaviour.Waves[waveCount];
 
         for (int i = 0; i < spawnBehaviour.Spawns.Length; i++)
         {
@@ -94,53 +130,62 @@ public class DreadnovaSpawner : MonoBehaviour
 
             for (int j = 0; j < spawnInfo.count; j++)
             {
-                DreadnovaSpawnInfo[] availableSpawnpoints;
-                while (true)
-                {
-                    availableSpawnpoints = FindUnseenSpawnpoints();
-
-                    if (availableSpawnpoints != null && availableSpawnpoints.Length > 0) break;
-
-                    yield return new WaitForSeconds(0.2f);
-                }
-
-                DreadnovaSpawnInfo spawn = availableSpawnpoints[Random.Range(0, availableSpawnpoints.Length)];
-
                 switch (spawnInfo.type)
                 {
                     case EnemyType.FIGHTER:
-                        SpawnEnemy(fighterPrefab, spawn);
+                        SpawnEnemy(fighterPrefab, spawnpoints[spawnIndex]);
                         break;
                     case EnemyType.CHARGER:
-                        SpawnEnemy(chargerPrefab, spawn);
+                        SpawnEnemy(chargerPrefab, spawnpoints[spawnIndex]);
                         break;
                     case EnemyType.SWARMER:
-                        SpawnEnemy(swarmerPrefab, spawn);
+                        SpawnEnemy(swarmerPrefab, spawnpoints[spawnIndex]);
                         break;
                     case EnemyType.CRUISER:
-                        SpawnEnemy(cruiserPrefab, spawn);
-                        break;
-                    case EnemyType.CARGO:
-                        SpawnEnemy(cargoPrefab, spawn);
+                        SpawnEnemy(cruiserPrefab, spawnpoints[spawnIndex]);
                         break;
                 }
+
+                spawnIndex = (spawnIndex + 1) % spawnpoints.Length;
+
+                yield return new WaitForSeconds(timeBetweenEnemySpawns);
             }
         }
+
+        yield return null;
     }
 
-    private void SpawnEnemy(GameObject prefab, DreadnovaSpawnInfo spawnInfo)
+    private GameObject SpawnEnemy(GameObject prefab, Transform spawnpoint)
     {
+        GameObject enemy = SpawnEnemy(prefab, spawnpoint.position, spawnpoint.position + spawnpoint.forward * distanceToTravelAway);
 
+        enemy.transform.rotation = spawnpoint.rotation;
+
+        return enemy;
+    }
+
+    private GameObject SpawnEnemy(GameObject prefab, Vector3 spawnpoint, Vector3 destination)
+    {
         GameObject enemy = Instantiate(prefab);
 
-        AdvancedFSM advancedFSM = enemy.GetComponent<AdvancedFSM>();
+        enemy.transform.position = spawnpoint;
 
-        if (advancedFSM.CurrentState.ID == FSMStateID.Spawned)
+        if (enemy.TryGetComponent(out AdvancedFSM advancedFSM))
         {
-            SpawnState state = (SpawnState)advancedFSM.CurrentState;
-
-            state.SpawnInfo = spawnInfo;
+            advancedFSM.spawnpoint = spawnpoint;
+            advancedFSM.spawnDestination = destination;
+            advancedFSM.waypoints = waypoints;
         }
+        else if (enemy.TryGetComponent(out Flock flock))
+        {
+            flock.SetSpawnDestination = spawnpoint;
+            flock.SetSpawnDestination = destination;
+            flock.WayPoints = waypoints;
+        }
+
+        AreaManager.Instance.OnObjectAdd(enemy, true);
+
+        return enemy;
     }
 
     private void OnDrawGizmos()
@@ -169,14 +214,5 @@ public class DreadnovaSpawner : MonoBehaviour
         }
     }
 
-    public WaveBehaviour Wave { get { return waveBehaviour; } }
-}
-
-public struct DreadnovaSpawnInfo
-{
-    public Transform spawn;
-    public Vector3 destination;
-    public GameObject enemy;
-
-    public bool Taken { get { return enemy; } }
+    public WaveBehaviour Wave { get { return shieldWaveBehaviour; } }
 }

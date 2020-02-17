@@ -148,6 +148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints: []
+  spawnpoint: {fileID: 0}
+  spawnDestination: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
   myRigidbody: {fileID: 0}
   DetectionRange: 500

@@ -90,8 +90,8 @@ public class NodeManager : MonoBehaviour
             }
 
             // Spawn the portals and update the information for the nodes
-            SpawnPortals();
-
+            StartCoroutine(SpawnPortals());
+                
             // Selects the middle choice as default
             NodeUpdate(Choices.Length / 2);
 
@@ -257,7 +257,7 @@ public class NodeManager : MonoBehaviour
     /// <summary>
     /// Spawns portals in-front of the player
     /// </summary>
-    private void SpawnPortals()
+    private IEnumerator SpawnPortals()
     {
         portals = new GameObject[Choices.Length];
 
@@ -266,6 +266,13 @@ public class NodeManager : MonoBehaviour
 
         // Grabs the ship transform
         Transform ship = GameManager.Instance.shipController.transform;
+
+        while (Physics.Raycast(ship.transform.position, ship.forward, 1 << 8))
+        {
+            ship.transform.rotation *= Quaternion.Euler(10 * Time.deltaTime, 0, 0);
+
+            yield return new WaitForEndOfFrame();
+        }
 
         // Vector the ship's forward direction
         Vector3 forward = ship.forward * 300;
@@ -277,7 +284,7 @@ public class NodeManager : MonoBehaviour
         for (int i = 0; i < Choices.Length; i++)
         {
             // Creates portal
-            GameObject portal = Instantiate<GameObject>(portalPrefab, parent);
+            GameObject portal = Instantiate(portalPrefab, parent);
             portal.name = "[Portal] Choice: " + (i + 1);
 
             Vector3 position = ship.right;

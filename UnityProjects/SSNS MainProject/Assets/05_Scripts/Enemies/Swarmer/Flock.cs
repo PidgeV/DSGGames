@@ -9,7 +9,6 @@ using Complete;
 /// </summary>
 public class Flock : MonoBehaviour
 {
-
     public FlockAgent agentPrefab;
     public List<FlockAgent> agents = new List<FlockAgent>();
     public FlockBehaviour behaviour;
@@ -52,6 +51,9 @@ public class Flock : MonoBehaviour
     float sqrAvoidanceRadius;
     public float SquareAvoidanceRadius { get { return sqrAvoidanceRadius; } }
 
+    private Vector3 spawnpoint;
+    private Vector3 spawnDestination;
+
     [HideInInspector] public GameObject player; //Remove at some point and look for the player status inside Game Manager. Or use a function from the Game Manager
 
     int incrementCount = 0;
@@ -75,6 +77,8 @@ public class Flock : MonoBehaviour
                 Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f)),
                 transform);
         flockLeader.GetComponent<FlockLeaderController>().waypoints = waypoints; //set waypoints of target leader
+        flockLeader.GetComponent<FlockLeaderController>().spawnpoint = spawnpoint;
+        flockLeader.GetComponent<FlockLeaderController>().spawnDestination = spawnDestination;
         flockLeader.transform.parent = transform;
 
         //Spawn all swarm agents
@@ -92,25 +96,32 @@ public class Flock : MonoBehaviour
 
         //Look for player
         player = GameObject.FindGameObjectWithTag("Player");
-        StartCoroutine(DestroySwarm());
+        //StartCoroutine(DestroySwarm());
     }
 
     // Update is called once per frame
     void Update()
     {
         //target = player.transform.position;
-        List<Transform> context = new List<Transform>();
-        List<Transform> obstacles = new List<Transform>();
         Vector3 move = Vector3.zero;
 
         //Loop through each agent and run the behaviours
         foreach (FlockAgent agent in agents)
         {
+            if (flockLeader.GetComponent<FlockLeaderController>().CurrentStateID == FSMStateID.Spawned)
+            {
+                move = flockLeader.transform.forward;
+            }
+            else
+            {
+                List<Transform> context = new List<Transform>();
+                List<Transform> obstacles = new List<Transform>();
 
-            context = GetNearbyNeighbours(agent, context); //Use the physics engine to get nearby agents
-            obstacles = GetNearbyObstacles(agent, obstacles);
+                context = GetNearbyNeighbours(agent, context); //Use the physics engine to get nearby agents
+                obstacles = GetNearbyObstacles(agent, obstacles);
 
-            move = behaviour.CalculateMove(agent, context, this, obstacles); //Move the agent with the behaviour object
+                move = behaviour.CalculateMove(agent, context, this, obstacles); //Move the agent with the behaviour object
+            }
 
             move *= driveFactor; //Multiply the movement by the drive factor
             if (move.sqrMagnitude > sqrMaxSpeed)
@@ -164,11 +175,14 @@ public class Flock : MonoBehaviour
         return obstacles;
     }
 
-    IEnumerator DestroySwarm()
-    {
-        while (agents.Count > 0) yield return new WaitForSeconds(0.5f);
+    //IEnumerator DestroySwarm()
+    //{
+    //    while (agents.Count > 0) yield return new WaitForSeconds(0.5f);
 
-        Destroy(gameObject);
-    }
+    //    Destroy(gameObject);
+    //}
+
+    public Vector3 SetSpawnpoint { set { spawnpoint = value; } }
+    public Vector3 SetSpawnDestination { set { spawnDestination = value; } }
 
 }

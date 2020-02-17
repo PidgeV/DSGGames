@@ -45,6 +45,14 @@ public class AdvancedFSM : FSM
     private FSMState currentState;
     public FSMState CurrentState { get { return currentState; } }
 
+    public delegate void StateChange(FSMStateID stateID);
+
+    public event StateChange StateChanged;
+
+    public Vector3 spawnpoint;
+
+    public Vector3 spawnDestination;
+
     public AdvancedFSM()
     {
         fsmStates = new List<FSMState>();
@@ -67,7 +75,9 @@ public class AdvancedFSM : FSM
         {
             fsmStates.Add(fsmState);
             currentState = fsmState;
+            currentState.EnterStateInit();
             currentStateID = fsmState.ID;
+            StateChanged?.Invoke(currentStateID);
             return;
         }
 
@@ -144,5 +154,7 @@ public class AdvancedFSM : FSM
                 break;
             }
         }
+
+        StateChanged?.Invoke(currentStateID);
     }
 }

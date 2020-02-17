@@ -6,15 +6,23 @@ using UnityEngine;
 public class WaveBehaviour : ScriptableObject
 {
     [SerializeField] private float timeBetweenWaves = 30;
-    [SerializeField] private bool loop = true;
-    [SerializeField] private bool random = false;
+    [SerializeField] private float timeBetweenCargoSpawns = 40;
 
     [SerializeField] private SpawnBehaviour[] waves;
 
-    private int waveIndex;
+    public int GetMaxEnemyCount(int waveIndex)
+    {
+        int count = 0;
+
+        foreach(SpawnInfo spawn in waves[waveIndex].Spawns)
+        {
+            count += spawn.count;
+        }
+
+        return count;
+    }
 
     public float TimeBetweenWaves { get { return timeBetweenWaves; } }
-    public bool Loop { get { return loop; } }
-    public bool Random { get { return random; } }
+    public float TimeBetweenCargoSpawns { get { return timeBetweenCargoSpawns; } }
     public SpawnBehaviour[] Waves { get { return waves; } }
 }

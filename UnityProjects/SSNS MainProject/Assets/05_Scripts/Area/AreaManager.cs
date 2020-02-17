@@ -80,7 +80,7 @@ public class AreaManager : MonoBehaviour
             {
                 Vector3 size = new Vector3(Instance.AreaSize * 1.1f, Instance.AreaSize * 1.1f, Instance.AreaSize * 1.1f);
                 smoke.ChangeSize(size);
-                smoke.ChangeCapacity((int)(Mathf.Sqrt(size.x * size.y * size.z) / 500));
+                smoke.ChangeCapacity(NodeManager.Instance.CurrentNode.Event.smokeAmount);
             }
         }
 
@@ -88,7 +88,6 @@ public class AreaManager : MonoBehaviour
         if (lastArea != null && lastArea.parent != null)
             lastArea.parent.gameObject.SetActive(false);
 
-        StartCoroutine(TransitionAreas());
         StartCoroutine(DestroyLastArea());
     }
 
@@ -115,10 +114,25 @@ public class AreaManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator TransitionAreas()
     {
+        nextAreaLoaded = false;
+        lastAreaDestroyed = false;
+
         //areaEffect = GameObject.Instantiate(areaEffectPrefab, currentArea.location, Quaternion.identity);
         //areaEffect.transform.localScale = Vector3.one * currentArea.size * 2;
 
         yield return new WaitForSeconds(MIN_TRAVEL_TIME);
+
+        AreaLoaded?.Invoke();
+
+        currentArea.enemies.gameObject.SetActive(true);
+        currentArea.obstacles.gameObject.SetActive(true);
+
+        // TODO: Should be in the testShipController
+        GameManager.Instance.shipController.transform.position = PlayerDestination;
+        GameManager.Instance.shipController.transform.rotation = Quaternion.Euler(0, 0, 0);
+
+        SkyboxManager.Instance.SwitchToSkybox(NodeManager.Instance.CurrentNode.Skybox);
+        GameManager.Instance.SwitchState(GameState.BATTLE);
     }
 
     /// <summary>
@@ -182,20 +196,7 @@ public class AreaManager : MonoBehaviour
         // Transition to next node
         else if (nextAreaLoaded && lastAreaDestroyed)
         {
-            nextAreaLoaded = false;
-            lastAreaDestroyed = false;
-
-            AreaLoaded?.Invoke();
-
-            currentArea.enemies.gameObject.SetActive(true);
-            currentArea.obstacles.gameObject.SetActive(true);
-
-            // TODO: Should be in the testShipController
-            GameManager.Instance.shipController.transform.position = PlayerDestination;
-            GameManager.Instance.shipController.transform.rotation = Quaternion.Euler(0, 0, 0);
-
-            SkyboxManager.Instance.SwitchToSkybox(NodeManager.Instance.CurrentNode.Skybox);
-            GameManager.Instance.SwitchState(SNSSTypes.GameState.BATTLE);
+            StartCoroutine(TransitionAreas());
         }
     }
 
@@ -207,8 +208,9 @@ public class AreaManager : MonoBehaviour
 
 	public int AreaSize { get { return currentArea.size; } }
     public bool EnemiesDead { get { return currentArea.enemies.childCount == 0; } }
-
+    public int EnemyCount { get { return currentArea.enemies.childCount; } }
     public Vector3 PlayerDestination { get { return currentArea.location - Vector3.forward * currentArea.size; } }
+    public Vector3 FindRandomPosition { get { return currentArea.location + Random.insideUnitSphere * currentArea.size; } }
 }
 
 /// <summary>

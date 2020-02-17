@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class SpawnState : FSMState
 {
-    private DreadnovaSpawnInfo spawnInfo;
-
     private AdvancedFSM controller;
 
     public SpawnState(AdvancedFSM enemyController)
@@ -16,20 +14,39 @@ public class SpawnState : FSMState
 
     public override void EnterStateInit()
     {
+        if (controller.GetType() == typeof(Complete.FlockLeaderController))
+        {
+            ChangeColliders(controller.transform.parent.gameObject, false);
+        }
+        else
+        {
+            ChangeColliders(controller.gameObject, false);
+        }
+
     }
 
     public override void Reason()
     {
-        if (spawnInfo.spawn == null || IsInCurrentRange(controller.transform, spawnInfo.destination, 1))
+        if (IsInCurrentRange(controller.transform, controller.spawnDestination, 50))
         {
-            spawnInfo.enemy = null;
-            controller.PerformTransition(Transition.Patrol);
+            if (controller.GetType() == typeof(Complete.FlockLeaderController))
+            {
+                ChangeColliders(controller.transform.parent.gameObject, true);
+
+                controller.PerformTransition(Transition.Defend);
+            }
+            else
+            {
+                ChangeColliders(controller.gameObject, true);
+
+                controller.PerformTransition(Transition.Patrol);
+            }
         }
     }
 
     public override void Act()
     {
-        if (spawnInfo.spawn != null)
+        if (controller.spawnpoint != null)
         {
             Move();
         }
@@ -43,13 +60,21 @@ public class SpawnState : FSMState
         {
             Complete.FlockLeaderController flockLeader = (Complete.FlockLeaderController)controller;
 
+            //Calculate direction
+            Vector3 direction = controller.spawnDestination - controller.transform.position;
+            direction.Normalize();
+
+            Vector3 newDir = Vector3.RotateTowards(controller.transform.forward, direction, 20 * Time.deltaTime, 0);
+            Quaternion rot = Quaternion.LookRotation(newDir);
+            controller.transform.rotation = Quaternion.Lerp(controller.transform.rotation, rot, 20 * Time.deltaTime);
+
             //Move towards position. No need to worry about obstacles or 
-            controller.transform.position = Vector3.MoveTowards(controller.transform.position, spawnInfo.destination, flockLeader.PatrolSpeed * Time.deltaTime);
+            controller.transform.position += controller.transform.forward * flockLeader.PatrolSpeed * Time.deltaTime;
         }
         else
         {
             //Calculate direction
-            Vector3 direction = spawnInfo.destination - controller.transform.position;
+            Vector3 direction = controller.spawnDestination - controller.transform.position;
             direction.Normalize();
 
             Vector3 newDir = Vector3.RotateTowards(controller.transform.forward, direction, 20 * Time.deltaTime, 0);
@@ -62,5 +87,11 @@ public class SpawnState : FSMState
 
     }
 
-    public DreadnovaSpawnInfo SpawnInfo { set { spawnInfo = value; spawnInfo.enemy = controller.gameObject; } }
+    private void ChangeColliders(GameObject parent, bool active)
+    {
+        foreach (Collider collider in parent.GetComponentsInChildren<Collider>())
+        {
+            collider.enabled = active;
+        }
+    }
 }

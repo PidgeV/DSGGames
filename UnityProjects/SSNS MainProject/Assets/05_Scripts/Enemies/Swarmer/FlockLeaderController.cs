@@ -49,9 +49,12 @@ namespace Complete
         {
             Flock swarm = transform.parent.GetComponent<Flock>();
             //States
+            SpawnState spawn = new SpawnState(this);
             SwarmLeaderPatrolState patrol = new SwarmLeaderPatrolState(this, swarm, waypoints);
             SwarmLeaderAttackState attack = new SwarmLeaderAttackState(this, swarm);
             SwarmLeaderDefendState defend = new SwarmLeaderDefendState(this, swarm);
+
+            spawn.AddTransition(Transition.Defend, FSMStateID.Defend);
 
             //Transitions
             patrol.AddTransition(Transition.Attack, FSMStateID.Attacking);
@@ -63,9 +66,19 @@ namespace Complete
             defend.AddTransition(Transition.Patrol, FSMStateID.Patrolling);
 
             //Add states
+            AddFSMState(spawn);
             AddFSMState(defend);
             AddFSMState(patrol);
             AddFSMState(attack);
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.blue;
+            Gizmos.DrawWireSphere(transform.position, 2.0f);
+
+            Gizmos.color = Color.green;
+            Gizmos.DrawRay(transform.position, transform.forward * 50);
         }
     }
 }

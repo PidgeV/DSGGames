@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using SNSSTypes;
 
+[RequireComponent(typeof(SphereCollider))]
 public class ShieldProjector : MonoBehaviour
 {
 	// When the shield is hit
@@ -64,12 +65,10 @@ public class ShieldProjector : MonoBehaviour
 		ShieldMeshRenderer.material.SetColor("_BaseColor", BaseColor);
 		ShieldMeshRenderer.material.SetColor("_FresnelColor", BaseColor);
 
-		//if (gameObject.TryGetComponent<Collider>(out shipCollider)) {
-		//	shipCollider.enabled = false;
-		//}
-
-		shieldCollider = gameObject.AddComponent<SphereCollider>();
-		shieldCollider.radius = ShieldSize;
+		if (gameObject.TryGetComponent<SphereCollider>(out shieldCollider))
+		{
+			shieldCollider.radius = ShieldSize;
+		}
 
 		ShieldMeshRenderer.gameObject.transform.localScale *= ShieldSize;
 

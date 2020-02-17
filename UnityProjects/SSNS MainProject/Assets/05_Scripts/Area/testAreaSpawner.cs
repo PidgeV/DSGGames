@@ -27,62 +27,63 @@ public class testAreaSpawner : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    //IEnumerator Start()
-    //{
-    //    if (GameManager.Instance)
-    //    {
-    //        System.Random random = GameManager.Instance.Random;
+    void Start()
+    {
+        if (GameManager.Instance)
+        {
+            //System.Random random = GameManager.Instance.Random;
 
-    //        for (int j = 0; j < random.Next(2, 10); j++)
-    //        {
-    //            GameObject enemy = Instantiate<GameObject>(fighterPrefab);
-    //            enemy.transform.position = transform.position + Vector3.one * random.Next((int)(-AreaManager.Instance.AreaSize / 1.5f), (int)(AreaManager.Instance.AreaSize / 1.5f));
-    //            enemy.transform.parent = transform;
+            //for (int j = 0; j < random.Next(2, 10); j++)
+            //{
+            //    GameObject enemy = Instantiate<GameObject>(fighterPrefab);
+            //    enemy.transform.position = transform.position + Vector3.one * random.Next((int)(-AreaManager.Instance.AreaSize / 1.5f), (int)(AreaManager.Instance.AreaSize / 1.5f));
+            //    enemy.transform.parent = transform;
 
-    //            FighterController controller = enemy.GetComponent<FighterController>();
-    //            controller.waypoints = new Transform[] { transform };
+            //    FighterController controller = enemy.GetComponent<FighterController>();
+            //    controller.waypoints = new Transform[] { transform };
 
-    //            AreaManager.Instance.OnObjectAdd(enemy, true);
+            //    AreaManager.Instance.OnObjectAdd(enemy, true);
 
-    //            yield return null;
-    //        }
+            //    yield return null;
+            //}
 
-    //        for (int j = 0; j < random.Next(2, 10); j++)
-    //        {
-    //            GameObject enemy = Instantiate<GameObject>(chaserPrefab);
-    //            enemy.transform.position = transform.position + Vector3.one * random.Next((int)(-AreaManager.Instance.AreaSize / 1.5f), (int)(AreaManager.Instance.AreaSize / 1.5f));
-    //            enemy.transform.parent = transform;
+            //for (int j = 0; j < random.Next(2, 10); j++)
+            //{
+            //    GameObject enemy = Instantiate<GameObject>(chaserPrefab);
+            //    enemy.transform.position = transform.position + Vector3.one * random.Next((int)(-AreaManager.Instance.AreaSize / 1.5f), (int)(AreaManager.Instance.AreaSize / 1.5f));
+            //    enemy.transform.parent = transform;
 
-    //            ChargerController controller = enemy.GetComponent<ChargerController>();
-    //            controller.waypoints = new Transform[] { transform };
+            //    ChargerController controller = enemy.GetComponent<ChargerController>();
+            //    controller.waypoints = new Transform[] { transform };
 
-    //            AreaManager.Instance.OnObjectAdd(enemy, true);
+            //    AreaManager.Instance.OnObjectAdd(enemy, true);
 
-    //            yield return null;
-    //        }
+            //    yield return null;
+            //}
 
-    //        for (int j = 0; j < random.Next(5); j++)
-    //        {
-    //            GameObject enemy = Instantiate<GameObject>(swarmerPrefab);
-    //            enemy.transform.position = transform.position + Vector3.one * random.Next((int)(-AreaManager.Instance.AreaSize / 1.5f), (int)(AreaManager.Instance.AreaSize / 1.5f));
-    //            enemy.transform.parent = transform;
+            //for (int j = 0; j < random.Next(5); j++)
+            //{
+            //    GameObject enemy = Instantiate<GameObject>(swarmerPrefab);
+            //    enemy.transform.position = transform.position + Vector3.one * random.Next((int)(-AreaManager.Instance.AreaSize / 1.5f), (int)(AreaManager.Instance.AreaSize / 1.5f));
+            //    enemy.transform.parent = transform;
 
-    //            Flock controller = enemy.GetComponent<Flock>();
-    //            controller.startingCount = random.Next(20, 50);
+            //    Flock controller = enemy.GetComponent<Flock>();
+            //    controller.startingCount = random.Next(20, 50);
 
-    //            if (asteroidSpawner != null)
-    //                controller.WayPoints = asteroidSpawner.asteroids;
-    //            else
-    //                controller.WayPoints = new GameObject[] { gameObject };
+            //    if (asteroidSpawner != null)
+            //        controller.WayPoints = asteroidSpawner.asteroids;
+            //    else
+            //        controller.WayPoints = new GameObject[] { gameObject };
 
-    //            AreaManager.Instance.OnObjectAdd(enemy, true);
+            //    AreaManager.Instance.OnObjectAdd(enemy, true);
 
-    //            yield return null;
-    //        }
+            //    yield return null;
+            //}
 
-    //        AreaManager.Instance.OnSpawnFinished();
-    //    }
-    //}
+        }
+
+        AreaManager.Instance.OnSpawnFinished();
+    }
 
     // Update is called once per frame
     void Update()

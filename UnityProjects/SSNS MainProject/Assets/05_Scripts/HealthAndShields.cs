@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class HealthAndShields : MonoBehaviour
 {
 	/// <summary> When this GameObjects life or shields change values </summary>

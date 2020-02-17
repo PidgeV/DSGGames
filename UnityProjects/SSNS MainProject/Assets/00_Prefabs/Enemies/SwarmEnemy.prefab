@@ -62,6 +62,6 @@ MonoBehaviour:
   driveFactor: 60
   maxSpeed: 80
   neighbourRadius: 15
-  avoidanceRadius: 10
-  obstacleDistance: 50
+  avoidanceRadius: 20
+  obstacleDistance: 100
   player: {fileID: 0}

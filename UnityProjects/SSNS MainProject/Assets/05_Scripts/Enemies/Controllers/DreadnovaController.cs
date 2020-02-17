@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DreadnovaController : AdvancedFSM
 {
+    [SerializeField] private HealthAndShields[] shieldGenerators;
+    [SerializeField] private bool generatorPhaseOnly = true;
 
     private DreadnovaSpawner spawner;
     private HealthAndShields health;
@@ -16,7 +18,7 @@ public class DreadnovaController : AdvancedFSM
     {
         DeadState dead = new DeadState(this);
         DreadnovaSpawnState spawn = new DreadnovaSpawnState(this);
-        DreadnovaShieldState shield = new DreadnovaShieldState(this);
+        DreadnovaShieldState shield = new DreadnovaShieldState(this, shieldGenerators);
 
         spawn.AddTransition(Transition.Defend, FSMStateID.Defend);
 
@@ -44,6 +46,7 @@ public class DreadnovaController : AdvancedFSM
         }
     }
 
+    public bool GeneratorPhaseOnly { get { return generatorPhaseOnly; } }
     public DreadnovaSpawner Spawner { get { return spawner; } }
     public HealthAndShields Health { get { return health; } }
     public GameObject Player { get { return player; } }

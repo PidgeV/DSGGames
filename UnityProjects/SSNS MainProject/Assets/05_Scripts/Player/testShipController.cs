@@ -130,6 +130,7 @@ public class testShipController : MonoBehaviour
     private void Awake()
     {
         Physics.IgnoreLayerCollision(13, 13); // cause projectiles to ignore projectiles
+        Physics.IgnoreLayerCollision(12, 12); // cause shields to ignore shields
 
         // Set the cameras size and positions
         gunnerCamera.rect = new Rect(0, 0.0f, 1.0f, 0.5f);
