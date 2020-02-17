@@ -3,21 +3,59 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CinematicController : MonoBehaviour
-{	
-	[SerializeField] private GameObject shipModel;
+{
+	private Animator animator;
+	private GameObject ship;
+
+	// Start is called before the first frame update
+	void Start()
+	{
+		ship = GameObject.FindGameObjectWithTag("Ship");
+		animator = GetComponent<Animator>();
+	}
+
+	public void TransitionMainTo_Options()
+	{
+		animator.SetTrigger("TransitionToOptions");
+	}
+
+	public void TransitionMainTo_Setup()
+	{
+		animator.SetTrigger("TransitionToSetup");
+	}
+
+	public void TransitionOptionsTo_Main()
+	{
+		animator.SetTrigger("Exit");
+	}
+
+	public void TransitionSetupTo_Main()
+	{
+		animator.SetTrigger("Exit");
+	}
+
+	public void PlayGame()
+	{
+		animator.SetTrigger("PlayGame");
+	}
+
+	public void QuitGame()
+	{
+
+	}
+
+
 
 	bool canSkip = true;
 	public bool inTransition = false;
+
 
 	public void StartTransition()
 	{
 		inTransition = true;
 	}
 
-	// Start is called before the first frame update
-	void Start()
-    {
-	}
+
 
     // Update is called once per frame
     void Update()
