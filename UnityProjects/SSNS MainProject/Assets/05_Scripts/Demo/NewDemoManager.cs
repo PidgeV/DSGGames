@@ -364,7 +364,9 @@ public class NewDemoManager : MonoBehaviour
 	/// </summary>
 	public void DestroyGenerators()
 	{
-		if (GameObject.FindGameObjectWithTag("CapitalShip").TryGetComponent(out DreadnovaController controller))
+		GameObject dreadnova = GameObject.FindGameObjectWithTag("CapitalShip");
+
+		if (dreadnova && dreadnova.TryGetComponent(out DreadnovaController controller))
 		{
 			controller.DestroyGenerators();
 		}

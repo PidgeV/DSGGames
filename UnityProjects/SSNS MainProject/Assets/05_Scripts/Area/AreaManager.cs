@@ -31,6 +31,8 @@ public class AreaManager : MonoBehaviour
 
     private float transitionTime;
 
+    private float startTravelTime;
+
     /// <summary>
     /// Determines if the player is outside the current area.
     /// </summary>
@@ -98,6 +100,8 @@ public class AreaManager : MonoBehaviour
         if (lastArea != null && lastArea.parent != null)
             lastArea.parent.gameObject.SetActive(false);
 
+        startTravelTime = Time.time;
+
         StartCoroutine(DestroyLastArea());
     }
 
@@ -130,7 +134,13 @@ public class AreaManager : MonoBehaviour
         //areaEffect = GameObject.Instantiate(areaEffectPrefab, currentArea.location, Quaternion.identity);
         //areaEffect.transform.localScale = Vector3.one * currentArea.size * 2;
 
-        yield return new WaitForSeconds(MIN_TRAVEL_TIME);
+        float currentTime = Time.time;
+
+        float time = MIN_TRAVEL_TIME - Mathf.Min(Time.time - startTravelTime, 0);
+
+        Debug.Log("Time Difference: " + time + " " + currentTime + " " + startTravelTime);
+
+        yield return new WaitForSeconds(time);
 
         AreaLoaded?.Invoke();
 
