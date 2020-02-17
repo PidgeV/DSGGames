@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Wave Behaviour", menuName = "Dreadnova/New Wave Behaviour")]
+[CreateAssetMenu(fileName = "Wave Behaviour", menuName = "Spawner/Wave Behaviour")]
 public class WaveBehaviour : ScriptableObject
 {
     [SerializeField] private float timeBetweenWaves = 30;
+    [SerializeField] private float timeBetweenEnemySpawns = 0.4f;
     [SerializeField] private float timeBetweenCargoSpawns = 40;
 
-    [SerializeField] private SpawnBehaviour[] waves;
+    [SerializeField] private WaveSpawn[] waves;
 
     public int GetMaxEnemyCount(int waveIndex)
     {
@@ -23,6 +24,7 @@ public class WaveBehaviour : ScriptableObject
     }
 
     public float TimeBetweenWaves { get { return timeBetweenWaves; } }
+    public float TimeBetweenEnemySpawns { get { return timeBetweenEnemySpawns; } }
     public float TimeBetweenCargoSpawns { get { return timeBetweenCargoSpawns; } }
-    public SpawnBehaviour[] Waves { get { return waves; } }
+    public WaveSpawn[] Waves { get { return waves; } }
 }

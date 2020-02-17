@@ -58,10 +58,12 @@ public class Node : MonoBehaviour, IEnumerable<Node>
 
         #endregion
         
-        nodeInfo.reward = RewardManager.Instance.GetReward(false);
+        if (nodeInfo.reward == null)
+            nodeInfo.reward = RewardManager.Instance.GetReward(false);
 
         // TODO: Make it so that switching nodes is never the same skybox
-        nodeInfo.skybox = random.Next(SkyboxManager.Instance.SkyboxAmount);
+        if (nodeInfo.skybox != -1)
+            nodeInfo.skybox = random.Next(SkyboxManager.Instance.SkyboxAmount);
     }
 
     private void Awake()
@@ -221,9 +223,9 @@ public class NodeInfo
 {
     [HideInInspector] public string name;
     public int depth;
-    [HideInInspector] public int skybox;
+    public int skybox = -1;
     public NodeType type;
     public NodeEvent nodeEvent;
-    [HideInInspector] public Reward reward;
+    public Reward reward;
     public Node[] children;
 }

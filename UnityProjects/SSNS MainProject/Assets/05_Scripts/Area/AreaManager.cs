@@ -31,6 +31,18 @@ public class AreaManager : MonoBehaviour
 
     private float transitionTime;
 
+    private float startTravelTime;
+
+    /// <summary>
+    /// Determines if the player is outside the current area.
+    /// </summary>
+    /// <param name="player">The player's transform</param>
+    /// <returns>Whether the player is outside of the area</returns>
+    public bool IsPlayerOutside(Transform player)
+    {
+        return Vector3.Distance(player.position, currentArea.location) >= currentArea.size;
+    }
+
     /// <summary>
     /// Ends the area giving the ship the node's reward 
     /// and waits for the UI to be hidden again before allowing next node selection
@@ -88,6 +100,8 @@ public class AreaManager : MonoBehaviour
         if (lastArea != null && lastArea.parent != null)
             lastArea.parent.gameObject.SetActive(false);
 
+        startTravelTime = Time.time;
+
         StartCoroutine(DestroyLastArea());
     }
 
@@ -120,7 +134,13 @@ public class AreaManager : MonoBehaviour
         //areaEffect = GameObject.Instantiate(areaEffectPrefab, currentArea.location, Quaternion.identity);
         //areaEffect.transform.localScale = Vector3.one * currentArea.size * 2;
 
-        yield return new WaitForSeconds(MIN_TRAVEL_TIME);
+        float currentTime = Time.time;
+
+        float time = MIN_TRAVEL_TIME - Mathf.Min(Time.time - startTravelTime, 0);
+
+        Debug.Log("Time Difference: " + time + " " + currentTime + " " + startTravelTime);
+
+        yield return new WaitForSeconds(time);
 
         AreaLoaded?.Invoke();
 

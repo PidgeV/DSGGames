@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using SNSSTypes;
 
-[CreateAssetMenu(fileName = "Spawn Behaviour", menuName = "Dreadnova/New Spawn Behaviour")]
-public class SpawnBehaviour : ScriptableObject
+[System.Serializable]
+[CreateAssetMenu(fileName = "Wave Spawn", menuName = "Spawner/Wave Spawns")]
+public class WaveSpawn : ScriptableObject
 {
+    [Tooltip("Set the amount of enemies to spawn with a certain type. Swarmer is the actual amount in the flock.")]
     [SerializeField] private SpawnInfo[] spawns;
 
     public SpawnInfo[] Spawns { get { return spawns; } }
@@ -16,5 +18,4 @@ public struct SpawnInfo
 {
     public EnemyType type;
     public int count;
-    public int spawned;
 }

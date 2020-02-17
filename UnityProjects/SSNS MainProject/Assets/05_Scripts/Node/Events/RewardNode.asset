@@ -10,9 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 995b72f791929c843bcfde9a052502c8, type: 3}
-  m_Name: Random
+  m_Name: RewardNode
   m_EditorClassIdentifier: 
   eventType: 1
   prefabsToSpawn:
+  - {fileID: 8057410561316126089, guid: d1c2643c6a95dfb4c8373d7fefcfb4f0, type: 3}
   - {fileID: 8464054742834353141, guid: f3149f3ba7921454b844f858390c7b62, type: 3}
   areaSize: 1000
+  smokeAmount: 200

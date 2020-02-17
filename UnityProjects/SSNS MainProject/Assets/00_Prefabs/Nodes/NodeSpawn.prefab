@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 129781809285703139}
-  - component: {fileID: 5952219224359566902}
+  - component: {fileID: -2191837754835623166}
   - component: {fileID: 2146682979}
   m_Layer: 0
-  m_Name: TestEnemySpawn
+  m_Name: NodeSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,13 +26,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8057410561316126089}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 481.24292, y: 310.92273, z: -722.0694}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5952219224359566902
+--- !u!114 &-2191837754835623166
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,15 +41,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 8057410561316126089}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34e815840a8b17845ad2cd590a4cdf87, type: 3}
+  m_Script: {fileID: 11500000, guid: 46102f20e7863234abed105c03f6976d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fighterPrefab: {fileID: 58820780711503999, guid: 412fb68aa6718b248a7adb1e254193c0,
     type: 3}
-  chaserPrefab: {fileID: 3107085776561158194, guid: 0bb00d2ff3a929e4c9d818bdf52479d9,
+  chargerPrefab: {fileID: 3107085776561158194, guid: 0bb00d2ff3a929e4c9d818bdf52479d9,
     type: 3}
   swarmerPrefab: {fileID: 2212086307816132563, guid: 01e0ea9331425964888c9f346c3a8fed,
     type: 3}
+  cruiserPrefab: {fileID: 8278412131455947766, guid: d70f243484b0f1349aa7336d65b5ffc7,
+    type: 3}
+  cargoPrefab: {fileID: 3107085776561158194, guid: ec334dcaca7277c4f90e6774cbc973fe,
+    type: 3}
+  spawnpoints: []
+  waypoints: []
+  waveBehaviour: {fileID: 11400000, guid: 153957047a10813488ea6b835df3bba0, type: 2}
 --- !u!114 &2146682979
 MonoBehaviour:
   m_ObjectHideFlags: 0

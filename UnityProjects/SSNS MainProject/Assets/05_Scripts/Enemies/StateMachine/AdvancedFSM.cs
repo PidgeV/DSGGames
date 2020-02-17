@@ -30,6 +30,7 @@ using System.Collections.Generic;
         Attacking,
         Dead,
         Defend,
+        Running,
     }
 
 public class AdvancedFSM : FSM

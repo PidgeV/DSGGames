@@ -1693,6 +1693,12 @@ PrefabInstance:
       propertyPath: nodeInfo.children.Array.data[0]
       value: 
       objectReference: {fileID: 6772740611640658788}
+    - target: {fileID: 176833206867982374, guid: 21cc6f7db4a04f549bd7889a31c0670c,
+        type: 3}
+      propertyPath: nodeInfo.nodeEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 400eff173c12faf4abffada6615639bb,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21cc6f7db4a04f549bd7889a31c0670c, type: 3}
 --- !u!224 &3534888471611647223 stripped
@@ -1832,7 +1838,7 @@ PrefabInstance:
         type: 3}
       propertyPath: nodeInfo.nodeEvent
       value: 
-      objectReference: {fileID: 11400000, guid: 414f8d6158693624496266de20d3b2af,
+      objectReference: {fileID: 11400000, guid: c206f269ffa171f4d90a62d9be29921f,
         type: 2}
     - target: {fileID: 176833206867982374, guid: 21cc6f7db4a04f549bd7889a31c0670c,
         type: 3}
@@ -1991,6 +1997,12 @@ PrefabInstance:
       propertyPath: nodeInfo.children.Array.data[0]
       value: 
       objectReference: {fileID: 6772740610544258962}
+    - target: {fileID: 176833206867982374, guid: 21cc6f7db4a04f549bd7889a31c0670c,
+        type: 3}
+      propertyPath: nodeInfo.nodeEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: c206f269ffa171f4d90a62d9be29921f,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21cc6f7db4a04f549bd7889a31c0670c, type: 3}
 --- !u!114 &6772740611640658788 stripped
@@ -2143,6 +2155,12 @@ PrefabInstance:
       propertyPath: nodeInfo.type
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 176833206867982374, guid: 21cc6f7db4a04f549bd7889a31c0670c,
+        type: 3}
+      propertyPath: nodeInfo.nodeEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 7653eb8fdc120574a97662ffc99607f2,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21cc6f7db4a04f549bd7889a31c0670c, type: 3}
 --- !u!114 &6772740610284461918 stripped
@@ -2170,11 +2188,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6884217599049538229}
     m_Modifications:
-    - target: {fileID: 8387040180598474020, guid: 5b14d031bc094154b9788fceb36c3ceb,
-        type: 3}
-      propertyPath: m_Name
-      value: SelectedNode
-      objectReference: {fileID: 0}
     - target: {fileID: 8127194074421424203, guid: 5b14d031bc094154b9788fceb36c3ceb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2279,6 +2292,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8387040180598474020, guid: 5b14d031bc094154b9788fceb36c3ceb,
+        type: 3}
+      propertyPath: m_Name
+      value: SelectedNode
       objectReference: {fileID: 0}
     - target: {fileID: 5494183564396687371, guid: 5b14d031bc094154b9788fceb36c3ceb,
         type: 3}
@@ -2569,7 +2587,7 @@ PrefabInstance:
         type: 3}
       propertyPath: nodeInfo.nodeEvent
       value: 
-      objectReference: {fileID: 11400000, guid: 7653eb8fdc120574a97662ffc99607f2,
+      objectReference: {fileID: 11400000, guid: 1bdb509b3556d934184168f939918599,
         type: 2}
     - target: {fileID: 176833206867982374, guid: 21cc6f7db4a04f549bd7889a31c0670c,
         type: 3}
@@ -2603,16 +2621,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6884217599803137067}
     m_Modifications:
-    - target: {fileID: 4635642680647428773, guid: 0b049d8fee2595b4a8b21ea6e203cd40,
-        type: 3}
-      propertyPath: m_Name
-      value: NewDemoManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 4635642680647428773, guid: 0b049d8fee2595b4a8b21ea6e203cd40,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4635642680647428772, guid: 0b049d8fee2595b4a8b21ea6e203cd40,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2717,6 +2725,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635642680647428773, guid: 0b049d8fee2595b4a8b21ea6e203cd40,
+        type: 3}
+      propertyPath: m_Name
+      value: NewDemoManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635642680647428773, guid: 0b049d8fee2595b4a8b21ea6e203cd40,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4635642680647428779, guid: 0b049d8fee2595b4a8b21ea6e203cd40,
         type: 3}
