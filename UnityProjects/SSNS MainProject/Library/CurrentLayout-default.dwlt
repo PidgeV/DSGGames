@@ -110,10 +110,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 683, y: 494}
-  m_MaxSize: {x: 14004, y: 14044}
+  m_MinSize: {x: 679, y: 494}
+  m_MaxSize: {x: 14002, y: 14044}
   vertical: 1
-  controlID: 115
+  controlID: 135
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -135,10 +135,10 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 947
-  m_MinSize: {x: 683, y: 494}
-  m_MaxSize: {x: 14004, y: 14044}
+  m_MinSize: {x: 679, y: 494}
+  m_MaxSize: {x: 14002, y: 14044}
   vertical: 0
-  controlID: 116
+  controlID: 136
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -160,10 +160,10 @@ MonoBehaviour:
     y: 0
     width: 1561
     height: 947
-  m_MinSize: {x: 406, y: 494}
+  m_MinSize: {x: 404, y: 494}
   m_MaxSize: {x: 10002, y: 14044}
   vertical: 1
-  controlID: 60
+  controlID: 64
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -185,10 +185,10 @@ MonoBehaviour:
     y: 0
     width: 1561
     height: 611
-  m_MinSize: {x: 406, y: 222}
-  m_MaxSize: {x: 8006, y: 4022}
+  m_MinSize: {x: 404, y: 222}
+  m_MaxSize: {x: 8004, y: 4022}
   vertical: 0
-  controlID: 61
+  controlID: 65
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -208,8 +208,8 @@ MonoBehaviour:
     y: 0
     width: 317
     height: 611
-  m_MinSize: {x: 202, y: 222}
-  m_MaxSize: {x: 4002, y: 4022}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -270,7 +270,7 @@ MonoBehaviour:
   - {fileID: 18}
   - {fileID: 19}
   m_Selected: 0
-  m_LastSelected: 2
+  m_LastSelected: 1
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -290,8 +290,8 @@ MonoBehaviour:
     y: 0
     width: 359
     height: 947
-  m_MinSize: {x: 277, y: 72}
-  m_MaxSize: {x: 4002, y: 4022}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
@@ -407,9 +407,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 7e500000
+      m_SelectedIDs: 90290000
       m_LastClickedID: 0
-      m_ExpandedIDs: 88e0edff0eeaedff36ededff3a52eefff261eeffde66eefffc56f4ff1640f7ff6c4cf7ff4052f7ff1653f7ff5053f7ff2e5bf7ffd8c9ffffdec9ffff12caffff14caffffaecfffffc2d8ffff
+      m_ExpandedIDs: a2bbfeff14b406002cb4060052b4060056b4060058b4060064b406007eb4060094b406009cb40600a0b40600a4b40600a8b40600acb40600
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -462,16 +462,16 @@ MonoBehaviour:
   m_ShowContextualTools: 0
   m_WindowGUID: 68ec15328cd706a4786763cb47574d5c
   m_Gizmos: 1
-  m_SceneIsLit: 1
+  m_SceneIsLit: 0
   m_SceneLighting: 1
   m_2DMode: 0
   m_isRotationLocked: 0
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.000008821487, y: 1.1594968, z: 3}
+    m_Target: {x: 1250, y: 0, z: 3.7869678}
     speed: 2
-    m_Value: {x: -0.000008821487, y: 1.1594968, z: 3}
+    m_Value: {x: 1250, y: 0, z: 3.7869678}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -482,7 +482,7 @@ MonoBehaviour:
   m_SceneViewState:
     showFog: 1
     showMaterialUpdate: 0
-    showSkybox: 1
+    showSkybox: 0
     showFlares: 1
     showImageEffects: 1
     showParticleSystems: 1
@@ -500,13 +500,13 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: -0.1734962, y: -0.7780493, z: 0.24451947, w: -0.55204815}
+    m_Target: {x: -0.09594036, y: -0.75285107, z: 0.11263336, w: -0.64135134}
     speed: 2
-    m_Value: {x: -0.17349546, y: -0.77804595, z: 0.24451843, w: -0.55204576}
+    m_Value: {x: -0.095940016, y: -0.7528484, z: 0.11263296, w: -0.6413491}
   m_Size:
-    m_Target: 11.774471
+    m_Target: 4147.0205
     speed: 2
-    m_Value: 11.267437
+    m_Value: 4147.0205
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -720,20 +720,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/01_Scenes
+    - Assets/05_Scripts/Enemies/Swarmer
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/01_Scenes
+  - Assets/05_Scripts/Enemies/Swarmer
   m_LastFoldersGridSize: 64
-  m_LastProjectPath: D:\GitHub\DSGGames\UnityProjects\SSNS MainProject
+  m_LastProjectPath: C:\DSGGames\UnityProjects\SSNS MainProject
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: d8640000
-    m_LastClickedID: 25816
-    m_ExpandedIDs: 000000000463000026650000046600004a670000346800000069000034690000386900004069000068690000f6690000d66a0000b66c00002a6d0000b86e0000e26e0000fa700000327100007e710000027500000475000006750000087500000a7500000c7500000e750000107500001275000014750000167500001875000000ca9a3b
+    scrollPos: {x: 0, y: 243}
+    m_SelectedIDs: 7c610000
+    m_LastClickedID: 24956
+    m_ExpandedIDs: 00000000505f00007c6100005e620000a4620000ac6300009864000064650000686500009e650000a2650000aa650000d465000066660000486700002c690000a26900004c6b0000766b0000966d0000ce6d00001a6e00000a7600000c7600000e76000010760000127600001476000016760000187600001a7600001c7600001e7600002076000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -761,7 +761,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000000463000026650000046600004a670000346800000069000034690000386900004069000068690000f6690000d66a0000b66c00002a6d0000b86e0000e26e0000fa7000007e710000027500000475000006750000087500000a7500000c7500000e7500001075000012750000147500001675000018750000
+    m_ExpandedIDs: 00000000505f00007c6100005e620000ac63000098640000686500009e650000a2650000aa650000d465000066660000486700002c690000a26900004c6b0000766b0000966d00001a6e00000a7600000c7600000e76000010760000127600001476000016760000187600001a7600001c7600001e76000020760000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

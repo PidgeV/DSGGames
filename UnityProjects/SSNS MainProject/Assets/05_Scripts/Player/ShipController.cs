@@ -503,7 +503,12 @@ public class ShipController : MonoBehaviour
 
 		shootingSoundController.PlayShot(currentWeapon);
 
-		if (TryGetComponent(out ShieldProjector shield))
+        if (shot.TryGetComponent(out ShotThing st))
+        {
+            st.whoSent = ShotThing.shotFrom.Player;
+        }
+
+        if (TryGetComponent(out ShieldProjector shield))
 		{
 			shield.IgnoreCollider(shot.GetComponent<Collider>());
 		}
@@ -533,7 +538,14 @@ public class ShipController : MonoBehaviour
 					if (hit.collider.TryGetComponent(out HealthAndShields hp))
 					{
 						hp.TakeDamage(laser.Damage / 10, laser.Damage);
-					}
+                        if (hit.collider.TryGetComponent(out ScoreCounter[] sc))
+                        {
+                            foreach (ScoreCounter sc1 in sc)
+                            {
+                                sc1.Hit();
+                            }
+                        }
+                    }
 				}
 			}
 			else if (currentWeapon == WeaponType.Charged && shotTimer > currentShotInfo.FireRate)

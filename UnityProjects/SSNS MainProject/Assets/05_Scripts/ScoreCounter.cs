@@ -6,14 +6,12 @@ using UnityEngine.UI;
 public class ScoreCounter : MonoBehaviour
 {
     [SerializeField] static int Score;
-    [SerializeField] int hitScore;
+    [SerializeField] int thisScore;
 
     enum TypeOfHit { ShieldHit, DestroyHit };
     [SerializeField] TypeOfHit typeOfHit;
 
     [Header("Only Include if Neccessary")]
-    [Tooltip("Used if there is no HealthAndShields component on this object.")]
-    [SerializeField] GameObject goHit;
     [Tooltip("The UI element for the player text, only is used if tag is player")]
     [SerializeField] Text playerText;
     bool isPlayer = false;
@@ -22,24 +20,9 @@ public class ScoreCounter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (playerText == null) playerText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
-
         Score = 0;
-        if (typeOfHit == TypeOfHit.ShieldHit)
-        {
-
-            if (goHit != null )//&& goHit.GetComponent<HealthAndShields>())
-            {
-                goHit.GetComponent<HealthAndShields>().onLifeChange += OnShieldHit;
-                goHit.GetComponent<HealthAndShields>().onShieldChange += OnShieldHit;
-            }
-            else if (TryGetComponent(out HealthAndShields health))
-            {
-                health.onLifeChange += OnShieldHit;
-                health.onShieldChange += OnShieldHit;
-            }
-        }
-        if (tag == "Player")
+    
+        if (gameObject.tag == "Player")
         {
             isPlayer = true;
         }
@@ -51,23 +34,43 @@ public class ScoreCounter : MonoBehaviour
         {
             playerText.text = "Score: " + Score;
         }
-        hitThisFrame = false;
     }
 
-    void OnShieldHit(float current, float max)
+
+    /// <summary>
+    /// Only call with null go if it's the laser shooting
+    /// </summary>
+    /// <param name="thingShot"></param>
+    public void Hit(GameObject thingShot = null)
     {
-        if (hitThisFrame == false)
+        if (thingShot == null)
         {
-            hitThisFrame = true;
-            Score += hitScore;
+            if (typeOfHit == TypeOfHit.ShieldHit)
+            {
+                Score += thisScore;
+            }
         }
+        else if (thingShot.TryGetComponent(out ShotThing st))
+        {
+
+            if (st.whoSent == ShotThing.shotFrom.Player && typeOfHit == TypeOfHit.ShieldHit)
+            {
+                Score += thisScore;
+            }
+        }
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Hit(collision.gameObject);
     }
 
     private void OnDestroy()
     {
         if (typeOfHit == TypeOfHit.DestroyHit)
         {
-            Score += hitScore;
+            Score += thisScore;
         }
     }
 }

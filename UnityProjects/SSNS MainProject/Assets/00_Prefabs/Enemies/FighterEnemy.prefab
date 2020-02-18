@@ -162,9 +162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6286453dae1153842b3a801a13a42fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitScore: 50
+  thisScore: 50
   typeOfHit: 0
-  goHit: {fileID: 58820780711503999}
   playerText: {fileID: 0}
 --- !u!114 &6435107481374648959
 MonoBehaviour:
@@ -178,9 +177,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6286453dae1153842b3a801a13a42fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitScore: 350
+  thisScore: 350
   typeOfHit: 1
-  goHit: {fileID: 0}
   playerText: {fileID: 0}
 --- !u!114 &3339599255118679233
 MonoBehaviour:
@@ -582,11 +580,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3068536347109623564}
     m_Modifications:
-    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyThruster
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275373, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -642,6 +635,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyThruster
+      objectReference: {fileID: 0}
     - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_Time
@@ -677,11 +675,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3068536347109623564}
     m_Modifications:
-    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyThruster (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275373, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -737,6 +730,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyThruster (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -777,11 +775,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3068536347109623564}
     m_Modifications:
-    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyThruster (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275373, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -837,6 +830,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyThruster (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -877,11 +875,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 58820780711503996}
     m_Modifications:
-    - target: {fileID: 645844403578658387, guid: c0c0ed7488653d34baf9950ba7dc7311,
-        type: 3}
-      propertyPath: m_Name
-      value: Shield
-      objectReference: {fileID: 0}
     - target: {fileID: 4516505457575865408, guid: c0c0ed7488653d34baf9950ba7dc7311,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -951,6 +944,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 99.99994
+      objectReference: {fileID: 0}
+    - target: {fileID: 645844403578658387, guid: c0c0ed7488653d34baf9950ba7dc7311,
+        type: 3}
+      propertyPath: m_Name
+      value: Shield
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0c0ed7488653d34baf9950ba7dc7311, type: 3}
