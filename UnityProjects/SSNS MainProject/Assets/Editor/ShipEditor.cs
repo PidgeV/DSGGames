@@ -13,6 +13,7 @@ public class ShipEditor : Editor
 		base.OnInspectorGUI();
 		GUILayout.Space(5f);
 		DrawSettingEditor(controller.myBehaviour, ref controller.showBehaviour);
+		GUILayout.Space(5f);
 		DrawSettingEditor(controller.myStats, ref controller.showStats);
 		GUILayout.Space(5f);
 		EditorGUILayout.HelpBox("This is a custone editor located in the 'ShipEditor' script", MessageType.Info);

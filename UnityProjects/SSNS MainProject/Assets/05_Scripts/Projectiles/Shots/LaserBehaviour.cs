@@ -51,8 +51,8 @@ public class LaserBehaviour : MonoBehaviour
             laserMaterials[0].SetFloat("Vector1_2C1D604B", fade);
             laserMaterials[1].SetFloat("Vector1_2C1D604B", fade2);
 
-            Debug.Log("Fading material: " + laserMaterials[0] + " to " + fade);
-            Debug.Log("Fading material: " + laserMaterials[1] + " to " + fade2);
+            //Debug.Log("Fading material: " + laserMaterials[0] + " to " + fade);
+            //Debug.Log("Fading material: " + laserMaterials[1] + " to " + fade2);
         }
     }
 }

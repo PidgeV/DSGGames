@@ -25,7 +25,7 @@
                     "name": "DPad",
                     "type": "Value",
                     "id": "337eea80-2901-489b-bb0b-3cc3837e1076",
-                    "expectedControlType": "Dpad",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
@@ -195,7 +195,7 @@
                     "name": "DPad Controller",
                     "id": "7994b87c-e593-400b-8ce6-b16be2cefcc1",
                     "path": "2DVector",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "DPad",

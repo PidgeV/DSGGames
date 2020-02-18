@@ -22,8 +22,11 @@ public class ShipController : MonoBehaviour
 
 	[Header("Dependencies")]
 	[SerializeField] private Transform shipModel;
-	[SerializeField] private Transform gunnerCamParent;
-	[SerializeField] private Transform shotSpawnLocation;
+	[SerializeField] private Transform gunnerPivot;
+	[SerializeField] private Transform gunnerObject;
+	[SerializeField] private Transform barrelL;
+	[SerializeField] private Transform barrelR;
+	[SerializeField] private Animator gunAnimator;
 
 	[Header("Control Options")]
 	[SerializeField] private bool invertedControls;
@@ -248,9 +251,9 @@ public class ShipController : MonoBehaviour
 	/// </summary>
 	private void OnDestroy()
 	{
-		if (player1) Destroy(player1.gameObject);
+		//if (player1) Destroy(player1.gameObject);
 
-		if (player2) Destroy(player2.gameObject);
+		//if (player2) Destroy(player2.gameObject);
 	}
 
 	#endregion
@@ -300,41 +303,44 @@ public class ShipController : MonoBehaviour
 	{
 		if (lockOn && lockOnTarget)
 		{
-			float speed;
-			if (currentWeapon == WeaponType.Laser)
-			{
-				speed = Mathf.Infinity;
-			}
-			else
-			{
-				speed = currentShotInfo.Speed;
-			}
+			//float speed;
+			//if (currentWeapon == WeaponType.Laser)
+			//{
+			//	speed = Mathf.Infinity;
+			//}
+			//else
+			//{
+			//	speed = currentShotInfo.Speed;
+			//}
 
-			Vector3 intercept = InterceptCalculationClass.FirstOrderIntercept(shotSpawnLocation.position, rigidbody.velocity, speed, lockOnTarget.transform.position, lockOnTarget.GetComponent<Rigidbody>().velocity);
-			gunnerCamParent.LookAt(intercept);
-			//gunRotation = gunnerCamera.transform.eulerAngles;
+			//Vector3 intercept = InterceptCalculationClass.FirstOrderIntercept(shotSpawnLocation.position, rigidbody.velocity, speed, lockOnTarget.transform.position, lockOnTarget.GetComponent<Rigidbody>().velocity);
+			//gunnerCamParent.LookAt(intercept);
+			////gunRotation = gunnerCamera.transform.eulerAngles;
 		}
 		else
-		{
+		{   // Reset the  gunners camera to zero
+			gunnerPivot.rotation = Quaternion.identity;
+			gunnerObject.Rotate(new Vector2(-gunVelocity.y, gunVelocity.x) * Time.deltaTime);
+
 			// POSITION
 			// Where the camera SHOULD be relative to the ship model
-			gunnerCamera.transform.position = shipModel.transform.position + (shipModel.transform.up * -6);
+			Vector3 shipPos = shipModel.transform.position;
 
-			// ROTATION
-			// Add the current input to the guns final rotation
-			gunnerAim *= Quaternion.Euler(new Vector2(-gunVelocity.y, gunVelocity.x) * Time.deltaTime);
-			gunnerCamParent.rotation = gunnerAim;
+			Vector3 yPos = -6 * shipModel.transform.up;
+			Vector3 zPos = -1 * shipModel.transform.forward;
 
-			RaycastHit hit;
-			// Does the ray intersect any objects excluding the player layer
-			if (lockOn == false && Physics.Raycast(gunnerCamera.transform.position, gunnerCamera.transform.forward, out hit, Mathf.Infinity))
-			{
-				if (hit.collider.gameObject.tag == "Enemy" ||
-					hit.collider.gameObject.tag == "Shield")
-				{
-					lockOnTarget = hit.collider.gameObject;
-				}
-			}
+			gunnerPivot.position = shipPos + yPos + zPos;
+
+			//RaycastHit hit;
+			//// Does the ray intersect any objects excluding the player layer
+			//if (lockOn == false && Physics.Raycast(gunnerCamera.transform.position, gunnerCamera.transform.forward, out hit, Mathf.Infinity))
+			//{
+			//	if (hit.collider.gameObject.tag == "Enemy" ||
+			//		hit.collider.gameObject.tag == "Shield")
+			//	{
+			//		lockOnTarget = hit.collider.gameObject;
+			//	}
+			//}
 		}
 	}
 
@@ -492,8 +498,8 @@ public class ShipController : MonoBehaviour
 
 	private void SpawnShot()
 	{
-		Quaternion rot = Quaternion.LookRotation(shotSpawnLocation.transform.forward);
-		GameObject shot = Instantiate(currentShotInfo.gameObject, shotSpawnLocation.position, rot);
+		Quaternion rot = Quaternion.LookRotation(barrelL.transform.forward);
+		GameObject shot = Instantiate(currentShotInfo.gameObject, barrelL.position, rot);
 
 		shootingSoundController.PlayShot(currentWeapon);
 
@@ -520,7 +526,7 @@ public class ShipController : MonoBehaviour
 
 				LayerMask enemyLayer = LayerMask.GetMask("Enemies");
 				enemyLayer += LayerMask.GetMask("Swarm");
-				RaycastHit[] hits = Physics.SphereCastAll(shotSpawnLocation.transform.position, 15f, shotSpawnLocation.transform.forward.normalized, laser.Length, enemyLayer);
+				RaycastHit[] hits = Physics.SphereCastAll(barrelL.transform.position, 15f, barrelL.transform.forward.normalized, laser.Length, enemyLayer);
 
 				foreach (RaycastHit hit in hits)
 				{
@@ -537,9 +543,9 @@ public class ShipController : MonoBehaviour
 				//Spawn then parent to the gunner. Store gameobject to check in update.
 				if (!chargedShot)
 				{
-					Quaternion rot = Quaternion.LookRotation(shotSpawnLocation.transform.forward);
-					chargedShot = Instantiate(currentShotInfo.gameObject, shotSpawnLocation.position, rot).GetComponent<ChargedShotBehaviour>();
-					chargedShot.transform.parent = shotSpawnLocation.transform;
+					Quaternion rot = Quaternion.LookRotation(barrelL.transform.forward);
+					chargedShot = Instantiate(currentShotInfo.gameObject, barrelL.position, rot).GetComponent<ChargedShotBehaviour>();
+					chargedShot.transform.parent = barrelL.transform;
 					if (TryGetComponent(out ShieldProjector shield))
 					{
 						shield.IgnoreCollider(chargedShot.GetComponent<Collider>());
@@ -626,35 +632,52 @@ public class ShipController : MonoBehaviour
         rollInput = direction;
     }
 
-	
 
+	bool usingDefault = true;
     /// <summary> Swap the ships weapon  </summary>
     public void SwapWeapon(Vector2 dInput)
     {
-        if (dInput.x > 0)
-        {
-            currentWeapon = WeaponType.Laser;
-        }
-        else if (dInput.x < 0)
-        {
-            currentWeapon = WeaponType.Missiles;
-        }
-        else if (dInput.y > 0)
-        {
-            currentWeapon = WeaponType.Charged;
-        }
-        else if (dInput.y < 0)
-        {
-            if (currentWeapon == WeaponType.Regular)
-            {
-                currentWeapon = WeaponType.Energy;
-            }
-            else
-            {
-                currentWeapon = WeaponType.Regular;
-            }
-        }
-    }
+		if (dInput.x > 0)
+		{
+			if (usingDefault)
+			{
+				usingDefault = false;
+				currentWeapon = WeaponType.Laser;
+				gunAnimator.SetTrigger("Change_Laser");
+			}
+		}
+		else if (dInput.x < 0)
+		{
+			if (usingDefault)
+			{
+				usingDefault = false;
+				currentWeapon = WeaponType.Missiles;
+				gunAnimator.SetTrigger("Change_Rockets");
+			}
+		}
+		else if (dInput.y > 0)
+		{
+			if (usingDefault)
+			{
+				usingDefault = false;
+				currentWeapon = WeaponType.Charged;
+				gunAnimator.SetTrigger("Change_Charged");
+			}
+		}
+		else if (dInput.y < 0)
+		{
+			usingDefault = true;
+			gunAnimator.SetTrigger("Reset");
+			if (currentWeapon == WeaponType.Regular)
+			{
+				currentWeapon = WeaponType.Energy;
+			}
+			else
+			{
+				currentWeapon = WeaponType.Regular;
+			}
+		}
+	}
 
     /// <summary> Make the ship shoot </summary>
     public void Shoot(PlayerRole role, bool pressed)
@@ -666,6 +689,7 @@ public class ShipController : MonoBehaviour
 
         if (role == PlayerRole.Gunner)
         {
+			gunAnimator.SetBool("Attacking", pressed);
             shooting_Gunner = pressed;
         }
     }
