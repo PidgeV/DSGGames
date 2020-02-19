@@ -10,6 +10,7 @@ public class LaserBehaviour : MonoBehaviour
     [SerializeField] ParticleSystem emissionParticle;
     ParticleSystem.EmissionModule emission;
 
+    public float radius = 15f;
     [SerializeField] float laserLength = 500f;
     [SerializeField] float laserDamagePerSecond = 5f;
     float particleCount;

@@ -46,11 +46,6 @@ public class ShieldProjector : MonoBehaviour
 	// The damage percent is the smount of shield remaining. 0 - 1
 	 float DamagePercent = 1;
 
-	[Header("Shield Properties")]
-	private float ShieldSize = 1.0f;
-	public bool ResizeShield = false;
-
-
 	// Hows does the shield fade out
 	[Header("Shiled Behaviour")]
 	[SerializeField] FadeType fadeType = FadeType.NO_FADE;
@@ -65,13 +60,7 @@ public class ShieldProjector : MonoBehaviour
 		ShieldMeshRenderer.material.SetColor("_BaseColor", BaseColor);
 		ShieldMeshRenderer.material.SetColor("_FresnelColor", BaseColor);
 
-		if (gameObject.TryGetComponent(out shieldCollider))
-		{
-			ShieldSize = shieldCollider.radius;
-		}
-
-		ShieldMeshRenderer.gameObject.transform.localScale *= ShieldSize;
-
+        shieldCollider = GetComponent<SphereCollider>();
         Physics.IgnoreCollision(shipCollider, shieldCollider);
 	}
 
@@ -152,7 +141,7 @@ public class ShieldProjector : MonoBehaviour
 	// Resize this shields hitbox depending on the shield damage percent
 	void UpdateShieldCollider(bool shieldEnabled)
 	{
-		if (ResizeShield && shipCollider != null)
+		if (shipCollider != null)
 		{
 			//shipCollider.enabled = !shieldEnabled;
 			shieldCollider.enabled = shieldEnabled;
@@ -170,7 +159,7 @@ public class ShieldProjector : MonoBehaviour
 
 		// Spawn in a Impact effect object
 		GameObject impact = Instantiate(ImpactVFX, ShieldMeshRenderer.transform.parent) as GameObject;
-		impact.transform.localScale = Vector3.one * ShieldSize * 2;
+		impact.transform.localScale = Vector3.one * transform.localScale.magnitude * shieldCollider.radius;
 
 		//GameObject hit = Instantiate(HitVFX, collision.contacts[0].point, Quaternion.identity) as GameObject;
 
@@ -185,7 +174,7 @@ public class ShieldProjector : MonoBehaviour
 		material.SetVector("_ImpactPosition", (transform.position - collision.contacts[0].point).normalized / -2f);
 
 		// Destroy the new impact object after 2 seconds
-		Destroy(impact, 2);
+		Destroy(impact, 2); 
 	}
 
 	// Spawn a shield dissolve object
@@ -199,7 +188,7 @@ public class ShieldProjector : MonoBehaviour
 
 		GameObject dissolve = Instantiate(DissolveVFX, ShieldMeshRenderer.transform.parent) as GameObject;
 		
-		dissolve.transform.localScale = Vector3.one * ShieldSize * 2;
+		dissolve.transform.localScale = Vector3.one * transform.localScale.magnitude * shieldCollider.radius;
 		dissolve.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", GetColor);
 
 		Destroy(dissolve, 2);
@@ -236,8 +225,8 @@ public class ShieldProjector : MonoBehaviour
 		if (fadeType == FadeType.FULL_FADE)
 		{
 			// FULL_FADE means we fade the shield to nothing
-			ShieldMeshRenderer.material.SetColor("_BaseColor", Color.Lerp(ShieldMeshRenderer.material.GetColor("_BaseColor"), Color.clear, 0.05f));
-			ShieldMeshRenderer.material.SetColor("_FresnelColor", Color.Lerp(ShieldMeshRenderer.material.GetColor("_FresnelColor"), Color.clear, 0.05f));
+			ShieldMeshRenderer.material.SetColor("_BaseColor", Color.Lerp(ShieldMeshRenderer.material.GetColor("_BaseColor"), Color.clear, 0.01f));
+			ShieldMeshRenderer.material.SetColor("_FresnelColor", Color.Lerp(ShieldMeshRenderer.material.GetColor("_FresnelColor"), Color.clear, 0.01f));
 		}
 		else if (fadeType == FadeType.HALF_FADE)
 		{
@@ -249,7 +238,7 @@ public class ShieldProjector : MonoBehaviour
 	// Reset the values of the shield depending on the fade type
 	void ResetShieldShader()
 	{
-		if (ResizeShield && DamagePercent == 0)
+		if (DamagePercent == 0)
 		{
 			// Do nothying
 			return;

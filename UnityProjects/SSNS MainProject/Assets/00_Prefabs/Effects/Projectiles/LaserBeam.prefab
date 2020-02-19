@@ -9755,8 +9755,9 @@ MonoBehaviour:
   laserParticle: {fileID: 281559281928473976}
   ringParticle: {fileID: 6514853672543934488}
   emissionParticle: {fileID: 6344216804115684313}
+  radius: 15
   laserLength: 5000
-  laserDamagePerSecond: 50
+  laserDamagePerSecond: 15
   fadeIn: 0
 --- !u!114 &8423215883985848745
 MonoBehaviour:

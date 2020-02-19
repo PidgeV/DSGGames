@@ -59,9 +59,9 @@ MonoBehaviour:
   waypoints: []
   defenseTarget: {fileID: 0}
   startingCount: 200
-  driveFactor: 60
+  driveFactor: 75
   maxSpeed: 80
-  neighbourRadius: 15
-  avoidanceRadius: 20
+  neighbourRadius: 20
+  avoidanceRadius: 25
   obstacleDistance: 100
   player: {fileID: 0}

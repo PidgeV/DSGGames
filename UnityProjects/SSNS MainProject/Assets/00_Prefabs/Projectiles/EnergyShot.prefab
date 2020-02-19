@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 2533200590899523750}
   - component: {fileID: 7947172679849969082}
   - component: {fileID: 7839970523369067123}
-  - component: {fileID: -6646188585606743039}
   m_Layer: 13
   m_Name: EnergyShot
   m_TagString: Untagged
@@ -114,7 +113,7 @@ MonoBehaviour:
   weapon: 1
   fireRate: 0.1
   lifeTime: 5
-  speed: 850
+  speed: 700
 --- !u!82 &7947172679849969082
 AudioSource:
   m_ObjectHideFlags: 0
@@ -212,19 +211,6 @@ AudioSource:
     m_PostInfinity: 2
     m_RotationOrder: 4
 --- !u!114 &7839970523369067123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4450240921679082262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a53d0b3959f4f9c4b865b1970f8f5e95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whoSent: 1
---- !u!114 &-6646188585606743039
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

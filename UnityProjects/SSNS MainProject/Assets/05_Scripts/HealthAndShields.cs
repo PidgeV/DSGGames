@@ -107,12 +107,7 @@ public class HealthAndShields : MonoBehaviour
 	// Damage the ship
 	public void TakeDamage(float kineticDamage, float energyDamage)
 	{
-		if (Invincible == true)
-		{
-			// Do nothing
-			return;
-		}
-		else
+		if (!Invincible)
 		{
 			regenDelay = Time.realtimeSinceStartup + regenInterval;
 
