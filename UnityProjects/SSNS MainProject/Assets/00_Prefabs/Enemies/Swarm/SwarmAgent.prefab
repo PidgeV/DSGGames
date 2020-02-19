@@ -259,8 +259,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6286453dae1153842b3a801a13a42fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisScore: 5
+  hitScore: 5
   typeOfHit: 0
+  goHit: {fileID: 0}
   playerText: {fileID: 0}
 --- !u!114 &1488303829716995618
 MonoBehaviour:
@@ -274,8 +275,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6286453dae1153842b3a801a13a42fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisScore: 50
+  hitScore: 50
   typeOfHit: 1
+  goHit: {fileID: 6258311400090120682}
   playerText: {fileID: 0}
 --- !u!82 &-3954175687532258068
 AudioSource:
@@ -460,24 +462,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.45066
       objectReference: {fileID: 0}
-<<<<<<< HEAD
-    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.45066
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.45066
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.45066
-      objectReference: {fileID: 0}
-=======
->>>>>>> Blakes-Branch
     - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_Parameters.widthMultiplier
