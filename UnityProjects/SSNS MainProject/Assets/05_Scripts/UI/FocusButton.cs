@@ -9,7 +9,12 @@ public class FocusButton : MonoBehaviour
 	// Start is called before the first frame update
 	void OnEnable()
 	{
+		StartCoroutine(Highlight());
+	}
+
+	private IEnumerator Highlight()
+	{
+		yield return null;
 		GetComponent<Button>().Select();
-        Debug.Log("Called");
 	}
 }
