@@ -26,7 +26,7 @@ public class ShipController : MonoBehaviour
 	[SerializeField] private Transform gunnerObject;
 	[SerializeField] private Transform barrelL;
 	[SerializeField] private Transform barrelR;
-	[SerializeField] private Animator gunAnimator;
+	[SerializeField] private GunController gunController;
 
 	[Header("Control Options")]
 	[SerializeField] private bool invertedControls;
@@ -647,68 +647,64 @@ public class ShipController : MonoBehaviour
     {
         rollInput = direction;
     }
-
-
-	bool usingDefault = true;
-    /// <summary> Swap the ships weapon  </summary>
-    public void SwapWeapon(Vector2 dInput)
-    {
+	
+	/// <summary> Swap the ships weapon  </summary>
+	public void SwapWeapon(Vector2 dInput)
+	{
 		if (dInput.x > 0)
 		{
-			if (usingDefault)
+			if (gunController.CanSwap)
 			{
-				usingDefault = false;
 				currentWeapon = WeaponType.Laser;
-				gunAnimator.SetTrigger("Change_Laser");
+				gunController.SwapWeapon(currentWeapon);
 			}
 		}
 		else if (dInput.x < 0)
 		{
-			if (usingDefault)
+			if (gunController.CanSwap)
 			{
-				usingDefault = false;
 				currentWeapon = WeaponType.Missiles;
-				gunAnimator.SetTrigger("Change_Rockets");
+				gunController.SwapWeapon(currentWeapon);
 			}
 		}
 		else if (dInput.y > 0)
 		{
-			if (usingDefault)
+			if (gunController.CanSwap)
 			{
-				usingDefault = false;
 				currentWeapon = WeaponType.Charged;
-				gunAnimator.SetTrigger("Change_Charged");
+				gunController.SwapWeapon(currentWeapon);
 			}
 		}
 		else if (dInput.y < 0)
 		{
-			usingDefault = true;
-			gunAnimator.SetTrigger("Reset");
-			if (currentWeapon == WeaponType.Regular)
+			if (gunController.CanSwap)
 			{
-				currentWeapon = WeaponType.Energy;
+				// If were using the regular weapon swap to the energy varient, else use the regular one
+				currentWeapon = currentWeapon == WeaponType.Regular ? WeaponType.Energy : WeaponType.Regular;
+
+				gunController.SwapWeapon(currentWeapon);
 			}
-			else
+		}
+
+	}
+
+	/// <summary> Make the ship shoot </summary>
+	public void Shoot(PlayerRole role, bool pressed)
+	{
+		if (role == PlayerRole.Pilot)
+		{
+			shooting_Pilot = pressed;
+		}
+
+		if (role == PlayerRole.Gunner)
+		{
+			if (gunController.CanAttack)
 			{
-				currentWeapon = WeaponType.Regular;
+				gunController.UpdateAttacking(pressed);
+				shooting_Gunner = pressed;
 			}
 		}
 	}
-
-    /// <summary> Make the ship shoot </summary>
-    public void Shoot(PlayerRole role, bool pressed)
-    {
-        if (role == PlayerRole.Pilot)
-        {
-            shooting_Pilot = pressed;
-        }
-
-        if (role == PlayerRole.Gunner)
-        {
-			gunAnimator.SetBool("Attacking", pressed);
-            shooting_Gunner = pressed;
-        }
-    }
 
 
 
