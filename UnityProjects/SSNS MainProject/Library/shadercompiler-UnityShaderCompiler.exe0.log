@@ -1,2 +1,10 @@
-Base path: 'D:/Unity/Editor/Data', plugins path 'D:/Unity/Editor/Data/PlaybackEngines'
+Base path: 'C:/Program Files/Unity/Hub/Editor/2019.2.2f1/Editor/Data', plugins path 'C:/Program Files/Unity/Hub/Editor/2019.2.2f1/Editor/Data/PlaybackEngines'
 Cmd: initializeCompiler
+Cmd: preprocessCompute
+  insize=5285 outsize=5287 ok=1
+Cmd: preprocessCompute
+  insize=2475 outsize=2477 ok=1
+Cmd: preprocess
+  insize=17995 outsize=437 ok=1
+Cmd: preprocessCompute
+  insize=1529 outsize=1531 ok=1
