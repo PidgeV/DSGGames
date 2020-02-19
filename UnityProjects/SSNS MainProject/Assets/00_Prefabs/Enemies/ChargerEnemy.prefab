@@ -186,6 +186,7 @@ MonoBehaviour:
   ImpactVFX: {fileID: 5266171281214306815, guid: b9048ee1f6b3b8d46a2a7682ceaffd9b,
     type: 3}
   HitVFX: {fileID: 4814854336648323653, guid: 428a07eb300045945a363fa54421b206, type: 3}
+  shipCollider: {fileID: 0}
   ResizeShield: 0
   fadeType: 1
 --- !u!114 &5702806089406881496
@@ -238,9 +239,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6286453dae1153842b3a801a13a42fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitScore: 200
+  thisScore: 0
   typeOfHit: 0
-  goHit: {fileID: 3107085776561158194}
   playerText: {fileID: 0}
 --- !u!114 &5355516276204472101
 MonoBehaviour:
@@ -254,9 +254,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6286453dae1153842b3a801a13a42fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitScore: 300
+  thisScore: 0
   typeOfHit: 1
-  goHit: {fileID: 0}
   playerText: {fileID: 0}
 --- !u!114 &-1809771570838268277
 MonoBehaviour:
@@ -391,21 +390,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7509524241790833359}
     m_Modifications:
-    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyThruster
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275373, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -461,15 +445,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949435, guid: 59d053a849b18994bae25015b58df19c,
+    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyThruster
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
-    - target: {fileID: 1225102731379926714, guid: 59d053a849b18994bae25015b58df19c,
+    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
-      propertyPath: m_Layer
-      value: 9
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
@@ -485,6 +474,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Parameters.widthMultiplier
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949435, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102731379926714, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59d053a849b18994bae25015b58df19c, type: 3}
@@ -635,6 +634,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6103393024892273190, guid: c0c0ed7488653d34baf9950ba7dc7311,
+        type: 3}
+      propertyPath: shipCollider
+      value: 
+      objectReference: {fileID: 3107085776561158199}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0c0ed7488653d34baf9950ba7dc7311, type: 3}
 --- !u!4 &65695769877998401 stripped

@@ -39,7 +39,7 @@ public class ShieldProjector : MonoBehaviour
 
 
 	// The current collider that is on this ship
-	Collider shipCollider;
+	[SerializeField] Collider shipCollider;
 	SphereCollider shieldCollider;
 
 
@@ -72,7 +72,7 @@ public class ShieldProjector : MonoBehaviour
 
 		ShieldMeshRenderer.gameObject.transform.localScale *= ShieldSize;
 
-        //Physics.IgnoreCollision(shipCollider, shieldCollider);
+        Physics.IgnoreCollision(shipCollider, shieldCollider);
 	}
 
 	// Update is called once per frame

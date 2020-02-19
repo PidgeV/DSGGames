@@ -27,8 +27,9 @@ public class ShipController : MonoBehaviour
 	[SerializeField] private Transform barrelL;
 	[SerializeField] private Transform barrelR;
 	[SerializeField] private GunController gunController;
+    ShieldProjector shieldProjector;
 
-	[Header("Control Options")]
+    [Header("Control Options")]
 	[SerializeField] private bool invertedControls;
 	[SerializeField] private bool unlimitedBoost;
 	[SerializeField] private bool limitRotation;
@@ -167,7 +168,10 @@ public class ShipController : MonoBehaviour
 				currentShotInfo = s;
 			}
 		}
-	}
+
+        shieldProjector = GetComponentInChildren<ShieldProjector>();
+
+    }
 
 	/// <summary>
 	/// Used for all the non physics calculations
@@ -504,10 +508,7 @@ public class ShipController : MonoBehaviour
             st.whoSent = ShotThing.shotFrom.Player;
         }
 
-        if (TryGetComponent(out ShieldProjector shield))
-		{
-			shield.IgnoreCollider(shot.GetComponent<Collider>());
-		}
+        shieldProjector.IgnoreCollider(shot.GetComponent<Collider>());
 	}
 
 	public void Shoot()
@@ -653,7 +654,7 @@ public class ShipController : MonoBehaviour
 	{
 		if (dInput.x > 0)
 		{
-			if (gunController.CanSwap)
+			if (gunController.CanSwap && ammoCount.HasAmmo(WeaponType.Laser))
 			{
 				currentWeapon = WeaponType.Laser;
 				gunController.SwapWeapon(currentWeapon);
@@ -661,7 +662,7 @@ public class ShipController : MonoBehaviour
 		}
 		else if (dInput.x < 0)
 		{
-			if (gunController.CanSwap)
+			if (gunController.CanSwap && ammoCount.HasAmmo(WeaponType.Missiles))
 			{
 				currentWeapon = WeaponType.Missiles;
 				gunController.SwapWeapon(currentWeapon);
@@ -669,7 +670,7 @@ public class ShipController : MonoBehaviour
 		}
 		else if (dInput.y > 0)
 		{
-			if (gunController.CanSwap)
+			if (gunController.CanSwap && ammoCount.HasAmmo(WeaponType.Charged))
 			{
 				currentWeapon = WeaponType.Charged;
 				gunController.SwapWeapon(currentWeapon);
@@ -681,7 +682,6 @@ public class ShipController : MonoBehaviour
 			{
 				// If were using the regular weapon swap to the energy varient, else use the regular one
 				currentWeapon = currentWeapon == WeaponType.Regular ? WeaponType.Energy : WeaponType.Regular;
-
 				gunController.SwapWeapon(currentWeapon);
 			}
 		}

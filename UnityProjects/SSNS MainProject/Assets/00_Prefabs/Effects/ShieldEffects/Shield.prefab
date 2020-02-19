@@ -113,5 +113,6 @@ MonoBehaviour:
   ImpactVFX: {fileID: 5266171281214306815, guid: b9048ee1f6b3b8d46a2a7682ceaffd9b,
     type: 3}
   HitVFX: {fileID: 4814854336648323653, guid: 428a07eb300045945a363fa54421b206, type: 3}
+  shipCollider: {fileID: 0}
   ResizeShield: 0
-  fadeType: 1
+  fadeType: 0
