@@ -106,6 +106,7 @@ public class FighterController : AdvancedFSM
 
     public bool AvoidObstacles(ref Vector3 dir)
     {
+        bool hit = false;
         RaycastHit hitInfo;
 
         //Check direction facing
@@ -116,9 +117,18 @@ public class FighterController : AdvancedFSM
             turnDir.Normalize();
 
             dir += turnDir;
-            return true;
+            hit = true;
         }
-        return false;
+        if (Physics.SphereCast(transform.position, RaySize, rbSelf.velocity.normalized, out hitInfo, CollisionCheckDistance, ObstacleLayer))
+        {
+            // Get the desired direction we need to move to move around  the obstacle. Transform to world co-ordinates (gets the obstacleMoveDirection wrt the current foward direction).
+            Vector3 turnDir = transform.TransformDirection(hitInfo.normal);
+            turnDir.Normalize();
+
+            dir += turnDir;
+            hit = true;
+        }
+        return hit;
     }
 
     public bool PlayerInVision()

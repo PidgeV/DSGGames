@@ -98,6 +98,7 @@ public class DreadnovaSpawner : NodeSpawner
         if (swarmer.TryGetComponent(out Flock flock))
         {
             flock.defenseTarget = cargo;
+            flock.startingCount = 100;
         }
 
         cargoTime = 0;

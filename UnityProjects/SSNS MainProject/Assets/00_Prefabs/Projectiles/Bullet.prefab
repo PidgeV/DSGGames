@@ -14,8 +14,11 @@ GameObject:
   - component: {fileID: 3914930520208039227}
   - component: {fileID: -5304832730458768805}
   - component: {fileID: 2533200590899523750}
+<<<<<<< HEAD
   - component: {fileID: 7575283476526480397}
   - component: {fileID: -4167044725204195359}
+=======
+>>>>>>> Blakes-Branch
   m_Layer: 13
   m_Name: Bullet
   m_TagString: Untagged
@@ -112,6 +115,7 @@ MonoBehaviour:
   fireRate: 0.1
   lifeTime: 5
   speed: 850
+<<<<<<< HEAD
 --- !u!114 &7575283476526480397
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,6 +141,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   whoSent: 1
+=======
+>>>>>>> Blakes-Branch
 --- !u!1001 &3012279576347739250
 PrefabInstance:
   m_ObjectHideFlags: 0

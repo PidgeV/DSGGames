@@ -78,6 +78,7 @@
     <Compile Include="Assets\05_Scripts\Enemies\Controllers\DreadnovaController.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Controllers\EnemyController.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Controllers\FighterController.cs" />
+    <Compile Include="Assets\05_Scripts\Enemies\DrawMinimapLine.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Obselete\ChaserEnemy.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Obselete\FighterEnemy.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\StateMachine\AdvancedFSM.cs" />

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DreadnovaShieldPhase
   m_EditorClassIdentifier: 
   timeBetweenWaves: 30
-  timeBetweenEnemySpawns: 0.4
+  timeBetweenEnemySpawns: 2
   timeBetweenCargoSpawns: 40
   waves:
   - {fileID: 11400000, guid: a145621b5015cec4fac5f3de20b971f4, type: 2}
