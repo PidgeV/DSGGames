@@ -520,33 +520,7 @@ public class ShipController : MonoBehaviour
 		{
 			if (currentWeapon == WeaponType.Laser)
 			{
-<<<<<<< HEAD
-				laser.fadeIn = true;
-				//LaserShot: Long, straight beam, near instant, aoe from origin
-				//Raycast instead of instantiate for instant movement
-				ammoCount.Take1Ammo(currentWeapon);
-
-				LayerMask enemyLayer = LayerMask.GetMask("Enemies");
-				enemyLayer += LayerMask.GetMask("Swarm");
-				RaycastHit[] hits = Physics.SphereCastAll(barrelL.transform.position, 15f, barrelL.transform.forward.normalized, laser.Length, enemyLayer);
-
-				foreach (RaycastHit hit in hits)
-				{
-					if (hit.collider.TryGetComponent(out HealthAndShields hp))
-					{
-						hp.TakeDamage(laser.Damage / 10, laser.Damage);
-                        if (hit.collider.TryGetComponent(out ScoreCounter[] sc))
-                        {
-                            foreach (ScoreCounter sc1 in sc)
-                            {
-                                sc1.Hit();
-                            }
-                        }
-                    }
-				}
-=======
                 LaserOn();
->>>>>>> Blakes-Branch
 			}
 			else if (currentWeapon == WeaponType.Charged && shotTimer > currentShotInfo.FireRate)
 			{
