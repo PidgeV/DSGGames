@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2650163542115975439}
   - component: {fileID: -235943445137922597}
   - component: {fileID: 7271389079199752486}
+  - component: {fileID: -2408196061925187355}
   m_Layer: 13
   m_Name: ChargeShot
   m_TagString: Untagged
@@ -202,6 +203,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shotSound: {fileID: 8300000, guid: ce146abd8ad460c40acae661bad9f88d, type: 3}
+--- !u!114 &-2408196061925187355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 110116227568893219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a53d0b3959f4f9c4b865b1970f8f5e95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  whoSent: 1
 --- !u!1001 &8266436467177248536
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -209,11 +223,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7451610447520524819}
     m_Modifications:
-    - target: {fileID: 2785737672537857433, guid: 47e6e1dc813e5e04bbd669e50c41b9a6,
-        type: 3}
-      propertyPath: m_Name
-      value: ChargeShot
-      objectReference: {fileID: 0}
     - target: {fileID: 4631578106782141097, guid: 47e6e1dc813e5e04bbd669e50c41b9a6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -268,6 +277,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2785737672537857433, guid: 47e6e1dc813e5e04bbd669e50c41b9a6,
+        type: 3}
+      propertyPath: m_Name
+      value: ChargeShot
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47e6e1dc813e5e04bbd669e50c41b9a6, type: 3}

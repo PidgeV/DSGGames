@@ -117,8 +117,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyOnHit: 0
   constantCollisionDamage: 1
-  kineticDamage: 2
-  energyDamage: 2
+  kineticDamage: 10
+  energyDamage: 10
   hitSoundObject: {fileID: 0}
 --- !u!114 &2083052501916966413
 MonoBehaviour:
@@ -574,11 +574,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3107085776561158193}
     m_Modifications:
-    - target: {fileID: 645844403578658387, guid: c0c0ed7488653d34baf9950ba7dc7311,
-        type: 3}
-      propertyPath: m_Name
-      value: Shield
-      objectReference: {fileID: 0}
     - target: {fileID: 4516505457575865408, guid: c0c0ed7488653d34baf9950ba7dc7311,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -633,6 +628,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 645844403578658387, guid: c0c0ed7488653d34baf9950ba7dc7311,
+        type: 3}
+      propertyPath: m_Name
+      value: Shield
       objectReference: {fileID: 0}
     - target: {fileID: 6103393024892273190, guid: c0c0ed7488653d34baf9950ba7dc7311,
         type: 3}

@@ -258,6 +258,8 @@ GameObject:
   - component: {fileID: 3389620870335011402}
   - component: {fileID: 1137948052489119147}
   - component: {fileID: 1768846636957905644}
+  - component: {fileID: 7779302749484587794}
+  - component: {fileID: 9037543789995640107}
   m_Layer: 9
   m_Name: Left Generator
   m_TagString: Untagged
@@ -313,6 +315,7 @@ MonoBehaviour:
   ImpactVFX: {fileID: 5266171281214306815, guid: b9048ee1f6b3b8d46a2a7682ceaffd9b,
     type: 3}
   HitVFX: {fileID: 4814854336648323653, guid: 428a07eb300045945a363fa54421b206, type: 3}
+  shipCollider: {fileID: 0}
   ResizeShield: 0
   fadeType: 0
 --- !u!114 &1768846636957905644
@@ -335,6 +338,36 @@ MonoBehaviour:
   Invincible: 0
   DestroyOnDeath: 0
   regenSpeed: 1
+--- !u!114 &7779302749484587794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712521122446004873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6286453dae1153842b3a801a13a42fe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisScore: 80
+  typeOfHit: 0
+  playerText: {fileID: 0}
+--- !u!114 &9037543789995640107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 712521122446004873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6286453dae1153842b3a801a13a42fe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisScore: 2500
+  typeOfHit: 1
+  playerText: {fileID: 0}
 --- !u!1 &1268373666320553554
 GameObject:
   m_ObjectHideFlags: 0
@@ -706,6 +739,8 @@ GameObject:
   - component: {fileID: 3312304360599567067}
   - component: {fileID: 1063320468130963246}
   - component: {fileID: 4063424365783989057}
+  - component: {fileID: 2518988153070584080}
+  - component: {fileID: 5217936282721047914}
   m_Layer: 9
   m_Name: Right Generator
   m_TagString: Untagged
@@ -761,6 +796,7 @@ MonoBehaviour:
   ImpactVFX: {fileID: 5266171281214306815, guid: b9048ee1f6b3b8d46a2a7682ceaffd9b,
     type: 3}
   HitVFX: {fileID: 4814854336648323653, guid: 428a07eb300045945a363fa54421b206, type: 3}
+  shipCollider: {fileID: 0}
   ResizeShield: 0
   fadeType: 0
 --- !u!114 &4063424365783989057
@@ -783,6 +819,36 @@ MonoBehaviour:
   Invincible: 0
   DestroyOnDeath: 0
   regenSpeed: 1
+--- !u!114 &2518988153070584080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6796477096561291851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6286453dae1153842b3a801a13a42fe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisScore: 80
+  typeOfHit: 0
+  playerText: {fileID: 0}
+--- !u!114 &5217936282721047914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6796477096561291851}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6286453dae1153842b3a801a13a42fe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  thisScore: 2500
+  typeOfHit: 1
+  playerText: {fileID: 0}
 --- !u!1 &7280510676467491650
 GameObject:
   m_ObjectHideFlags: 0
@@ -854,11 +920,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 194390594244868684}
     m_Modifications:
-    - target: {fileID: 645844403578658387, guid: c0c0ed7488653d34baf9950ba7dc7311,
-        type: 3}
-      propertyPath: m_Name
-      value: Shield
-      objectReference: {fileID: 0}
     - target: {fileID: 4516505457575865408, guid: c0c0ed7488653d34baf9950ba7dc7311,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -914,17 +975,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 645844403578658387, guid: c0c0ed7488653d34baf9950ba7dc7311,
+        type: 3}
+      propertyPath: m_Name
+      value: Shield
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0c0ed7488653d34baf9950ba7dc7311, type: 3}
---- !u!4 &2821658336606809233 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4516505457575865408, guid: c0c0ed7488653d34baf9950ba7dc7311,
-    type: 3}
-  m_PrefabInstance: {fileID: 1838966760177123537}
-  m_PrefabAsset: {fileID: 0}
 --- !u!23 &670759933082544734 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: 1209874130760428175, guid: c0c0ed7488653d34baf9950ba7dc7311,
+    type: 3}
+  m_PrefabInstance: {fileID: 1838966760177123537}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2821658336606809233 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4516505457575865408, guid: c0c0ed7488653d34baf9950ba7dc7311,
     type: 3}
   m_PrefabInstance: {fileID: 1838966760177123537}
   m_PrefabAsset: {fileID: 0}
@@ -1166,11 +1232,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5622021086648120736}
     m_Modifications:
-    - target: {fileID: 645844403578658387, guid: c0c0ed7488653d34baf9950ba7dc7311,
-        type: 3}
-      propertyPath: m_Name
-      value: Shield
-      objectReference: {fileID: 0}
     - target: {fileID: 4516505457575865408, guid: c0c0ed7488653d34baf9950ba7dc7311,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1225,6 +1286,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 645844403578658387, guid: c0c0ed7488653d34baf9950ba7dc7311,
+        type: 3}
+      propertyPath: m_Name
+      value: Shield
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0c0ed7488653d34baf9950ba7dc7311, type: 3}

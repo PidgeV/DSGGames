@@ -105,7 +105,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7693469286925294298
 Transform:
   m_ObjectHideFlags: 0
@@ -149,6 +149,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9624d69701f7f20499d9adea95ea59c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  waypoints: []
+  spawnpoint: {x: 0, y: 0, z: 0}
+  spawnDestination: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
   myRigidbody: {fileID: 0}
   DetectionRange: 1500
