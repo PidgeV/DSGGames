@@ -10,5 +10,6 @@ public class FocusButton : MonoBehaviour
 	void OnEnable()
 	{
 		GetComponent<Button>().Select();
+        Debug.Log("Called");
 	}
 }

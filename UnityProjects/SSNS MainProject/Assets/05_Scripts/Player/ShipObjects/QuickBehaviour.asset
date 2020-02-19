@@ -20,6 +20,6 @@ MonoBehaviour:
   RotSpeed: 0.1
   moveScale: 5
   moveSpeed: 0.1
-  normalPos: {x: 0, y: 7, z: -25}
-  boostPos: {x: 0, y: 7, z: -35}
+  normalPos: {x: 0, y: 7, z: -40}
+  boostPos: {x: 0, y: 7, z: -50}
   cameraSpeed: 0.01

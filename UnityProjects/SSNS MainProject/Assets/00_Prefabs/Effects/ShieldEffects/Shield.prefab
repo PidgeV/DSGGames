@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 4516505457575865408}
   - component: {fileID: 4897347350598719094}
   - component: {fileID: 1209874130760428175}
+  - component: {fileID: 6310708430626000254}
+  - component: {fileID: 6103393024892273190}
   m_Layer: 12
   m_Name: Shield
   m_TagString: Untagged
@@ -78,3 +80,38 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!135 &6310708430626000254
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645844403578658387}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.009970879
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6103393024892273190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645844403578658387}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ef5227dfa6fe724096ffbda88a48183, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShieldMeshRenderer: {fileID: 1209874130760428175}
+  BaseColor: {r: 12.54902, g: 0.5647059, b: 0.5647059, a: 1}
+  BrokenColor: {r: 12.679245, g: 5.893726, b: 0.89711624, a: 1}
+  DissolveVFX: {fileID: 3815312508183173413, guid: ddffe4b2b0537394db51f273f9c2d557,
+    type: 3}
+  ImpactVFX: {fileID: 5266171281214306815, guid: b9048ee1f6b3b8d46a2a7682ceaffd9b,
+    type: 3}
+  HitVFX: {fileID: 4814854336648323653, guid: 428a07eb300045945a363fa54421b206, type: 3}
+  ResizeShield: 0
+  fadeType: 1

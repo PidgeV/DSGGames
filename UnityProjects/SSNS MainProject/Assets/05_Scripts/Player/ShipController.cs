@@ -41,12 +41,12 @@ public class ShipController : MonoBehaviour
 
 	[Header("Weapon")]
 	[SerializeField] private WeaponType startingWeapon;
-	[SerializeField] private ChargedShotBehaviour chargedShot;
 	[SerializeField] private LaserBehaviour laser;
 	[SerializeField] private ShotInfo[] shots;
+    private ChargedShotBehaviour chargedShot;
 
-	// The ammo we have for each weapon
-	public AmmoCounter ammoCount;
+    // The ammo we have for each weapon
+    public AmmoCounter ammoCount;
 
 	// What weapon are we currently using
 	[HideInInspector] public WeaponType currentWeapon;
@@ -105,7 +105,6 @@ public class ShipController : MonoBehaviour
 	private bool shooting_Pilot;
 
 	private float boostGauge;
-	private float shotCounter;
 	private float shotTimer;
 
 	private float gunRotationSpeed = 200f;
@@ -222,9 +221,6 @@ public class ShipController : MonoBehaviour
         {
             ShipShoot();
         }
-
-        // Increment the shooter timer
-        shotCounter += Time.deltaTime;
 		#endregion
 	}
 
@@ -519,38 +515,11 @@ public class ShipController : MonoBehaviour
 		{
 			if (currentWeapon == WeaponType.Laser)
 			{
-				laser.fadeIn = true;
-				//LaserShot: Long, straight beam, near instant, aoe from origin
-				//Raycast instead of instantiate for instant movement
-				ammoCount.Take1Ammo(currentWeapon);
-
-				LayerMask enemyLayer = LayerMask.GetMask("Enemies");
-				enemyLayer += LayerMask.GetMask("Swarm");
-				RaycastHit[] hits = Physics.SphereCastAll(barrelL.transform.position, 15f, barrelL.transform.forward.normalized, laser.Length, enemyLayer);
-
-				foreach (RaycastHit hit in hits)
-				{
-					if (hit.collider.TryGetComponent(out HealthAndShields hp))
-					{
-						hp.TakeDamage(laser.Damage / 10, laser.Damage);
-					}
-				}
+                LaserOn();
 			}
 			else if (currentWeapon == WeaponType.Charged && shotTimer > currentShotInfo.FireRate)
 			{
-				laser.fadeIn = false;
-				shotTimer = 0;
-				//Spawn then parent to the gunner. Store gameobject to check in update.
-				if (!chargedShot)
-				{
-					Quaternion rot = Quaternion.LookRotation(barrelL.transform.forward);
-					chargedShot = Instantiate(currentShotInfo.gameObject, barrelL.position, rot).GetComponent<ChargedShotBehaviour>();
-					chargedShot.transform.parent = barrelL.transform;
-					if (TryGetComponent(out ShieldProjector shield))
-					{
-						shield.IgnoreCollider(chargedShot.GetComponent<Collider>());
-					}
-				}
+                ChargeShot();
 			}
 			else if (shotTimer > currentShotInfo.FireRate)
 			{
@@ -564,7 +533,49 @@ public class ShipController : MonoBehaviour
 				}
 			}
 		}
+        else
+        {
+            laser.fadeIn = false;
+        }
 	}
+
+    void LaserOn()
+    {
+        laser.fadeIn = true;
+        //LaserShot: Long, straight beam, near instant, aoe from origin
+        //Raycast instead of instantiate for instant movement
+        ammoCount.Take1Ammo(currentWeapon);
+
+        LayerMask enemyLayer = LayerMask.GetMask("Enemies");
+        enemyLayer += LayerMask.GetMask("Swarm");
+        RaycastHit[] hits = Physics.SphereCastAll(barrelL.transform.position, 15f, barrelL.transform.forward.normalized, laser.Length, enemyLayer);
+
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit.collider.TryGetComponent(out HealthAndShields hp))
+            {
+                hp.TakeDamage(laser.Damage / 10, laser.Damage);
+            }
+        }
+    }
+
+    void ChargeShot()
+    {
+        laser.fadeIn = false;
+        shotTimer = 0;
+        //Spawn then parent to the gunner. Store gameobject to check in update.
+        if (!chargedShot)
+        {
+            Quaternion rot = Quaternion.LookRotation(barrelL.transform.forward);
+            chargedShot = Instantiate(currentShotInfo.gameObject, barrelL.position, rot).GetComponent<ChargedShotBehaviour>();
+            chargedShot.transform.parent = barrelL.transform;
+            if (TryGetComponent(out ShieldProjector shield))
+            {
+                shield.IgnoreCollider(chargedShot.GetComponent<Collider>());
+            }
+        }
+    }
+
 	public void ShipShoot()
 	{
 		if (shotTimer > currentShotInfo.FireRate)

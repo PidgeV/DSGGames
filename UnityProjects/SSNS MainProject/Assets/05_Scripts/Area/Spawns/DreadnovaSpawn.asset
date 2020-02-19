@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawns:
   - type: 0
-    count: 40
+    count: 20
   - type: 1
-    count: 40
+    count: 20
   - type: 2
     count: 400

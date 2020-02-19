@@ -77,7 +77,7 @@ public class CinematicController : MonoBehaviour
 		Animator animator = GetComponent<Animator>();
 
 		if (animator && canSkip) {
-			TurnOffTrails();
+			//TurnOffTrails();  //Triggered in animation already
 			animator.Play("Intro_Animation", 0, 0.95f);
 			animator.SetTrigger("TransitionToMain");
 		}

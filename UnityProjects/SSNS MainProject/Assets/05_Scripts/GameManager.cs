@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using SNSSTypes;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 /// <summary>
 /// Handles switching from states
@@ -64,6 +65,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
+        
         if (Instance != null)
         {
             Destroy(Instance.gameObject);

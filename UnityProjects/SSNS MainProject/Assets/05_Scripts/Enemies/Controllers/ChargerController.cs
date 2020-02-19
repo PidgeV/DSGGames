@@ -80,6 +80,7 @@ public class ChargerController : AdvancedFSM
         if (player && collision.gameObject.Equals(player) && CurrentStateID == FSMStateID.Attacking)
         {
             hitPlayer = true;
+            PerformTransition(Transition.Patrol);
         }
     }
 
@@ -111,7 +112,7 @@ public class ChargerController : AdvancedFSM
 
         if (hitInfo.collider != null)
         {
-            Debug.Log(hitInfo.collider.gameObject.name);
+            //Debug.Log(hitInfo.collider.gameObject.name);
             if (hitInfo.collider.gameObject.Equals(player.gameObject))
             {
                 return true;
@@ -122,22 +123,29 @@ public class ChargerController : AdvancedFSM
 
     public bool AvoidObstacles(ref Vector3 dir)
     {
+        bool hit = false;
         RaycastHit hitInfo;
 
         //Check direction facing
-        if (Physics.SphereCast(transform.position, RaySize, transform.forward.normalized,
-            out hitInfo, CollisionCheckDistance, ObstacleLayer) /*||
-            Physics.SphereCast(controller.transform.position, controller.RaySize, controller.rbSelf.velocity.normalized,
-            out hitInfo, controller.CollisionCheckDistance, controller.ObstacleLayer)*/)
+        if (Physics.SphereCast(transform.position, RaySize, transform.forward.normalized, out hitInfo, CollisionCheckDistance, ObstacleLayer))/* || Physics.SphereCast(controller.transform.position, controller.RaySize, controller.rbSelf.velocity.normalized, out hitInfo, controller.CollisionCheckDistance, controller.ObstacleLayer))*/
         {
             // Get the desired direction we need to move to move around  the obstacle. Transform to world co-ordinates (gets the obstacleMoveDirection wrt the current foward direction).
-            Vector3 turnDir = transform.TransformDirection(hitInfo.normal * 2);
+            Vector3 turnDir = transform.TransformDirection(hitInfo.normal);
             turnDir.Normalize();
 
             dir += turnDir;
-            return true;
+            hit = true;
         }
-        return false;
+        if (Physics.SphereCast(transform.position, RaySize, rbSelf.velocity.normalized, out hitInfo, CollisionCheckDistance, ObstacleLayer))
+        {
+            // Get the desired direction we need to move to move around  the obstacle. Transform to world co-ordinates (gets the obstacleMoveDirection wrt the current foward direction).
+            Vector3 turnDir = transform.TransformDirection(hitInfo.normal);
+            turnDir.Normalize();
+
+            dir += turnDir;
+            hit = true;
+        }
+        return hit;
     }
 
     //Getters
