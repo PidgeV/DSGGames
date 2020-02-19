@@ -42,7 +42,7 @@ namespace Complete
             if(swarm.player != null)
             {
                 //Check distance to player
-                if (Vector3.Distance(controller.transform.position, swarm.player.transform.position) <= controller.PlayerDistance) 
+                if (Vector3.Distance(controller.transform.position, swarm.player.transform.position) <= controller.PlayerDistance && AIManager.aiManager.CanAttack()) 
                 {
                     controller.PerformTransition(Transition.Attack);
                 }

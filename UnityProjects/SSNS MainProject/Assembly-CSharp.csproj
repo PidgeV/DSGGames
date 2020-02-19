@@ -72,6 +72,7 @@
     <Compile Include="Assets\05_Scripts\Demo\DemoManager.cs" />
     <Compile Include="Assets\05_Scripts\Demo\DemoValue.cs" />
     <Compile Include="Assets\05_Scripts\Demo\NewDemoManager.cs" />
+    <Compile Include="Assets\05_Scripts\Enemies\AIManager.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Controllers\CargoController.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Controllers\ChargerController.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Controllers\CruiserController.cs" />
@@ -85,7 +86,7 @@
     <Compile Include="Assets\05_Scripts\Enemies\StateMachine\FSMState.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\States\CargoPatrolState.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\States\ChargerStates\ChargerAttackState.cs" />
-    <Compile Include="Assets\05_Scripts\Enemies\States\ChargerStates\ChaserPatrolState.cs" />
+    <Compile Include="Assets\05_Scripts\Enemies\States\ChargerStates\ChargerPatrolState.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\States\CruiserStates\CruiserAttackState.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\States\CruiserStates\CruiserPatrolState.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\States\DeadState.cs" />

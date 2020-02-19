@@ -47,6 +47,7 @@ public class FighterAttackState : FSMState
 
             if (player == null)
             {
+                AIManager.aiManager.StopAttack();
                 controller.PerformTransition(Transition.Patrol);
                 return;
             }
@@ -56,12 +57,14 @@ public class FighterAttackState : FSMState
 
         if (Vector3.Distance(player.transform.position, controller.transform.position) < controller.CloseDistance)
         {
+            AIManager.aiManager.StopAttack();
             controller.PerformTransition(Transition.Patrol);
         }
 
         //Else dead transition to dead
         if (controller.Health <= 0)
         {
+            AIManager.aiManager.StopAttack();
             controller.PerformTransition(Transition.NoHealth);
         }
     }

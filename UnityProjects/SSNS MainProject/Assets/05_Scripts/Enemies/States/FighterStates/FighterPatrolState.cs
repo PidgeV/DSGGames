@@ -87,7 +87,7 @@ public class FighterPatrolState : FSMState
                 if (timer2 >= timeOftenCheck)
                 {
                     timer2 = 0f;
-                    if (controller.PlayerInVision()) // in vision and has been patrolling for minimum time. This is to prevent the ai staying in attack mode and acting weird
+                    if (controller.PlayerInVision() && AIManager.aiManager.CanAttack()) // in vision and has been patrolling for minimum time. This is to prevent the ai staying in attack mode and acting weird
                     {
                         timer1 = 0f;
                         controller.PerformTransition(Transition.SawPlayer);

@@ -36,6 +36,7 @@ public class ChargerAttackState : FSMState
     {
         if (player == null || controller.hitPlayer)
         {
+            AIManager.aiManager.StopAttack();
             controller.PerformTransition(Transition.Patrol);
         }
         else
@@ -48,6 +49,7 @@ public class ChargerAttackState : FSMState
             float distance = Vector3.Distance(controller.transform.position, player.transform.position);
             if (dotProduct < 0 && distance < 100)
             {
+                AIManager.aiManager.StopAttack();
                 controller.PerformTransition(Transition.Patrol); //Go to patrolling
             }
         }
@@ -55,6 +57,7 @@ public class ChargerAttackState : FSMState
         //Else dead transition to dead
         if (controller.Health <= 0)
         {
+            AIManager.aiManager.StopAttack();
             controller.PerformTransition(Transition.NoHealth);
         }
     }
