@@ -47,14 +47,14 @@ public class AreaManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Ends the area giving the ship the node's reward 
+    /// Ends the area giving the ship the node's reward
     /// and waits for the UI to be hidden again before allowing next node selection
     /// </summary>
     public void EndArea()
     {
         areaEnded = true;
 
-        //Destroy(areaEffect);
+        Destroy(areaEffect);
 
         // Grabs current reward and uses it on the ship
         Reward reward = NodeManager.Instance.CurrentNode.Reward;
@@ -65,7 +65,7 @@ public class AreaManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Loads the area given. Uses the NodeEvent script to spawn 
+    /// Loads the area given. Uses the NodeEvent script to spawn
     /// prefabs that should handle spawning objects in the area.
     /// </summary>
     /// <param name="nodeInfo">The node to load</param>
