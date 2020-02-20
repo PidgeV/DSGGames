@@ -22,21 +22,21 @@ public class Player : Controller
 	// The Control Type (Controller or Keyboard)
 	public ControlType controlType = ControlType.CONTROLLER;
 
-	PlayerInput playerInput;
-	ShipController controller;
+	public PlayerInput PlayerInput;
+	public ShipController Controller;
 
 	#region Unity Events
 
 	private void Awake()
 	{
-		playerInput = GetComponent<PlayerInput>();
+		PlayerInput = GetComponent<PlayerInput>();
 		// When a player starts the game this grabs an open ship
 		foreach (GameObject ship in GameObject.FindGameObjectsWithTag("Player"))
 		{
 			if (ship.TryGetComponent(out ShipController shipController))
 			{
-				controller = shipController;
-				controller.JoinShip(this);
+				Controller = shipController;
+				Controller.JoinShip(this);
 				break;
 			}
 		}
@@ -91,12 +91,12 @@ public class Player : Controller
 		if (currentState == GameState.NODE_SELECTION)
 		{
 			Debug.Log("Switch Current ActionMap (NodeMap)");
-			playerInput.SwitchCurrentActionMap("NodeMap");
+			PlayerInput.SwitchCurrentActionMap("NodeMap");
 		}
 		else if (currentState == GameState.BATTLE)
 		{
 			Debug.Log("Switch Current ActionMap (Ship)");
-			playerInput.SwitchCurrentActionMap("Ship");
+			PlayerInput.SwitchCurrentActionMap("Ship");
 		}
 	}
 
@@ -148,13 +148,13 @@ public class Player : Controller
 		if (myRole == PlayerRole.Pilot)
 		{
 			// Rotate the player ship
-			controller.SteerShip(input.Get<Vector2>());
+			Controller.SteerShip(input.Get<Vector2>());
 		}
 
 		if (myRole == PlayerRole.Gunner)
 		{
 			// Move the player camera
-			controller.AimGun(input.Get<Vector2>());
+			Controller.AimGun(input.Get<Vector2>());
 		}
 	}
 	public override void OnRightStick(InputValue input)
@@ -162,13 +162,13 @@ public class Player : Controller
 		if (myRole == PlayerRole.Pilot)
 		{
 			// Rotate the player ship
-			controller.StrafeShip(input.Get<Vector2>());
+			Controller.StrafeShip(input.Get<Vector2>());
 		}
 
 		if (myRole == PlayerRole.Gunner)
 		{
 			// Move the player camera
-			controller.AimGun(input.Get<Vector2>());
+			Controller.AimGun(input.Get<Vector2>());
 		}
 	}
 
@@ -180,7 +180,7 @@ public class Player : Controller
 		if (myRole == PlayerRole.Gunner)
 		{
 			// Change the current weapon
-			controller.SwapWeapon(input.Get<Vector2>());
+			Controller.SwapWeapon(input.Get<Vector2>());
 		}
 	}
 
@@ -189,13 +189,13 @@ public class Player : Controller
 		if (myRole == PlayerRole.Pilot)
 		{
 			// Boost the ship
-			controller.Boost(input.isPressed);
+			Controller.Boost(input.isPressed);
 		}
 
 		if (myRole == PlayerRole.Gunner)
 		{
 			// Make the gunner shoot
-			controller.Shoot(myRole, input.isPressed);
+			Controller.Shoot(myRole, input.isPressed);
 		}
 	}
 	public override void OnB(InputValue input)
@@ -205,22 +205,22 @@ public class Player : Controller
 		if (myRole == PlayerRole.Pilot)
 		{
 			// Boost the ship
-			controller.Boost(input.isPressed);
+			Controller.Boost(input.isPressed);
 		}
 
 		if (myRole == PlayerRole.Gunner)
 		{
 			// Make the gunner shoot
-			controller.Shoot(myRole, input.isPressed);
+			Controller.Shoot(myRole, input.isPressed);
 		}
 	}
 	public override void OnX(InputValue input)
 	{
-		controller.ToggleMap(input.isPressed);
+		Controller.ToggleMap(input.isPressed);
 	}
 	public override void OnY(InputValue input)
 	{
-		if (myRole != PlayerRole.None) controller.TriggerRoleSwap(input.isPressed);
+		if (myRole != PlayerRole.None) Controller.TriggerRoleSwap(input.isPressed);
 	}
 
 	public override void OnLeftTrigger(InputValue input)
@@ -228,13 +228,13 @@ public class Player : Controller
 		if (myRole == PlayerRole.Pilot)
 		{
 			// Boost the ship
-			controller.RotateShip(input.Get<float>());
+			Controller.RotateShip(input.Get<float>());
 		}
 
 		if (myRole == PlayerRole.Gunner)
 		{
 			// Make the gunner shoot
-			controller.Shoot(myRole, input.isPressed);
+			Controller.Shoot(myRole, input.isPressed);
 		}
 	}
 	public override void OnRightTrigger(InputValue input)
@@ -242,23 +242,23 @@ public class Player : Controller
 		if (myRole == PlayerRole.Pilot)
 		{
 			// Boost the ship
-			controller.RotateShip(-input.Get<float>());
+			Controller.RotateShip(-input.Get<float>());
 		}
 
 		if (myRole == PlayerRole.Gunner)
 		{
 			// Make the gunner shoot
-			controller.Shoot(myRole, input.isPressed);
+			Controller.Shoot(myRole, input.isPressed);
 		}
 	}
 
 	public override void OnRightBumper(InputValue input)
 	{
-		controller.Shoot(myRole, input.isPressed);
+		Controller.Shoot(myRole, input.isPressed);
 	}
 	public override void OnLeftBumper(InputValue input)
 	{
-		controller.LockOn(input.isPressed);
+		Controller.LockOn(input.isPressed);
 	}
 	#endregion
 
@@ -266,13 +266,10 @@ public class Player : Controller
 
 	public void OnPause(InputValue input)
 	{
-		if (input.isPressed)
+		if (input.isPressed == false)
 		{
-			GameObject pauseMenu = GameObject.Find("PauseMenu");
-
-			if (pauseMenu.TryGetComponent<Animator>(out Animator animator)) {
-				animator.SetBool("Open", !animator.GetBool("Open"));
-			}
+			print("??");
+			GameManager.Instance.PauseGame();
 		}
 	}
 

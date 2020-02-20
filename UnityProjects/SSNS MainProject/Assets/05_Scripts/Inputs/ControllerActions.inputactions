@@ -320,10 +320,10 @@
                 {
                     "name": "Pause",
                     "type": "Button",
-                    "id": "6dcc1479-7a06-47bc-90ac-d329745dd52b",
+                    "id": "80ae22ff-02f7-438a-9d4d-176eda078f5e",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press(behavior=2)"
                 }
             ],
             "bindings": [
@@ -373,7 +373,7 @@
                 },
                 {
                     "name": "",
-                    "id": "508e2e11-654e-4494-a694-c8e8a9287253",
+                    "id": "b762a78e-3378-47fe-8585-a137b344001b",
                     "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
@@ -415,10 +415,10 @@
                 {
                     "name": "Pause",
                     "type": "Button",
-                    "id": "bb296545-00db-41a0-b5be-da8ac378ba44",
+                    "id": "f2310ccd-991c-425c-9639-7a304d475b5b",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Press(behavior=2)"
                 }
             ],
             "bindings": [
@@ -457,7 +457,7 @@
                 },
                 {
                     "name": "",
-                    "id": "b6e3ab94-6e1d-46fa-b9c0-221829b8763a",
+                    "id": "9b8302a8-4c06-425a-9fed-699ff455c791",
                     "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",

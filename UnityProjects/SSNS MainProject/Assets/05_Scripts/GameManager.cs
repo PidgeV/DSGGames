@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     public bool debug;
+    public bool paused = false;
 
     [HideInInspector] public ShipController shipController;
 
@@ -27,6 +28,30 @@ public class GameManager : MonoBehaviour
     private float respawnTime;
 
     private bool respawn;
+
+	/// <summary>
+	/// Pause the game and open the pause menu
+	/// This is called from the players OnPause
+	/// </summary>
+	public void PauseGame()
+	{
+		Player[] players = GameObject.FindObjectsOfType<Player>();
+
+		foreach (Player player in players)
+		{
+			string newActions = !paused ? "MenuNavigation" : "Ship";
+			player.PlayerInput.SwitchCurrentActionMap(newActions);
+		}
+
+		paused = !paused;
+
+		GameObject pauseMenu = GameObject.Find("PauseMenu");
+		if (pauseMenu && pauseMenu.TryGetComponent<Animator>(out Animator animator))
+		{
+			bool open = animator.GetBool("Open");
+			animator.SetBool("Open", !open);
+		}
+	}
 
     /// <summary>
     /// Switch to provided state
