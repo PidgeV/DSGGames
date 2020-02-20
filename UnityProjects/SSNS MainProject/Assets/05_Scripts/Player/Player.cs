@@ -30,7 +30,6 @@ public class Player : Controller
 	private void Awake()
 	{
 		playerInput = GetComponent<PlayerInput>();
-
 		// When a player starts the game this grabs an open ship
 		foreach (GameObject ship in GameObject.FindGameObjectsWithTag("Player"))
 		{
@@ -264,6 +263,18 @@ public class Player : Controller
 	#endregion
 
 	#region [Action Map] Menu Navigation
+
+	public void OnPause(InputValue input)
+	{
+		if (input.isPressed)
+		{
+			GameObject pauseMenu = GameObject.Find("PauseMenu");
+
+			if (pauseMenu.TryGetComponent<Animator>(out Animator animator)) {
+				animator.SetBool("Open", !animator.GetBool("Open"));
+			}
+		}
+	}
 
 	public void OnNavigate()
 	{
