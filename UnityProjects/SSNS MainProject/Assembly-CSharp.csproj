@@ -70,6 +70,7 @@
     <Compile Include="Assets\05_Scripts\Area\TutorialSpawner.cs" />
     <Compile Include="Assets\05_Scripts\Area\Wave Behaviours\WaveBehaviour.cs" />
     <Compile Include="Assets\05_Scripts\DelayCollider.cs" />
+    <Compile Include="Assets\05_Scripts\DelayDamage.cs" />
     <Compile Include="Assets\05_Scripts\Demo\DemoManager.cs" />
     <Compile Include="Assets\05_Scripts\Demo\DemoValue.cs" />
     <Compile Include="Assets\05_Scripts\Demo\NewDemoManager.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="Assets\05_Scripts\Node\NodeManagerUI.cs" />
     <Compile Include="Assets\05_Scripts\Player\AmmoCounter.cs" />
     <Compile Include="Assets\05_Scripts\Player\Player.cs" />
+    <Compile Include="Assets\05_Scripts\Player\PlayerRespawn.cs" />
     <Compile Include="Assets\05_Scripts\Player\ShipController.cs" />
     <Compile Include="Assets\05_Scripts\Player\ShipObjects\ShipBehaviour.cs" />
     <Compile Include="Assets\05_Scripts\Player\ShipObjects\ShipStats.cs" />

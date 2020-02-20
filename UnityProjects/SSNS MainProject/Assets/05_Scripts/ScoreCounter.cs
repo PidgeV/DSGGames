@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class ScoreCounter : MonoBehaviour
 {
-    [SerializeField] static int Score;
+	[SerializeField] private ScoreDisplay scoreDisplay;
+
+	[SerializeField] static int Score;
     [SerializeField] int thisScore;
 
     enum TypeOfHit { ShieldHit, DestroyHit };
@@ -20,7 +22,9 @@ public class ScoreCounter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Score = 0;
+		scoreDisplay = GameObject.FindObjectOfType<ScoreDisplay>();
+
+		Score = 0;
     
         if (gameObject.tag == "Player")
         {
@@ -30,10 +34,10 @@ public class ScoreCounter : MonoBehaviour
 
     private void Update()
     {
-        if (isPlayer)
-        {
-            playerText.text = "Score: " + Score;
-        }
+        //if (isPlayer)
+        //{
+        //    playerText.text = "Score: " + Score;
+        //}
     }
 
 
@@ -46,8 +50,10 @@ public class ScoreCounter : MonoBehaviour
         if (thingShot == null)
         {
             if (typeOfHit == TypeOfHit.ShieldHit)
-            {
-                Score += thisScore;
+			{
+				if (scoreDisplay) scoreDisplay.AddScore(thisScore);
+
+				Score += thisScore;
             }
         }
         else if (thingShot.TryGetComponent(out ShotThing st))
@@ -55,6 +61,8 @@ public class ScoreCounter : MonoBehaviour
 
             if (st.whoSent == ShotThing.shotFrom.Player && typeOfHit == TypeOfHit.ShieldHit)
             {
+				if (scoreDisplay) scoreDisplay.AddScore(thisScore);
+
                 Score += thisScore;
             }
         }
