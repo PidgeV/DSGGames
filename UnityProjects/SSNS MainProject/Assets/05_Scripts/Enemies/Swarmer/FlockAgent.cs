@@ -31,6 +31,8 @@ public class FlockAgent : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (TryGetComponent(out HealthAndShields health) && health.Invincible) return;
+
         if(explosionVFXPrefab != null) Instantiate(explosionVFXPrefab, transform.position, transform.rotation);
         Destroy(gameObject);
     }
