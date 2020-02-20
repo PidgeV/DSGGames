@@ -51,7 +51,7 @@ public class AreaManager : MonoBehaviour
     {
         areaEnded = true;
 
-        //Destroy(areaEffect);
+        Destroy(areaEffect);
 
         // Grabs current reward and uses it on the ship
         Reward reward = NodeManager.Instance.CurrentNode.Reward;
@@ -131,8 +131,8 @@ public class AreaManager : MonoBehaviour
         nextAreaLoaded = false;
         lastAreaDestroyed = false;
 
-        //areaEffect = GameObject.Instantiate(areaEffectPrefab, currentArea.location, Quaternion.identity);
-        //areaEffect.transform.localScale = Vector3.one * currentArea.size * 2;
+        areaEffect = GameObject.Instantiate(areaEffectPrefab, currentArea.location, Quaternion.identity);
+        areaEffect.transform.localScale = Vector3.one * currentArea.size * 2;
 
         float currentTime = Time.time;
 
