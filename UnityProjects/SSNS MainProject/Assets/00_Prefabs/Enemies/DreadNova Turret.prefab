@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6954068233691288909}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Bullet spawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,8 +42,7 @@ GameObject:
   - component: {fileID: 6144039130059738991}
   - component: {fileID: 2372013640538777953}
   - component: {fileID: 8137766117900137070}
-  - component: {fileID: 544191465024094397}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,7 +60,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.06099091, y: 0.057147916, z: 0.057147916}
   m_Children:
-  - {fileID: 4579233463786675602}
+  - {fileID: 1373193893417193824}
   m_Father: {fileID: 5496556695023662048}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -125,13 +124,45 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 3909233067320746374, guid: 51db0d498dcb95a48850ce62e4e5a045, type: 3}
---- !u!114 &544191465024094397
+--- !u!1 &3828221871227305166
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1373193893417193824}
+  - component: {fileID: 8059159777213940266}
+  m_Layer: 9
+  m_Name: BaseRotationEmpty
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1373193893417193824
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3828221871227305166}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 4579233463786675602}
+  m_Father: {fileID: 4442361066804546513}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8059159777213940266
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 581222275158356502}
+  m_GameObject: {fileID: 3828221871227305166}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 420861ad52c209544a6578a9732691fb, type: 3}
@@ -156,7 +187,7 @@ GameObject:
   - component: {fileID: 7994947110618660541}
   - component: {fileID: 4400498544131362116}
   - component: {fileID: 8236435552936401397}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,11 +202,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4853719593281310330}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 23.738668}
-  m_LocalScale: {x: 0.8113878, y: 0.7813342, z: 0.86595124}
+  m_LocalPosition: {x: 0, y: 0, z: 23.738686}
+  m_LocalScale: {x: 0.8113878, y: 0.78133464, z: 0.8659517}
   m_Children:
   - {fileID: 6954068233691288909}
-  m_Father: {fileID: 4442361066804546513}
+  m_Father: {fileID: 1373193893417193824}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4621152204172180468
@@ -268,8 +299,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5496556695023662048}
-  m_Layer: 0
-  m_Name: TurretDreadUV
+  m_Layer: 9
+  m_Name: DreadNova Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
