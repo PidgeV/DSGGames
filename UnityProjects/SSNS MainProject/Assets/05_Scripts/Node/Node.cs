@@ -24,17 +24,17 @@ public class Node : MonoBehaviour, IEnumerable<Node>
 
     public void ActiveColor()
     {
-        ring.color = Color.green;
+      //  ring.color = Color.green;
     }
 
     public void DestinationColor()
     {
-        ring.color = new Color32(255, 165, 0, 255);
+       // ring.color = new Color32(255, 165, 0, 255);
     }
 
     public void ResetColor()
     {
-        ring.color = Color.white;
+      //  ring.color = Color.white;
     }
 
     /// <summary>

@@ -10,6 +10,12 @@ public class NodeManager : MonoBehaviour
 {
     public static NodeManager Instance;
 
+	[SerializeField] private GameObject node_Default;
+	[SerializeField] private GameObject node_Currrent;
+	[SerializeField] private GameObject node_Next;
+	[SerializeField] private GameObject node_Boss;
+
+
     #region Constant Values
 
     private const float MAX_SELECT_TIME = 10f;
@@ -110,8 +116,9 @@ public class NodeManager : MonoBehaviour
         selectingNode = false;
         nodeSelected = false;
 
-        // Stores the last node
-        lastNode = currentNode;
+		// Stores the last node
+		//lastNode
+		lastNode = currentNode;
 
         currentNode = node;
 
