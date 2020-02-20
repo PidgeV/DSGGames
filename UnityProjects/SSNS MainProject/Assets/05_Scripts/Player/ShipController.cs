@@ -26,6 +26,7 @@ public class ShipController : MonoBehaviour
 	[SerializeField] private Transform gunnerObject;
 	[SerializeField] private Transform barrelL;
 	[SerializeField] private Transform barrelR;
+	[SerializeField] private Transform gunnerslockUI;
 	[SerializeField] private GunController gunController;
     ShieldProjector shieldProjector;
 
@@ -33,6 +34,7 @@ public class ShipController : MonoBehaviour
 	[SerializeField] private bool invertedControls;
 	[SerializeField] private bool unlimitedBoost;
 	[SerializeField] private bool limitRotation;
+	[SerializeField] private bool lockOn;
 
 	[Header("Behaviour")]
 	public ShipBehaviour myBehaviour;
@@ -90,6 +92,7 @@ public class ShipController : MonoBehaviour
 
 	private Vector2 strafeDirection;
 	private Vector2 rotateDirection;
+	private Vector2 gunnerCenter;
 
 	private Vector3 finalStrafeVelocity;
 	private Vector3 finalThrustVelocity;
@@ -101,7 +104,6 @@ public class ShipController : MonoBehaviour
 	private bool boosting;
 	private bool roleSwap;
 	private bool stopThrust;
-	private bool lockOn;
 	private bool shooting_Gunner;
 	private bool shooting_Pilot;
 
@@ -135,6 +137,8 @@ public class ShipController : MonoBehaviour
 		// Set the cameras size and positions
 		gunnerCamera.rect = new Rect(0, 0.0f, 1.0f, 0.5f);
 		pilotCamera.rect = new Rect(0, 0.5f, 1.0f, 0.5f);
+
+		gunnerCenter = gunnerslockUI.transform.position;
 
 		// Set the max values of our boost Gauge
 		boostGauge = myStats.maxBoostGauge;
@@ -298,46 +302,62 @@ public class ShipController : MonoBehaviour
 	/// </summary>
 	public void UpdateCamera()
 	{
-		if (lockOn && lockOnTarget)
+		gunnerPivot.rotation = Quaternion.identity;
+		gunnerObject.Rotate(new Vector2(-gunVelocity.y, gunVelocity.x) * Time.deltaTime);
+
+		// POSITION
+		// Where the camera SHOULD be relative to the ship model
+		Vector3 shipPos = shipModel.transform.position;
+
+		Vector3 yPos = -6 * shipModel.transform.up;
+		Vector3 zPos = -1 * shipModel.transform.forward;
+
+		gunnerPivot.position = Vector3.Lerp(gunnerPivot.position, shipPos + yPos + zPos, 0.25f);
+
+		// If we don't have a target currently locking
+		if (lockOnTarget == null)
 		{
-			//float speed;
-			//if (currentWeapon == WeaponType.Laser)
-			//{
-			//	speed = Mathf.Infinity;
-			//}
-			//else
-			//{
-			//	speed = currentShotInfo.Speed;
-			//}
-
-			//Vector3 intercept = InterceptCalculationClass.FirstOrderIntercept(shotSpawnLocation.position, rigidbody.velocity, speed, lockOnTarget.transform.position, lockOnTarget.GetComponent<Rigidbody>().velocity);
-			//gunnerCamParent.LookAt(intercept);
-			////gunRotation = gunnerCamera.transform.eulerAngles;
+			CheckForTarget();
 		}
-		else
-		{   // Reset the  gunners camera to zero
-			gunnerPivot.rotation = Quaternion.identity;
-			gunnerObject.Rotate(new Vector2(-gunVelocity.y, gunVelocity.x) * Time.deltaTime);
 
-			// POSITION
-			// Where the camera SHOULD be relative to the ship model
-			Vector3 shipPos = shipModel.transform.position;
 
-			Vector3 yPos = -6 * shipModel.transform.up;
-			Vector3 zPos = -1 * shipModel.transform.forward;
+		// (BLOCKER) If we cant Lock on
+		if (lockOn == false) return;
 
-			gunnerPivot.position = shipPos + yPos + zPos;
+		if (lockOnTarget != null)
+		{
+			Vector2 newPoint = gunnerCamera.WorldToScreenPoint(lockOnTarget.transform.position);
+			float unlockDist = 60;
 
-			//RaycastHit hit;
-			//// Does the ray intersect any objects excluding the player layer
-			//if (lockOn == false && Physics.Raycast(gunnerCamera.transform.position, gunnerCamera.transform.forward, out hit, Mathf.Infinity))
-			//{
-			//	if (hit.collider.gameObject.tag == "Enemy" ||
-			//		hit.collider.gameObject.tag == "Shield")
-			//	{
-			//		lockOnTarget = hit.collider.gameObject;
-			//	}
-			//}
+			if (Vector2.Distance(gunnerCenter, newPoint) < unlockDist)
+			{
+				gunnerslockUI.transform.position = newPoint;
+			}
+			else
+			{
+				gunnerslockUI.transform.position = gunnerCenter;
+				lockOnTarget = null;
+			}
+		}
+	}
+
+	/// <summary>
+	/// Raycast forward and see if the gunners hovering an enemy
+	/// </summary>
+	public void CheckForTarget()
+	{     
+		// (BLOCKER) If we cant Lock on
+		if (lockOn == false) return;
+
+		RaycastHit hit;
+
+		Vector3 origin = gunnerCamera.transform.position;
+		Vector3 direction = gunnerCamera.transform.forward;
+
+		if (Physics.Raycast(origin, direction, out hit, Mathf.Infinity, LayerMask.GetMask("Enemies")))
+		{
+			Debug.Log("Locked ON!", hit.collider.gameObject);
+			lockOnTarget = hit.collider.gameObject;
 		}
 	}
 
@@ -762,7 +782,6 @@ public class ShipController : MonoBehaviour
 	/// <summary> Toggle the lockOn member </summary>
 	public void LockOn(bool pressed)
 	{
-		lockOn = pressed;
 	}
 
 	/// <summary> Toggle the boosting member </summary>
