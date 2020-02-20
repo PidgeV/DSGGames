@@ -112,6 +112,10 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         UpdateState();
+
+        Physics.IgnoreLayerCollision(13, 13); // cause projectiles to ignore projectiles
+        Physics.IgnoreLayerCollision(12, 12); // cause shields to ignore shields
+        Physics.IgnoreLayerCollision(8, 12); // cause obstacles to ignore shields
     }
 
     private void Update()

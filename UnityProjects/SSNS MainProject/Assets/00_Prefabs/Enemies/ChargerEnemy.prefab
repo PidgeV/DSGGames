@@ -58,14 +58,12 @@ GameObject:
   - component: {fileID: 3107085776561158198}
   - component: {fileID: 2083052501916966413}
   - component: {fileID: 5065271178767460442}
-  - component: {fileID: 7622716379943830873}
   - component: {fileID: 5702806089406881496}
   - component: {fileID: 3107085776561158192}
   - component: {fileID: 7371385028968951949}
   - component: {fileID: 5355516276204472101}
   - component: {fileID: -1809771570838268277}
   - component: {fileID: -3852444204649308673}
-  - component: {fileID: -4069400658031388453}
   m_Layer: 9
   m_Name: ChargerEnemy
   m_TagString: Enemy
@@ -165,30 +163,7 @@ MonoBehaviour:
   currentShield: 0
   Invincible: 0
   DestroyOnDeath: 1
-  regenSpeed: 1
---- !u!114 &7622716379943830873
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3107085776561158194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ef5227dfa6fe724096ffbda88a48183, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShieldMeshRenderer: {fileID: 3354876196551011726}
-  BaseColor: {r: 6.5882354, g: 4.2352943, b: 0.34509805, a: 1}
-  BrokenColor: {r: 7.1215687, g: 0.4392157, b: 0, a: 1}
-  DissolveVFX: {fileID: 3815312508183173413, guid: ddffe4b2b0537394db51f273f9c2d557,
-    type: 3}
-  ImpactVFX: {fileID: 5266171281214306815, guid: b9048ee1f6b3b8d46a2a7682ceaffd9b,
-    type: 3}
-  HitVFX: {fileID: 4814854336648323653, guid: 428a07eb300045945a363fa54421b206, type: 3}
-  shipCollider: {fileID: 0}
-  ResizeShield: 0
-  fadeType: 1
+  regenSpeed: 2
 --- !u!114 &5702806089406881496
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -370,19 +345,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!135 &-4069400658031388453
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3107085776561158194}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 15
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1716442560375955551
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -629,6 +591,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4516505457575865408, guid: c0c0ed7488653d34baf9950ba7dc7311,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4516505457575865408, guid: c0c0ed7488653d34baf9950ba7dc7311,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4516505457575865408, guid: c0c0ed7488653d34baf9950ba7dc7311,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1200
+      objectReference: {fileID: 0}
     - target: {fileID: 645844403578658387, guid: c0c0ed7488653d34baf9950ba7dc7311,
         type: 3}
       propertyPath: m_Name
@@ -644,12 +621,6 @@ PrefabInstance:
 --- !u!4 &65695769877998401 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4516505457575865408, guid: c0c0ed7488653d34baf9950ba7dc7311,
-    type: 3}
-  m_PrefabInstance: {fileID: 4486918097373939457}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &3354876196551011726 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 1209874130760428175, guid: c0c0ed7488653d34baf9950ba7dc7311,
     type: 3}
   m_PrefabInstance: {fileID: 4486918097373939457}
   m_PrefabAsset: {fileID: 0}

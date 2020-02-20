@@ -132,9 +132,6 @@ public class ShipController : MonoBehaviour
 	/// </summary>
 	private void Awake()
 	{
-		Physics.IgnoreLayerCollision(13, 13); // cause projectiles to ignore projectiles
-		Physics.IgnoreLayerCollision(12, 12); // cause shields to ignore shields
-
 		// Set the cameras size and positions
 		gunnerCamera.rect = new Rect(0, 0.0f, 1.0f, 0.5f);
 		pilotCamera.rect = new Rect(0, 0.5f, 1.0f, 0.5f);
@@ -554,13 +551,13 @@ public class ShipController : MonoBehaviour
 
         LayerMask enemyLayer = LayerMask.GetMask("Enemies");
         enemyLayer += LayerMask.GetMask("Swarm");
-        RaycastHit[] hits = Physics.SphereCastAll(barrelL.transform.position, 15f, barrelL.transform.forward.normalized, laser.Length, enemyLayer);
+        RaycastHit[] hits = Physics.SphereCastAll(barrelL.transform.position, laser.radius, barrelL.transform.forward.normalized, laser.Length, enemyLayer);
 
         foreach (RaycastHit hit in hits)
         {
             if (hit.collider.TryGetComponent(out HealthAndShields hp))
             {
-                hp.TakeDamage(laser.Damage / 10, laser.Damage);
+                hp.TakeDamage(laser.Damage / 3, laser.Damage);
             }
         }
     }

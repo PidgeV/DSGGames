@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 645844403578658387}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 100, y: 99.99994, z: 99.99994}
+  m_LocalScale: {x: 1800, y: 1800, z: 1800}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -91,7 +91,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.009970879
+  m_Radius: 0.01
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6103393024892273190
 MonoBehaviour:
@@ -114,5 +114,4 @@ MonoBehaviour:
     type: 3}
   HitVFX: {fileID: 4814854336648323653, guid: 428a07eb300045945a363fa54421b206, type: 3}
   shipCollider: {fileID: 0}
-  ResizeShield: 0
   fadeType: 0
