@@ -22,6 +22,12 @@ public class GameManager : MonoBehaviour
 
     private System.Random random;
 
+    private const int MAX_RESPAWN_TIME = 5;
+
+    private float respawnTime;
+
+    private bool respawn;
+
     /// <summary>
     /// Switch to provided state
     /// </summary>
@@ -38,7 +44,10 @@ public class GameManager : MonoBehaviour
     /// </summary>
     private void UpdateState()
     {
-        HealthAndShields healthAndShields = Instance.shipController.GetComponent<HealthAndShields>();
+        if (!shipController)
+            shipController = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipController>();
+
+        HealthAndShields healthAndShields = shipController.GetComponent<HealthAndShields>();
 
         switch (gameState)
         {
@@ -63,9 +72,33 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void CheckForRespawn()
+    {
+        if (respawn)
+        {
+            respawnTime += Time.deltaTime;
+
+            if (respawnTime >= MAX_RESPAWN_TIME)
+            {
+                respawnTime = 0;
+                respawn = false;
+
+                if (shipController && shipController.TryGetComponent(out PlayerRespawn playerRespawn))
+                {
+                    playerRespawn.Respawn();
+                }
+            }
+        }
+        else if (shipController && shipController.TryGetComponent(out HealthAndShields health) && health.currentLife <= 0)
+        {
+            respawn = true;
+
+            // TODO: Some effect for respawning
+        }
+    }
+
     private void Awake()
     {
-        
         if (Instance != null)
         {
             Destroy(Instance.gameObject);
@@ -73,14 +106,32 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
 
-        shipController = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipController>();
-
         random = new System.Random(seed);
     }
 
     private void Start()
     {
         UpdateState();
+    }
+
+    private void Update()
+    {
+        switch (gameState)
+        {
+            case GameState.NODE_TRANSITION:
+                break;
+            case GameState.BATTLE:
+                CheckForRespawn();
+                break;
+            case GameState.BATTLE_END:
+                break;
+            case GameState.NODE_SELECTION:
+                break;
+            case GameState.PAUSE:
+                break;
+            case GameState.GAME_END:
+                break;
+        }
     }
 
     public GameState GameState { get { return gameState; } }

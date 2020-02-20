@@ -286,20 +286,9 @@ public class NewDemoManager : MonoBehaviour
 	/// </summary>
 	public void RespawnPlayer()
 	{
-		if (playerObj)
+		if (player && player.TryGetComponent(out PlayerRespawn respawn))
 		{
-			if (AreaManager.Instance)
-			{
-				playerObj.transform.rotation = Quaternion.Euler(Vector3.zero);
-				playerObj.transform.position = AreaManager.Instance.PlayerDestination;
-			}
-			else
-			{
-				playerObj.transform.position = originalPos;
-				playerObj.transform.rotation = originalRot;
-			}
-
-			playerObj.gameObject.SetActive(true);
+			respawn.Respawn();
 		}
 	}
 

@@ -16,6 +16,7 @@ public class AreaManager : MonoBehaviour
     public event AreaLoadEventHandler AreaLoaded;
 
     private const int MIN_TRAVEL_TIME = 10;
+    private const int MAX_OUTSIDE_TIME = 10;
 
     [SerializeField] private Area lastArea;
     [SerializeField] private Area currentArea;
@@ -32,6 +33,8 @@ public class AreaManager : MonoBehaviour
     private float transitionTime;
 
     private float startTravelTime;
+
+    private float outsideTime;
 
     /// <summary>
     /// Determines if the player is outside the current area.
@@ -131,8 +134,8 @@ public class AreaManager : MonoBehaviour
         nextAreaLoaded = false;
         lastAreaDestroyed = false;
 
-        //areaEffect = GameObject.Instantiate(areaEffectPrefab, currentArea.location, Quaternion.identity);
-        //areaEffect.transform.localScale = Vector3.one * currentArea.size * 2;
+        areaEffect = Instantiate(areaEffectPrefab, currentArea.location, Quaternion.identity);
+        areaEffect.transform.localScale = Vector3.one * currentArea.size * 2;
 
         float currentTime = Time.time;
 
@@ -217,6 +220,23 @@ public class AreaManager : MonoBehaviour
         else if (nextAreaLoaded && lastAreaDestroyed)
         {
             StartCoroutine(TransitionAreas());
+        }
+
+        if (IsPlayerOutside(GameManager.Instance.shipController.transform))
+        {
+            outsideTime += Time.deltaTime;
+
+            if (outsideTime >= MAX_OUTSIDE_TIME)
+            {
+                if (NodeManager.Instance.CurrentNode.Type == NodeType.Reward)
+                {
+                    GameManager.Instance.SwitchState(GameState.BATTLE_END);
+                }
+                else
+                {
+                    // Kill player and respawn ?
+                }
+            }
         }
     }
 

@@ -21,6 +21,7 @@ namespace SNSSTypes
 
     public enum GameState
     {
+        MAIN_MENU,
         NODE_TRANSITION,
         BATTLE,
         BATTLE_END,
