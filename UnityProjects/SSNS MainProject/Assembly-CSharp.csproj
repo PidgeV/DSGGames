@@ -236,6 +236,7 @@
     <Compile Include="Assets\Misselaineous\Cinemachine\Timeline\CinemachineMixer.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Timeline\CinemachineShot.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Timeline\CinemachineTrack.cs" />
+    <Compile Include="Assets\PauseMenu.cs" />
     <None Include="Assets\Misselaineous\Cinemachine\ReleaseNotes.txt" />
     <None Include="Assets\07_Sprites\Menus\MenuColorList.txt" />
     <Reference Include="Unity.Timeline.Editor">
