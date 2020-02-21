@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CinematicController : MonoBehaviour
 {
@@ -47,15 +48,20 @@ public class CinematicController : MonoBehaviour
 		animator.SetTrigger("PlayGame");
 	}
 
+	public void LoadGame()
+	{
+		SceneManager.LoadScene(1);
+	}
+
 	public void QuitGame()
 	{
-
+		Application.Quit();
 	}
 
 	public void Return()
 	{
-		Debug.Log("??");
 	}
+
 
 	public void StartTransition()
 	{

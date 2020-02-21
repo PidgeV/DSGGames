@@ -268,7 +268,6 @@ public class Player : Controller
 	{
 		if (input.isPressed == false)
 		{
-			print("??");
 			GameManager.Instance.PauseGame();
 		}
 	}
