@@ -598,10 +598,8 @@ public class ShipController : MonoBehaviour
             Quaternion rot = Quaternion.LookRotation(barrelL.transform.forward);
             chargedShot = Instantiate(currentShotInfo.gameObject, barrelL.position, rot).GetComponent<ChargedShotBehaviour>();
             chargedShot.transform.parent = barrelL.transform;
-            if (TryGetComponent(out ShieldProjector shield))
-            {
-                shield.IgnoreCollider(chargedShot.GetComponent<Collider>());
-            }
+
+            shieldProjector.IgnoreCollider(chargedShot.GetComponent<Collider>());
         }
     }
 

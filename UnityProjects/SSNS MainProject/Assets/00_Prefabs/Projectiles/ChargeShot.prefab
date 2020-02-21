@@ -82,9 +82,9 @@ MonoBehaviour:
     type: 3}
   maxChargeTime: 3
   minDamage: 5
-  maxDamage: 50
-  minScale: 0.1
-  maxScale: 0.5
+  maxDamage: 75
+  minScale: 0.05
+  maxScale: 0.1
 --- !u!82 &-235943445137922597
 AudioSource:
   m_ObjectHideFlags: 0

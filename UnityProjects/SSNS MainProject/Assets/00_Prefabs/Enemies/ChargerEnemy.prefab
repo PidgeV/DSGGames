@@ -156,8 +156,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21bcb8e5aef53064495f71d628833b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 50
-  maxShield: 25
+  maxLife: 15
+  maxShield: 15
   regenInterval: 5
   currentLife: 0
   currentShield: 0
@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreDisplay: {fileID: 0}
-  thisScore: 0
+  thisScore: 50
   typeOfHit: 0
   playerText: {fileID: 0}
 --- !u!114 &5355516276204472101
@@ -231,7 +231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreDisplay: {fileID: 0}
-  thisScore: 0
+  thisScore: 150
   typeOfHit: 1
   playerText: {fileID: 0}
 --- !u!114 &-1809771570838268277
@@ -363,6 +363,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &3812548441896937604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3941278785948883282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6286453dae1153842b3a801a13a42fe0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreDisplay: {fileID: 0}
+  thisScore: 50
+  typeOfHit: 0
+  playerText: {fileID: 0}
 --- !u!1001 &1716442560375955551
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -370,21 +386,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7509524241790833359}
     m_Modifications:
-    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyThruster
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275373, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -440,6 +441,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyThruster
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1225102730936949435, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_Layer
@@ -474,11 +490,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3107085776561158193}
     m_Modifications:
-    - target: {fileID: -927199367670048503, guid: e70bf82ceeff89147bfa046fd5c85421,
-        type: 3}
-      propertyPath: m_Name
-      value: SNSS_ChargerShip_Model (1)
-      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: e70bf82ceeff89147bfa046fd5c85421,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -534,6 +545,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: e70bf82ceeff89147bfa046fd5c85421,
+        type: 3}
+      propertyPath: m_Name
+      value: SNSS_ChargerShip_Model (1)
+      objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: e70bf82ceeff89147bfa046fd5c85421,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -554,11 +570,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3107085776561158193}
     m_Modifications:
-    - target: {fileID: 645844403578658387, guid: c0c0ed7488653d34baf9950ba7dc7311,
-        type: 3}
-      propertyPath: m_Name
-      value: Shield
-      objectReference: {fileID: 0}
     - target: {fileID: 4516505457575865408, guid: c0c0ed7488653d34baf9950ba7dc7311,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -628,6 +639,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1200
+      objectReference: {fileID: 0}
+    - target: {fileID: 645844403578658387, guid: c0c0ed7488653d34baf9950ba7dc7311,
+        type: 3}
+      propertyPath: m_Name
+      value: Shield
       objectReference: {fileID: 0}
     - target: {fileID: 6103393024892273190, guid: c0c0ed7488653d34baf9950ba7dc7311,
         type: 3}

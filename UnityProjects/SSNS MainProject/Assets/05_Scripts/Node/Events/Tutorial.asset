@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabsToSpawn:
   - {fileID: 8057410561316126089, guid: 7f15efc27668a13468b16d0b51f2b54d, type: 3}
-  - {fileID: 8464054742834353141, guid: f3149f3ba7921454b844f858390c7b62, type: 3}
   areaSize: 1000
   smokeAmount: 200
   asteroidAmount: 100

@@ -115,7 +115,7 @@ public class ShieldProjector : MonoBehaviour
 
 			SpawnShieldDissolve();
 
-			UpdateShieldCollider(false);
+			//UpdateShieldCollider(false);
 		}
 
 		// If we currently have a 0% shield and our new percent is anything above 0%
@@ -133,7 +133,7 @@ public class ShieldProjector : MonoBehaviour
 				ShieldMeshRenderer.material.SetColor("_BaseColor", GetColor);
 			}
 
-			UpdateShieldCollider(true);
+		//	UpdateShieldCollider(true);
 		}
 
 		// Update the damage percent

@@ -17,7 +17,7 @@ public class PlayerConnectionManager : MonoBehaviour
 		}
 
 		Instance = this;
-		DontDestroyOnLoad(gameObject);
+		//DontDestroyOnLoad(gameObject);
 	}
 
 	public void Join(Player newPlayer)
