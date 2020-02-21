@@ -128,9 +128,9 @@ public class NodeManager : MonoBehaviour
             Destroy(portals[0].transform.parent.gameObject);
         }
 
-        lastNode.ResetColor();
+        lastNode.UpdateVisual(currentNode.NodeInfo, null);
 
-        currentNode.ActiveColor();
+        currentNode.UpdateVisual(currentNode.NodeInfo, null);
 
         // Hides all UI except the gunner
         nodeUI.FadeGroups(false, false, true);
@@ -150,7 +150,7 @@ public class NodeManager : MonoBehaviour
 
         // Resets node color
         if (lastNode != null)
-            lastNode.ResetColor();
+            lastNode.UpdateVisual(currentNode.NodeInfo, null);
     }
 
     #region Player Selection
@@ -205,9 +205,8 @@ public class NodeManager : MonoBehaviour
 
         nodeUI.UpdatePilot(selectedNode, leftNode, rightNode);
 
-        currentNode.ActiveColor();
-        Choices[selectedIndex].ResetColor();
-        Choices[selectedIndex].DestinationColor();
+        currentNode.UpdateVisual(currentNode.NodeInfo, Choices[selectedIndex].NodeInfo);
+        Choices[selectedIndex].UpdateVisual(currentNode.NodeInfo, Choices[selectedIndex].NodeInfo);
 
         #endregion
     }

@@ -61,7 +61,9 @@ public class ShieldProjector : MonoBehaviour
 		ShieldMeshRenderer.material.SetColor("_FresnelColor", BaseColor);
 
         shieldCollider = GetComponent<SphereCollider>();
-        Physics.IgnoreCollision(shipCollider, shieldCollider);
+
+		if (shipCollider)
+			Physics.IgnoreCollision(shipCollider, shieldCollider);
 	}
 
 	// Update is called once per frame

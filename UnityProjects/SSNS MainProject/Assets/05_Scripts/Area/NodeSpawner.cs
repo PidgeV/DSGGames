@@ -43,7 +43,7 @@ public class NodeSpawner : MonoBehaviour
         {
             if (AreaManager.Instance.EnemiesDead)
             {
-                AreaManager.Instance.EndArea();
+                GameManager.Instance.SwitchState(GameState.BATTLE_END);
             }
         }
     }

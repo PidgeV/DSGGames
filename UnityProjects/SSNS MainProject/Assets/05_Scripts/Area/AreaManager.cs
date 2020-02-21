@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SNSSTypes;
+using UnityEngine.UI;
 
 /// <summary>
 /// Manager that handles each area (node)
@@ -15,12 +16,13 @@ public class AreaManager : MonoBehaviour
 
     public event AreaLoadEventHandler AreaLoaded;
 
-    private const int MIN_TRAVEL_TIME = 10;
+    private const int MIN_TRAVEL_TIME = 5;
     private const int MAX_OUTSIDE_TIME = 10;
 
     [SerializeField] private Area lastArea;
     [SerializeField] private Area currentArea;
     [SerializeField] private GameObject areaEffectPrefab;
+    [SerializeField] private Image outsideOverlay;
 
     private AreaState state;
 
@@ -222,7 +224,7 @@ public class AreaManager : MonoBehaviour
             StartCoroutine(TransitionAreas());
         }
 
-        if (IsPlayerOutside(GameManager.Instance.shipController.transform))
+        if (GameManager.Instance.GameState == GameState.BATTLE && IsPlayerOutside(GameManager.Instance.shipController.transform))
         {
             outsideTime += Time.deltaTime;
 
