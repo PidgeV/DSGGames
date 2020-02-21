@@ -560,6 +560,12 @@ public class ShipController : MonoBehaviour
         {
             laser.fadeIn = false;
         }
+
+        //Spawn shot effect
+        if(TryGetComponent(out ShotEffectSpawner effectSpawn))
+        {
+            effectSpawn.SpawnEffect(currentWeapon);
+        }
 	}
 
     void LaserOn()
