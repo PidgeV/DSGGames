@@ -292,11 +292,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5622021086648120736}
-  - component: {fileID: 3389620870335011402}
-  - component: {fileID: 1137948052489119147}
   - component: {fileID: 1768846636957905644}
   - component: {fileID: 7779302749484587794}
-  - component: {fileID: 9037543789995640107}
   m_Layer: 9
   m_Name: Left Generator
   m_TagString: Untagged
@@ -319,41 +316,6 @@ Transform:
   m_Father: {fileID: 7649470160110134923}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &3389620870335011402
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 712521122446004873}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 50
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1137948052489119147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 712521122446004873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ef5227dfa6fe724096ffbda88a48183, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShieldMeshRenderer: {fileID: 7685183912631147420}
-  BaseColor: {r: 0, g: 1, b: 0.74451804, a: 1}
-  BrokenColor: {r: 1, g: 0, b: 0.18766785, a: 1}
-  DissolveVFX: {fileID: 3815312508183173413, guid: ddffe4b2b0537394db51f273f9c2d557,
-    type: 3}
-  ImpactVFX: {fileID: 5266171281214306815, guid: b9048ee1f6b3b8d46a2a7682ceaffd9b,
-    type: 3}
-  HitVFX: {fileID: 4814854336648323653, guid: 428a07eb300045945a363fa54421b206, type: 3}
-  shipCollider: {fileID: 0}
-  fadeType: 0
 --- !u!114 &1768846636957905644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -389,22 +351,6 @@ MonoBehaviour:
   scoreDisplay: {fileID: 0}
   thisScore: 80
   typeOfHit: 0
-  playerText: {fileID: 0}
---- !u!114 &9037543789995640107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 712521122446004873}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6286453dae1153842b3a801a13a42fe0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreDisplay: {fileID: 0}
-  thisScore: 2500
-  typeOfHit: 1
   playerText: {fileID: 0}
 --- !u!1 &1268373666320553554
 GameObject:
@@ -776,10 +722,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 194390594244868684}
-  - component: {fileID: 3312304360599567067}
-  - component: {fileID: 1063320468130963246}
   - component: {fileID: 4063424365783989057}
-  - component: {fileID: 2518988153070584080}
   - component: {fileID: 5217936282721047914}
   m_Layer: 9
   m_Name: Right Generator
@@ -803,41 +746,6 @@ Transform:
   m_Father: {fileID: 7649470160110134923}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &3312304360599567067
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6796477096561291851}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 50
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1063320468130963246
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6796477096561291851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ef5227dfa6fe724096ffbda88a48183, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShieldMeshRenderer: {fileID: 670759933082544734}
-  BaseColor: {r: 0, g: 1, b: 0.74451804, a: 1}
-  BrokenColor: {r: 1, g: 0, b: 0.18766785, a: 1}
-  DissolveVFX: {fileID: 3815312508183173413, guid: ddffe4b2b0537394db51f273f9c2d557,
-    type: 3}
-  ImpactVFX: {fileID: 5266171281214306815, guid: b9048ee1f6b3b8d46a2a7682ceaffd9b,
-    type: 3}
-  HitVFX: {fileID: 4814854336648323653, guid: 428a07eb300045945a363fa54421b206, type: 3}
-  shipCollider: {fileID: 0}
-  fadeType: 0
 --- !u!114 &4063424365783989057
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -858,22 +766,6 @@ MonoBehaviour:
   Invincible: 0
   DestroyOnDeath: 0
   regenSpeed: 0
---- !u!114 &2518988153070584080
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6796477096561291851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6286453dae1153842b3a801a13a42fe0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreDisplay: {fileID: 0}
-  thisScore: 80
-  typeOfHit: 0
-  playerText: {fileID: 0}
 --- !u!114 &5217936282721047914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1398,12 +1290,6 @@ PrefabInstance:
 --- !u!4 &2821658336606809233 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4516505457575865408, guid: c0c0ed7488653d34baf9950ba7dc7311,
-    type: 3}
-  m_PrefabInstance: {fileID: 1838966760177123537}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &670759933082544734 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 1209874130760428175, guid: c0c0ed7488653d34baf9950ba7dc7311,
     type: 3}
   m_PrefabInstance: {fileID: 1838966760177123537}
   m_PrefabAsset: {fileID: 0}
@@ -2350,12 +2236,6 @@ PrefabInstance:
 --- !u!4 &4954185920454188371 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4516505457575865408, guid: c0c0ed7488653d34baf9950ba7dc7311,
-    type: 3}
-  m_PrefabInstance: {fileID: 8821729305702035731}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &7685183912631147420 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 1209874130760428175, guid: c0c0ed7488653d34baf9950ba7dc7311,
     type: 3}
   m_PrefabInstance: {fileID: 8821729305702035731}
   m_PrefabAsset: {fileID: 0}

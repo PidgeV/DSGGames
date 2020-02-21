@@ -364,6 +364,9 @@ public class NodeManager : MonoBehaviour
 
         currentNode = startNode;
         lastNode = null;
+
+        nodeUI.FadeGroups(false, false, true);
+        currentNode.UpdateVisual(currentNode.NodeInfo, null);
     }
 
     private void Start()

@@ -163,6 +163,8 @@ public class ShieldProjector : MonoBehaviour
 		GameObject impact = Instantiate(ImpactVFX, ShieldMeshRenderer.transform.parent) as GameObject;
 		impact.transform.localScale = Vector3.one * transform.localScale.magnitude * shieldCollider.radius;
 
+		transform.parent = transform.parent;
+
 		//GameObject hit = Instantiate(HitVFX, collision.contacts[0].point, Quaternion.identity) as GameObject;
 
 		// Get that objects material
