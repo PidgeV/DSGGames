@@ -5,6 +5,9 @@ using UnityEngine;
 public class DreadnovaSpawnState : FSMState
 {
     private DreadnovaController controller;
+
+    private bool warped;
+
     public DreadnovaSpawnState(DreadnovaController enemyController)
     {
         controller = enemyController;
@@ -13,11 +16,21 @@ public class DreadnovaSpawnState : FSMState
 
     public override void Act()
     {
-        controller.Warp(true);
     }
 
     public override void Reason()
     {
-        controller.PerformTransition(Transition.Defend);
+        if (GameManager.Instance.GameState == SNSSTypes.GameState.BATTLE)
+        {
+            if (!warped)
+            {
+                warped = true;
+                controller.WarpDreadnova(true);
+            }
+            else if (!controller.warping)
+            {
+                controller.PerformTransition(Transition.Defend);
+            }
+        }
     }
 }

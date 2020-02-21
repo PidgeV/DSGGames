@@ -38,6 +38,9 @@ public class AreaManager : MonoBehaviour
 
     private float outsideTime;
 
+    private Color outsideStartColor;
+    private Color outsideTargetColor;
+
     /// <summary>
     /// Determines if the player is outside the current area.
     /// </summary>
@@ -60,10 +63,14 @@ public class AreaManager : MonoBehaviour
 
         // Grabs current reward and uses it on the ship
         Reward reward = NodeManager.Instance.CurrentNode.Reward;
-        reward.UseReward(GameManager.Instance.shipController.myStats);
 
-        // Updates the ui for the reward
-        RewardManager.Instance.rewardUI.UpdateUI(reward);
+        if (reward != null)
+        {
+            reward.UseReward(GameManager.Instance.shipController.myStats);
+
+            // Updates the ui for the reward
+            RewardManager.Instance.rewardUI.UpdateUI(reward);
+        }
     }
 
     /// <summary>
@@ -73,6 +80,10 @@ public class AreaManager : MonoBehaviour
     /// <param name="nodeInfo">The node to load</param>
     public void LoadNewArea(NodeInfo nodeInfo)
     {
+        outsideTime = 0;
+
+        outsideOverlay.color = outsideStartColor;
+
         // Moves player to a spot away from any areas
         // TODO: Implement effects for scene transition
         GameManager.Instance.shipController.transform.position = Vector3.forward * -10000;
@@ -145,7 +156,8 @@ public class AreaManager : MonoBehaviour
 
         Debug.Log("Time Difference: " + time + " " + currentTime + " " + startTravelTime);
 
-        yield return new WaitForSeconds(time);
+        if (NodeManager.Instance.CurrentNode.Type != NodeType.Tutorial)
+            yield return new WaitForSeconds(time);
 
         AreaLoaded?.Invoke();
 
@@ -207,6 +219,13 @@ public class AreaManager : MonoBehaviour
         }
 
         Instance = this;
+
+        outsideStartColor = outsideOverlay.color;
+        outsideStartColor.a = 0;
+
+        outsideTargetColor = outsideOverlay.color;
+
+        outsideOverlay.color = outsideStartColor;
     }
 
     // Update is called once per frame
@@ -224,20 +243,33 @@ public class AreaManager : MonoBehaviour
             StartCoroutine(TransitionAreas());
         }
 
-        if (GameManager.Instance.GameState == GameState.BATTLE && IsPlayerOutside(GameManager.Instance.shipController.transform))
+        if (GameManager.Instance.GameState == GameState.BATTLE)
         {
-            outsideTime += Time.deltaTime;
-
-            if (outsideTime >= MAX_OUTSIDE_TIME)
+            if (IsPlayerOutside(GameManager.Instance.shipController.transform))
             {
-                if (NodeManager.Instance.CurrentNode.Type == NodeType.Reward)
+                outsideTime += Time.deltaTime;
+
+                if (outsideTime >= MAX_OUTSIDE_TIME)
                 {
-                    GameManager.Instance.SwitchState(GameState.BATTLE_END);
+                    outsideTime = 0;
+
+                    if (NodeManager.Instance.CurrentNode.Type == NodeType.Reward)
+                    {
+                        GameManager.Instance.SwitchState(GameState.BATTLE_END);
+                    }
+                    else
+                    {
+                        // Kill player and respawn ?
+                    }
                 }
-                else
-                {
-                    // Kill player and respawn ?
-                }
+            }
+            else
+            {
+                float range = currentArea.size - (currentArea.size - 150);
+                float input = Mathf.Abs(Vector3.Distance(GameManager.Instance.shipController.transform.position, currentArea.location));
+                float t = Mathf.Clamp((input - (currentArea.size - 150)) / range, 0, 1);
+                outsideOverlay.color = Color.Lerp(outsideStartColor, outsideTargetColor, t);
+                Debug.Log(range + " " + t + " " + input);
             }
         }
     }
@@ -251,8 +283,9 @@ public class AreaManager : MonoBehaviour
 	public int AreaSize { get { return currentArea.size; } }
     public bool EnemiesDead { get { return currentArea.enemies.childCount == 0; } }
     public int EnemyCount { get { return currentArea.enemies.childCount; } }
-    public Vector3 PlayerDestination { get { return currentArea.location - Vector3.forward * currentArea.size; } }
+    public Vector3 PlayerDestination { get { return currentArea.location - Vector3.forward * (currentArea.size - 200); } }
     public Vector3 FindRandomPosition { get { return currentArea.location + Random.insideUnitSphere * currentArea.size; } }
+    public Vector3 AreaLocation { get { return currentArea.location; } }
 }
 
 /// <summary>

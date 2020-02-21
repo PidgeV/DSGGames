@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnLookAt : MonoBehaviour
 {
-    [SerializeField] Transform point;
+    [SerializeField] public Transform point;
     [SerializeField] bool usePointUpVector;
     // Start is called before the first frame update
     void Start()

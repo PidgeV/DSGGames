@@ -9,6 +9,10 @@ public class DreadnovaShieldState : FSMState
     private HealthAndShields[] generators;
     private int shieldAliveCount;
 
+    private bool shieldGone;
+
+    private float shieldDissolve;
+
     public DreadnovaShieldState(DreadnovaController enemyController, HealthAndShields[] shieldGenerators)
     {
         controller = enemyController;
@@ -23,18 +27,51 @@ public class DreadnovaShieldState : FSMState
         }
     }
 
-    public override void Act()
+    public override void EnterStateInit()
     {
+        shieldGone = false;
+        shieldDissolve = 1;
     }
 
     public override void Reason()
     {
         if (shieldAliveCount <= 0)
         {
-            if (NodeManager.Instance.CurrentNode.Type == SNSSTypes.NodeType.MiniBoss)
-                controller.PerformTransition(Transition.NoShield);
+            if (shieldGone)
+            {
+                controller.dreadnovaShield.SetActive(false);
+
+                foreach (Transform child in controller.dreadnovaModel.transform)
+                {
+                    if (child.TryGetComponent(out Collider collider))
+                    {
+                        collider.enabled = true;
+                    }
+                }
+
+                if (NodeManager.Instance.CurrentNode.Type == SNSSTypes.NodeType.MiniBoss)
+                    controller.PerformTransition(Transition.NoShield);
+                else
+                    controller.PerformTransition(Transition.Attack);
+            }
             else
-                controller.PerformTransition(Transition.Attack);
+            {
+                shieldDissolve = Mathf.Max(shieldDissolve - 0.2f * Time.deltaTime, 0);
+
+                if (shieldDissolve == 0)
+                    shieldGone = true;
+            }
+        }
+    }
+
+    public override void Act()
+    {
+        foreach (Transform child in controller.dreadnovaShield.transform)
+        {
+            if (child.TryGetComponent(out MeshRenderer renderer))
+            {
+                renderer.material.SetFloat("_Dissolve", shieldDissolve);
+            }
         }
     }
 

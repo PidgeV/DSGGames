@@ -87,10 +87,10 @@ public class HealthAndShields : MonoBehaviour
 		if (invokeEvents == true)
 		{
 			// Invoke the On Life Change Event
-			onLifeChange.Invoke(currentLife, maxLife);
+			onLifeChange?.Invoke(currentLife, maxLife);
 
 			// Invoke the On Shield Change Event
-			onShieldChange.Invoke(currentShield, maxShield);
+			onShieldChange?.Invoke(currentShield, maxShield);
 		}
 	}
 

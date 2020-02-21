@@ -4,6 +4,7 @@ using UnityEngine;
 using SNSSTypes;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Handles switching from states
@@ -94,6 +95,9 @@ public class GameManager : MonoBehaviour
                 shipController.StopThrust = false;
                 AreaManager.Instance.LoadNewArea(NodeManager.Instance.CurrentNode.NodeInfo);
                 break;
+            case GameState.GAME_END:
+                SceneManager.LoadScene("MainMenu");
+                break;
         }
     }
 
@@ -114,7 +118,7 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
-        else if (shipController && shipController.TryGetComponent(out HealthAndShields health) && health.currentLife <= 0)
+        else if (shipController && !shipController.gameObject.activeSelf)
         {
             respawn = true;
 

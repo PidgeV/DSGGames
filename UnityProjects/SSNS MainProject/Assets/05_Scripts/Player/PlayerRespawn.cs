@@ -8,6 +8,8 @@ public class PlayerRespawn : MonoBehaviour
 
     private ShipController player;
 
+    private Camera camera;
+
     public void Respawn()
     {
         player.transform.position = AreaManager.Instance.PlayerDestination;
@@ -19,10 +21,22 @@ public class PlayerRespawn : MonoBehaviour
         }
 
         player.gameObject.SetActive(true);
+
+        Destroy(camera.gameObject);
+    }
+
+    private void OnDeath()
+    {
+        camera = new Camera();
     }
 
     private void Start()
     {
         TryGetComponent(out player);
+
+        if (TryGetComponent(out HealthAndShields health))
+        {
+            health.onDeath += OnDeath;
+        }
     }
 }
