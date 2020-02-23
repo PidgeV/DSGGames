@@ -154,7 +154,7 @@ public class AreaManager : MonoBehaviour
 
         float time = MIN_TRAVEL_TIME - Mathf.Min(Time.time - startTravelTime, 0);
 
-        Debug.Log("Time Difference: " + time + " " + currentTime + " " + startTravelTime);
+      //  Debug.Log("Time Difference: " + time + " " + currentTime + " " + startTravelTime);
 
         if (NodeManager.Instance.CurrentNode.Type != NodeType.Tutorial)
             yield return new WaitForSeconds(time);
@@ -269,7 +269,7 @@ public class AreaManager : MonoBehaviour
                 float input = Mathf.Abs(Vector3.Distance(GameManager.Instance.shipController.transform.position, currentArea.location));
                 float t = Mathf.Clamp((input - (currentArea.size - 150)) / range, 0, 1);
                 outsideOverlay.color = Color.Lerp(outsideStartColor, outsideTargetColor, t);
-                Debug.Log(range + " " + t + " " + input);
+              //  Debug.Log(range + " " + t + " " + input);
             }
         }
     }

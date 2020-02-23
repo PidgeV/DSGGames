@@ -238,6 +238,7 @@
     <Compile Include="Assets\Misselaineous\Cinemachine\Timeline\CinemachineShot.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Timeline\CinemachineTrack.cs" />
     <Compile Include="Assets\PauseMenu.cs" />
+    <Compile Include="Assets\Shaders\AreaIndicator\Scripts\AreaShaderController.cs" />
     <None Include="Assets\Misselaineous\Cinemachine\ReleaseNotes.txt" />
     <None Include="Assets\07_Sprites\Menus\MenuColorList.txt" />
     <Reference Include="Unity.Timeline.Editor">
