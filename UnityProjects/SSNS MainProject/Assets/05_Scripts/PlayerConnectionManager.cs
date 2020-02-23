@@ -23,6 +23,5 @@ public class PlayerConnectionManager : MonoBehaviour
 	public void Join(Player newPlayer)
 	{
 		players.Add(newPlayer);
-		Debug.Log("?");
 	}
 }
