@@ -148,7 +148,7 @@ public class AreaManager : MonoBehaviour
         lastAreaDestroyed = false;
 
         areaEffect = Instantiate(areaEffectPrefab, currentArea.location, Quaternion.identity);
-        areaEffect.transform.localScale = Vector3.one * currentArea.size * 2;
+        areaEffect.transform.localScale = Vector3.one * currentArea.size;
 
         float currentTime = Time.time;
 

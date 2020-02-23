@@ -608,9 +608,7 @@ public class ShipController : MonoBehaviour
 		if (shotTimer > currentShotInfo.FireRate)
 		{
 			shotTimer = 0;
-			Quaternion rot = Quaternion.LookRotation(transform.forward);
-			GameObject shot = Instantiate(currentShotInfo.gameObject, transform.position + transform.forward * 10, Quaternion.identity);
-			shot.transform.rotation = rot;
+			GameObject shot = Instantiate(currentShotInfo.gameObject, transform.position + transform.forward * 15, shipModel.transform.rotation);
 		}
 	}
 

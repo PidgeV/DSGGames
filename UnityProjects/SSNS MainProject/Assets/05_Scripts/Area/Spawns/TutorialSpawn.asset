@@ -15,7 +15,3 @@ MonoBehaviour:
   spawns:
   - type: 0
     count: 3
-  - type: 1
-    count: 3
-  - type: 2
-    count: 40

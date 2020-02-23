@@ -37,7 +37,7 @@ Material:
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 10
     - _Hardness: -200
-    - _IntersectionsSize: 0.6
+    - _IntersectionsSize: -0.4
     - _Radius: 150
     - _ReceivesSSR: 1
     - _RenderQueueType: 5
@@ -63,7 +63,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 0
     m_Colors:
-    - _Color: {r: 0.7988609, g: 15.396227, b: 15.319799, a: 0.078431375}
+    - _Color: {r: 26.566038, g: 2.1923923, b: 0.1253118, a: 0.078431375}
     - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _Position: {r: 0, g: 0, b: 0, a: 0}
