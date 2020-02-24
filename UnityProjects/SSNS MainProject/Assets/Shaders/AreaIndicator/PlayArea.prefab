@@ -317,7 +317,7 @@ MonoBehaviour:
   player: {fileID: 0}
   startColor: {r: 4, g: 0.047058824, b: 0, a: 0}
   transitionColor: {r: 5.992157, g: 0.5019608, b: 0, a: 0.11764706}
-  finalColor: {r: 0.043137256, g: 0.11372549, b: 0.015686275, a: 0.007843138}
+  finalColor: {r: 0.043137256, g: 0.11372549, b: 0.015686275, a: 0.003921569}
   Duration: 1
 --- !u!1 &7998061651209745816
 GameObject:

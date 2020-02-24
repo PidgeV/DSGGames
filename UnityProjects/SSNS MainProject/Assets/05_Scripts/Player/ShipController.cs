@@ -205,6 +205,15 @@ public class ShipController : MonoBehaviour
 		UpdateBoostGauge();
 		UpdateHealthAndShields();
 
+		if (boosting)
+		{
+			turnMultiplayer = Mathf.Lerp(turnMultiplayer, 0.4f, 0.03f);
+		}
+		else
+		{
+			turnMultiplayer = Mathf.Lerp(turnMultiplayer, 1f, 0.03f);
+		}
+
 		#region TODO -- Check if does anything
 		// Shooting
 		if (shooting_Gunner)
@@ -369,13 +378,14 @@ public class ShipController : MonoBehaviour
 		// Steer Ship
 		#region Steer Ship
 
+
 		if (rotating)
 		{
-			rotationSpeed = Mathf.Clamp(rotationSpeed + myStats.shipRotAcceleration, 0, myStats.rotationSpeed);
+			rotationSpeed = Mathf.Clamp(rotationSpeed + myStats.shipRotAcceleration , 0, myStats.rotationSpeed);
 		}
 		else
 		{
-			rotationSpeed = Mathf.Clamp(rotationSpeed - myStats.shipRotAcceleration, 0, myStats.rotationSpeed);
+			rotationSpeed = Mathf.Clamp(rotationSpeed - myStats.shipRotAcceleration , 0, myStats.rotationSpeed);
 		}
 
 		finalRotation = rotateDirection * rotationSpeed;
@@ -620,10 +630,11 @@ public class ShipController : MonoBehaviour
 	/// <summary> Move the gunners camera </summary>
 	public void AimGun(Vector2 velocity)
     {
-        gunVelocity = new Vector2(velocity.x, velocity.y) * gunRotationSpeed;
+		gunVelocity = new Vector2(velocity.x, velocity.y) * gunRotationSpeed;
     }
 
-    /// <summary> Steer the ship </summary>
+	/// <summary> Steer the ship </summary>
+	float turnMultiplayer = 1;
     public void SteerShip(Vector2 velocity)
     {
         // Check if we are steering
@@ -637,11 +648,11 @@ public class ShipController : MonoBehaviour
             // Check if we want inverted controls
             if (invertedControls == true)
             {
-                rotateDirection = new Vector2(velocity.y, velocity.x);
+				rotateDirection = new Vector2(velocity.y, velocity.x) * turnMultiplayer;
             }
             else
             {
-                rotateDirection = new Vector2(-velocity.y, velocity.x);
+				rotateDirection = new Vector2(-velocity.y, velocity.x) * turnMultiplayer;
             }
 
             rotating = true;
@@ -792,11 +803,11 @@ public class ShipController : MonoBehaviour
         // If our boost gauge is more than 5% full we allow the player to boost
         // This is to avoid stuttering  on a 0% gauge
         if (boostGauge > myStats.maxBoostGauge * 0.1f)
-        {
-            boosting = pressed;
+		{
+			boosting = pressed;
         }
         else
-        {
+		{
             boosting = false;
         }
     }
