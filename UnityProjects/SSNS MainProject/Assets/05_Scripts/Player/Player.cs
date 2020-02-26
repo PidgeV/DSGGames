@@ -4,12 +4,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using SNSSTypes;
 
-public enum ControlType
-{
-	CONTROLLER,
-	KEYBOARD_AND_MOUSE
-}
-
 public class Player : Controller
 {
 	// This players role (Pilot or Gunner)
@@ -17,11 +11,8 @@ public class Player : Controller
 
 	// The current gamestate
 	// This is used to change the playing action map to a menu action map
-	public GameState currentState = GameState.BATTLE;
-
-	// The Control Type (Controller or Keyboard)
-	public ControlType controlType = ControlType.CONTROLLER;
-
+	// public GameState currentState = GameState.BATTLE;
+	
 	public PlayerInput PlayerInput;
 	public ShipController Controller;
 
@@ -34,6 +25,22 @@ public class Player : Controller
 
 		DontDestroyOnLoad(gameObject);
 	}
+
+	private void Start()
+	{
+		PlayerConnectionManager.Instance.Join(this);
+	}
+
+	private void Update()
+	{
+		//// Keep our GameState up to date with the GameManager
+		//if (GameManager.Instance && currentState != GameManager.Instance.GameState)
+		//{
+		//	currentState = GameManager.Instance.GameState;
+		//	SetPlayerActionMap(currentState);
+		//}
+	}
+	#endregion
 
 	public void FindShip()
 	{
@@ -49,84 +56,11 @@ public class Player : Controller
 		}
 	}
 
-	private void Start()
+	public void SetPlayerActionMap(string targetMap)
 	{
-		PlayerConnectionManager.Instance.Join(this);
+		PlayerInput.SwitchCurrentActionMap(targetMap);
 	}
 
-	private void Update()
-	{
-		// Keep our GameState up to date with the GameManager
-		if (GameManager.Instance && currentState != GameManager.Instance.GameState)
-		{
-			currentState = GameManager.Instance.GameState;
-			SetPlayerActionMap(currentState);
-		}
-
-		#region Not Working
-		//// ONLY.. If were using a mouse and keyboard
-		//if (controlType == ControlType.KEYBOARD_AND_MOUSE)
-		//{
-		//	Vector2 screenCenter = new Vector2(Screen.width, Screen.height - (Screen.height / 2)) / 2f;
-		//	Vector2 mousePosition = Input.mousePosition;
-
-		//	if (myRole == PlayerRole.Gunner)
-		//	{
-		//		if (mousePosition.y < (Screen.height / 2))
-		//		{
-		//			Vector2 direction = mousePosition - screenCenter;
-
-		//			direction.x = direction.x / Screen.width;
-		//			direction.y = direction.y / Screen.height;
-
-		//			controller.AimGun(direction * 2);
-		//		}
-		//		else
-		//		{
-		//			controller.AimGun(new Vector2(0, 1));
-		//		}
-		//	}
-
-		//}
-		#endregion
-	}
-	#endregion
-
-	//
-	public void SetPlayerActionMap(GameState currentState)
-	{
-		if (currentState == GameState.NODE_SELECTION)
-		{
-			Debug.Log("Switch Current ActionMap (NodeMap)");
-			PlayerInput.SwitchCurrentActionMap("NodeMap");
-		}
-		else if (currentState == GameState.BATTLE)
-		{
-			Debug.Log("Switch Current ActionMap (Ship)");
-			PlayerInput.SwitchCurrentActionMap("Ship");
-		}
-	}
-
-	#region [Action Map] NodeMap
-	public void OnNavigate(InputValue input)
-	{
-		if (myRole == PlayerRole.Pilot)
-		{
-			if (input.Get<Vector2>().x >= 0.05f)
-			{
-				NodeManager.Instance.SelectNodeChoice(1);
-			}
-			else if (input.Get<Vector2>().x <= -0.05f)
-			{
-				NodeManager.Instance.SelectNodeChoice(-1);
-			}
-		}
-	}
-
-	#endregion
-
-	#region [Action Map] Ship Controller
-	/// <summary> Spawn the players role </summary>
 	public void SwapRole()
 	{
 		if (myRole == PlayerRole.None)
@@ -148,6 +82,8 @@ public class Player : Controller
 			}
 		}
 	}
+
+	#region [Action Map] Ship Controller
 
 	// Used to move the player
 	public override void OnLeftStick(InputValue input)
@@ -273,26 +209,38 @@ public class Player : Controller
 
 	public void OnPause(InputValue input)
 	{
-		if (input.isPressed == false)
+		if (input.isPressed)
 		{
-			GameManager.Instance.PauseGame();
+			// Tell the menu manager to pause the game
+			MenuManager.Instance.PauseGame(input.isPressed);
 		}
 	}
 
-	public void OnNavigate()
+	public void OnNavigate(InputValue input)
 	{
+		MenuManager menu = MenuManager.Instance;
+
 		// Unity automatically does this
+		if (menu.openMenu == OpenMenuType.NODE_MAP)
+		{
+			menu.NavigateNodeMap(input.Get<Vector2>());
+		}
+		else
+		{
+			menu.NavigateMenu(input.Get<Vector2>());
+		}
 	}
 
-	public void OnSelect()
+	public void OnSelect(InputValue input)
 	{
-		// Unity automatically does this
+		MenuManager menu = MenuManager.Instance;
+		menu.Select();
 	}
 
-	public void OnBack()
+	public void OnBack(InputValue input)
 	{
-		CinematicController.Instance.Return();
+		MenuManager menu = MenuManager.Instance;
+		menu.Return();
 	}
-
 	#endregion
 }

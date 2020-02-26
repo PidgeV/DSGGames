@@ -62,6 +62,9 @@ public class CinematicController : MonoBehaviour
 	{
 	}
 
+	public void Select()
+	{
+	}
 
 	public void StartTransition()
 	{

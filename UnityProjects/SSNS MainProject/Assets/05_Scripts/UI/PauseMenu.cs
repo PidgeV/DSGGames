@@ -7,7 +7,7 @@ public class PauseMenu : MonoBehaviour
 {
 	public void Resume()
 	{
-		GameManager.Instance.PauseGame();
+		MenuManager.Instance.PauseGame(false);
 	}
 
 	public void Options()

@@ -51,6 +51,11 @@ namespace SNSSTypes
 		FULL_FADE
 	}
 
+	public enum OpenMenuType
+	{
+		MENU,
+		NODE_MAP
+	}
 	//RegularShot: Normal
 	//EnergyShot: Regular shot, but for shields
 	//ChargeShot: Charges over course of 1.5 seconds, then fires

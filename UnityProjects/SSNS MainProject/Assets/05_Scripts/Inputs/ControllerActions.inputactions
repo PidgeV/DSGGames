@@ -99,7 +99,7 @@
                     "id": "2e7fbd87-1945-4d0e-82f1-7256f6c8835b",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Press(behavior=2)"
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -323,7 +323,7 @@
                     "id": "80ae22ff-02f7-438a-9d4d-176eda078f5e",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Press(behavior=2)"
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -418,7 +418,7 @@
                     "id": "f2310ccd-991c-425c-9639-7a304d475b5b",
                     "expectedControlType": "",
                     "processors": "",
-                    "interactions": "Press(behavior=2)"
+                    "interactions": ""
                 }
             ],
             "bindings": [
