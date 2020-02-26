@@ -134,6 +134,10 @@ public class ShipController : MonoBehaviour
 	/// </summary>
 	private void Awake()
 	{
+		foreach (Player player in GameObject.FindObjectsOfType<Player>()) {
+			player.FindShip();
+		}
+
 		// Set the cameras size and positions
 		gunnerCamera.rect = new Rect(0, 0.0f, 1.0f, 0.5f);
 		pilotCamera.rect = new Rect(0, 0.5f, 1.0f, 0.5f);
@@ -311,9 +315,6 @@ public class ShipController : MonoBehaviour
 	/// </summary>
 	public void UpdateCamera()
 	{
-		gunnerPivot.rotation = Quaternion.identity;
-		gunnerObject.Rotate(new Vector2(-gunVelocity.y, gunVelocity.x) * Time.deltaTime);
-
 		// POSITION
 		// Where the camera SHOULD be relative to the ship model
 		Vector3 shipPos = shipModel.transform.position;
@@ -323,30 +324,42 @@ public class ShipController : MonoBehaviour
 
 		gunnerPivot.position = Vector3.Lerp(gunnerPivot.position, shipPos + yPos + zPos, 0.25f);
 
-		// If we don't have a target currently locking
-		if (lockOnTarget == null)
+		if (numberOfPlayers > 1)
 		{
-			CheckForTarget();
+
+			gunnerPivot.rotation = Quaternion.identity;
+			gunnerObject.Rotate(new Vector2(-gunVelocity.y, gunVelocity.x) * Time.deltaTime);
+
+		
+			// If we don't have a target currently locking
+			if (lockOnTarget == null)
+			{
+				CheckForTarget();
+			}
+
+
+			// (BLOCKER) If we cant Lock on
+			if (lockOn == false) return;
+
+			if (lockOnTarget != null)
+			{
+				Vector2 newPoint = gunnerCamera.WorldToScreenPoint(lockOnTarget.transform.position);
+				float unlockDist = 60;
+
+				if (Vector2.Distance(gunnerCenter, newPoint) < unlockDist)
+				{
+					gunnerslockUI.transform.position = newPoint;
+				}
+				else
+				{
+					gunnerslockUI.transform.position = gunnerCenter;
+					lockOnTarget = null;
+				}
+			}
 		}
-
-
-		// (BLOCKER) If we cant Lock on
-		if (lockOn == false) return;
-
-		if (lockOnTarget != null)
+		else
 		{
-			Vector2 newPoint = gunnerCamera.WorldToScreenPoint(lockOnTarget.transform.position);
-			float unlockDist = 60;
-
-			if (Vector2.Distance(gunnerCenter, newPoint) < unlockDist)
-			{
-				gunnerslockUI.transform.position = newPoint;
-			}
-			else
-			{
-				gunnerslockUI.transform.position = gunnerCenter;
-				lockOnTarget = null;
-			}
+			//gunnerPivot.rotation = shipModel.rotation;
 		}
 	}
 

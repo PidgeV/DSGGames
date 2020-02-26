@@ -30,6 +30,13 @@ public class Player : Controller
 	private void Awake()
 	{
 		PlayerInput = GetComponent<PlayerInput>();
+		FindShip();
+
+		DontDestroyOnLoad(gameObject);
+	}
+
+	public void FindShip()
+	{
 		// When a player starts the game this grabs an open ship
 		foreach (GameObject ship in GameObject.FindGameObjectsWithTag("Player"))
 		{

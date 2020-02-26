@@ -144,33 +144,33 @@ public class AreaManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator TransitionAreas()
     {
-        nextAreaLoaded = false;
-        lastAreaDestroyed = false;
+		nextAreaLoaded = false;
+		lastAreaDestroyed = false;
 
-        areaEffect = Instantiate(areaEffectPrefab, currentArea.location, Quaternion.identity);
-        areaEffect.transform.localScale = Vector3.one * currentArea.size;
+		float currentTime = Time.time;
 
-        float currentTime = Time.time;
+		float time = MIN_TRAVEL_TIME - Mathf.Min(Time.time - startTravelTime, 0);
 
-        float time = MIN_TRAVEL_TIME - Mathf.Min(Time.time - startTravelTime, 0);
+		//  Debug.Log("Time Difference: " + time + " " + currentTime + " " + startTravelTime);
 
-      //  Debug.Log("Time Difference: " + time + " " + currentTime + " " + startTravelTime);
+		if (NodeManager.Instance.CurrentNode.Type != NodeType.Tutorial)
+			yield return new WaitForSeconds(time);
 
-        if (NodeManager.Instance.CurrentNode.Type != NodeType.Tutorial)
-            yield return new WaitForSeconds(time);
+		AreaLoaded?.Invoke();
 
-        AreaLoaded?.Invoke();
+		currentArea.enemies.gameObject.SetActive(true);
+		currentArea.obstacles.gameObject.SetActive(true);
 
-        currentArea.enemies.gameObject.SetActive(true);
-        currentArea.obstacles.gameObject.SetActive(true);
+		// TODO: Should be in the testShipController
+		GameManager.Instance.shipController.transform.position = PlayerDestination;
+		GameManager.Instance.shipController.transform.rotation = Quaternion.Euler(0, 0, 0);
 
-        // TODO: Should be in the testShipController
-        GameManager.Instance.shipController.transform.position = PlayerDestination;
-        GameManager.Instance.shipController.transform.rotation = Quaternion.Euler(0, 0, 0);
+		SkyboxManager.Instance.SwitchToSkybox(NodeManager.Instance.CurrentNode.Skybox);
+		GameManager.Instance.SwitchState(GameState.BATTLE);
 
-        SkyboxManager.Instance.SwitchToSkybox(NodeManager.Instance.CurrentNode.Skybox);
-        GameManager.Instance.SwitchState(GameState.BATTLE);
-    }
+		areaEffect = Instantiate(areaEffectPrefab, currentArea.location, Quaternion.identity);
+		areaEffect.transform.localScale = Vector3.one * currentArea.size;
+	}
 
     /// <summary>
     /// Adds object to the area
