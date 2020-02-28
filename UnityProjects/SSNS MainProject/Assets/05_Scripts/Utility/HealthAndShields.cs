@@ -16,21 +16,19 @@ public class HealthAndShields : MonoBehaviour
 	public delegate void OnDeath();
 	public OnDeath onDeath;
 
+	private ShipStats shipStats;
 
 	// The MAX life the ship has
-	[SerializeField] float maxLife = 100f;
-	public float MaxLife { get { return maxLife; } }
+	public float MaxLife { get { return shipStats.maxHealth; } }
 
 	// The MAX shield the ship has
-	[SerializeField] float maxShield = 100f;
-	public float MaxShield { get { return maxShield; } }
+	public float MaxShield { get { return shipStats.maxShield; } }
+
+	public float shieldRegenDelay = 3f;
 
 
 	// Can we regenerate our shield
-	public float regenInterval = 5;
-	private float regenDelay = 0;
-	public bool CanRegen { get { return Time.realtimeSinceStartup > regenDelay; } }
-
+	public bool CanRegen { get { return Time.realtimeSinceStartup > shieldRegenDelay; } }
 
 	public float currentLife;
 	public float currentShield;
@@ -39,15 +37,20 @@ public class HealthAndShields : MonoBehaviour
 	public bool DestroyOnDeath = true;
 
 
-	// The PERCENT of shield that is regenerated per second
-	[Range(0, 100)] public int regenSpeed = 5;
-
-
 	// Start is called before the first frame update
 	void Start()
 	{
-		currentLife = maxLife;
-		currentShield = maxShield;
+		if (TryGetComponent(out ShipController player))
+		{
+			shipStats = player.myStats;
+		}
+		else if (TryGetComponent(out EnemyController enemy))
+		{
+			shipStats = enemy.Stats;
+		}
+
+		currentLife = MaxLife;
+		currentShield = MaxShield;
 
 		ShieldProjector shieldProjector = gameObject.GetComponentInChildren<ShieldProjector>();
 
@@ -68,10 +71,10 @@ public class HealthAndShields : MonoBehaviour
 		if (CanRegen && currentLife >= 0)
 		{
 			// Calculating the amount we need to heal WITH regen Speed
-			float amountToHeal = currentShield + (maxShield * regenSpeed / 100f) * Time.deltaTime;
+			float amountToHeal = currentShield + (MaxShield * shipStats.shieldRegenPercent / 100f) * Time.deltaTime;
 
 			// Clamp out shield to the max shield
-			currentShield = Mathf.Clamp(amountToHeal, 0, maxShield);
+			currentShield = Mathf.Clamp(amountToHeal, 0, MaxShield);
 		}
 	}
 
@@ -81,16 +84,16 @@ public class HealthAndShields : MonoBehaviour
 	/// <param name="invokeEvents"> Do you want to call the OnLifeChange events </param>
 	public void ResetValues(bool invokeEvents = false)
 	{
-		currentLife = maxLife;
-		currentShield = maxShield;
+		currentLife = MaxLife;
+		currentShield = MaxShield;
 
 		if (invokeEvents == true)
 		{
 			// Invoke the On Life Change Event
-			onLifeChange?.Invoke(currentLife, maxLife);
+			onLifeChange?.Invoke(currentLife, MaxLife);
 
 			// Invoke the On Shield Change Event
-			onShieldChange?.Invoke(currentShield, maxShield);
+			onShieldChange?.Invoke(currentShield, MaxShield);
 		}
 	}
 
@@ -109,10 +112,10 @@ public class HealthAndShields : MonoBehaviour
 	{
 		if (!Invincible)
 		{
-			regenDelay = Time.realtimeSinceStartup + regenInterval;
+			shieldRegenDelay = Time.realtimeSinceStartup + shipStats.shieldRegenInterval;
 
 			// Damage the shield
-			currentShield = Mathf.Clamp(currentShield - energyDamage, 0, maxShield);
+			currentShield = Mathf.Clamp(currentShield - energyDamage, 0, MaxShield);
 
 			// If we have negative shields we can take it away from your life pool
 			if (currentShield == 0)
@@ -131,21 +134,21 @@ public class HealthAndShields : MonoBehaviour
 		// Invoke the On Life Change Event
 		if (onLifeChange != null)
 		{
-			onLifeChange.Invoke(currentLife, maxLife);
+			onLifeChange.Invoke(currentLife, MaxLife);
 		}
 
 		// Invoke the On Shield Change Event		
 		if (onShieldChange != null)
 		{
-			onShieldChange.Invoke(currentShield, maxShield);
+			onShieldChange.Invoke(currentShield, MaxShield);
 		}
 	}
 
 	// When life is 0 this is called by TakeDamage or Update
 	void HandleDeath()
 	{
-		currentLife = maxLife;
-		currentShield = maxShield;
+		currentLife = MaxLife;
+		currentShield = MaxShield;
 
 		// Invoke the On Death Event
 		if (onDeath != null)
@@ -171,10 +174,10 @@ public class HealthAndShields : MonoBehaviour
 		currentLife += amountToHeal;
 
 		// Clamp that value
-		if (currentLife > maxLife) currentLife = maxLife;
+		if (currentLife > MaxLife) currentLife = MaxLife;
 
 		// Invoke the On Life Change Event
-		onLifeChange.Invoke(currentLife, maxLife);
+		onLifeChange.Invoke(currentLife, MaxLife);
 	}
 
 	/// <summary> Print out the damage taken </summary>

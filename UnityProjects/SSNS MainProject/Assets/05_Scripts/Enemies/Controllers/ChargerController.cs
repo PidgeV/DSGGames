@@ -3,35 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class ChargerController : AdvancedFSM
+public class ChargerController : EnemyController
 {
-    [Header("Green: forward direction and collision check.")]
-    [Header("Red: intercept calculation.")]
-    [Header("Blue: Velocity and collision check.")]
-    [SerializeField] bool debugDraw = false;
-
-    [SerializeField] ChargerStats stats;
-
-    //MAth things for later. To store the dot product
-    float dotProduct;
-
-    [Space(15)]
-    [SerializeField] LayerMask obstacleLayer;
-    [SerializeField] float collisionCheckDistance = 150f;
-
-    [Space(15)]
-    [SerializeField] float waypointDistanceMeters = 50f;
-    [SerializeField] float playerDistanceMeters = 100f;
-
-    public Rigidbody rbSelf;
-
-    [Tooltip("Size of ray for collision checking. Larger numbers will mean the avoidance is larger")]
-    [SerializeField] float raySize = 7.5f;
-
-    GameObject player;
     public bool hitPlayer = false;
 
-    private void ConstructFSM()
+    protected override void ConstructFSM()
     {
         DeadState deadState = new DeadState(this);
         SpawnState spawnState = new SpawnState(this);
@@ -51,28 +27,6 @@ public class ChargerController : AdvancedFSM
         AddFSMState(patrol);
         AddFSMState(deadState);
         AddFSMState(attack);
-    }
-
-    protected override void Initialize()
-    {
-        //Pretty self explainatory
-        player = GameObject.FindGameObjectWithTag("Player");
-        stats.currentHealth = stats.maxHealth;
-        ConstructFSM();
-
-    }
-    protected override void FSMUpdate()
-    {
-        //Do this
-        if (CurrentState != null)
-        {
-            CurrentState.Reason();
-            CurrentState.Act();
-        }
-    }
-    protected override void FSMFixedUpdate()
-    {
-        //Guess we needed this
     }
 
     private void OnCollisionEnter(Collision collision)

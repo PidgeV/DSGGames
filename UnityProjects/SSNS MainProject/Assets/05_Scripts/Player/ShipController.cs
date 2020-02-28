@@ -40,7 +40,7 @@ public class ShipController : MonoBehaviour
 	public ShipBehaviour myBehaviour;
 
 	[Header("Stats")]
-	public ShipStats myStats;
+	public PlayerStats myStats;
 
 	[Header("Weapon")]
 	[SerializeField] private WeaponType startingWeapon;
@@ -444,14 +444,14 @@ public class ShipController : MonoBehaviour
 
 		if (stopThrust)
 		{
-			thrustSpeed = Mathf.Clamp(thrustSpeed - myStats.shipDeceleration, 0, myStats.thrustSpeed);
+			thrustSpeed = Mathf.Clamp(thrustSpeed - myStats.shipDeceleration, 0, myStats.normalSpeed);
 		}
 		// If were boosting
 		else if (boosting)
 		{
 			// Increase our speed when boosting
-			if (rigidbody.velocity.magnitude < myStats.boostSpeed)
-				thrustSpeed = Mathf.Clamp(thrustSpeed + (myStats.thrustSpeed * 2.4f * Time.deltaTime), myStats.thrustSpeed, myStats.boostSpeed);
+			if (rigidbody.velocity.magnitude < myStats.maxSpeed)
+				thrustSpeed = Mathf.Clamp(thrustSpeed + (myStats.normalSpeed * 2.4f * Time.deltaTime), myStats.normalSpeed, myStats.maxSpeed);
 
 
 			// Reduce the boost gauge
@@ -469,15 +469,15 @@ public class ShipController : MonoBehaviour
 		}
 		// Else if we are NOT boosting and our thrustSpeed is over our maxThrustSpeed
 		// We need to smooth the transition from boosting to not boosting
-		else if (thrustSpeed > myStats.thrustSpeed)
+		else if (thrustSpeed > myStats.normalSpeed)
 		{
 			// Clamp our thrust Speed to our max thrust speed
-			thrustSpeed = Mathf.Clamp(thrustSpeed - myStats.shipDeceleration, myStats.thrustSpeed, myStats.boostSpeed);
+			thrustSpeed = Mathf.Clamp(thrustSpeed - myStats.shipDeceleration, myStats.normalSpeed, myStats.maxSpeed);
 		}
 		// Else were not boosting so we increase our ships normal speed
 		else
 		{
-			thrustSpeed = myStats.thrustSpeed;
+			thrustSpeed = myStats.normalSpeed;
 		}
 
 		finalThrustVelocity = transform.forward * thrustSpeed;
@@ -485,7 +485,7 @@ public class ShipController : MonoBehaviour
 	}
 
 	/// <summary> 
-	/// Update the ships PHYSICS
+	/// Update the ships movement
 	/// </summary>
 	public void UpdateShipPhysics()
 	{
@@ -495,8 +495,7 @@ public class ShipController : MonoBehaviour
 
 		rigidbody.rotation *= rollRotation * rotateRotation;
 
-		rigidbody.AddForce(finalThrustVelocity, ForceMode.VelocityChange);
-		rigidbody.AddRelativeForce(finalStrafeVelocity, ForceMode.VelocityChange);
+		rigidbody.transform.position += finalThrustVelocity + finalStrafeVelocity;
 	}
 
 	/// <summary>
