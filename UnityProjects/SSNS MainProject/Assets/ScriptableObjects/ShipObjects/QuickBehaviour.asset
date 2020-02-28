@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a7e3859a5f47a94ba510f3ff97a51c5, type: 3}
   m_Name: QuickBehaviour
   m_EditorClassIdentifier: 
-  shipName: 
+  shipName: The Ship
   shipDescription: 
   xRot: 14
   yRot: 10

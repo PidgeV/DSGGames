@@ -12,9 +12,9 @@ public class Player : Controller
 	// The current gamestate
 	// This is used to change the playing action map to a menu action map
 	// public GameState currentState = GameState.BATTLE;
-	
+
 	public PlayerInput PlayerInput;
-	public ShipController Controller;
+	public ShipInputHandler Controller;
 
 	#region Unity Events
 
@@ -47,7 +47,7 @@ public class Player : Controller
 		// When a player starts the game this grabs an open ship
 		foreach (GameObject ship in GameObject.FindGameObjectsWithTag("Player"))
 		{
-			if (ship.TryGetComponent(out ShipController shipController))
+			if (ship.TryGetComponent(out ShipInputHandler shipController))
 			{
 				Controller = shipController;
 				Controller.JoinShip(this);
@@ -138,7 +138,7 @@ public class Player : Controller
 		if (myRole == PlayerRole.Gunner)
 		{
 			// Make the gunner shoot
-			Controller.Shoot(myRole, input.isPressed);
+			Controller.ShootGun(input.isPressed);
 		}
 	}
 	public override void OnB(InputValue input)
@@ -154,7 +154,7 @@ public class Player : Controller
 		if (myRole == PlayerRole.Gunner)
 		{
 			// Make the gunner shoot
-			Controller.Shoot(myRole, input.isPressed);
+			Controller.ShootGun(input.isPressed);
 		}
 	}
 	public override void OnX(InputValue input)
@@ -177,7 +177,7 @@ public class Player : Controller
 		if (myRole == PlayerRole.Gunner)
 		{
 			// Make the gunner shoot
-			Controller.Shoot(myRole, input.isPressed);
+			Controller.ShootGun(input.isPressed);
 		}
 	}
 	public override void OnRightTrigger(InputValue input)
@@ -191,17 +191,28 @@ public class Player : Controller
 		if (myRole == PlayerRole.Gunner)
 		{
 			// Make the gunner shoot
-			Controller.Shoot(myRole, input.isPressed);
+			Controller.ShootGun(input.isPressed);
 		}
 	}
 
 	public override void OnRightBumper(InputValue input)
 	{
-		Controller.Shoot(myRole, input.isPressed);
+		if (myRole == PlayerRole.Pilot)
+		{
+			Controller.ShootShip(input.isPressed);
+		}
+
+		if (myRole == PlayerRole.Gunner)
+		{
+			Controller.ShootGun(input.isPressed);
+		}
 	}
 	public override void OnLeftBumper(InputValue input)
 	{
-		Controller.LockOn(input.isPressed);
+		if (myRole == PlayerRole.Gunner)
+		{
+			Controller.LockOn(input.isPressed);
+		}
 	}
 	#endregion
 

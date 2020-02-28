@@ -128,10 +128,9 @@
     <Compile Include="Assets\05_Scripts\Player\AmmoCounter.cs" />
     <Compile Include="Assets\05_Scripts\Player\GunController.cs" />
     <Compile Include="Assets\05_Scripts\Player\Player.cs" />
+    <Compile Include="Assets\05_Scripts\Player\PlayerHUDHandler.cs" />
     <Compile Include="Assets\05_Scripts\Player\PlayerRespawn.cs" />
     <Compile Include="Assets\05_Scripts\Player\ShipController.cs" />
-    <Compile Include="Assets\05_Scripts\Player\ShipObjects\ShipBehaviour.cs" />
-    <Compile Include="Assets\05_Scripts\Player\ShipObjects\ShipStats.cs" />
     <Compile Include="Assets\05_Scripts\Player\ShootingSoundController.cs" />
     <Compile Include="Assets\05_Scripts\Player\ShotEffectSpawner.cs" />
     <Compile Include="Assets\05_Scripts\Player\TestGunController.cs" />
@@ -188,6 +187,8 @@
     <Compile Include="Assets\05_Scripts\Utility\ToggleObjects.cs" />
     <Compile Include="Assets\09_Effects\Shaders\AreaIndicator\Scripts\AreaShaderController.cs" />
     <Compile Include="Assets\11_Animations\Menus\Transitions\CinematicController.cs" />
+    <Compile Include="Assets\ExtendedEditor.cs" />
+    <Compile Include="Assets\ExtendedEditorWindow.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Base\Runtime\Behaviours\CinemachineBlendListCamera.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Base\Runtime\Behaviours\CinemachineBrain.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Base\Runtime\Behaviours\CinemachineClearShot.cs" />
@@ -241,7 +242,11 @@
     <Compile Include="Assets\Misselaineous\Cinemachine\Timeline\CinemachineMixer.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Timeline\CinemachineShot.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Timeline\CinemachineTrack.cs" />
+    <Compile Include="Assets\ScriptableObjects\ShipObjects\ShipBehaviour.cs" />
+    <Compile Include="Assets\ScriptableObjects\ShipObjects\ShipStats.cs" />
+    <Compile Include="Assets\ShipInputHandler.cs" />
     <Compile Include="Assets\SizeDisplay.cs" />
+    <Compile Include="Assets\WeaponsSystem.cs" />
     <None Include="Assets\Misselaineous\Cinemachine\ReleaseNotes.txt" />
     <None Include="Assets\07_Sprites\UI\Menus\MenuColorList.txt" />
     <Reference Include="Unity.Timeline.Editor">

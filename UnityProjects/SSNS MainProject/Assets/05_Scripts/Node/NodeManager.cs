@@ -347,11 +347,12 @@ public class NodeManager : MonoBehaviour
             rotateToPortal = false;
         }
 
-        // Steers the ship to the direction
-        GameManager.Instance.shipController.SteerShip(dir);
-    }
+		// Steers the ship to the direction
+		// TODO
+		//  GameManager.Instance.shipController.SteerShip(dir);
+	}
 
-    private void Awake()
+	private void Awake()
     {
         if (Instance != null)
         {

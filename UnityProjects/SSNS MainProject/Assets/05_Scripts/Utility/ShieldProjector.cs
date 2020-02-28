@@ -261,6 +261,9 @@ public class ShieldProjector : MonoBehaviour
 
     public void IgnoreCollider(Collider collider)
     {
-        Physics.IgnoreCollision(shieldCollider, collider);
+		if (collider)
+		{
+			Physics.IgnoreCollision(shieldCollider, collider);
+		}
     }
 }

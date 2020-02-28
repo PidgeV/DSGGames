@@ -71,8 +71,8 @@ public class ChargedShotBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(maxChargeTime);
 
-        transform.parent = null;
-        hasShot = true;
+        //transform.parent = null;
+        //hasShot = true;
     }
 
     private void OnCollisionEnter(Collision collision)

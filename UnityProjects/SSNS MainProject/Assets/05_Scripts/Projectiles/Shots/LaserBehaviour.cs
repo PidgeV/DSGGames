@@ -18,7 +18,7 @@ public class LaserBehaviour : MonoBehaviour
 
     Material[] laserMaterials;
     public float Length { get { return laserLength; } }
-    public float Damage { get { return laserDamagePerSecond * Time.deltaTime; } }
+    public float Damage { get { return laserDamagePerSecond / Time.deltaTime; } }
 
     private void Start()
     {

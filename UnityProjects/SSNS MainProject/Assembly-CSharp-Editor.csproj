@@ -62,6 +62,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Editor\GunControllerEditor.cs" />
+    <Compile Include="Assets\Editor\ShipEditor.cs" />
+    <Compile Include="Assets\Editor\WeaponsSystemEditor.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Base\Editor\Editors\CinemachineBasicMultiChannelPerlinEditor.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Base\Editor\Editors\CinemachineBlenderSettingsEditor.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Base\Editor\Editors\CinemachineBlendListCameraEditor.cs" />
@@ -105,7 +108,6 @@
     <Compile Include="Assets\Misselaineous\Cinemachine\PostFX\Editor\CinemachinePostProcessingEditor.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\PostFX\Editor\PostFXAutoImport.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Timeline\Editor\CinemachineShotEditor.cs" />
-    <Compile Include="Assets\Misselaineous\Editor\ShipEditor.cs" />
     <Reference Include="UnityEditor.TestRunner">
       <HintPath>D:/GitHub/DSGGames/UnityProjects/SSNS MainProject/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
     </Reference>
