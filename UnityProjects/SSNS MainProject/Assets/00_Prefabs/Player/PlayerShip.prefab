@@ -759,7 +759,7 @@ MonoBehaviour:
   ShipShotCounter: 0
   defaultTexture: {fileID: 0}
   useDefaultEditor: 0
-  showWeaponsSystem: 1
+  showWeaponsSystem: 0
 --- !u!114 &5736774719925733543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1354,28 +1354,38 @@ PrefabInstance:
       objectReference: {fileID: 3711581252135968245}
     - target: {fileID: 3018611695878883401, guid: d756dc7a4a8506345ba2e7210f6c2736,
         type: 3}
-      propertyPath: ammoCount.ammo.Array.data[0]
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 3018611695878883401, guid: d756dc7a4a8506345ba2e7210f6c2736,
-        type: 3}
-      propertyPath: ammoCount.ammo.Array.data[1]
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 3018611695878883401, guid: d756dc7a4a8506345ba2e7210f6c2736,
-        type: 3}
       propertyPath: ammoCount.ammo.Array.data[2]
-      value: 100
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3018611695878883401, guid: d756dc7a4a8506345ba2e7210f6c2736,
         type: 3}
       propertyPath: ammoCount.ammo.Array.data[3]
-      value: 100
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3018611695878883401, guid: d756dc7a4a8506345ba2e7210f6c2736,
         type: 3}
       propertyPath: ammoCount.ammo.Array.data[4]
-      value: 100
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018611695878883401, guid: d756dc7a4a8506345ba2e7210f6c2736,
+        type: 3}
+      propertyPath: _shipController
+      value: 
+      objectReference: {fileID: 6552152225560632436}
+    - target: {fileID: 3018611695878883401, guid: d756dc7a4a8506345ba2e7210f6c2736,
+        type: 3}
+      propertyPath: FireRateStandard
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018611695878883401, guid: d756dc7a4a8506345ba2e7210f6c2736,
+        type: 3}
+      propertyPath: FireRateEnergy
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018611695878883401, guid: d756dc7a4a8506345ba2e7210f6c2736,
+        type: 3}
+      propertyPath: FireRateLaser
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8955104964450262280, guid: d756dc7a4a8506345ba2e7210f6c2736,
         type: 3}

@@ -27,8 +27,9 @@ public class WeaponsSystem : MonoBehaviour
 
 	private void Update()
 	{
-		if (ShipShooting && (ShipShotCounter += Time.deltaTime) < ShipShotInterval)
-		{
+		if ((ShipShotCounter += Time.deltaTime) > ShipShotInterval && ShipShooting) {
+			GunController.ShootFromShip();
+			ShipShotCounter = 0.0f;
 		}
 	}
 

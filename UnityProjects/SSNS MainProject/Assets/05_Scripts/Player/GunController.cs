@@ -25,6 +25,8 @@ public class GunController : MonoBehaviour
 
 	private Transform _chargeShotTransform;
 
+	[SerializeField] private ShipController _shipController;
+
 	private WeaponType currentWeapon;
 
 	public bool Attacking = false;
@@ -57,14 +59,15 @@ public class GunController : MonoBehaviour
 
 			RaycastHit[] hits = Physics.RaycastAll(ray, laserShot.Length, enemyLayer);
 
-			foreach (RaycastHit hit in hits)
-			{
+			foreach (RaycastHit hit in hits) {
 				if (hit.collider.TryGetComponent(out HealthAndShields hp))
 				{
 					hp.TakeDamage(laserShot.Damage / 3, laserShot.Damage);
 				}
 			}
+
 			ammoCount.Take1Ammo(currentWeapon);
+			CheckAmmo();
 		}	
 	}
 
@@ -77,11 +80,20 @@ public class GunController : MonoBehaviour
 	// Shoot from Ship
 	public void ShootFromShip()
 	{
+		InitShot(Instantiate(standardShot, _shipController.ShipModel.position + _shipController.ShipModel.forward * 10, _shipController.ShipModel.rotation));
 	}
 
 	public void ResetSpeed()
 	{
 		gunAnimator.speed = 1;
+	}
+
+	public void CheckAmmo()
+	{
+		if (ammoCount.HasAmmo(currentWeapon) == false) {
+			_shipController.SwapWeapon(new Vector2(0, -1));
+			UpdateAttacking(false);
+		}
 	}
 
 	// Standard Shot
@@ -113,24 +125,33 @@ public class GunController : MonoBehaviour
 		gunAnimator.speed = FireRateLaser;
 	}
 
-	public void ShootStandard() {
-		ammoCount.Take1Ammo(currentWeapon);
+	public void ShootStandard()
+	{
+		// TODO -- Play Sound
+		// ammoCount.Take1Ammo(currentWeapon);
 		GameObject shotPrefab = currentWeapon == WeaponType.Regular ? standardShot : energyShot;
 		InitShot(Instantiate(shotPrefab, barrelL.position, barrelL.rotation));
 	}
 
-	public void ShootMissileL() {
+	public void ShootMissileL()
+	{
+		// TODO -- Play Sound
 		ammoCount.Take1Ammo(currentWeapon);
 		InitShot(Instantiate(missileShot, barrelL.position, barrelL.rotation));
+		CheckAmmo();
 	}
 
-	public void ShootMissileR() {
+	public void ShootMissileR()
+	{
+		// TODO -- Play Sound
 		ammoCount.Take1Ammo(currentWeapon);
 		InitShot(Instantiate(missileShot, barrelR.position, barrelR.rotation));
+		CheckAmmo();
 	}
 
 	public void StartCharge()
 	{
+		// TODO -- Play Sound
 		GameObject newChargeShot = Instantiate(chargedShot, barrelL.position, barrelL.rotation, barrelL.transform);
 		InitShot(newChargeShot);
 
@@ -139,17 +160,22 @@ public class GunController : MonoBehaviour
 
 	public void EndCharge()
 	{
+		// TODO -- Stop Sound
 		if (_chargeShotTransform != null)
 		{
 			ChargedShotBehaviour behaviour = _chargeShotTransform.GetComponent<ChargedShotBehaviour>();
 			behaviour.HasShot = true;
 
 			_chargeShotTransform = null;
+
+			ammoCount.Take1Ammo(currentWeapon);
+			CheckAmmo();
 		}
 	}
 
 	public void StartLaser()
 	{
+		// TODO -- Play Sound
 		LayerMask enemyLayer = new LayerMask();
 		enemyLayer += LayerMask.GetMask("Enemies");
 		enemyLayer += LayerMask.GetMask("Swarm");
@@ -169,6 +195,7 @@ public class GunController : MonoBehaviour
 
 	public void EndLaser()
 	{
+		// TODO -- Stop Sound
 		laserShot.fadeIn = false;
 	}
 
@@ -209,13 +236,11 @@ public class GunController : MonoBehaviour
 		}
 		else
 		{
-			if (currentWeapon == WeaponType.Energy)
-			{
+			if (currentWeapon == WeaponType.Energy) {
 				gunAnimator.SetBool("Energy", true);
 			}
 
-			if (currentWeapon == WeaponType.Regular)
-			{
+			if (currentWeapon == WeaponType.Regular) {
 				gunAnimator.SetBool("Energy", true);
 			}
 		}

@@ -22,7 +22,7 @@ public class GunControllerEditor : ExtendedEditor
 		{
 			GUILayout.Space(10);
 
-			SerializedObject GunControllerObject = new SerializedObject(_gunController);
+			SerializedObject GunControllerObject =  new SerializedObject(_gunController);
 
 			SerializedProperty ammoCount = GunControllerObject.FindProperty("ammoCount");
 			SerializedProperty ammoArray = ammoCount.FindPropertyRelative("ammo");
@@ -54,6 +54,11 @@ public class GunControllerEditor : ExtendedEditor
 			EditorGUILayout.EndVertical();
 
 			EditorGUILayout.BeginVertical("box");
+			GUILayout.Label("Ship Controller", EditorStyles.boldLabel);
+			DrawField("_shipController");
+			EditorGUILayout.EndVertical();
+
+			EditorGUILayout.BeginVertical("box");
 			GUILayout.Label("Barrels", EditorStyles.boldLabel);
 			DrawField("barrelL");
 			DrawField("barrelR");
@@ -71,6 +76,7 @@ public class GunControllerEditor : ExtendedEditor
 			EditorGUILayout.EndVertical();
 
 			serializedObject.ApplyModifiedProperties();
+			GunControllerObject.ApplyModifiedProperties();
 		}
 	}
 
@@ -85,7 +91,8 @@ public class GunControllerEditor : ExtendedEditor
 		DrawField("FireRateStandard");
 
 		GUILayout.Space(5);
-		EditorGUILayout.PropertyField(ammoArray.GetArrayElementAtIndex((int)SNSSTypes.WeaponType.Regular));
+		SerializedProperty ammoProperty = ammoArray.GetArrayElementAtIndex((int)SNSSTypes.WeaponType.Regular);
+		EditorGUILayout.PropertyField(ammoProperty);
 
 		GUILayout.Space(5);
 		EditorGUILayout.PropertyField(Damage.FindProperty("kineticDamage"));
