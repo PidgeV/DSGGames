@@ -86,9 +86,10 @@ public class GunController : MonoBehaviour
 
 	// Standard Shot
 	public float FireRateStandard = 5f;
+	public float FireRateEnergy = 5f;
 	public void UpdateStandardShot()
 	{
-		gunAnimator.speed = FireRateStandard;
+		gunAnimator.speed = currentWeapon == WeaponType.Regular ? FireRateStandard : FireRateEnergy;
 	}
 
 	// Missile Shot
@@ -114,12 +115,8 @@ public class GunController : MonoBehaviour
 
 	public void ShootStandard() {
 		ammoCount.Take1Ammo(currentWeapon);
-		InitShot(Instantiate(standardShot, barrelL.position, barrelL.rotation));
-	}
-
-	public void ShootEnergy() {
-		ammoCount.Take1Ammo(currentWeapon);
-		InitShot(Instantiate(standardShot, barrelL.position, barrelL.rotation));
+		GameObject shotPrefab = currentWeapon == WeaponType.Regular ? standardShot : energyShot;
+		InitShot(Instantiate(shotPrefab, barrelL.position, barrelL.rotation));
 	}
 
 	public void ShootMissileL() {
@@ -209,6 +206,18 @@ public class GunController : MonoBehaviour
 
 			// Wait for the return animation to end
 			while (inReturnAnimation) { yield return null; }
+		}
+		else
+		{
+			if (currentWeapon == WeaponType.Energy)
+			{
+				gunAnimator.SetBool("Energy", true);
+			}
+
+			if (currentWeapon == WeaponType.Regular)
+			{
+				gunAnimator.SetBool("Energy", true);
+			}
 		}
 
 		// Now we can start the swap animation

@@ -29,6 +29,8 @@ public class GunControllerEditor : ExtendedEditor
 
 			DrawStandardShot(ammoArray);
 
+			DrawEnergyShot(ammoArray);
+
 			DrawMissileShot(ammoArray);
 
 			DrawChargeShot(ammoArray);
@@ -84,6 +86,28 @@ public class GunControllerEditor : ExtendedEditor
 
 		GUILayout.Space(5);
 		EditorGUILayout.PropertyField(ammoArray.GetArrayElementAtIndex((int)SNSSTypes.WeaponType.Regular));
+
+		GUILayout.Space(5);
+		EditorGUILayout.PropertyField(Damage.FindProperty("kineticDamage"));
+		EditorGUILayout.PropertyField(Damage.FindProperty("energyDamage"));
+
+		Damage.ApplyModifiedProperties();
+
+		EditorGUILayout.EndVertical();
+	}
+
+	void DrawEnergyShot(SerializedProperty ammoArray)
+	{
+		EditorGUILayout.BeginVertical("box");
+
+		SerializedObject Damage = new SerializedObject(_gunController.energyShot.GetComponent<Damage>());
+
+		GUILayout.Label("Energy Shot", EditorStyles.boldLabel);
+
+		DrawField("FireRateEnergy");
+
+		GUILayout.Space(5);
+		EditorGUILayout.PropertyField(ammoArray.GetArrayElementAtIndex((int)SNSSTypes.WeaponType.Energy));
 
 		GUILayout.Space(5);
 		EditorGUILayout.PropertyField(Damage.FindProperty("kineticDamage"));
