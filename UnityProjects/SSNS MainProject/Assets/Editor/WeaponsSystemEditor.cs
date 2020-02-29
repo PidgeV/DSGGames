@@ -6,17 +6,18 @@ using UnityEngine;
 [CustomEditor(typeof(WeaponsSystem))]
 public class WeaponsSystemEditor : ExtendedEditor
 {
+	[HideInInspector] public bool[] showWeapons = new bool[0];
+
 	// EditorStyles.toolbarButton
 	WeaponsSystem _weaponsSystem;
 
-	GUIStyle selectedStyle = new GUIStyle();
-	GUIStyle idleStyle = new GUIStyle();
+	GUIStyle iconStyle = new GUIStyle();
 
 	private void OnEnable()
 	{
 		_weaponsSystem = (WeaponsSystem)target;
-		selectedStyle.normal.background = MakeTex(2, 2, new Color(1f, 0f, 0f, 1f));
-		idleStyle.normal.background = MakeTex(2, 2, new Color(0f, 1f, 0f, 1f));
+		iconStyle.normal.background = _weaponsSystem.defaultTexture;
+		showWeapons = new bool[] { false, false, false, false, false };
 	}
 
 	bool _showDependencies = true;
@@ -30,36 +31,7 @@ public class WeaponsSystemEditor : ExtendedEditor
 		}
 		else
 		{
-			SerializedObject GunControllerObject = new SerializedObject(_weaponsSystem.GunController);
-
-			EditorGUILayout.BeginVertical("box");
-
-			GUILayout.Label("Ammo", EditorStyles.boldLabel);
-
-			SerializedProperty ammoCount = GunControllerObject.FindProperty("ammoCount");
-			SerializedProperty ammoArray = ammoCount.FindPropertyRelative("ammo");
-
-			EditorGUILayout.BeginHorizontal();
-		
-			for (int index = 0; index < ammoArray.arraySize; index++) {
-				EditorGUILayout.BeginVertical("box");
-
-				if (index == 0) {
-					GUILayout.Box("", selectedStyle, GUILayout.ExpandWidth(true), GUILayout.Height(8));
-				}
-				else {
-					GUILayout.Box("", idleStyle, GUILayout.ExpandWidth(true), GUILayout.Height(8));
-				}
-
-				GUILayout.Box("", GUILayout.ExpandWidth(true),GUILayout.Height(50));
-				GUILayout.Label(ammoArray.GetArrayElementAtIndex(index).intValue.ToString(), EditorStyles.centeredGreyMiniLabel, GUILayout.ExpandWidth(true));
-
-				EditorGUILayout.EndVertical();
-			}
-
-			EditorGUILayout.EndHorizontal();
-
-			EditorGUILayout.EndVertical();
+			GUILayout.Space(10);
 
 			EditorGUILayout.BeginVertical("box");
 
@@ -73,6 +45,41 @@ public class WeaponsSystemEditor : ExtendedEditor
 		serializedObject.ApplyModifiedProperties();
 
 		DrawFootnote("Use Default Editor", ref _weaponsSystem.useDefaultEditor);
+	}
+
+	private void DrawWeaponUI(int index, GUIStyle style)
+	{
+		EditorGUILayout.BeginVertical("box");
+		EditorGUILayout.BeginHorizontal();
+
+		if (GUILayout.Button("Weapon", EditorStyles.toolbarButton, GUILayout.ExpandWidth(true)))
+		{
+			showWeapons[index] = !showWeapons[index];
+		}
+
+		EditorGUILayout.EndHorizontal();
+
+		if (showWeapons[index])
+		{
+			EditorGUILayout.BeginHorizontal();
+			EditorGUILayout.BeginVertical("box");
+
+			GUILayout.Box("", style, GUILayout.Width(50), GUILayout.Height(50));
+
+			EditorGUILayout.EndVertical();
+			EditorGUILayout.BeginVertical("box");
+
+			int int1 = 0;
+
+			EditorGUILayout.IntField(int1);
+			EditorGUILayout.IntField(int1);
+			EditorGUILayout.IntField(int1);
+
+			EditorGUILayout.EndVertical();
+			EditorGUILayout.EndHorizontal();
+		}
+
+		EditorGUILayout.EndVertical();
 	}
 
 	private Texture2D MakeTex(int width, int height, Color col)

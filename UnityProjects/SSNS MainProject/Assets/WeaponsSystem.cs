@@ -17,6 +17,8 @@ public class WeaponsSystem : MonoBehaviour
 	public float ShipShotInterval = 0.1f;
 	public float ShipShotCounter = 0.0f;
 
+	public Texture2D defaultTexture;
+
 	private void Awake()
 	{
 		_shipController = GetComponent<ShipController>();

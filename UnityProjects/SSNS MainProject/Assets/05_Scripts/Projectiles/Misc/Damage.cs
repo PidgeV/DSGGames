@@ -9,8 +9,8 @@ public class Damage : MonoBehaviour
     [SerializeField] bool destroyOnHit = false;
     [SerializeField] bool constantCollisionDamage = false;
     // The damage whatever collides with the gameObject holding this script should take
-    [SerializeField] int kineticDamage = 5;
-    [SerializeField] int energyDamage = 5;
+    public int kineticDamage = 5;
+	public int energyDamage = 5;
 
     [Space(10)]
     [SerializeField] GameObject hitSoundObject;

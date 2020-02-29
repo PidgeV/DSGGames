@@ -757,6 +757,7 @@ MonoBehaviour:
   GunShooting: 0
   ShipShotInterval: 0.1
   ShipShotCounter: 0
+  defaultTexture: {fileID: 0}
   useDefaultEditor: 0
   showWeaponsSystem: 1
 --- !u!114 &5736774719925733543
@@ -1319,6 +1320,12 @@ PrefabInstance:
       objectReference: {fileID: 8866761739970050728}
     - target: {fileID: 3018611695878883401, guid: d756dc7a4a8506345ba2e7210f6c2736,
         type: 3}
+      propertyPath: standardShot
+      value: 
+      objectReference: {fileID: 4450240921679082262, guid: 31460afb2d57a1740a2902c36c19ba0e,
+        type: 3}
+    - target: {fileID: 3018611695878883401, guid: d756dc7a4a8506345ba2e7210f6c2736,
+        type: 3}
       propertyPath: energyShot
       value: 
       objectReference: {fileID: 4450240921679082262, guid: 3b677ceb74ae31b4fa791919b59499df,
@@ -1347,10 +1354,29 @@ PrefabInstance:
       objectReference: {fileID: 3711581252135968245}
     - target: {fileID: 3018611695878883401, guid: d756dc7a4a8506345ba2e7210f6c2736,
         type: 3}
-      propertyPath: standardShot
-      value: 
-      objectReference: {fileID: 4450240921679082262, guid: 31460afb2d57a1740a2902c36c19ba0e,
+      propertyPath: ammoCount.ammo.Array.data[0]
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018611695878883401, guid: d756dc7a4a8506345ba2e7210f6c2736,
         type: 3}
+      propertyPath: ammoCount.ammo.Array.data[1]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018611695878883401, guid: d756dc7a4a8506345ba2e7210f6c2736,
+        type: 3}
+      propertyPath: ammoCount.ammo.Array.data[2]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018611695878883401, guid: d756dc7a4a8506345ba2e7210f6c2736,
+        type: 3}
+      propertyPath: ammoCount.ammo.Array.data[3]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 3018611695878883401, guid: d756dc7a4a8506345ba2e7210f6c2736,
+        type: 3}
+      propertyPath: ammoCount.ammo.Array.data[4]
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 8955104964450262280, guid: d756dc7a4a8506345ba2e7210f6c2736,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -9,12 +9,12 @@ public class GunController : MonoBehaviour
 	[SerializeField] private Animator gunAnimator;
 	[SerializeField] private Animator swapAnimator;
 
-	[SerializeField] private GameObject standardShot;
-	[SerializeField] private GameObject energyShot;
-	[SerializeField] private GameObject missileShot;
-	[SerializeField] private GameObject chargedShot;
+	public GameObject standardShot;
+	public GameObject energyShot;
+	public GameObject missileShot;
+	public GameObject chargedShot;
 
-	[SerializeField] private LaserBehaviour laserShot;
+	public LaserBehaviour laserShot;
 
 	[SerializeField] private Transform barrelL;
 	[SerializeField] private Transform barrelR;
@@ -85,31 +85,31 @@ public class GunController : MonoBehaviour
 	}
 
 	// Standard Shot
-	private float StandardShotFireRate = 5f;
+	public float FireRateStandard = 5f;
 	public void UpdateStandardShot()
 	{
-		gunAnimator.speed = StandardShotFireRate;
+		gunAnimator.speed = FireRateStandard;
 	}
 
 	// Missile Shot
-	private float MissileShotFireRate = 1f;
+	public float FireRateMissile = 1f;
 	public void UpdateMissileShot()
 	{
-		gunAnimator.speed = MissileShotFireRate;
+		gunAnimator.speed = FireRateMissile;
 	}
 
 	// Charge Shot
-	private float ChargeShotFireRate = 2f;
+	public float FireRateCharge = 2f;
 	public void UpdateChargeShot()
 	{
-		gunAnimator.speed = ChargeShotFireRate;
+		gunAnimator.speed = FireRateCharge;
 	}
 
 	// Charge Shot
-	private float LaserShotFireRate = 0.2f;
+	public float FireRateLaser = 0.2f;
 	public void UpdateLaserShot()
 	{
-		gunAnimator.speed = LaserShotFireRate;
+		gunAnimator.speed = FireRateLaser;
 	}
 
 	public void ShootStandard() {

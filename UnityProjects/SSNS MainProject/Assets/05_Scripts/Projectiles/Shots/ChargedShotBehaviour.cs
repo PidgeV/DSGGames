@@ -11,14 +11,12 @@ public class ChargedShotBehaviour : MonoBehaviour
     [SerializeField] float maxChargeTime = 5f;
     
     //Damage values
-    [Space(15)]
     [SerializeField] float minDamage = 10f;
     [SerializeField] float maxDamage = 50f;
     private float currentDamage;
     private float increasePerSecond;
 
     //Scale values
-    [Space(15)]
     [SerializeField] float minScale = 0.5f;
     [SerializeField] float maxScale = 2f;
     private Vector3 scalePerSecond;

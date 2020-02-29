@@ -240,6 +240,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 533205660235058987}
     m_Modifications:
+    - target: {fileID: 2143217328605918705, guid: 51472dbaec72f7549afaf70f847cc23a,
+        type: 3}
+      propertyPath: m_Name
+      value: MissileBall_Prefab
+      objectReference: {fileID: 0}
     - target: {fileID: 3163045462547793890, guid: 51472dbaec72f7549afaf70f847cc23a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -294,11 +299,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2143217328605918705, guid: 51472dbaec72f7549afaf70f847cc23a,
-        type: 3}
-      propertyPath: m_Name
-      value: MissileBall_Prefab
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51472dbaec72f7549afaf70f847cc23a, type: 3}

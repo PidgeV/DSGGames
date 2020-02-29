@@ -55,5 +55,4 @@ public class AmmoCounter
         ammo = new int[(int)WeaponType.End];
     }
 
-
 }
