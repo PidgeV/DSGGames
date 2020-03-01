@@ -45,8 +45,8 @@ public class ShipEditor : ExtendedEditor
 
 				GUILayout.Label("Cameras", EditorStyles.boldLabel);
 
-				DrawField("pilotCamera");
-				DrawField("gunnerCamera");
+				DrawField("PilotCamera");
+				DrawField("GunnerCamera");
 
 				EditorGUILayout.EndVertical();
 

@@ -108,6 +108,7 @@
     <Compile Include="Assets\Misselaineous\Cinemachine\PostFX\Editor\CinemachinePostProcessingEditor.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\PostFX\Editor\PostFXAutoImport.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Timeline\Editor\CinemachineShotEditor.cs" />
+    <Compile Include="Assets\Misselaineous\Editor\EnemyShipEditor.cs" />
     <Reference Include="UnityEditor.TestRunner">
       <HintPath>D:/GitHub/DSGGames/UnityProjects/SSNS MainProject/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
     </Reference>

@@ -8,8 +8,8 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody))]
 public class ShipController : MonoBehaviour
 {
-	[SerializeField] private Camera pilotCamera;
-	[SerializeField] private Camera gunnerCamera;
+	public Camera PilotCamera;
+	public Camera GunnerCamera;
 
 	[HideInInspector] public Player player1;
 	[HideInInspector] public Player player2;
@@ -74,6 +74,7 @@ public class ShipController : MonoBehaviour
 	private bool stopThrust;
 	private bool shooting_Gunner;
 	private bool shooting_Pilot;
+	private bool slowCamera;
 
 	private float boostGauge;
 	private float shotTimer;
@@ -120,15 +121,15 @@ public class ShipController : MonoBehaviour
 		}
 
 		// Set the cameras size and positions
-		gunnerCamera.rect = new Rect(0, 0.0f, 1.0f, 0.5f);
-		pilotCamera.rect = new Rect(0, 0.5f, 1.0f, 0.5f);
+		GunnerCamera.rect = new Rect(0, 0.0f, 1.0f, 0.5f);
+		PilotCamera.rect = new Rect(0, 0.5f, 1.0f, 0.5f);
 
 		gunnerCenter = gunnerslockUI.transform.position;
 
-		// Set the max values of our boost Gauge
+		// Set the max values of our Boost Gauge
 		boostGauge = myStats.maxBoostGauge;
 
-		// Get components
+		// Get Components
 		rigidbody = gameObject.GetComponent<Rigidbody>();
 
 		_playerHUD = gameObject.GetComponent<PlayerHUDHandler>();
@@ -145,20 +146,11 @@ public class ShipController : MonoBehaviour
 	/// </summary>
 	private void Update()
     {
-		// Update the ships movement values
 		UpdateShipValues();
-
-		// Move the ship model
+		
 		UpdateShipModel(rotateDirection);
 
-		if (boosting)
-		{
-			turnMultiplayer = Mathf.Lerp(turnMultiplayer, 0.4f, 0.03f);
-		}
-		else
-		{
-			turnMultiplayer = Mathf.Lerp(turnMultiplayer, 1f, 0.03f);
-		}
+		UpdateTurnMultiplier();
 	}
 
 	/// <summary>
@@ -166,7 +158,6 @@ public class ShipController : MonoBehaviour
 	/// </summary>
 	private void FixedUpdate()
     {
-		// Update the ships PHYSICS and rotation
 		UpdateShipPhysics();
 	}
 
@@ -187,19 +178,10 @@ public class ShipController : MonoBehaviour
 	/// <summary> Change the roles of the players </summary>
 	public void SwapRoles()
 	{
-		Debug.Log("Swapping roles");
+		if (player1) player1.SwapRole();
+		if (player2) player2.SwapRole();
 
-		if (player1)
-		{
-			player1.SwapRole();
-		}
-
-		if (player2)
-		{
-			player2.SwapRole();
-		}
-
-		gunVelocity = Vector3.zero;
+		ResetShip();
 	}
 
 	/// <summary>
@@ -207,7 +189,6 @@ public class ShipController : MonoBehaviour
 	/// </summary>
 	public void UpdateCamera()
 	{
-		// POSITION
 		// Where the camera SHOULD be relative to the ship model
 		Vector3 shipPos = ShipModel.transform.position;
 
@@ -217,8 +198,7 @@ public class ShipController : MonoBehaviour
 		gunnerPivot.position = Vector3.Lerp(gunnerPivot.position, shipPos + yPos + zPos, 0.25f);
 
 		gunnerPivot.rotation = Quaternion.identity;
-		gunnerObject.Rotate(new Vector2(-gunVelocity.y, gunVelocity.x) * Time.deltaTime);
-
+		gunnerObject.Rotate(new Vector2(-gunVelocity.y, gunVelocity.x) * Time.deltaTime * (slowCamera ? 0.2f : 1f));
 
 		// If we don't have a target currently locking
 		if (lockOnTarget == null)
@@ -231,7 +211,7 @@ public class ShipController : MonoBehaviour
 
 		if (lockOnTarget != null)
 		{
-			Vector2 newPoint = gunnerCamera.WorldToScreenPoint(lockOnTarget.transform.position);
+			Vector2 newPoint = GunnerCamera.WorldToScreenPoint(lockOnTarget.transform.position);
 			float unlockDist = 60;
 
 			if (Vector2.Distance(gunnerCenter, newPoint) < unlockDist)
@@ -256,8 +236,8 @@ public class ShipController : MonoBehaviour
 
 		RaycastHit hit;
 
-		Vector3 origin = gunnerCamera.transform.position;
-		Vector3 direction = gunnerCamera.transform.forward;
+		Vector3 origin = GunnerCamera.transform.position;
+		Vector3 direction = GunnerCamera.transform.forward;
 
 		if (Physics.Raycast(origin, direction, out hit, Mathf.Infinity, LayerMask.GetMask("Enemies")))
 		{
@@ -411,10 +391,27 @@ public class ShipController : MonoBehaviour
 		// Camera
 		Vector3 targetCameraPos = boosting ? myBehaviour.boostPos : myBehaviour.normalPos;
 
-		pilotCamera.transform.localPosition = Vector3.Slerp(pilotCamera.transform.localPosition, targetCameraPos, myBehaviour.cameraSpeed);
+		PilotCamera.transform.localPosition = Vector3.Slerp(PilotCamera.transform.localPosition, targetCameraPos, myBehaviour.cameraSpeed);
 	}
 
 	#endregion
+
+	private void UpdateTurnMultiplier()
+	{
+		if (boosting)
+		{
+			turnMultiplayer = Mathf.Lerp(turnMultiplayer, 0.4f, 0.03f);
+		}
+		else
+		{
+			turnMultiplayer = Mathf.Lerp(turnMultiplayer, 1f, 0.03f);
+		}
+	}
+
+	private void ResetShip()
+	{
+		gunVelocity = Vector3.zero;
+	}
 
 	public void SwapWeapon(Vector2 Input)
 	{
@@ -429,6 +426,11 @@ public class ShipController : MonoBehaviour
 	public void ShootShip(bool pressed)
 	{
 		_weaponsSystem.ShipShooting = pressed;
+	}
+	
+	public void SlowCamera(bool pressed)
+	{
+		slowCamera = pressed;
 	}
 
 	// Editor values

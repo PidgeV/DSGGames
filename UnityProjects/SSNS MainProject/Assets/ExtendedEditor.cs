@@ -23,7 +23,12 @@ public class ExtendedEditor : Editor
 
 	protected void DrawField(string propName)
 	{
-		EditorGUILayout.PropertyField(serializedObject.FindProperty(propName), true);
+		SerializedProperty sp = serializedObject.FindProperty(propName);
+		if (sp != null) EditorGUILayout.PropertyField(sp, true);
+		else if (GUILayout.Button("?"))
+		{
+			Debug.Log("Could not find the property with the name " + propName);
+		}
 	}
 
 	protected void DrawFootnote(string msg, ref bool showDefault)

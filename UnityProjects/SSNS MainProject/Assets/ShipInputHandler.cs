@@ -186,6 +186,11 @@ public class ShipInputHandler : MonoBehaviour
 		}
 	}
 
+	internal void SlowCamera(bool isPressed)
+	{
+		_shipController.SlowCamera(isPressed);
+	}
+
 	/// <summary> Toggle the ships map </summary>
 	public void ToggleMap(bool pressed)
 	{

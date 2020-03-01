@@ -177,7 +177,7 @@ public class Player : Controller
 		if (myRole == PlayerRole.Gunner)
 		{
 			// Make the gunner shoot
-			Controller.ShootGun(input.isPressed);
+			Controller.SlowCamera(input.isPressed);
 		}
 	}
 	public override void OnRightTrigger(InputValue input)
@@ -191,7 +191,7 @@ public class Player : Controller
 		if (myRole == PlayerRole.Gunner)
 		{
 			// Make the gunner shoot
-			Controller.ShootGun(input.isPressed);
+			Controller.SlowCamera(input.isPressed);
 		}
 	}
 
@@ -209,6 +209,11 @@ public class Player : Controller
 	}
 	public override void OnLeftBumper(InputValue input)
 	{
+		if (myRole == PlayerRole.Pilot)
+		{
+			Controller.ShootShip(input.isPressed);
+		}
+
 		if (myRole == PlayerRole.Gunner)
 		{
 			Controller.LockOn(input.isPressed);

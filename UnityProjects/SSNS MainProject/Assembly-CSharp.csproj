@@ -84,6 +84,7 @@
     <Compile Include="Assets\05_Scripts\Enemies\StateMachine\AdvancedFSM.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\StateMachine\FSM.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\StateMachine\FSMState.cs" />
+    <Compile Include="Assets\05_Scripts\Enemies\States\AttackState.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\States\CargoPatrolState.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\States\ChargerStates\ChargerAttackState.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\States\ChargerStates\ChaserPatrolState.cs" />
@@ -95,9 +96,9 @@
     <Compile Include="Assets\05_Scripts\Enemies\States\DreadnovaStates\DreadnovaSpawnState.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\States\FighterStates\FighterAttackState.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\States\FighterStates\FighterPatrolState.cs" />
+    <Compile Include="Assets\05_Scripts\Enemies\States\PatrolState.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\States\SpawnState.cs" />
-    <Compile Include="Assets\05_Scripts\Enemies\Stats\ChargerStats.cs" />
-    <Compile Include="Assets\05_Scripts\Enemies\Stats\FighterStats.cs" />
+    <Compile Include="Assets\05_Scripts\Enemies\Stats\EnemyStats.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Swarmer\Behaviour Scripts\AlignmentBehaviour.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Swarmer\Behaviour Scripts\AvoidanceBehaviour.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Swarmer\Behaviour Scripts\AvoidObstacles.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Assets\05_Scripts\Player\PlayerHUDHandler.cs" />
     <Compile Include="Assets\05_Scripts\Player\PlayerRespawn.cs" />
     <Compile Include="Assets\05_Scripts\Player\ShipController.cs" />
+    <Compile Include="Assets\05_Scripts\Player\ShipObjects\PlayerStats.cs" />
     <Compile Include="Assets\05_Scripts\Player\ShootingSoundController.cs" />
     <Compile Include="Assets\05_Scripts\Player\ShotEffectSpawner.cs" />
     <Compile Include="Assets\05_Scripts\Player\TestGunController.cs" />
@@ -154,6 +156,7 @@
     <Compile Include="Assets\05_Scripts\Score\ShotThing.cs" />
     <Compile Include="Assets\05_Scripts\Shaders\MoveShaderPoint.cs" />
     <Compile Include="Assets\05_Scripts\Shaders\ShieldDissolve.cs" />
+    <Compile Include="Assets\05_Scripts\ShipStats.cs" />
     <Compile Include="Assets\05_Scripts\Sound\Projectiles\ChargedShotSoundControl.cs" />
     <Compile Include="Assets\05_Scripts\Sound\Projectiles\LaserSoundController.cs" />
     <Compile Include="Assets\05_Scripts\UI\DemoManagerMenu.cs" />
@@ -243,7 +246,6 @@
     <Compile Include="Assets\Misselaineous\Cinemachine\Timeline\CinemachineShot.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Timeline\CinemachineTrack.cs" />
     <Compile Include="Assets\ScriptableObjects\ShipObjects\ShipBehaviour.cs" />
-    <Compile Include="Assets\ScriptableObjects\ShipObjects\ShipStats.cs" />
     <Compile Include="Assets\ShipInputHandler.cs" />
     <Compile Include="Assets\SizeDisplay.cs" />
     <Compile Include="Assets\WeaponsSystem.cs" />

@@ -88,6 +88,23 @@ public class GunController : MonoBehaviour
 		gunAnimator.speed = 1;
 	}
 
+	public bool CheckForPlayer()
+	{
+		RaycastHit hit;
+
+		Vector3 origin = _shipController.GunnerCamera.transform.position;
+		Vector3 direction = _shipController.GunnerCamera.transform.forward;
+
+		if (Physics.Raycast(origin, direction, out hit, Mathf.Infinity))
+		{
+			if (hit.collider.tag == "Player") {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+
 	public void CheckAmmo()
 	{
 		if (ammoCount.HasAmmo(currentWeapon) == false) {
@@ -129,6 +146,7 @@ public class GunController : MonoBehaviour
 	{
 		// TODO -- Play Sound
 		// ammoCount.Take1Ammo(currentWeapon);
+		if (CheckForPlayer()) return;
 		GameObject shotPrefab = currentWeapon == WeaponType.Regular ? standardShot : energyShot;
 		InitShot(Instantiate(shotPrefab, barrelL.position, barrelL.rotation));
 	}
@@ -136,6 +154,7 @@ public class GunController : MonoBehaviour
 	public void ShootMissileL()
 	{
 		// TODO -- Play Sound
+		if (CheckForPlayer()) return;
 		ammoCount.Take1Ammo(currentWeapon);
 		InitShot(Instantiate(missileShot, barrelL.position, barrelL.rotation));
 		CheckAmmo();
@@ -144,6 +163,7 @@ public class GunController : MonoBehaviour
 	public void ShootMissileR()
 	{
 		// TODO -- Play Sound
+		if (CheckForPlayer()) return;
 		ammoCount.Take1Ammo(currentWeapon);
 		InitShot(Instantiate(missileShot, barrelR.position, barrelR.rotation));
 		CheckAmmo();
@@ -152,6 +172,7 @@ public class GunController : MonoBehaviour
 	public void StartCharge()
 	{
 		// TODO -- Play Sound
+		if (CheckForPlayer()) return;
 		GameObject newChargeShot = Instantiate(chargedShot, barrelL.position, barrelL.rotation, barrelL.transform);
 		InitShot(newChargeShot);
 
