@@ -9,15 +9,13 @@ public class FighterController : EnemyController
 
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject bulletShootPos;
-    //[SerializeField] float distanceNeedToMaintain;
-    [SerializeField] float accuracyForShot;
 
-    private void ConstructFSM()
+    protected override void ConstructFSM()
     {
         DeadState deadState = new DeadState(this);
         SpawnState spawnState = new SpawnState(this);
-        FighterPatrolState patrol = new FighterPatrolState(this, player, waypointDistanceMeters, playerDistanceMeters, true);
-        FighterAttackState attack = new FighterAttackState(this, player, bullet, bulletShootPos);
+        FighterPatrolState patrol = new FighterPatrolState(this, true);
+        FighterAttackState attack = new FighterAttackState(this, bullet, bulletShootPos);
 
         spawnState.AddTransition(Transition.Patrol, FSMStateID.Patrolling);
 
@@ -34,37 +32,6 @@ public class FighterController : EnemyController
         AddFSMState(deadState);
     }
 
-    protected override void Initialize()
-    {
-        //Pretty self explainatory
-        if (GameObject.FindGameObjectWithTag("Player") != null)
-        {
-            player = GameObject.FindGameObjectWithTag("Player");
-        }
-
-        currentHealth = maxHealth;
-        ConstructFSM();
-
-        rbSelf = GetComponent<Rigidbody>();
-    }
-    protected override void FSMUpdate()
-    {
-        //Do this
-        if (CurrentState != null)
-        {
-            CurrentState.Reason();
-            CurrentState.Act();
-        }
-    }
-    protected override void FSMFixedUpdate()
-    {
-        //Guess we needed this
-    }
-
     //Getters
     public float CloseDistance { get { return closeDistanceCheck; } }
-    public float Health { get { return currentHealth; } }
-    public GameObject Player { get { return player; } }
-    public float Accuracy { get { return accuracyForShot; } }
-    public float FireRate { get { return fireRate; } }
 }

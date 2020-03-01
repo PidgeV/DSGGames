@@ -16,13 +16,13 @@ public class GameManager : MonoBehaviour
     public bool debug;
     public bool paused = false;
 
-    [HideInInspector] public ShipController shipController;
-
     [SerializeField] private GameState gameState = GameState.NODE_TRANSITION;
 
     [SerializeField] private int seed;
 
     private System.Random random;
+
+    private ShipController shipController;
 
     private const int MAX_RESPAWN_TIME = 5;
 
@@ -164,6 +164,6 @@ public class GameManager : MonoBehaviour
     }
 
     public GameState GameState { get { return gameState; } }
-
     public System.Random Random { get { return random; } }
+    public GameObject Player { get { return shipController.gameObject; } }
 }

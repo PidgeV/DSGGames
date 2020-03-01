@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class DeadState : FSMState
 {
-    private AdvancedFSM controller;
-    public DeadState(AdvancedFSM enemyController)
+    private EnemyController controller;
+    public DeadState(EnemyController enemyController)
     {
         controller = enemyController;
         stateID = FSMStateID.Dead;

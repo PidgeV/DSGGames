@@ -185,4 +185,6 @@ public class HealthAndShields : MonoBehaviour
 	{
 		Debug.Log("Damage Taken:( KineticDamage: " + kineticDamage + ", EnergyDamage: " + energyDamag + ")");
 	}
+
+	public bool IsDead { get { return currentLife <= 0; } }
 }

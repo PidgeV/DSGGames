@@ -6,8 +6,6 @@ using UnityEngine;
 public abstract class EnemyController : AdvancedFSM
 {
     public Transform[] waypoints;
-    
-    private Rigidbody rbSelf;
 
     [SerializeField] private EnemyStats myStats;
 
@@ -15,6 +13,9 @@ public abstract class EnemyController : AdvancedFSM
     [Header("Red: intercept calculation.")]
     [Header("Blue: Velocity and collision check.")]
     [SerializeField] bool debugDraw = false;
+
+    private Rigidbody rbSelf;
+    private HealthAndShields health;
 
     //MAth things for later. To store the dot product
     float dotProduct;
@@ -28,7 +29,11 @@ public abstract class EnemyController : AdvancedFSM
     protected override void Initialize()
     {
         ConstructFSM();
+
+        TryGetComponent(out rbSelf);
+        TryGetComponent(out health);
     }
+
     protected override void FSMUpdate()
     {
         //Do this
@@ -68,9 +73,7 @@ public abstract class EnemyController : AdvancedFSM
 
     public bool PlayerInVision()
     {
-        GameObject player = GameManager.Instance.shipController.gameObject;
-
-        Vector3 dir = player.transform.position - transform.position;
+        Vector3 dir = Player.transform.position - transform.position;
         Ray ray = new Ray(transform.position, dir);
         RaycastHit hitInfo;
         LayerMask layerMask = LayerMask.GetMask("Obstacles");
@@ -82,7 +85,7 @@ public abstract class EnemyController : AdvancedFSM
         if (hitInfo.collider != null)
         {
             //Debug.Log(hitInfo.collider.gameObject.name);
-            if (hitInfo.collider.gameObject.Equals(player.gameObject))
+            if (hitInfo.collider.gameObject.Equals(Player))
             {
                 return true;
             }
@@ -105,6 +108,8 @@ public abstract class EnemyController : AdvancedFSM
         }
     }
 
+    public GameObject Player { get { return GameManager.Instance.Player; } }
+    public HealthAndShields Health { get { return health; } }
     public EnemyStats Stats { get { return myStats; } }
     public Rigidbody Rigid { get { return rbSelf; } }
     public LayerMask ObstacleLayer { get { return myStats.ObstacleLayer; } }
@@ -112,4 +117,6 @@ public abstract class EnemyController : AdvancedFSM
     public float CollisionDistance { get { return myStats.CollisionDistance; } }
     public float WaypointDistance { get { return myStats.WaypointDistance; } }
     public float PlayerDistance { get { return myStats.PlayerDistance; } }
+    public Vector3 Spawn { get { return spawnpoint; } set { spawnpoint = value; } }
+    public Vector3 SpawnDestination { get { return spawnDestination; } set { spawnDestination = value; } }
 }

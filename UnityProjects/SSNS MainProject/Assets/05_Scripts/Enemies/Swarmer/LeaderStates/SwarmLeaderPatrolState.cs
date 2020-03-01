@@ -2,88 +2,83 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Complete
+public class SwarmLeaderPatrolState : FSMState
 {
-    public class SwarmLeaderPatrolState : FSMState
+    FlockLeaderController controller;
+    Flock swarm;
+
+    private int patrolID = 0;
+    private bool randomPoint;
+    public SwarmLeaderPatrolState(FlockLeaderController leader, Flock swarmObj, bool randomize = true)
     {
-        FlockLeaderController controller;
-        Flock swarm;
-        Transform[] waypoints;
+        controller = leader;
+        randomPoint = randomize;
+        swarm = swarmObj;
+        swarm.swarmFollowRadius = controller.PatrolRadius;
 
-        private int patrolID = 0;
-        private bool randomPoint;
-        public SwarmLeaderPatrolState(FlockLeaderController leader, Flock swarmObj, Transform[] wayPoints, bool randomize = true)
+        if (randomPoint) patrolID = Random.Range(0, controller.waypoints.Length);
+
+
+        stateID = FSMStateID.Patrolling;
+    }
+
+    public override void Act()
+    {
+        Move();
+    }
+
+    public override void Reason()
+    {
+        if(swarm.defenseTarget != null)
         {
-            controller = leader;
-            waypoints = wayPoints;
-            randomPoint = randomize;
-            swarm = swarmObj;
-            swarm.swarmFollowRadius = controller.PatrolRadius;
-
-            if (randomPoint) patrolID = Random.Range(0, waypoints.Length);
-
-
-            stateID = FSMStateID.Patrolling;
+            //Enter defend state mode
+            controller.PerformTransition(Transition.Defend);
         }
 
-        public override void Act()
+        if(swarm.player != null)
         {
-            Move();
-        }
-
-        public override void Reason()
-        {
-            if(swarm.defenseTarget != null)
+            //Check distance to player
+            if (Vector3.Distance(controller.transform.position, swarm.player.transform.position) <= controller.PlayerDistance) 
             {
-                //Enter defend state mode
-                controller.PerformTransition(Transition.Defend);
+                controller.PerformTransition(Transition.Attack);
             }
+        }
+        else
+        {
+            swarm.player = GameObject.FindGameObjectWithTag("Player");
+        }
 
-            if(swarm.player != null)
+        //Check waypoint distance
+        if (controller.waypoints.Length > 0)
+        {
+            if (Vector3.Distance(controller.transform.position, controller.waypoints[patrolID].transform.position) <= controller.WaypointDistance) //Check distance to current waypoint
             {
-                //Check distance to player
-                if (Vector3.Distance(controller.transform.position, swarm.player.transform.position) <= controller.PlayerDistance) 
+                if (randomPoint)
                 {
-                    controller.PerformTransition(Transition.Attack);
+                    patrolID = Random.Range(0, controller.waypoints.Length); //Choose random patrol point
                 }
-            }
-            else
-            {
-                swarm.player = GameObject.FindGameObjectWithTag("Player");
-            }
-
-            //Check waypoint distance
-            if (waypoints.Length > 0)
-            {
-                if (Vector3.Distance(controller.transform.position, waypoints[patrolID].transform.position) <= controller.WaypointDistance) //Check distance to current waypoint
+                else
                 {
-                    if (randomPoint)
-                    {
-                        patrolID = Random.Range(0, waypoints.Length); //Choose random patrol point
-                    }
-                    else
-                    {
-                        patrolID++;//Progress to next waypoint
+                    patrolID++;//Progress to next waypoint
 
-                        if (patrolID >= waypoints.Length) patrolID = 0; //Circle back to first waypoint
-                    }
+                    if (patrolID >= controller.waypoints.Length) patrolID = 0; //Circle back to first waypoint
                 }
             }
         }
+    }
 
-        public override void EnterStateInit()
-        {
-            //Do this when entering the state
-            swarm.swarmFollowRadius = controller.PatrolRadius;
-        }
+    public override void EnterStateInit()
+    {
+        //Do this when entering the state
+        swarm.swarmFollowRadius = controller.PatrolRadius;
+    }
 
-        void Move()
+    void Move()
+    {
+        if (controller.waypoints.Length > 0 && controller.waypoints[patrolID] != null)
         {
-            if (waypoints.Length > 0 && waypoints[patrolID] != null)
-            {
-                //Move towards position. No need to worry about obstacles or 
-                controller.transform.position = Vector3.MoveTowards(controller.transform.position, waypoints[patrolID].transform.position, controller.PatrolSpeed * Time.deltaTime);
-            }
+            //Move towards position. No need to worry about obstacles or 
+            controller.transform.position = Vector3.MoveTowards(controller.transform.position, controller.waypoints[patrolID].transform.position, controller.Stats.normalSpeed * Time.deltaTime);
         }
     }
 }

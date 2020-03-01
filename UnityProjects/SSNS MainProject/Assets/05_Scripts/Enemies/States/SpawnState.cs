@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SpawnState : FSMState
 {
-    private AdvancedFSM controller;
+    private EnemyController controller;
 
-    public SpawnState(AdvancedFSM enemyController)
+    public SpawnState(EnemyController enemyController)
     {
         controller = enemyController;
         stateID = FSMStateID.Spawned;
@@ -14,7 +14,7 @@ public class SpawnState : FSMState
 
     public override void EnterStateInit()
     {
-        if (controller.GetType() == typeof(Complete.FlockLeaderController))
+        if (controller.GetType() == typeof(FlockLeaderController))
         {
             ChangeColliders(controller.transform.parent.gameObject, false);
         }
@@ -27,9 +27,9 @@ public class SpawnState : FSMState
 
     public override void Reason()
     {
-        if (IsInCurrentRange(controller.transform, controller.spawnDestination, 50))
+        if (IsInCurrentRange(controller.transform, controller.Spawn, 50))
         {
-            if (controller.GetType() == typeof(Complete.FlockLeaderController))
+            if (controller.GetType() == typeof(FlockLeaderController))
             {
                 ChangeColliders(controller.transform.parent.gameObject, true);
 
@@ -46,7 +46,7 @@ public class SpawnState : FSMState
 
     public override void Act()
     {
-        if (controller.spawnpoint != null)
+        if (controller.Spawn != null)
         {
             Move();
         }
@@ -56,12 +56,12 @@ public class SpawnState : FSMState
     void Move()
     {
 
-        if (controller.GetType() == typeof(Complete.FlockLeaderController))
+        if (controller.GetType() == typeof(FlockLeaderController))
         {
-            Complete.FlockLeaderController flockLeader = (Complete.FlockLeaderController)controller;
+            FlockLeaderController flockLeader = (FlockLeaderController)controller;
 
             //Calculate direction
-            Vector3 direction = controller.spawnDestination - controller.transform.position;
+            Vector3 direction = controller.SpawnDestination - controller.transform.position;
             direction.Normalize();
 
             Vector3 newDir = Vector3.RotateTowards(controller.transform.forward, direction, 20 * Time.deltaTime, 0);
@@ -74,7 +74,7 @@ public class SpawnState : FSMState
         else
         {
             //Calculate direction
-            Vector3 direction = controller.spawnDestination - controller.transform.position;
+            Vector3 direction = controller.SpawnDestination - controller.transform.position;
             direction.Normalize();
 
             Vector3 newDir = Vector3.RotateTowards(controller.transform.forward, direction, 20 * Time.deltaTime, 0);

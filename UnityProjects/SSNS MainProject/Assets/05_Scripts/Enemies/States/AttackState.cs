@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChargerAttackState : FSMState
+public class AttackState : FSMState
 {
-    ChargerController controller;
-    Vector3 interceptPoint;
-    float dotProduct;
+    protected EnemyController controller;
+    protected Vector3 interceptPoint;
+    protected float dotProduct;
 
     //Obstacle variables
-    Vector3 obstacleAvoidDirection = Vector3.right;
-    bool obstacleHit = false;
-    float obstacleTimer = 0;
-    float avoidTime = 2f;
+    protected Vector3 obstacleAvoidDirection = Vector3.right;
+    protected bool obstacleHit = false;
+    protected float obstacleTimer = 0;
+    protected float avoidTime = 2f;
 
-    float maxSpeed = 0;
+    protected float maxSpeed = 0;
 
     //constructor
-    public ChargerAttackState(ChargerController chaserController)
+    public AttackState(EnemyController chaserController)
     {
         controller = chaserController;
 
@@ -51,7 +51,7 @@ public class ChargerAttackState : FSMState
         }
 
         //Else dead transition to dead
-        if (controller.Health <= 0)
+        if (controller.Health.IsDead <= 0)
         {
             controller.PerformTransition(Transition.NoHealth);
         }
@@ -81,7 +81,7 @@ public class ChargerAttackState : FSMState
     {
         if (interceptPoint != null)
         {
-            float rotationForce = controller.RegRotationForce;
+            float rotationForce = controller.Stats.rotationSpeed;
             //Calculate direction
             Vector3 direction = controller.transform.forward; // sets forward
             direction.Normalize();
