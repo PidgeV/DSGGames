@@ -39,7 +39,7 @@ public class SwarmLeaderDefendState : FSMState
         if(swarm.defenseTarget != null)
         {
             //Moves swarm towards the ship to defend
-            controller.transform.position = Vector3.MoveTowards(controller.transform.position, swarm.defenseTarget.transform.position, controller.Stats.normalSpeed * Time.deltaTime);
+            controller.transform.position = Vector3.MoveTowards(controller.transform.position, swarm.defenseTarget.transform.position, controller.Stats.shipSpeed * Time.deltaTime);
         }
     }
 

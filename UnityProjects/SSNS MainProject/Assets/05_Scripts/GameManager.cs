@@ -136,6 +136,8 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         random = new System.Random(seed);
+
+        shipController = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipController>();
     }
 
     private void Start()
@@ -165,5 +167,5 @@ public class GameManager : MonoBehaviour
 
     public GameState GameState { get { return gameState; } }
     public System.Random Random { get { return random; } }
-    public GameObject Player { get { return shipController.gameObject; } }
+    public ShipController Player { get { return shipController; } }
 }

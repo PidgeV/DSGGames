@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PatrolState : FSMState
+public class PatrolState<T> : FSMState where T : EnemyController
 {
-    protected EnemyController controller;
+    protected T controller;
     protected int patrolID = 0;
     protected bool randomPoint;
 
@@ -21,7 +21,7 @@ public class PatrolState : FSMState
     protected float timeOftenCheck = 1.0f;
 
     //Constructor
-    public PatrolState(EnemyController enemyController, bool randomizePoint = false)
+    public PatrolState(T enemyController, bool randomizePoint = false)
     {
         controller = enemyController;
         randomPoint = randomizePoint;
@@ -33,7 +33,7 @@ public class PatrolState : FSMState
     //Do this always
     public override void Act()
     {
-        Move();
+        Move(controller.waypoints[patrolID]);
     }
 
     //Initialize on entering state
@@ -97,9 +97,9 @@ public class PatrolState : FSMState
     }
 
     //Moves
-    protected virtual void Move()
+    protected virtual void Move(Transform target)
     {
-        if (controller.waypoints[patrolID] != null)
+        if (target != null)
         {
             //Calculate direction
             Vector3 direction = controller.transform.forward; // sets forward
@@ -113,7 +113,7 @@ public class PatrolState : FSMState
             //Rotation
             if (!obstacleHit && obstacleTimer == 0)
             {
-                direction = controller.waypoints[patrolID].transform.position - controller.transform.position; // sets desired direction to target intercept point
+                direction = target.transform.position - controller.transform.position; // sets desired direction to target intercept point
             }
             else
             {
@@ -131,7 +131,7 @@ public class PatrolState : FSMState
             controller.transform.rotation = Quaternion.Lerp(controller.transform.rotation, rot, controller.Stats.rotationSpeed * Time.deltaTime);
 
             //Movement
-            controller.Rigid.AddForce(controller.transform.forward.normalized * controller.Stats.normalSpeed, ForceMode.Acceleration); // move regular speed if obstacle is in the way or player is not target
+            controller.Rigid.AddForce(controller.transform.forward.normalized * controller.Stats.shipSpeed, ForceMode.Acceleration); // move regular speed if obstacle is in the way or player is not target
         }
     }
 }

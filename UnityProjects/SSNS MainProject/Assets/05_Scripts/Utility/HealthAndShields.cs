@@ -48,6 +48,14 @@ public class HealthAndShields : MonoBehaviour
 		{
 			shipStats = enemy.Stats;
 		}
+		else if (TryGetComponent(out FlockAgent flockAgent))
+		{
+			shipStats = flockAgent.swarm.FlockLeader.Stats;
+		}
+		else
+		{
+			Debug.LogError("Couldn't get ship stats");
+		}
 
 		currentLife = MaxLife;
 		currentShield = MaxShield;

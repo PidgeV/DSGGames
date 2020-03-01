@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DreadnovaController : AdvancedFSM
+public class DreadnovaController : EnemyController
 {
     [SerializeField] private HealthAndShields[] shieldGenerators;
     public GameObject dreadnovaShield;
@@ -10,15 +10,12 @@ public class DreadnovaController : AdvancedFSM
     public GameObject dreadnovaThrusters;
 
     private DreadnovaSpawner spawner;
-    private HealthAndShields health;
-
-    private GameObject player;
 
     private float waveTime;
 
     public bool warping;
 
-    private void ConstructFSM()
+    protected override void ConstructFSM()
     {
         DeadState dead = new DeadState(this);
         DreadnovaSpawnState spawn = new DreadnovaSpawnState(this);
@@ -37,24 +34,6 @@ public class DreadnovaController : AdvancedFSM
         AddFSMState(shield);
         AddFSMState(escape);
         AddFSMState(dead);
-    }
-
-    protected override void Initialize()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-
-        ConstructFSM();
-
-        transform.position += transform.forward * -100000;
-    }
-    protected override void FSMUpdate()
-    {
-        //Do this
-        if (CurrentState != null)
-        {
-            CurrentState.Reason();
-            CurrentState.Act();
-        }
     }
 
     public void WarpDreadnova(bool warpIn)
@@ -108,6 +87,4 @@ public class DreadnovaController : AdvancedFSM
     }
 
     public DreadnovaSpawner Spawner { get { return spawner; } }
-    public HealthAndShields Health { get { return health; } }
-    public GameObject Player { get { return player; } }
 }

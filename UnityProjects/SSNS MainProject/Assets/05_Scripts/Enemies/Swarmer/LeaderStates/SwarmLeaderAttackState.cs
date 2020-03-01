@@ -63,7 +63,7 @@ public class SwarmLeaderAttackState : FSMState
         if (swarm.player != null)
         {
             //Move towards position. No need to worry about obstacles or 
-            controller.transform.position = Vector3.MoveTowards(controller.transform.position, swarm.player.transform.position, controller.Stats.maxSpeed * Time.deltaTime);
+            controller.transform.position = Vector3.MoveTowards(controller.transform.position, swarm.player.transform.position, controller.Stats.attackShipSpeed * Time.deltaTime);
         }
     }
 }

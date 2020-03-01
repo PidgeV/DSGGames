@@ -63,7 +63,7 @@ public class Reward : ScriptableObject
 					break;
 
 				case RewardsType.RegenDelayReduction:
-					target.shieldRegenDelay += value;
+					target.shieldRegenInterval -= value;
 					break;
 
 				case RewardsType.BoostGaugeIncrease:

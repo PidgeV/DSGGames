@@ -444,14 +444,14 @@ public class ShipController : MonoBehaviour
 
 		if (stopThrust)
 		{
-			thrustSpeed = Mathf.Clamp(thrustSpeed - myStats.shipDeceleration, 0, myStats.normalSpeed);
+			thrustSpeed = Mathf.Clamp(thrustSpeed - myStats.shipDeceleration, 0, myStats.shipSpeed);
 		}
 		// If were boosting
 		else if (boosting)
 		{
 			// Increase our speed when boosting
-			if (rigidbody.velocity.magnitude < myStats.maxSpeed)
-				thrustSpeed = Mathf.Clamp(thrustSpeed + (myStats.normalSpeed * 2.4f * Time.deltaTime), myStats.normalSpeed, myStats.maxSpeed);
+			if (rigidbody.velocity.magnitude < myStats.boostSpeed)
+				thrustSpeed = Mathf.Clamp(thrustSpeed + (myStats.shipSpeed * 2.4f * Time.deltaTime), myStats.shipSpeed, myStats.boostSpeed);
 
 
 			// Reduce the boost gauge
@@ -469,15 +469,15 @@ public class ShipController : MonoBehaviour
 		}
 		// Else if we are NOT boosting and our thrustSpeed is over our maxThrustSpeed
 		// We need to smooth the transition from boosting to not boosting
-		else if (thrustSpeed > myStats.normalSpeed)
+		else if (thrustSpeed > myStats.shipSpeed)
 		{
 			// Clamp our thrust Speed to our max thrust speed
-			thrustSpeed = Mathf.Clamp(thrustSpeed - myStats.shipDeceleration, myStats.normalSpeed, myStats.maxSpeed);
+			thrustSpeed = Mathf.Clamp(thrustSpeed - myStats.shipDeceleration, myStats.shipSpeed, myStats.boostSpeed);
 		}
 		// Else were not boosting so we increase our ships normal speed
 		else
 		{
-			thrustSpeed = myStats.normalSpeed;
+			thrustSpeed = myStats.shipSpeed;
 		}
 
 		finalThrustVelocity = transform.forward * thrustSpeed;
@@ -495,7 +495,8 @@ public class ShipController : MonoBehaviour
 
 		rigidbody.rotation *= rollRotation * rotateRotation;
 
-		rigidbody.transform.position += finalThrustVelocity + finalStrafeVelocity;
+		rigidbody.AddForce(finalThrustVelocity, ForceMode.VelocityChange);
+		rigidbody.AddRelativeForce(finalStrafeVelocity, ForceMode.VelocityChange);
 	}
 
 	/// <summary>

@@ -69,7 +69,7 @@ public class SpawnState : FSMState
             controller.transform.rotation = Quaternion.Lerp(controller.transform.rotation, rot, 20 * Time.deltaTime);
 
             //Move towards position. No need to worry about obstacles or 
-            controller.transform.position += controller.transform.forward * flockLeader.PatrolSpeed * Time.deltaTime;
+            controller.transform.position += controller.transform.forward * flockLeader.Stats.shipSpeed * Time.deltaTime;
         }
         else
         {

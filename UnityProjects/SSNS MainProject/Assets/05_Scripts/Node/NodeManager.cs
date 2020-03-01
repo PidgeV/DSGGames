@@ -271,7 +271,7 @@ public class NodeManager : MonoBehaviour
         Transform parent = new GameObject("Portals").transform;
 
         // Grabs the ship transform
-        Transform ship = GameManager.Instance.shipController.transform;
+        Transform ship = GameManager.Instance.Player.transform;
 
         while (Physics.Raycast(ship.transform.position, ship.forward, 1 << 8))
         {
@@ -316,11 +316,11 @@ public class NodeManager : MonoBehaviour
         if (portals == null || !rotateToPortal) return;
 
         // Finds the direction to the portal
-        Vector3 portalDir = (portals[selectedIndex].transform.position - GameManager.Instance.shipController.transform.position).normalized;
+        Vector3 portalDir = (portals[selectedIndex].transform.position - GameManager.Instance.Player.transform.position).normalized;
         Debug.Log(selectedIndex);
 
         // Finds the angle between
-        float angle = Vector3.SignedAngle(GameManager.Instance.shipController.transform.forward, portalDir, GameManager.Instance.shipController.transform.up);
+        float angle = Vector3.SignedAngle(GameManager.Instance.Player.transform.forward, portalDir, GameManager.Instance.Player.transform.up);
 
         Vector2 dir = Vector2.zero;
 
@@ -348,7 +348,7 @@ public class NodeManager : MonoBehaviour
         }
 
         // Steers the ship to the direction
-        GameManager.Instance.shipController.SteerShip(dir);
+        GameManager.Instance.Player.SteerShip(dir);
     }
 
     private void Awake()

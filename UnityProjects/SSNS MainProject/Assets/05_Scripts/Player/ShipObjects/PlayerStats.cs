@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Player Stats", menuName = "Ship/New Player Stats")]
+[CreateAssetMenu(fileName = "Player Stats", menuName = "Ship/Player Stats")]
 [System.Serializable]
 public class PlayerStats : ShipStats
 {
@@ -13,6 +13,10 @@ public class PlayerStats : ShipStats
     // Acceleration and deacceleration for the ship's rotation
     public float shipRotAcceleration = 5;
     public float shipRotDeceleration = 2;
+
+	public float boostSpeed = 50f;
+
+	public float baseDamage = 1f;
 
 	// The speed of strafing
 	public float strafeSpeed = 30f;

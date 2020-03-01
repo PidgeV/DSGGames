@@ -5,24 +5,36 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public abstract class EnemyController : AdvancedFSM
 {
-    public Transform[] waypoints;
-
-    [SerializeField] private EnemyStats myStats;
-
     [Header("Green: forward direction and collision check.")]
     [Header("Red: intercept calculation.")]
     [Header("Blue: Velocity and collision check.")]
     [SerializeField] bool debugDraw = false;
 
+    public Transform[] waypoints;
+
+    public EnemyStats myStats;
+
+    [Header("Distance Checks")]
+    [SerializeField] float collisionDistanceCheck = 150f;
+    [SerializeField] float waypointDistanceCheck = 50f;
+    [SerializeField] float playerDistanceCheck = 100f;
+    [SerializeField] float attackDistanceCheck = 80f;
+    [SerializeField] float patrolDistanceCheck = 200f;
+
+    [Header("Collision Properties")]
+    [SerializeField] LayerMask obstacleLayer;
+
+    [Tooltip("Size of ray for collision checking. Larger numbers will mean the avoidance is larger")]
+    [SerializeField] float raySize = 7.5f;
+
     private Rigidbody rbSelf;
     private HealthAndShields health;
-
-    //MAth things for later. To store the dot product
-    float dotProduct;
 
     private Vector3 spawnpoint;
 
     private Vector3 spawnDestination;
+
+    [HideInInspector] public bool showStats;
 
     protected abstract void ConstructFSM();
 
@@ -80,7 +92,7 @@ public abstract class EnemyController : AdvancedFSM
         layerMask += LayerMask.GetMask("Player"); //Add player layer to obstacles
         layerMask += LayerMask.GetMask("Enemies"); //Add player layer to obstacles
 
-        Physics.SphereCast(ray, myStats.RaySize / 2, out hitInfo, Mathf.Infinity, layerMask);
+        Physics.SphereCast(ray, raySize / 2, out hitInfo, Mathf.Infinity, layerMask);
 
         if (hitInfo.collider != null)
         {
@@ -108,15 +120,17 @@ public abstract class EnemyController : AdvancedFSM
         }
     }
 
-    public GameObject Player { get { return GameManager.Instance.Player; } }
+    public GameObject Player { get { return GameManager.Instance.Player.gameObject; } }
     public HealthAndShields Health { get { return health; } }
     public EnemyStats Stats { get { return myStats; } }
     public Rigidbody Rigid { get { return rbSelf; } }
-    public LayerMask ObstacleLayer { get { return myStats.ObstacleLayer; } }
-    public float RaySize { get { return myStats.RaySize; } }
-    public float CollisionDistance { get { return myStats.CollisionDistance; } }
-    public float WaypointDistance { get { return myStats.WaypointDistance; } }
-    public float PlayerDistance { get { return myStats.PlayerDistance; } }
+    public LayerMask ObstacleLayer { get { return obstacleLayer; } }
     public Vector3 Spawn { get { return spawnpoint; } set { spawnpoint = value; } }
     public Vector3 SpawnDestination { get { return spawnDestination; } set { spawnDestination = value; } }
+    public float CollisionDistance { get { return collisionDistanceCheck; } }
+    public float WaypointDistance { get { return waypointDistanceCheck; } }
+    public float AttackDistance { get { return attackDistanceCheck; } }
+    public float PatrolDistance { get { return patrolDistanceCheck; } }
+    public float PlayerDistance { get { return playerDistanceCheck; } }
+    public float RaySize { get { return raySize; } }
 }

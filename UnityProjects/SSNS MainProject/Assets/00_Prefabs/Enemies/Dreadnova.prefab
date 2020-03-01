@@ -90,9 +90,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a12dcf569cefd459a368b1ec232939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  debugDraw: 0
   waypoints: []
-  spawnpoint: {x: 0, y: 0, z: 0}
-  spawnDestination: {x: 0, y: 0, z: 0}
+  myStats: {fileID: 0}
+  collisionDistanceCheck: 150
+  waypointDistanceCheck: 50
+  playerDistanceCheck: 100
+  attackDistanceCheck: 80
+  patrolDistanceCheck: 200
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 4864
+  raySize: 7.5
+  showStats: 0
   shieldGenerators:
   - {fileID: 1768846636957905644}
   - {fileID: 4063424365783989057}
@@ -328,14 +338,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21bcb8e5aef53064495f71d628833b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 20
-  maxShield: 50
-  regenInterval: 0
+  shieldRegenDelay: 3
   currentLife: 0
   currentShield: 0
   Invincible: 0
   DestroyOnDeath: 0
-  regenSpeed: 0
 --- !u!114 &7779302749484587794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -758,14 +765,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21bcb8e5aef53064495f71d628833b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 20
-  maxShield: 50
-  regenInterval: 0
+  shieldRegenDelay: 3
   currentLife: 0
   currentShield: 0
   Invincible: 0
   DestroyOnDeath: 0
-  regenSpeed: 0
 --- !u!114 &5217936282721047914
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1856,6 +1860,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyThruster (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1885,11 +1894,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 204
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyThruster (2)
       objectReference: {fileID: 0}
     - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
@@ -1976,6 +1980,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyThruster (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -2005,11 +2014,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 204
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyThruster (1)
       objectReference: {fileID: 0}
     - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
@@ -2096,6 +2100,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyThruster
+      objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -2120,11 +2129,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 24
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyThruster
       objectReference: {fileID: 0}
     - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}

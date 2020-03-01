@@ -78,7 +78,7 @@ public class SwarmLeaderPatrolState : FSMState
         if (controller.waypoints.Length > 0 && controller.waypoints[patrolID] != null)
         {
             //Move towards position. No need to worry about obstacles or 
-            controller.transform.position = Vector3.MoveTowards(controller.transform.position, controller.waypoints[patrolID].transform.position, controller.Stats.normalSpeed * Time.deltaTime);
+            controller.transform.position = Vector3.MoveTowards(controller.transform.position, controller.waypoints[patrolID].transform.position, controller.Stats.shipSpeed * Time.deltaTime);
         }
     }
 }
