@@ -10,13 +10,13 @@ public class ShipController : MonoBehaviour
 {
 	[SerializeField] private Camera pilotCamera;
 	[SerializeField] private Camera gunnerCamera;
-	
+
 	[HideInInspector] public Player player1;
 	[HideInInspector] public Player player2;
 
 	public ParticleSystem warpEffect1;
 	public ParticleSystem warpEffect2;
-	
+
 	public Transform ShipModel;
 
 	[SerializeField] private Transform gunnerPivot;
@@ -24,17 +24,19 @@ public class ShipController : MonoBehaviour
 	[SerializeField] private Transform gunnerslockUI;
 
     ShieldProjector shieldProjector;
-	
+
 	public bool invertedControls;
 	public bool unlimitedBoost;
 	public bool lockOn;
-	
+
 	public ShipBehaviour myBehaviour;
-	public ShipStats myStats;
+
+	[Header("Stats")]
+	public PlayerStats myStats;
 
 	private PlayerHUDHandler _playerHUD;
 	private WeaponsSystem _weaponsSystem;
-	
+
 	[SerializeField] private ShootingSoundController shootingSoundController;
 
 	private HealthAndShields shipHP;
@@ -200,8 +202,8 @@ public class ShipController : MonoBehaviour
 		gunVelocity = Vector3.zero;
 	}
 
-	/// <summary> 
-	/// Use INPUT and update the camera 
+	/// <summary>
+	/// Use INPUT and update the camera
 	/// </summary>
 	public void UpdateCamera()
 	{
@@ -248,7 +250,7 @@ public class ShipController : MonoBehaviour
 	/// Raycast forward and see if the gunners hovering an enemy
 	/// </summary>
 	public void CheckForTarget()
-	{     
+	{
 		// (BLOCKER) If we cant Lock on
 		if (lockOn == false) return;
 
@@ -265,7 +267,7 @@ public class ShipController : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Use INPUT and update the ships target values, not the actual rigidbody 
+	/// Use INPUT and update the ships target values, not the actual rigidbody
 	/// </summary>
 	public void UpdateShipValues()
 	{
@@ -325,14 +327,14 @@ public class ShipController : MonoBehaviour
 
 		if (stopThrust)
 		{
-			thrustSpeed = Mathf.Clamp(thrustSpeed - myStats.shipDeceleration, 0, myStats.thrustSpeed);
+			thrustSpeed = Mathf.Clamp(thrustSpeed - myStats.shipDeceleration, 0, myStats.shipSpeed);
 		}
 		// If were boosting
 		else if (boosting)
 		{
 			// Increase our speed when boosting
 			if (rigidbody.velocity.magnitude < myStats.boostSpeed)
-				thrustSpeed = Mathf.Clamp(thrustSpeed + (myStats.thrustSpeed * 2.4f * Time.deltaTime), myStats.thrustSpeed, myStats.boostSpeed);
+				thrustSpeed = Mathf.Clamp(thrustSpeed + (myStats.shipSpeed * 2.4f * Time.deltaTime), myStats.shipSpeed, myStats.boostSpeed);
 
 
 			// Reduce the boost gauge
@@ -350,23 +352,23 @@ public class ShipController : MonoBehaviour
 		}
 		// Else if we are NOT boosting and our thrustSpeed is over our maxThrustSpeed
 		// We need to smooth the transition from boosting to not boosting
-		else if (thrustSpeed > myStats.thrustSpeed)
+		else if (thrustSpeed > myStats.shipSpeed)
 		{
 			// Clamp our thrust Speed to our max thrust speed
-			thrustSpeed = Mathf.Clamp(thrustSpeed - myStats.shipDeceleration, myStats.thrustSpeed, myStats.boostSpeed);
+			thrustSpeed = Mathf.Clamp(thrustSpeed - myStats.shipDeceleration, myStats.shipSpeed, myStats.boostSpeed);
 		}
 		// Else were not boosting so we increase our ships normal speed
 		else
 		{
-			thrustSpeed = myStats.thrustSpeed;
+			thrustSpeed = myStats.shipSpeed;
 		}
 
 		finalThrustVelocity = transform.forward * thrustSpeed;
 		#endregion
 	}
 
-	/// <summary> 
-	/// Update the ships PHYSICS
+	/// <summary>
+	/// Update the ships movement
 	/// </summary>
 	public void UpdateShipPhysics()
 	{
@@ -381,7 +383,7 @@ public class ShipController : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Move the ships model so it looks more like your controlling the ship 
+	/// Move the ships model so it looks more like your controlling the ship
 	/// </summary>
 	public void UpdateShipModel(Vector3 velocity)
 	{
@@ -428,7 +430,7 @@ public class ShipController : MonoBehaviour
 	{
 		_weaponsSystem.ShipShooting = pressed;
 	}
-	
+
 	// Editor values
 	[HideInInspector] public bool showBehaviour = false;
 	[HideInInspector] public bool showStats = false;

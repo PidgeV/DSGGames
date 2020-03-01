@@ -69,27 +69,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d2999f0dd3562e4491c6267c683b923, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints: []
-  spawnpoint: {x: 0, y: 0, z: 0}
-  spawnDestination: {x: 0, y: 0, z: 0}
   debugDraw: 1
-  fireRate: 1
-  maxHealth: 10
-  currentHealth: 0
-  regRotationForce: 7
-  acceleration: 100
+  waypoints: []
+  myStats: {fileID: 11400000, guid: 4d3abca4e635611439357f2aa43ae73d, type: 2}
+  collisionDistanceCheck: 250
+  waypointDistanceCheck: 100
+  playerDistanceCheck: 2000
+  attackDistanceCheck: 80
+  patrolDistanceCheck: 100
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 4864
-  collisionCheckDistance: 250
-  waypointDistanceMeters: 100
-  playerDistanceMeters: 2000
-  closeDistance: 100
-  rbSelf: {fileID: 58820780711503997}
   raySize: 25
+  showStats: 0
+  closeDistanceCheck: 90
   bullet: {fileID: 4450240921679082262, guid: 3b677ceb74ae31b4fa791919b59499df, type: 3}
   bulletShootPos: {fileID: 1864797949346244314}
-  accuracyForShot: 30
 --- !u!114 &7891742998165567511
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -102,14 +97,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21bcb8e5aef53064495f71d628833b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 15
-  maxShield: 15
-  regenInterval: 5
+  shieldRegenDelay: 3
   currentLife: 0
   currentShield: 0
   Invincible: 0
   DestroyOnDeath: 1
-  regenSpeed: 2
 --- !u!54 &58820780711503997
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -733,21 +725,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.58977
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.58977
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.58977
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_Name
@@ -767,6 +744,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.58977
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.58977
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.58977
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59d053a849b18994bae25015b58df19c, type: 3}
@@ -838,21 +830,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.58977
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.58977
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.58977
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_Name
@@ -872,6 +849,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.58977
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.58977
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.58977
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59d053a849b18994bae25015b58df19c, type: 3}

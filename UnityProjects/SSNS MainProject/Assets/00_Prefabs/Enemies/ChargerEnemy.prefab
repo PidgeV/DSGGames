@@ -58,7 +58,6 @@ GameObject:
   - component: {fileID: 3107085776561158198}
   - component: {fileID: 2083052501916966413}
   - component: {fileID: 5065271178767460442}
-  - component: {fileID: 5702806089406881496}
   - component: {fileID: 3107085776561158192}
   - component: {fileID: 7371385028968951949}
   - component: {fileID: 5355516276204472101}
@@ -130,19 +129,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a1176cb7a12e094f8443583782d7e76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints: []
-  spawnpoint: {x: 0, y: 0, z: 0}
-  spawnDestination: {x: 0, y: 0, z: 0}
   debugDraw: 1
-  stats: {fileID: 5702806089406881496}
+  waypoints: []
+  myStats: {fileID: 11400000, guid: b228fcfa117d79f499461b0c4acb4e68, type: 2}
+  collisionDistanceCheck: 150
+  waypointDistanceCheck: 200
+  playerDistanceCheck: 2000
+  attackDistanceCheck: 80
+  patrolDistanceCheck: 200
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 4864
-  collisionCheckDistance: 150
-  waypointDistanceMeters: 50
-  playerDistanceMeters: 1000
-  rbSelf: {fileID: 3107085776561158192}
   raySize: 20
+  showStats: 1
   hitPlayer: 0
 --- !u!114 &5065271178767460442
 MonoBehaviour:
@@ -156,36 +155,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21bcb8e5aef53064495f71d628833b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 15
-  maxShield: 15
-  regenInterval: 5
+  shieldRegenDelay: 3
   currentLife: 0
   currentShield: 0
   Invincible: 0
   DestroyOnDeath: 1
-  regenSpeed: 2
---- !u!114 &5702806089406881496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3107085776561158194}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec4000605fa16d84d8eb8fe907cc939e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shipName: Charger
-  shipDescription: Charges things
-  maxHealth: 20
-  maxShield: 15
-  currentHealth: 0
-  currentShield: 0
-  acceleration: 100
-  regRotationForce: 10
-  chargeAcceleration: 250
-  chargeRotationForce: 2
 --- !u!54 &3107085776561158192
 Rigidbody:
   m_ObjectHideFlags: 0

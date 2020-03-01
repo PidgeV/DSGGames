@@ -97,7 +97,7 @@ public class NodeManager : MonoBehaviour
 
             // Spawn the portals and update the information for the nodes
             StartCoroutine(SpawnPortals());
-                
+
             // Selects the middle choice as default
             NodeUpdate(Choices.Length / 2);
 
@@ -187,7 +187,7 @@ public class NodeManager : MonoBehaviour
         rotateToPortal = true;
 
         // Updates the node UI for the pilot
-        #region UI 
+        #region UI
 
         NodeInfo selectedNode = Choices[selectedIndex].NodeInfo;
 
@@ -271,7 +271,7 @@ public class NodeManager : MonoBehaviour
         Transform parent = new GameObject("Portals").transform;
 
         // Grabs the ship transform
-        Transform ship = GameManager.Instance.shipController.transform;
+        Transform ship = GameManager.Instance.Player.transform;
 
         while (Physics.Raycast(ship.transform.position, ship.forward, 1 << 8))
         {
@@ -316,11 +316,11 @@ public class NodeManager : MonoBehaviour
         if (portals == null || !rotateToPortal) return;
 
         // Finds the direction to the portal
-        Vector3 portalDir = (portals[selectedIndex].transform.position - GameManager.Instance.shipController.transform.position).normalized;
+        Vector3 portalDir = (portals[selectedIndex].transform.position - GameManager.Instance.Player.transform.position).normalized;
         Debug.Log(selectedIndex);
 
         // Finds the angle between
-        float angle = Vector3.SignedAngle(GameManager.Instance.shipController.transform.forward, portalDir, GameManager.Instance.shipController.transform.up);
+        float angle = Vector3.SignedAngle(GameManager.Instance.Player.transform.forward, portalDir, GameManager.Instance.Player.transform.up);
 
         Vector2 dir = Vector2.zero;
 
@@ -390,7 +390,7 @@ public class NodeManager : MonoBehaviour
             timeBeforeSelection -= Time.deltaTime;
 
             // If timer hits 0 select node based on player selections
-            if (timeBeforeSelection <= 0) 
+            if (timeBeforeSelection <= 0)
             {
                 timeBeforeSelection = 0;
 

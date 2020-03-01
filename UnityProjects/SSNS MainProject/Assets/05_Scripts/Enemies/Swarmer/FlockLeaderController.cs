@@ -2,83 +2,49 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Complete
+public class FlockLeaderController : EnemyController
 {
-    public class FlockLeaderController : AdvancedFSM
+    [SerializeField] float attackStateRadius;
+    [SerializeField] float patrolStateRadius;
+    [SerializeField] float defenseStateRadius;
+
+    public float AttackRadius { get { return attackStateRadius; } }
+    public float PatrolRadius { get { return patrolStateRadius; } }
+    public float DefenseRadius { get { return defenseStateRadius; } }
+
+    protected override void ConstructFSM()
     {
-        [SerializeField] float patrolSpeed;
-        [SerializeField] float attackSpeed;
+        Flock swarm = transform.parent.GetComponent<Flock>();
+        //States
+        SpawnState spawn = new SpawnState(this);
+        SwarmLeaderPatrolState patrol = new SwarmLeaderPatrolState(this, swarm);
+        SwarmLeaderAttackState attack = new SwarmLeaderAttackState(this, swarm);
+        SwarmLeaderDefendState defend = new SwarmLeaderDefendState(this, swarm);
 
-        [SerializeField] float attackStateRadius;
-        [SerializeField] float patrolStateRadius;
-        [SerializeField] float defenseStateRadius;
+        spawn.AddTransition(Transition.Defend, FSMStateID.Defend);
 
-        [Space(15)]
-        [SerializeField] float waypointDistanceMeters = 75f;
-        [SerializeField] float playerDistanceMeters = 200f;
-
-        public float WaypointDistance { get { return waypointDistanceMeters; } }
-        public float PlayerDistance { get { return playerDistanceMeters; } }
-        public float PatrolSpeed { get { return patrolSpeed; } }
-        public float AttackSpeed { get { return attackSpeed; } }
-        public float AttackRadius { get { return attackStateRadius; } }
-        public float PatrolRadius { get { return patrolStateRadius; } }
-        public float DefenseRadius { get { return defenseStateRadius; } }
-
-        protected override void FSMFixedUpdate()
-        {
+        //Transitions
+        patrol.AddTransition(Transition.Attack, FSMStateID.Attacking);
+        patrol.AddTransition(Transition.Patrol, FSMStateID.Patrolling);
             
-        }
+        attack.AddTransition(Transition.Patrol, FSMStateID.Patrolling);
+        attack.AddTransition(Transition.Defend, FSMStateID.Defend);
 
-        protected override void FSMUpdate()
-        {
-            //Do this
-            if (CurrentState != null)
-            {
-                CurrentState.Reason();
-                CurrentState.Act();
-            }
-        }
+        defend.AddTransition(Transition.Patrol, FSMStateID.Patrolling);
 
-        protected override void Initialize()
-        {
-            ConstructFSM();
-        }
+        //Add states
+        AddFSMState(spawn);
+        AddFSMState(defend);
+        AddFSMState(patrol);
+        AddFSMState(attack);
+    }
 
-        void ConstructFSM()
-        {
-            Flock swarm = transform.parent.GetComponent<Flock>();
-            //States
-            SpawnState spawn = new SpawnState(this);
-            SwarmLeaderPatrolState patrol = new SwarmLeaderPatrolState(this, swarm, waypoints);
-            SwarmLeaderAttackState attack = new SwarmLeaderAttackState(this, swarm);
-            SwarmLeaderDefendState defend = new SwarmLeaderDefendState(this, swarm);
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(transform.position, 2.0f);
 
-            spawn.AddTransition(Transition.Defend, FSMStateID.Defend);
-
-            //Transitions
-            patrol.AddTransition(Transition.Attack, FSMStateID.Attacking);
-            patrol.AddTransition(Transition.Patrol, FSMStateID.Patrolling);
-            
-            attack.AddTransition(Transition.Patrol, FSMStateID.Patrolling);
-            attack.AddTransition(Transition.Defend, FSMStateID.Defend);
-
-            defend.AddTransition(Transition.Patrol, FSMStateID.Patrolling);
-
-            //Add states
-            AddFSMState(spawn);
-            AddFSMState(defend);
-            AddFSMState(patrol);
-            AddFSMState(attack);
-        }
-
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.blue;
-            Gizmos.DrawWireSphere(transform.position, 2.0f);
-
-            Gizmos.color = Color.green;
-            Gizmos.DrawRay(transform.position, transform.forward * 50);
-        }
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay(transform.position, transform.forward * 50);
     }
 }

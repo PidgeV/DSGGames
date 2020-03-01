@@ -16,13 +16,13 @@ public class GameManager : MonoBehaviour
     public bool debug;
     public bool paused = false;
 
-    [HideInInspector] public ShipController shipController;
-
     [SerializeField] private GameState gameState = GameState.NODE_TRANSITION;
 
     [SerializeField] private int seed;
 
     private System.Random random;
+
+    private ShipController shipController;
 
     private const int MAX_RESPAWN_TIME = 5;
 
@@ -136,6 +136,8 @@ public class GameManager : MonoBehaviour
         Instance = this;
 
         random = new System.Random(seed);
+
+        shipController = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipController>();
     }
 
     private void Start()
@@ -164,6 +166,6 @@ public class GameManager : MonoBehaviour
     }
 
     public GameState GameState { get { return gameState; } }
-
     public System.Random Random { get { return random; } }
+    public ShipController Player { get { return shipController; } }
 }

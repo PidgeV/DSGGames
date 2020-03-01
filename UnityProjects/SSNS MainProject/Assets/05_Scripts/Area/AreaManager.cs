@@ -66,7 +66,7 @@ public class AreaManager : MonoBehaviour
 
         if (reward != null)
         {
-            reward.UseReward(GameManager.Instance.shipController.myStats);
+            reward.UseReward(GameManager.Instance.Player.myStats);
 
             // Updates the ui for the reward
             RewardManager.Instance.rewardUI.UpdateUI(reward);
@@ -86,7 +86,7 @@ public class AreaManager : MonoBehaviour
 
         // Moves player to a spot away from any areas
         // TODO: Implement effects for scene transition
-        GameManager.Instance.shipController.transform.position = Vector3.forward * -10000;
+        GameManager.Instance.Player.transform.position = Vector3.forward * -10000;
 
         // Creates new area storing the old one
         lastArea = currentArea;
@@ -162,8 +162,8 @@ public class AreaManager : MonoBehaviour
 		currentArea.obstacles.gameObject.SetActive(true);
 
 		// TODO: Should be in the testShipController
-		GameManager.Instance.shipController.transform.position = PlayerDestination;
-		GameManager.Instance.shipController.transform.rotation = Quaternion.Euler(0, 0, 0);
+		GameManager.Instance.Player.transform.position = PlayerDestination;
+		GameManager.Instance.Player.transform.rotation = Quaternion.Euler(0, 0, 0);
 
 		SkyboxManager.Instance.SwitchToSkybox(NodeManager.Instance.CurrentNode.Skybox);
 		GameManager.Instance.SwitchState(GameState.BATTLE);
@@ -245,7 +245,7 @@ public class AreaManager : MonoBehaviour
 
         if (GameManager.Instance.GameState == GameState.BATTLE)
         {
-            if (IsPlayerOutside(GameManager.Instance.shipController.transform))
+            if (IsPlayerOutside(GameManager.Instance.Player.transform))
             {
                 outsideTime += Time.deltaTime;
 
@@ -266,7 +266,7 @@ public class AreaManager : MonoBehaviour
             else
             {
                 float range = currentArea.size - (currentArea.size - 150);
-                float input = Mathf.Abs(Vector3.Distance(GameManager.Instance.shipController.transform.position, currentArea.location));
+                float input = Mathf.Abs(Vector3.Distance(GameManager.Instance.Player.transform.position, currentArea.location));
                 float t = Mathf.Clamp((input - (currentArea.size - 150)) / range, 0, 1);
                 outsideOverlay.color = Color.Lerp(outsideStartColor, outsideTargetColor, t);
               //  Debug.Log(range + " " + t + " " + input);

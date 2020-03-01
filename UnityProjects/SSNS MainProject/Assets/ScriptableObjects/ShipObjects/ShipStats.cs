@@ -2,19 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "New Ship Stats", menuName = "Ship/New Ship Stats")]
+[CreateAssetMenu(fileName = "Player Stats", menuName = "Ship/Player Stats")]
 [System.Serializable]
-public class ShipStats : ScriptableObject
+public class PlayerStats : ShipStats
 {
-	// Ship description
-	[SerializeField] private string shipName;
-    [SerializeField] private string shipDescription;
-
-	// Ship properties
-	// The max values for this ships health and shield
-	public float maxHealth = 20f;
-	public float maxShield = 15f;
-
 	// Acceleration and deacceleration of the ship's speed
 	public float shipAcceleration = .3f;
 	public float shipDeceleration = .01f;
@@ -23,31 +14,16 @@ public class ShipStats : ScriptableObject
     public float shipRotAcceleration = 5;
     public float shipRotDeceleration = 2;
 
-    // Min and max thruster speed of the ship
-	public float thrustSpeed = 50f;
+	public float boostSpeed = 50f;
 
-	// The speed the ship moves per second when boosting
-	public float boostSpeed = 30f;
+	public float baseDamage = 1f;
 
 	// The speed of strafing
 	public float strafeSpeed = 30f;
 
-	// The speed that the ship rotates
-	public float rotationSpeed = 5f;
-
-	// The delay between shots for the players basic weapon
-	public float fireRate = 0.1f;
-
-	// The base damage for the player basic gun
-	public float baseDamage = 1f;
-
 	// Reductions of damage for this ship
 	public float healthDamageReduction = 0.0f;
 	public float shieldDamageReduction = 0.0f;
-
-	// Shield regen properties
-	public float shieldRegenPercent = 0.1f;
-	public float shieldRegenDelay = 3f;
 
 	// This ships boost gauge values
 	public float maxBoostGauge = 5f;
@@ -61,7 +37,4 @@ public class ShipStats : ScriptableObject
 	// Extra ship abilities
 	public bool reserveShield = false;
 	public bool shieldBreakEMP = false;
-
-    public string ShipName { get { return shipName; } }
-    public string ShipDescription { get { return shipDescription; } }
 }
