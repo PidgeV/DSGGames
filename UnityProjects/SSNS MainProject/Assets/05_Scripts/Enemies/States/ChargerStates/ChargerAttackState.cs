@@ -13,14 +13,16 @@ public class ChargerAttackState : AttackState<ChargerController>
     }
 
     public override void Act()
-    {
-        CalculateIntercept();
+	{
+		if (MenuManager.Instance.Sleeping) return;
+		CalculateIntercept();
         Move();
     }
 
     public override void Reason()
-    {
-        if (controller.Player == null || ((ChargerController)controller).hitPlayer)
+	{
+		if (MenuManager.Instance.Sleeping) return;
+		if (controller.Player == null || ((ChargerController)controller).hitPlayer)
         {
             controller.PerformTransition(Transition.Patrol);
         }

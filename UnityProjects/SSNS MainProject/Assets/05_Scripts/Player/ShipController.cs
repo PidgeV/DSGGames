@@ -145,7 +145,9 @@ public class ShipController : MonoBehaviour
 	/// Used for all the non physics calculations
 	/// </summary>
 	private void Update()
-    {
+	{
+		if (MenuManager.Instance.Sleeping) return;
+
 		UpdateShipValues();
 		
 		UpdateShipModel(rotateDirection);
@@ -157,7 +159,8 @@ public class ShipController : MonoBehaviour
 	/// FixedUpdate is used for physic calculations
 	/// </summary>
 	private void FixedUpdate()
-    {
+	{
+		if (MenuManager.Instance.Sleeping) return;
 		UpdateShipPhysics();
 	}
 
@@ -166,7 +169,8 @@ public class ShipController : MonoBehaviour
     /// because we need to know where the ship is after physics are applied
     /// </summary>
     private void LateUpdate()
-    {
+	{
+		if (MenuManager.Instance.Sleeping) return;
 		UpdateCamera();
 	}
 

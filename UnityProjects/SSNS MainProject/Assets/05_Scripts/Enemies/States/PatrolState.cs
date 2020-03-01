@@ -33,6 +33,7 @@ public class PatrolState<T> : FSMState where T : EnemyController
     //Do this always
     public override void Act()
     {
+		if (MenuManager.Instance.Sleeping) return;
         Move(controller.waypoints[patrolID]);
     }
 
@@ -46,8 +47,9 @@ public class PatrolState<T> : FSMState where T : EnemyController
 
 
     public override void Reason()
-    {
-        if (timer1 < timeAfterTransition)
+	{
+		if (MenuManager.Instance.Sleeping) return;
+		if (timer1 < timeAfterTransition)
         {
             timer1 += Time.deltaTime;
         }

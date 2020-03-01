@@ -20,14 +20,16 @@ public class FighterAttackState : AttackState<FighterController>
     }
 
     public override void Act()
-    {
-        Move();
+	{
+		if (MenuManager.Instance.Sleeping) return;
+		Move();
         Shoot();
     }
 
     public override void Reason()
-    {
-        if (controller.Player == null)
+	{
+		if (MenuManager.Instance.Sleeping) return;
+		if (controller.Player == null)
         {
             controller.PerformTransition(Transition.Patrol);
         }

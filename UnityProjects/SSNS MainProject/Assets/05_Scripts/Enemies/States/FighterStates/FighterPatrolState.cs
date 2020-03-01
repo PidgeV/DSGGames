@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FighterPatrolState : PatrolState<FighterController>
 {
-    public FighterPatrolState(FighterController enemyController, bool randomizePoint = false) : base(enemyController, randomizePoint)
-    {
-    }
+	public FighterPatrolState(FighterController enemyController, bool randomizePoint = false) : base(enemyController, randomizePoint)
+	{
+	}
 }

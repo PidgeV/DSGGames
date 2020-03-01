@@ -35,6 +35,8 @@ public class CruiserAttackState : AttackState<CruiserController>
 	/// </summary>
 	public override void Reason()
 	{
+		if (MenuManager.Instance.Sleeping) return;
+
 		// Dead
 		if (myController.Health.IsDead)
 		{
@@ -58,6 +60,8 @@ public class CruiserAttackState : AttackState<CruiserController>
 	/// </summary>
 	public override void Act()
 	{
+		if (MenuManager.Instance.Sleeping) return;
+
 		if (myController.Player != null)
 		{
 			Vector3 playerPos = myController.Player.transform.position;

@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 /// <summary>
 /// The Controller for the Cruiser Enemy
 /// </summary>

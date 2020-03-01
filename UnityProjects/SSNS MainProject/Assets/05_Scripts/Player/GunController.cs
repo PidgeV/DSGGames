@@ -71,6 +71,17 @@ public class GunController : MonoBehaviour
 		}	
 	}
 
+	private void OnGUI()
+	{
+		GUI.Box(new Rect(0, Screen.height - 25, 350, 35), "Ammo" +
+			" ( " + "SS " + "n/a" + " )" +
+			" ( " + "ES " + "n/a" + " )" +
+			" ( " + "MS " + ammoCount.GetAmmo(WeaponType.Missiles) + " )" +
+			" ( " + "CS " + ammoCount.GetAmmo(WeaponType.Charged) + " )" +
+			" ( " + "LS " + ammoCount.GetAmmo(WeaponType.Laser) + " )");
+		;
+	}
+
 	public void UpdateAttacking(bool state)
 	{
 		Attacking = state;
@@ -144,17 +155,22 @@ public class GunController : MonoBehaviour
 
 	public void ShootStandard()
 	{
-		// TODO -- Play Sound
-		// ammoCount.Take1Ammo(currentWeapon);
+		if (MenuManager.Instance.Sleeping) return;
 		if (CheckForPlayer()) return;
+
+		// TODO -- Play Sound
+
 		GameObject shotPrefab = currentWeapon == WeaponType.Regular ? standardShot : energyShot;
 		InitShot(Instantiate(shotPrefab, barrelL.position, barrelL.rotation));
 	}
 
 	public void ShootMissileL()
 	{
-		// TODO -- Play Sound
+		if (MenuManager.Instance.Sleeping) return;
 		if (CheckForPlayer()) return;
+
+		// TODO -- Play Sound
+
 		ammoCount.Take1Ammo(currentWeapon);
 		InitShot(Instantiate(missileShot, barrelL.position, barrelL.rotation));
 		CheckAmmo();
@@ -162,8 +178,11 @@ public class GunController : MonoBehaviour
 
 	public void ShootMissileR()
 	{
-		// TODO -- Play Sound
+		if (MenuManager.Instance.Sleeping) return;
 		if (CheckForPlayer()) return;
+
+		// TODO -- Play Sound
+
 		ammoCount.Take1Ammo(currentWeapon);
 		InitShot(Instantiate(missileShot, barrelR.position, barrelR.rotation));
 		CheckAmmo();
@@ -171,8 +190,10 @@ public class GunController : MonoBehaviour
 
 	public void StartCharge()
 	{
-		// TODO -- Play Sound
 		if (CheckForPlayer()) return;
+
+		// TODO -- Play Sound
+
 		GameObject newChargeShot = Instantiate(chargedShot, barrelL.position, barrelL.rotation, barrelL.transform);
 		InitShot(newChargeShot);
 
@@ -181,11 +202,12 @@ public class GunController : MonoBehaviour
 
 	public void EndCharge()
 	{
-		// TODO -- Stop Sound
 		if (_chargeShotTransform != null)
 		{
 			ChargedShotBehaviour behaviour = _chargeShotTransform.GetComponent<ChargedShotBehaviour>();
 			behaviour.HasShot = true;
+
+			// TODO -- Stop Sound
 
 			_chargeShotTransform = null;
 

@@ -7,6 +7,8 @@ public class MenuManager : MonoBehaviour
 {
 	public static MenuManager Instance;
 
+	public bool Sleeping = false;
+
 	private void Awake()
 	{
 		if (Instance != null)
@@ -65,6 +67,20 @@ public class MenuManager : MonoBehaviour
 			else
 			{
 				player.SetPlayerActionMap("Ship");
+			}
+		}
+
+		foreach (Rigidbody rigidbody in GameObject.FindObjectsOfType<Rigidbody>())
+		{
+			if (state == true)
+			{
+				Sleeping = true;
+				rigidbody.Sleep();
+			}
+			else
+			{
+				Sleeping = false;
+				rigidbody.WakeUp();
 			}
 		}
 

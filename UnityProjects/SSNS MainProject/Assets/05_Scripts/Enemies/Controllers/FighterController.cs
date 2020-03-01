@@ -24,9 +24,10 @@ public class FighterController : EnemyController
 
         attack.AddTransition(Transition.NoHealth, FSMStateID.Dead);
         attack.AddTransition(Transition.Patrol, FSMStateID.Patrolling);
-        //What's the difference between saw player and attack transition?
 
+        //What's the difference between saw player and attack transition?
         AddFSMState(spawnState);
+
         AddFSMState(patrol);
         AddFSMState(attack);
         AddFSMState(deadState);
