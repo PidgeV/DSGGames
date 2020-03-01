@@ -6,6 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerStats : ShipStats
 {
+	[Header("Movement")]
 	// Acceleration and deacceleration of the ship's speed
 	public float shipAcceleration = .3f;
 	public float shipDeceleration = .01f;
@@ -16,15 +17,17 @@ public class PlayerStats : ShipStats
 
 	public float boostSpeed = 50f;
 
-	public float baseDamage = 1f;
-
 	// The speed of strafing
 	public float strafeSpeed = 30f;
+
+	[Header("Damage")]
+	public float baseDamage = 1f;
 
 	// Reductions of damage for this ship
 	public float healthDamageReduction = 0.0f;
 	public float shieldDamageReduction = 0.0f;
 
+	[Header("Boost")]
 	// This ships boost gauge values
 	public float maxBoostGauge = 5f;
 
@@ -34,6 +37,7 @@ public class PlayerStats : ShipStats
 	// The amount boosting recharges the meter every second
 	public float boostGaugeRechargeAmount = 1.5f;
 
+	[Header("Bonuses")]
 	// Extra ship abilities
 	public bool reserveShield = false;
 	public bool shieldBreakEMP = false;
