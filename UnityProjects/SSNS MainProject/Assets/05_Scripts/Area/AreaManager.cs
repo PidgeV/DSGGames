@@ -66,7 +66,7 @@ public class AreaManager : MonoBehaviour
 
         if (reward != null)
         {
-            reward.UseReward(GameManager.Instance.Player.myStats);
+            reward.UseReward(GameManager.Instance.Player.Properties);
 
             // Updates the ui for the reward
             RewardManager.Instance.rewardUI.UpdateUI(reward);

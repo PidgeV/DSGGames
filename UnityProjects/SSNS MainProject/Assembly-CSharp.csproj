@@ -132,11 +132,13 @@
     <Compile Include="Assets\05_Scripts\Player\PlayerHUDHandler.cs" />
     <Compile Include="Assets\05_Scripts\Player\PlayerRespawn.cs" />
     <Compile Include="Assets\05_Scripts\Player\ShipController.cs" />
+    <Compile Include="Assets\05_Scripts\Player\ShipInputHandler.cs" />
     <Compile Include="Assets\05_Scripts\Player\ShipObjects\PlayerStats.cs" />
     <Compile Include="Assets\05_Scripts\Player\ShootingSoundController.cs" />
     <Compile Include="Assets\05_Scripts\Player\ShotEffectSpawner.cs" />
     <Compile Include="Assets\05_Scripts\Player\TestGunController.cs" />
     <Compile Include="Assets\05_Scripts\Player\TurretController.cs" />
+    <Compile Include="Assets\05_Scripts\Player\WeaponsSystem.cs" />
     <Compile Include="Assets\05_Scripts\Projectiles\Barrel.cs" />
     <Compile Include="Assets\05_Scripts\Projectiles\Intercept\InterceptCalculationClass.cs" />
     <Compile Include="Assets\05_Scripts\Projectiles\Intercept\InterceptCalculationClassNoMono.cs" />
@@ -157,8 +159,11 @@
     <Compile Include="Assets\05_Scripts\Shaders\MoveShaderPoint.cs" />
     <Compile Include="Assets\05_Scripts\Shaders\ShieldDissolve.cs" />
     <Compile Include="Assets\05_Scripts\ShipStats.cs" />
+    <Compile Include="Assets\05_Scripts\SizeDisplay.cs" />
+    <Compile Include="Assets\05_Scripts\Sound\MusicManager.cs" />
     <Compile Include="Assets\05_Scripts\Sound\Projectiles\ChargedShotSoundControl.cs" />
     <Compile Include="Assets\05_Scripts\Sound\Projectiles\LaserSoundController.cs" />
+    <Compile Include="Assets\05_Scripts\Sound\RandomizeMusic.cs" />
     <Compile Include="Assets\05_Scripts\UI\DemoManagerMenu.cs" />
     <Compile Include="Assets\05_Scripts\UI\Fade.cs" />
     <Compile Include="Assets\05_Scripts\UI\FocusButton.cs" />
@@ -178,6 +183,8 @@
     <Compile Include="Assets\05_Scripts\UI\UIManager.cs" />
     <Compile Include="Assets\05_Scripts\Utility\DelayCollider.cs" />
     <Compile Include="Assets\05_Scripts\Utility\DelayDamage.cs" />
+    <Compile Include="Assets\05_Scripts\Utility\ExtendedEditor.cs" />
+    <Compile Include="Assets\05_Scripts\Utility\ExtendedEditorWindow.cs" />
     <Compile Include="Assets\05_Scripts\Utility\HealthAndShields.cs" />
     <Compile Include="Assets\05_Scripts\Utility\Helper.cs" />
     <Compile Include="Assets\05_Scripts\Utility\RandomPosition.cs" />
@@ -190,8 +197,6 @@
     <Compile Include="Assets\05_Scripts\Utility\ToggleObjects.cs" />
     <Compile Include="Assets\09_Effects\Shaders\AreaIndicator\Scripts\AreaShaderController.cs" />
     <Compile Include="Assets\11_Animations\Menus\Transitions\CinematicController.cs" />
-    <Compile Include="Assets\ExtendedEditor.cs" />
-    <Compile Include="Assets\ExtendedEditorWindow.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Base\Runtime\Behaviours\CinemachineBlendListCamera.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Base\Runtime\Behaviours\CinemachineBrain.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Base\Runtime\Behaviours\CinemachineClearShot.cs" />
@@ -246,9 +251,6 @@
     <Compile Include="Assets\Misselaineous\Cinemachine\Timeline\CinemachineShot.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Timeline\CinemachineTrack.cs" />
     <Compile Include="Assets\ScriptableObjects\ShipObjects\ShipBehaviour.cs" />
-    <Compile Include="Assets\ShipInputHandler.cs" />
-    <Compile Include="Assets\SizeDisplay.cs" />
-    <Compile Include="Assets\WeaponsSystem.cs" />
     <None Include="Assets\Misselaineous\Cinemachine\ReleaseNotes.txt" />
     <None Include="Assets\07_Sprites\UI\Menus\MenuColorList.txt" />
     <Reference Include="Unity.Timeline.Editor">

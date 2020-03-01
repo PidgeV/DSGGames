@@ -15,6 +15,8 @@ public class PlayerStats : ShipStats
     public float shipRotAcceleration = 5;
     public float shipRotDeceleration = 2;
 
+	public float GunRotationSpeed = 2;
+
 	public float boostSpeed = 50f;
 
 	// The speed of strafing

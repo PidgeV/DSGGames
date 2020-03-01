@@ -16,6 +16,7 @@ public class ShipEditor : ExtendedEditor
 
 	bool _showDependencies = true;
 	bool _showControlls = false;
+	bool _showAuto = false;
 
 	public override void OnInspectorGUI()
 	{
@@ -30,23 +31,32 @@ public class ShipEditor : ExtendedEditor
 			EditorGUILayout.BeginHorizontal();
 			if (GUILayout.Button("Controlls", EditorStyles.toolbarButton))
 			{
+				_showAuto = false;
 				_showDependencies = false;
 				_showControlls = true;
 			}
 			if (GUILayout.Button("Dependencies", EditorStyles.toolbarButton))
 			{
+				_showAuto = false;
 				_showDependencies = true;
+				_showControlls = false;
+			}
+			if (GUILayout.Button("Auto", EditorStyles.toolbarButton))
+			{
+				_showAuto = true;
+				_showDependencies = false;
 				_showControlls = false;
 			}
 			EditorGUILayout.EndHorizontal();
 
-			if (_showDependencies) {
+			if (_showDependencies)
+			{
 				EditorGUILayout.BeginVertical("box");
 
 				GUILayout.Label("Cameras", EditorStyles.boldLabel);
 
-				DrawField("PilotCamera");
-				DrawField("GunnerCamera");
+				DrawField("pilotCamera");
+				DrawField("gunnerCamera");
 
 				EditorGUILayout.EndVertical();
 
@@ -54,7 +64,7 @@ public class ShipEditor : ExtendedEditor
 
 				GUILayout.Label("Transforms", EditorStyles.boldLabel);
 
-				DrawField("ShipModel");
+				DrawField("shipModel");
 
 				GUILayout.Space(5);
 
@@ -85,15 +95,47 @@ public class ShipEditor : ExtendedEditor
 				EditorGUILayout.EndVertical();
 			}
 
-			if (_showControlls) {
+			if (_showAuto)
+			{
+				EditorGUILayout.BeginVertical("box");
+
+				GUILayout.Label("Auto", EditorStyles.boldLabel);
+
+				DrawField("shieldProjector");
+				DrawField("weaponsSystem");
+				DrawField("playerHUD");
+				DrawField("rigidbody");
+				DrawField("shipHP");
+
+				EditorGUILayout.EndVertical();
+
+				EditorGUILayout.BeginVertical("box");
+
+				GUILayout.Label("Lock On Target", EditorStyles.boldLabel);
+
+				DrawField("lockOnTarget");
+
+				EditorGUILayout.EndVertical();
+			}
+
+			if (_showControlls)
+			{
 				EditorGUILayout.BeginVertical("box");
 
 				GUILayout.Label("Control Options", EditorStyles.boldLabel);
 
-				DrawField("invertedControls");
-				DrawField("unlimitedBoost");
-				DrawField("lockOn");
+				DrawField("InvertedControls");
+				DrawField("UnlimitedBoost");
+				DrawField("AimAssist");
 
+				EditorGUILayout.EndVertical();
+
+				EditorGUILayout.BeginVertical("box");
+
+				GUILayout.Label("Properties", EditorStyles.boldLabel);
+
+				DrawField("myProperties");
+				DrawSettingEditor(_shipController.Properties, ref _shipController.showStats);
 				EditorGUILayout.EndVertical();
 
 				EditorGUILayout.BeginVertical("box");
@@ -101,16 +143,8 @@ public class ShipEditor : ExtendedEditor
 				GUILayout.Label("Behaviour", EditorStyles.boldLabel);
 
 				DrawField("myBehaviour");
-				DrawSettingEditor(_shipController.myBehaviour, ref _shipController.showBehaviour);
+				DrawSettingEditor(_shipController.Behaviour, ref _shipController.showBehaviour);
 
-				EditorGUILayout.EndVertical();
-
-				EditorGUILayout.BeginVertical("box");
-
-				GUILayout.Label("Stats", EditorStyles.boldLabel);
-
-				DrawField("myStats");
-				DrawSettingEditor(_shipController.myStats,ref _shipController.showStats);
 				EditorGUILayout.EndVertical();
 			}
 

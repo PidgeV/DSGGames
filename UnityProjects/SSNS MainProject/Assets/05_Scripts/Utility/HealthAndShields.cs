@@ -42,7 +42,7 @@ public class HealthAndShields : MonoBehaviour
 	{
 		if (TryGetComponent(out ShipController player))
 		{
-			shipStats = player.myStats;
+			shipStats = player.Properties;
 		}
 		else if (TryGetComponent(out EnemyController enemy))
 		{

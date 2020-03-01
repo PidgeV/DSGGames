@@ -41,21 +41,21 @@ public class PlayerHUDHandler : MonoBehaviour
 	public void UpdateBoostGauge()
 	{
 		// Boost Gauge
-		if (_shipController.BoostGauge < _shipController.myStats.maxBoostGauge && _shipController.Boosting == false)
+		if (_shipController.BoostGauge < _shipController.Properties.maxBoostGauge && _shipController.Boosting == false)
 		{
 			float rechargeRate = 1.5f;
 			
 			_shipController.BoostGauge += rechargeRate * Time.deltaTime;
 			
-			if (_shipController.BoostGauge > _shipController.myStats.maxBoostGauge) {
-				_shipController.BoostGauge = _shipController.myStats.maxBoostGauge;
+			if (_shipController.BoostGauge > _shipController.Properties.maxBoostGauge) {
+				_shipController.BoostGauge = _shipController.Properties.maxBoostGauge;
 			}
 
 			// Boost Slider
-			_slider_Boost.value = (1 / _shipController.myStats.maxBoostGauge) * _shipController.BoostGauge;
+			_slider_Boost.value = (1 / _shipController.Properties.maxBoostGauge) * _shipController.BoostGauge;
 
 			// Set the color of the boost slider
-			_boostImage.color = Color.Lerp(Color.red, Color.yellow, (1 / _shipController.myStats.maxBoostGauge) * _shipController.BoostGauge);
+			_boostImage.color = Color.Lerp(Color.red, Color.yellow, (1 / _shipController.Properties.maxBoostGauge) * _shipController.BoostGauge);
 		}
 	}
 

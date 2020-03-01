@@ -8,45 +8,54 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody))]
 public class ShipController : MonoBehaviour
 {
-	public Camera PilotCamera;
-	public Camera GunnerCamera;
-
-	[HideInInspector] public Player player1;
-	[HideInInspector] public Player player2;
-
-	public ParticleSystem warpEffect1;
-	public ParticleSystem warpEffect2;
-
-	public Transform ShipModel;
-
-	[SerializeField] private Transform gunnerPivot;
-	[SerializeField] private Transform gunnerObject;
-	[SerializeField] private Transform gunnerslockUI;
-
-    ShieldProjector shieldProjector;
-
-	public bool invertedControls;
-	public bool unlimitedBoost;
-	public bool lockOn;
-
-	public ShipBehaviour myBehaviour;
-
-	[Header("Stats")]
-	public PlayerStats myStats;
-
-	private PlayerHUDHandler _playerHUD;
-	private WeaponsSystem _weaponsSystem;
+	[SerializeField] private Camera pilotCamera;
+	[SerializeField] private Camera gunnerCamera;
 
 	[SerializeField] private ShootingSoundController shootingSoundController;
 
-	private HealthAndShields shipHP;
-	private Rigidbody rigidbody;
+	[SerializeField] private ShieldProjector shieldProjector;
 
+	[SerializeField] private WeaponsSystem weaponsSystem;
 
-	// Who are we locked onto
-	private GameObject lockOnTarget;
+	[SerializeField] private PlayerHUDHandler playerHUD;
 
-	#region Ship Properties
+	[SerializeField] private HealthAndShields shipHP;
+
+	[SerializeField] private Rigidbody rigidbody;
+
+	[SerializeField] private ParticleSystem warpEffect1;
+	[SerializeField] private ParticleSystem warpEffect2;
+
+	[SerializeField] private Transform shipModel;
+
+	[SerializeField] private ShipBehaviour myBehaviour;
+	[SerializeField] private PlayerStats myProperties;
+
+	[SerializeField] private Transform gunnerslockUI;
+	[SerializeField] private Transform gunnerPivot;
+	[SerializeField] private Transform gunnerObject;
+
+	[SerializeField] private GameObject lockOnTarget;
+
+	public Player Player1;
+	public Player Player2;
+
+	public bool InvertedControls;
+	public bool UnlimitedBoost;
+	public bool AimAssist;
+
+	#region Ship Members
+	private Vector2 strafeDirection;
+	private Vector2 rotateDirection;
+	private Vector2 gunnerCenter;
+	private Vector2 gunVelocity;
+	private Vector2 gunRotation;
+
+	private Vector3 finalStrafeVelocity;
+	private Vector3 finalThrustVelocity;
+	private Vector3 finalRollRotation;
+	private Vector3 finalRotation;
+
 	private int numberOfPlayers;
 
 	private float thrustSpeed;
@@ -56,39 +65,33 @@ public class ShipController : MonoBehaviour
 	private float rollInput;
 	private float rollSpeed;
 	private float spinSpeed;
+	private float boostGauge;
 	private float turnMultiplayer;
-
-	private Vector2 strafeDirection;
-	private Vector2 rotateDirection;
-	private Vector2 gunnerCenter;
-
-	private Vector3 finalStrafeVelocity;
-	private Vector3 finalThrustVelocity;
-	private Vector3 finalRollRotation;
-	private Vector3 finalRotation;
 
 	private bool strafing;
 	private bool rotating;
 	private bool boosting;
 	private bool roleSwap;
 	private bool stopThrust;
+	private bool slowCamera;
 	private bool shooting_Gunner;
 	private bool shooting_Pilot;
-	private bool slowCamera;
-
-	private float boostGauge;
-	private float shotTimer;
-
-	private float gunRotationSpeed = 200f;
-
-	private Vector2 gunVelocity;
-	private Vector2 gunRotation;
-
-	private Quaternion gunnerAim;
 	#endregion
 
 	#region Properties
-	public int NumberOfPlayers { get { return numberOfPlayers; } set { numberOfPlayers = value; } }
+	public Camera PilotCamera { get { return pilotCamera; } }
+	public Camera GunnerCamera { get { return gunnerCamera; } }
+
+	public ShipBehaviour Behaviour { get { return myBehaviour; } }
+
+	public PlayerStats Properties { get { return myProperties; } }
+
+	public ParticleSystem WarpEffect1 { get { return warpEffect1; } }
+	public ParticleSystem WarpEffect2 { get { return warpEffect2; } }
+
+	public Transform ShipModel { get { return shipModel; } }
+
+	public int NumberOfPlayers { get; set; }
 
 	public bool Boosting { get { return boosting; } set { boosting = value; } }
 	public bool Strafing { get { return strafing; } set { strafing = value; } }
@@ -100,7 +103,6 @@ public class ShipController : MonoBehaviour
 	public float BoostGauge { get { return boostGauge; }  set { boostGauge = value; } }
 
 	public float TurnMultiplayer { get { return turnMultiplayer; }  set { turnMultiplayer = value; } }
-	public float GunRotationSpeed { get { return gunRotationSpeed; } set { gunRotationSpeed = value; } }
 
 	public Vector2 StrafeDirection { get { return strafeDirection; } set { strafeDirection = value; } }
 	public Vector2 RotateDirection { get { return rotateDirection; } set { rotateDirection = value; } }
@@ -116,29 +118,39 @@ public class ShipController : MonoBehaviour
 	/// </summary>
 	private void Awake()
 	{
+		if (shieldProjector == null) {
+			shieldProjector = GetComponentInChildren<ShieldProjector>();
+		}
+
+		if (weaponsSystem == null) {
+			weaponsSystem = gameObject.GetComponent<WeaponsSystem>();
+		}
+
+		if (shieldProjector == null) {
+			shieldProjector = GetComponentInChildren<ShieldProjector>();
+		}
+
+		if (playerHUD == null) {
+			playerHUD = gameObject.GetComponent<PlayerHUDHandler>();
+		}
+
+		if (rigidbody == null) {
+			rigidbody = gameObject.GetComponent<Rigidbody>();
+		}
+
 		foreach (Player player in GameObject.FindObjectsOfType<Player>()) {
 			player.FindShip();
 		}
 
 		// Set the cameras size and positions
-		GunnerCamera.rect = new Rect(0, 0.0f, 1.0f, 0.5f);
-		PilotCamera.rect = new Rect(0, 0.5f, 1.0f, 0.5f);
+		gunnerCamera.rect = new Rect(0, 0.0f, 1.0f, 0.5f);
+		pilotCamera.rect = new Rect(0, 0.5f, 1.0f, 0.5f);
 
 		gunnerCenter = gunnerslockUI.transform.position;
 
-		// Set the max values of our Boost Gauge
-		boostGauge = myStats.maxBoostGauge;
+		boostGauge = myProperties.maxBoostGauge;
 
-		// Get Components
-		rigidbody = gameObject.GetComponent<Rigidbody>();
-
-		_playerHUD = gameObject.GetComponent<PlayerHUDHandler>();
-		_weaponsSystem = gameObject.GetComponent<WeaponsSystem>();
-
-		// Get references
 		if (!shipHP) TryGetComponent(out shipHP);
-
-        shieldProjector = GetComponentInChildren<ShieldProjector>();
     }
 
 	/// <summary>
@@ -161,6 +173,7 @@ public class ShipController : MonoBehaviour
 	private void FixedUpdate()
 	{
 		if (MenuManager.Instance.Sleeping) return;
+
 		UpdateShipPhysics();
 	}
 
@@ -171,6 +184,7 @@ public class ShipController : MonoBehaviour
     private void LateUpdate()
 	{
 		if (MenuManager.Instance.Sleeping) return;
+
 		UpdateCamera();
 	}
 
@@ -182,8 +196,8 @@ public class ShipController : MonoBehaviour
 	/// <summary> Change the roles of the players </summary>
 	public void SwapRoles()
 	{
-		if (player1) player1.SwapRole();
-		if (player2) player2.SwapRole();
+		if (Player1) Player1.SwapRole();
+		if (Player2) Player2.SwapRole();
 
 		ResetShip();
 	}
@@ -194,10 +208,10 @@ public class ShipController : MonoBehaviour
 	public void UpdateCamera()
 	{
 		// Where the camera SHOULD be relative to the ship model
-		Vector3 shipPos = ShipModel.transform.position;
+		Vector3 shipPos = shipModel.transform.position;
 
-		Vector3 yPos = -6 * ShipModel.transform.up;
-		Vector3 zPos = -1 * ShipModel.transform.forward;
+		Vector3 yPos = -6 * shipModel.transform.up;
+		Vector3 zPos = -1 * shipModel.transform.forward;
 
 		gunnerPivot.position = Vector3.Lerp(gunnerPivot.position, shipPos + yPos + zPos, 0.25f);
 
@@ -211,11 +225,11 @@ public class ShipController : MonoBehaviour
 		}
 
 		// (BLOCKER) If we cant Lock on
-		if (lockOn == false) return;
+		if (AimAssist == false) return;
 
 		if (lockOnTarget != null)
 		{
-			Vector2 newPoint = GunnerCamera.WorldToScreenPoint(lockOnTarget.transform.position);
+			Vector2 newPoint = gunnerCamera.WorldToScreenPoint(lockOnTarget.transform.position);
 			float unlockDist = 60;
 
 			if (Vector2.Distance(gunnerCenter, newPoint) < unlockDist)
@@ -236,12 +250,12 @@ public class ShipController : MonoBehaviour
 	public void CheckForTarget()
 	{
 		// (BLOCKER) If we cant Lock on
-		if (lockOn == false) return;
+		if (AimAssist == false) return;
 
 		RaycastHit hit;
 
-		Vector3 origin = GunnerCamera.transform.position;
-		Vector3 direction = GunnerCamera.transform.forward;
+		Vector3 origin = gunnerCamera.transform.position;
+		Vector3 direction = gunnerCamera.transform.forward;
 
 		if (Physics.Raycast(origin, direction, out hit, Mathf.Infinity, LayerMask.GetMask("Enemies")))
 		{
@@ -261,11 +275,11 @@ public class ShipController : MonoBehaviour
 
 		if (rotating)
 		{
-			rotationSpeed = Mathf.Clamp(rotationSpeed + myStats.shipRotAcceleration , 0, myStats.rotationSpeed);
+			rotationSpeed = Mathf.Clamp(rotationSpeed + myProperties.shipRotAcceleration , 0, myProperties.rotationSpeed);
 		}
 		else
 		{
-			rotationSpeed = Mathf.Clamp(rotationSpeed - myStats.shipRotAcceleration , 0, myStats.rotationSpeed);
+			rotationSpeed = Mathf.Clamp(rotationSpeed - myProperties.shipRotAcceleration , 0, myProperties.rotationSpeed);
 		}
 
 		finalRotation = rotateDirection * rotationSpeed;
@@ -277,16 +291,16 @@ public class ShipController : MonoBehaviour
 		if (rollInput > 0)
 		{
 			rollDirection = 1;
-			rollSpeed = Mathf.Clamp(rollSpeed + myStats.shipRotAcceleration, 0, myStats.rotationSpeed);
+			rollSpeed = Mathf.Clamp(rollSpeed + myProperties.shipRotAcceleration, 0, myProperties.rotationSpeed);
 		}
 		else if (rollInput < 0)
 		{
 			rollDirection = -1;
-			rollSpeed = Mathf.Clamp(rollSpeed + myStats.shipRotAcceleration, 0, myStats.rotationSpeed);
+			rollSpeed = Mathf.Clamp(rollSpeed + myProperties.shipRotAcceleration, 0, myProperties.rotationSpeed);
 		}
 		else
 		{
-			rollSpeed = Mathf.Clamp(rollSpeed - myStats.shipRotDeceleration, 0, myStats.rotationSpeed);
+			rollSpeed = Mathf.Clamp(rollSpeed - myProperties.shipRotDeceleration, 0, myProperties.rotationSpeed);
 		}
 
 		finalRollRotation = new Vector3(0, 0, rollDirection) * rollSpeed;
@@ -297,11 +311,11 @@ public class ShipController : MonoBehaviour
 
 		if (strafing)
 		{
-			strafeSpeed = Mathf.Clamp(strafeSpeed + myStats.shipAcceleration * 2f, 0, myStats.strafeSpeed);
+			strafeSpeed = Mathf.Clamp(strafeSpeed + myProperties.shipAcceleration * 2f, 0, myProperties.strafeSpeed);
 		}
 		else
 		{
-			strafeSpeed = Mathf.Clamp(strafeSpeed - myStats.shipDeceleration, 0, myStats.strafeSpeed);
+			strafeSpeed = Mathf.Clamp(strafeSpeed - myProperties.shipDeceleration, 0, myProperties.strafeSpeed);
 		}
 		finalStrafeVelocity = strafeDirection * strafeSpeed;
 		#endregion
@@ -311,40 +325,40 @@ public class ShipController : MonoBehaviour
 
 		if (stopThrust)
 		{
-			thrustSpeed = Mathf.Clamp(thrustSpeed - myStats.shipDeceleration, 0, myStats.shipSpeed);
+			thrustSpeed = Mathf.Clamp(thrustSpeed - myProperties.shipDeceleration, 0, myProperties.shipSpeed);
 		}
 		// If were boosting
 		else if (boosting)
 		{
 			// Increase our speed when boosting
-			if (rigidbody.velocity.magnitude < myStats.boostSpeed)
-				thrustSpeed = Mathf.Clamp(thrustSpeed + (myStats.shipSpeed * 2.4f * Time.deltaTime), myStats.shipSpeed, myStats.boostSpeed);
+			if (rigidbody.velocity.magnitude < myProperties.boostSpeed)
+				thrustSpeed = Mathf.Clamp(thrustSpeed + (myProperties.shipSpeed * 2.4f * Time.deltaTime), myProperties.shipSpeed, myProperties.boostSpeed);
 
 
 			// Reduce the boost gauge
-			boostGauge = Mathf.Clamp(boostGauge - myStats.boostGaugeConsumeAmount * Time.deltaTime, 0, myStats.maxBoostGauge);
-			_playerHUD._slider_Boost.value = 1 / myStats.maxBoostGauge * boostGauge;
+			boostGauge = Mathf.Clamp(boostGauge - myProperties.boostGaugeConsumeAmount * Time.deltaTime, 0, myProperties.maxBoostGauge);
+			playerHUD._slider_Boost.value = 1 / myProperties.maxBoostGauge * boostGauge;
 
 			// Set the color of the boost slider
-			_playerHUD._boostImage.color = Color.Lerp(Color.red, Color.yellow, 1 / myStats.maxBoostGauge * boostGauge);
+			playerHUD._boostImage.color = Color.Lerp(Color.red, Color.yellow, 1 / myProperties.maxBoostGauge * boostGauge);
 
 			// Turn off boosting
-			if (boostGauge <= 0 && unlimitedBoost == false)
+			if (boostGauge <= 0 && UnlimitedBoost == false)
 			{
 				boosting = false;
 			}
 		}
 		// Else if we are NOT boosting and our thrustSpeed is over our maxThrustSpeed
 		// We need to smooth the transition from boosting to not boosting
-		else if (thrustSpeed > myStats.shipSpeed)
+		else if (thrustSpeed > myProperties.shipSpeed)
 		{
 			// Clamp our thrust Speed to our max thrust speed
-			thrustSpeed = Mathf.Clamp(thrustSpeed - myStats.shipDeceleration, myStats.shipSpeed, myStats.boostSpeed);
+			thrustSpeed = Mathf.Clamp(thrustSpeed - myProperties.shipDeceleration, myProperties.shipSpeed, myProperties.boostSpeed);
 		}
 		// Else were not boosting so we increase our ships normal speed
 		else
 		{
-			thrustSpeed = myStats.shipSpeed;
+			thrustSpeed = myProperties.shipSpeed;
 		}
 
 		finalThrustVelocity = transform.forward * thrustSpeed;
@@ -372,7 +386,7 @@ public class ShipController : MonoBehaviour
 	public void UpdateShipModel(Vector3 velocity)
 	{
 		// Rotation
-		Quaternion currentRot = ShipModel.transform.localRotation;
+		Quaternion currentRot = shipModel.transform.localRotation;
 		Quaternion targetRot = Quaternion.Euler
 			(
 				 velocity.x * myBehaviour.xRot,
@@ -380,22 +394,22 @@ public class ShipController : MonoBehaviour
 				-velocity.y * myBehaviour.zRot
 			);
 
-		ShipModel.transform.localRotation = Quaternion.Slerp(currentRot, targetRot, myBehaviour.RotSpeed);
+		shipModel.transform.localRotation = Quaternion.Slerp(currentRot, targetRot, myBehaviour.RotSpeed);
 
 		// Translation
-		Vector3 currentPos = ShipModel.transform.localPosition;
+		Vector3 currentPos = shipModel.transform.localPosition;
 		Vector3 targetPos = new Vector3(-velocity.y, velocity.x, 0) * myBehaviour.moveScale;
 
 		if (targetPos.y < 0) {
 			targetPos.y *= 0.4f;
 		}
 
-		ShipModel.transform.localPosition = Vector3.Lerp(currentPos, targetPos, myBehaviour.moveSpeed);
+		shipModel.transform.localPosition = Vector3.Lerp(currentPos, targetPos, myBehaviour.moveSpeed);
 
 		// Camera
 		Vector3 targetCameraPos = boosting ? myBehaviour.boostPos : myBehaviour.normalPos;
 
-		PilotCamera.transform.localPosition = Vector3.Slerp(PilotCamera.transform.localPosition, targetCameraPos, myBehaviour.cameraSpeed);
+		pilotCamera.transform.localPosition = Vector3.Slerp(pilotCamera.transform.localPosition, targetCameraPos, myBehaviour.cameraSpeed);
 	}
 
 	#endregion
@@ -419,17 +433,17 @@ public class ShipController : MonoBehaviour
 
 	public void SwapWeapon(Vector2 Input)
 	{
-		_weaponsSystem.SwapWeapon(Input);
+		weaponsSystem.SwapWeapon(Input);
 	}
 
 	public void ShootGun(bool pressed)
 	{
-		_weaponsSystem.ShootGun(pressed);
+		weaponsSystem.ShootGun(pressed);
 	}
 
 	public void ShootShip(bool pressed)
 	{
-		_weaponsSystem.ShipShooting = pressed;
+		weaponsSystem.ShipShooting = pressed;
 	}
 	
 	public void SlowCamera(bool pressed)
