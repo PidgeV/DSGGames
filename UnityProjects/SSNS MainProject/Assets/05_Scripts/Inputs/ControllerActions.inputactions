@@ -392,6 +392,14 @@
                     "name": "Navigate",
                     "type": "Value",
                     "id": "2ea53412-db7c-420e-9113-9eb616ad21fa",
+                    "expectedControlType": "Stick",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "UnPause",
+                    "type": "Button",
+                    "id": "1a3d4a5f-91f7-453a-bb15-575cf8c7f538",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
@@ -408,14 +416,6 @@
                     "name": "Back",
                     "type": "Button",
                     "id": "4c22343f-9759-44ac-a6da-0e296c22cd1d",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Pause",
-                    "type": "Button",
-                    "id": "f2310ccd-991c-425c-9639-7a304d475b5b",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
@@ -457,12 +457,12 @@
                 },
                 {
                     "name": "",
-                    "id": "9b8302a8-4c06-425a-9fed-699ff455c791",
+                    "id": "f41aa9a9-d65b-4a67-afc3-e5775cee645c",
                     "path": "<Gamepad>/start",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Pause",
+                    "action": "UnPause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

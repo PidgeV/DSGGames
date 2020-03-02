@@ -7,8 +7,8 @@ public class PauseRigidbody : MonoBehaviour
 {
 	Rigidbody _rigidbody;
 
-	Vector3 _cachedVelocity;
-	Quaternion _cachedRotation;
+	Vector3 _cachedVelocity = Vector3.zero;
+	Quaternion _cachedRotation = Quaternion.identity;
 
 	// Start is called before the first frame update
 	void Awake()

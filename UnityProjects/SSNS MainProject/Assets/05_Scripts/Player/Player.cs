@@ -225,11 +225,14 @@ public class Player : Controller
 
 	public void OnPause(InputValue input)
 	{
-		if (input.isPressed)
-		{
-			// Tell the menu manager to pause the game
-			MenuManager.Instance.PauseGame(input.isPressed);
-		}
+		// Tell the menu manager to pause the game
+		MenuManager.Instance.PauseGame(!MenuManager.Instance.Sleeping);
+	}
+
+	public void OnUnPause(InputValue input)
+	{
+		// Tell the menu manager to pause the game
+		MenuManager.Instance.PauseGame(!MenuManager.Instance.Sleeping);
 	}
 
 	public void OnNavigate(InputValue input)
