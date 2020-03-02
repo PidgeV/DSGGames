@@ -100,7 +100,6 @@ public class CruiserAttackState : AttackState<CruiserController>
 	/// </summary>
 	public void Shoot()
 	{
-		Debug.Log("Shoot");
 		if (myController.myState == CruiserState.Defensive)
 		{
 			// We are in normal mode
@@ -115,11 +114,9 @@ public class CruiserAttackState : AttackState<CruiserController>
 
 	protected override void CalculateIntercept()
 	{
-		throw new System.NotImplementedException();
 	}
 
 	protected override void Move()
 	{
-		throw new System.NotImplementedException();
 	}
 }

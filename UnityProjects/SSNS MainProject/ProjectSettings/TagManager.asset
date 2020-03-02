@@ -15,8 +15,6 @@ TagManager:
   - Shield
   - Score
   - MinimapCamera
-  - Dialogue
-  - Music
   layers:
   - Default
   - TransparentFX

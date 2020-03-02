@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4994356229069780107}
   - component: {fileID: 5359782907830985707}
   - component: {fileID: 8692589894669654194}
+  - component: {fileID: 3792061595859340692}
   m_Layer: 9
   m_Name: CargoEnemy
   m_TagString: Enemy
@@ -177,6 +178,18 @@ MonoBehaviour:
   thisScore: 2000
   typeOfHit: 1
   playerText: {fileID: 0}
+--- !u!114 &3792061595859340692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3107085776561158194}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40324cba1ad5d964fb2f4e0198f19f4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4183364643357832015
 GameObject:
   m_ObjectHideFlags: 0
@@ -478,6 +491,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1194192106000426767}
     m_Modifications:
+    - target: {fileID: 645844403578658387, guid: c0c0ed7488653d34baf9950ba7dc7311,
+        type: 3}
+      propertyPath: m_Name
+      value: Shield
+      objectReference: {fileID: 0}
     - target: {fileID: 4516505457575865408, guid: c0c0ed7488653d34baf9950ba7dc7311,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -547,11 +565,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 645844403578658387, guid: c0c0ed7488653d34baf9950ba7dc7311,
-        type: 3}
-      propertyPath: m_Name
-      value: Shield
       objectReference: {fileID: 0}
     - target: {fileID: 6103393024892273190, guid: c0c0ed7488653d34baf9950ba7dc7311,
         type: 3}

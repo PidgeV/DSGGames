@@ -21,14 +21,12 @@ public class FighterAttackState : AttackState<FighterController>
 
     public override void Act()
 	{
-		if (MenuManager.Instance.Sleeping) return;
 		Move();
         Shoot();
     }
 
     public override void Reason()
 	{
-		if (MenuManager.Instance.Sleeping) return;
 		if (controller.Player == null)
         {
             controller.PerformTransition(Transition.Patrol);
@@ -53,7 +51,6 @@ public class FighterAttackState : AttackState<FighterController>
 
     public override void EnterStateInit()
     {
-        //Debug.Log("Attacking");
     }
 
     //Moves

@@ -50,8 +50,9 @@ public abstract class EnemyController : AdvancedFSM
     {
         //Do this
         if (CurrentState != null)
-        {
-            CurrentState.Reason();
+		{
+			if (MenuManager.Instance.Sleeping) return;
+			CurrentState.Reason();
             CurrentState.Act();
         }
     }

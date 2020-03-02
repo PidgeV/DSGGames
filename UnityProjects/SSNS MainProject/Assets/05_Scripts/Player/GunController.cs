@@ -91,6 +91,7 @@ public class GunController : MonoBehaviour
 	// Shoot from Ship
 	public void ShootFromShip()
 	{
+		if (MenuManager.Instance.Sleeping) return;
 		InitShot(Instantiate(standardShot, _shipController.ShipModel.position + _shipController.ShipModel.forward * 10, _shipController.ShipModel.rotation));
 	}
 

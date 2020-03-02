@@ -70,17 +70,17 @@ public class MenuManager : MonoBehaviour
 			}
 		}
 
-		foreach (Rigidbody rigidbody in GameObject.FindObjectsOfType<Rigidbody>())
+		foreach (PauseRigidbody rigidbody in GameObject.FindObjectsOfType<PauseRigidbody>())
 		{
 			if (state == true)
 			{
 				Sleeping = true;
-				rigidbody.Sleep();
+				rigidbody.Pause();
 			}
 			else
 			{
 				Sleeping = false;
-				rigidbody.WakeUp();
+				rigidbody.UnPause();
 			}
 		}
 

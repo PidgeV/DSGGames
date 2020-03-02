@@ -72,6 +72,8 @@
     <Compile Include="Assets\05_Scripts\Demo\DemoManager.cs" />
     <Compile Include="Assets\05_Scripts\Demo\DemoValue.cs" />
     <Compile Include="Assets\05_Scripts\Demo\NewDemoManager.cs" />
+    <Compile Include="Assets\05_Scripts\DialogueClass.cs" />
+    <Compile Include="Assets\05_Scripts\DialogueSystem.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Controllers\CargoController.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Controllers\ChargerController.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Controllers\CruiserController.cs" />
@@ -126,6 +128,7 @@
     <Compile Include="Assets\05_Scripts\Node\NodeEvent.cs" />
     <Compile Include="Assets\05_Scripts\Node\NodeManager.cs" />
     <Compile Include="Assets\05_Scripts\Node\NodeManagerUI.cs" />
+    <Compile Include="Assets\05_Scripts\PauseRigidbody.cs" />
     <Compile Include="Assets\05_Scripts\Player\AmmoCounter.cs" />
     <Compile Include="Assets\05_Scripts\Player\GunController.cs" />
     <Compile Include="Assets\05_Scripts\Player\Player.cs" />
@@ -197,6 +200,7 @@
     <Compile Include="Assets\05_Scripts\Utility\ToggleObjects.cs" />
     <Compile Include="Assets\09_Effects\Shaders\AreaIndicator\Scripts\AreaShaderController.cs" />
     <Compile Include="Assets\11_Animations\Menus\Transitions\CinematicController.cs" />
+    <Compile Include="Assets\13_ScriptableObjects\ShipObjects\ShipBehaviour.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Base\Runtime\Behaviours\CinemachineBlendListCamera.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Base\Runtime\Behaviours\CinemachineBrain.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Base\Runtime\Behaviours\CinemachineClearShot.cs" />
@@ -250,7 +254,6 @@
     <Compile Include="Assets\Misselaineous\Cinemachine\Timeline\CinemachineMixer.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Timeline\CinemachineShot.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Timeline\CinemachineTrack.cs" />
-    <Compile Include="Assets\ScriptableObjects\ShipObjects\ShipBehaviour.cs" />
     <None Include="Assets\Misselaineous\Cinemachine\ReleaseNotes.txt" />
     <None Include="Assets\07_Sprites\UI\Menus\MenuColorList.txt" />
     <Reference Include="Unity.Timeline.Editor">

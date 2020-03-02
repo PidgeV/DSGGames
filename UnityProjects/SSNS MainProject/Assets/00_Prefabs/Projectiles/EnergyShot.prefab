@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2533200590899523750}
   - component: {fileID: 7947172679849969082}
   - component: {fileID: 7839970523369067123}
+  - component: {fileID: 6779530674185974454}
   m_Layer: 13
   m_Name: EnergyShot
   m_TagString: Untagged
@@ -223,6 +224,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   whoSent: 1
+--- !u!114 &6779530674185974454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4450240921679082262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40324cba1ad5d964fb2f4e0198f19f4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3012279576347739250
 PrefabInstance:
   m_ObjectHideFlags: 0
