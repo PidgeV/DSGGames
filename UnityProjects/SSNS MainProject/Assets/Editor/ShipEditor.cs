@@ -2,12 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using System;
 
 [CustomEditor(typeof(ShipController))]
 public class ShipEditor : ExtendedEditor
 {
 	// EditorStyles.toolbarButton
 	ShipController _shipController;
+
+	void Block(String name, Action action)
+	{
+		EditorGUILayout.BeginVertical("box");
+		GUILayout.Label(name, EditorStyles.boldLabel);
+		action.Invoke();
+		EditorGUILayout.EndVertical();
+	}
 
 	private void OnEnable()
 	{
@@ -51,101 +60,62 @@ public class ShipEditor : ExtendedEditor
 
 			if (_showDependencies)
 			{
-				EditorGUILayout.BeginVertical("box");
+				Block("Cameras", () => {
+					DrawField("pilotCamera");
+					DrawField("gunnerCamera");
+				});
 
-				GUILayout.Label("Cameras", EditorStyles.boldLabel);
+				Block("Transforms", () =>  {
+					DrawField("shipModel");
+					GUILayout.Space(5);
+					DrawField("gunnerPivot");
+					DrawField("gunnerObject");
+					GUILayout.Space(5);
+					DrawField("gunnerslockUI");
+				});
 
-				DrawField("pilotCamera");
-				DrawField("gunnerCamera");
+				Block("Audio", () => {
+					DrawField("shootingSoundController");
+				});
 
-				EditorGUILayout.EndVertical();
-
-				EditorGUILayout.BeginVertical("box");
-
-				GUILayout.Label("Transforms", EditorStyles.boldLabel);
-
-				DrawField("shipModel");
-
-				GUILayout.Space(5);
-
-				DrawField("gunnerPivot");
-				DrawField("gunnerObject");
-
-				GUILayout.Space(5);
-
-				DrawField("gunnerslockUI");
-
-				EditorGUILayout.EndVertical();
-
-				EditorGUILayout.BeginVertical("box");
-
-				GUILayout.Label("Audio", EditorStyles.boldLabel);
-
-				DrawField("shootingSoundController");
-
-				EditorGUILayout.EndVertical();
-
-				EditorGUILayout.BeginVertical("box");
-
-				GUILayout.Label("Warp Effect", EditorStyles.boldLabel);
-
-				DrawField("warpEffect1");
-				DrawField("warpEffect2");
-
-				EditorGUILayout.EndVertical();
+				Block("Warp Effect", () => {
+					DrawField("warpEffect1");
+					DrawField("warpEffect2");
+				});
 			}
 
 			if (_showAuto)
 			{
-				EditorGUILayout.BeginVertical("box");
+				Block("Auto", () => {
+					DrawField("shieldProjector");
+					DrawField("weaponsSystem");
+					DrawField("playerHUD");
+					DrawField("rigidbody");
+					DrawField("shipHP");
+				});
 
-				GUILayout.Label("Auto", EditorStyles.boldLabel);
-
-				DrawField("shieldProjector");
-				DrawField("weaponsSystem");
-				DrawField("playerHUD");
-				DrawField("rigidbody");
-				DrawField("shipHP");
-
-				EditorGUILayout.EndVertical();
-
-				EditorGUILayout.BeginVertical("box");
-
-				GUILayout.Label("Lock On Target", EditorStyles.boldLabel);
-
-				DrawField("lockOnTarget");
-
-				EditorGUILayout.EndVertical();
+				Block("Lock On Target", () => {
+					DrawField("lockOnTarget");
+				});
 			}
 
 			if (_showControlls)
 			{
-				EditorGUILayout.BeginVertical("box");
-
-				GUILayout.Label("Control Options", EditorStyles.boldLabel);
-
+				Block("Control Options", () => {
 				DrawField("InvertedControls");
 				DrawField("UnlimitedBoost");
 				DrawField("AimAssist");
+				});
 
-				EditorGUILayout.EndVertical();
+				Block("Properties", () => {
+					DrawField("myProperties");
+					DrawSettingEditor(_shipController.Properties, ref _shipController.showStats);
+				});
 
-				EditorGUILayout.BeginVertical("box");
-
-				GUILayout.Label("Properties", EditorStyles.boldLabel);
-
-				DrawField("myProperties");
-				DrawSettingEditor(_shipController.Properties, ref _shipController.showStats);
-				EditorGUILayout.EndVertical();
-
-				EditorGUILayout.BeginVertical("box");
-
-				GUILayout.Label("Behaviour", EditorStyles.boldLabel);
-
-				DrawField("myBehaviour");
-				DrawSettingEditor(_shipController.Behaviour, ref _shipController.showBehaviour);
-
-				EditorGUILayout.EndVertical();
+				Block("Behaviour", () => {
+					DrawField("myBehaviour");
+					DrawSettingEditor(_shipController.Behaviour, ref _shipController.showBehaviour);
+				});
 			}
 
 			serializedObject.ApplyModifiedProperties();
