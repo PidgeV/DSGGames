@@ -56,6 +56,14 @@ namespace SNSSTypes
 		MENU,
 		NODE_MAP
 	}
+
+	public enum OwnerType
+	{
+		AI,
+		MC,
+		NONE
+	}
+
 	//RegularShot: Normal
 	//EnergyShot: Regular shot, but for shields
 	//ChargeShot: Charges over course of 1.5 seconds, then fires

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -40,6 +41,14 @@ public class ExtendedEditorWindow : EditorWindow
 		}
 	}
 
+	protected void Block(string name, Action action)
+	{
+		EditorGUILayout.BeginVertical("box");
+		if (name != "") GUILayout.Label(name, EditorStyles.boldLabel);
+		action.Invoke();
+		EditorGUILayout.EndVertical();
+	}
+
 	protected int  DrawSidebar(SerializedProperty prop)
 	{
 		int counter = 0;
@@ -60,7 +69,7 @@ public class ExtendedEditorWindow : EditorWindow
 		return lastTab;
 	}
 
-	protected void DrawSettingEditor(Object settings, ref bool foldout)
+	protected void DrawSettingEditor(UnityEngine.Object settings, ref bool foldout)
 	{
 		foldout = EditorGUILayout.InspectorTitlebar(foldout, settings);
 		if (foldout)

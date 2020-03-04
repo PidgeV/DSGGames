@@ -7,11 +7,24 @@ public class DialogueSystem : MonoBehaviour
 {
     [SerializeField] AudioSource audioSource;
     [SerializeField] Text dialogueText;
-    [SerializeField] DialogueClass[] dialogue;
+	
+	Queue<DialogueClass> dialogueQueue = new Queue<DialogueClass>();
 
-    Queue<DialogueClass> dialogueQueue = new Queue<DialogueClass>();
-    // Start is called before the first frame update
-    IEnumerator Start()
+	public List<DialogueClass> Dialogue;
+
+	// Editor
+	public DialogueClass NewDialogue;
+	public Texture2D SoundIcon;
+	public bool ShowDefaultEditor;
+
+	[ContextMenu("Play Index Zero")]
+	public void PlayIndexZero()
+	{
+		AddDialogue(0);
+	}
+
+	// Start is called before the first frame update
+	IEnumerator Start()
     {
         while(true)
         {
@@ -21,10 +34,10 @@ public class DialogueSystem : MonoBehaviour
 
             if (audioSource && !audioSource.isPlaying && dialogueQueue.Count > 0)
             {
-                audioSource.clip = dialogueQueue.Peek().soundClip;
+                audioSource.clip = dialogueQueue.Peek().SoundClip;
                 audioSource.Play();
 
-                if (dialogueText) dialogueText.text = dialogueQueue.Peek().text;
+                if (dialogueText) dialogueText.text = dialogueQueue.Peek().Text;
 
                 dialogueQueue.Dequeue();
             }
@@ -45,15 +58,35 @@ public class DialogueSystem : MonoBehaviour
         dialogueQueue.Enqueue(dialogue);
     }
 
-    public void AddDialogue(int listIndex)
-    {
-        if(listIndex < dialogue.Length)
-        {
-            dialogueQueue.Enqueue(dialogue[listIndex]);
-        }
-        else
-        {
-            Debug.LogError("Index out of range.");
-        }
-    }
+	public void AddDialogue(int listIndex)
+	{
+		if (listIndex < Dialogue.Count)
+		{
+			foreach (DialogueClass dialogue in Dialogue) {
+				if (dialogue.Index == listIndex)
+				{
+					dialogueQueue.Enqueue(dialogue);
+					return;
+				}
+			}
+		}
+		else
+		{
+			Debug.LogError("Index out of range.");
+		}
+	}
+
+	public void PlayQuickClip(AudioClip clip)
+	{
+		if (audioSource != null) {
+			audioSource.PlayOneShot(clip);
+		}
+	}
+
+	public void GenerateNewDialogue()
+	{
+		NewDialogue.Index = Dialogue.Count;
+		Dialogue.Add(NewDialogue);
+		NewDialogue = new DialogueClass();
+	}
 }
