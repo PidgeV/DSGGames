@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipName: Dreadnova Generators
   shipDescription: 
-  maxHealth: 100
-  maxShield: 200
+  maxHealth: 1
+  maxShield: 50
   shieldRegenPercent: 0
   shieldRegenInterval: 5
   shipSpeed: 0
