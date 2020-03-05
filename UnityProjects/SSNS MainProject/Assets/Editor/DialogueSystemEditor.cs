@@ -24,11 +24,6 @@ public class DialogueSystemEditor : ExtendedEditor
 		}
 		else
 		{
-			if (GUILayout.Button("Play Test Clip ( Must be in game! )"))
-			{
-				_dialogueSystem.PlayIndexZero();
-			}
-
 			if (GUILayout.Button("Open Editor"))
 			{
 				_window = EditorWindow.GetWindow<DialogueSystemWindow>();
