@@ -16,7 +16,7 @@ public class HealthAndShields : MonoBehaviour
 	public delegate void OnDeath();
 	public OnDeath onDeath;
 
-	private ShipStats shipStats;
+	[SerializeField] private ShipStats shipStats;
 
 	// The MAX life the ship has
 	public float MaxLife { get { return shipStats.maxHealth; } }
@@ -40,21 +40,24 @@ public class HealthAndShields : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		if (TryGetComponent(out ShipController player))
+		if (shipStats == null)
 		{
-			shipStats = player.Properties;
-		}
-		else if (TryGetComponent(out EnemyController enemy))
-		{
-			shipStats = enemy.Stats;
-		}
-		else if (TryGetComponent(out FlockAgent flockAgent))
-		{
-			shipStats = flockAgent.swarm.FlockLeader.Stats;
-		}
-		else
-		{
-			Debug.LogError("Couldn't get ship stats");
+			if (TryGetComponent(out ShipController player))
+			{
+				shipStats = player.Properties;
+			}
+			else if (TryGetComponent(out EnemyController enemy))
+			{
+				shipStats = enemy.Stats;
+			}
+			else if (TryGetComponent(out FlockAgent flockAgent))
+			{
+				shipStats = flockAgent.swarm.FlockLeader.Stats;
+			}
+			else
+			{
+				Debug.LogError("Couldn't get ship stats");
+			}
 		}
 
 		currentLife = MaxLife;

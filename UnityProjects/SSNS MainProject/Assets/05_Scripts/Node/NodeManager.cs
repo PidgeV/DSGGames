@@ -102,7 +102,7 @@ public class NodeManager : MonoBehaviour
             NodeUpdate(Choices.Length / 2);
 
             // Enable all node UI
-            nodeUI.FadeGroups(true, true, true);
+            //nodeUI.FadeGroups(true, true, true);
         }
     }
 
@@ -133,7 +133,7 @@ public class NodeManager : MonoBehaviour
         currentNode.UpdateVisual(currentNode.NodeInfo, null);
 
         // Hides all UI except the gunner
-        nodeUI.FadeGroups(false, false, true);
+        //nodeUI.FadeGroups(false, false, true);
 
 
         // Switches state to node transition to load next area
@@ -146,7 +146,7 @@ public class NodeManager : MonoBehaviour
     public void HideAllNodeUI()
     {
         // Disable all node UI
-        nodeUI.FadeGroups(false, false, false);
+        //nodeUI.FadeGroups(false, false, false);
 
         // Resets node color
         if (lastNode != null)
@@ -366,7 +366,7 @@ public class NodeManager : MonoBehaviour
         currentNode = startNode;
         lastNode = null;
 
-        nodeUI.FadeGroups(false, false, true);
+        //nodeUI.FadeGroups(false, false, true);
         currentNode.UpdateVisual(currentNode.NodeInfo, null);
     }
 
