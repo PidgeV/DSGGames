@@ -129,6 +129,9 @@
     <Reference Include="Unity.InputSystem">
       <HintPath>C:/DSGGames/UnityProjects/SSNS MainProject/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
+      <HintPath>C:/DSGGames/UnityProjects/SSNS MainProject/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Runtime">
       <HintPath>C:/DSGGames/UnityProjects/SSNS MainProject/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
     </Reference>
@@ -165,6 +168,9 @@
     <Reference Include="Unity.VisualEffectGraph.Editor">
       <HintPath>C:/DSGGames/UnityProjects/SSNS MainProject/Library/ScriptAssemblies/Unity.VisualEffectGraph.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.ProBuilder.AddOns.Editor">
+      <HintPath>C:/DSGGames/UnityProjects/SSNS MainProject/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.ShaderGraph.Editor">
       <HintPath>C:/DSGGames/UnityProjects/SSNS MainProject/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
     </Reference>
@@ -179,12 +185,6 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>C:/DSGGames/UnityProjects/SSNS MainProject/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
-      <HintPath>C:/DSGGames/UnityProjects/SSNS MainProject/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProBuilder.AddOns.Editor">
-      <HintPath>C:/DSGGames/UnityProjects/SSNS MainProject/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.2f1/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

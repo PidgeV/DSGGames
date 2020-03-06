@@ -317,7 +317,7 @@ public class NodeManager : MonoBehaviour
 
         // Finds the direction to the portal
         Vector3 portalDir = (portals[selectedIndex].transform.position - GameManager.Instance.Player.transform.position).normalized;
-        Debug.Log(selectedIndex);
+       // Debug.Log(selectedIndex);
 
         // Finds the angle between
         float angle = Vector3.SignedAngle(GameManager.Instance.Player.transform.forward, portalDir, GameManager.Instance.Player.transform.up);

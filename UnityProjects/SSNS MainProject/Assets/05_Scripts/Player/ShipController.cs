@@ -218,7 +218,7 @@ public class ShipController : MonoBehaviour
 		gunnerPivot.rotation = Quaternion.identity;
 		gunnerObject.Rotate(new Vector2(-gunVelocity.y, gunVelocity.x) * Time.deltaTime * (slowCamera ? 0.2f : 1f));
 
-        gunnerObject.eulerAngles = new Vector3(gunnerObject.eulerAngles.x, gunnerObject.eulerAngles.y, 0);
+      //  gunnerObject.eulerAngles = new Vector3(gunnerObject.eulerAngles.x, gunnerObject.eulerAngles.y, 0);
 
         // If we don't have a target currently locking
         if (lockOnTarget == null)
