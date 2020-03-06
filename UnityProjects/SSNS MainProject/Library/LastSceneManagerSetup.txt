@@ -1,5 +1,9 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/01_Scenes/TrixieTestScene.unity
+=======
+- path: Assets/01_Scenes/Working.unity
+>>>>>>> master
   isLoaded: 1
   isActive: 1
   isSubScene: 0

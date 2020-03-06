@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FighterPatrolState : FSMState
+public class FighterPatrolState : PatrolState<FighterController>
 {
+<<<<<<< HEAD
     private GameObject player;
     private FighterController controller;
     private float distance;
@@ -140,4 +141,9 @@ public class FighterPatrolState : FSMState
             controller.rbSelf.AddForce(controller.transform.forward.normalized * controller.Acceleration, ForceMode.Acceleration); // move regular speed if obstacle is in the way or player is not target
         }
     }
+=======
+	public FighterPatrolState(FighterController enemyController, bool randomizePoint = false) : base(enemyController, randomizePoint)
+	{
+	}
+>>>>>>> master
 }

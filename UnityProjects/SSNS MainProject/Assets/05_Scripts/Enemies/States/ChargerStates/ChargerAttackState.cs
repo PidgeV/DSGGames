@@ -2,51 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChargerAttackState : FSMState
+public class ChargerAttackState : AttackState<ChargerController>
 {
-    ChargerController controller;
-    private GameObject player;
-    Vector3 interceptPoint;
-    float dotProduct;
-
-    //Obstacle variables
-    Vector3 obstacleAvoidDirection = Vector3.right;
-    bool obstacleHit = false;
-    float obstacleTimer = 0;
-    float avoidTime = 2f;
-
-    float maxSpeed = 0;
+    private float dotProduct;
+    private float currentSpeed;
 
     //constructor
-    public ChargerAttackState(ChargerController chaserController, GameObject playerObj)
+    public ChargerAttackState(ChargerController chargerController) : base(chargerController)
     {
-        controller = chaserController;
-        player = playerObj;
-
-        stateID = FSMStateID.Attacking;
     }
 
     public override void Act()
-    {
-        CalculateIntercept();
+	{
+		CalculateIntercept();
         Move();
     }
 
     public override void Reason()
-    {
-        if (player == null || controller.hitPlayer)
+	{
+		if (controller.Player == null || ((ChargerController)controller).hitPlayer)
         {
             AIManager.aiManager.StopAttack();
             controller.PerformTransition(Transition.Patrol);
         }
         else
         {
-
             CalcDotProduct();
 
-            maxSpeed = Mathf.Max(maxSpeed, controller.rbSelf.velocity.magnitude);
+            currentSpeed = Mathf.Max(controller.Stats.attackShipSpeed, controller.Rigid.velocity.magnitude);
 
-            float distance = Vector3.Distance(controller.transform.position, player.transform.position);
+            float distance = Vector3.Distance(controller.transform.position, controller.Player.transform.position);
             if (dotProduct < 0 && distance < 100)
             {
                 AIManager.aiManager.StopAttack();
@@ -55,38 +40,33 @@ public class ChargerAttackState : FSMState
         }
 
         //Else dead transition to dead
-        if (controller.Health <= 0)
+        if (controller.Health.IsDead)
         {
             AIManager.aiManager.StopAttack();
             controller.PerformTransition(Transition.NoHealth);
         }
     }
 
-    public override void EnterStateInit()
-    {
-        //Debug.Log("Attacking");
-    }
-
     //Calculates the intercept point
-    private void CalculateIntercept()
+    protected override void CalculateIntercept()
     {
-        Rigidbody rbTarget = player.gameObject.GetComponent<Rigidbody>();
+        Rigidbody rbTarget = controller.Player.gameObject.GetComponent<Rigidbody>();
         //positions
-        Vector3 targetPosition = player.transform.position;
+        Vector3 targetPosition = controller.Player.transform.position;
         //velocities
-        Vector3 velocity = controller.rbSelf ? controller.rbSelf.velocity : Vector3.zero;
+        Vector3 velocity = controller.Rigid ? controller.Rigid.velocity : Vector3.zero;
         Vector3 targetVelocity = rbTarget ? rbTarget.velocity : Vector3.zero;
 
         //calculate intercept
-        interceptPoint = InterceptCalculationClass.FirstOrderIntercept(controller.transform.position, velocity, maxSpeed, targetPosition, targetVelocity);
+        interceptPoint = InterceptCalculationClass.FirstOrderIntercept(controller.transform.position, velocity, currentSpeed, targetPosition, targetVelocity);
     }
 
     //Moves
-    void Move()
+    protected override void Move()
     {
         if (interceptPoint != null)
         {
-            float rotationForce = controller.RegRotationForce;
+            float rotationForce = controller.Stats.rotationSpeed;
             //Calculate direction
             Vector3 direction = controller.transform.forward; // sets forward
             direction.Normalize();
@@ -100,7 +80,7 @@ public class ChargerAttackState : FSMState
             if (!obstacleHit && obstacleTimer == 0)
             {
                 direction = interceptPoint - controller.transform.position; // sets desired direction to target intercept point
-                rotationForce = controller.ChargeRotationForce;
+                rotationForce = controller.Stats.attackRotationSpeed;
             }
             else
             {
@@ -120,25 +100,25 @@ public class ChargerAttackState : FSMState
             //Movement
             if (!obstacleHit && LineOfSight() && dotProduct > 0.95f)
             {
-                controller.rbSelf.AddForce(controller.transform.forward.normalized * controller.ChargeAcceleration, ForceMode.Acceleration); // charge if there's no obstacle
+                controller.Rigid.AddForce(controller.transform.forward.normalized * currentSpeed, ForceMode.Acceleration); // charge if there's no obstacle
             }
             else
             {
-                controller.rbSelf.AddForce(controller.transform.forward.normalized * controller.Acceleration, ForceMode.Acceleration); // move regular speed if an obstacle is in the way
+                controller.Rigid.AddForce(controller.transform.forward.normalized * controller.Stats.shipSpeed, ForceMode.Acceleration); // move regular speed if an obstacle is in the way
             }
         }
     }
 
-    void CalcDotProduct()
+    protected void CalcDotProduct()
     {
-        if (player != null)
+        if (controller.Player != null)
         {
-            dotProduct = Vector3.Dot(controller.transform.forward.normalized, (player.transform.position - controller.transform.position).normalized);
+            dotProduct = Vector3.Dot(controller.transform.forward.normalized, (controller.Player.transform.position - controller.transform.position).normalized);
             //Debug.Log(dotProduct);
         }
     }
 
-    bool LineOfSight()
+    protected bool LineOfSight()
     {
         //Raycast to see if there is a straight shot to the intercept point
         Ray ray = new Ray(controller.transform.position, interceptPoint);

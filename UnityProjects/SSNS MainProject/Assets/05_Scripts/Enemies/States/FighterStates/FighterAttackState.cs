@@ -2,57 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FighterAttackState : FSMState
+public class FighterAttackState : AttackState<FighterController>
 {
-    private GameObject player;
-    private FighterController controller;
-    Vector3 interceptPoint;
-
-    //Obstacle variables
-    Vector3 obstacleAvoidDirection = Vector3.right;
-    bool obstacleHit = false;
-    float obstacleTimer = 0;
-    float avoidTime = 0.7f;
     float shotTimer = 0.0f;
     float intervalTime = 0.0f;
     float calculateInterval = 0.1f;
-    float maxSpeed = 0;
     GameObject bulletPrefab;
     GameObject bulletSpawnPos;
     Rigidbody rbPlayer;
 
-    public FighterAttackState(FighterController enemyController, GameObject playerObj, GameObject bullet, GameObject bulletShootPos)
+    public FighterAttackState(FighterController enemyController, GameObject bullet, GameObject bulletShootPos) : base(enemyController)
     {
-        controller = enemyController;
-        player = playerObj;
         bulletPrefab = bullet;
         bulletSpawnPos = bulletShootPos;
 
-        stateID = FSMStateID.Attacking;
-
-        rbPlayer = player.GetComponent<Rigidbody>();
+        rbPlayer = controller.Player.GetComponent<Rigidbody>();
     }
 
     public override void Act()
-    {
-        Move();
+	{
+		Move();
         Shoot();
     }
 
     public override void Reason()
-    {
-        if (player == null)
+	{
+		if (controller.Player == null)
         {
-            player = GameObject.FindGameObjectWithTag("Player");
+            controller.PerformTransition(Transition.Patrol);
+        }
+        else
+        {
 
-            if (player == null)
+            CalculateIntercept();
+
+            if (Vector3.Distance(controller.Player.transform.position, controller.transform.position) < controller.RaySize)
             {
                 AIManager.aiManager.StopAttack();
                 controller.PerformTransition(Transition.Patrol);
-                return;
             }
         }
 
+<<<<<<< HEAD
         CalculateIntercept();
 
         if (Vector3.Distance(player.transform.position, controller.transform.position) < controller.CloseDistance)
@@ -61,8 +52,10 @@ public class FighterAttackState : FSMState
             controller.PerformTransition(Transition.Patrol);
         }
 
+=======
+>>>>>>> master
         //Else dead transition to dead
-        if (controller.Health <= 0)
+        if (controller.Health.IsDead)
         {
             AIManager.aiManager.StopAttack();
             controller.PerformTransition(Transition.NoHealth);
@@ -71,13 +64,12 @@ public class FighterAttackState : FSMState
 
     public override void EnterStateInit()
     {
-        //Debug.Log("Attacking");
     }
 
     //Moves
-    void Move()
+    protected override void Move()
     {
-        if (player != null)
+        if (controller.Player != null)
         {
             //Calculate direction
             Vector3 direction = controller.transform.forward; // sets forward
@@ -104,12 +96,12 @@ public class FighterAttackState : FSMState
                 }
             }
 
-            Vector3 newDir = Vector3.RotateTowards(controller.transform.forward, direction, controller.RegRotationForce * Time.deltaTime, 0);
+            Vector3 newDir = Vector3.RotateTowards(controller.transform.forward, direction, controller.Stats.rotationSpeed * Time.deltaTime, 0);
             Quaternion rot = Quaternion.LookRotation(newDir);
-            controller.transform.rotation = Quaternion.Lerp(controller.transform.rotation, rot, controller.RegRotationForce * Time.deltaTime);
+            controller.transform.rotation = Quaternion.Lerp(controller.transform.rotation, rot, controller.Stats.rotationSpeed * Time.deltaTime);
 
             //Move
-            controller.rbSelf.AddForce(controller.transform.forward.normalized * controller.Acceleration , ForceMode.Acceleration);
+            controller.Rigid.AddForce(controller.transform.forward.normalized * controller.Stats.shipSpeed , ForceMode.Acceleration);
         }
     }
 
@@ -121,7 +113,7 @@ public class FighterAttackState : FSMState
 
             float distanceFromSight = Vector3.Cross(controller.transform.forward, interceptPoint - controller.transform.position).magnitude;
 
-            if (distanceFromSight <= controller.Accuracy && shotTimer >= controller.FireRate)
+            if (distanceFromSight <= controller.Stats.accuracy && shotTimer >= controller.Stats.fireRate)
             {
                 Quaternion lookRot = Quaternion.LookRotation(controller.transform.forward);
                 GameObject bullet = Object.Instantiate(bulletPrefab, bulletSpawnPos.transform.position, lookRot);
@@ -135,7 +127,7 @@ public class FighterAttackState : FSMState
     }
 
     //Calculates the intercept point
-    void CalculateIntercept()
+    protected override void CalculateIntercept()
     {
         intervalTime += Time.deltaTime;
         //while (true)
@@ -144,9 +136,9 @@ public class FighterAttackState : FSMState
             intervalTime = 0.0f;
             //yield return new WaitForSeconds(calculateInterval);
             //positions
-            Vector3 targetPosition = player.transform.position;
+            Vector3 targetPosition = controller.Player.transform.position;
             //velocities
-            Vector3 velocity = controller.rbSelf ? controller.rbSelf.velocity : Vector3.zero;
+            Vector3 velocity = controller.Rigid ? controller.Rigid.velocity : Vector3.zero;
             //Vector3 velocity = Vector3.zero;
             Vector3 targetVelocity = rbPlayer ? rbPlayer.velocity : Vector3.zero;
 

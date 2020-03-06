@@ -2,55 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChargerPatrolState : FSMState
+public class ChargerPatrolState : PatrolState<ChargerController>
 {
-    private GameObject player;
-    private ChargerController controller;
-    private float distance;
-    private float playerDist;
-    private int patrolID = 0;
-    private bool randomPoint;
-
-    //Obstacle variables
-    Vector3 obstacleAvoidDirection = Vector3.right;
-    bool obstacleHit = false;
-    float obstacleTimer = 0;
-    float avoidTime = 2f;
-
-    //Timer for staying in patrol;
-    private float timer1 = 0f;
-    private float timeAfterTransition = 10f;
-    //Timer for how often to check for seeing the player
-    private float timer2 = 0f;
-    private float timeOftenCheck = 1.0f;
-
-
-
-    //Constructor
-    public ChargerPatrolState(ChargerController enemyController, GameObject playerObj, float waypointDistance, float playerDistance, bool randomizePoint = false)
+    public ChargerPatrolState(ChargerController enemyController, bool randomizePoint = false) : base(enemyController, randomizePoint)
     {
-        controller = enemyController;
-        player = playerObj;
-        distance = (waypointDistance * 12); // Multiply for meters to units. 12 units/meter
-        playerDist = (playerDistance * 12);
-        randomPoint = randomizePoint;
-        stateID = FSMStateID.Patrolling;
-
-        EnterStateInit();
-    }
-
-    //Do this always
-    public override void Act()
-    {
-        Move();
     }
 
     //Initialize on entering state
     public override void EnterStateInit()
     {
-        //Debug.Log("Patrolling");
+        base.EnterStateInit();
         controller.hitPlayer = false;
     }
+<<<<<<< HEAD:UnityProjects/SSNS MainProject/Assets/05_Scripts/Enemies/States/ChargerStates/ChargerPatrolState.cs
 
 
     public override void Reason()
@@ -146,4 +110,6 @@ public class ChargerPatrolState : FSMState
             controller.rbSelf.AddForce(controller.transform.forward.normalized * controller.Acceleration, ForceMode.Acceleration); // move regular speed if obstacle is in the way or player is not target
         }
     }
+=======
+>>>>>>> master:UnityProjects/SSNS MainProject/Assets/05_Scripts/Enemies/States/ChargerStates/ChaserPatrolState.cs
 }
