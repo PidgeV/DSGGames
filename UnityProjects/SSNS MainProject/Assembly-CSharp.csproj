@@ -201,6 +201,7 @@
     <Compile Include="Assets\09_Effects\Shaders\AreaIndicator\Scripts\AreaShaderController.cs" />
     <Compile Include="Assets\11_Animations\Menus\Transitions\CinematicController.cs" />
     <Compile Include="Assets\13_ScriptableObjects\ShipObjects\ShipBehaviour.cs" />
+    <Compile Include="Assets\FlashOnHit.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Base\Runtime\Behaviours\CinemachineBlendListCamera.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Base\Runtime\Behaviours\CinemachineBrain.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Base\Runtime\Behaviours\CinemachineClearShot.cs" />
@@ -254,6 +255,7 @@
     <Compile Include="Assets\Misselaineous\Cinemachine\Timeline\CinemachineMixer.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Timeline\CinemachineShot.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Timeline\CinemachineTrack.cs" />
+    <Compile Include="Assets\ShieldGenerator.cs" />
     <None Include="Assets\Misselaineous\Cinemachine\ReleaseNotes.txt" />
     <None Include="Assets\07_Sprites\UI\Menus\MenuColorList.txt" />
     <Reference Include="Unity.Timeline.Editor">
