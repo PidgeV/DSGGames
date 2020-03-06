@@ -1,82 +1,61 @@
 ﻿using SNSSTypes;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
-
-// TODO -- Menu Navigation
-// TODO -- Player Score
-// TODO -- Leaving Play Area
-// TODO -- Press A to Join
-// TODO -- Mouse controls
-// TODO -- Less movemement flexibility while boosting
-
-
 
 [RequireComponent(typeof(Rigidbody))]
 public class ShipController : MonoBehaviour
 {
-	[Header("Cameras")]
 	[SerializeField] private Camera pilotCamera;
 	[SerializeField] private Camera gunnerCamera;
 
-	[Header("Dependencies")]
-	[SerializeField] private Transform shipModel;
-	[SerializeField] private Transform gunnerPivot;
-	[SerializeField] private Transform gunnerObject;
-	[SerializeField] private Transform barrelL;
-	[SerializeField] private Transform barrelR;
-	[SerializeField] private Animator gunAnimator;
-
-	[Header("Control Options")]
-	[SerializeField] private bool invertedControls;
-	[SerializeField] private bool unlimitedBoost;
-	[SerializeField] private bool limitRotation;
-
-	[Header("Behaviour")]
-	public ShipBehaviour myBehaviour;
-
-	[Header("Stats")]
-	public ShipStats myStats;
-
-	[Header("Weapon")]
-	[SerializeField] private WeaponType startingWeapon;
-	[SerializeField] private ChargedShotBehaviour chargedShot;
-	[SerializeField] private LaserBehaviour laser;
-	[SerializeField] private ShotInfo[] shots;
-
-	// The ammo we have for each weapon
-	public AmmoCounter ammoCount;
-
-	// What weapon are we currently using
-	[HideInInspector] public WeaponType currentWeapon;
-
-	// A Reference to the player controlling this ship if needed
-	[HideInInspector] public Player player1;
-	[HideInInspector] public Player player2;
-
-
-	[Header("Audio")]
 	[SerializeField] private ShootingSoundController shootingSoundController;
 
-	private Slider slider_Health;
-	private Slider slider_Shield;
-	private Slider slider_Boost;
+	[SerializeField] private ShieldProjector shieldProjector;
 
-	private Image healthImage;
-	private Image shieldImage;
-	private Image boostImage;
+	[SerializeField] private WeaponsSystem weaponsSystem;
 
-	private HealthAndShields shipHP;
-	private Rigidbody rigidbody;
+	[SerializeField] private PlayerHUDHandler playerHUD;
 
-	// The data about the current weapon
-	private ShotInfo currentShotInfo;
+	[SerializeField] private HealthAndShields shipHP;
 
-	// Who are we locked onto
-	private GameObject lockOnTarget;
+	[SerializeField] private Rigidbody rigidbody;
 
-	#region Ship Properties
+	[SerializeField] private ParticleSystem warpEffect1;
+	[SerializeField] private ParticleSystem warpEffect2;
+
+	[SerializeField] private Transform shipModel;
+
+	[SerializeField] private ShipBehaviour myBehaviour;
+	[SerializeField] private PlayerStats myProperties;
+
+	[SerializeField] private Transform gunnerslockUI;
+	[SerializeField] private Transform gunnerPivot;
+	[SerializeField] private Transform gunnerObject;
+
+	[SerializeField] private GameObject lockOnTarget;
+
+	public Player Player1;
+	public Player Player2;
+
+	public bool InvertedControls;
+	public bool UnlimitedBoost;
+	public bool AimAssist;
+
+	#region Ship Members
+	private Vector2 strafeDirection;
+	private Vector2 rotateDirection;
+	private Vector2 gunnerCenter;
+	private Vector2 gunVelocity;
+	private Vector2 gunRotation;
+
+	private Vector3 finalStrafeVelocity;
+	private Vector3 finalThrustVelocity;
+	private Vector3 finalRollRotation;
+	private Vector3 finalRotation;
+
 	private int numberOfPlayers;
 
 	private float thrustSpeed;
@@ -86,43 +65,50 @@ public class ShipController : MonoBehaviour
 	private float rollInput;
 	private float rollSpeed;
 	private float spinSpeed;
-
-	private Vector2 strafeDirection;
-	private Vector2 rotateDirection;
-
-	private Vector3 finalStrafeVelocity;
-	private Vector3 finalThrustVelocity;
-	private Vector3 finalRollRotation;
-	private Vector3 finalRotation;
+	private float boostGauge;
+	private float turnMultiplayer;
 
 	private bool strafing;
 	private bool rotating;
 	private bool boosting;
 	private bool roleSwap;
 	private bool stopThrust;
-	private bool lockOn;
+	private bool slowCamera;
 	private bool shooting_Gunner;
 	private bool shooting_Pilot;
-
-	private float boostGauge;
-	private float shotCounter;
-	private float shotTimer;
-
-	private float gunRotationSpeed = 200f;
-
-	private Vector2 gunVelocity;
-	private Vector2 gunRotation;
-
-	private Quaternion gunnerAim;
 	#endregion
 
-	// Editor values
-	[HideInInspector] public bool showBehaviour = false;
-	[HideInInspector] public bool showStats = false;
+	#region Properties
+	public Camera PilotCamera { get { return pilotCamera; } }
+	public Camera GunnerCamera { get { return gunnerCamera; } }
 
-	// Proporties
-	public bool StopThrust { set { stopThrust = value; } }
+	public ShipBehaviour Behaviour { get { return myBehaviour; } }
 
+	public PlayerStats Properties { get { return myProperties; } }
+
+	public ParticleSystem WarpEffect1 { get { return warpEffect1; } }
+	public ParticleSystem WarpEffect2 { get { return warpEffect2; } }
+
+	public Transform ShipModel { get { return shipModel; } }
+
+	public int NumberOfPlayers { get; set; }
+
+	public bool Boosting { get { return boosting; } set { boosting = value; } }
+	public bool Strafing { get { return strafing; } set { strafing = value; } }
+	public bool Rotating { get { return rotating; } set { rotating = value; } }
+	public bool RoleSwap { get { return roleSwap; } set { roleSwap = value; } }
+	public bool StopThrust { get { return stopThrust; } set { stopThrust = value; } }
+
+	public float RollInput { get { return rollInput; } set { rollInput = value; } }
+	public float BoostGauge { get { return boostGauge; }  set { boostGauge = value; } }
+
+	public float TurnMultiplayer { get { return turnMultiplayer; }  set { turnMultiplayer = value; } }
+
+	public Vector2 StrafeDirection { get { return strafeDirection; } set { strafeDirection = value; } }
+	public Vector2 RotateDirection { get { return rotateDirection; } set { rotateDirection = value; } }
+
+	public Vector3 GunVelocity { get { return gunVelocity; }  set { gunVelocity = value; } }
+	#endregion
 
 	// Unity Methods and Events
 	#region Unity Events and Methods
@@ -132,108 +118,62 @@ public class ShipController : MonoBehaviour
 	/// </summary>
 	private void Awake()
 	{
-		Physics.IgnoreLayerCollision(13, 13); // cause projectiles to ignore projectiles
-		Physics.IgnoreLayerCollision(12, 12); // cause shields to ignore shields
+		if (shieldProjector == null) {
+			shieldProjector = GetComponentInChildren<ShieldProjector>();
+		}
+
+		if (weaponsSystem == null) {
+			weaponsSystem = gameObject.GetComponent<WeaponsSystem>();
+		}
+
+		if (shieldProjector == null) {
+			shieldProjector = GetComponentInChildren<ShieldProjector>();
+		}
+
+		if (playerHUD == null) {
+			playerHUD = gameObject.GetComponent<PlayerHUDHandler>();
+		}
+
+		if (rigidbody == null) {
+			rigidbody = gameObject.GetComponent<Rigidbody>();
+		}
+
+		foreach (Player player in GameObject.FindObjectsOfType<Player>()) {
+			player.FindShip();
+		}
 
 		// Set the cameras size and positions
 		gunnerCamera.rect = new Rect(0, 0.0f, 1.0f, 0.5f);
 		pilotCamera.rect = new Rect(0, 0.5f, 1.0f, 0.5f);
 
-		// Set the max values of our boost Gauge
-		boostGauge = myStats.maxBoostGauge;
+		gunnerCenter = gunnerslockUI.transform.position;
 
-		// Get components
-		rigidbody = gameObject.GetComponent<Rigidbody>();
+		boostGauge = myProperties.maxBoostGauge;
 
-		slider_Health = GameObject.Find("[Slider] Health").GetComponent<Slider>();
-		slider_Shield = GameObject.Find("[Slider] Shield").GetComponent<Slider>();
-		slider_Boost = GameObject.Find("[Slider] Boost").GetComponent<Slider>();
-
-		// Get the images for the sliders
-		boostImage = slider_Boost.gameObject.GetComponentInChildren<Image>();
-		healthImage = slider_Health.gameObject.GetComponentInChildren<Image>();
-		shieldImage = slider_Shield.gameObject.GetComponentInChildren<Image>();
-
-		// Get references
 		if (!shipHP) TryGetComponent(out shipHP);
-
-		currentWeapon = startingWeapon;
-
-		shotTimer = Mathf.Infinity;
-
-		foreach (ShotInfo s in shots)
-		{
-			if (s.weapon == currentWeapon)
-			{
-				currentShotInfo = s;
-			}
-		}
-	}
+    }
 
 	/// <summary>
 	/// Used for all the non physics calculations
 	/// </summary>
 	private void Update()
-    {
-        #region Shooting Logic
+	{
+		if (MenuManager.Instance.Sleeping) return;
 
-        shotTimer += Time.deltaTime;
-        if (currentWeapon != currentShotInfo.weapon)
-        {
-            foreach (ShotInfo s in shots)
-            {
-                if (s.weapon == currentWeapon)
-                {
-                    currentShotInfo = s;
-                }
-            }
-        }
-
-		#endregion
-
-		// Update the ships movement values
 		UpdateShipValues();
-
-		// Move the ship model
+		
 		UpdateShipModel(rotateDirection);
 
-		// Update sliders
-		UpdateBoostGauge();
-		UpdateHealthAndShields();
-
-		#region TODO -- Check if does anything
-		// Shooting
-		if (shooting_Gunner)
-        {
-            Shoot();
-        }
-        else
-        {
-            laser.fadeIn = false;
-
-            if (chargedShot)
-            {
-                chargedShot.HasShot = true;
-                chargedShot = null;
-            }
-        }
-
-        if (shooting_Pilot)
-        {
-            ShipShoot();
-        }
-
-        // Increment the shooter timer
-        shotCounter += Time.deltaTime;
-		#endregion
+		UpdateTurnMultiplier();
 	}
 
 	/// <summary>
 	/// FixedUpdate is used for physic calculations
 	/// </summary>
 	private void FixedUpdate()
-    {
-		// Update the ships PHYSICS and rotation
+	{
+		if (MenuManager.Instance.Sleeping) return;
+
 		UpdateShipPhysics();
 	}
 
@@ -242,18 +182,10 @@ public class ShipController : MonoBehaviour
     /// because we need to know where the ship is after physics are applied
     /// </summary>
     private void LateUpdate()
-    {
-		UpdateCamera();
-	}
-
-	/// <summary>
-	/// Clean up 
-	/// </summary>
-	private void OnDestroy()
 	{
-		//if (player1) Destroy(player1.gameObject);
+		if (MenuManager.Instance.Sleeping) return;
 
-		//if (player2) Destroy(player2.gameObject);
+		UpdateCamera();
 	}
 
 	#endregion
@@ -261,104 +193,95 @@ public class ShipController : MonoBehaviour
 	// Update transformations for the gun or the ship
 	#region Ship Movement Methods
 
-	/// <summary>
-	/// Add a player to the ship 
-	/// </summary>
-	public void JoinShip(Player newPlayer)
+	/// <summary> Change the roles of the players </summary>
+	public void SwapRoles()
 	{
-		// Check if we are the first player to join
-		if (player1)
-		{
-			// If we have a pilot
+		if (Player1) Player1.SwapRole();
+		if (Player2) Player2.SwapRole();
 
-			// Make the new player a gunner
-			if (player1.myRole == PlayerRole.Pilot)
-			{
-				player2 = newPlayer;
-				player2.myRole = PlayerRole.Gunner;
-			}
-			else
-			{
-				player2 = newPlayer;
-				player2.myRole = PlayerRole.Pilot;
-			}
-		}
-		else
-		{
-			// If we dont have a pilot
-
-			// Make the new player a pilot
-			player1 = newPlayer;
-			player1.myRole = PlayerRole.Pilot;
-		}
-
-		// Increment the number of players
-		numberOfPlayers++;
+		ResetShip();
 	}
 
-	/// <summary> 
-	/// Use INPUT and update the camera 
+	/// <summary>
+	/// Use INPUT and update the camera
 	/// </summary>
 	public void UpdateCamera()
 	{
-		if (lockOn && lockOnTarget)
+		// Where the camera SHOULD be relative to the ship model
+		Vector3 shipPos = shipModel.transform.position;
+
+		Vector3 yPos = -6 * shipModel.transform.up;
+		Vector3 zPos = -1 * shipModel.transform.forward;
+
+		gunnerPivot.position = Vector3.Lerp(gunnerPivot.position, shipPos + yPos + zPos, 0.25f);
+
+		gunnerPivot.rotation = Quaternion.identity;
+		gunnerObject.Rotate(new Vector2(-gunVelocity.y, gunVelocity.x) * Time.deltaTime * (slowCamera ? 0.2f : 1f));
+
+      //  gunnerObject.eulerAngles = new Vector3(gunnerObject.eulerAngles.x, gunnerObject.eulerAngles.y, 0);
+
+        // If we don't have a target currently locking
+        if (lockOnTarget == null)
 		{
-			//float speed;
-			//if (currentWeapon == WeaponType.Laser)
-			//{
-			//	speed = Mathf.Infinity;
-			//}
-			//else
-			//{
-			//	speed = currentShotInfo.Speed;
-			//}
-
-			//Vector3 intercept = InterceptCalculationClass.FirstOrderIntercept(shotSpawnLocation.position, rigidbody.velocity, speed, lockOnTarget.transform.position, lockOnTarget.GetComponent<Rigidbody>().velocity);
-			//gunnerCamParent.LookAt(intercept);
-			////gunRotation = gunnerCamera.transform.eulerAngles;
+			CheckForTarget();
 		}
-		else
-		{   // Reset the  gunners camera to zero
-			gunnerPivot.rotation = Quaternion.identity;
-			gunnerObject.Rotate(new Vector2(-gunVelocity.y, gunVelocity.x) * Time.deltaTime);
 
-			// POSITION
-			// Where the camera SHOULD be relative to the ship model
-			Vector3 shipPos = shipModel.transform.position;
+		// (BLOCKER) If we cant Lock on
+		if (AimAssist == false) return;
 
-			Vector3 yPos = -6 * shipModel.transform.up;
-			Vector3 zPos = -1 * shipModel.transform.forward;
+		if (lockOnTarget != null)
+		{
+			Vector2 newPoint = gunnerCamera.WorldToScreenPoint(lockOnTarget.transform.position);
+			float unlockDist = 60;
 
-			gunnerPivot.position = shipPos + yPos + zPos;
-
-			//RaycastHit hit;
-			//// Does the ray intersect any objects excluding the player layer
-			//if (lockOn == false && Physics.Raycast(gunnerCamera.transform.position, gunnerCamera.transform.forward, out hit, Mathf.Infinity))
-			//{
-			//	if (hit.collider.gameObject.tag == "Enemy" ||
-			//		hit.collider.gameObject.tag == "Shield")
-			//	{
-			//		lockOnTarget = hit.collider.gameObject;
-			//	}
-			//}
+			if (Vector2.Distance(gunnerCenter, newPoint) < unlockDist)
+			{
+				gunnerslockUI.transform.position = newPoint;
+			}
+			else
+			{
+				gunnerslockUI.transform.position = gunnerCenter;
+				lockOnTarget = null;
+			}
 		}
 	}
 
 	/// <summary>
-	/// Use INPUT and update the ships target values, not the actual rigidbody 
+	/// Raycast forward and see if the gunners hovering an enemy
+	/// </summary>
+	public void CheckForTarget()
+	{
+		// (BLOCKER) If we cant Lock on
+		if (AimAssist == false) return;
+
+		RaycastHit hit;
+
+		Vector3 origin = gunnerCamera.transform.position;
+		Vector3 direction = gunnerCamera.transform.forward;
+
+		if (Physics.Raycast(origin, direction, out hit, Mathf.Infinity, LayerMask.GetMask("Enemies")))
+		{
+			Debug.Log("Locked ON!", hit.collider.gameObject);
+			lockOnTarget = hit.collider.gameObject;
+		}
+	}
+
+	/// <summary>
+	/// Use INPUT and update the ships target values, not the actual rigidbody
 	/// </summary>
 	public void UpdateShipValues()
 	{
 		// Steer Ship
 		#region Steer Ship
 
+
 		if (rotating)
 		{
-			rotationSpeed = Mathf.Clamp(rotationSpeed + myStats.shipRotAcceleration, 0, myStats.rotationSpeed);
+			rotationSpeed = Mathf.Clamp(rotationSpeed + myProperties.shipRotAcceleration , 0, myProperties.rotationSpeed);
 		}
 		else
 		{
-			rotationSpeed = Mathf.Clamp(rotationSpeed - myStats.shipRotAcceleration, 0, myStats.rotationSpeed);
+			rotationSpeed = Mathf.Clamp(rotationSpeed - myProperties.shipRotAcceleration , 0, myProperties.rotationSpeed);
 		}
 
 		finalRotation = rotateDirection * rotationSpeed;
@@ -370,16 +293,16 @@ public class ShipController : MonoBehaviour
 		if (rollInput > 0)
 		{
 			rollDirection = 1;
-			rollSpeed = Mathf.Clamp(rollSpeed + myStats.shipRotAcceleration, 0, myStats.rotationSpeed);
+			rollSpeed = Mathf.Clamp(rollSpeed + myProperties.shipRotAcceleration, 0, myProperties.rotationSpeed);
 		}
 		else if (rollInput < 0)
 		{
 			rollDirection = -1;
-			rollSpeed = Mathf.Clamp(rollSpeed + myStats.shipRotAcceleration, 0, myStats.rotationSpeed);
+			rollSpeed = Mathf.Clamp(rollSpeed + myProperties.shipRotAcceleration, 0, myProperties.rotationSpeed);
 		}
 		else
 		{
-			rollSpeed = Mathf.Clamp(rollSpeed - myStats.shipRotDeceleration, 0, myStats.rotationSpeed);
+			rollSpeed = Mathf.Clamp(rollSpeed - myProperties.shipRotDeceleration, 0, myProperties.rotationSpeed);
 		}
 
 		finalRollRotation = new Vector3(0, 0, rollDirection) * rollSpeed;
@@ -390,11 +313,11 @@ public class ShipController : MonoBehaviour
 
 		if (strafing)
 		{
-			strafeSpeed = Mathf.Clamp(strafeSpeed + myStats.shipAcceleration * 2f, 0, myStats.strafeSpeed);
+			strafeSpeed = Mathf.Clamp(strafeSpeed + myProperties.shipAcceleration * 2f, 0, myProperties.strafeSpeed);
 		}
 		else
 		{
-			strafeSpeed = Mathf.Clamp(strafeSpeed - myStats.shipDeceleration, 0, myStats.strafeSpeed);
+			strafeSpeed = Mathf.Clamp(strafeSpeed - myProperties.shipDeceleration, 0, myProperties.strafeSpeed);
 		}
 		finalStrafeVelocity = strafeDirection * strafeSpeed;
 		#endregion
@@ -404,48 +327,48 @@ public class ShipController : MonoBehaviour
 
 		if (stopThrust)
 		{
-			thrustSpeed = Mathf.Clamp(thrustSpeed - myStats.shipDeceleration, 0, myStats.thrustSpeed);
+			thrustSpeed = Mathf.Clamp(thrustSpeed - myProperties.shipDeceleration, 0, myProperties.shipSpeed);
 		}
 		// If were boosting
 		else if (boosting)
 		{
 			// Increase our speed when boosting
-			if (rigidbody.velocity.magnitude < myStats.boostSpeed)
-				thrustSpeed = Mathf.Clamp(thrustSpeed + (myStats.thrustSpeed * 2.4f * Time.deltaTime), myStats.thrustSpeed, myStats.boostSpeed);
+			if (rigidbody.velocity.magnitude < myProperties.boostSpeed)
+				thrustSpeed = Mathf.Clamp(thrustSpeed + (myProperties.shipSpeed * 2.4f * Time.deltaTime), myProperties.shipSpeed, myProperties.boostSpeed);
 
 
 			// Reduce the boost gauge
-			boostGauge = Mathf.Clamp(boostGauge - myStats.boostGaugeConsumeAmount * Time.deltaTime, 0, myStats.maxBoostGauge);
-			slider_Boost.value = 1 / myStats.maxBoostGauge * boostGauge;
+			boostGauge = Mathf.Clamp(boostGauge - myProperties.boostGaugeConsumeAmount * Time.deltaTime, 0, myProperties.maxBoostGauge);
+			playerHUD._slider_Boost.value = 1 / myProperties.maxBoostGauge * boostGauge;
 
 			// Set the color of the boost slider
-			boostImage.color = Color.Lerp(Color.red, Color.yellow, 1 / myStats.maxBoostGauge * boostGauge);
+			playerHUD._boostImage.color = Color.Lerp(Color.red, Color.yellow, 1 / myProperties.maxBoostGauge * boostGauge);
 
 			// Turn off boosting
-			if (boostGauge <= 0 && unlimitedBoost == false)
+			if (boostGauge <= 0 && UnlimitedBoost == false)
 			{
 				boosting = false;
 			}
 		}
 		// Else if we are NOT boosting and our thrustSpeed is over our maxThrustSpeed
 		// We need to smooth the transition from boosting to not boosting
-		else if (thrustSpeed > myStats.thrustSpeed)
+		else if (thrustSpeed > myProperties.shipSpeed)
 		{
 			// Clamp our thrust Speed to our max thrust speed
-			thrustSpeed = Mathf.Clamp(thrustSpeed - myStats.shipDeceleration, myStats.thrustSpeed, myStats.boostSpeed);
+			thrustSpeed = Mathf.Clamp(thrustSpeed - myProperties.shipDeceleration, myProperties.shipSpeed, myProperties.boostSpeed);
 		}
 		// Else were not boosting so we increase our ships normal speed
 		else
 		{
-			thrustSpeed = myStats.thrustSpeed;
+			thrustSpeed = myProperties.shipSpeed;
 		}
 
 		finalThrustVelocity = transform.forward * thrustSpeed;
 		#endregion
 	}
 
-	/// <summary> 
-	/// Update the ships PHYSICS
+	/// <summary>
+	/// Update the ships movement
 	/// </summary>
 	public void UpdateShipPhysics()
 	{
@@ -460,7 +383,7 @@ public class ShipController : MonoBehaviour
 	}
 
 	/// <summary>
-	/// Move the ships model so it looks more like your controlling the ship 
+	/// Move the ships model so it looks more like your controlling the ship
 	/// </summary>
 	public void UpdateShipModel(Vector3 velocity)
 	{
@@ -493,329 +416,45 @@ public class ShipController : MonoBehaviour
 
 	#endregion
 
-	// Shooting
-	#region Projectile Methods
-
-	private void SpawnShot()
+	private void UpdateTurnMultiplier()
 	{
-		Quaternion rot = Quaternion.LookRotation(barrelL.transform.forward);
-		GameObject shot = Instantiate(currentShotInfo.gameObject, barrelL.position, rot);
-
-		shootingSoundController.PlayShot(currentWeapon);
-
-        if (shot.TryGetComponent(out ShotThing st))
-        {
-            st.whoSent = ShotThing.shotFrom.Player;
-        }
-
-        if (TryGetComponent(out ShieldProjector shield))
+		if (boosting)
 		{
-			shield.IgnoreCollider(shot.GetComponent<Collider>());
-		}
-	}
-
-	public void Shoot()
-	{
-		Ray ray = new Ray(gunnerCamera.transform.position, gunnerCamera.transform.forward);
-		LayerMask layer = LayerMask.GetMask("Player");
-
-		//If not hitting player collider
-		if (!Physics.Raycast(ray, 15f, layer))
-		{
-			if (currentWeapon == WeaponType.Laser)
-			{
-				laser.fadeIn = true;
-				//LaserShot: Long, straight beam, near instant, aoe from origin
-				//Raycast instead of instantiate for instant movement
-				ammoCount.Take1Ammo(currentWeapon);
-
-				LayerMask enemyLayer = LayerMask.GetMask("Enemies");
-				enemyLayer += LayerMask.GetMask("Swarm");
-				RaycastHit[] hits = Physics.SphereCastAll(barrelL.transform.position, 15f, barrelL.transform.forward.normalized, laser.Length, enemyLayer);
-
-				foreach (RaycastHit hit in hits)
-				{
-					if (hit.collider.TryGetComponent(out HealthAndShields hp))
-					{
-						hp.TakeDamage(laser.Damage / 10, laser.Damage);
-                        if (hit.collider.TryGetComponent(out ScoreCounter[] sc))
-                        {
-                            foreach (ScoreCounter sc1 in sc)
-                            {
-                                sc1.Hit();
-                            }
-                        }
-                    }
-				}
-			}
-			else if (currentWeapon == WeaponType.Charged && shotTimer > currentShotInfo.FireRate)
-			{
-				laser.fadeIn = false;
-				shotTimer = 0;
-				//Spawn then parent to the gunner. Store gameobject to check in update.
-				if (!chargedShot)
-				{
-					Quaternion rot = Quaternion.LookRotation(barrelL.transform.forward);
-					chargedShot = Instantiate(currentShotInfo.gameObject, barrelL.position, rot).GetComponent<ChargedShotBehaviour>();
-					chargedShot.transform.parent = barrelL.transform;
-					if (TryGetComponent(out ShieldProjector shield))
-					{
-						shield.IgnoreCollider(chargedShot.GetComponent<Collider>());
-					}
-				}
-			}
-			else if (shotTimer > currentShotInfo.FireRate)
-			{
-				laser.fadeIn = false;
-				shotTimer = 0;
-
-				if (ammoCount.HasAmmo(currentWeapon))
-				{
-					ammoCount.Take1Ammo(currentWeapon);
-					SpawnShot();
-				}
-			}
-		}
-	}
-	public void ShipShoot()
-	{
-		if (shotTimer > currentShotInfo.FireRate)
-		{
-			shotTimer = 0;
-			Quaternion rot = Quaternion.LookRotation(transform.forward);
-			GameObject shot = Instantiate(currentShotInfo.gameObject, transform.position + transform.forward * 10, Quaternion.identity);
-			shot.transform.rotation = rot;
-		}
-	}
-
-	#endregion
-
-	// Called by the player script
-	#region Input Methods
-
-	/// <summary> Move the gunners camera </summary>
-	public void AimGun(Vector2 velocity)
-    {
-        gunVelocity = new Vector2(velocity.x, velocity.y) * gunRotationSpeed;
-    }
-
-    /// <summary> Steer the ship </summary>
-    public void SteerShip(Vector2 velocity)
-    {
-        // Check if we are steering
-        if (velocity == Vector2.zero)
-        {
-            rotateDirection = Vector2.zero;
-            rotating = false;
-        }
-        else
-        {
-            // Check if we want inverted controls
-            if (invertedControls == true)
-            {
-                rotateDirection = new Vector2(velocity.y, velocity.x);
-            }
-            else
-            {
-                rotateDirection = new Vector2(-velocity.y, velocity.x);
-            }
-
-            rotating = true;
-        }
-    }
-
-    /// <summary> Move the Ship up, down, left or right </summary>
-    public void StrafeShip(Vector2 velocity)
-    {
-        if (velocity.sqrMagnitude >= 1)
-        {
-            strafeDirection = velocity;
-            strafing = true;
-        }
-        else
-        {
-            strafing = false;
-        }
-    }
-
-    /// <summary> Rotate the ship on the Z axis </summary>
-    public void RotateShip(float direction)
-    {
-        rollInput = direction;
-    }
-
-
-	bool usingDefault = true;
-    /// <summary> Swap the ships weapon  </summary>
-    public void SwapWeapon(Vector2 dInput)
-    {
-		if (dInput.x > 0)
-		{
-			if (usingDefault)
-			{
-				usingDefault = false;
-				currentWeapon = WeaponType.Laser;
-				gunAnimator.SetTrigger("Change_Laser");
-			}
-		}
-		else if (dInput.x < 0)
-		{
-			if (usingDefault)
-			{
-				usingDefault = false;
-				currentWeapon = WeaponType.Missiles;
-				gunAnimator.SetTrigger("Change_Rockets");
-			}
-		}
-		else if (dInput.y > 0)
-		{
-			if (usingDefault)
-			{
-				usingDefault = false;
-				currentWeapon = WeaponType.Charged;
-				gunAnimator.SetTrigger("Change_Charged");
-			}
-		}
-		else if (dInput.y < 0)
-		{
-			usingDefault = true;
-			gunAnimator.SetTrigger("Reset");
-			if (currentWeapon == WeaponType.Regular)
-			{
-				currentWeapon = WeaponType.Energy;
-			}
-			else
-			{
-				currentWeapon = WeaponType.Regular;
-			}
-		}
-	}
-
-    /// <summary> Make the ship shoot </summary>
-    public void Shoot(PlayerRole role, bool pressed)
-    {
-        if (role == PlayerRole.Pilot)
-        {
-            shooting_Pilot = pressed;
-        }
-
-        if (role == PlayerRole.Gunner)
-        {
-			gunAnimator.SetBool("Attacking", pressed);
-            shooting_Gunner = pressed;
-        }
-    }
-
-
-
-	/// <summary> Change the roles of the players </summary>
-	public void SwapRoles()
-	{
-		Debug.Log("Swapping roles");
-
-		if (player1)
-		{
-			player1.SwapRole();
-		}
-
-		if (player2)
-		{
-			player2.SwapRole();
-		}
-
-		gunVelocity = Vector3.zero;
-	}
-
-
-
-	/// <summary> Trigger a role swap request </summary>
-	public void TriggerRoleSwap(bool pressed)
-	{
-		// If we only have one player..
-		// Just let them swap on command
-		if (numberOfPlayers == 1 && pressed == true)
-		{
-			SwapRoles();
-			return;
-		}
-
-		// If were currently looking for a role swap
-		if (roleSwap == true && pressed == true)
-		{
-			// This means that BOTH players are holding down the role swap button
-			SwapRoles();
+			turnMultiplayer = Mathf.Lerp(turnMultiplayer, 0.4f, 0.03f);
 		}
 		else
 		{
-			// Else we want to set looking for roleSwap to whatever the last input was
-
-			// This could be a button press -> start a roleSwap
-			// This could be a button release -> cancel the roleSwap
-
-			roleSwap = pressed;
+			turnMultiplayer = Mathf.Lerp(turnMultiplayer, 1f, 0.03f);
 		}
 	}
 
-	/// <summary> Toggle the ships map </summary>
-	public void ToggleMap(bool pressed)
+	private void ResetShip()
 	{
-		// TODO -- ToggleMap();
+		gunVelocity = Vector3.zero;
 	}
 
-	/// <summary> Toggle the lockOn member </summary>
-	public void LockOn(bool pressed)
+	public void SwapWeapon(Vector2 Input)
 	{
-		lockOn = pressed;
+		weaponsSystem.SwapWeapon(Input);
 	}
 
-	/// <summary> Toggle the boosting member </summary>
-	public void Boost(bool pressed)
-    {
-        // If our boost gauge is more than 5% full we allow the player to boost
-        // This is to avoid stuttering  on a 0% gauge
-        if (boostGauge > myStats.maxBoostGauge * 0.1f)
-        {
-            boosting = pressed;
-        }
-        else
-        {
-            boosting = false;
-        }
-    }
-
-	#endregion
-
-	// Updates the UI / HUD
-	#region Stat Methods
-
-	public void UpdateBoostGauge()
+	public void ShootGun(bool pressed)
 	{
-		// Boost Gauge
-		if (boostGauge < myStats.maxBoostGauge && boosting == false)
-		{
-			float rechargeRate = 1.5f;
-
-			// Recharge our boost gauge
-			boostGauge += rechargeRate * Time.deltaTime;
-
-			// Clamp the boost gauge to our maxBoostGauge
-			if (boostGauge > myStats.maxBoostGauge)
-			{
-				boostGauge = myStats.maxBoostGauge;
-			}
-
-			// Boost Slider
-			slider_Boost.value = (1 / myStats.maxBoostGauge) * boostGauge;
-
-			// Set the color of the boost slider
-			boostImage.color = Color.Lerp(Color.red, Color.yellow, (1 / myStats.maxBoostGauge) * boostGauge);
-		}
-	}
-	public void UpdateHealthAndShields()
-	{
-		slider_Health.value = (1 / shipHP.MaxLife) * shipHP.currentLife;
-		slider_Shield.value = (1 / shipHP.MaxShield) * shipHP.currentShield;
+		weaponsSystem.ShootGun(pressed);
 	}
 
-	#endregion
+	public void ShootShip(bool pressed)
+	{
+		weaponsSystem.ShipShooting = pressed;
+	}
+	
+	public void SlowCamera(bool pressed)
+	{
+		slowCamera = pressed;
+	}
+
+	// Editor values
+	[HideInInspector] public bool showBehaviour = false;
+	[HideInInspector] public bool showStats = false;
+	[HideInInspector] public bool useDefaultEditor = false;
 }

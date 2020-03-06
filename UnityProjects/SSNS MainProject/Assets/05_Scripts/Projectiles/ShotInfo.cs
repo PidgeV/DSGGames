@@ -17,6 +17,7 @@ public class ShotInfo : MonoBehaviour
 
     private void Update()
     {
+		if (MenuManager.Instance.Sleeping) return;
         if (weapon != SNSSTypes.WeaponType.Laser || lifeTime != 0)
         {
             lifeTimer += Time.deltaTime;

@@ -17,7 +17,7 @@ public class Reward : ScriptableObject
 	/// <summary>
 	/// Use this reward on a gameobject
 	/// </summary>
-	public void UseReward(ShipStats target)
+	public void UseReward(PlayerStats target)
 	{
 		Debug.Log("You are applying the reward " + type.ToString() + " to the player!");
 
@@ -63,7 +63,7 @@ public class Reward : ScriptableObject
 					break;
 
 				case RewardsType.RegenDelayReduction:
-					target.shieldRegenDelay += value;
+					target.shieldRegenInterval -= value;
 					break;
 
 				case RewardsType.BoostGaugeIncrease:

@@ -52,16 +52,16 @@ MonoBehaviour:
     m_Bits: 2048
   obstacleLayers:
     serializedVersion: 2
-    m_Bits: 4864
+    m_Bits: 768
   flockLeaderPrefab: {fileID: 561547919149143226, guid: 8b2d5ba9147f86d45ae2e6e961fe4a4a,
     type: 3}
   swarmFollowRadius: 75
   waypoints: []
   defenseTarget: {fileID: 0}
   startingCount: 200
-  driveFactor: 60
+  driveFactor: 75
   maxSpeed: 80
-  neighbourRadius: 15
-  avoidanceRadius: 20
+  neighbourRadius: 20
+  avoidanceRadius: 25
   obstacleDistance: 100
   player: {fileID: 0}

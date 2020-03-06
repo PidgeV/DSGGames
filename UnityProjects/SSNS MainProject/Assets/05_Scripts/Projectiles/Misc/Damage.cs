@@ -7,9 +7,10 @@ using UnityEngine;
 public class Damage : MonoBehaviour
 {
     [SerializeField] bool destroyOnHit = false;
+    [SerializeField] bool constantCollisionDamage = false;
     // The damage whatever collides with the gameObject holding this script should take
-    [SerializeField] int kineticDamage = 5;
-    [SerializeField] int energyDamage = 5;
+    public int kineticDamage = 5;
+	public int energyDamage = 5;
 
     [Space(10)]
     [SerializeField] GameObject hitSoundObject;
@@ -41,6 +42,15 @@ public class Damage : MonoBehaviour
         }
     }
 
+    private void OnCollisionStay(Collision collision)
+    {
+        //Apply damage to things it hits
+        if (collision.gameObject.TryGetComponent(out HealthAndShields hpTemp) && constantCollisionDamage)
+        {
+            hpTemp.TakeDamage(kineticDamage, energyDamage);
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
 
@@ -51,7 +61,7 @@ public class Damage : MonoBehaviour
         //Apply damage to things it hits
         if (other.gameObject.TryGetComponent(out HealthAndShields hpTemp))
         {
-            hpTemp.TakeDamage(kineticDamage, energyDamage);
+            hpTemp.TakeDamage(kineticDamage * Time.deltaTime, energyDamage * Time.deltaTime);
         }
 
         if(destroyOnHit)

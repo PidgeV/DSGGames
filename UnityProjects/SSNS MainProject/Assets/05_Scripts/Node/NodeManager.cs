@@ -10,6 +10,12 @@ public class NodeManager : MonoBehaviour
 {
     public static NodeManager Instance;
 
+	[SerializeField] private GameObject node_Default;
+	[SerializeField] private GameObject node_Currrent;
+	[SerializeField] private GameObject node_Next;
+	[SerializeField] private GameObject node_Boss;
+
+
     #region Constant Values
 
     private const float MAX_SELECT_TIME = 10f;
@@ -91,12 +97,12 @@ public class NodeManager : MonoBehaviour
 
             // Spawn the portals and update the information for the nodes
             StartCoroutine(SpawnPortals());
-                
+
             // Selects the middle choice as default
             NodeUpdate(Choices.Length / 2);
 
             // Enable all node UI
-            nodeUI.FadeGroups(true, true, true);
+            //nodeUI.FadeGroups(true, true, true);
         }
     }
 
@@ -110,8 +116,9 @@ public class NodeManager : MonoBehaviour
         selectingNode = false;
         nodeSelected = false;
 
-        // Stores the last node
-        lastNode = currentNode;
+		// Stores the last node
+		//lastNode
+		lastNode = currentNode;
 
         currentNode = node;
 
@@ -121,12 +128,12 @@ public class NodeManager : MonoBehaviour
             Destroy(portals[0].transform.parent.gameObject);
         }
 
-        lastNode.ResetColor();
+        lastNode.UpdateVisual(currentNode.NodeInfo, null);
 
-        currentNode.ActiveColor();
+        currentNode.UpdateVisual(currentNode.NodeInfo, null);
 
         // Hides all UI except the gunner
-        nodeUI.FadeGroups(false, false, true);
+        //nodeUI.FadeGroups(false, false, true);
 
 
         // Switches state to node transition to load next area
@@ -139,11 +146,11 @@ public class NodeManager : MonoBehaviour
     public void HideAllNodeUI()
     {
         // Disable all node UI
-        nodeUI.FadeGroups(false, false, false);
+        //nodeUI.FadeGroups(false, false, false);
 
         // Resets node color
         if (lastNode != null)
-            lastNode.ResetColor();
+            lastNode.UpdateVisual(currentNode.NodeInfo, null);
     }
 
     #region Player Selection
@@ -180,7 +187,7 @@ public class NodeManager : MonoBehaviour
         rotateToPortal = true;
 
         // Updates the node UI for the pilot
-        #region UI 
+        #region UI
 
         NodeInfo selectedNode = Choices[selectedIndex].NodeInfo;
 
@@ -198,9 +205,8 @@ public class NodeManager : MonoBehaviour
 
         nodeUI.UpdatePilot(selectedNode, leftNode, rightNode);
 
-        currentNode.ActiveColor();
-        Choices[selectedIndex].ResetColor();
-        Choices[selectedIndex].DestinationColor();
+        currentNode.UpdateVisual(currentNode.NodeInfo, Choices[selectedIndex].NodeInfo);
+        Choices[selectedIndex].UpdateVisual(currentNode.NodeInfo, Choices[selectedIndex].NodeInfo);
 
         #endregion
     }
@@ -265,7 +271,7 @@ public class NodeManager : MonoBehaviour
         Transform parent = new GameObject("Portals").transform;
 
         // Grabs the ship transform
-        Transform ship = GameManager.Instance.shipController.transform;
+        Transform ship = GameManager.Instance.Player.transform;
 
         while (Physics.Raycast(ship.transform.position, ship.forward, 1 << 8))
         {
@@ -310,11 +316,11 @@ public class NodeManager : MonoBehaviour
         if (portals == null || !rotateToPortal) return;
 
         // Finds the direction to the portal
-        Vector3 portalDir = (portals[selectedIndex].transform.position - GameManager.Instance.shipController.transform.position).normalized;
-        Debug.Log(selectedIndex);
+        Vector3 portalDir = (portals[selectedIndex].transform.position - GameManager.Instance.Player.transform.position).normalized;
+       // Debug.Log(selectedIndex);
 
         // Finds the angle between
-        float angle = Vector3.SignedAngle(GameManager.Instance.shipController.transform.forward, portalDir, GameManager.Instance.shipController.transform.up);
+        float angle = Vector3.SignedAngle(GameManager.Instance.Player.transform.forward, portalDir, GameManager.Instance.Player.transform.up);
 
         Vector2 dir = Vector2.zero;
 
@@ -341,11 +347,12 @@ public class NodeManager : MonoBehaviour
             rotateToPortal = false;
         }
 
-        // Steers the ship to the direction
-        GameManager.Instance.shipController.SteerShip(dir);
-    }
+		// Steers the ship to the direction
+		// TODO
+		//  GameManager.Instance.shipController.SteerShip(dir);
+	}
 
-    private void Awake()
+	private void Awake()
     {
         if (Instance != null)
         {
@@ -358,6 +365,9 @@ public class NodeManager : MonoBehaviour
 
         currentNode = startNode;
         lastNode = null;
+
+        //nodeUI.FadeGroups(false, false, true);
+        currentNode.UpdateVisual(currentNode.NodeInfo, null);
     }
 
     private void Start()
@@ -380,7 +390,7 @@ public class NodeManager : MonoBehaviour
             timeBeforeSelection -= Time.deltaTime;
 
             // If timer hits 0 select node based on player selections
-            if (timeBeforeSelection <= 0) 
+            if (timeBeforeSelection <= 0)
             {
                 timeBeforeSelection = 0;
 

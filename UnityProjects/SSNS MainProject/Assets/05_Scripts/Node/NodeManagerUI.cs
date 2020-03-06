@@ -71,6 +71,8 @@ public struct NodeManagerUI
         selectionUI.groupFade.FadeActive(selection);
         pilotNodeUI.groupFade.FadeActive(pilot);
         gunnerNodeUI.groupFade.FadeActive(gunner);
+
+        gunnerNodeUI.redicle.enabled = !gunner;
     }
 }
 
@@ -111,4 +113,6 @@ public struct PilotNodeUI
 public struct GunnerNodeUI
 {
     public Fade groupFade;
+
+    public Image redicle;
 }

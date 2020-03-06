@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using Complete;
 
 
 /// <summary>
 /// The attack state for the Cruiser enemy
 /// </summary>
-public class CruiserAttackState : FSMState
+public class CruiserAttackState : AttackState<CruiserController>
 {
 	// Reference to the parent controller
 	CruiserController myController;
@@ -18,12 +17,8 @@ public class CruiserAttackState : FSMState
 
 	bool inAttackRange = false;
 
-	public CruiserAttackState(CruiserController controller)
+	public CruiserAttackState(CruiserController controller) : base(controller)
 	{
-		stateID = FSMStateID.Attacking;
-
-		myController = controller;
-		EnterStateInit();
 	}
 
 	/// <summary>
@@ -40,8 +35,10 @@ public class CruiserAttackState : FSMState
 	/// </summary>
 	public override void Reason()
 	{
+		if (MenuManager.Instance.Sleeping) return;
+
 		// Dead
-		if (myController.HP <= 0)
+		if (myController.Health.IsDead)
 		{
 			myController.PerformTransition(Transition.NoHealth);
 			return;
@@ -50,7 +47,7 @@ public class CruiserAttackState : FSMState
 		// Patroling
 		if ((stateCounter += Time.deltaTime) > 0.25f)
 		{
-			if (myController.CheckPlayer(myController.LostRange) == false) {
+			if (myController.CheckPlayer(myController.PatrolDistance) == false) {
 				myController.PerformTransition(Transition.Patrol);
 			}
 
@@ -63,20 +60,17 @@ public class CruiserAttackState : FSMState
 	/// </summary>
 	public override void Act()
 	{
-		if (myController.player == null)
+		if (MenuManager.Instance.Sleeping) return;
+
+		if (myController.Player != null)
 		{
-			// Do nothing
-			return;
-		}
-		else
-		{
-			Vector3 playerPos = myController.player.transform.position;
+			Vector3 playerPos = myController.Player.transform.position;
 			Vector3 currentPos = myController.transform.position;
 
-			Quaternion targetRotation = Quaternion.LookRotation(myController.player.transform.position - myController.transform.position);
+			Quaternion targetRotation = Quaternion.LookRotation(myController.Player.transform.position - myController.transform.position);
 
 			// Are we in range to shoot?
-			inAttackRange = Vector3.Distance(playerPos, currentPos) < myController.AttackRange;
+			inAttackRange = Vector3.Distance(playerPos, currentPos) < myController.AttackDistance;
 			inAttackRange = Quaternion.Angle(myController.transform.rotation, targetRotation) < 5;
 
 			if ((shotCounter += Time.deltaTime) > 1f) {
@@ -88,11 +82,11 @@ public class CruiserAttackState : FSMState
 				}
 				else
 				{
-					Vector3 direction = (myController.player.transform.position - myController.transform.position).normalized;
+					Vector3 direction = (myController.Player.transform.position - myController.transform.position).normalized;
 
 					float speed = 55f * 12f;
 
-					myController.myRigidbody.AddForce(direction * speed * Time.deltaTime, ForceMode.Acceleration);
+					myController.Rigid.AddForce(direction * speed * Time.deltaTime, ForceMode.Acceleration);
 					myController.transform.rotation = Quaternion.Slerp(myController.transform.rotation, targetRotation, 0.01f);
 				}
 
@@ -106,7 +100,6 @@ public class CruiserAttackState : FSMState
 	/// </summary>
 	public void Shoot()
 	{
-		Debug.Log("Shoot");
 		if (myController.myState == CruiserState.Defensive)
 		{
 			// We are in normal mode
@@ -117,5 +110,13 @@ public class CruiserAttackState : FSMState
 			// We are in aggro mode
 
 		}
+	}
+
+	protected override void CalculateIntercept()
+	{
+	}
+
+	protected override void Move()
+	{
 	}
 }

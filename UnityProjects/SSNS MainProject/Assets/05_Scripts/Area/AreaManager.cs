@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SNSSTypes;
+using UnityEngine.UI;
 
 /// <summary>
 /// Manager that handles each area (node)
@@ -15,11 +16,13 @@ public class AreaManager : MonoBehaviour
 
     public event AreaLoadEventHandler AreaLoaded;
 
-    private const int MIN_TRAVEL_TIME = 10;
+    private const int MIN_TRAVEL_TIME = 5;
+    private const int MAX_OUTSIDE_TIME = 10;
 
     [SerializeField] private Area lastArea;
     [SerializeField] private Area currentArea;
     [SerializeField] private GameObject areaEffectPrefab;
+    [SerializeField] private Image outsideOverlay;
 
     private AreaState state;
 
@@ -33,6 +36,11 @@ public class AreaManager : MonoBehaviour
 
     private float startTravelTime;
 
+    private float outsideTime;
+
+    private Color outsideStartColor;
+    private Color outsideTargetColor;
+
     /// <summary>
     /// Determines if the player is outside the current area.
     /// </summary>
@@ -44,33 +52,41 @@ public class AreaManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Ends the area giving the ship the node's reward 
+    /// Ends the area giving the ship the node's reward
     /// and waits for the UI to be hidden again before allowing next node selection
     /// </summary>
     public void EndArea()
     {
         areaEnded = true;
 
-        //Destroy(areaEffect);
+        Destroy(areaEffect);
 
         // Grabs current reward and uses it on the ship
         Reward reward = NodeManager.Instance.CurrentNode.Reward;
-        reward.UseReward(GameManager.Instance.shipController.myStats);
 
-        // Updates the ui for the reward
-        RewardManager.Instance.rewardUI.UpdateUI(reward);
+        if (reward != null)
+        {
+            reward.UseReward(GameManager.Instance.Player.Properties);
+
+            // Updates the ui for the reward
+            RewardManager.Instance.rewardUI.UpdateUI(reward);
+        }
     }
 
     /// <summary>
-    /// Loads the area given. Uses the NodeEvent script to spawn 
+    /// Loads the area given. Uses the NodeEvent script to spawn
     /// prefabs that should handle spawning objects in the area.
     /// </summary>
     /// <param name="nodeInfo">The node to load</param>
     public void LoadNewArea(NodeInfo nodeInfo)
     {
+        outsideTime = 0;
+
+        outsideOverlay.color = outsideStartColor;
+
         // Moves player to a spot away from any areas
         // TODO: Implement effects for scene transition
-        GameManager.Instance.shipController.transform.position = Vector3.forward * -10000;
+        GameManager.Instance.Player.transform.position = Vector3.forward * -10000;
 
         // Creates new area storing the old one
         lastArea = currentArea;
@@ -128,32 +144,33 @@ public class AreaManager : MonoBehaviour
     /// <returns></returns>
     private IEnumerator TransitionAreas()
     {
-        nextAreaLoaded = false;
-        lastAreaDestroyed = false;
+		nextAreaLoaded = false;
+		lastAreaDestroyed = false;
 
-        //areaEffect = GameObject.Instantiate(areaEffectPrefab, currentArea.location, Quaternion.identity);
-        //areaEffect.transform.localScale = Vector3.one * currentArea.size * 2;
+		float currentTime = Time.time;
 
-        float currentTime = Time.time;
+		float time = MIN_TRAVEL_TIME - Mathf.Min(Time.time - startTravelTime, 0);
 
-        float time = MIN_TRAVEL_TIME - Mathf.Min(Time.time - startTravelTime, 0);
+		//  Debug.Log("Time Difference: " + time + " " + currentTime + " " + startTravelTime);
 
-        Debug.Log("Time Difference: " + time + " " + currentTime + " " + startTravelTime);
+		if (NodeManager.Instance.CurrentNode.Type != NodeType.Tutorial)
+			yield return new WaitForSeconds(time);
 
-        yield return new WaitForSeconds(time);
+		AreaLoaded?.Invoke();
 
-        AreaLoaded?.Invoke();
+		currentArea.enemies.gameObject.SetActive(true);
+		currentArea.obstacles.gameObject.SetActive(true);
 
-        currentArea.enemies.gameObject.SetActive(true);
-        currentArea.obstacles.gameObject.SetActive(true);
+		// TODO: Should be in the testShipController
+		GameManager.Instance.Player.transform.position = PlayerDestination;
+		GameManager.Instance.Player.transform.rotation = Quaternion.Euler(0, 0, 0);
 
-        // TODO: Should be in the testShipController
-        GameManager.Instance.shipController.transform.position = PlayerDestination;
-        GameManager.Instance.shipController.transform.rotation = Quaternion.Euler(0, 0, 0);
+		SkyboxManager.Instance.SwitchToSkybox(NodeManager.Instance.CurrentNode.Skybox);
+		GameManager.Instance.SwitchState(GameState.BATTLE);
 
-        SkyboxManager.Instance.SwitchToSkybox(NodeManager.Instance.CurrentNode.Skybox);
-        GameManager.Instance.SwitchState(GameState.BATTLE);
-    }
+		areaEffect = Instantiate(areaEffectPrefab, currentArea.location, Quaternion.identity);
+		areaEffect.transform.localScale = Vector3.one * currentArea.size;
+	}
 
     /// <summary>
     /// Adds object to the area
@@ -202,6 +219,13 @@ public class AreaManager : MonoBehaviour
         }
 
         Instance = this;
+
+        outsideStartColor = outsideOverlay.color;
+        outsideStartColor.a = 0;
+
+        outsideTargetColor = outsideOverlay.color;
+
+        outsideOverlay.color = outsideStartColor;
     }
 
     // Update is called once per frame
@@ -218,6 +242,36 @@ public class AreaManager : MonoBehaviour
         {
             StartCoroutine(TransitionAreas());
         }
+
+        if (GameManager.Instance.GameState == GameState.BATTLE)
+        {
+            if (IsPlayerOutside(GameManager.Instance.Player.transform))
+            {
+                outsideTime += Time.deltaTime;
+
+                if (outsideTime >= MAX_OUTSIDE_TIME)
+                {
+                    outsideTime = 0;
+
+                    if (NodeManager.Instance.CurrentNode.Type == NodeType.Reward)
+                    {
+                        GameManager.Instance.SwitchState(GameState.BATTLE_END);
+                    }
+                    else
+                    {
+                        // Kill player and respawn ?
+                    }
+                }
+            }
+            else
+            {
+                float range = currentArea.size - (currentArea.size - 150);
+                float input = Mathf.Abs(Vector3.Distance(GameManager.Instance.Player.transform.position, currentArea.location));
+                float t = Mathf.Clamp((input - (currentArea.size - 150)) / range, 0, 1);
+                outsideOverlay.color = Color.Lerp(outsideStartColor, outsideTargetColor, t);
+              //  Debug.Log(range + " " + t + " " + input);
+            }
+        }
     }
 
 	//
@@ -229,8 +283,9 @@ public class AreaManager : MonoBehaviour
 	public int AreaSize { get { return currentArea.size; } }
     public bool EnemiesDead { get { return currentArea.enemies.childCount == 0; } }
     public int EnemyCount { get { return currentArea.enemies.childCount; } }
-    public Vector3 PlayerDestination { get { return currentArea.location - Vector3.forward * currentArea.size; } }
+    public Vector3 PlayerDestination { get { return currentArea.location - Vector3.forward * (currentArea.size - 200); } }
     public Vector3 FindRandomPosition { get { return currentArea.location + Random.insideUnitSphere * currentArea.size; } }
+    public Vector3 AreaLocation { get { return currentArea.location; } }
 }
 
 /// <summary>

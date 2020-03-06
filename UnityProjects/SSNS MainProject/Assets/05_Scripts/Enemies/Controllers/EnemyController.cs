@@ -5,163 +5,133 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public abstract class EnemyController : AdvancedFSM
 {
-    //[Header("Green: forward direction and collision check.")]
-    //[Header("Red: intercept calculation.")]
-    //[Header("Blue: Velocity and collision check.")]
-    //[SerializeField] private bool debugDraw = false;
+    [Header("Green: forward direction and collision check.")]
+    [Header("Red: intercept calculation.")]
+    [Header("Blue: Velocity and collision check.")]
+    [SerializeField] bool debugDraw = false;
 
-    ////[SerializeField] EnemyStats stats;
+    public Transform[] waypoints;
 
-    ////MAth things for later. To store the dot product
-    //float dotProduct;
+    public EnemyStats myStats;
 
-    //[Space(15)]
-    //[SerializeField] LayerMask obstacleLayer;
-    //[SerializeField] float collisionCheckDistance = 150f;
-    //[SerializeField] float playerDistanceMeters = 100f;
+    [Header("Distance Checks")]
+    [SerializeField] float collisionDistanceCheck = 150f;
+    [SerializeField] float waypointDistanceCheck = 50f;
+    [SerializeField] float playerDistanceCheck = 100f;
+    [SerializeField] float attackDistanceCheck = 80f;
+    [SerializeField] float patrolDistanceCheck = 200f;
 
-    //[Tooltip("Size of ray for collision checking. Larger numbers will mean the avoidance is larger")]
-    //[SerializeField] float raySize = 7.5f;
+    [Header("Collision Properties")]
+    [SerializeField] LayerMask obstacleLayer;
 
-    //public Rigidbody rbSelf;
+    [Tooltip("Size of ray for collision checking. Larger numbers will mean the avoidance is larger")]
+    [SerializeField] float raySize = 7.5f;
 
-    //protected GameObject player;
-    //public bool hitPlayer = false;
+    private Rigidbody rbSelf;
+    private HealthAndShields health;
 
-    ////Obstacle variables
-    //Vector3 obstacleAvoidDirection = Vector3.right;
-    //bool obstacleHit = false;
-    //float obstacleTimer = 0;
-    //float avoidTime = 2f;
+    private Vector3 spawnpoint;
 
-    //protected abstract void ConstructFSM();
+    private Vector3 spawnDestination;
 
-    //protected override void Initialize()
-    //{
-    //    player = GameObject.FindGameObjectWithTag("Player");
+    [HideInInspector] public bool showStats;
 
-    //    ConstructFSM();
-    //}
+    protected abstract void ConstructFSM();
 
-    //protected override void FSMUpdate()
-    //{
-    //    //Do this
-    //    if (CurrentState != null)
-    //    {
-    //        CurrentState.Reason();
-    //        CurrentState.Act();
-    //    }
-    //}
-    //protected override void FSMFixedUpdate()
-    //{
-    //    //Guess we needed this
-    //}
+    protected override void Initialize()
+    {
+        ConstructFSM();
 
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.Equals(player) && CurrentStateID == FSMStateID.Attacking)
-    //    {
-    //        hitPlayer = true;
-    //    }
-    //}
+        TryGetComponent(out rbSelf);
+        TryGetComponent(out health);
+    }
 
-    ////Draw debug rays
-    //private void OnDrawGizmos()
-    //{
-    //    if (debugDraw)
-    //    {
-    //        Debug.DrawRay(transform.position, transform.forward.normalized * collisionCheckDistance, Color.green); //Forward ray
-    //                                                                                                               //Debug.DrawRay(transform.position, interceptPoint - transform.position, Color.red); // Intercept point
-    //        if (rbSelf)
-    //        {
-    //            //Vector3 dir = rbSelf.velocity;
-    //            Debug.DrawRay(transform.position, rbSelf.velocity.normalized * collisionCheckDistance, Color.blue); //Velocity ray
-    //        }
-    //    }
-    //}
+    protected override void FSMUpdate()
+    {
+        //Do this
+        if (CurrentState != null)
+		{
+			if (MenuManager.Instance.Sleeping) return;
+			CurrentState.Reason();
+            CurrentState.Act();
+        }
+    }
 
-    //public bool PlayerInVision()
-    //{
-    //    Vector3 dir = player.transform.position - transform.position;
-    //    Ray ray = new Ray(transform.position, dir);
-    //    RaycastHit hitInfo;
-    //    LayerMask layerMask = LayerMask.GetMask("Obstacles");
-    //    layerMask += LayerMask.GetMask("Player"); //Add player layer to obstacles
-    //    layerMask += LayerMask.GetMask("Enemies");
+    public bool AvoidObstacles(ref Vector3 dir)
+    {
+        bool hit = false;
+        RaycastHit hitInfo;
 
-    //    Physics.Raycast(ray, out hitInfo, Mathf.Infinity, layerMask);
+        //Check direction facing
+        if (Physics.SphereCast(transform.position, RaySize, transform.forward.normalized, out hitInfo, CollisionDistance, ObstacleLayer))/* || Physics.SphereCast(controller.transform.position, controller.RaySize, controller.rbSelf.velocity.normalized, out hitInfo, controller.CollisionCheckDistance, controller.ObstacleLayer))*/
+        {
+            // Get the desired direction we need to move to move around  the obstacle. Transform to world co-ordinates (gets the obstacleMoveDirection wrt the current foward direction).
+            Vector3 turnDir = transform.TransformDirection(hitInfo.normal);
+            turnDir.Normalize();
 
-    //    if (hitInfo.collider != null)
-    //    {
-    //        Debug.Log(hitInfo.collider.gameObject.name);
-    //        if (hitInfo.collider.gameObject.Equals(player.gameObject))
-    //        {
-    //            return true;
-    //        }
-    //    }
-    //    return false;
-    //}
+            dir += turnDir;
+            hit = true;
+        }
+        if (Physics.SphereCast(transform.position, RaySize, rbSelf.velocity.normalized, out hitInfo, CollisionDistance, ObstacleLayer))
+        {
+            // Get the desired direction we need to move to move around  the obstacle. Transform to world co-ordinates (gets the obstacleMoveDirection wrt the current foward direction).
+            Vector3 turnDir = transform.TransformDirection(hitInfo.normal);
+            turnDir.Normalize();
 
-    //public bool AvoidObstacles(ref Vector3 dir)
-    //{
-    //    RaycastHit hitInfo;
+            dir += turnDir;
+            hit = true;
+        }
+        return hit;
+    }
 
-    //    //Check direction facing
-    //    if (Physics.SphereCast(transform.position, RaySize, transform.forward.normalized,
-    //        out hitInfo, CollisionCheckDistance, ObstacleLayer) /*||
-    //        Physics.SphereCast(controller.transform.position, controller.RaySize, controller.rbSelf.velocity.normalized,
-    //        out hitInfo, controller.CollisionCheckDistance, controller.ObstacleLayer)*/)
-    //    {
-    //        // Get the desired direction we need to move to move around  the obstacle. Transform to world co-ordinates (gets the obstacleMoveDirection wrt the current foward direction).
-    //        Vector3 turnDir = transform.TransformDirection(hitInfo.normal * 2);
-    //        turnDir.Normalize();
+    public bool PlayerInVision()
+    {
+        Vector3 dir = Player.transform.position - transform.position;
+        Ray ray = new Ray(transform.position, dir);
+        RaycastHit hitInfo;
+        LayerMask layerMask = LayerMask.GetMask("Obstacles");
+        layerMask += LayerMask.GetMask("Player"); //Add player layer to obstacles
+        layerMask += LayerMask.GetMask("Enemies"); //Add player layer to obstacles
 
-    //        dir += turnDir;
-    //        return true;
-    //    }
-    //    return false;
-    //}
+        Physics.SphereCast(ray, raySize / 2, out hitInfo, Mathf.Infinity, layerMask);
 
-    ////Moves
-    //public void Move(Vector3 destination)
-    //{
-    //        //Calculate direction
-    //        Vector3 direction = transform.forward; // sets forward
-    //        direction.Normalize();
+        if (hitInfo.collider != null)
+        {
+            //Debug.Log(hitInfo.collider.gameObject.name);
+            if (hitInfo.collider.gameObject.Equals(Player))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
-    //        if (AvoidObstacles(ref direction)) // will change direction towards the right if an obstacle is in the way
-    //        {
-    //            obstacleHit = true;
-    //        }
+    //Draw debug rays
+    private void OnDrawGizmos()
+    {
+        if (debugDraw)
+        {
+            Debug.DrawRay(transform.position, transform.forward.normalized * CollisionDistance, Color.green); //Forward ray
+                                                                                                              //Debug.DrawRay(transform.position, interceptPoint - transform.position, Color.red); // Intercept point
+            if (rbSelf)
+            {
+                //Vector3 dir = rbSelf.velocity;
+                Debug.DrawRay(transform.position, rbSelf.velocity.normalized * CollisionDistance, Color.blue); //Velocity ray
+            }
+        }
+    }
 
-    //        //Rotation
-    //        if (!obstacleHit && obstacleTimer == 0)
-    //        {
-    //            direction = destination - transform.position; // sets desired direction to target intercept point
-    //        }
-    //        else
-    //        {
-    //            //if obstacles, ignore desired direction and move to the right of obstacles
-    //            obstacleTimer += Time.deltaTime;
-    //            if (obstacleTimer > avoidTime)
-    //            {
-    //                obstacleTimer = 0;
-    //                obstacleHit = false;
-    //            }
-    //        }
-
-
-    //        Vector3 newDir = Vector3.RotateTowards(transform.forward, direction, RegRotationForce * Time.deltaTime, 0);
-    //        Quaternion rot = Quaternion.LookRotation(newDir);
-    //        transform.rotation = Quaternion.Lerp(transform.rotation, rot, RegRotationForce * Time.deltaTime);
-
-    //        //Movement
-    //        rbSelf.AddForce(transform.forward.normalized * Acceleration, ForceMode.Acceleration); // move regular speed if obstacle is in the way or player is not target
-    //}
-
-    //public float CollisionCheckDistance { get { return collisionCheckDistance; } }
-    //public float PlayerDistance { get { return playerDistanceMeters; } }
-    //public LayerMask ObstacleLayer { get { return obstacleLayer; } }
-    //public float RaySize { get { return raySize; } }
-    //public GameObject Player { get { return player; } }
+    public GameObject Player { get { return GameManager.Instance.Player.gameObject; } }
+    public HealthAndShields Health { get { return health; } }
+    public EnemyStats Stats { get { return myStats; } }
+    public Rigidbody Rigid { get { return rbSelf; } }
+    public LayerMask ObstacleLayer { get { return obstacleLayer; } }
+    public Vector3 Spawn { get { return spawnpoint; } set { spawnpoint = value; } }
+    public Vector3 SpawnDestination { get { return spawnDestination; } set { spawnDestination = value; } }
+    public float CollisionDistance { get { return collisionDistanceCheck; } }
+    public float WaypointDistance { get { return waypointDistanceCheck; } }
+    public float AttackDistance { get { return attackDistanceCheck; } }
+    public float PatrolDistance { get { return patrolDistanceCheck; } }
+    public float PlayerDistance { get { return playerDistanceCheck; } }
+    public float RaySize { get { return raySize; } }
 }

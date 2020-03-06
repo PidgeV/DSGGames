@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Complete;
 
 /// <summary>
 /// The Main flock class used to spawn agents and leader.
@@ -77,8 +76,8 @@ public class Flock : MonoBehaviour
                 Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f)),
                 transform);
         flockLeader.GetComponent<FlockLeaderController>().waypoints = waypoints; //set waypoints of target leader
-        flockLeader.GetComponent<FlockLeaderController>().spawnpoint = spawnpoint;
-        flockLeader.GetComponent<FlockLeaderController>().spawnDestination = spawnDestination;
+        flockLeader.GetComponent<FlockLeaderController>().Spawn = spawnpoint;
+        flockLeader.GetComponent<FlockLeaderController>().SpawnDestination = spawnDestination;
         flockLeader.transform.parent = transform;
 
         //Spawn all swarm agents
@@ -184,5 +183,6 @@ public class Flock : MonoBehaviour
 
     public Vector3 SetSpawnpoint { set { spawnpoint = value; } }
     public Vector3 SetSpawnDestination { set { spawnDestination = value; } }
+    public FlockLeaderController FlockLeader { get { flockLeader.TryGetComponent(out FlockLeaderController leader); return leader; } }
 
 }

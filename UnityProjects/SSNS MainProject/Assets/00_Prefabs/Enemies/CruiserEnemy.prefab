@@ -99,13 +99,14 @@ GameObject:
   - component: {fileID: 7735083024966515877}
   - component: {fileID: 1688868791803855599}
   - component: {fileID: -8450713878146757795}
+  - component: {fileID: 5332992819847651208}
   m_Layer: 0
   m_Name: CruiserEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7693469286925294298
 Transform:
   m_ObjectHideFlags: 0
@@ -149,19 +150,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9624d69701f7f20499d9adea95ea59c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
-  myRigidbody: {fileID: 0}
-  DetectionRange: 1500
-  AttackRange: 800
-  LostRange: 2000
-  collisionCheckDistance: 150
-  raySize: 7.5
-  HP: 100
-  regRotationForce: 30
-  Acceleration: 50
+  debugDraw: 0
+  waypoints: []
+  myStats: {fileID: 11400000, guid: 35d9b2c87c12752488155d866fdf8192, type: 2}
+  collisionDistanceCheck: 150
+  waypointDistanceCheck: 50
+  playerDistanceCheck: 100
+  attackDistanceCheck: 80
+  patrolDistanceCheck: 200
   obstacleLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 4864
+  raySize: 7.5
+  showStats: 0
   myState: 1
 --- !u!65 &6373742027123135118
 BoxCollider:
@@ -188,14 +189,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21bcb8e5aef53064495f71d628833b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 100
-  maxShield: 100
-  regenInterval: 5
+  shieldRegenDelay: 3
   currentLife: 0
   currentShield: 0
   Invincible: 0
   DestroyOnDeath: 1
-  regenSpeed: 5
 --- !u!114 &1688868791803855599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -309,6 +307,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5332992819847651208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8278412131455947766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40324cba1ad5d964fb2f4e0198f19f4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &786981758362012370
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -376,16 +386,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyThruster (4)
       objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -400,6 +400,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 4.0697207
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59d053a849b18994bae25015b58df19c, type: 3}
@@ -476,21 +486,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyThruster
       objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Time
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -505,6 +500,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 6.0172706
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Time
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59d053a849b18994bae25015b58df19c, type: 3}
@@ -581,16 +591,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyThruster (3)
       objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -605,6 +605,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 4.0697207
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59d053a849b18994bae25015b58df19c, type: 3}
@@ -681,21 +691,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyThruster (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Time
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -710,6 +705,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 6.0172706
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Time
+      value: 0.1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59d053a849b18994bae25015b58df19c, type: 3}
@@ -786,16 +796,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyThruster (5)
       objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -810,6 +810,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 4.0697207
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59d053a849b18994bae25015b58df19c, type: 3}
@@ -886,16 +896,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyThruster (2)
       objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -910,6 +910,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 4.0697207
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].time
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59d053a849b18994bae25015b58df19c, type: 3}

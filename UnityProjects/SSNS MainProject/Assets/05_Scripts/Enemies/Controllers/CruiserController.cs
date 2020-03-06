@@ -2,38 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-using Complete;
-
-
 /// <summary>
 /// The Controller for the Cruiser Enemy
 /// </summary>
 [RequireComponent(typeof(Rigidbody))]
-public class CruiserController : AdvancedFSM
+public class CruiserController : EnemyController
 {
-	// Referense to the player
-	[HideInInspector] public GameObject player;
-	[HideInInspector] public Rigidbody myRigidbody;
-
-	// State Dependencies
-	public float DetectionRange = 1500;
-	[HideInInspector] public float AttackRange = 800;
-	[HideInInspector] public float LostRange = 2000;
-
-	[HideInInspector] public float collisionCheckDistance = 150f;
-	[HideInInspector] public float raySize = 7.5f;
-
-	// My stats
-	[Header("Ship Stats")]
-	public float HP = 100;
-
-	public float regRotationForce = 20;
-	public float Acceleration = 25;
-
-	[Header("obstacle Layer")]
-	public LayerMask obstacleLayer;
-
-
 	// What should I be doing when an enemy is in range
 	[Header("Cruiser State")]
 	public CruiserState myState = CruiserState.Defensive;
@@ -43,41 +17,14 @@ public class CruiserController : AdvancedFSM
 	/// </summary>
 	protected override void Initialize()
 	{
-		// Get our components
-		myRigidbody = GetComponent<Rigidbody>();
-
 		// Create our states
 		ConstructFSM();
 	}
 
 	/// <summary>
-	/// Update is called once per frame
-	/// </summary>
-	protected override void FSMUpdate()
-	{
-		if (CurrentState == null)
-		{
-			// Do nothing
-			return;
-		}
-		else
-		{
-			CurrentState.Reason();
-			CurrentState.Act();
-		}
-	}
-
-	/// <summary>
-	/// FixedUpdate is called 30 times a second
-	/// </summary>
-	protected override void FSMFixedUpdate()
-	{
-	}
-
-	/// <summary>
 	/// Create the state machine and behavior for this enemy
 	/// </summary>
-	private void ConstructFSM()
+	protected override void ConstructFSM()
 	{
 		// Dead State
 		DeadState deadState = new DeadState(this);
@@ -136,11 +83,7 @@ public class CruiserController : AdvancedFSM
 	// Check if the player is in range AND the ship can see the player
 	public bool CheckPlayer(float distance)
 	{
-		if (player == null) {
-			player = GameObject.FindGameObjectWithTag("Player");
-		}
-
-		if (player == null)
+		if (Player == null)
 		{
 			return false;
 		}
@@ -151,7 +94,7 @@ public class CruiserController : AdvancedFSM
 			// Else we either don't have a player in range OR an obstacle is blocking the bath between us
 
 			// If the player is in range
-			if (InRange(gameObject, player, distance))
+			if (InRange(gameObject, Player, distance))
 			{
 				#region Check for Obstacles
 
@@ -163,12 +106,12 @@ public class CruiserController : AdvancedFSM
 				RaycastHit hit;
 
 				// Waycast from this enemy to the player
-				if (Physics.Raycast(transform.position, (player.transform.position - transform.position).normalized * distance, out hit, mask)) {
+				if (Physics.Raycast(transform.position, (Player.transform.position - transform.position).normalized * distance, out hit, mask)) {
 
 					// NOTE -- I'm not doing a null check on the collider. I might be wrong,but I dont think there will ever be a hit on something without a collider
 
 					// If we hit the player
-					if (hit.collider.gameObject.Equals(player)) {
+					if (hit.collider.gameObject.Equals(Player)) {
 						return true;
 					}
 					

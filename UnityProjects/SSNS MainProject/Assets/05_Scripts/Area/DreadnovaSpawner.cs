@@ -30,6 +30,8 @@ public class DreadnovaSpawner : NodeSpawner
         TryGetComponent(out dreadnovaController);
 
         dreadnovaController.StateChanged += DreadnovaStateChange;
+
+        waveBehaviour = shieldWaveBehaviour;
     }
 
     private void Update()
@@ -98,6 +100,7 @@ public class DreadnovaSpawner : NodeSpawner
         if (swarmer.TryGetComponent(out Flock flock))
         {
             flock.defenseTarget = cargo;
+            flock.startingCount = 100;
         }
 
         cargoTime = 0;

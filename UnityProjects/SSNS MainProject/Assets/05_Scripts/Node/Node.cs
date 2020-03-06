@@ -16,25 +16,40 @@ public class Node : MonoBehaviour, IEnumerable<Node>
 
     [Header("Visual Image Components")]
     [SerializeField] private Text nodeName;
-    [SerializeField] private Image fill;
-    [SerializeField] private Image ring;
+
+    [Tooltip("Order is: Default, Current, Next, Boss")]
+    [SerializeField] private GameObject[] prefabs;
+
+    [SerializeField] private GameObject visual;
 
     [Space(5)]
     [SerializeField] private NodeInfo nodeInfo;
 
-    public void ActiveColor()
+    public void UpdateVisual(NodeInfo current, NodeInfo next)
     {
-        ring.color = Color.green;
-    }
+        // TODO: Change this later for when effects are added
+        if (nodeInfo.type == NodeType.Boss || nodeInfo.type == NodeType.MiniBoss) return;
 
-    public void DestinationColor()
-    {
-        ring.color = new Color32(255, 165, 0, 255);
-    }
+        Destroy(visual.gameObject);
 
-    public void ResetColor()
-    {
-        ring.color = Color.white;
+        if (current != null && current.name == nodeInfo.name)
+        {
+            visual = Instantiate(prefabs[1], transform);
+        }
+        else if (next != null && next.name == nodeInfo.name)
+        {
+            visual = Instantiate(prefabs[2], transform);
+        }
+        else
+        {
+            visual = Instantiate(prefabs[0], transform);
+        }
+
+        visual.transform.SetAsLastSibling();
+        if (visual.transform.Find("NodeSprite").transform.Find("Name").TryGetComponent(out Text text))
+        {
+            text.text = NodeName;
+        }
     }
 
     /// <summary>
@@ -74,31 +89,18 @@ public class Node : MonoBehaviour, IEnumerable<Node>
 
     private void Start()
     {
-        // Changes node color depending on type
-        switch (Type)
-        {
-            case NodeType.Tutorial:
-                fill.transform.localScale = Vector3.one;
-                fill.color = Color.cyan;
-                break;
-            case NodeType.Reward:
-                fill.transform.localScale = Vector3.one * 0.8f;
-                fill.color = Color.magenta;
-                break;
-            case NodeType.Boss:
-                fill.transform.localScale = Vector3.one * 1.2f;
-                fill.color = Color.red;
-                break;
-        }
-
-        ring.transform.localScale = fill.transform.localScale;
-
         // Creates lines going to each children
         foreach (Node node in Children)
         {
             RectTransform rect = Instantiate<GameObject>(linePrefab, transform).GetComponent<RectTransform>();
-            rect.transform.SetSiblingIndex(0);
 
+            if (rect.TryGetComponent(out Image image))
+            {
+                Color color = image.color;
+                color.a = 0.05f;
+                image.color = color;
+            }
+            
             float distance = Vector2.Distance(transform.localPosition, node.transform.localPosition);
 
             Vector2 dir = node.transform.position - transform.position;
@@ -106,6 +108,20 @@ public class Node : MonoBehaviour, IEnumerable<Node>
 
             rect.sizeDelta = new Vector2(distance, 10);
             rect.Rotate(new Vector3(0, 0, angle));
+        }
+
+        Destroy(visual.gameObject);
+
+        // Changes node color depending on type
+        switch (Type)
+        {
+            case NodeType.MiniBoss:
+            case NodeType.Boss:
+                visual = Instantiate(prefabs[3], transform);
+                break;
+            default:
+                visual = Instantiate(prefabs[0], transform);
+                break;
         }
     }
 

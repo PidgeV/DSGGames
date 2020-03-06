@@ -4,12 +4,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using SNSSTypes;
 
-public enum ControlType
-{
-	CONTROLLER,
-	KEYBOARD_AND_MOUSE
-}
-
 public class Player : Controller
 {
 	// This players role (Pilot or Gunner)
@@ -17,30 +11,19 @@ public class Player : Controller
 
 	// The current gamestate
 	// This is used to change the playing action map to a menu action map
-	public GameState currentState = GameState.BATTLE;
+	// public GameState currentState = GameState.BATTLE;
 
-	// The Control Type (Controller or Keyboard)
-	public ControlType controlType = ControlType.CONTROLLER;
-
-	PlayerInput playerInput;
-	ShipController controller;
+	public PlayerInput PlayerInput;
+	public ShipInputHandler Controller;
 
 	#region Unity Events
 
 	private void Awake()
 	{
-		playerInput = GetComponent<PlayerInput>();
+		PlayerInput = GetComponent<PlayerInput>();
+		FindShip();
 
-		// When a player starts the game this grabs an open ship
-		foreach (GameObject ship in GameObject.FindGameObjectsWithTag("Player"))
-		{
-			if (ship.TryGetComponent(out ShipController shipController))
-			{
-				controller = shipController;
-				controller.JoinShip(this);
-				break;
-			}
-		}
+		DontDestroyOnLoad(gameObject);
 	}
 
 	private void Start()
@@ -50,77 +33,34 @@ public class Player : Controller
 
 	private void Update()
 	{
-		// Keep our GameState up to date with the GameManager
-		if (GameManager.Instance && currentState != GameManager.Instance.GameState)
-		{
-			currentState = GameManager.Instance.GameState;
-			SetPlayerActionMap(currentState);
-		}
-
-		#region Not Working
-		//// ONLY.. If were using a mouse and keyboard
-		//if (controlType == ControlType.KEYBOARD_AND_MOUSE)
+		//// Keep our GameState up to date with the GameManager
+		//if (GameManager.Instance && currentState != GameManager.Instance.GameState)
 		//{
-		//	Vector2 screenCenter = new Vector2(Screen.width, Screen.height - (Screen.height / 2)) / 2f;
-		//	Vector2 mousePosition = Input.mousePosition;
-
-		//	if (myRole == PlayerRole.Gunner)
-		//	{
-		//		if (mousePosition.y < (Screen.height / 2))
-		//		{
-		//			Vector2 direction = mousePosition - screenCenter;
-
-		//			direction.x = direction.x / Screen.width;
-		//			direction.y = direction.y / Screen.height;
-
-		//			controller.AimGun(direction * 2);
-		//		}
-		//		else
-		//		{
-		//			controller.AimGun(new Vector2(0, 1));
-		//		}
-		//	}
-
+		//	currentState = GameManager.Instance.GameState;
+		//	SetPlayerActionMap(currentState);
 		//}
-		#endregion
 	}
 	#endregion
 
-	//
-	public void SetPlayerActionMap(GameState currentState)
+	public void FindShip()
 	{
-		if (currentState == GameState.NODE_SELECTION)
+		// When a player starts the game this grabs an open ship
+		foreach (GameObject ship in GameObject.FindGameObjectsWithTag("Player"))
 		{
-			Debug.Log("Switch Current ActionMap (NodeMap)");
-			playerInput.SwitchCurrentActionMap("NodeMap");
-		}
-		else if (currentState == GameState.BATTLE)
-		{
-			Debug.Log("Switch Current ActionMap (Ship)");
-			playerInput.SwitchCurrentActionMap("Ship");
-		}
-	}
-
-	#region [Action Map] NodeMap
-	public void OnNavigate(InputValue input)
-	{
-		if (myRole == PlayerRole.Pilot)
-		{
-			if (input.Get<Vector2>().x >= 0.05f)
+			if (ship.TryGetComponent(out ShipInputHandler shipController))
 			{
-				NodeManager.Instance.SelectNodeChoice(1);
-			}
-			else if (input.Get<Vector2>().x <= -0.05f)
-			{
-				NodeManager.Instance.SelectNodeChoice(-1);
+				Controller = shipController;
+				Controller.JoinShip(this);
+				break;
 			}
 		}
 	}
 
-	#endregion
+	public void SetPlayerActionMap(string targetMap)
+	{
+		PlayerInput.SwitchCurrentActionMap(targetMap);
+	}
 
-	#region [Action Map] Ship Controller
-	/// <summary> Spawn the players role </summary>
 	public void SwapRole()
 	{
 		if (myRole == PlayerRole.None)
@@ -143,19 +83,21 @@ public class Player : Controller
 		}
 	}
 
+	#region [Action Map] Ship Controller
+
 	// Used to move the player
 	public override void OnLeftStick(InputValue input)
 	{
 		if (myRole == PlayerRole.Pilot)
 		{
 			// Rotate the player ship
-			controller.SteerShip(input.Get<Vector2>());
+			Controller.SteerShip(input.Get<Vector2>());
 		}
 
 		if (myRole == PlayerRole.Gunner)
 		{
 			// Move the player camera
-			controller.AimGun(input.Get<Vector2>());
+			Controller.AimGun(input.Get<Vector2>());
 		}
 	}
 	public override void OnRightStick(InputValue input)
@@ -163,13 +105,13 @@ public class Player : Controller
 		if (myRole == PlayerRole.Pilot)
 		{
 			// Rotate the player ship
-			controller.StrafeShip(input.Get<Vector2>());
+			Controller.StrafeShip(input.Get<Vector2>());
 		}
 
 		if (myRole == PlayerRole.Gunner)
 		{
 			// Move the player camera
-			controller.AimGun(input.Get<Vector2>());
+			Controller.AimGun(input.Get<Vector2>());
 		}
 	}
 
@@ -181,7 +123,7 @@ public class Player : Controller
 		if (myRole == PlayerRole.Gunner)
 		{
 			// Change the current weapon
-			controller.SwapWeapon(input.Get<Vector2>());
+			Controller.SwapWeapon(input.Get<Vector2>());
 		}
 	}
 
@@ -190,13 +132,13 @@ public class Player : Controller
 		if (myRole == PlayerRole.Pilot)
 		{
 			// Boost the ship
-			controller.Boost(input.isPressed);
+			Controller.Boost(input.isPressed);
 		}
 
 		if (myRole == PlayerRole.Gunner)
 		{
 			// Make the gunner shoot
-			controller.Shoot(myRole, input.isPressed);
+			Controller.ShootGun(input.isPressed);
 		}
 	}
 	public override void OnB(InputValue input)
@@ -206,22 +148,22 @@ public class Player : Controller
 		if (myRole == PlayerRole.Pilot)
 		{
 			// Boost the ship
-			controller.Boost(input.isPressed);
+			Controller.Boost(input.isPressed);
 		}
 
 		if (myRole == PlayerRole.Gunner)
 		{
 			// Make the gunner shoot
-			controller.Shoot(myRole, input.isPressed);
+			Controller.ShootGun(input.isPressed);
 		}
 	}
 	public override void OnX(InputValue input)
 	{
-		controller.ToggleMap(input.isPressed);
+		Controller.ToggleMap(input.isPressed);
 	}
 	public override void OnY(InputValue input)
 	{
-		if (myRole != PlayerRole.None) controller.TriggerRoleSwap(input.isPressed);
+		if (myRole != PlayerRole.None) Controller.TriggerRoleSwap(input.isPressed);
 	}
 
 	public override void OnLeftTrigger(InputValue input)
@@ -229,13 +171,13 @@ public class Player : Controller
 		if (myRole == PlayerRole.Pilot)
 		{
 			// Boost the ship
-			controller.RotateShip(input.Get<float>());
+			Controller.RotateShip(input.Get<float>());
 		}
 
 		if (myRole == PlayerRole.Gunner)
 		{
 			// Make the gunner shoot
-			controller.Shoot(myRole, input.isPressed);
+			Controller.SlowCamera(input.isPressed);
 		}
 	}
 	public override void OnRightTrigger(InputValue input)
@@ -243,42 +185,81 @@ public class Player : Controller
 		if (myRole == PlayerRole.Pilot)
 		{
 			// Boost the ship
-			controller.RotateShip(-input.Get<float>());
+			Controller.RotateShip(-input.Get<float>());
 		}
 
 		if (myRole == PlayerRole.Gunner)
 		{
 			// Make the gunner shoot
-			controller.Shoot(myRole, input.isPressed);
+			Controller.SlowCamera(input.isPressed);
 		}
 	}
 
 	public override void OnRightBumper(InputValue input)
 	{
-		controller.Shoot(myRole, input.isPressed);
+		if (myRole == PlayerRole.Pilot)
+		{
+			Controller.ShootShip(input.isPressed);
+		}
+
+		if (myRole == PlayerRole.Gunner)
+		{
+			Controller.ShootGun(input.isPressed);
+		}
 	}
 	public override void OnLeftBumper(InputValue input)
 	{
-		controller.LockOn(input.isPressed);
+		if (myRole == PlayerRole.Pilot)
+		{
+			Controller.ShootShip(input.isPressed);
+		}
+
+		if (myRole == PlayerRole.Gunner)
+		{
+			Controller.LockOn(input.isPressed);
+		}
 	}
 	#endregion
 
 	#region [Action Map] Menu Navigation
 
-	public void OnNavigate()
+	public void OnPause(InputValue input)
 	{
+		// Tell the menu manager to pause the game
+		MenuManager.Instance.PauseGame(!MenuManager.Instance.Sleeping);
+	}
+
+	public void OnUnPause(InputValue input)
+	{
+		// Tell the menu manager to pause the game
+		MenuManager.Instance.PauseGame(!MenuManager.Instance.Sleeping);
+	}
+
+	public void OnNavigate(InputValue input)
+	{
+		MenuManager menu = MenuManager.Instance;
+
 		// Unity automatically does this
+		if (menu.openMenu == OpenMenuType.NODE_MAP)
+		{
+			menu.NavigateNodeMap(input.Get<Vector2>());
+		}
+		else
+		{
+			menu.NavigateMenu(input.Get<Vector2>());
+		}
 	}
 
-	public void OnSelect()
+	public void OnSelect(InputValue input)
 	{
-		// Unity automatically does this
+		MenuManager menu = MenuManager.Instance;
+		menu.Select();
 	}
 
-	public void OnBack()
+	public void OnBack(InputValue input)
 	{
-		CinematicController.Instance.Return();
+		MenuManager menu = MenuManager.Instance;
+		menu.Return();
 	}
-
 	#endregion
 }

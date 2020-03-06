@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DreadnovaController : AdvancedFSM
+public class DreadnovaController : EnemyController
 {
     [SerializeField] private HealthAndShields[] shieldGenerators;
+    public GameObject dreadnovaShield;
+    public GameObject dreadnovaModel;
+    public GameObject dreadnovaThrusters;
 
     private DreadnovaSpawner spawner;
-    private HealthAndShields health;
-
-    private GameObject player;
 
     private float waveTime;
 
-    private void ConstructFSM()
+    public bool warping;
+
+    protected override void ConstructFSM()
     {
         DeadState dead = new DeadState(this);
         DreadnovaSpawnState spawn = new DreadnovaSpawnState(this);
@@ -34,33 +36,9 @@ public class DreadnovaController : AdvancedFSM
         AddFSMState(dead);
     }
 
-    protected override void Initialize()
+    public void WarpDreadnova(bool warpIn)
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-
-        ConstructFSM();
-    }
-    protected override void FSMUpdate()
-    {
-        //Do this
-        if (CurrentState != null)
-        {
-            CurrentState.Reason();
-            CurrentState.Act();
-        }
-    }
-
-    public void Warp(bool warpIn)
-    {
-        // TODO: Warp effects
-        if (warpIn)
-        {
-
-        }
-        else
-        {
-
-        }
+        StartCoroutine(Warp(warpIn));
     }
 
     public void DestroyGenerators()
@@ -71,7 +49,42 @@ public class DreadnovaController : AdvancedFSM
         }
     }
 
+    private IEnumerator Warp(bool warpIn)
+    {
+        warping = true;
+
+        // TODO: Warp effects
+        if (warpIn)
+        {
+            dreadnovaThrusters.SetActive(false);
+
+            yield return new WaitForSeconds(1.5f);
+
+            dreadnovaThrusters.SetActive(true);
+            transform.position = AreaManager.Instance.AreaLocation;
+
+            yield return new WaitForSeconds(1.0f);
+
+            dreadnovaThrusters.SetActive(false);
+        }
+        else
+        {
+            dreadnovaThrusters.SetActive(true);
+
+            yield return new WaitForSeconds(1.5f);
+
+            transform.position += transform.forward * 1000;
+
+            yield return new WaitForSeconds(1.5f);
+
+            yield return new WaitForSeconds(5.0f);
+
+            dreadnovaThrusters.SetActive(false);
+            dreadnovaModel.SetActive(false);
+        }
+
+        warping = false;
+    }
+
     public DreadnovaSpawner Spawner { get { return spawner; } }
-    public HealthAndShields Health { get { return health; } }
-    public GameObject Player { get { return player; } }
 }

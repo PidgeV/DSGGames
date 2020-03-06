@@ -35,7 +35,6 @@ using System.Collections.Generic;
 
 public class AdvancedFSM : FSM
 {
-    public Transform[] waypoints;
 
     private List<FSMState> fsmStates;
 
@@ -49,10 +48,6 @@ public class AdvancedFSM : FSM
     public delegate void StateChange(FSMStateID stateID);
 
     public event StateChange StateChanged;
-
-    public Vector3 spawnpoint;
-
-    public Vector3 spawnDestination;
 
     public AdvancedFSM()
     {

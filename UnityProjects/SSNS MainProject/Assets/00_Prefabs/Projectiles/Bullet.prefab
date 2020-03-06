@@ -9,13 +9,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 390192525371235463}
-  - component: {fileID: 4969816034176043972}
+  - component: {fileID: -5304832730458768805}
   - component: {fileID: 7443416512928844744}
   - component: {fileID: 3914930520208039227}
-  - component: {fileID: -5304832730458768805}
   - component: {fileID: 2533200590899523750}
-  - component: {fileID: 7575283476526480397}
-  - component: {fileID: -4167044725204195359}
+  - component: {fileID: -1908326594476902021}
+  - component: {fileID: 8746355738169537086}
+  - component: {fileID: 4969816034176043972}
   m_Layer: 13
   m_Name: Bullet
   m_TagString: Untagged
@@ -38,19 +38,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4969816034176043972
-BoxCollider:
+--- !u!54 &-5304832730458768805
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4450240921679082262}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 3, z: -15}
-  m_Center: {x: 0, y: 0, z: 8}
+  m_Mass: 0.0000001
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 1
 --- !u!114 &7443416512928844744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,25 +80,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyOnHit: 1
+  constantCollisionDamage: 0
   kineticDamage: 5
   energyDamage: 1
   hitSoundObject: {fileID: 0}
---- !u!54 &-5304832730458768805
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4450240921679082262}
-  serializedVersion: 2
-  m_Mass: 0.0000001
-  m_Drag: 0
-  m_AngularDrag: 0
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 1
 --- !u!114 &2533200590899523750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,20 +99,8 @@ MonoBehaviour:
   weapon: 0
   fireRate: 0.1
   lifeTime: 5
-  speed: 850
---- !u!114 &7575283476526480397
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4450240921679082262}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e2614cb825d20d4cba0c39ee1db7217, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-4167044725204195359
+  speed: 700
+--- !u!114 &-1908326594476902021
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -137,6 +113,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   whoSent: 1
+--- !u!114 &8746355738169537086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4450240921679082262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40324cba1ad5d964fb2f4e0198f19f4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!65 &4969816034176043972
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4450240921679082262}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3, y: 3, z: -15}
+  m_Center: {x: 0, y: 0, z: 8}
 --- !u!1001 &3012279576347739250
 PrefabInstance:
   m_ObjectHideFlags: 0

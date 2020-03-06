@@ -43,7 +43,7 @@ public class NodeSpawner : MonoBehaviour
         {
             if (AreaManager.Instance.EnemiesDead)
             {
-                AreaManager.Instance.EndArea();
+                GameManager.Instance.SwitchState(GameState.BATTLE_END);
             }
         }
     }
@@ -107,11 +107,11 @@ public class NodeSpawner : MonoBehaviour
 
         enemy.transform.position = spawnpoint;
 
-        if (enemy.TryGetComponent(out AdvancedFSM advancedFSM))
+        if (enemy.TryGetComponent(out EnemyController enemyController))
         {
-            advancedFSM.spawnpoint = spawnpoint;
-            advancedFSM.spawnDestination = destination;
-            advancedFSM.waypoints = waypoints;
+            enemyController.Spawn = spawnpoint;
+            enemyController.SpawnDestination = destination;
+            enemyController.waypoints = waypoints;
         }
         else if (enemy.TryGetComponent(out Flock flock))
         {

@@ -11,16 +11,14 @@ public class ChargedShotBehaviour : MonoBehaviour
     [SerializeField] float maxChargeTime = 5f;
     
     //Damage values
-    [Space(15)]
     [SerializeField] float minDamage = 10f;
     [SerializeField] float maxDamage = 50f;
     private float currentDamage;
     private float increasePerSecond;
 
     //Scale values
-    [Space(15)]
     [SerializeField] float minScale = 0.5f;
-    [SerializeField] float maxScale = 2f;
+    [SerializeField] float maxScale = 5f;
     private Vector3 scalePerSecond;
 
     private float speed;
@@ -60,19 +58,21 @@ public class ChargedShotBehaviour : MonoBehaviour
         {
             currentDamage = Mathf.Clamp(currentDamage + increasePerSecond * Time.deltaTime, minDamage, maxDamage);
             transform.localScale += scalePerSecond * Time.deltaTime;
-        }
+			transform.localPosition = Vector3.zero;
+
+		}
         else
         {
-            transform.position += transform.forward.normalized * speed * Time.deltaTime;
-        }
+           transform.position += transform.forward.normalized * speed * Time.deltaTime;
+		}
     }
 
     IEnumerator StartCharge()
     {
         yield return new WaitForSeconds(maxChargeTime);
 
-        transform.parent = null;
-        hasShot = true;
+        //transform.parent = null;
+        //hasShot = true;
     }
 
     private void OnCollisionEnter(Collision collision)
