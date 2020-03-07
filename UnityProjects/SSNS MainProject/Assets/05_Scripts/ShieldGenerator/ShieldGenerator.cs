@@ -108,7 +108,7 @@ public class ShieldGenerator : MonoBehaviour
 				_boom = false;
 
 				// TODO -- Explode
-				InitializeGenerator();
+				//InitializeGenerator();
 			}
 		}
 	}
