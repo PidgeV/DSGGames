@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SNSSTypes;
 
 public class DreadnovaEscapeState : FSMState
 {
@@ -34,6 +35,12 @@ public class DreadnovaEscapeState : FSMState
             {
                 warped = true;
                 controller.WarpDreadnova();
+            }
+            else if (!controller.warping)
+            {
+                controller.PerformTransition(Transition.NoHealth);
+
+                GameManager.Instance.SwitchState(GameState.BATTLE_END);
             }
         }
     }

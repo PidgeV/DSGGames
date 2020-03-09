@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SNSSTypes;
 
 public class DreadnovaShieldState : FSMState
 {
@@ -9,6 +10,10 @@ public class DreadnovaShieldState : FSMState
     private bool shieldGone;
 
     private float shieldDissolve;
+
+    private float waveTime;
+    private int waveCount;
+    private float cargoTime;
 
     public DreadnovaShieldState(DreadnovaController enemyController)
     {
@@ -23,6 +28,11 @@ public class DreadnovaShieldState : FSMState
         shieldGone = false;
         shieldDissolve = 1;
         controller.dreadnovaShield.SetActive(true);
+        controller.Spawner.enabled = true;
+
+        waveTime = 0;
+        waveCount = 0;
+        cargoTime = 0;
 
         foreach (ShieldGenerator generator in controller.Generators)
         {
@@ -42,6 +52,8 @@ public class DreadnovaShieldState : FSMState
     {
         if (IsGeneratorsDead())
         {
+            controller.Spawner.enabled = false;
+
             if (shieldGone)
             {
                 controller.dreadnovaShield.SetActive(false);
@@ -54,7 +66,7 @@ public class DreadnovaShieldState : FSMState
                     }
                 }
 
-                if (controller.State == SNSSTypes.DreadnovaState.SHIELD_STAGE)
+                if (controller.State == DreadnovaState.SHIELD_STAGE)
                     controller.PerformTransition(Transition.NoShield);
                 else
                     controller.PerformTransition(Transition.Attack);
@@ -65,6 +77,33 @@ public class DreadnovaShieldState : FSMState
 
                 if (shieldDissolve == 0)
                     shieldGone = true;
+            }
+        }
+        else if (GameManager.Instance.GameState == GameState.BATTLE)
+        {
+            if (AreaManager.Instance.EnemyCount <= controller.Spawner.Wave.GetMaxEnemyCount(waveCount))
+            {
+                waveTime += Time.deltaTime;
+
+                if (waveTime >= controller.Spawner.Wave.TimeBetweenWaves)
+                {
+                    waveTime = 0;
+                    waveCount = (waveCount + 1) % controller.Spawner.Wave.Waves.Length;
+
+                    controller.Spawner.StartWave(waveCount, false);
+                }
+            }
+
+            if (!controller.Spawner.CargoExists)
+            {
+                cargoTime += Time.deltaTime;
+
+                if (cargoTime >= controller.Spawner.Wave.TimeBetweenCargoSpawns)
+                {
+                    cargoTime = 0;
+
+                    controller.Spawner.SpawnCargo();
+                }
             }
         }
     }
@@ -83,10 +122,14 @@ public class DreadnovaShieldState : FSMState
     private bool IsGeneratorsDead()
     {
         bool dead = true;
+
         foreach (ShieldGenerator generator in controller.Generators)
         {
-            if (generator.IsAlive)
+            if (!generator.IsDead)
+            {
                 dead = false;
+                break;
+            }
         }
 
         return dead;

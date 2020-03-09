@@ -17,9 +17,9 @@ GameObject:
   - component: {fileID: 7327862236359696559}
   - component: {fileID: 94083485543350859}
   - component: {fileID: 8381119535546832197}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Missile
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -253,11 +253,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 533205660235058987}
     m_Modifications:
-    - target: {fileID: 2143217328605918705, guid: 51472dbaec72f7549afaf70f847cc23a,
-        type: 3}
-      propertyPath: m_Name
-      value: MissileBall_Prefab
-      objectReference: {fileID: 0}
     - target: {fileID: 3163045462547793890, guid: 51472dbaec72f7549afaf70f847cc23a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -312,6 +307,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2143217328605918705, guid: 51472dbaec72f7549afaf70f847cc23a,
+        type: 3}
+      propertyPath: m_Name
+      value: MissileBall_Prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 2143217328605918705, guid: 51472dbaec72f7549afaf70f847cc23a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4744713395591726043, guid: 51472dbaec72f7549afaf70f847cc23a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 576483272409239905, guid: 51472dbaec72f7549afaf70f847cc23a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6649724982018851647, guid: 51472dbaec72f7549afaf70f847cc23a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 8355093222612168674, guid: 51472dbaec72f7549afaf70f847cc23a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 51472dbaec72f7549afaf70f847cc23a, type: 3}

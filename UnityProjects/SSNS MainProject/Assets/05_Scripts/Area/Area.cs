@@ -15,11 +15,12 @@ public class Area : MonoBehaviour
 
     [SerializeField] private GameObject areaEffect;
 
-    private NodeSpawner spawner;
+    [SerializeField] private NodeSpawner spawner;
 
     void Awake()
     {
-        TryGetComponent(out spawner);
+        if (!spawner)
+            TryGetComponent(out spawner);
 
         gameObject.SetActive(false);
 

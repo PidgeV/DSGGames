@@ -36,12 +36,14 @@ public class DreadnovaController : EnemyController
 
     protected override void Initialize()
     {
-        base.Initialize();
-
         Spawn = transform.position;
         SpawnDestination = transform.position + transform.forward;
 
         dreadnovaThrusters.SetActive(true);
+
+        TryGetComponent(out spawner);
+
+        base.Initialize();
     }
 
     protected override void ConstructFSM()
@@ -99,11 +101,7 @@ public class DreadnovaController : EnemyController
 
         yield return new WaitForSeconds(10.0f);
 
-        gameObject.SetActive(false);
-
         warping = false;
-
-        PerformTransition(Transition.NoHealth);
     }
 
     public DreadnovaSpawner Spawner { get { return spawner; } }

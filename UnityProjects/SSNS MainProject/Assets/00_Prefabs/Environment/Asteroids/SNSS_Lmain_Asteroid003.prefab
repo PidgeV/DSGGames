@@ -108,8 +108,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyOnHit: 0
-  kineticDamage: 500
-  energyDamage: 500
+  constantCollisionDamage: 0
+  kineticDamage: 0
+  energyDamage: 100
+  hitSoundObject: {fileID: 0}
 --- !u!54 &2712248227465285383
 Rigidbody:
   m_ObjectHideFlags: 0

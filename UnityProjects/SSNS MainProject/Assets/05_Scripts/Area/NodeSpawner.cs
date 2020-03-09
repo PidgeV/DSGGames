@@ -75,7 +75,7 @@ public class NodeSpawner : MonoBehaviour
         for (int i = 0; i < waveBehaviour.GetMaxEnemyCount(0); i++)
         {
             Transform spawnpoint = new GameObject("Spawnpoint").transform;
-            spawnpoint.parent = area.waypoints;
+            spawnpoint.parent = area.spawns;
 
             Vector3 position = AreaManager.Instance.FindRandomPosition;
 
@@ -92,16 +92,12 @@ public class NodeSpawner : MonoBehaviour
 
     protected void GenerateWaypoints()
     {
-        Transform wpParent = new GameObject("Waypoints").transform;
-        wpParent.parent = transform;
-        wpParent.position = Vector3.zero;
-
         List<Transform> wp = new List<Transform>();
 
         for (int i = 0; i < Random.Range(5, 15); i++)
         {
             Transform waypoint = new GameObject("Waypoint").transform;
-            waypoint.parent = wpParent;
+            waypoint.parent = area.waypoints;
 
             Vector3 position = AreaManager.Instance.FindRandomPosition;
 
@@ -200,6 +196,11 @@ public class NodeSpawner : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void StartWave(int waveIndex, bool safeSpawn = true)
+    {
+        StartCoroutine(SpawnWave(waveIndex, safeSpawn));
     }
 
     protected virtual void DrawGizmos()

@@ -55,6 +55,8 @@ public class ShipController : MonoBehaviour
 	private Vector3 finalThrustVelocity;
 	private Vector3 finalRollRotation;
 	private Vector3 finalRotation;
+	private Vector3 collisionVelocity;
+	private Vector3 collisionDirection;
 
 	private int numberOfPlayers;
 
@@ -78,6 +80,7 @@ public class ShipController : MonoBehaviour
 	private bool slowCamera;
 	private bool shooting_Gunner;
 	private bool shooting_Pilot;
+	private bool collision;
 	#endregion
 
 	#region Properties
@@ -189,6 +192,22 @@ public class ShipController : MonoBehaviour
 		if (MenuManager.Instance.Sleeping) return;
 
 		UpdateCamera();
+	}
+
+	private void OnCollisionStay(Collision c)
+	{
+		if (c.gameObject.tag != "Projectile" && !collision)
+		{
+			Vector3 dir = c.contacts[0].point - transform.position;
+
+			dir = -dir.normalized;
+
+			collisionVelocity = dir * 1000;
+
+			collisionDirection = dir;
+
+			collision = true;
+		}
 	}
 
 	#endregion
@@ -384,8 +403,24 @@ public class ShipController : MonoBehaviour
 			rigidbody.rotation *= rollRotation * rotateRotation;
 		}
 
-		rigidbody.AddForce(finalThrustVelocity, ForceMode.VelocityChange);
-		rigidbody.AddRelativeForce(finalStrafeVelocity, ForceMode.VelocityChange);
+		if (collision)
+		{
+			rigidbody.AddForce(collisionVelocity, ForceMode.Acceleration);
+
+			collisionVelocity = Vector3.zero;
+
+			Quaternion direction = Quaternion.LookRotation(collisionDirection);
+
+			rigidbody.rotation = Quaternion.Lerp(rigidbody.rotation, direction, 6 * Time.deltaTime);
+
+			if (Mathf.Abs(Vector3.Angle(transform.forward, collisionDirection)) < 2.5f || rotating)
+				collision = false;
+		}
+		else
+		{
+			rigidbody.AddForce(finalThrustVelocity, ForceMode.VelocityChange);
+			rigidbody.AddRelativeForce(finalStrafeVelocity, ForceMode.VelocityChange);
+		}
 	}
 
 	/// <summary>

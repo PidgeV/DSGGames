@@ -138,6 +138,6 @@ public class ShieldGenerator : MonoBehaviour
 		}
 	}
 
-	public bool IsAlive { get { return _generator.activeSelf; } }
+	public bool IsDead { get { return _generatorAlive && !_generator.activeSelf; } }
 
 }

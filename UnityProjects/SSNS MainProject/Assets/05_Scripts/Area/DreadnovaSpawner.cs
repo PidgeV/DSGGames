@@ -10,60 +10,24 @@ public class DreadnovaSpawner : NodeSpawner
 
     [SerializeField] private float distanceToTravelAway = 200;
 
-    [SerializeField] private DreadnovaController dreadnovaController;
-
     private CargoController cargoController;
-
-    private float waveTime;
-    private int waveCount;
-
-    private float cargoTime;
 
     // Start is called before the first frame update
     void Start()
     {
-        waveTime = shieldWaveBehaviour.TimeBetweenWaves;
-
-        dreadnovaController.StateChanged += DreadnovaStateChange;
-
         waveBehaviour = shieldWaveBehaviour;
+
+        Transform dreadnova = transform.Find("Dreadnova");
+
+        if (TryGetComponent(out DreadnovaController controller))
+        {
+            controller.StateChanged += DreadnovaStateChange;
+        }
     }
 
     private void Update()
     {
-        if (GameManager.Instance.GameState == GameState.BATTLE)
-        {
-            if (dreadnovaController.CurrentStateID == FSMStateID.Dead || dreadnovaController.CurrentStateID == FSMStateID.Running)
-            {
-                AreaManager.Instance.EndArea();
-                enabled = false;
-            }
-            else
-            {
-                if (AreaManager.Instance.EnemyCount <= waveBehaviour.GetMaxEnemyCount(waveCount))
-                {
-                    waveTime += Time.deltaTime;
-
-                    if (waveTime >= waveBehaviour.TimeBetweenWaves)
-                    {
-                        waveTime = 0;
-                        waveCount = (waveCount + 1) % waveBehaviour.Waves.Length;
-
-                        StartCoroutine(SpawnWave(waveCount, false));
-                    }
-                }
-
-                if (!cargoController)
-                {
-                    cargoTime += Time.deltaTime;
-
-                    if (cargoTime >= waveBehaviour.TimeBetweenCargoSpawns)
-                    {
-                        SpawnCargo();
-                    }
-                }
-            }
-        }
+        // Leave empty
     }
 
     private void DreadnovaStateChange(FSMStateID stateID)
@@ -80,7 +44,7 @@ public class DreadnovaSpawner : NodeSpawner
         if (!cargoController) SpawnCargo();
     }
 
-    private void SpawnCargo()
+    public void SpawnCargo()
     {
         Vector3 spawnpoint = AreaManager.Instance.FindRandomPosition;
         Vector3 swarmerSpawnpoint = spawnpoint + Random.insideUnitSphere * 20;
@@ -95,8 +59,6 @@ public class DreadnovaSpawner : NodeSpawner
             flock.defenseTarget = cargo;
             flock.startingCount = 100;
         }
-
-        cargoTime = 0;
     }
 
     protected override GameObject SpawnEnemy(GameObject prefab, Transform spawnpoint)
@@ -122,5 +84,6 @@ public class DreadnovaSpawner : NodeSpawner
         }
     }
 
-    public WaveBehaviour Wave { get { return shieldWaveBehaviour; } }
+    public WaveBehaviour Wave { get { return waveBehaviour; } }
+    public bool CargoExists { get { return cargoController; } }
 }
