@@ -73,6 +73,8 @@ public class ShipController : MonoBehaviour
 	private bool boosting;
 	private bool roleSwap;
 	private bool stopThrust;
+	private bool stopRotation;
+	private bool freezeShip;
 	private bool slowCamera;
 	private bool shooting_Gunner;
 	private bool shooting_Pilot;
@@ -98,6 +100,7 @@ public class ShipController : MonoBehaviour
 	public bool Rotating { get { return rotating; } set { rotating = value; } }
 	public bool RoleSwap { get { return roleSwap; } set { roleSwap = value; } }
 	public bool StopThrust { get { return stopThrust; } set { stopThrust = value; } }
+	public bool Freeze { get { return freezeShip; } set { freezeShip = value; } }
 
 	public float RollInput { get { return rollInput; } set { rollInput = value; } }
 	public float BoostGauge { get { return boostGauge; }  set { boostGauge = value; } }
@@ -325,7 +328,7 @@ public class ShipController : MonoBehaviour
 		// Ship Thrust
 		#region Ship Thrust
 
-		if (stopThrust)
+		if (stopThrust || freezeShip)
 		{
 			thrustSpeed = Mathf.Clamp(thrustSpeed - myProperties.shipDeceleration, 0, myProperties.shipSpeed);
 		}
@@ -372,11 +375,14 @@ public class ShipController : MonoBehaviour
 	/// </summary>
 	public void UpdateShipPhysics()
 	{
-		// Apply physics to rigidbody
-		Quaternion rollRotation = Quaternion.Euler(finalRollRotation);
-		Quaternion rotateRotation = Quaternion.Euler(finalRotation);
+		if (!freezeShip)
+		{
+			// Apply physics to rigidbody
+			Quaternion rollRotation = Quaternion.Euler(finalRollRotation);
+			Quaternion rotateRotation = Quaternion.Euler(finalRotation);
 
-		rigidbody.rotation *= rollRotation * rotateRotation;
+			rigidbody.rotation *= rollRotation * rotateRotation;
+		}
 
 		rigidbody.AddForce(finalThrustVelocity, ForceMode.VelocityChange);
 		rigidbody.AddRelativeForce(finalStrafeVelocity, ForceMode.VelocityChange);

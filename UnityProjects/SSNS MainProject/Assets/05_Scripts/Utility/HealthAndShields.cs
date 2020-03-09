@@ -98,6 +98,8 @@ public class HealthAndShields : MonoBehaviour
 		currentLife = MaxLife;
 		currentShield = MaxShield;
 
+		gameObject.SetActive(true);
+
 		if (invokeEvents == true)
 		{
 			// Invoke the On Life Change Event

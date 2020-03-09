@@ -12,13 +12,17 @@ public class DreadnovaEscapeState : FSMState
     {
         controller = enemyController;
         stateID = FSMStateID.Running;
+
+        EnterStateInit();
+    }
+
+    public override void EnterStateInit()
+    {
+        warped = false;
     }
 
     public override void Act()
     {
-        // TODO: Warp out effect
-
-        controller.WarpDreadnova(false);
 
     }
 
@@ -29,13 +33,7 @@ public class DreadnovaEscapeState : FSMState
             if (!warped)
             {
                 warped = true;
-                controller.WarpDreadnova(true);
-            }
-            else if (!controller.warping)
-            {
-                controller.PerformTransition(Transition.NoHealth);
-
-                GameManager.Instance.SwitchState(SNSSTypes.GameState.NODE_SELECTION);
+                controller.WarpDreadnova();
             }
         }
     }

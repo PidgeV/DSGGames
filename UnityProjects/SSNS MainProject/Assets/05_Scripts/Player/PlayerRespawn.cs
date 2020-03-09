@@ -10,15 +10,21 @@ public class PlayerRespawn : MonoBehaviour
 
     public void Respawn()
     {
-        player.transform.position = AreaManager.Instance.PlayerDestination;
-        player.transform.rotation = Quaternion.identity;
+        Transform playerSpawn = AreaManager.Instance.CurrentArea.FindSafeSpawn();
+
+        player.transform.position = playerSpawn.position;
+        player.transform.rotation = playerSpawn.rotation;
 
         if (player.TryGetComponent(out HealthAndShields health))
         {
             health.ResetValues(true);
         }
 
+        AreaManager.Instance.CurrentArea.RespawnArea();
+
         player.gameObject.SetActive(true);
+
+        GameManager.Instance.SwitchState(SNSSTypes.GameState.BATTLE);
     }
 
     private void OnDeath()

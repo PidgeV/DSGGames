@@ -27,17 +27,17 @@ public class MenuManager : MonoBehaviour
 
 	private bool _gamePaused;
 
-	public void NavigateNodeMap(Vector2 direction)
-	{
-		if (direction.x >= 0.05f)
-		{
-			NodeManager.Instance.SelectNodeChoice(1);
-		}
-		else if (direction.x <= -0.05f)
-		{
-			NodeManager.Instance.SelectNodeChoice(-1);
-		}
-	}
+	//public void NavigateNodeMap(Vector2 direction)
+	//{
+	//	if (direction.x >= 0.05f)
+	//	{
+	//		NodeManager.Instance.SelectNodeChoice(1);
+	//	}
+	//	else if (direction.x <= -0.05f)
+	//	{
+	//		NodeManager.Instance.SelectNodeChoice(-1);
+	//	}
+	//}
 
 	public void NavigateMenu(Vector2 direction)
 	{

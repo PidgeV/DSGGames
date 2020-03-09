@@ -18,37 +18,38 @@ public class AreaManager : MonoBehaviour
 
     private const int MIN_TRAVEL_TIME = 5;
     private const int MAX_OUTSIDE_TIME = 10;
+    private const int WARP_HELD_TIME = 5;
 
-    [SerializeField] private Area lastArea;
-    [SerializeField] private Area currentArea;
-    [SerializeField] private GameObject areaEffectPrefab;
+    [SerializeField] private GameObject portalPrefab;
+    private GameObject portal;
+
     [SerializeField] private Image outsideOverlay;
 
-    private AreaState state;
+    [SerializeField] private int areaIndex;
+    [SerializeField] private Area[] areas;
+
+    private Area lastArea;
+    private Area currentArea;
 
     private GameObject areaEffect;
 
     private bool nextAreaLoaded;
     private bool lastAreaDestroyed;
     private bool areaEnded;
-
-    private float transitionTime;
+    private bool portalAhead;
 
     private float startTravelTime;
 
     private float outsideTime;
 
+    private float boostHeldTime;
+
     private Color outsideStartColor;
     private Color outsideTargetColor;
 
-    /// <summary>
-    /// Determines if the player is outside the current area.
-    /// </summary>
-    /// <param name="player">The player's transform</param>
-    /// <returns>Whether the player is outside of the area</returns>
-    public bool IsPlayerOutside(Transform player)
+    private void CheckForPortal()
     {
-        return Vector3.Distance(player.position, currentArea.location) >= currentArea.size;
+        portalAhead = Physics.SphereCast(GameManager.Instance.Player.transform.position, 50, GameManager.Instance.Player.transform.forward, out RaycastHit raycastHit, currentArea.Size * 2, 1 << 15);
     }
 
     /// <summary>
@@ -57,19 +58,14 @@ public class AreaManager : MonoBehaviour
     /// </summary>
     public void EndArea()
     {
-        areaEnded = true;
-
-        Destroy(areaEffect);
-
-        // Grabs current reward and uses it on the ship
-        Reward reward = NodeManager.Instance.CurrentNode.Reward;
-
-        if (reward != null)
+        if (!areaEnded)
         {
-            reward.UseReward(GameManager.Instance.Player.Properties);
+            areaEnded = true;
 
-            // Updates the ui for the reward
-            RewardManager.Instance.rewardUI.UpdateUI(reward);
+            portal = Instantiate(portalPrefab, currentArea.transform);
+            portal.transform.position = GameManager.Instance.Player.transform.position + GameManager.Instance.Player.transform.forward * 200;
+
+            GameManager.Instance.SwitchState(GameState.BATTLE_END);
         }
     }
 
@@ -78,62 +74,68 @@ public class AreaManager : MonoBehaviour
     /// prefabs that should handle spawning objects in the area.
     /// </summary>
     /// <param name="nodeInfo">The node to load</param>
-    public void LoadNewArea(NodeInfo nodeInfo)
+    public void LoadNewArea()
     {
+
         outsideTime = 0;
 
         outsideOverlay.color = outsideStartColor;
 
         // Moves player to a spot away from any areas
-        // TODO: Implement effects for scene transition
-        GameManager.Instance.Player.transform.position = Vector3.forward * -10000;
+        GameManager.Instance.Player.gameObject.SetActive(false);
+        GameManager.Instance.Player.transform.position = Vector3.zero;
+        GameManager.Instance.Player.transform.rotation = Quaternion.identity;
+        GameManager.Instance.Player.gameObject.SetActive(true);
+
+        if (areaIndex >= areas.Length)
+        {
+            GameManager.Instance.SwitchState(GameState.GAME_END);
+            return;
+        }
 
         // Creates new area storing the old one
         lastArea = currentArea;
-        currentArea = new Area(nodeInfo.name)
-        {
-            location = lastArea.location + Vector3.forward * 10000,
-            size = nodeInfo.nodeEvent.areaSize
-        };
-
-        // Spawns all prefabs
-        foreach (GameObject go in nodeInfo.nodeEvent.prefabsToSpawn)
-        {
-            GameObject spawnedGO = Instantiate(go);
-            spawnedGO.transform.parent = currentArea.parent;
-            spawnedGO.transform.position = currentArea.location;
-
-            //Adjust smoke to random variable for now
-            if(spawnedGO.TryGetComponent(out AdjustParticleSpaceSmoke smoke))
-            {
-                Vector3 size = new Vector3(Instance.AreaSize * 1.1f, Instance.AreaSize * 1.1f, Instance.AreaSize * 1.1f);
-                smoke.ChangeSize(size);
-                smoke.ChangeCapacity(NodeManager.Instance.CurrentNode.Event.smokeAmount);
-            }
-        }
 
         // Disables the last area
-        if (lastArea != null && lastArea.parent != null)
-            lastArea.parent.gameObject.SetActive(false);
+        if (lastArea != null)
+            lastArea.gameObject.SetActive(false);
+
+        currentArea = areas[areaIndex];
 
         startTravelTime = Time.time;
 
-        StartCoroutine(DestroyLastArea());
+        StartCoroutine(UnloadLastArea());
+        StartCoroutine(LoadNextArea());
+    }
+
+    private IEnumerator LoadNextArea()
+    {
+        yield return null;
+
+        if (currentArea != null)
+            currentArea.gameObject.SetActive(true);
+
+        nextAreaLoaded = true;
     }
 
     /// <summary>
     /// Destroys the last area while loading the next one
     /// </summary>
     /// <returns></returns>
-    private IEnumerator DestroyLastArea()
+    private IEnumerator UnloadLastArea()
     {
         yield return null;
 
         // Destroys the parent of the area
-        if (lastArea != null && lastArea.parent != null)
-            Destroy(lastArea.parent.gameObject);
-
-        lastArea = null;
+        if (lastArea != null)
+        {
+            lastArea.gameObject.SetActive(false);
+            
+            foreach(Transform obj in lastArea.objects)
+            {
+                Destroy(obj.gameObject);
+            }
+        }
 
         lastAreaDestroyed = true;
     }
@@ -151,25 +153,24 @@ public class AreaManager : MonoBehaviour
 
 		float time = MIN_TRAVEL_TIME - Mathf.Min(Time.time - startTravelTime, 0);
 
-		//  Debug.Log("Time Difference: " + time + " " + currentTime + " " + startTravelTime);
-
-		if (NodeManager.Instance.CurrentNode.Type != NodeType.Tutorial)
+		if (areaIndex != 0)
 			yield return new WaitForSeconds(time);
 
 		AreaLoaded?.Invoke();
 
-		currentArea.enemies.gameObject.SetActive(true);
-		currentArea.obstacles.gameObject.SetActive(true);
+        currentArea.LoadArea(true);
 
-		// TODO: Should be in the testShipController
-		GameManager.Instance.Player.transform.position = PlayerDestination;
-		GameManager.Instance.Player.transform.rotation = Quaternion.Euler(0, 0, 0);
+        yield return null;
 
-		SkyboxManager.Instance.SwitchToSkybox(NodeManager.Instance.CurrentNode.Skybox);
+        Transform playerSpawn = currentArea.FindSafeSpawn();
+
+        GameManager.Instance.Player.gameObject.SetActive(false);
+        GameManager.Instance.Player.transform.position = playerSpawn.position;
+		GameManager.Instance.Player.transform.rotation = playerSpawn.rotation;
+        GameManager.Instance.Player.gameObject.SetActive(true);
+
+        SkyboxManager.Instance.SwitchToSkybox(currentArea.Skybox);
 		GameManager.Instance.SwitchState(GameState.BATTLE);
-
-		areaEffect = Instantiate(areaEffectPrefab, currentArea.location, Quaternion.identity);
-		areaEffect.transform.localScale = Vector3.one * currentArea.size;
 	}
 
     /// <summary>
@@ -185,7 +186,7 @@ public class AreaManager : MonoBehaviour
         }
         else
         {
-            gObject.transform.parent = currentArea.obstacles;
+            gObject.transform.parent = currentArea.objects;
         }
     }
 
@@ -199,16 +200,8 @@ public class AreaManager : MonoBehaviour
             HealthAndShields healthAndShields = enemy.GetComponent<HealthAndShields>();
 
             if (healthAndShields)
-                healthAndShields.TakeDamage(10000000, 1000000);
+                healthAndShields.TakeDamage(Mathf.Infinity, Mathf.Infinity);
         }
-    }
-
-    /// <summary>
-    /// Transitions to next area
-    /// </summary>
-    public void OnSpawnFinished()
-    {
-        nextAreaLoaded = true;
     }
 
     private void Awake()
@@ -226,16 +219,38 @@ public class AreaManager : MonoBehaviour
         outsideTargetColor = outsideOverlay.color;
 
         outsideOverlay.color = outsideStartColor;
+
+        currentArea = areas[areaIndex];
     }
 
     // Update is called once per frame
     void Update()
     {
         // Waits for reward UI to hide before switching to node selection
-        if (areaEnded && !RewardManager.Instance.rewardUI.Shown)
+        if (areaEnded)
         {
-            areaEnded = false;
-            GameManager.Instance.SwitchState(SNSSTypes.GameState.NODE_SELECTION);
+            if (portalAhead)
+            {
+                if (GameManager.Instance.Player.Boosting)
+                {
+                    boostHeldTime += Time.deltaTime;
+
+                    if (boostHeldTime >= WARP_HELD_TIME)
+                    {
+                        areaEnded = false;
+                        Boosting = false;
+                        boostHeldTime = 0;
+                        areaIndex++;
+                        GameManager.Instance.SwitchState(GameState.NODE_TRANSITION);
+                    }
+                }
+                else
+                {
+                    boostHeldTime = Mathf.Max(boostHeldTime - Time.deltaTime, 0);
+                }
+            }
+            else
+                CheckForPortal();
         }
         // Transition to next node
         else if (nextAreaLoaded && lastAreaDestroyed)
@@ -245,7 +260,7 @@ public class AreaManager : MonoBehaviour
 
         if (GameManager.Instance.GameState == GameState.BATTLE)
         {
-            if (IsPlayerOutside(GameManager.Instance.Player.transform))
+            if (currentArea.IsPlayerOutside)
             {
                 outsideTime += Time.deltaTime;
 
@@ -253,71 +268,27 @@ public class AreaManager : MonoBehaviour
                 {
                     outsideTime = 0;
 
-                    if (NodeManager.Instance.CurrentNode.Type == NodeType.Reward)
+                    if (GameManager.Instance.Player.TryGetComponent(out HealthAndShields health))
                     {
-                        GameManager.Instance.SwitchState(GameState.BATTLE_END);
-                    }
-                    else
-                    {
-                        // Kill player and respawn ?
+                        health.TakeDamage(Mathf.Infinity, Mathf.Infinity);
                     }
                 }
             }
             else
             {
-                float range = currentArea.size - (currentArea.size - 150);
-                float input = Mathf.Abs(Vector3.Distance(GameManager.Instance.Player.transform.position, currentArea.location));
-                float t = Mathf.Clamp((input - (currentArea.size - 150)) / range, 0, 1);
+                float range = currentArea.Size - (currentArea.Size - 150);
+                float input = Mathf.Abs(Vector3.Distance(GameManager.Instance.Player.transform.position, currentArea.transform.position));
+                float t = Mathf.Clamp((input - (currentArea.Size - 150)) / range, 0, 1);
                 outsideOverlay.color = Color.Lerp(outsideStartColor, outsideTargetColor, t);
-              //  Debug.Log(range + " " + t + " " + input);
             }
         }
     }
 
-	//
-	private void OnDrawGizmos()
-	{
-		Gizmos.DrawWireSphere(currentArea.location, currentArea.size);
-	}
-
-	public int AreaSize { get { return currentArea.size; } }
+    public Area CurrentArea { get { return currentArea; } }
+	public int AreaSize { get { return currentArea.Size; } }
     public bool EnemiesDead { get { return currentArea.enemies.childCount == 0; } }
     public int EnemyCount { get { return currentArea.enemies.childCount; } }
-    public Vector3 PlayerDestination { get { return currentArea.location - Vector3.forward * (currentArea.size - 200); } }
-    public Vector3 FindRandomPosition { get { return currentArea.location + Random.insideUnitSphere * currentArea.size; } }
-    public Vector3 AreaLocation { get { return currentArea.location; } }
-}
-
-/// <summary>
-/// Class that stores all the area info
-/// </summary>
-[System.Serializable]
-public class Area
-{
-    public Transform parent;
-    public Transform obstacles;
-    public Transform enemies;
-    public Vector3 location;
-    public int size;
-
-    public Area(string name)
-    {
-        parent = new GameObject("Area: " + name).transform;
-        obstacles = new GameObject("Obstacles").transform;
-        obstacles.parent = parent;
-        obstacles.gameObject.SetActive(false);
-        enemies = new GameObject("Enemies").transform;
-        enemies.parent = parent;
-        enemies.gameObject.SetActive(false);
-    }
-
-    ~Area()
-    {
-        parent = null;
-        obstacles = null;
-        enemies = null;
-        location = Vector3.zero;
-        size = 0;
-        System.GC.EndNoGCRegion();
-    }
+    public Vector3 FindRandomPosition { get { return currentArea.transform.position + Random.insideUnitSphere * currentArea.Size; } }
+    public Vector3 AreaLocation { get { return currentArea.transform.position; } }
+    public bool Boosting { private get; set; }
 }

@@ -69,7 +69,7 @@ public class AsteroidSpawner : MonoBehaviour
                 //}
 
                 //Test if the asteroid would intersect with the player
-                if (totalPlayer.bounds.Intersects(asteroids[i].GetComponent<MeshRenderer>().bounds))
+                if (Physics.CheckSphere(pos, asteroids[i].transform.localScale.magnitude))
                 {
                     foundPos = false;
                 }
@@ -90,7 +90,7 @@ public class AsteroidSpawner : MonoBehaviour
     GameObject SpawnSingleAsteroid()
     {
         int rand = Random.Range(0, asteroidPrefabs.Length-1);
-        GameObject newAsteroid = Instantiate(asteroidPrefabs[rand]);
+        GameObject newAsteroid = Instantiate(asteroidPrefabs[rand], transform);
 
         float scale = Random.Range(minScale, maxScale);
         Vector3 scale2 = new Vector3(Random.Range(scale - 0.5f, scale + 0.5f), Random.Range(scale - 0.5f, scale + 0.5f), Random.Range(scale - 0.5f, scale + 0.5f));
@@ -100,8 +100,6 @@ public class AsteroidSpawner : MonoBehaviour
         newAsteroid.transform.localRotation = new Quaternion(Random.Range(0, 360), Random.Range(0, 360), Random.Range(0, 360),0);
         //newAsteroid.GetComponent<Rigidbody>().mass *= scale * scale;// * scale;
         //newAsteroid.GetComponent<Rigidbody>().AddForce(force, ForceMode.Impulse);
-
-        if(AreaManager.Instance != null) AreaManager.Instance.OnObjectAdd(newAsteroid);
 
         return newAsteroid;
     }

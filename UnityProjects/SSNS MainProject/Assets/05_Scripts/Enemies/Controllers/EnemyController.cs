@@ -36,6 +36,21 @@ public abstract class EnemyController : AdvancedFSM
 
     [HideInInspector] public bool showStats;
 
+    public virtual void ResetEnemy()
+    {
+        StopAllCoroutines();
+
+        if (health)
+            health.ResetValues();
+
+        gameObject.SetActive(false);
+        transform.position = spawnpoint;
+        transform.rotation = Quaternion.LookRotation(spawnDestination - spawnpoint);
+        gameObject.SetActive(true);
+
+        PerformTransition(Transition.Reset);
+    }
+
     protected abstract void ConstructFSM();
 
     protected override void Initialize()
@@ -49,9 +64,8 @@ public abstract class EnemyController : AdvancedFSM
     protected override void FSMUpdate()
     {
         //Do this
-        if (CurrentState != null)
+        if (CurrentState != null && !MenuManager.Instance.Sleeping)
 		{
-			if (MenuManager.Instance.Sleeping) return;
 			CurrentState.Reason();
             CurrentState.Act();
         }

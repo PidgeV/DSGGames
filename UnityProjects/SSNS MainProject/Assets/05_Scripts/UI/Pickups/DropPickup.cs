@@ -21,7 +21,8 @@ public class DropPickup : MonoBehaviour
         if (Random.Range(1, 101) < percentile)
         {
             int rand = Random.Range(0, pickups.Length);
-            Instantiate(pickups[rand].gameObject, transform.position, Quaternion.identity);
+
+            AreaManager.Instance.OnObjectAdd(Instantiate(pickups[rand].gameObject, transform.position, Quaternion.identity));
         }
     }
 }

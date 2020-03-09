@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using SNSSTypes;
 
-[RequireComponent(typeof(DreadnovaController))]
 public class DreadnovaSpawner : NodeSpawner
 {
     [SerializeField] private WaveBehaviour shieldWaveBehaviour;
@@ -11,7 +10,7 @@ public class DreadnovaSpawner : NodeSpawner
 
     [SerializeField] private float distanceToTravelAway = 200;
 
-    private DreadnovaController dreadnovaController;
+    [SerializeField] private DreadnovaController dreadnovaController;
 
     private CargoController cargoController;
 
@@ -23,11 +22,7 @@ public class DreadnovaSpawner : NodeSpawner
     // Start is called before the first frame update
     void Start()
     {
-        AreaManager.Instance.OnSpawnFinished();
-
         waveTime = shieldWaveBehaviour.TimeBetweenWaves;
-
-        TryGetComponent(out dreadnovaController);
 
         dreadnovaController.StateChanged += DreadnovaStateChange;
 
@@ -38,12 +33,10 @@ public class DreadnovaSpawner : NodeSpawner
     {
         if (GameManager.Instance.GameState == GameState.BATTLE)
         {
-            if (dreadnovaController.CurrentStateID == FSMStateID.Dead)
+            if (dreadnovaController.CurrentStateID == FSMStateID.Dead || dreadnovaController.CurrentStateID == FSMStateID.Running)
             {
-                if (AreaManager.Instance.EnemiesDead)
-                {
-                    AreaManager.Instance.EndArea();
-                }
+                AreaManager.Instance.EndArea();
+                enabled = false;
             }
             else
             {
@@ -56,7 +49,7 @@ public class DreadnovaSpawner : NodeSpawner
                         waveTime = 0;
                         waveCount = (waveCount + 1) % waveBehaviour.Waves.Length;
 
-                        StartCoroutine(SpawnWave(waveCount));
+                        StartCoroutine(SpawnWave(waveCount, false));
                     }
                 }
 

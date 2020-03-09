@@ -25,7 +25,8 @@ namespace SNSSTypes
         NODE_TRANSITION,
         BATTLE,
         BATTLE_END,
-        NODE_SELECTION,
+        NODE_SELECTION, // Don't use this
+        RESPAWN,
         PAUSE,
         GAME_END
     }

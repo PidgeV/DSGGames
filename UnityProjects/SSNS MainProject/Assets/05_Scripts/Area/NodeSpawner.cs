@@ -15,24 +15,17 @@ public class NodeSpawner : MonoBehaviour
     [SerializeField] protected GameObject cruiserPrefab;
     [SerializeField] protected GameObject cargoPrefab;
 
-    [Space(10)]
-    [SerializeField] protected Transform[] spawnpoints;
-    [SerializeField] protected Transform[] waypoints;
-
     [SerializeField] protected WaveBehaviour waveBehaviour;
 
-    private int spawnIndex;
+    private Area area;
+
+    [SerializeField] protected Transform[] spawnpoints;
+    [SerializeField] protected Transform[] waypoints;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (TryGetComponent(out AsteroidSpawner asteroidSpawner))
-        {
-            asteroidSpawner.minPos = -AreaManager.Instance.AreaSize * 1.2f;
-            asteroidSpawner.maxPos = AreaManager.Instance.AreaSize * 1.2f;
-            asteroidSpawner.maxAsteroids = NodeManager.Instance.CurrentNode.Event.asteroidAmount;
-            asteroidSpawner.maxScale = AreaManager.Instance.AreaSize / 200;
-        }
+        TryGetComponent(out area);
 
         StartCoroutine(CreateNode());
     }
@@ -54,12 +47,35 @@ public class NodeSpawner : MonoBehaviour
         spParent.parent = transform;
         spParent.position = Vector3.zero;
 
+        if (area && area.spawns && area.spawns.childCount > 0)
+        {
+            spawnpoints = area.Spawns;
+        }
+        else
+        {
+            GenerateSpawnpoints();
+        }
+
+        if (area && area.waypoints && area.waypoints.childCount > 0)
+        {
+            waypoints = area.Waypoints;
+        }
+        else
+        {
+            GenerateWaypoints();
+        }
+
+        yield return StartCoroutine(SpawnWave(0));
+    }
+
+    protected void GenerateSpawnpoints()
+    {
         List<Transform> sp = new List<Transform>();
 
         for (int i = 0; i < waveBehaviour.GetMaxEnemyCount(0); i++)
         {
             Transform spawnpoint = new GameObject("Spawnpoint").transform;
-            spawnpoint.parent = spParent;
+            spawnpoint.parent = area.waypoints;
 
             Vector3 position = AreaManager.Instance.FindRandomPosition;
 
@@ -72,7 +88,10 @@ public class NodeSpawner : MonoBehaviour
         }
 
         spawnpoints = sp.ToArray();
+    }
 
+    protected void GenerateWaypoints()
+    {
         Transform wpParent = new GameObject("Waypoints").transform;
         wpParent.parent = transform;
         wpParent.position = Vector3.zero;
@@ -95,10 +114,6 @@ public class NodeSpawner : MonoBehaviour
         }
 
         waypoints = wp.ToArray();
-
-        yield return StartCoroutine(SpawnWave(0));
-
-        AreaManager.Instance.OnSpawnFinished();
     }
 
     protected GameObject SpawnEnemy(GameObject prefab, Vector3 spawnpoint, Vector3 destination)
@@ -132,9 +147,11 @@ public class NodeSpawner : MonoBehaviour
         return enemy;
     }
 
-    protected virtual IEnumerator SpawnWave(int waveIndex)
+    protected virtual IEnumerator SpawnWave(int waveIndex, bool safeSpawn = true)
     {
         WaveSpawn spawnBehaviour = waveBehaviour.Waves[waveIndex];
+
+        int spawnIndex = 0;
 
         for (int i = 0; i < spawnBehaviour.Spawns.Length; i++)
         {
@@ -142,34 +159,42 @@ public class NodeSpawner : MonoBehaviour
 
             if (spawnInfo.type == EnemyType.SWARMER)
             {
-                GameObject swarmer = SpawnEnemy(swarmerPrefab, spawnpoints[spawnIndex]);
+                Transform spawnpoint = safeSpawn ? area.FindSafeSpawn() : spawnpoints[spawnIndex];
+
+                GameObject swarmer = SpawnEnemy(swarmerPrefab, spawnpoint);
 
                 if (swarmer.TryGetComponent(out Flock flock))
                 {
                     flock.startingCount = spawnInfo.count;
                 }
+
+                if (!safeSpawn)
+                    spawnIndex = (spawnIndex + 1) % spawnpoints.Length;
             }
             else
             {
                 for (int j = 0; j < spawnInfo.count; j++)
                 {
+                    Transform spawnpoint = safeSpawn ? area.FindSafeSpawn() : spawnpoints[spawnIndex];
+
                     switch (spawnInfo.type)
                     {
                         case EnemyType.FIGHTER:
-                            SpawnEnemy(fighterPrefab, spawnpoints[spawnIndex]);
+                            SpawnEnemy(fighterPrefab, spawnpoint);
                             break;
                         case EnemyType.CHARGER:
-                            SpawnEnemy(chargerPrefab, spawnpoints[spawnIndex]);
+                            SpawnEnemy(chargerPrefab, spawnpoint);
                             break;
                         case EnemyType.CRUISER:
-                            SpawnEnemy(cruiserPrefab, spawnpoints[spawnIndex]);
+                            SpawnEnemy(cruiserPrefab, spawnpoint);
                             break;
                         case EnemyType.CARGO:
-                            SpawnEnemy(cargoPrefab, spawnpoints[spawnIndex]);
+                            SpawnEnemy(cargoPrefab, spawnpoint);
                             break;
                     }
 
-                    spawnIndex = (spawnIndex + 1) % spawnpoints.Length;
+                    if (!safeSpawn)
+                        spawnIndex = (spawnIndex + 1) % spawnpoints.Length;
 
                     yield return new WaitForSeconds(waveBehaviour.TimeBetweenEnemySpawns);
                 }

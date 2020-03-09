@@ -27,7 +27,7 @@ public class SpawnState : FSMState
 
     public override void Reason()
     {
-        if (IsInCurrentRange(controller.transform, controller.Spawn, 50))
+        if (IsInCurrentRange(controller.transform, controller.SpawnDestination, 50))
         {
             if (controller.GetType() == typeof(FlockLeaderController))
             {
