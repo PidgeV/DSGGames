@@ -28,8 +28,6 @@ public class GameManager : MonoBehaviour
 
     private float respawnTime;
 
-    private bool respawn;
-
 	/// <summary>
 	/// Pause the game and open the pause menu
 	/// This is called from the players OnPause
@@ -83,19 +81,23 @@ public class GameManager : MonoBehaviour
             case GameState.BATTLE_END:
 				healthAndShields.ResetValues();
                 healthAndShields.Invincible = true;
+                shipController.Freeze = true;
                 AreaManager.Instance.EndArea();
                 break;
             case GameState.PAUSE:
                 break;
-            case GameState.NODE_SELECTION:
-                shipController.StopThrust = true;
-                NodeManager.Instance.BeginNodeSelection();
-                break;
             case GameState.NODE_TRANSITION:
+                shipController.Freeze = false;
                 shipController.StopThrust = false;
-                AreaManager.Instance.LoadNewArea(NodeManager.Instance.CurrentNode.NodeInfo);
+                AreaManager.Instance.LoadNewArea();
                 break;
             case GameState.GAME_END:
+
+                foreach (Player player in GameObject.FindObjectsOfType<Player>())
+                {
+                    player.SetPlayerActionMap("MenuNavigation");
+                }
+
                 SceneManager.LoadScene("MainMenu");
                 break;
         }
@@ -103,26 +105,27 @@ public class GameManager : MonoBehaviour
 
     private void CheckForRespawn()
     {
-        if (respawn)
+        
+        if (shipController && !shipController.gameObject.activeSelf)
         {
-            respawnTime += Time.deltaTime;
-
-            if (respawnTime >= MAX_RESPAWN_TIME)
-            {
-                respawnTime = 0;
-                respawn = false;
-
-                if (shipController && shipController.TryGetComponent(out PlayerRespawn playerRespawn))
-                {
-                    playerRespawn.Respawn();
-                }
-            }
-        }
-        else if (shipController && !shipController.gameObject.activeSelf)
-        {
-            respawn = true;
+            SwitchState(GameState.RESPAWN);
 
             // TODO: Some effect for respawning
+        }
+    }
+
+    private void RespawnPlayer()
+    {
+        respawnTime += Time.deltaTime;
+
+        if (respawnTime >= MAX_RESPAWN_TIME)
+        {
+            respawnTime = 0;
+
+            if (shipController && shipController.TryGetComponent(out PlayerRespawn playerRespawn))
+            {
+                playerRespawn.Respawn();
+            }
         }
     }
 
@@ -153,6 +156,9 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.BATTLE:
                 CheckForRespawn();
+                break;
+            case GameState.RESPAWN:
+                RespawnPlayer();
                 break;
             case GameState.BATTLE_END:
                 break;

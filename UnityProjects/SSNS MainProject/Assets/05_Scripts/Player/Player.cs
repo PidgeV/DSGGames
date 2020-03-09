@@ -242,7 +242,7 @@ public class Player : Controller
 		// Unity automatically does this
 		if (menu.openMenu == OpenMenuType.NODE_MAP)
 		{
-			menu.NavigateNodeMap(input.Get<Vector2>());
+			//menu.NavigateNodeMap(input.Get<Vector2>());
 		}
 		else
 		{

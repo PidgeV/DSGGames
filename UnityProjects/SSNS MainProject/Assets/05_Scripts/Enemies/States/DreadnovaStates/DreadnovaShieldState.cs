@@ -19,18 +19,33 @@ public class DreadnovaShieldState : FSMState
         stateID = FSMStateID.Defend;
         generators = shieldGenerators;
 
-        for (int i = 0; i < shieldGenerators.Length; i++)
+        for (int i = 0; i < generators.Length; i++)
         {
-            shieldGenerators[i].onDeath += OnGeneratorDeath;
-
-            shieldAliveCount++;
+            generators[i].onDeath += OnGeneratorDeath;
         }
+
+        EnterStateInit();
     }
 
     public override void EnterStateInit()
     {
         shieldGone = false;
         shieldDissolve = 1;
+        shieldAliveCount = generators.Length;
+        controller.dreadnovaShield.SetActive(true);
+
+        foreach (HealthAndShields generator in generators)
+        {
+            generator.ResetValues();
+        }
+
+        foreach (Transform child in controller.dreadnovaModel.transform)
+        {
+            if (child.TryGetComponent(out Collider collider))
+            {
+                collider.enabled = false;
+            }
+        }
     }
 
     public override void Reason()
@@ -49,7 +64,7 @@ public class DreadnovaShieldState : FSMState
                     }
                 }
 
-                if (NodeManager.Instance.CurrentNode.Type == SNSSTypes.NodeType.MiniBoss)
+                if (controller.State == SNSSTypes.DreadnovaState.SHIELD_STAGE)
                     controller.PerformTransition(Transition.NoShield);
                 else
                     controller.PerformTransition(Transition.Attack);

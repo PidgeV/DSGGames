@@ -19,6 +19,7 @@ using System.Collections.Generic;
         Attack,
         Patrol,
         Defend,
+        Reset
     }
 
     public enum FSMStateID
