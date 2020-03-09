@@ -735,7 +735,43 @@ MonoBehaviour:
   Sleeping: 0
   pauseMenu: {fileID: 2926375411033283669}
   openMenu: 0
---- !u!114 &386016738
+--- !u!1 &428374909
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 428374910}
+  m_Layer: 0
+  m_Name: ===== PLAYER =====
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &428374910
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 428374909}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.26588452, y: 0.120255396, z: 0.06313762}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &515568136 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6822402122183677345, guid: 17c49453365f9fb40b947fda43e2ce11,
+    type: 3}
+  m_PrefabInstance: {fileID: 5451369897023243188}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &523848248
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -784,42 +820,6 @@ MonoBehaviour:
   hdriSky:
     m_OverrideState: 0
     m_Value: {fileID: 8900000, guid: 19c9ee1a792233241b5a0dc077587353, type: 3}
---- !u!1 &428374909
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 428374910}
-  m_Layer: 0
-  m_Name: ===== PLAYER =====
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &428374910
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 428374909}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.26588452, y: 0.120255396, z: 0.06313762}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &515568136 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 6822402122183677345, guid: 17c49453365f9fb40b947fda43e2ce11,
-    type: 3}
-  m_PrefabInstance: {fileID: 5451369897023243188}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &565762036
 GameObject:
   m_ObjectHideFlags: 19
@@ -1523,7 +1523,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Profile: {fileID: 11400000, guid: d7c951bff0c988a4da01aaa8e3627d99, type: 2}
   m_StaticLightingSkyUniqueID: 1
-  m_SkySettings: {fileID: 386016738}
+  m_SkySettings: {fileID: 523848248}
   m_SkySettingsFromProfile: {fileID: 2173873593239112011, guid: d7c951bff0c988a4da01aaa8e3627d99,
     type: 2}
 --- !u!114 &1169003262
@@ -1593,6 +1593,186 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1415091436
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5686437362363176917, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: m_Name
+      value: Dialogue Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5686437362363176915, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 83.05329
+      objectReference: {fileID: 0}
+    - target: {fileID: 5686437362363176915, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 140.38087
+      objectReference: {fileID: 0}
+    - target: {fileID: 5686437362363176915, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 540.87244
+      objectReference: {fileID: 0}
+    - target: {fileID: 5686437362363176915, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5686437362363176915, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5686437362363176915, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5686437362363176915, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5686437362363176915, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5686437362363176915, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5686437362363176915, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5686437362363176915, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5686437362363176914, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: Dialogue.Array.data[24].SoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 50a376a593c564740be158e9438c43b3, type: 3}
+    - target: {fileID: 5686437362363176914, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: Dialogue.Array.data[25].SoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 30bf5bef2faad074b8a5a215f3fdf313, type: 3}
+    - target: {fileID: 5686437362363176914, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: Dialogue.Array.data[25].Text
+      value: Captain, did you know in some cultures it's rude to blow your nose in
+        public?
+      objectReference: {fileID: 0}
+    - target: {fileID: 5686437362363176914, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: Dialogue.Array.data[26].SoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: c9c75f188950a4548a6dbb9407fa5426, type: 3}
+    - target: {fileID: 5686437362363176914, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: Dialogue.Array.data[27].SoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4f4458866dff3f3498a4c2dc02158102, type: 3}
+    - target: {fileID: 5686437362363176914, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: Dialogue.Array.data[28].SoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 957a5f95a4e891345b9906c159640530, type: 3}
+    - target: {fileID: 5686437362363176914, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: Dialogue.Array.data[29].SoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 34f8e4bc7ca772745bf113ecdd7d09cd, type: 3}
+    - target: {fileID: 5686437362363176914, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: Dialogue.Array.data[30].SoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e2798c6d9f2b400469d4df19786ae430, type: 3}
+    - target: {fileID: 5686437362363176914, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: Dialogue.Array.data[31].SoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: ae6f21218bf26f44db38408529c6c150, type: 3}
+    - target: {fileID: 5686437362363176914, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: Dialogue.Array.data[32].SoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: fb115585bd5647c49aa71314726a8e73, type: 3}
+    - target: {fileID: 5686437362363176914, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: Dialogue.Array.data[33].SoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 817f2626a60aca242b0a4d506c76e763, type: 3}
+    - target: {fileID: 5686437362363176914, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: Dialogue.Array.data[34].SoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b0b749ee36681964ab2a156fc6524f48, type: 3}
+    - target: {fileID: 5686437362363176914, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: Dialogue.Array.data[35].SoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 90d4c7c5e4e233d47926a67312330b94, type: 3}
+    - target: {fileID: 5686437362363176914, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: Dialogue.Array.data[36].SoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b67617f9101ba044682a93a4f32fe62c, type: 3}
+    - target: {fileID: 5686437362363176914, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: Dialogue.Array.data[37].SoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: b72f104b18a29604983a41bfa774f121, type: 3}
+    - target: {fileID: 5686437362363176914, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: Dialogue.Array.data[38].SoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 48349d9fc7f761942b018473f64b1e4e, type: 3}
+    - target: {fileID: 5686437362363176914, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: Dialogue.Array.data[39].SoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4af1ac4f21082984c8fefa849606694d, type: 3}
+    - target: {fileID: 5686437362363176914, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: Dialogue.Array.data[40].SoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2777da8253fc1b347bcefb6471400cc4, type: 3}
+    - target: {fileID: 5686437362363176914, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: Dialogue.Array.data[41].SoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: ed049d4e2271c2f4da65ff4a124cc770, type: 3}
+    - target: {fileID: 5686437362363176914, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: Dialogue.Array.data[42].SoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1973598a4b2490b4c9025532d6c14a65, type: 3}
+    - target: {fileID: 5686437362363176914, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: Dialogue.Array.data[43].SoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7e79a4e0152a7714c9141c26ca4c041b, type: 3}
+    - target: {fileID: 5686437362363176914, guid: 7fb98282493c6fc4b8a282fdd605d380,
+        type: 3}
+      propertyPath: Dialogue.Array.data[44].SoundClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 9154d55e35249ba4f80a96802607d2c3, type: 3}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7fb98282493c6fc4b8a282fdd605d380, type: 3}
 --- !u!114 &1519624377 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3861665069243537858, guid: d756dc7a4a8506345ba2e7210f6c2736,
@@ -2587,11 +2767,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1772421518}
     m_Modifications:
-    - target: {fileID: 4635642680647428773, guid: 0b049d8fee2595b4a8b21ea6e203cd40,
-        type: 3}
-      propertyPath: m_Name
-      value: Demo Manager
-      objectReference: {fileID: 0}
     - target: {fileID: 4635642680647428772, guid: 0b049d8fee2595b4a8b21ea6e203cd40,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2697,6 +2872,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4635642680647428773, guid: 0b049d8fee2595b4a8b21ea6e203cd40,
+        type: 3}
+      propertyPath: m_Name
+      value: Demo Manager
+      objectReference: {fileID: 0}
     - target: {fileID: 4635642680647428779, guid: 0b049d8fee2595b4a8b21ea6e203cd40,
         type: 3}
       propertyPath: hud
@@ -2711,7 +2891,7 @@ PrefabInstance:
     - target: {fileID: 4635642681587780979, guid: 0b049d8fee2595b4a8b21ea6e203cd40,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.00002670288
       objectReference: {fileID: 0}
     - target: {fileID: 4635642681754026852, guid: 0b049d8fee2595b4a8b21ea6e203cd40,
         type: 3}
@@ -2721,7 +2901,7 @@ PrefabInstance:
     - target: {fileID: 4635642681754026852, guid: 0b049d8fee2595b4a8b21ea6e203cd40,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000030517578
+      value: 0.000015258789
       objectReference: {fileID: 0}
     - target: {fileID: 4635642680548460897, guid: 0b049d8fee2595b4a8b21ea6e203cd40,
         type: 3}
@@ -2741,7 +2921,7 @@ PrefabInstance:
     - target: {fileID: 4635642680793056455, guid: 0b049d8fee2595b4a8b21ea6e203cd40,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.000030517578
+      value: 0.0000076293945
       objectReference: {fileID: 0}
     - target: {fileID: 3253571880852935374, guid: 0b049d8fee2595b4a8b21ea6e203cd40,
         type: 3}
@@ -2751,7 +2931,7 @@ PrefabInstance:
     - target: {fileID: 3253571880852935374, guid: 0b049d8fee2595b4a8b21ea6e203cd40,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -0.0000038146973
       objectReference: {fileID: 0}
     - target: {fileID: 4635642682034230645, guid: 0b049d8fee2595b4a8b21ea6e203cd40,
         type: 3}
@@ -3625,18 +3805,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 940780699014486519}
   m_Mesh: {fileID: 289301614986012343, guid: ef2e9fb1b426cfc488e933bc22bb8e37, type: 3}
---- !u!114 &5051270218499298131 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2802933310444758597, guid: c94c8e9888c9b05468d98893ac2d5c9e,
-    type: 3}
-  m_PrefabInstance: {fileID: 6989502504543352086}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &5451369897023243188
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4265,338 +4433,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &8045726814433569985
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8045726814433569991}
-  - component: {fileID: 8045726814433569990}
-  - component: {fileID: 8045726814433569986}
-  m_Layer: 0
-  m_Name: Dialogue Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!82 &8045726814433569986
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8045726814433569985}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!114 &8045726814433569990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8045726814433569985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09d7c75e6599d84459b01e39d292fdd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioSource: {fileID: 8045726814433569986}
-  dialogueText: {fileID: 5051270218499298131}
-  Dialogue:
-  - OwnerType: 1
-    SoundClip: {fileID: 8300000, guid: cfcfd029b82e71343a89803e08f8467d, type: 3}
-    Name: All Surface Cannons Down
-    Text: "All surface targets destroyed! Great job! Now take this bastard down for
-      the\r count!"
-    Index: 0
-    volumeMultiplier: 1
-  - OwnerType: 1
-    SoundClip: {fileID: 8300000, guid: cfa65ddf3ec2283449f69d22ac488688, type: 3}
-    Name: Almost All Targets Destroyed
-    Text: "You\u2019ve almost destroyed all the surface targets! Go, go!"
-    Index: 1
-    volumeMultiplier: 1
-  - OwnerType: 1
-    SoundClip: {fileID: 8300000, guid: 9b2c0187e0694404eac90e76720f6f50, type: 3}
-    Name: Cargo Ship In bound
-    Text: "Cargo ship inbound to the vessel! Take that big boy down before it can
-      restore\r, integrity to the Dreadnova\u2019s armor."
-    Index: 2
-    volumeMultiplier: 1
-  - OwnerType: 1
-    SoundClip: {fileID: 8300000, guid: f79cb1c739e06a54684558901f33fe05, type: 3}
-    Name: Dread Jump V1
-    Text: "Damn it! We couldn\u2019t stall them for long enough and they\u2019ve jumped
-      out of the\r system! We\u2019ll pinpoint their signature and upload their location
-      to your ship\u2019s\r PDA. Get a move on team!"
-    Index: 3
-    volumeMultiplier: 1
-  - OwnerType: 1
-    SoundClip: {fileID: 8300000, guid: 3318e37e99d553a488bb6994ab276c69, type: 3}
-    Name: Dread Jump V2
-    Text: "Damn it! Bastards broke through our hyperdrive jam and jumped out of the
-      system! We\u2019ll\r trace their warp path and upload their position to your
-      PDA\u2026 Hop to it gang!"
-    Index: 4
-    volumeMultiplier: 1
-  - OwnerType: 1
-    SoundClip: {fileID: 8300000, guid: b18d1652bab15584fa74b17daefe848e, type: 3}
-    Name: Dread Jump V3
-    Text: "Ah Crap! We couldn\u2019t stall them for long enough and they\u2019ve jumped
-      out of the\r system! We\u2019ll pinpoint their signature and upload their location
-      to your ship\u2019s\r PDA. Get a move on team!"
-    Index: 5
-    volumeMultiplier: 1
-  - OwnerType: 1
-    SoundClip: {fileID: 8300000, guid: e6df780e5d11e234eab4cf02595977a5, type: 3}
-    Name: Dreadnova Sighted
-    Text: "Well it looks like we\u2019ve found the Dreadnova and they\u2019ve picked
-      up your\r signature\u2026 They\u2019re deploying some of its forces to deal
-      with you, so destroy a\r fair amount of them so we can get to work on the capitol
-      ship."
-    Index: 6
-    volumeMultiplier: 1
-  - OwnerType: 1
-    SoundClip: {fileID: 8300000, guid: c1fbba634f569bc40acfe0ae2fcf981d, type: 3}
-    Name: Fighter Wave Destroyed
-    Text: Supplementary fighter forces destroyed, nicely done!
-    Index: 7
-    volumeMultiplier: 1
-  - OwnerType: 1
-    SoundClip: {fileID: 8300000, guid: 207aacd9aa15d4c4b9503cbc1e883f54, type: 3}
-    Name: Hull Shields Down V1
-    Text: "Great work, the hull defense shields are offline! Now to get to work on
-      the surface\r cannons and find those weak spots. I\u2019ll get your ship\u2019s
-      PDA to highlight targets\r for you."
-    Index: 8
-    volumeMultiplier: 1
-  - OwnerType: 1
-    SoundClip: {fileID: 8300000, guid: e1337a24af856e44e9020be9954ac970, type: 3}
-    Name: Hull Shields Down V2
-    Text: "Great work, the hull defense shields are offline! Now get to work on the
-      surface\r cannons and weak spots on the hull. I\u2019ll get your ship\u2019s
-      PDA to highlight targets\r for you."
-    Index: 9
-    volumeMultiplier: 1
-  - OwnerType: 1
-    SoundClip: {fileID: 8300000, guid: 91c4414a049d54f49b069e8ff68c8e3c, type: 3}
-    Name: Intro V1
-    Text: "We\u2019ve located a DSG Dreadnova in the system so be on your guard! Scanners\r
-      show that the ship is equipped with a front-mounted super-cannon and a massive\r
-      fighter armada within its barracks. We\u2019ve jammed their hyperdrive navigation
-      for\r a short time, so get the job done quick and try to come back with most
-      of your\r body parts still attached\u2026"
-    Index: 10
-    volumeMultiplier: 1
-  - OwnerType: 1
-    SoundClip: {fileID: 8300000, guid: be5b5f850219c1e418f45e934ef11383, type: 3}
-    Name: Intro V2
-    Text: "Eyes up gang, we\u2019re sending you in to deal with a DSG class vessel
-      loaded with\r lucrative technology and a large super weapon mounted to the front.
-      Take that big\r bastard down before it can jump into hyperspace. We\u2019ve
-      only got one shot at this, so\r expect heavy resistance."
-    Index: 11
-    volumeMultiplier: 1
-  - OwnerType: 1
-    SoundClip: {fileID: 8300000, guid: 00f41586fa703624eb0926c7b00c7639, type: 3}
-    Name: Intro V3
-    Text: "Our scanners have detected a DSG Dreadnova equipped with heavy armaments\r
-      and we need you to take it out before it comes for us. We\u2019ve jammed its\r\nhyperdrive
-      for the time being so use this opportunity to hit \u2018em where it hurts; and\r
-      try not to mess it up in the process."
-    Index: 12
-    volumeMultiplier: 1
-  - OwnerType: 1
-    SoundClip: {fileID: 8300000, guid: d14490323ba6dcb4c8629b063fb4831a, type: 3}
-    Name: Left Generator Reboot
-    Text: "Shield Generator on the left side of the ship is rebooting! Take out the
-      other before it\r comes back online!"
-    Index: 13
-    volumeMultiplier: 1
-  - OwnerType: 1
-    SoundClip: {fileID: 8300000, guid: f8613baff90e2d047a46e96e4cdca856, type: 3}
-    Name: Right Generator Reboot
-    Text: "Shield Generator on the right side of the ship is rebooting! Take out the
-      other before it\r comes back online!"
-    Index: 14
-    volumeMultiplier: 1
-  - OwnerType: 1
-    SoundClip: {fileID: 8300000, guid: b339e3c691a4103488a332e194777c7b, type: 3}
-    Name: New System V1
-    Text: "Onto the next system team! Scans have picked up supplementary forces lingering\r
-      in the area. Find them, take them out and get back onto the Dreadnova\u2019s
-      trail.\r\nSimple."
-    Index: 15
-    volumeMultiplier: 1
-  - OwnerType: 1
-    SoundClip: {fileID: 8300000, guid: e19e4e8847acaa84ea236fc43c333cfa, type: 3}
-    Name: New System V2
-    Text: "You\u2019ve reached the next system! Scans show residual forces in the
-      area have been\r deployed to halt your progress. I\u2019ll get your ship\u2019s
-      PDA to highlight targets\r\nfor you."
-    Index: 16
-    volumeMultiplier: 1
-  - OwnerType: 1
-    SoundClip: {fileID: 8300000, guid: c07912ec0456e704db3be3d8f041f41e, type: 3}
-    Name: New System V3
-    Text: "New system team! Take down this squadron of forces so that you have a window\r
-      to pulse jump in pursuit of the Dreadnova. Good luck!"
-    Index: 17
-    volumeMultiplier: 1
-  - OwnerType: 1
-    SoundClip: {fileID: 8300000, guid: 582310e67e7fdf647a3153f6c1e3ab36, type: 3}
-    Name: New System V4
-    Text: "Welcome to the system gang! Pay close attention, the Dreadnova shouldn\u2019t
-      be\r too far ahead of us\u2026 Scanning the immediate area for hostiles."
-    Index: 18
-    volumeMultiplier: 1
-  - OwnerType: 1
-    SoundClip: {fileID: 8300000, guid: 7200d350b368289479d5e3fd85822059, type: 3}
-    Name: Out of Bounds V1
-    Text: "Fair warning, any breach in company policy will result in a deduction from
-      your\r pay at the end of the month."
-    Index: 19
-    volumeMultiplier: 1
-  - OwnerType: 1
-    SoundClip: {fileID: 8300000, guid: f7ec82cfc1970484f8ac3bdb833fa61f, type: 3}
-    Name: Out of Bounds V2
-    Text: "Get back to the battlefield! If you don\u2019t, there will be consequences
-      for breach of\r contract!"
-    Index: 20
-    volumeMultiplier: 1
-  - OwnerType: 1
-    SoundClip: {fileID: 8300000, guid: 1b95be251d61f68499622ce2deb543f3, type: 3}
-    Name: Out of Bounds V3
-    Text: "Where are you going?! You\u2019re jeopardizing the mission! Get back there!"
-    Index: 21
-    volumeMultiplier: 1
-  - OwnerType: 1
-    SoundClip: {fileID: 8300000, guid: a8fe922694c828c48b16e870611643e6, type: 3}
-    Name: Shield Generator Open V1
-    Text: Shield generator destroyed. Well done!
-    Index: 22
-    volumeMultiplier: 1
-  - OwnerType: 1
-    SoundClip: {fileID: 8300000, guid: aace5b37978f76c4996eb43924fd7035, type: 3}
-    Name: Shield Generator Open V2
-    Text: "Alright team, looks like we\u2019ve got a shot at taking down the Dreadnova\u2019s
-      shields,\r take them both offline at the same time to shut down the system!"
-    Index: 23
-    volumeMultiplier: 1
-  NewDialogue:
-    OwnerType: 2
-    SoundClip: {fileID: 0}
-    Name: 
-    Text: 
-    Index: 0
-    volumeMultiplier: 1
-  SoundIcon: {fileID: 2800000, guid: a293d7658a0c12e488413fbb52810b1f, type: 3}
-  ShowDefaultEditor: 0
---- !u!4 &8045726814433569991
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8045726814433569985}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 83.05329, y: 140.38087, z: 540.87244}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8261645149640895881
 MonoBehaviour:
   m_ObjectHideFlags: 0
