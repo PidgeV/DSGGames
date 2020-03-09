@@ -41,7 +41,7 @@ public class ShieldGenerator : MonoBehaviour
 		InitializeGenerator();
 	}
 
-	private void InitializeGenerator(bool panels = true)
+	public void InitializeGenerator(bool panels = true)
 	{
 		_shieldAlive = true;
 		_platesAlive = false;
@@ -137,5 +137,7 @@ public class ShieldGenerator : MonoBehaviour
 			}
 		}
 	}
+
+	public bool IsAlive { get { return _generator.activeSelf; } }
 
 }

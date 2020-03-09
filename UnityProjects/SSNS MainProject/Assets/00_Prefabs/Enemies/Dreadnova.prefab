@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1012340592505483828}
-  - component: {fileID: -649289541894782354}
   - component: {fileID: 4346195199491090952}
   m_Layer: 9
   m_Name: Dreadnova
@@ -33,51 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &-649289541894782354
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 184070561958212582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22fc7ff159aa4e04ebb8f04be21fc08e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fighterPrefab: {fileID: 58820780711503999, guid: 412fb68aa6718b248a7adb1e254193c0,
-    type: 3}
-  chargerPrefab: {fileID: 3107085776561158194, guid: 0bb00d2ff3a929e4c9d818bdf52479d9,
-    type: 3}
-  swarmerPrefab: {fileID: 2212086307816132563, guid: 01e0ea9331425964888c9f346c3a8fed,
-    type: 3}
-  cruiserPrefab: {fileID: 8278412131455947766, guid: d70f243484b0f1349aa7336d65b5ffc7,
-    type: 3}
-  cargoPrefab: {fileID: 3107085776561158194, guid: ec334dcaca7277c4f90e6774cbc973fe,
-    type: 3}
-  spawnpoints:
-  - {fileID: 2635313141815564535}
-  - {fileID: 3677282291892137031}
-  - {fileID: 8194999490793427882}
-  - {fileID: 4543127400807876740}
-  waypoints:
-  - {fileID: 8647506793944606112}
-  - {fileID: 4518366056734392177}
-  - {fileID: 1538229778255156995}
-  - {fileID: 8101353832974914178}
-  - {fileID: 210836109187030541}
-  - {fileID: 7493612659509726666}
-  - {fileID: 1034154683219772446}
-  - {fileID: 5964863621381800672}
-  - {fileID: 4325280155271367365}
-  - {fileID: 6118207954765562148}
-  - {fileID: 7170530868696401696}
-  waveBehaviour: {fileID: 0}
-  shieldWaveBehaviour: {fileID: 11400000, guid: 89240a6b121a2c44db7eebc7a2f2300a,
-    type: 2}
-  attackWaveBehaviour: {fileID: 11400000, guid: f0e561c4a6419c445b151a7077259622,
-    type: 2}
-  distanceToTravelAway: 500
 --- !u!114 &4346195199491090952
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,11 +58,12 @@ MonoBehaviour:
   raySize: 7.5
   showStats: 0
   shieldGenerators:
-  - {fileID: 7592570428196455655}
-  - {fileID: 4244114795891082845}
+  - {fileID: 7592570427090725275}
+  - {fileID: 4244114796866743073}
   dreadnovaShield: {fileID: 7506211325508057894}
   dreadnovaModel: {fileID: 9191272751502283835}
   dreadnovaThrusters: {fileID: 422722550329549805}
+  dreadnovaState: 0
   warping: 0
 --- !u!1 &234800337972893495
 GameObject:
@@ -3562,7 +3517,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5323569262874094974}
-  - component: {fileID: 2014535117949333944}
   m_Layer: 9
   m_Name: Model
   m_TagString: Untagged
@@ -3591,20 +3545,6 @@ Transform:
   m_Father: {fileID: 1012340592505483828}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &2014535117949333944
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5535788055612195305}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5691532053670609639
 GameObject:
   m_ObjectHideFlags: 0
@@ -5621,11 +5561,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5323569262874094974}
     m_Modifications:
-    - target: {fileID: 2948943926411655371, guid: 122cd8a4f59235445b3655e8a2403fb1,
-        type: 3}
-      propertyPath: m_Name
-      value: ShieldGenerator R
-      objectReference: {fileID: 0}
     - target: {fileID: 2948943926411655370, guid: 122cd8a4f59235445b3655e8a2403fb1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5721,6 +5656,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -15.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2948943926411655371, guid: 122cd8a4f59235445b3655e8a2403fb1,
+        type: 3}
+      propertyPath: m_Name
+      value: ShieldGenerator R
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 122cd8a4f59235445b3655e8a2403fb1, type: 3}
 --- !u!4 &4244114796866743086 stripped
@@ -5729,16 +5669,16 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1300096683362178020}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &4244114795891082845 stripped
+--- !u!114 &4244114796866743073 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2948943925171590585, guid: 122cd8a4f59235445b3655e8a2403fb1,
+  m_CorrespondingSourceObject: {fileID: 2948943926411655365, guid: 122cd8a4f59235445b3655e8a2403fb1,
     type: 3}
   m_PrefabInstance: {fileID: 1300096683362178020}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21bcb8e5aef53064495f71d628833b37, type: 3}
+  m_Script: {fileID: 11500000, guid: 908dc9312a9233c418390f2458c6ae04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &3609206524409016005
@@ -5748,11 +5688,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7130178765704309529}
     m_Modifications:
-    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyThruster (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275373, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5808,6 +5743,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyThruster (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Time
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -5838,21 +5793,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 204
       objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Parameters.widthMultiplier
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Time
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59d053a849b18994bae25015b58df19c, type: 3}
 --- !u!4 &2528219541411877544 stripped
@@ -5868,11 +5808,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5323569262874094974}
     m_Modifications:
-    - target: {fileID: 2948943926411655371, guid: 122cd8a4f59235445b3655e8a2403fb1,
-        type: 3}
-      propertyPath: m_Name
-      value: ShieldGenerator L
-      objectReference: {fileID: 0}
     - target: {fileID: 2948943926411655370, guid: 122cd8a4f59235445b3655e8a2403fb1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5968,26 +5903,31 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -15.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2948943926411655371, guid: 122cd8a4f59235445b3655e8a2403fb1,
+        type: 3}
+      propertyPath: m_Name
+      value: ShieldGenerator L
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 122cd8a4f59235445b3655e8a2403fb1, type: 3}
---- !u!114 &7592570428196455655 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2948943925171590585, guid: 122cd8a4f59235445b3655e8a2403fb1,
-    type: 3}
-  m_PrefabInstance: {fileID: 4734121534353772894}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 21bcb8e5aef53064495f71d628833b37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &7592570427090725268 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2948943926411655370, guid: 122cd8a4f59235445b3655e8a2403fb1,
     type: 3}
   m_PrefabInstance: {fileID: 4734121534353772894}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7592570427090725275 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2948943926411655365, guid: 122cd8a4f59235445b3655e8a2403fb1,
+    type: 3}
+  m_PrefabInstance: {fileID: 4734121534353772894}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 908dc9312a9233c418390f2458c6ae04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8232952366341310337
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5995,11 +5935,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7130178765704309529}
     m_Modifications:
-    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyThruster (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275373, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6055,6 +5990,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyThruster (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Time
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -6085,21 +6040,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 204
       objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Parameters.widthMultiplier
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Time
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59d053a849b18994bae25015b58df19c, type: 3}
 --- !u!4 &7152036164673338348 stripped
@@ -6115,11 +6055,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7130178765704309529}
     m_Modifications:
-    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyThruster
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275373, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6175,6 +6110,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyThruster
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Time
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -6199,21 +6154,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 24
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Parameters.widthMultiplier
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Time
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59d053a849b18994bae25015b58df19c, type: 3}

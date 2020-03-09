@@ -6,23 +6,14 @@ public class DreadnovaShieldState : FSMState
 {
     private DreadnovaController controller;
 
-    private HealthAndShields[] generators;
-    private int shieldAliveCount;
-
     private bool shieldGone;
 
     private float shieldDissolve;
 
-    public DreadnovaShieldState(DreadnovaController enemyController, HealthAndShields[] shieldGenerators)
+    public DreadnovaShieldState(DreadnovaController enemyController)
     {
         controller = enemyController;
         stateID = FSMStateID.Defend;
-        generators = shieldGenerators;
-
-        for (int i = 0; i < generators.Length; i++)
-        {
-            generators[i].onDeath += OnGeneratorDeath;
-        }
 
         EnterStateInit();
     }
@@ -31,12 +22,11 @@ public class DreadnovaShieldState : FSMState
     {
         shieldGone = false;
         shieldDissolve = 1;
-        shieldAliveCount = generators.Length;
         controller.dreadnovaShield.SetActive(true);
 
-        foreach (HealthAndShields generator in generators)
+        foreach (ShieldGenerator generator in controller.Generators)
         {
-            generator.ResetValues();
+            generator.InitializeGenerator();
         }
 
         foreach (Transform child in controller.dreadnovaModel.transform)
@@ -50,7 +40,7 @@ public class DreadnovaShieldState : FSMState
 
     public override void Reason()
     {
-        if (shieldAliveCount <= 0)
+        if (IsGeneratorsDead())
         {
             if (shieldGone)
             {
@@ -90,20 +80,15 @@ public class DreadnovaShieldState : FSMState
         }
     }
 
-    public void OnGeneratorDeath()
+    private bool IsGeneratorsDead()
     {
-        shieldAliveCount--;
-    }
-
-    ~DreadnovaShieldState()
-    {
-        shieldAliveCount = 0;
-
-        for (int i = 0; i < generators.Length; i++)
+        bool dead = true;
+        foreach (ShieldGenerator generator in controller.Generators)
         {
-            generators[i].onDeath -= OnGeneratorDeath;
+            if (generator.IsAlive)
+                dead = false;
         }
 
-        generators = null;
+        return dead;
     }
 }

@@ -5,7 +5,7 @@ using SNSSTypes;
 
 public class DreadnovaController : EnemyController
 {
-    [SerializeField] private HealthAndShields[] shieldGenerators;
+    [SerializeField] private ShieldGenerator[] shieldGenerators;
     public GameObject dreadnovaShield;
     public GameObject dreadnovaModel;
     public GameObject dreadnovaThrusters;
@@ -20,9 +20,9 @@ public class DreadnovaController : EnemyController
     {
         base.ResetEnemy();
 
-        foreach (HealthAndShields generator in shieldGenerators)
+        foreach (ShieldGenerator generator in shieldGenerators)
         {
-            generator.ResetValues();
+            generator.InitializeGenerator();
         }
 
         dreadnovaShield.SetActive(true);
@@ -48,7 +48,7 @@ public class DreadnovaController : EnemyController
     {
         DeadState dead = new DeadState(this);
         DreadnovaSpawnState spawn = new DreadnovaSpawnState(this);
-        DreadnovaShieldState shield = new DreadnovaShieldState(this, shieldGenerators);
+        DreadnovaShieldState shield = new DreadnovaShieldState(this);
         DreadnovaEscapeState escape = new DreadnovaEscapeState(this);
 
         dead.AddTransition(Transition.Reset, FSMStateID.Spawned);
@@ -77,10 +77,11 @@ public class DreadnovaController : EnemyController
 
     public void DestroyGenerators()
     {
-        foreach (HealthAndShields generator in shieldGenerators)
-        {
-            generator.TakeDamage(Mathf.Infinity, Mathf.Infinity);
-        }
+        // TODO: Need to update
+        //foreach (HealthAndShields generator in shieldGenerators)
+        //{
+        //    generator.TakeDamage(Mathf.Infinity, Mathf.Infinity);
+        //}
     }
 
     private IEnumerator WarpOut()
@@ -107,4 +108,5 @@ public class DreadnovaController : EnemyController
 
     public DreadnovaSpawner Spawner { get { return spawner; } }
     public DreadnovaState State { get { return dreadnovaState; } }
+    public ShieldGenerator[] Generators { get { return shieldGenerators; } }
 }
