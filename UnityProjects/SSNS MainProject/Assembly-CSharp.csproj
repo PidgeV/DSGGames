@@ -62,11 +62,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\05_Scripts\Area\Area.cs" />
     <Compile Include="Assets\05_Scripts\Area\AreaManager.cs" />
     <Compile Include="Assets\05_Scripts\Area\DreadnovaSpawner.cs" />
     <Compile Include="Assets\05_Scripts\Area\NodeSpawner.cs" />
     <Compile Include="Assets\05_Scripts\Area\Spawns\WaveSpawn.cs" />
-    <Compile Include="Assets\05_Scripts\Area\testAreaSpawner.cs" />
     <Compile Include="Assets\05_Scripts\Area\TutorialSpawner.cs" />
     <Compile Include="Assets\05_Scripts\Area\Wave Behaviours\WaveBehaviour.cs" />
     <Compile Include="Assets\05_Scripts\Demo\DemoManager.cs" />
@@ -206,13 +206,13 @@
     <Compile Include="Assets\11_Animations\Menus\Transitions\CinematicController.cs" />
     <Compile Include="Assets\13_ScriptableObjects\ShipObjects\ShipBehaviour.cs" />
     <Compile Include="Assets\Cruiser\CruiserEnemy.cs" />
+    <Compile Include="Assets\Cruiser\CruiserEnemyAttacking.cs" />
+    <Compile Include="Assets\Cruiser\CruiserEnemyEscape.cs" />
+    <Compile Include="Assets\Cruiser\CruiserEnemyIdle.cs" />
+    <Compile Include="Assets\Cruiser\CruiserEnemyPatrolling.cs" />
     <Compile Include="Assets\Cruiser\CruiserObstacleTurret.cs" />
-    <Compile Include="Assets\CruiserEnemyAttacking.cs" />
-    <Compile Include="Assets\CruiserEnemyEscape.cs" />
-    <Compile Include="Assets\CruiserEnemyIdle.cs" />
-    <Compile Include="Assets\CruiserEnemyPatrolling.cs" />
-    <Compile Include="Assets\CruiserTargetArea.cs" />
-    <Compile Include="Assets\DreadNovaTurret.cs" />
+    <Compile Include="Assets\Cruiser\CruiserTargetArea.cs" />
+    <Compile Include="Assets\Cruiser\DreadNovaTurret.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Base\Runtime\Behaviours\CinemachineBlendListCamera.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Base\Runtime\Behaviours\CinemachineBrain.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Base\Runtime\Behaviours\CinemachineClearShot.cs" />

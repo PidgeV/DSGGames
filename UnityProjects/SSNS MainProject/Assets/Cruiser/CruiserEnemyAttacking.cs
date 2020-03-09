@@ -41,11 +41,13 @@ public class CruiserEnemyAttacking : StateMachineBehaviour
 		Vector3 toPosition = (_player.position - _transform.position).normalized;
 		float angleToPosition = Vector3.Angle(_transform.forward, toPosition);
 
+		_cruiserEnemy._currentMinTurn += Time.deltaTime * 0.005f;
+
 		if (angleToPosition < 1)
 		{
 			if ((_attackTimer += Time.deltaTime) > 3)
 			{
-				// TODO -- Attack();
+				_cruiserEnemy.CruiserAttack();
 				animator.SetTrigger("Escape");
 			}
 			else

@@ -11,7 +11,7 @@ public class CruiserEnemyEscape : StateMachineBehaviour
 	private float _targetSpeed = 250;
 
 	private List<Vector3> _waypoints;
-	private Vector3 _targetPos = Vector3.zero;
+	private Vector3 _targetPos;
 
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -24,6 +24,8 @@ public class CruiserEnemyEscape : StateMachineBehaviour
 		_cruiserEnemy._currentMinTurn = _cruiserEnemy._initialMinTurn;
 
 		_waypoints = _cruiserEnemy.Waypoints;
+
+		_targetPos = _transform.position;
 
 		foreach (Vector3 pos in _waypoints) {
 			if (Vector3.Distance(_transform.position, pos) > Vector3.Distance(_transform.position, _targetPos))

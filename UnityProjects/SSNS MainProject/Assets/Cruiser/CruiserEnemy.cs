@@ -23,12 +23,17 @@ public class CruiserEnemy : MonoBehaviour
 	public float _initialMinTurn = 0.20f;
 	public float _currentMinTurn;
 
+	public bool _moveUp;
+
 	public List<Vector3> Waypoints;
 
 	public float TargetDistanceToPoint = 150f;
 	public float MinTimeToIdle = 35f;
 	public float EscapeRange = 700f;
 	public float AggroRange = 500f;
+
+	[SerializeField] private Transform shield;
+	[SerializeField] private Transform obstacleScanner;
 
 	public Vector3 TargetPos;
 
@@ -47,20 +52,30 @@ public class CruiserEnemy : MonoBehaviour
 		Waypoints = AIUtilities.GenerateWaypoints(transform.position, 1000, 25);
 	}
 
+	private void Update()
+	{
+		shield.transform.rotation = Quaternion.identity;
+
+		RaycastHit hit;
+
+		// Check for the dreadnova
+		// _moveUp = Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, 1 << 8);
+	}
+
 	// Draw Gizmos each frame
 	private void OnDrawGizmos()
 	{
 		if (Application.isPlaying == false) return;
 
-		Gizmos.color = Color.red;
-		Gizmos.DrawWireSphere(transform.position, AggroRange);
+		//Gizmos.color = Color.red;
+		//Gizmos.DrawWireSphere(transform.position, AggroRange);
 
-		Gizmos.color = Color.blue;
-		Gizmos.DrawWireSphere(transform.position, EscapeRange);
+		//Gizmos.color = Color.blue;
+		//Gizmos.DrawWireSphere(transform.position, EscapeRange);
 
 		foreach (Vector3 point in Waypoints)
 		{
-			Gizmos.color = Color.green;
+			Gizmos.color = Color.red;
 			Gizmos.DrawSphere(point, 5);
 		}
 
@@ -76,10 +91,22 @@ public class CruiserEnemy : MonoBehaviour
 	// Move and Rotate the cruiser ship
 	public void Move(Vector3 newPosition)
 	{
-		Vector3 rot = Vector3.RotateTowards(transform.forward, newPosition - transform.position, _currentMinTurn * Time.deltaTime, 0.0f);
-		transform.rotation = Quaternion.LookRotation(rot, transform.up);
+		if (_moveUp)
+		{
+			transform.rotation *= Quaternion.AngleAxis( -Time.deltaTime * 20, new Vector3(1, 0, 0));
+		}
+		else
+		{
+			Vector3 rot = Vector3.RotateTowards(transform.forward, newPosition - transform.position, _currentMinTurn * Time.deltaTime, 0.0f);
+			transform.rotation = Quaternion.LookRotation(rot, transform.up);
+		}
 
 		transform.Translate(Vector3.forward * Time.deltaTime * _currentSpeed);
+	}
+
+	public void CruiserAttack()
+	{
+		print("Big Attack");
 	}
 }
 
@@ -113,5 +140,42 @@ public static class AIUtilities
 		}
 
 		return objects;
+	}
+
+	public static void LookAtTarget(Transform transform, Vector3 target, float maxRotation = 1.5f)
+	{
+		Vector3 currentForward = transform.forward;
+		Vector3 targetPoint = target - transform.position;
+
+		Vector3 rot = Vector3.RotateTowards(currentForward, targetPoint, maxRotation * Time.deltaTime, 0.0f);
+
+		transform.rotation = Quaternion.LookRotation(rot, transform.up);
+	}
+
+	public static void ClampTurretRotation(Transform transform, float minAngle, float maxAngle)
+	{
+		Vector3 currentRotation = transform.localRotation.eulerAngles;
+
+		// Clamp the Min Rotation
+		if (currentRotation.x < 360 + minAngle && currentRotation.x > 180) {
+			currentRotation.x = 360 + minAngle;
+		}
+
+		// Clamp the Max Rotation
+		if (currentRotation.x > maxAngle && currentRotation.x < 180) {
+			currentRotation.x = maxAngle;
+		}
+
+		// Keep the Z at 0
+		currentRotation.z = 0;
+
+		// Set the final Rotation
+		transform.localRotation = Quaternion.Euler(currentRotation);
+	}
+
+	public static float GetAngleToTarget(Transform transform, Vector3 target)
+	{
+		Vector3 toPosition = (target - transform.position).normalized;
+		return Vector3.Angle(transform.forward, toPosition);
 	}
 }

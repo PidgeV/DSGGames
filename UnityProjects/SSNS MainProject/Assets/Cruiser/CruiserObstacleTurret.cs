@@ -3,48 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CruiserObstacleTurret : MonoBehaviour
-{
-	public Transform Target;
-	
+{	
 	[SerializeField] private CruiserTargetArea targetArea;
 	[SerializeField] private Collider obstacleArea;
+
+	[SerializeField] private Transform _target;
+
+	[SerializeField] private GameObject projectile;
+	[SerializeField] private Transform barrel;
+
+	[SerializeField] private float minRotationAngle = -55.0f;
+	[SerializeField] private float maxRotationAngle = 5.0f;
+	[SerializeField] private float maxRotation = 1.5f;
+
+	[SerializeField] private float fireRate = 0.2f;
 
 	// Update is called once per frame
 	void Update()
 	{
-		if (Target == null)
+		if (_target == null)
 		{
 			GameObject target = targetArea.GetObstacle();
-			if (target) Target = target.transform;
+			if (target) _target = target.transform;
 		}
 		else
 		{
-			float minRotation = -45;
-			float maxRotation = 10;
+			AIUtilities.LookAtTarget(transform, _target.position, maxRotation);
+			AIUtilities.ClampTurretRotation(transform, minRotationAngle, maxRotationAngle);
 
-			Vector3 rot = Vector3.RotateTowards(transform.forward, Target.position - transform.position, 2f * Time.deltaTime, 0.0f);
-			transform.rotation = Quaternion.LookRotation(rot, transform.up);
+			float angleToPosition = AIUtilities.GetAngleToTarget(transform, _target.position);
 
-			Vector3 currentRotation = transform.localRotation.eulerAngles;
-
-			if (currentRotation.x < 360 + minRotation && currentRotation.x > 180)
-			{
-				currentRotation.x = 360 + minRotation;
-			}
-
-			if (currentRotation.x > maxRotation && currentRotation.x < 180)
-			{
-				currentRotation.x = maxRotation;
-			}
-
-			currentRotation.z = 0;
-
-			transform.localRotation = Quaternion.Euler(currentRotation);
-
-			Vector3 toPosition = (Target.position - transform.position).normalized;
-			float angleToPosition = Vector3.Angle(transform.forward, toPosition);
-
-			if (angleToPosition < 5)
+			if (Mathf.Abs(angleToPosition) < 1)
 			{ 
 				if (coRunning == false) {
 					StartCoroutine(coShoot());
@@ -58,9 +47,9 @@ public class CruiserObstacleTurret : MonoBehaviour
 	{
 		coRunning = true;
 		yield return new WaitForSeconds(1.5f);
-		if (Target)
+		if (_target)
 		{
-			Destroy(Target.gameObject);
+			Destroy(_target.gameObject);
 		}
 		coRunning = false;
 	}
@@ -68,8 +57,8 @@ public class CruiserObstacleTurret : MonoBehaviour
 	// Draw the Gizmos
 	void OnDrawGizmos()
 	{
-		if (Target == null) return;
+		if (_target == null) return;
 
-		Gizmos.DrawLine(transform.position, Target.position);
+		Gizmos.DrawLine(transform.position, _target.position);
 	}
 }

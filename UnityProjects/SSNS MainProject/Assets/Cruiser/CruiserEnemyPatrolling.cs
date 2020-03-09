@@ -54,7 +54,7 @@ public class CruiserEnemyPatrolling : StateMachineBehaviour
 		}
 
 		_cruiserEnemy._currentSpeed = Mathf.Lerp(_cruiserEnemy._currentSpeed, _targetSpeed, Time.deltaTime * 5);
-		_cruiserEnemy._currentMinTurn += Time.deltaTime * 0.001f;
+		_cruiserEnemy._currentMinTurn += Time.deltaTime * 0.005f;
 	}
 
 	// Change / Update the ships state

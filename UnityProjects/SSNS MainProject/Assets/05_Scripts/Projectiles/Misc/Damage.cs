@@ -51,22 +51,22 @@ public class Damage : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
+    //private void OnTriggerEnter(Collider other)
+    //{
 
-        //Spawn the hit sound Object and parent to what it hit. Do this in case the object is destroyed on hitting things
-        if (hitSoundObject)
-            Instantiate(hitSoundObject, other.transform);
+    //    //Spawn the hit sound Object and parent to what it hit. Do this in case the object is destroyed on hitting things
+    //    if (hitSoundObject)
+    //        Instantiate(hitSoundObject, other.transform);
 
-        //Apply damage to things it hits
-        if (other.gameObject.TryGetComponent(out HealthAndShields hpTemp))
-        {
-            hpTemp.TakeDamage(kineticDamage * Time.deltaTime, energyDamage * Time.deltaTime);
-        }
+    //    //Apply damage to things it hits
+    //    if (other.gameObject.TryGetComponent(out HealthAndShields hpTemp))
+    //    {
+    //        hpTemp.TakeDamage(kineticDamage * Time.deltaTime, energyDamage * Time.deltaTime);
+    //    }
 
-        if(destroyOnHit)
-        {
-            Destroy(gameObject);
-        }
-    }
+    //    if(destroyOnHit)
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
 }
