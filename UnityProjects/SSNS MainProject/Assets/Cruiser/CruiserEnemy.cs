@@ -4,43 +4,47 @@ using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
 
-
-// TODO: 
-// 4 turrets
-// lightning attack
-// small dudes 
-// run from player
-// sicko mode
-// defensive state
+// NOTE -- Things to know..
+// 1. The Cruiser will destroy obstacles when patrolling
+// 2. The Cruiser will ONLY! destroy obstacles when patrolling
+// 3. The Cruiser attack the player with a large attack when in the attacking state
+// this is followed by a transition into the escape state where the cruiser will run away
 
 public class CruiserEnemy : MonoBehaviour
 {
 	private Animator _animator;
 
-	private float speed = 50;
+	public CruiserObstacleTurret obstacleTurretL;
+	public CruiserObstacleTurret obstacleTurretR;
 
-	public List<Vector3> Waypoints { get; private set; }
+	public float _initialSpeed = 100.0f;
+	public float _currentSpeed;
 
-	public float TargetDistanceToPoint { get; private set; }
-	public float AggroRange { get; private set; }
-	public float EscapeRange { get; private set; }
+	public float _initialMinTurn = 0.20f;
+	public float _currentMinTurn;
+
+	public List<Vector3> Waypoints;
+
+	public float TargetDistanceToPoint = 150f;
+	public float MinTimeToIdle = 35f;
+	public float EscapeRange = 700f;
+	public float AggroRange = 500f;
+
+	public Vector3 TargetPos;
 
 	// Start is called before the first frame update
 	private void Awake()
 	{
 		_animator = GetComponent<Animator>();
 
-		TargetDistanceToPoint = 50f;
-		AggroRange = 1000f;
-		EscapeRange = 1500f;
+		_currentSpeed = _initialSpeed;
+		_currentMinTurn = _initialMinTurn;
 	}
 
 	// Start is called before the first frame update
 	private void Start()
 	{
-		Waypoints = AIUtilities.GenerateWaypoints(transform.position, 2000, 25);
-
-		_animator.SetTrigger("Patrolling");
+		Waypoints = AIUtilities.GenerateWaypoints(transform.position, 1000, 25);
 	}
 
 	// Draw Gizmos each frame
@@ -59,15 +63,23 @@ public class CruiserEnemy : MonoBehaviour
 			Gizmos.color = Color.green;
 			Gizmos.DrawSphere(point, 5);
 		}
+
+		Gizmos.color = Color.green;
+		Gizmos.DrawLine(transform.position, TargetPos);
+	}
+
+	private void OnCollisionEnter(Collision collision)
+	{
+		// TODO: If an astroide enter my rande, take damage and destroy it
 	}
 
 	// Move and Rotate the cruiser ship
 	public void Move(Vector3 newPosition)
 	{
-		Vector3 rot = Vector3.RotateTowards(transform.forward, newPosition - transform.position, 0.35f * Time.deltaTime, 0.0f);
-		transform.rotation = Quaternion.LookRotation(rot, Vector3.up);
+		Vector3 rot = Vector3.RotateTowards(transform.forward, newPosition - transform.position, _currentMinTurn * Time.deltaTime, 0.0f);
+		transform.rotation = Quaternion.LookRotation(rot, transform.up);
 
-		transform.Translate(Vector3.forward * Time.deltaTime * speed);
+		transform.Translate(Vector3.forward * Time.deltaTime * _currentSpeed);
 	}
 }
 
@@ -89,5 +101,17 @@ public static class AIUtilities
 		}
 
 		return points;
+	}
+
+	public static List<GameObject> ScanForAllObstacle(Vector3 center, float radius)
+	{
+		List<GameObject> objects = new List<GameObject>();
+
+		foreach (Collider collider in Physics.OverlapSphere(center, radius, LayerMask.GetMask("Obstacles")))
+		{
+			objects.Add(collider.gameObject);
+		}
+
+		return objects;
 	}
 }

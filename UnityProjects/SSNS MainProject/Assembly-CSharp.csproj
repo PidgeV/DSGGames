@@ -206,8 +206,13 @@
     <Compile Include="Assets\11_Animations\Menus\Transitions\CinematicController.cs" />
     <Compile Include="Assets\13_ScriptableObjects\ShipObjects\ShipBehaviour.cs" />
     <Compile Include="Assets\Cruiser\CruiserEnemy.cs" />
+    <Compile Include="Assets\Cruiser\CruiserObstacleTurret.cs" />
     <Compile Include="Assets\CruiserEnemyAttacking.cs" />
+    <Compile Include="Assets\CruiserEnemyEscape.cs" />
+    <Compile Include="Assets\CruiserEnemyIdle.cs" />
     <Compile Include="Assets\CruiserEnemyPatrolling.cs" />
+    <Compile Include="Assets\CruiserTargetArea.cs" />
+    <Compile Include="Assets\DreadNovaTurret.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Base\Runtime\Behaviours\CinemachineBlendListCamera.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Base\Runtime\Behaviours\CinemachineBrain.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Base\Runtime\Behaviours\CinemachineClearShot.cs" />

@@ -8,19 +8,61 @@ public class CruiserEnemyAttacking : StateMachineBehaviour
 	private Transform _transform;
 	private Transform _player;
 
+	private float _targetSpeed = 100;
+	private float _targetAttackSpeed = 10;
+	private float _attackTimer = 0;
+
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
-		_transform = animator.gameObject.transform;
-		_cruiserEnemy = animator.gameObject.GetComponent<CruiserEnemy>();
 		_player = GameObject.FindGameObjectWithTag("Player").transform;
+
+		_cruiserEnemy = animator.gameObject.GetComponent<CruiserEnemy>();
+		_transform = animator.gameObject.transform;
+
+		_cruiserEnemy._currentMinTurn = _cruiserEnemy._initialMinTurn;
+
+		_attackTimer = 0;
 	}
 
 	// OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
 	override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
+		Act(animator);
+		Reason(animator);
+	}
+
+	// Act on the current states logic
+	void Act(Animator animator)
+	{
+		_cruiserEnemy.TargetPos = _player.transform.position;
 		_cruiserEnemy.Move(_player.transform.position);
 
+		Vector3 toPosition = (_player.position - _transform.position).normalized;
+		float angleToPosition = Vector3.Angle(_transform.forward, toPosition);
+
+		if (angleToPosition < 1)
+		{
+			if ((_attackTimer += Time.deltaTime) > 3)
+			{
+				// TODO -- Attack();
+				animator.SetTrigger("Escape");
+			}
+			else
+			{
+				_cruiserEnemy._currentSpeed = Mathf.Lerp(_cruiserEnemy._currentSpeed, _targetAttackSpeed, Time.deltaTime * 0.8f);
+			}
+		}
+		else
+		{
+			_attackTimer = 0.0f;
+			_cruiserEnemy._currentSpeed = Mathf.Lerp(_cruiserEnemy._currentSpeed, _targetSpeed, Time.deltaTime * 0.8f);
+		}
+	}
+
+	// Change / Update the ships state
+	void Reason(Animator animator)
+	{
 		if (Vector3.Distance(_transform.position, _player.position) > _cruiserEnemy.EscapeRange)
 		{
 			animator.SetTrigger("Patrolling");
