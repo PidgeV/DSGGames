@@ -99,7 +99,7 @@ public class DreadnovaController : EnemyController
 
         yield return new WaitForSeconds(1.5f);
 
-        yield return new WaitForSeconds(10.0f);
+        yield return new WaitForSeconds(5.0f);
 
         warping = false;
     }

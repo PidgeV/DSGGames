@@ -24,6 +24,7 @@ public class AreaManager : MonoBehaviour
     private GameObject portal;
 
     [SerializeField] private Image outsideOverlay;
+    [SerializeField] private Text boostNotification;
 
     [SerializeField] private int areaIndex;
     [SerializeField] private Area[] areas;
@@ -62,8 +63,9 @@ public class AreaManager : MonoBehaviour
         {
             areaEnded = true;
 
-            portal = Instantiate(portalPrefab, currentArea.transform);
-            portal.transform.position = GameManager.Instance.Player.transform.position + GameManager.Instance.Player.transform.forward * 200;
+            //portal = Instantiate(portalPrefab, currentArea.transform);
+            //portal.transform.position = GameManager.Instance.Player.transform.position + GameManager.Instance.Player.transform.forward * 200;
+            boostNotification.gameObject.SetActive(true);
 
             GameManager.Instance.SwitchState(GameState.BATTLE_END);
         }
@@ -213,6 +215,8 @@ public class AreaManager : MonoBehaviour
 
         Instance = this;
 
+        boostNotification.gameObject.SetActive(false);
+
         outsideStartColor = outsideOverlay.color;
         outsideStartColor.a = 0;
 
@@ -229,28 +233,32 @@ public class AreaManager : MonoBehaviour
         // Waits for reward UI to hide before switching to node selection
         if (areaEnded)
         {
-            if (portalAhead)
+            if (GameManager.Instance.Player.Boosting)
             {
-                if (GameManager.Instance.Player.Boosting)
-                {
-                    boostHeldTime += Time.deltaTime;
+                boostHeldTime += Time.deltaTime;
 
-                    if (boostHeldTime >= WARP_HELD_TIME)
-                    {
-                        areaEnded = false;
-                        Boosting = false;
-                        boostHeldTime = 0;
-                        areaIndex++;
-                        GameManager.Instance.SwitchState(GameState.NODE_TRANSITION);
-                    }
-                }
-                else
+                if (boostHeldTime >= WARP_HELD_TIME)
                 {
-                    boostHeldTime = Mathf.Max(boostHeldTime - Time.deltaTime, 0);
+                    areaEnded = false;
+                    Boosting = false;
+                    boostHeldTime = 0;
+                    areaIndex++;
+
+                    boostNotification.gameObject.SetActive(false);
+
+                    GameManager.Instance.SwitchState(GameState.NODE_TRANSITION);
                 }
+
+                GameManager.Instance.Player.Warping = true;
             }
             else
-                CheckForPortal();
+            {
+                boostHeldTime = Mathf.Max(boostHeldTime - Time.deltaTime, 0);
+
+                GameManager.Instance.Player.Warping = false;
+            }
+
+            boostNotification.text = "Boost for " + (int)(WARP_HELD_TIME - boostHeldTime) + "s";
         }
         // Transition to next node
         else if (nextAreaLoaded && lastAreaDestroyed)

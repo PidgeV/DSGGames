@@ -73,6 +73,7 @@ public class ShipController : MonoBehaviour
 	private bool strafing;
 	private bool rotating;
 	private bool boosting;
+	private bool warping;
 	private bool roleSwap;
 	private bool stopThrust;
 	private bool stopRotation;
@@ -99,6 +100,7 @@ public class ShipController : MonoBehaviour
 	public int NumberOfPlayers { get; set; }
 
 	public bool Boosting { get { return boosting; } set { boosting = value; } }
+	public bool Warping { get { return warping; } set { warping = value; } }
 	public bool Strafing { get { return strafing; } set { strafing = value; } }
 	public bool Rotating { get { return rotating; } set { rotating = value; } }
 	public bool RoleSwap { get { return roleSwap; } set { roleSwap = value; } }
@@ -171,6 +173,17 @@ public class ShipController : MonoBehaviour
 		UpdateShipModel(rotateDirection);
 
 		UpdateTurnMultiplier();
+
+		if (warping)
+		{
+			WarpEffect1.Play();
+			WarpEffect2.Play();
+		}
+		else if (!boosting)
+		{
+			WarpEffect1.Stop();
+			WarpEffect2.Stop();
+		}
 	}
 
 	/// <summary>
@@ -401,25 +414,29 @@ public class ShipController : MonoBehaviour
 			Quaternion rotateRotation = Quaternion.Euler(finalRotation);
 
 			rigidbody.rotation *= rollRotation * rotateRotation;
+
+			if (collision)
+			{
+				rigidbody.AddForce(collisionVelocity, ForceMode.Acceleration);
+
+				collisionVelocity = Vector3.zero;
+
+				Quaternion direction = Quaternion.LookRotation(collisionDirection);
+
+				rigidbody.rotation = Quaternion.Lerp(rigidbody.rotation, direction, 6 * Time.deltaTime);
+
+				if (Mathf.Abs(Vector3.Angle(transform.forward, collisionDirection)) < 2.5f || rotating)
+					collision = false;
+			}
+			else
+			{
+				rigidbody.AddForce(finalThrustVelocity, ForceMode.VelocityChange);
+				rigidbody.AddRelativeForce(finalStrafeVelocity, ForceMode.VelocityChange);
+			}
 		}
-
-		if (collision)
-		{
-			rigidbody.AddForce(collisionVelocity, ForceMode.Acceleration);
-
-			collisionVelocity = Vector3.zero;
-
-			Quaternion direction = Quaternion.LookRotation(collisionDirection);
-
-			rigidbody.rotation = Quaternion.Lerp(rigidbody.rotation, direction, 6 * Time.deltaTime);
-
-			if (Mathf.Abs(Vector3.Angle(transform.forward, collisionDirection)) < 2.5f || rotating)
-				collision = false;
-		}
-		else
+		else if (warping)
 		{
 			rigidbody.AddForce(finalThrustVelocity, ForceMode.VelocityChange);
-			rigidbody.AddRelativeForce(finalStrafeVelocity, ForceMode.VelocityChange);
 		}
 	}
 
@@ -450,7 +467,7 @@ public class ShipController : MonoBehaviour
 		shipModel.transform.localPosition = Vector3.Lerp(currentPos, targetPos, myBehaviour.moveSpeed);
 
 		// Camera
-		Vector3 targetCameraPos = boosting ? myBehaviour.boostPos : myBehaviour.normalPos;
+		Vector3 targetCameraPos = warping ? myBehaviour.warpPos : boosting ? myBehaviour.boostPos : myBehaviour.normalPos;
 
 		pilotCamera.transform.localPosition = Vector3.Slerp(pilotCamera.transform.localPosition, targetCameraPos, myBehaviour.cameraSpeed);
 	}

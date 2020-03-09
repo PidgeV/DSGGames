@@ -77,16 +77,17 @@ public class GameManager : MonoBehaviour
         {
             case GameState.BATTLE:
                 healthAndShields.Invincible = false;
+                shipController.Warping = false;
                 break;
             case GameState.BATTLE_END:
 				healthAndShields.ResetValues();
                 healthAndShields.Invincible = true;
-                shipController.Freeze = true;
                 AreaManager.Instance.EndArea();
                 break;
             case GameState.PAUSE:
                 break;
             case GameState.NODE_TRANSITION:
+                shipController.Warping = true;
                 shipController.Freeze = false;
                 shipController.StopThrust = false;
                 AreaManager.Instance.LoadNewArea();
