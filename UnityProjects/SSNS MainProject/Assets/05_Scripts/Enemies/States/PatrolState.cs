@@ -86,7 +86,11 @@ public class PatrolState<T> : FSMState where T : EnemyController
                     if (controller.PlayerInVision()) // in vision and has been patrolling for minimum time. This is to prevent the ai staying in attack mode and acting weird
                     {
                         timer1 = 0f;
-                        controller.PerformTransition(Transition.SawPlayer);
+
+                        if (AIManager.aiManager.CanAttack(controller.aiType))
+                        {
+                            controller.PerformTransition(Transition.SawPlayer);
+                        }
                     }
                 }
             }

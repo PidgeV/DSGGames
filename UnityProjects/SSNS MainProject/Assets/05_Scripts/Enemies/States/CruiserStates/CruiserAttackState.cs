@@ -40,7 +40,8 @@ public class CruiserAttackState : AttackState<CruiserController>
 		// Dead
 		if (myController.Health.IsDead)
 		{
-			myController.PerformTransition(Transition.NoHealth);
+            //AIManager.aiManager.StopAttack(controller.aiType);
+            myController.PerformTransition(Transition.NoHealth);
 			return;
 		}
 		
@@ -48,7 +49,8 @@ public class CruiserAttackState : AttackState<CruiserController>
 		if ((stateCounter += Time.deltaTime) > 0.25f)
 		{
 			if (myController.CheckPlayer(myController.PatrolDistance) == false) {
-				myController.PerformTransition(Transition.Patrol);
+                AIManager.aiManager.StopAttack(controller.aiType);
+                myController.PerformTransition(Transition.Patrol);
 			}
 
 			stateCounter = 0.0f;

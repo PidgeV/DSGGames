@@ -22,6 +22,7 @@ public class ChargerAttackState : AttackState<ChargerController>
 	{
 		if (controller.Player == null || ((ChargerController)controller).hitPlayer)
         {
+            AIManager.aiManager.StopAttack(controller.aiType);
             controller.PerformTransition(Transition.Patrol);
         }
         else
@@ -33,6 +34,7 @@ public class ChargerAttackState : AttackState<ChargerController>
             float distance = Vector3.Distance(controller.transform.position, controller.Player.transform.position);
             if (dotProduct < 0 && distance < 100)
             {
+                AIManager.aiManager.StopAttack(controller.aiType);
                 controller.PerformTransition(Transition.Patrol); //Go to patrolling
             }
         }
@@ -40,6 +42,7 @@ public class ChargerAttackState : AttackState<ChargerController>
         //Else dead transition to dead
         if (controller.Health.IsDead)
         {
+            //AIManager.aiManager.StopAttack(controller.aiType);
             controller.PerformTransition(Transition.NoHealth);
         }
     }

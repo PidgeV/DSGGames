@@ -14,6 +14,7 @@ public class FlockLeaderController : EnemyController
 
     protected override void ConstructFSM()
     {
+        base.aiType = AIManager.AITypes.Swarmer;
         Flock swarm = transform.parent.GetComponent<Flock>();
         //States
         SpawnState spawn = new SpawnState(this);

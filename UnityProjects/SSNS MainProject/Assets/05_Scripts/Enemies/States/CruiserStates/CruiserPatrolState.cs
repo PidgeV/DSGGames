@@ -33,16 +33,21 @@ public class CruiserPatrolState : PatrolState<CruiserController>
 	{
 		// Death
 		if (myController.Health.IsDead) {
-			myController.PerformTransition(Transition.NoHealth);
+            //AIManager.aiManager.StopAttack(controller.aiType);
+            myController.PerformTransition(Transition.NoHealth);
 			return;
 		}
 
 		// Saw Player
 		if ((counter += Time.deltaTime) > 0.25f)
 		{
-			if (myController.CheckPlayer(myController.PlayerDistance) == true) {
-				myController.PerformTransition(Transition.SawPlayer);
-			}
+            if (myController.CheckPlayer(myController.PlayerDistance) == true)
+            {
+                if (AIManager.aiManager.CanAttack(controller.aiType))
+                {
+                    myController.PerformTransition(Transition.SawPlayer);
+                }
+            }
 
 			counter = 0.0f;
 		}

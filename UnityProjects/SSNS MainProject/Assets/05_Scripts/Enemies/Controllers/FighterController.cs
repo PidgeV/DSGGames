@@ -12,6 +12,7 @@ public class FighterController : EnemyController
 
     protected override void ConstructFSM()
     {
+        base.aiType = AIManager.AITypes.Fighter;
         DeadState deadState = new DeadState(this);
         SpawnState spawnState = new SpawnState(this);
         FighterPatrolState patrol = new FighterPatrolState(this, true);
