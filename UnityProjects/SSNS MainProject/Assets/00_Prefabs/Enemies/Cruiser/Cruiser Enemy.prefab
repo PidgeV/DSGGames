@@ -172,11 +172,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef5227dfa6fe724096ffbda88a48183, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeType: 1
+  fadeType: 2
   ShieldColor:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 0.02352941, g: 0.05787475, b: 1, a: 1}
+    key1: {r: 1, g: 0.9777699, b: 0.023584902, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
@@ -202,8 +202,10 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  dissolveVFX: {fileID: 0}
-  impactVFX: {fileID: 0}
+  dissolveVFX: {fileID: 3815312508183173413, guid: ddffe4b2b0537394db51f273f9c2d557,
+    type: 3}
+  impactVFX: {fileID: 5266171281214306815, guid: b9048ee1f6b3b8d46a2a7682ceaffd9b,
+    type: 3}
   hitVFX: {fileID: 0}
   shipCollider: {fileID: 0}
 --- !u!135 &8772997953055965654

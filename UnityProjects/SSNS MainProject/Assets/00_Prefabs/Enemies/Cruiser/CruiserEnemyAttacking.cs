@@ -8,7 +8,7 @@ public class CruiserEnemyAttacking : StateMachineBehaviour
 	private Transform _transform;
 	private Transform _player;
 
-	private float _targetSpeed = 100;
+	private float _targetSpeed = 50;
 	private float _targetAttackSpeed = 10;
 	private float _attackTimer = 0;
 
@@ -45,7 +45,7 @@ public class CruiserEnemyAttacking : StateMachineBehaviour
 
 		if (angleToPosition < 1)
 		{
-			if ((_attackTimer += Time.deltaTime) > 3)
+			if ((_attackTimer += Time.deltaTime) > 6)
 			{
 				_cruiserEnemy.CruiserAttack();
 				animator.SetTrigger("Escape");

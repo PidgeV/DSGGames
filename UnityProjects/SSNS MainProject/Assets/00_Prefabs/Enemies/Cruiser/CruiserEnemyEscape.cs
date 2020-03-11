@@ -8,7 +8,7 @@ public class CruiserEnemyEscape : StateMachineBehaviour
 	private Transform _transform;
 	private Transform _player;
 
-	private float _targetSpeed = 250;
+	private float _targetSpeed = 550;
 
 	private List<Vector3> _waypoints;
 	private Vector3 _targetPos;
