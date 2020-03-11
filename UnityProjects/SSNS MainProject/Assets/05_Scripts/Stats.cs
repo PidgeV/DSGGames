@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ShipStats : ScriptableObject
+
+[CreateAssetMenu(fileName = "Health Stats", menuName = "Health/Stats")]
+public class Stats : ScriptableObject
 {
 	// Ship description
 	[SerializeField] private string shipName;

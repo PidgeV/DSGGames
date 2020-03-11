@@ -52,6 +52,7 @@ public class DreadnovaController : EnemyController
         DreadnovaSpawnState spawn = new DreadnovaSpawnState(this);
         DreadnovaShieldState shield = new DreadnovaShieldState(this);
         DreadnovaEscapeState escape = new DreadnovaEscapeState(this);
+        DreadnovaAttackState attack = new DreadnovaAttackState(this);
 
         dead.AddTransition(Transition.Reset, FSMStateID.Spawned);
 
@@ -65,6 +66,9 @@ public class DreadnovaController : EnemyController
 
         escape.AddTransition(Transition.NoHealth, FSMStateID.Dead);
         escape.AddTransition(Transition.Reset, FSMStateID.Spawned);
+
+        attack.AddTransition(Transition.NoHealth, FSMStateID.Dead);
+        attack.AddTransition(Transition.Reset, FSMStateID.Spawned);
 
         AddFSMState(spawn);
         AddFSMState(shield);

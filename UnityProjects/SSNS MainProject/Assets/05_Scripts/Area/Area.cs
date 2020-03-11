@@ -57,6 +57,8 @@ public class Area : MonoBehaviour
         {
             controller.ResetEnemy();
         }
+
+        spawner.StartWave(0);
     }
 
     public void KillEnemies()

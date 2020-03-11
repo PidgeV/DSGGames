@@ -26,6 +26,8 @@ public class Damage : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.CompareTag(tag)) return;
+
         //Spawn the hit sound Object and parent to what it hit. Do this in case the object is destroyed on hitting things
         if (hitSoundObject)
             Instantiate(hitSoundObject, transform.position, Quaternion.identity, collision.transform);

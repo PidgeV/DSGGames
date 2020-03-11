@@ -16,7 +16,7 @@ public class HealthAndShields : MonoBehaviour
 	public delegate void OnDeath();
 	public OnDeath onDeath;
 
-	[SerializeField] private ShipStats shipStats;
+	[SerializeField] private Stats shipStats;
 
 	// The MAX life the ship has
 	public float MaxLife { get { return shipStats.maxHealth; } }

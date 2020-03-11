@@ -4,7 +4,7 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "Player Stats", menuName = "Ship/Player Stats")]
 [System.Serializable]
-public class PlayerStats : ShipStats
+public class PlayerStats : Stats
 {
 	[Header("Movement")]
 	// Acceleration and deacceleration of the ship's speed

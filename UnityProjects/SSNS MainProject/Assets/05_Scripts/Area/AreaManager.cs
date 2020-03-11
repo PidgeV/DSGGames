@@ -233,7 +233,7 @@ public class AreaManager : MonoBehaviour
         // Waits for reward UI to hide before switching to node selection
         if (areaEnded)
         {
-            if (GameManager.Instance.Player.Boosting)
+            if (GameManager.Instance.Player.Boosting || currentArea.IsPlayerOutside)
             {
                 boostHeldTime += Time.deltaTime;
 
@@ -282,13 +282,14 @@ public class AreaManager : MonoBehaviour
                     }
                 }
             }
-            else
-            {
-                float range = currentArea.Size - (currentArea.Size - 150);
-                float input = Mathf.Abs(Vector3.Distance(GameManager.Instance.Player.transform.position, currentArea.transform.position));
-                float t = Mathf.Clamp((input - (currentArea.Size - 150)) / range, 0, 1);
-                outsideOverlay.color = Color.Lerp(outsideStartColor, outsideTargetColor, t);
-            }
+        }
+
+        if (GameManager.Instance.GameState == GameState.BATTLE || GameManager.Instance.GameState == GameState.BATTLE_END)
+        {
+            float range = currentArea.Size - (currentArea.Size - 150);
+            float input = Mathf.Abs(Vector3.Distance(GameManager.Instance.Player.transform.position, currentArea.transform.position));
+            float t = Mathf.Clamp((input - (currentArea.Size - 150)) / range, 0, 1);
+            outsideOverlay.color = Color.Lerp(outsideStartColor, outsideTargetColor, t);
         }
     }
 
