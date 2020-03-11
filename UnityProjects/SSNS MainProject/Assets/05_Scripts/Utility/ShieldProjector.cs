@@ -4,8 +4,10 @@ using UnityEngine;
 using SNSSTypes;
 
 [RequireComponent(typeof(SphereCollider))]
+
 public class ShieldProjector : MonoBehaviour
 {
+	#region Events ( OnShieldHit, OnShieldBreak, OnShieldRegen)
 	// When the shield is hit
 	public delegate void OnShieldHit(GameObject attacker);
 	public OnShieldHit onShieldHit;
@@ -17,53 +19,48 @@ public class ShieldProjector : MonoBehaviour
 	// When the shield goes from 0 to any value
 	public delegate void OnShieldRegen();
 	public OnShieldRegen onShieldRegen;
+	#endregion
 
-
-	// Keeps material references from impact objects that need to be faded out
-	private List<Material> objectsToFade = new List<Material>();
-
-
-	[Header("Shield Renderer")]
-	[SerializeField] MeshRenderer ShieldMeshRenderer;
-
-
-	// The initial and final color of a shield
-	[Header("Colors")]
-	[ColorUsage(true, true)] public Color BaseColor;
-	[ColorUsage(true, true)] public Color BrokenColor;
-
-	[Header("Effects")]
-	[SerializeField] GameObject DissolveVFX;
-	[SerializeField] GameObject ImpactVFX;
-	[SerializeField] GameObject HitVFX;
-
-
-	// The current collider that is on this ship
-	[SerializeField] Collider shipCollider;
-	SphereCollider shieldCollider;
-
-
-	// The damage percent is the smount of shield remaining. 0 - 1
-	 float DamagePercent = 1;
-
-	// Hows does the shield fade out
-	[Header("Shiled Behaviour")]
+	[Header("Shield Behaviour")]
 	[SerializeField] FadeType fadeType = FadeType.NO_FADE;
 
+	/// <summary> The color of this shield over its lifetime </summary>
+	[Header("Shield Color")]
+	public Gradient ShieldColor;
+
+	[Header("Shield Effects")]
+	[SerializeField] private GameObject dissolveVFX;
+	[SerializeField] private GameObject impactVFX;
+	[SerializeField] private GameObject hitVFX;
+
+	[SerializeField] private Collider shipCollider;
 
 	// Get the current color of the shield between the base color and the broken color
-	public Color GetColor { get { return Color.Lerp(BrokenColor, BaseColor, DamagePercent); } }
+	public Color GetColor => ShieldColor.Evaluate(_damagePercent);
 
+	#region Private Members
+
+	private List<Material> _objectsToFade = new List<Material>();
+
+	private SphereCollider _shieldCollider;
+	private Material _shieldMaterial;
+
+	private float _damagePercent = 1;
+
+	#endregion
+
+	#region Unity Events
 	// Start is called before the first frame update
 	void Start()
 	{
-		ShieldMeshRenderer.material.SetColor("_BaseColor", BaseColor);
-		ShieldMeshRenderer.material.SetColor("_FresnelColor", BaseColor);
+		_shieldMaterial = GetComponent<MeshRenderer>().material;
 
-        shieldCollider = GetComponent<SphereCollider>();
+		_shieldMaterial.SetColor("_BaseColor", ShieldColor.Evaluate(0));
+		_shieldMaterial.SetColor("_FresnelColor", ShieldColor.Evaluate(1));
 
-		if (shipCollider)
-			Physics.IgnoreCollision(shipCollider, shieldCollider);
+        _shieldCollider = GetComponent<SphereCollider>();
+
+		if (shipCollider) Physics.IgnoreCollision(shipCollider, _shieldCollider);
 	}
 
 	// Update is called once per frame
@@ -71,7 +68,7 @@ public class ShieldProjector : MonoBehaviour
 	{
 		// The shader for the impact objects used object space, I believe that is why the object using the shader (the shield)
 		// needs to not be rotated. This like makes sure the impact shader works
-		ShieldMeshRenderer.gameObject.transform.rotation = Quaternion.identity;
+		transform.rotation = Quaternion.identity;
 
 		FadeShieldImpacts();
 		FadeShieldShader();
@@ -88,18 +85,15 @@ public class ShieldProjector : MonoBehaviour
 			onShieldHit.Invoke(collision.gameObject);
 		}
 	}
+	#endregion
 
-	/// <summary>
-	/// Update the shield fill percent 
-	/// </summary>
-	/// <param name="current">The current shield value</param>
-	/// <param name="max">The max shield value</param>
+	// Update the shield 
 	public void UpdateShieldPercent(float current, float max)
 	{
 		float newPercent = 1 / max * current;
 
 		// If our shield is at 0%
-		if (newPercent <= 0 && DamagePercent > 0)
+		if (newPercent <= 0 && _damagePercent > 0)
 		{
 			// Invoke the On Shield Break Event
 			if (onShieldBreak != null)
@@ -110,7 +104,7 @@ public class ShieldProjector : MonoBehaviour
 			if (fadeType == FadeType.HALF_FADE)
 			{
 				// HALF_FADE means we fade the shield out so that only a small ring of color can be seen
-				ShieldMeshRenderer.material.SetColor("_BaseColor", Color.clear);
+				_shieldMaterial.SetColor("_BaseColor", Color.clear);
 			}
 
 			SpawnShieldDissolve();
@@ -119,7 +113,7 @@ public class ShieldProjector : MonoBehaviour
 		}
 
 		// If we currently have a 0% shield and our new percent is anything above 0%
-		if (DamagePercent <= 0 && newPercent > DamagePercent)
+		if (_damagePercent <= 0 && newPercent > _damagePercent)
 		{
 			// Invoke the On Shield Regen Event
 			if (onShieldRegen != null)
@@ -130,38 +124,47 @@ public class ShieldProjector : MonoBehaviour
 			if (fadeType == FadeType.HALF_FADE)
 			{
 				// HALF_FADE means we fade the shield out so that only a small ring of color can be seen
-				ShieldMeshRenderer.material.SetColor("_BaseColor", GetColor);
+				_shieldMaterial.SetColor("_BaseColor", GetColor);
 			}
 
 		//	UpdateShieldCollider(true);
 		}
 
 		// Update the damage percent
-		DamagePercent = newPercent;
+		_damagePercent = newPercent;
+	}
+
+	// Ignore a Collider
+	public void IgnoreCollider(Collider collider)
+	{
+		if (collider) {
+			Physics.IgnoreCollision(_shieldCollider, collider);
+		}
 	}
 
 	// Resize this shields hitbox depending on the shield damage percent
-	void UpdateShieldCollider(bool shieldEnabled)
+	public void UpdateCollider(bool shieldEnabled)
 	{
 		if (shipCollider != null)
 		{
 			//shipCollider.enabled = !shieldEnabled;
-			shieldCollider.enabled = shieldEnabled;
+			_shieldCollider.enabled = shieldEnabled;
 		}
 	}
 
+	#region Private Methods
 	// Handle the spawning and despawning of of a impact effect
 	void SpawnShieldImpact(Collision collision)
 	{
-		if (DamagePercent <= 0)
+		if (_damagePercent <= 0)
 		{
 			// Do nothing
 			return;
 		}
 
 		// Spawn in a Impact effect object
-		GameObject impact = Instantiate(ImpactVFX, ShieldMeshRenderer.transform.parent) as GameObject;
-		impact.transform.localScale = Vector3.one * transform.localScale.magnitude * shieldCollider.radius;
+		GameObject impact = Instantiate(impactVFX, transform.parent) as GameObject;
+		impact.transform.localScale = Vector3.one * transform.localScale.magnitude * _shieldCollider.radius;
 
 		transform.parent = transform.parent;
 
@@ -172,7 +175,7 @@ public class ShieldProjector : MonoBehaviour
 
 		// Add the impactObject to a list of materials
 		// This is used to fade out hits to the shield
-		objectsToFade.Add(material);
+		_objectsToFade.Add(material);
 
 		// Set the position of the sphere mask in the shield shader to display the new hit
 		material.SetVector("_ImpactPosition", (transform.position - collision.contacts[0].point).normalized / -2f);
@@ -184,15 +187,15 @@ public class ShieldProjector : MonoBehaviour
 	// Spawn a shield dissolve object
 	void SpawnShieldDissolve()
 	{
-		if (DissolveVFX == null)
+		if (dissolveVFX == null)
 		{
 			// Do nothing
 			return;
 		}
 
-		GameObject dissolve = Instantiate(DissolveVFX, ShieldMeshRenderer.transform.parent) as GameObject;
+		GameObject dissolve = Instantiate(dissolveVFX, transform.parent) as GameObject;
 		
-		dissolve.transform.localScale = Vector3.one * transform.localScale.magnitude * shieldCollider.radius;
+		dissolve.transform.localScale = Vector3.one * transform.localScale.magnitude * _shieldCollider.radius;
 		dissolve.GetComponent<MeshRenderer>().material.SetColor("_BaseColor", GetColor);
 
 		Destroy(dissolve, 2);
@@ -202,12 +205,12 @@ public class ShieldProjector : MonoBehaviour
 	void FadeShieldImpacts()
 	{
 		// Loop through each ImpactObjects
-		foreach (Material material in objectsToFade)
+		foreach (Material material in _objectsToFade)
 		{
 			// If that material is destroyed we remove it from the list
 			if (material == null)
 			{
-				objectsToFade.Remove(material);
+				_objectsToFade.Remove(material);
 			}
 			else
 			{
@@ -229,41 +232,34 @@ public class ShieldProjector : MonoBehaviour
 		if (fadeType == FadeType.FULL_FADE)
 		{
 			// FULL_FADE means we fade the shield to nothing
-			ShieldMeshRenderer.material.SetColor("_BaseColor", Color.Lerp(ShieldMeshRenderer.material.GetColor("_BaseColor"), Color.clear, 0.01f));
-			ShieldMeshRenderer.material.SetColor("_FresnelColor", Color.Lerp(ShieldMeshRenderer.material.GetColor("_FresnelColor"), Color.clear, 0.01f));
+			_shieldMaterial.SetColor("_BaseColor", Color.Lerp(_shieldMaterial.GetColor("_BaseColor"), Color.clear, 0.01f));
+			_shieldMaterial.SetColor("_FresnelColor", Color.Lerp(_shieldMaterial.GetColor("_FresnelColor"), Color.clear, 0.01f));
 		}
 		else if (fadeType == FadeType.HALF_FADE)
 		{
 			// HALF_FADE means we fade the shield out so that only a small ring of color can be seen
-			ShieldMeshRenderer.material.SetFloat("_FresnelSize", Mathf.Lerp(ShieldMeshRenderer.material.GetFloat("_FresnelSize"), 23, 0.1f));
+			_shieldMaterial.SetFloat("_FresnelSize", Mathf.Lerp(_shieldMaterial.GetFloat("_FresnelSize"), 5, 0.1f));
 		}
 	}
 
 	// Reset the values of the shield depending on the fade type
 	void ResetShieldShader()
 	{
-		if (DamagePercent == 0)
+		if (_damagePercent == 0)
 		{
 			// Do nothying
 			return;
 		}
 
 		// When the shield is hit. We set the shield to full visibility
-		ShieldMeshRenderer.material.SetColor("_BaseColor", GetColor);
-		ShieldMeshRenderer.material.SetColor("_FresnelColor", GetColor);
+		_shieldMaterial.SetColor("_BaseColor", GetColor);
+		_shieldMaterial.SetColor("_FresnelColor", GetColor);
 
 		if (fadeType == FadeType.HALF_FADE)
 		{
 			// HALF_FADE means we fade the shield out so that only a small ring of color can be seen
-			ShieldMeshRenderer.material.SetFloat("_FresnelSize", 3);
+			_shieldMaterial.SetFloat("_FresnelSize", 5);
 		}
 	}
-
-    public void IgnoreCollider(Collider collider)
-    {
-		if (collider)
-		{
-			Physics.IgnoreCollision(shieldCollider, collider);
-		}
-    }
+	#endregion
 }
