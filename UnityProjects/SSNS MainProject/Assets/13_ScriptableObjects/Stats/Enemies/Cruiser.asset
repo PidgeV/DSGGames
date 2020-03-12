@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipName: Cruiser
   shipDescription: 
-  maxHealth: 100
-  maxShield: 100
+  maxHealth: 350
+  maxShield: 350
+  shieldRegenPercent: 0.1
+  shieldRegenInterval: 5
   shipSpeed: 30
   rotationSpeed: 5
   fireRate: 0.1
-  shieldRegenPercent: 5
-  shieldRegenInterval: 5
   attackShipSpeed: 50
   attackRotationSpeed: 2
   accuracy: 0

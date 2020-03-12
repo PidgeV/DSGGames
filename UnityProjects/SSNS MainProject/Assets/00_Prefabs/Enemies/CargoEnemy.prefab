@@ -81,6 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21bcb8e5aef53064495f71d628833b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shipStats: {fileID: 0}
   shieldRegenDelay: 3
   currentLife: 0
   currentShield: 0
@@ -251,6 +252,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1194192106000426767}
     m_Modifications:
+    - target: {fileID: 1225102729419275378, guid: 633f381299eb47344bda0c5b2efc8d8c,
+        type: 3}
+      propertyPath: m_Name
+      value: ThusterCone (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275373, guid: 633f381299eb47344bda0c5b2efc8d8c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -305,11 +311,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102729419275378, guid: 633f381299eb47344bda0c5b2efc8d8c,
-        type: 3}
-      propertyPath: m_Name
-      value: ThusterCone (3)
       objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926709, guid: 633f381299eb47344bda0c5b2efc8d8c,
         type: 3}
@@ -371,6 +372,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1194192106000426767}
     m_Modifications:
+    - target: {fileID: 1225102729419275378, guid: 633f381299eb47344bda0c5b2efc8d8c,
+        type: 3}
+      propertyPath: m_Name
+      value: ThusterCone (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275373, guid: 633f381299eb47344bda0c5b2efc8d8c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -425,11 +431,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102729419275378, guid: 633f381299eb47344bda0c5b2efc8d8c,
-        type: 3}
-      propertyPath: m_Name
-      value: ThusterCone (1)
       objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926709, guid: 633f381299eb47344bda0c5b2efc8d8c,
         type: 3}
@@ -570,7 +571,59 @@ PrefabInstance:
         type: 3}
       propertyPath: shipCollider
       value: 
-      objectReference: {fileID: 3107085776561158199}
+      objectReference: {fileID: 0}
+    - target: {fileID: 6103393024892273190, guid: c0c0ed7488653d34baf9950ba7dc7311,
+        type: 3}
+      propertyPath: fadeType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6103393024892273190, guid: c0c0ed7488653d34baf9950ba7dc7311,
+        type: 3}
+      propertyPath: ShieldColor.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6103393024892273190, guid: c0c0ed7488653d34baf9950ba7dc7311,
+        type: 3}
+      propertyPath: ShieldColor.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6103393024892273190, guid: c0c0ed7488653d34baf9950ba7dc7311,
+        type: 3}
+      propertyPath: ShieldColor.key0.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6103393024892273190, guid: c0c0ed7488653d34baf9950ba7dc7311,
+        type: 3}
+      propertyPath: ShieldMeshRenderer
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6103393024892273190, guid: c0c0ed7488653d34baf9950ba7dc7311,
+        type: 3}
+      propertyPath: dissolveVFX
+      value: 
+      objectReference: {fileID: 3815312508183173413, guid: ddffe4b2b0537394db51f273f9c2d557,
+        type: 3}
+    - target: {fileID: 6103393024892273190, guid: c0c0ed7488653d34baf9950ba7dc7311,
+        type: 3}
+      propertyPath: impactVFX
+      value: 
+      objectReference: {fileID: 5266171281214306815, guid: b9048ee1f6b3b8d46a2a7682ceaffd9b,
+        type: 3}
+    - target: {fileID: 6103393024892273190, guid: c0c0ed7488653d34baf9950ba7dc7311,
+        type: 3}
+      propertyPath: ShieldColor.key1.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6103393024892273190, guid: c0c0ed7488653d34baf9950ba7dc7311,
+        type: 3}
+      propertyPath: ShieldColor.key1.g
+      value: 0.7684327
+      objectReference: {fileID: 0}
+    - target: {fileID: 6103393024892273190, guid: c0c0ed7488653d34baf9950ba7dc7311,
+        type: 3}
+      propertyPath: ShieldColor.key1.b
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0c0ed7488653d34baf9950ba7dc7311, type: 3}
 --- !u!1 &4189544690550367770 stripped
@@ -592,6 +645,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1194192106000426767}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 308f2050128b6b449a1c38e0b00e23fa,
+        type: 3}
+      propertyPath: m_Name
+      value: SNSS_CargoShip
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 308f2050128b6b449a1c38e0b00e23fa,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -647,11 +705,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 308f2050128b6b449a1c38e0b00e23fa,
-        type: 3}
-      propertyPath: m_Name
-      value: SNSS_CargoShip
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 308f2050128b6b449a1c38e0b00e23fa, type: 3}
 --- !u!4 &838210127615619202 stripped
@@ -667,6 +720,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1194192106000426767}
     m_Modifications:
+    - target: {fileID: 1225102729419275378, guid: 633f381299eb47344bda0c5b2efc8d8c,
+        type: 3}
+      propertyPath: m_Name
+      value: ThusterCone (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275373, guid: 633f381299eb47344bda0c5b2efc8d8c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -721,11 +779,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102729419275378, guid: 633f381299eb47344bda0c5b2efc8d8c,
-        type: 3}
-      propertyPath: m_Name
-      value: ThusterCone (2)
       objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926709, guid: 633f381299eb47344bda0c5b2efc8d8c,
         type: 3}
@@ -802,6 +855,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1194192106000426767}
     m_Modifications:
+    - target: {fileID: 1225102729419275378, guid: 633f381299eb47344bda0c5b2efc8d8c,
+        type: 3}
+      propertyPath: m_Name
+      value: ThusterCone (4)
+      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275373, guid: 633f381299eb47344bda0c5b2efc8d8c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -856,11 +914,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102729419275378, guid: 633f381299eb47344bda0c5b2efc8d8c,
-        type: 3}
-      propertyPath: m_Name
-      value: ThusterCone (4)
       objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926709, guid: 633f381299eb47344bda0c5b2efc8d8c,
         type: 3}
@@ -922,6 +975,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1194192106000426767}
     m_Modifications:
+    - target: {fileID: 1225102729419275378, guid: 633f381299eb47344bda0c5b2efc8d8c,
+        type: 3}
+      propertyPath: m_Name
+      value: ThusterCone
+      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275373, guid: 633f381299eb47344bda0c5b2efc8d8c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -976,11 +1034,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102729419275378, guid: 633f381299eb47344bda0c5b2efc8d8c,
-        type: 3}
-      propertyPath: m_Name
-      value: ThusterCone
       objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926709, guid: 633f381299eb47344bda0c5b2efc8d8c,
         type: 3}
@@ -1042,6 +1095,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1194192106000426767}
     m_Modifications:
+    - target: {fileID: 1225102729419275378, guid: 633f381299eb47344bda0c5b2efc8d8c,
+        type: 3}
+      propertyPath: m_Name
+      value: ThusterCone (5)
+      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275373, guid: 633f381299eb47344bda0c5b2efc8d8c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1096,11 +1154,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102729419275378, guid: 633f381299eb47344bda0c5b2efc8d8c,
-        type: 3}
-      propertyPath: m_Name
-      value: ThusterCone (5)
       objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926709, guid: 633f381299eb47344bda0c5b2efc8d8c,
         type: 3}

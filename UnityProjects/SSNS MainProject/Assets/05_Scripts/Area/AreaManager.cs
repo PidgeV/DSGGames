@@ -48,7 +48,93 @@ public class AreaManager : MonoBehaviour
     private Color outsideStartColor;
     private Color outsideTargetColor;
 
-    private void CheckForPortal()
+	private void Awake()
+	{
+		if (Instance != null)
+		{
+			Destroy(Instance.gameObject);
+		}
+
+		Instance = this;
+
+		boostNotification.gameObject.SetActive(false);
+
+		outsideStartColor = outsideOverlay.color;
+		outsideStartColor.a = 0;
+
+		outsideTargetColor = outsideOverlay.color;
+
+		outsideOverlay.color = outsideStartColor;
+
+		currentArea = areas[areaIndex];
+	}
+
+	// Update is called once per frame
+	void Update()
+	{
+		// Waits for reward UI to hide before switching to node selection
+		if (areaEnded)
+		{
+			if (GameManager.Instance.Player.Boosting)
+			{
+				boostHeldTime += Time.deltaTime;
+
+				if (boostHeldTime >= WARP_HELD_TIME)
+				{
+					areaEnded = false;
+					Boosting = false;
+					boostHeldTime = 0;
+					areaIndex++;
+
+					boostNotification.gameObject.SetActive(false);
+
+					GameManager.Instance.SwitchState(GameState.NODE_TRANSITION);
+				}
+
+				GameManager.Instance.Player.Warping = true;
+			}
+			else
+			{
+				boostHeldTime = Mathf.Max(boostHeldTime - Time.deltaTime, 0);
+
+				GameManager.Instance.Player.Warping = false;
+			}
+
+			boostNotification.text = "Boost for " + (int)(WARP_HELD_TIME - boostHeldTime) + "s";
+		}
+		// Transition to next node
+		else if (nextAreaLoaded && lastAreaDestroyed)
+		{
+			StartCoroutine(TransitionAreas());
+		}
+
+		if (GameManager.Instance.GameState == GameState.BATTLE)
+		{
+			if (currentArea.IsPlayerOutside)
+			{
+				outsideTime += Time.deltaTime;
+
+				if (outsideTime >= MAX_OUTSIDE_TIME)
+				{
+					outsideTime = 0;
+
+					if (GameManager.Instance.Player.TryGetComponent(out HealthAndShields health))
+					{
+						health.TakeDamage(Mathf.Infinity, Mathf.Infinity);
+					}
+				}
+			}
+			else
+			{
+				float range = currentArea.Size - (currentArea.Size - 150);
+				float input = Mathf.Abs(Vector3.Distance(GameManager.Instance.Player.transform.position, currentArea.transform.position));
+				float t = Mathf.Clamp((input - (currentArea.Size - 150)) / range, 0, 1);
+				outsideOverlay.color = Color.Lerp(outsideStartColor, outsideTargetColor, t);
+			}
+		}
+	}
+
+	private void CheckForPortal()
     {
         portalAhead = Physics.SphereCast(GameManager.Instance.Player.transform.position, 50, GameManager.Instance.Player.transform.forward, out RaycastHit raycastHit, currentArea.Size * 2, 1 << 15);
     }
@@ -132,7 +218,7 @@ public class AreaManager : MonoBehaviour
         if (lastArea != null)
         {
             lastArea.gameObject.SetActive(false);
-            
+
             foreach(Transform obj in lastArea.objects)
             {
                 Destroy(obj.gameObject);
@@ -206,95 +292,8 @@ public class AreaManager : MonoBehaviour
         }
     }
 
-    private void Awake()
-    {
-        if (Instance != null)
-        {
-            Destroy(Instance.gameObject);
-        }
-
-        Instance = this;
-
-        boostNotification.gameObject.SetActive(false);
-
-        outsideStartColor = outsideOverlay.color;
-        outsideStartColor.a = 0;
-
-        outsideTargetColor = outsideOverlay.color;
-
-        outsideOverlay.color = outsideStartColor;
-
-        currentArea = areas[areaIndex];
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        // Waits for reward UI to hide before switching to node selection
-        if (areaEnded)
-        {
-            if (GameManager.Instance.Player.Boosting || currentArea.IsPlayerOutside)
-            {
-                boostHeldTime += Time.deltaTime;
-
-                if (boostHeldTime >= WARP_HELD_TIME)
-                {
-                    areaEnded = false;
-                    Boosting = false;
-                    boostHeldTime = 0;
-                    areaIndex++;
-
-                    boostNotification.gameObject.SetActive(false);
-
-                    GameManager.Instance.SwitchState(GameState.NODE_TRANSITION);
-                }
-
-                GameManager.Instance.Player.Warping = true;
-            }
-            else
-            {
-                boostHeldTime = Mathf.Max(boostHeldTime - Time.deltaTime, 0);
-
-                GameManager.Instance.Player.Warping = false;
-            }
-
-            boostNotification.text = "Boost for " + (int)(WARP_HELD_TIME - boostHeldTime) + "s";
-        }
-        // Transition to next node
-        else if (nextAreaLoaded && lastAreaDestroyed)
-        {
-            StartCoroutine(TransitionAreas());
-        }
-
-        if (GameManager.Instance.GameState == GameState.BATTLE)
-        {
-            if (currentArea.IsPlayerOutside)
-            {
-                outsideTime += Time.deltaTime;
-
-                if (outsideTime >= MAX_OUTSIDE_TIME)
-                {
-                    outsideTime = 0;
-
-                    if (GameManager.Instance.Player.TryGetComponent(out HealthAndShields health))
-                    {
-                        health.TakeDamage(Mathf.Infinity, Mathf.Infinity);
-                    }
-                }
-            }
-        }
-
-        if (GameManager.Instance.GameState == GameState.BATTLE || GameManager.Instance.GameState == GameState.BATTLE_END)
-        {
-            float range = currentArea.Size - (currentArea.Size - 150);
-            float input = Mathf.Abs(Vector3.Distance(GameManager.Instance.Player.transform.position, currentArea.transform.position));
-            float t = Mathf.Clamp((input - (currentArea.Size - 150)) / range, 0, 1);
-            outsideOverlay.color = Color.Lerp(outsideStartColor, outsideTargetColor, t);
-        }
-    }
-
     public Area CurrentArea { get { return currentArea; } }
-	public int AreaSize { get { return currentArea.Size; } }
+	  public int AreaSize { get { return currentArea.Size; } }
     public bool EnemiesDead { get { return currentArea.enemies.childCount == 0; } }
     public int EnemyCount { get { return currentArea.enemies.childCount; } }
     public Vector3 FindRandomPosition { get { return currentArea.transform.position + Random.insideUnitSphere * currentArea.Size; } }
