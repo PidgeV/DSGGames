@@ -35,6 +35,7 @@ public abstract class EnemyController : AdvancedFSM
     private Vector3 spawnDestination;
 
     [HideInInspector] public bool showStats;
+    [HideInInspector] public AIManager.AITypes aiType = AIManager.AITypes.Null;
 
     public virtual void ResetEnemy()
     {
@@ -59,6 +60,12 @@ public abstract class EnemyController : AdvancedFSM
 
         TryGetComponent(out rbSelf);
         TryGetComponent(out health);
+
+        //Removes from AIManager on death
+        if (health != null)
+        {
+            health.onDeath += OnDeath;
+        }
     }
 
     protected override void FSMUpdate()
@@ -133,6 +140,11 @@ public abstract class EnemyController : AdvancedFSM
                 Debug.DrawRay(transform.position, rbSelf.velocity.normalized * CollisionDistance, Color.blue); //Velocity ray
             }
         }
+    }
+
+    private void OnDeath()
+    {
+        AIManager.aiManager.StopAttack(this.aiType);
     }
 
     public GameObject Player { get { return GameManager.Instance.Player.gameObject; } }

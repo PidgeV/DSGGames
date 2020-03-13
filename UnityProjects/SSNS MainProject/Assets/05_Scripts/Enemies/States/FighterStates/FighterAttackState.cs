@@ -29,6 +29,7 @@ public class FighterAttackState : AttackState<FighterController>
 	{
 		if (controller.Player == null)
         {
+            AIManager.aiManager.StopAttack(controller.aiType);
             controller.PerformTransition(Transition.Patrol);
         }
         else
@@ -38,6 +39,7 @@ public class FighterAttackState : AttackState<FighterController>
 
             if (Vector3.Distance(controller.Player.transform.position, controller.transform.position) < controller.RaySize)
             {
+                AIManager.aiManager.StopAttack(controller.aiType);
                 controller.PerformTransition(Transition.Patrol);
             }
         }

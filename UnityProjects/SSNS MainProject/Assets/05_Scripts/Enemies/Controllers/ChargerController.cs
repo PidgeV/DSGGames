@@ -9,6 +9,7 @@ public class ChargerController : EnemyController
 
     protected override void ConstructFSM()
     {
+        base.aiType = AIManager.AITypes.Charger;
         DeadState deadState = new DeadState(this);
         SpawnState spawnState = new SpawnState(this);
         ChargerPatrolState patrol = new ChargerPatrolState(this, true);
@@ -34,6 +35,7 @@ public class ChargerController : EnemyController
         if (Player && collision.gameObject.Equals(Player) && CurrentStateID == FSMStateID.Attacking)
         {
             hitPlayer = true;
+            AIManager.aiManager.StopAttack(base.aiType);
             PerformTransition(Transition.Patrol);
         }
     }

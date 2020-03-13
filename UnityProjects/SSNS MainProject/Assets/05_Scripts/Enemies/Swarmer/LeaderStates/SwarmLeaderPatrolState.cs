@@ -40,7 +40,10 @@ public class SwarmLeaderPatrolState : FSMState
             //Check distance to player
             if (Vector3.Distance(controller.transform.position, swarm.player.transform.position) <= controller.PlayerDistance) 
             {
-                controller.PerformTransition(Transition.Attack);
+                if (AIManager.aiManager.CanAttack(controller.aiType))
+                {
+                    controller.PerformTransition(Transition.Attack);
+                }
             }
         }
         else

@@ -82,6 +82,7 @@
     <Compile Include="Assets\05_Scripts\Demo\NewDemoManager.cs" />
     <Compile Include="Assets\05_Scripts\DialogueClass.cs" />
     <Compile Include="Assets\05_Scripts\DialogueSystem.cs" />
+    <Compile Include="Assets\05_Scripts\Enemies\AIManager.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Controllers\CargoController.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Controllers\ChargerController.cs" />
     <Compile Include="Assets\05_Scripts\Enemies\Controllers\CruiserController.cs" />
