@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class AIManager : MonoBehaviour
 {
-    private readonly float maxAttack = 2;
-    /*private*/ public float curAttack = 0;
-
     public static AIManager aiManager;
     public enum AITypes { Null, Swarmer, Charger, Fighter };
-    readonly int[] countsPer1Point = { 0, 6, 1, 2 };
+    [Header("Do not modify any values while running please")]
+    [SerializeField] private readonly float maxAttack = 4;
+    [SerializeField] private float curAttack = 0;
+    [SerializeField] readonly int[] countsPer1Point = { 0, 6, 1, 2 };
+    [Header("NULL, Swarmer, Charger, Fighter")]
     [SerializeField] int[] countsOfAI = { 0, 0, 0, 0 };
 
     float MaxAttack { get { return maxAttack; } } // set { maxAttack = value; } }
@@ -29,7 +30,7 @@ public class AIManager : MonoBehaviour
         
         for (int i = 1; i < counts.Length; i++)
         {
-            total += counts[i] / countsPer1Point[i];
+            total += (float)counts[i] / countsPer1Point[i];
         }
 
         return total;
@@ -46,7 +47,7 @@ public class AIManager : MonoBehaviour
         float total = 0;
         for (int i = 1; i < countsOfAI.Length; i++)
         {
-            total += countsOfAI[i] / countsPer1Point[i];
+            total += (float)countsOfAI[i] / countsPer1Point[i];
         }
 
         aiManager.CurAttack = total;
@@ -86,6 +87,10 @@ public class AIManager : MonoBehaviour
         if (aiManager == null)
         {
             aiManager = this;
+        }
+        for (int i = 0; i < countsOfAI.Length; i++)
+        {
+            countsOfAI[i] = 0;
         }
     }
 

@@ -95,7 +95,7 @@ public class ChargerAttackState : AttackState<ChargerController>
 
             Vector3 newDir = Vector3.RotateTowards(controller.transform.forward, direction, rotationForce * Time.deltaTime, 0);
             Quaternion rot = Quaternion.LookRotation(newDir);
-            controller.transform.rotation = Quaternion.Slerp(controller.transform.rotation, rot, rotationForce * Time.deltaTime);
+            controller.transform.rotation = Quaternion.Lerp(controller.transform.rotation, rot, rotationForce * Time.deltaTime);
 
             //Movement
             if (!obstacleHit && LineOfSight() && dotProduct > 0.95f)
