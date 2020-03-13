@@ -36,6 +36,7 @@ public class SwarmLeaderAttackState : FSMState
             if (swarm.player == null)
             {
                 //If no player can be found then go to patrol state
+                AIManager.aiManager.StopAttack(controller.aiType);
                 controller.PerformTransition(Transition.Patrol);
                 return;
             }
