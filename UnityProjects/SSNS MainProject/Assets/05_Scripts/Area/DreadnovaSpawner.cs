@@ -46,10 +46,11 @@ public class DreadnovaSpawner : NodeSpawner
 
     public void SpawnCargo()
     {
-        Vector3 spawnpoint = AreaManager.Instance.FindRandomPosition;
-        Vector3 swarmerSpawnpoint = spawnpoint + Random.insideUnitSphere * 20;
+        Transform spawnpoint = AreaManager.Instance.CurrentArea.FindSafeSpawn();
 
-        GameObject cargo = SpawnEnemy(cargoPrefab, spawnpoint, spawnpoint);
+        Vector3 swarmerSpawnpoint = spawnpoint.position + Random.insideUnitSphere * 20;
+
+        GameObject cargo = SpawnEnemy(cargoPrefab, spawnpoint.position, spawnpoint.position);
         GameObject swarmer = SpawnEnemy(swarmerPrefab, swarmerSpawnpoint, swarmerSpawnpoint);
 
         cargo.TryGetComponent(out cargoController);
@@ -58,6 +59,8 @@ public class DreadnovaSpawner : NodeSpawner
         {
             flock.defenseTarget = cargo;
             flock.startingCount = 100;
+
+            //flock.FlockLeader.gameObject.transform.position = swarmerSpawnpoint;
         }
     }
 

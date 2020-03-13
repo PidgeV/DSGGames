@@ -25,8 +25,8 @@ public class FlockAgent : MonoBehaviour
 
     public void Move(Vector3 velocity)
     {
-        transform.forward = velocity;// Vector3.Lerp(transform.forward, velocity, Time.deltaTime);
-        transform.position += velocity * Time.deltaTime;
+        transform.forward =  Vector3.Lerp(transform.forward, velocity, Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, transform.position + velocity, Time.deltaTime);
     }
 
     private void OnCollisionEnter(Collision collision)

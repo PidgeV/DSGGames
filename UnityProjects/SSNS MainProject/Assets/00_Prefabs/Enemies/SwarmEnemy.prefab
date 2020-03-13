@@ -52,7 +52,7 @@ MonoBehaviour:
     m_Bits: 2048
   obstacleLayers:
     serializedVersion: 2
-    m_Bits: 768
+    m_Bits: 4864
   flockLeaderPrefab: {fileID: 561547919149143226, guid: 8b2d5ba9147f86d45ae2e6e961fe4a4a,
     type: 3}
   swarmFollowRadius: 75

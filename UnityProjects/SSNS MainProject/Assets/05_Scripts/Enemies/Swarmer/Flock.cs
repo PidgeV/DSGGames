@@ -72,13 +72,12 @@ public class Flock : MonoBehaviour
         //Spawn Leader
         flockLeader = Instantiate(
                 flockLeaderPrefab,
-                transform.position + Random.insideUnitSphere * startingCount * agentDensity,
+                transform.position,
                 Quaternion.Euler(Vector3.forward * Random.Range(0f, 360f)),
                 transform);
         flockLeader.GetComponent<FlockLeaderController>().waypoints = waypoints; //set waypoints of target leader
         flockLeader.GetComponent<FlockLeaderController>().Spawn = spawnpoint;
         flockLeader.GetComponent<FlockLeaderController>().SpawnDestination = spawnDestination;
-        flockLeader.transform.parent = transform;
 
         //Spawn all swarm agents
         for (int i = 0; i < startingCount; i++)
