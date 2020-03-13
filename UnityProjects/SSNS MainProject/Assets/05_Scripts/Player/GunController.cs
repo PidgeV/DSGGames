@@ -92,8 +92,16 @@ public class GunController : MonoBehaviour
 	public void ShootFromShip()
 	{
 		if (MenuManager.Instance.Sleeping) return;
-		InitShot(Instantiate(standardShot, _shipController.ShipModel.position + _shipController.ShipModel.forward * 10, _shipController.ShipModel.rotation));
-	}
+
+        GameObject shot = Instantiate(standardShot, _shipController.ShipModel.position + _shipController.ShipModel.forward * 10, _shipController.ShipModel.rotation);
+
+        InitShot(shot);
+
+        if (shot.TryGetComponent(out Bullet bullet))
+        {
+            bullet.role = PlayerRole.Pilot;
+        }
+    }
 
 	public void ResetSpeed()
 	{
@@ -329,8 +337,13 @@ public class GunController : MonoBehaviour
 	{
 		if (newShot.TryGetComponent(out ShotThing shotThing)) {
 			shotThing.whoSent = ShotThing.shotFrom.Player;
-		}
+        }
 
-		shieldProjector.IgnoreCollider(newShot.GetComponent<Collider>());
+        if (newShot.TryGetComponent(out Bullet bullet))
+        {
+            bullet.role = PlayerRole.Gunner;
+        }
+
+        shieldProjector.IgnoreCollider(newShot.GetComponent<Collider>());
 	}
 }
