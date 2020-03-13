@@ -23,4 +23,5 @@ MonoBehaviour:
   normalPos: {x: 0, y: 7, z: -40}
   boostPos: {x: 0, y: 7, z: -70}
   warpPos: {x: 0, y: 7, z: -100}
+  deathPos: {x: 0, y: 0, z: -150}
   cameraSpeed: 0.01

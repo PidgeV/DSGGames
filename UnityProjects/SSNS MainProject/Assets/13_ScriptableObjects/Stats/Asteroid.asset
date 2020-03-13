@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipName: 
   shipDescription: 
-  maxHealth: 50
+  maxHealth: 10
   maxShield: 0
   shieldRegenPercent: 0
   shieldRegenInterval: 0

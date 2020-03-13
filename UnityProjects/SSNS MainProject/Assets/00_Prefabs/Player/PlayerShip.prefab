@@ -387,7 +387,6 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  ShieldMeshRenderer: {fileID: 5755440587805146542}
   dissolveVFX: {fileID: 3815312508183173413, guid: ddffe4b2b0537394db51f273f9c2d557,
     type: 3}
   impactVFX: {fileID: 5266171281214306815, guid: b9048ee1f6b3b8d46a2a7682ceaffd9b,
@@ -680,6 +679,7 @@ GameObject:
   - component: {fileID: 8791227409726347338}
   - component: {fileID: 6552152225560632439}
   - component: {fileID: 4376755382601005565}
+  - component: {fileID: 7716633116533072267}
   m_Layer: 10
   m_Name: PlayerShip
   m_TagString: Player
@@ -823,6 +823,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shipStats: {fileID: 0}
+  destroyedPrefab: {fileID: 8122468943365590533, guid: 21e41154b332b5e4aacdab5fb26252db,
+    type: 3}
   shieldRegenDelay: 3
   currentLife: 0
   currentShield: 0
@@ -857,7 +859,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeToRespawn: 2
-  cameraPrefab: {fileID: 0}
+  cameraPrefab: {fileID: 7114412933449935857, guid: cb7f7b6a69f230749a742a9622a6231a,
+    type: 3}
+  hud: {fileID: 0}
 --- !u!114 &8791227409726347338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -987,6 +991,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7716633116533072267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6552152225560632427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48901a74a34a93249835e8beb8ed2146, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destroyOnHit: 0
+  constantCollisionDamage: 0
+  kineticDamage: 5
+  energyDamage: 5
+  hitSoundObject: {fileID: 0}
 --- !u!1001 &5473376580466404375
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1400,6 +1421,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d756dc7a4a8506345ba2e7210f6c2736, type: 3}
+--- !u!4 &2674374794929922646 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8955104964450262280, guid: d756dc7a4a8506345ba2e7210f6c2736,
+    type: 3}
+  m_PrefabInstance: {fileID: 6438921718846947166}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &8866761739970050728 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 2474365032764999158, guid: d756dc7a4a8506345ba2e7210f6c2736,
@@ -1454,12 +1481,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbc30a0579b477449897f1180caffc0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &2674374794929922646 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8955104964450262280, guid: d756dc7a4a8506345ba2e7210f6c2736,
-    type: 3}
-  m_PrefabInstance: {fileID: 6438921718846947166}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6552152223947193274
 PrefabInstance:
   m_ObjectHideFlags: 0

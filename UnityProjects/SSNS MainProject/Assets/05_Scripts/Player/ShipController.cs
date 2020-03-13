@@ -215,7 +215,7 @@ public class ShipController : MonoBehaviour
 
 			dir = -dir.normalized;
 
-			collisionVelocity = dir * 10000;
+			collisionVelocity = dir * 50000;
 
 			collisionDirection = dir;
 

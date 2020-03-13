@@ -14,6 +14,7 @@ public class AsteroidCollision : MonoBehaviour
 
         if (TryGetComponent(out Rigidbody rigid))
         {
+            rigid.mass = 1000;
             rigid.angularVelocity = Random.insideUnitSphere * 50000;
         }
 
@@ -30,7 +31,7 @@ public class AsteroidCollision : MonoBehaviour
         foreach (Transform children in broken.transform)
         {
             Rigidbody rigid = children.gameObject.AddComponent<Rigidbody>();
-            rigid.mass = 50;
+            rigid.mass = 500;
             rigid.useGravity = false;
             rigid.drag = 0.05f;
 

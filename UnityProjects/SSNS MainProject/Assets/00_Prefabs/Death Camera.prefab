@@ -83,7 +83,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7114412933449935857}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!114 &7114412933449935823
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,7 +91,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7114412933449935857}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 23c1ce4fb46143f46bc5cb5224c934f6, type: 3}
   m_Name: 
@@ -118,7 +118,7 @@ MonoBehaviour:
   flipYMode: 0
   fullscreenPassthrough: 0
   allowDynamicResolution: 0
-  customRenderingSettings: 0
+  customRenderingSettings: 1
   invertFaceCulling: 0
   probeLayerMask:
     serializedVersion: 2
