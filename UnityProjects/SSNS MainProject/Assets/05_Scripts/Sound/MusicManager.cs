@@ -18,7 +18,7 @@ public class MusicManager : MonoBehaviour
 
     [SerializeField] int startingTrackNumber = 0;
 
-    [Range(0.1f, 10f)]
+    [Range(1f, 15f)]
     [SerializeField] float crossfadeSpeed = 1;
 
     [Range(0, 1)]
@@ -70,6 +70,32 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Chooses a random track from desired music type array
+    /// </summary>
+    /// <param name="musicType"></param>
+    public void RandomTrack(SNSSTypes.MusicTrackType musicType)
+    {
+        StopAllCoroutines();
+        int rand;
+
+        switch (musicType)
+        {
+            case SNSSTypes.MusicTrackType.MENU:
+                rand = Random.Range(0, menuTracks.Length);
+                StartCoroutine(StartMenuTrack(rand));
+                break;
+            case SNSSTypes.MusicTrackType.NON_COMBAT:
+                rand = Random.Range(0, nonCombatTracks.Length);
+                StartCoroutine(StartNonCombatTrack(rand));
+                break;
+            case SNSSTypes.MusicTrackType.COMBAT:
+                rand = Random.Range(0, combatTracks.Length);
+                StartCoroutine(StartCombatTrack(rand));
+                break;
+        }
+    }
+
     IEnumerator StartMenuTrack(int track)
     {
 
@@ -77,12 +103,14 @@ public class MusicManager : MonoBehaviour
         {
             if (usingSource1)
             {
+                //change music
                 source1.clip = menuTracks[track];
                 source1.Play();
 
                 while (source1.volume != maxVolume)
                 {
                     yield return null;
+                    //Crossfade
                     source1.volume = Mathf.Clamp(source1.volume + (maxVolume / crossfadeSpeed * Time.deltaTime), 0, maxVolume);
                     source2.volume = Mathf.Clamp(source2.volume - (maxVolume / crossfadeSpeed * Time.deltaTime), 0, maxVolume);
                 }
@@ -90,12 +118,14 @@ public class MusicManager : MonoBehaviour
             }
             else
             {
+                //change music
                 source2.clip = menuTracks[track];
                 source2.Play();
 
                 while (source2.volume != maxVolume)
                 {
                     yield return null;
+                    //Crossfade
                     source2.volume = Mathf.Clamp(source2.volume + (maxVolume / crossfadeSpeed * Time.deltaTime), 0, maxVolume);
                     source1.volume = Mathf.Clamp(source1.volume - (maxVolume / crossfadeSpeed * Time.deltaTime), 0, maxVolume);
                 }

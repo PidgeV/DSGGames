@@ -114,7 +114,7 @@ MonoBehaviour:
   weapon: 1
   fireRate: 0.1
   lifeTime: 5
-  speed: 300
+  speed: 700
 --- !u!82 &7947172679849969082
 AudioSource:
   m_ObjectHideFlags: 0

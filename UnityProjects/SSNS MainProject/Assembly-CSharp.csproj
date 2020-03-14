@@ -178,6 +178,7 @@
     <Compile Include="Assets\05_Scripts\Sound\MusicManager.cs" />
     <Compile Include="Assets\05_Scripts\Sound\Projectiles\ChargedShotSoundControl.cs" />
     <Compile Include="Assets\05_Scripts\Sound\Projectiles\LaserSoundController.cs" />
+    <Compile Include="Assets\05_Scripts\Sound\RandomizeMusic.cs" />
     <Compile Include="Assets\05_Scripts\UI\DemoManagerMenu.cs" />
     <Compile Include="Assets\05_Scripts\UI\Fade.cs" />
     <Compile Include="Assets\05_Scripts\UI\FocusButton.cs" />

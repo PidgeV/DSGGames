@@ -99,7 +99,7 @@ MonoBehaviour:
   weapon: 0
   fireRate: 0.1
   lifeTime: 5
-  speed: 300
+  speed: 700
 --- !u!114 &-1908326594476902021
 MonoBehaviour:
   m_ObjectHideFlags: 0
