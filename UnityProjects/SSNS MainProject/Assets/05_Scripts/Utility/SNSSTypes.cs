@@ -45,33 +45,35 @@ namespace SNSSTypes
         TRANSITION_END
     }
 
-	public enum FadeType
-	{
-		NO_FADE,
-		HALF_FADE,
-		FULL_FADE
-	}
+    public enum FadeType
+    {
+        NO_FADE,
+        HALF_FADE,
+        FULL_FADE
+    }
 
-	public enum OpenMenuType
-	{
-		MENU,
-		NODE_MAP
-	}
+    public enum OpenMenuType
+    {
+        MENU,
+        NODE_MAP
+    }
 
-	public enum OwnerType
-	{
-		AI,
-		MC,
-		NONE
-	}
+    public enum OwnerType
+    {
+        AI,
+        MC,
+        NONE
+    }
 
-	//RegularShot: Normal
-	//EnergyShot: Regular shot, but for shields
-	//ChargeShot: Charges over course of 1.5 seconds, then fires
-	//Missiles: Spawns many misiles to hit many enemies (think whistlin birds)
-	//LaserShot: Long, straight beam, near instant, aoe from origin
+    //RegularShot: Normal
+    //EnergyShot: Regular shot, but for shields
+    //ChargeShot: Charges over course of 1.5 seconds, then fires
+    //Missiles: Spawns many misiles to hit many enemies (think whistlin birds)
+    //LaserShot: Long, straight beam, near instant, aoe from origin
 
-	public enum WeaponType { Regular, Energy, Laser, Charged, Missiles, End }
+    public enum WeaponType { Regular, Energy, Laser, Charged, Missiles, End }
 
     public enum EnemyType { FIGHTER, CHARGER, SWARMER, CRUISER, CARGO }
+
+    public enum MusicTrackType { MENU, NON_COMBAT, COMBAT }
 }

@@ -21,7 +21,7 @@ public class LaserSoundController : MonoBehaviour
     private void Start()
     {
         laser = GetComponent<LaserBehaviour>();
-        StartCoroutine(FadeLaserSound());
+        //StartCoroutine(FadeLaserSound());
     }
 
     private void Update()
@@ -37,22 +37,32 @@ public class LaserSoundController : MonoBehaviour
 
             StartStopSoundSource.Play();
         }
-    }
 
-    IEnumerator FadeLaserSound()
-    {
-
-        while (true)
+        //Fade laser sounds
+        if (startLaser)
         {
-            yield return null;
-            if(startLaser)
-            {
-                constantSoundSource.volume = Mathf.Clamp(constantSoundSource.volume + 0.7f * Time.deltaTime, 0, 1);
-            }
-            else
-            {
-                constantSoundSource.volume = Mathf.Clamp(constantSoundSource.volume - 0.7f * Time.deltaTime, 0, 1);
-            }
+            constantSoundSource.volume = Mathf.Clamp(constantSoundSource.volume + 0.7f * Time.deltaTime, 0, 1);
+        }
+        else
+        {
+            constantSoundSource.volume = Mathf.Clamp(constantSoundSource.volume - 0.7f * Time.deltaTime, 0, 1);
         }
     }
+
+    //IEnumerator FadeLaserSound()
+    //{
+
+    //    while (true)
+    //    {
+    //        yield return null;
+    //        if(startLaser)
+    //        {
+    //            constantSoundSource.volume = Mathf.Clamp(constantSoundSource.volume + 0.7f * Time.deltaTime, 0, 1);
+    //        }
+    //        else
+    //        {
+    //            constantSoundSource.volume = Mathf.Clamp(constantSoundSource.volume - 0.7f * Time.deltaTime, 0, 1);
+    //        }
+    //    }
+    //}
 }

@@ -16,11 +16,11 @@ MonoBehaviour:
   shipDescription: 
   maxHealth: 5
   maxShield: 0
-  shipSpeed: 75
-  rotationSpeed: 0
-  fireRate: 0
   shieldRegenPercent: 0
   shieldRegenInterval: 5
+  shipSpeed: 75
+  rotationSpeed: 8
+  fireRate: 0
   attackShipSpeed: 150
   attackRotationSpeed: 0
   accuracy: 0

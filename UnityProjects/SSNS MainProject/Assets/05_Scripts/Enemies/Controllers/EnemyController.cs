@@ -93,7 +93,7 @@ public abstract class EnemyController : AdvancedFSM
             dir += turnDir;
             hit = true;
         }
-        if (Physics.SphereCast(transform.position, RaySize, rbSelf.velocity.normalized, out hitInfo, CollisionDistance, ObstacleLayer))
+        if (rbSelf != null && Physics.SphereCast(transform.position, RaySize, rbSelf.velocity.normalized, out hitInfo, CollisionDistance, ObstacleLayer))
         {
             // Get the desired direction we need to move to move around  the obstacle. Transform to world co-ordinates (gets the obstacleMoveDirection wrt the current foward direction).
             Vector3 turnDir = transform.TransformDirection(hitInfo.normal);

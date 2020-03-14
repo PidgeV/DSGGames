@@ -49,6 +49,11 @@ public class GunController : MonoBehaviour
 
 	private void Update()
 	{
+        if(currentWeapon == WeaponType.Laser && CheckForPlayer())
+        {
+            EndLaser();
+        }
+
 		if (laserShot.fadeIn)
 		{
 			Ray ray = new Ray(barrelL.transform.position, barrelL.transform.forward);
@@ -219,22 +224,22 @@ public class GunController : MonoBehaviour
 
 	public void StartLaser()
 	{
-		// TODO -- Play Sound
-		LayerMask enemyLayer = new LayerMask();
-		enemyLayer += LayerMask.GetMask("Enemies");
-		enemyLayer += LayerMask.GetMask("Swarm");
+		//// TODO -- Play Sound
+		//LayerMask enemyLayer = new LayerMask();
+		//enemyLayer += LayerMask.GetMask("Enemies");
+		//enemyLayer += LayerMask.GetMask("Swarm");
 
 		laserShot.fadeIn = true;
 
-		RaycastHit[] hits = Physics.SphereCastAll(barrelL.transform.position, laserShot.radius, barrelL.transform.forward.normalized, laserShot.Length, enemyLayer);
+		//RaycastHit[] hits = Physics.SphereCastAll(barrelL.transform.position, laserShot.radius, barrelL.transform.forward.normalized, laserShot.Length, enemyLayer);
 
-		// The Initial cone in front of the laser
-		foreach (RaycastHit hit in hits) {
-			if (hit.collider.TryGetComponent(out HealthAndShields hp))
-			{
-				hp.TakeDamage(laserShot.Damage / 3, laserShot.Damage);
-			}
-		}
+		//// The Initial cone in front of the laser
+		//foreach (RaycastHit hit in hits) {
+		//	if (hit.collider.TryGetComponent(out HealthAndShields hp))
+		//	{
+		//		hp.TakeDamage(laserShot.Damage / 3, laserShot.Damage);
+		//	}
+		//}
 	}
 
 	public void EndLaser()

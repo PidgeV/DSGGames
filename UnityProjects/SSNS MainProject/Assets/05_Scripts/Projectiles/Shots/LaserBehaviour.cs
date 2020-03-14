@@ -29,38 +29,31 @@ public class LaserBehaviour : MonoBehaviour
 
         emission = emissionParticle.emission;
         particleCount = emission.rateOverTime.constant;
-
-        StartCoroutine(Fade());
     }
 
-    IEnumerator Fade()
+    private void Update()
     {
-        while (true)
+        float fade;
+        float fade2;
+        float alpha;
+
+        if (fadeIn)
         {
-            yield return new WaitForEndOfFrame();
-
-            float fade;
-            float fade2;
-            float alpha;
-
-            if (fadeIn)
-            {
-                fade = Mathf.Clamp((laserMaterials[0].GetFloat("Vector1_2C1D604B") - 0.5f * Time.deltaTime), 0.5f, 1); //Using alphaClip
-                fade2 = Mathf.Clamp((laserMaterials[1].GetFloat("Vector1_2C1D604B") - 0.7f * Time.deltaTime), 0, 1);
-                alpha = Mathf.Clamp((laserMaterials[2].GetFloat("Vector1_2DFED300") + 0.2f * Time.deltaTime), 0, 0.5f); //Using alpha
-                emission.rateOverTime = particleCount;
-            }
-            else
-            {
-                fade = Mathf.Clamp((laserMaterials[0].GetFloat("Vector1_2C1D604B") + 0.5f * Time.deltaTime), 0.5f, 1);
-                fade2 = Mathf.Clamp((laserMaterials[1].GetFloat("Vector1_2C1D604B") + 0.7f * Time.deltaTime), 0, 1);
-                alpha = Mathf.Clamp((laserMaterials[2].GetFloat("Vector1_2DFED300") - 0.5f * Time.deltaTime), 0, 0.5f);
-                emission.rateOverTime = 0;
-            }
-
-            laserMaterials[0].SetFloat("Vector1_2C1D604B", fade);
-            laserMaterials[1].SetFloat("Vector1_2C1D604B", fade2);
-            laserMaterials[2].SetFloat("Vector1_2DFED300", alpha);
+            fade = Mathf.Clamp((laserMaterials[0].GetFloat("Vector1_2C1D604B") - 0.5f * Time.deltaTime), 0.5f, 1); //Using alphaClip
+            fade2 = Mathf.Clamp((laserMaterials[1].GetFloat("Vector1_2C1D604B") - 0.7f * Time.deltaTime), 0, 1);
+            alpha = Mathf.Clamp((laserMaterials[2].GetFloat("Vector1_2DFED300") + 0.2f * Time.deltaTime), 0, 0.5f); //Using alpha
+            emission.rateOverTime = particleCount;
         }
+        else
+        {
+            fade = Mathf.Clamp((laserMaterials[0].GetFloat("Vector1_2C1D604B") + 0.5f * Time.deltaTime), 0.5f, 1);
+            fade2 = Mathf.Clamp((laserMaterials[1].GetFloat("Vector1_2C1D604B") + 0.7f * Time.deltaTime), 0, 1);
+            alpha = Mathf.Clamp((laserMaterials[2].GetFloat("Vector1_2DFED300") - 0.5f * Time.deltaTime), 0, 0.5f);
+            emission.rateOverTime = 0;
+        }
+
+        laserMaterials[0].SetFloat("Vector1_2C1D604B", fade);
+        laserMaterials[1].SetFloat("Vector1_2C1D604B", fade2);
+        laserMaterials[2].SetFloat("Vector1_2DFED300", alpha);
     }
 }
