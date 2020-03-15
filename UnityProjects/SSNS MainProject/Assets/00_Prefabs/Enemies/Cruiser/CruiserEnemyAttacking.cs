@@ -12,6 +12,8 @@ public class CruiserEnemyAttacking : StateMachineBehaviour
 	private float _targetAttackSpeed = 10;
 	private float _attackTimer = 0;
 
+	private bool _shieldUp = true;
+
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
@@ -59,6 +61,25 @@ public class CruiserEnemyAttacking : StateMachineBehaviour
 		{
 			_attackTimer = 0.0f;
 			_cruiserEnemy._currentSpeed = Mathf.Lerp(_cruiserEnemy._currentSpeed, _targetSpeed, Time.deltaTime * 0.8f);
+		}
+
+		if (Vector3.Distance(_transform.position, _player.position) < 300)
+		{
+			if (_shieldUp == true)
+			{
+				// Shield Down
+				_shieldUp = false;
+				_cruiserEnemy.shieldDown();
+			}
+		}
+		else
+		{
+			if (_shieldUp == false)
+			{
+				// Shield Up
+				_shieldUp = true;
+				_cruiserEnemy.shieldUp();
+			}
 		}
 	}
 

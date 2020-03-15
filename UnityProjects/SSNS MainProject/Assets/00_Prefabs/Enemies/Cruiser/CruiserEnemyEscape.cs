@@ -13,6 +13,8 @@ public class CruiserEnemyEscape : StateMachineBehaviour
 	private List<Vector3> _waypoints;
 	private Vector3 _targetPos;
 
+	private bool _shieldUp = true;
+
 	// OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
 	override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
 	{
@@ -48,6 +50,25 @@ public class CruiserEnemyEscape : StateMachineBehaviour
 		if (Vector3.Distance(_transform.position, _targetPos) < _cruiserEnemy.TargetDistanceToPoint)
 		{
 			animator.SetTrigger("Patrolling");
+		}
+
+		if (Vector3.Distance(_transform.position, _player.position) < 300)
+		{
+			if (_shieldUp == true)
+			{
+				// Shield Down
+				_shieldUp = false;
+				_cruiserEnemy.shieldDown();
+			}
+		}
+		else
+		{
+			if (_shieldUp == false)
+			{
+				// Shield Up
+				_shieldUp = true;
+				_cruiserEnemy.shieldUp();
+			}
 		}
 	}
 

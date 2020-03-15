@@ -34,6 +34,10 @@ public class CruiserEnemy : MonoBehaviour
 
 	[SerializeField] private Transform shield;
 	[SerializeField] private Transform obstacleScanner;
+	[SerializeField] private Collider shieldCollider;
+
+	public void shieldUp() => shieldCollider.enabled = true;
+	public void shieldDown() => shieldCollider.enabled = false;
 
 	public Vector3 TargetPos;
 
