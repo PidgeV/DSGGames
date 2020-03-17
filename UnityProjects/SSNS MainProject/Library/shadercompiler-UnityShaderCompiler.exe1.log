@@ -1,4 +1,11 @@
-Base path: 'D:/Unity/Editor/Data', plugins path 'D:/Unity/Editor/Data/PlaybackEngines'
+Base path: 'C:/Program Files/Unity/Editor/Data', plugins path 'C:/Program Files/Unity/Editor/Data/PlaybackEngines'
 Cmd: initializeCompiler
-Cmd: compileSnippet
-  api=4 type=1 insize=38368 outsize=5506 kw=DECALS_3RT DEBUG_DISPLAY pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
+Cmd: compileComputeKernel
+  error: 1 plat 4 at Fire&Smoke.vfx(53): comma expression used where a vector constructor may have been intended
+  api=4 insize=5608 outsize=1875 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=5597 outsize=20962 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=5203 outsize=1996 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=5579 outsize=20856 ok=1
