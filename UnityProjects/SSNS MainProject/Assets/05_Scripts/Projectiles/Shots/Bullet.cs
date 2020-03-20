@@ -11,6 +11,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public GameObject shooter;
+    public SNSSTypes.PlayerRole role = SNSSTypes.PlayerRole.None;
 
     private void Awake()
     {
@@ -24,6 +25,11 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (role != SNSSTypes.PlayerRole.None && GameManager.Instance.Player.TryGetComponent(out PlayerHUDHandler hud))
+        {
+            hud.BlinkRedicle(SNSSTypes.PlayerRole.Pilot);
+        }
+
         StartCoroutine(DestroyBullet());
     }
 

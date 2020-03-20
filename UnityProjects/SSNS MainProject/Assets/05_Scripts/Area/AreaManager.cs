@@ -110,7 +110,10 @@ public class AreaManager : MonoBehaviour
 
 		if (GameManager.Instance.GameState == GameState.BATTLE)
 		{
-			if (currentArea.IsPlayerOutside)
+            if (!outsideOverlay.IsActive())
+                outsideOverlay.gameObject.SetActive(true);
+
+            if (currentArea.IsPlayerOutside)
 			{
 				outsideTime += Time.deltaTime;
 
@@ -132,6 +135,10 @@ public class AreaManager : MonoBehaviour
 				outsideOverlay.color = Color.Lerp(outsideStartColor, outsideTargetColor, t);
 			}
 		}
+        else if (GameManager.Instance.GameState == GameState.RESPAWN && outsideOverlay.IsActive())
+        {
+            outsideOverlay.gameObject.SetActive(false);
+        }
 	}
 
 	private void CheckForPortal()
@@ -218,7 +225,7 @@ public class AreaManager : MonoBehaviour
         if (lastArea != null)
         {
             lastArea.gameObject.SetActive(false);
-            
+
             foreach(Transform obj in lastArea.objects)
             {
                 Destroy(obj.gameObject);
@@ -283,9 +290,9 @@ public class AreaManager : MonoBehaviour
     /// </summary>
     public void KillEnemies()
     {
-        foreach(GameObject enemy in currentArea.enemies)
+        foreach(Transform enemy in currentArea.enemies)
         {
-            HealthAndShields healthAndShields = enemy.GetComponent<HealthAndShields>();
+            HealthAndShields healthAndShields = enemy.GetComponentInChildren<HealthAndShields>();
 
             if (healthAndShields)
                 healthAndShields.TakeDamage(Mathf.Infinity, Mathf.Infinity);
@@ -293,7 +300,7 @@ public class AreaManager : MonoBehaviour
     }
 
     public Area CurrentArea { get { return currentArea; } }
-	public int AreaSize { get { return currentArea.Size; } }
+	  public int AreaSize { get { return currentArea.Size; } }
     public bool EnemiesDead { get { return currentArea.enemies.childCount == 0; } }
     public int EnemyCount { get { return currentArea.enemies.childCount; } }
     public Vector3 FindRandomPosition { get { return currentArea.transform.position + Random.insideUnitSphere * currentArea.Size; } }

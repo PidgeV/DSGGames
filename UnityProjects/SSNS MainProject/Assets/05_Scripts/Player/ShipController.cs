@@ -207,7 +207,7 @@ public class ShipController : MonoBehaviour
 		UpdateCamera();
 	}
 
-	private void OnCollisionStay(Collision c)
+	private void OnCollisionEnter(Collision c)
 	{
 		if (c.gameObject.tag != "Projectile" && !collision)
 		{
@@ -215,7 +215,7 @@ public class ShipController : MonoBehaviour
 
 			dir = -dir.normalized;
 
-			collisionVelocity = dir * 1000;
+			collisionVelocity = dir * 50000;
 
 			collisionDirection = dir;
 

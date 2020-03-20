@@ -32,6 +32,7 @@ public class ShipBehaviour : ScriptableObject
 	public Vector3 normalPos;
 	public Vector3 boostPos;
 	public Vector3 warpPos;
+	public Vector3 deathPos;
 
 	public float cameraSpeed = 0.01f;
 }

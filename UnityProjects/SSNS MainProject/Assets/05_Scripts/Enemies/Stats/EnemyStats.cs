@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Enemy Stats", menuName = "Ship/Enemy Stats")]
-public class EnemyStats : ShipStats
+public class EnemyStats : Stats
 {
     [Header("Movement")]
     public float attackShipSpeed = 50f;

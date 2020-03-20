@@ -16,7 +16,9 @@ public class HealthAndShields : MonoBehaviour
 	public delegate void OnDeath();
 	public OnDeath onDeath;
 
-	[SerializeField] private ShipStats shipStats;
+	[SerializeField] private Stats shipStats;
+	[SerializeField] private GameObject destroyedPrefab;
+	private GameObject destroyedObject;
 
 	// The MAX life the ship has
 	public float MaxLife { get { return shipStats.maxHealth; } }
@@ -178,6 +180,15 @@ public class HealthAndShields : MonoBehaviour
 		{
 			// Respawn the gameobject?
 			gameObject.SetActive(false);
+		}
+
+		if (destroyedPrefab)
+		{
+			destroyedObject = Instantiate(destroyedPrefab);
+			destroyedObject.transform.position = transform.position;
+			destroyedObject.transform.rotation = transform.rotation;
+
+			AreaManager.Instance.OnObjectAdd(destroyedObject);
 		}
 	}
 

@@ -5,8 +5,12 @@ using UnityEngine;
 public class PlayerRespawn : MonoBehaviour
 {
     [SerializeField] private float timeToRespawn;
+    [SerializeField] private GameObject cameraPrefab;
+    [SerializeField] private RectTransform hud;
 
     private ShipController player;
+
+    private GameObject camera;
 
     public void Respawn()
     {
@@ -24,11 +28,22 @@ public class PlayerRespawn : MonoBehaviour
 
         player.gameObject.SetActive(true);
 
+        Destroy(camera);
+
+        hud.gameObject.SetActive(true);
+
         GameManager.Instance.SwitchState(SNSSTypes.GameState.BATTLE);
     }
 
     private void OnDeath()
     {
+        camera = Instantiate(cameraPrefab);
+        camera.transform.position = transform.position + Quaternion.LookRotation(transform.forward) * player.Behaviour.deathPos;
+        camera.transform.LookAt(transform.position);
+
+        camera.transform.rotation = Quaternion.Euler(camera.transform.eulerAngles.x, camera.transform.eulerAngles.y, transform.eulerAngles.z);
+
+        hud.gameObject.SetActive(false);
     }
 
     private void Start()

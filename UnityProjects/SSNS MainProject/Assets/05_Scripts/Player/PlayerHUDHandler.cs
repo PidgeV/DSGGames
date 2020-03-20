@@ -8,6 +8,9 @@ public class PlayerHUDHandler : MonoBehaviour
 	private ShipController _shipController;
 	private HealthAndShields _shipHealth;
 
+    [SerializeField] private Image pilotRedicle;
+    [SerializeField] private Image gunnerRedicle;
+
 	[HideInInspector] public Slider _slider_Health;
 	[HideInInspector] public Slider _slider_Shield;
 	[HideInInspector] public Slider _slider_Boost;
@@ -65,4 +68,59 @@ public class PlayerHUDHandler : MonoBehaviour
 		_slider_Shield.value = (1 / _shipHealth.MaxShield) * _shipHealth.currentShield;
 	}
 
+    public void BlinkRedicle(SNSSTypes.PlayerRole role)
+    {
+        StopAllCoroutines();
+        pilotRedicle.rectTransform.localScale = Vector3.one;
+        pilotRedicle.color = new Color(1, 1, 1, pilotRedicle.color.a);
+
+        gunnerRedicle.rectTransform.localScale = Vector3.one;
+        gunnerRedicle.color = new Color(1, 1, 1, gunnerRedicle.color.a);
+
+
+        if (role == SNSSTypes.PlayerRole.Pilot)
+        {
+            StartCoroutine(Blink(pilotRedicle));
+        }
+        else if (role == SNSSTypes.PlayerRole.Gunner)
+        {
+            StartCoroutine(Blink(gunnerRedicle));
+        }
+    }
+
+    private IEnumerator Blink(Image redicle)
+    {
+        bool decrease = false;
+        float scale = 1;
+
+        float max = 1.01f;
+
+        redicle.rectTransform.localScale = Vector3.one * scale;
+
+        redicle.color = new Color(1, 0, 0, redicle.color.a);
+
+        while (true)
+        {
+            if (decrease)
+            {
+                scale = Mathf.Clamp(scale - 0.1f, 1, max);
+            }
+            else
+            {
+                scale = Mathf.Clamp(scale + 0.1f, 1, max);
+
+                if (scale == max)
+                    decrease = true;
+            }
+
+            redicle.rectTransform.localScale = Vector3.one * scale;
+
+            if (decrease && scale == 1)
+                break;
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        redicle.color = new Color(1, 1, 1, redicle.color.a);
+    }
 }

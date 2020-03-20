@@ -333,15 +333,25 @@ public class NewDemoManager : MonoBehaviour
 	/// </summary>
 	public void KillAllEnemies()
 	{
-		foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy")) {
-
-			if (enemy.TryGetComponent(out HealthAndShields health)) {
-				health.TakeDamage(Mathf.Infinity, Mathf.Infinity);
-			}
-			else if (enemy.TryGetComponent(out Flock swarm))
+		if (AreaManager.Instance != null)
+		{
+			AreaManager.Instance.KillEnemies();
+		}
+		else
+		{
+			foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
 			{
-				foreach (FlockAgent agent in swarm.agents) {
-					agent.GetComponent<HealthAndShields>().TakeDamage(Mathf.Infinity, Mathf.Infinity);
+
+				if (enemy.TryGetComponent(out HealthAndShields health))
+				{
+					health.TakeDamage(Mathf.Infinity, Mathf.Infinity);
+				}
+				else if (enemy.TryGetComponent(out Flock swarm))
+				{
+					foreach (FlockAgent agent in swarm.agents)
+					{
+						agent.GetComponent<HealthAndShields>().TakeDamage(Mathf.Infinity, Mathf.Infinity);
+					}
 				}
 			}
 		}
