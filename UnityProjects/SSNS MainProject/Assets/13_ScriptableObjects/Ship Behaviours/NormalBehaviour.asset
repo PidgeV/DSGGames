@@ -22,5 +22,6 @@ MonoBehaviour:
   moveSpeed: 0.05
   normalPos: {x: 0, y: 7, z: -35}
   boostPos: {x: 0, y: 7, z: -55}
-  warpPos: {x: 0, y: 0, z: -75}
+  warpPos: {x: 0, y: 7, z: -75}
+  deathPos: {x: 0, y: 7, z: -75}
   cameraSpeed: 0.01
