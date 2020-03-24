@@ -1,21 +1,62 @@
 Base path: 'C:/Program Files/Unity/Editor/Data', plugins path 'C:/Program Files/Unity/Editor/Data/PlaybackEngines'
 Cmd: initializeCompiler
 Cmd: compileComputeKernel
-  api=4 insize=5191 outsize=1859 ok=1
+  api=4 insize=18610 outsize=4952 ok=1
 Cmd: compileComputeKernel
-  api=4 insize=5517 outsize=2396 ok=1
+  api=4 insize=15603 outsize=93200 ok=1
 Cmd: compileComputeKernel
-  api=4 insize=1629 outsize=1398 ok=1
-Cmd: compileSnippet
-  api=4 type=0 insize=14182 outsize=6022 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
+  api=4 insize=15603 outsize=42917 ok=1
 Cmd: compileComputeKernel
-  api=4 insize=5069 outsize=2663 ok=1
+  api=4 insize=15603 outsize=74883 ok=1
 Cmd: compileComputeKernel
-  api=4 insize=4834 outsize=2492 ok=1
+  api=4 insize=15603 outsize=40455 ok=1
 Cmd: compileComputeKernel
-  error: 1 plat 4 at Packages/com.unity.visualeffectgraph/Shaders/VFXCommon.cginc(561): pow(f, e) will not work for negative f, use abs(f) or conditionally handle negative values if you expect them
-  api=4 insize=5644 outsize=9353 ok=1
+  api=4 insize=15603 outsize=50961 ok=1
 Cmd: compileComputeKernel
-  api=4 insize=5275 outsize=2191 ok=1
-Cmd: compileSnippet
-  api=4 type=0 insize=13185 outsize=4218 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
+  api=4 insize=15603 outsize=77324 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=25750 outsize=15415 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=1326 outsize=620 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=2648 outsize=1945 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=9347 outsize=9139 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=13624 outsize=2094 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=21554 outsize=15241 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=4423 outsize=2453 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=3022 outsize=494 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=7918 outsize=532 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=857 outsize=578 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=1580 outsize=16101 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=36515 outsize=32395 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=36515 outsize=35084 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=5065 outsize=1174 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=15717 outsize=3063 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=2596 outsize=2186 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=8970 outsize=244 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=3043 outsize=551 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=9814 outsize=4045 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=7700 outsize=7862 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=3918 outsize=3422 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=17632 outsize=638 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=2510 outsize=562 ok=1
