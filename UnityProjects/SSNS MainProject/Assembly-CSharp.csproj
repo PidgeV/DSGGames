@@ -77,6 +77,7 @@
     <Compile Include="Assets\05_Scripts\Area\Spawns\WaveSpawn.cs" />
     <Compile Include="Assets\05_Scripts\Area\TutorialSpawner.cs" />
     <Compile Include="Assets\05_Scripts\Area\Wave Behaviours\WaveBehaviour.cs" />
+    <Compile Include="Assets\05_Scripts\ButtonBehaviour.cs" />
     <Compile Include="Assets\05_Scripts\Demo\DemoManager.cs" />
     <Compile Include="Assets\05_Scripts\Demo\DemoValue.cs" />
     <Compile Include="Assets\05_Scripts\Demo\NewDemoManager.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="Assets\05_Scripts\Environment\SkyboxManager.cs" />
     <Compile Include="Assets\05_Scripts\Environment\TargetMove.cs" />
     <Compile Include="Assets\05_Scripts\GameManager.cs" />
+    <Compile Include="Assets\05_Scripts\GameSettings.cs" />
     <Compile Include="Assets\05_Scripts\Inputs\Controller.cs" />
     <Compile Include="Assets\05_Scripts\Node\Node.cs" />
     <Compile Include="Assets\05_Scripts\Node\NodeEvent.cs" />
@@ -171,6 +173,7 @@
     <Compile Include="Assets\05_Scripts\Rewards\RewardUI.cs" />
     <Compile Include="Assets\05_Scripts\Score\ScoreCounter.cs" />
     <Compile Include="Assets\05_Scripts\Score\ShotThing.cs" />
+    <Compile Include="Assets\05_Scripts\Settings.cs" />
     <Compile Include="Assets\05_Scripts\Shaders\MoveShaderPoint.cs" />
     <Compile Include="Assets\05_Scripts\Shaders\ShieldDissolve.cs" />
     <Compile Include="Assets\05_Scripts\ShieldGenerator\ShieldGenerator.cs" />
