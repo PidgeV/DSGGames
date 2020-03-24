@@ -1,11 +1,2 @@
-Base path: 'C:/Program Files/Unity/Editor/Data', plugins path 'C:/Program Files/Unity/Editor/Data/PlaybackEngines'
+Base path: 'C:/Program Files/Unity/Hub/Editor/2019.2.2f1/Editor/Data', plugins path 'C:/Program Files/Unity/Hub/Editor/2019.2.2f1/Editor/Data/PlaybackEngines'
 Cmd: initializeCompiler
-Cmd: compileComputeKernel
-  error: 1 plat 4 at Fire&Smoke.vfx(53): comma expression used where a vector constructor may have been intended
-  api=4 insize=5608 outsize=1875 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=5597 outsize=20962 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=5203 outsize=1996 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=5579 outsize=20856 ok=1
