@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
 	/// </summary>
 	public void PauseGame()
 	{
-		Player[] players = GameObject.FindObjectsOfType<Player>();
+		Player[] players = FindObjectsOfType<Player>();
 
 		foreach (Player player in players)
 		{
@@ -78,6 +78,7 @@ public class GameManager : MonoBehaviour
             case GameState.BATTLE:
                 healthAndShields.Invincible = false;
                 shipController.Warping = false;
+                WarpEffectBehaviour.instance.EndWarp();
                 break;
             case GameState.BATTLE_END:
 				healthAndShields.ResetValues();
@@ -90,11 +91,14 @@ public class GameManager : MonoBehaviour
                 shipController.Warping = true;
                 shipController.Freeze = false;
                 shipController.StopThrust = false;
-                AreaManager.Instance.LoadNewArea();
+                shipController.AlignGunnerWithPilot();
+                WarpEffectBehaviour.instance.StartWarp();
+                //AreaManager.Instance.LoadNewArea();
+                StartCoroutine(DelayedAreaLoad());
                 break;
             case GameState.GAME_END:
 
-                foreach (Player player in GameObject.FindObjectsOfType<Player>())
+                foreach (Player player in FindObjectsOfType<Player>())
                 {
                     player.SetPlayerActionMap("MenuNavigation");
                 }
@@ -102,6 +106,12 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene("MainMenu");
                 break;
         }
+    }
+
+    IEnumerator DelayedAreaLoad()
+    {
+        yield return new WaitForSeconds(3f);
+        AreaManager.Instance.LoadNewArea();
     }
 
     private void CheckForRespawn()

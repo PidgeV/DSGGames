@@ -242,43 +242,46 @@ public class ShipController : MonoBehaviour
 	/// </summary>
 	public void UpdateCamera()
 	{
-		// Where the camera SHOULD be relative to the ship model
-		Vector3 shipPos = shipModel.transform.position;
+        if (!warping)
+        {
+            // Where the camera SHOULD be relative to the ship model
+            Vector3 shipPos = shipModel.transform.position;
 
-		Vector3 yPos = -6 * shipModel.transform.up;
-		Vector3 zPos = -1 * shipModel.transform.forward;
+            Vector3 yPos = -6 * shipModel.transform.up;
+            Vector3 zPos = -1 * shipModel.transform.forward;
 
-		gunnerPivot.position = Vector3.Lerp(gunnerPivot.position, shipPos + yPos + zPos, 0.25f);
+            gunnerPivot.position = Vector3.Lerp(gunnerPivot.position, shipPos + yPos + zPos, 0.25f);
 
-		gunnerPivot.rotation = Quaternion.identity;
-		gunnerObject.Rotate(new Vector2(-gunVelocity.y, gunVelocity.x) * Time.deltaTime * (slowCamera ? 0.2f : 1f));
+            gunnerPivot.rotation = Quaternion.identity;
+            gunnerObject.Rotate(new Vector2(-gunVelocity.y, gunVelocity.x) * Time.deltaTime * (slowCamera ? 0.2f : 1f));
 
-      //  gunnerObject.eulerAngles = new Vector3(gunnerObject.eulerAngles.x, gunnerObject.eulerAngles.y, 0);
+            //  gunnerObject.eulerAngles = new Vector3(gunnerObject.eulerAngles.x, gunnerObject.eulerAngles.y, 0);
 
-        // If we don't have a target currently locking
-        if (lockOnTarget == null)
-		{
-			CheckForTarget();
-		}
+            // If we don't have a target currently locking
+            if (lockOnTarget == null)
+            {
+                CheckForTarget();
+            }
 
-		// (BLOCKER) If we cant Lock on
-		if (AimAssist == false) return;
+            // (BLOCKER) If we cant Lock on
+            if (AimAssist == false) return;
 
-		if (lockOnTarget != null)
-		{
-			Vector2 newPoint = gunnerCamera.WorldToScreenPoint(lockOnTarget.transform.position);
-			float unlockDist = 60;
+            if (lockOnTarget != null)
+            {
+                Vector2 newPoint = gunnerCamera.WorldToScreenPoint(lockOnTarget.transform.position);
+                float unlockDist = 60;
 
-			if (Vector2.Distance(gunnerCenter, newPoint) < unlockDist)
-			{
-				gunnerslockUI.transform.position = newPoint;
-			}
-			else
-			{
-				gunnerslockUI.transform.position = gunnerCenter;
-				lockOnTarget = null;
-			}
-		}
+                if (Vector2.Distance(gunnerCenter, newPoint) < unlockDist)
+                {
+                    gunnerslockUI.transform.position = newPoint;
+                }
+                else
+                {
+                    gunnerslockUI.transform.position = gunnerCenter;
+                    lockOnTarget = null;
+                }
+            }
+        }
 	}
 
 	/// <summary>
@@ -510,6 +513,14 @@ public class ShipController : MonoBehaviour
 	{
 		slowCamera = pressed;
 	}
+
+    /// <summary>
+    /// Makes gunner face the same direction as the pilot
+    /// </summary>
+    public void AlignGunnerWithPilot()
+    {
+        gunnerObject.transform.rotation = gameObject.transform.rotation;
+    }
 
 	// Editor values
 	[HideInInspector] public bool showBehaviour = false;

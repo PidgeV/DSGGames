@@ -505,7 +505,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6552152225560632427}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.9848079, z: 0, w: 0.17364752}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -516,7 +516,7 @@ Transform:
   - {fileID: 2262280685838337479}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 2000, z: 0}
 --- !u!54 &6552152225560632437
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -815,10 +815,10 @@ GameObject:
   - component: {fileID: 2262280685838337479}
   - component: {fileID: 2515026088879441067}
   - component: {fileID: 2471945356514067847}
-  - component: {fileID: 4337535301809322311}
+  - component: {fileID: 8772786701082190365}
   m_Layer: 0
   m_Name: WarpEffect
-  m_TagString: Untagged
+  m_TagString: WarpEffect
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -831,8 +831,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8979454547450197188}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.000012367962}
-  m_LocalPosition: {x: 0, y: 6.6, z: 165}
-  m_LocalScale: {x: 10, y: 10, z: 10}
+  m_LocalPosition: {x: 0, y: -2, z: 891.1}
+  m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children: []
   m_Father: {fileID: 6552152225560632426}
   m_RootOrder: 4
@@ -851,7 +851,7 @@ VisualEffect:
   m_PropertySheet:
     m_Float:
       m_Array:
-      - m_Value: 30
+      - m_Value: 60
         m_Name: WarpRadius
         m_Overridden: 1
     m_Vector2f:
@@ -859,7 +859,13 @@ VisualEffect:
     m_Vector3f:
       m_Array: []
     m_Vector4f:
-      m_Array: []
+      m_Array:
+      - m_Value: {x: 0, y: 0.322116, z: 0.9056604, w: 1}
+        m_Name: TrailColor 2
+        m_Overridden: 0
+      - m_Value: {x: 1, y: 1, z: 1, w: 0}
+        m_Name: Trail Color
+        m_Overridden: 0
     m_Uint:
       m_Array: []
     m_Int:
@@ -913,7 +919,7 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &4337535301809322311
+--- !u!114 &8772786701082190365
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -925,7 +931,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce6662587bb140945ba6113df1854634, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  warpTransitionSpeed: 10
+  warpTransitionSpeed: 40
 --- !u!1001 &3603328856722011669
 PrefabInstance:
   m_ObjectHideFlags: 0

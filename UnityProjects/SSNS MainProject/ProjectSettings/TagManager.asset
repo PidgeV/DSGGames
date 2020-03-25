@@ -14,7 +14,8 @@ TagManager:
   - CapitalShip
   - Shield
   - Score
-  - MinimapCamera
+  - Projectile
+  - WarpEffect
   layers:
   - Default
   - TransparentFX

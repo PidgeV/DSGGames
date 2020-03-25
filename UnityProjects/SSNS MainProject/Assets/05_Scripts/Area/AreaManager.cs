@@ -177,10 +177,10 @@ public class AreaManager : MonoBehaviour
         outsideOverlay.color = outsideStartColor;
 
         // Moves player to a spot away from any areas
-        GameManager.Instance.Player.gameObject.SetActive(false);
+        //GameManager.Instance.Player.gameObject.SetActive(false);
         GameManager.Instance.Player.transform.position = Vector3.zero;
         GameManager.Instance.Player.transform.rotation = Quaternion.identity;
-        GameManager.Instance.Player.gameObject.SetActive(true);
+        //GameManager.Instance.Player.gameObject.SetActive(true);
 
         if (areaIndex >= areas.Length)
         {
@@ -259,10 +259,10 @@ public class AreaManager : MonoBehaviour
 
         Transform playerSpawn = currentArea.FindSafeSpawn();
 
-        GameManager.Instance.Player.gameObject.SetActive(false);
+        //GameManager.Instance.Player.gameObject.SetActive(false);
         GameManager.Instance.Player.transform.position = playerSpawn.position;
 		GameManager.Instance.Player.transform.rotation = playerSpawn.rotation;
-        GameManager.Instance.Player.gameObject.SetActive(true);
+        //GameManager.Instance.Player.gameObject.SetActive(true);
 
         SkyboxManager.Instance.SwitchToSkybox(currentArea.Skybox);
 		GameManager.Instance.SwitchState(GameState.BATTLE);
