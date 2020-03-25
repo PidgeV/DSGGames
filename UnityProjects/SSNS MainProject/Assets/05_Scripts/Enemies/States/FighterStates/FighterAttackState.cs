@@ -37,7 +37,7 @@ public class FighterAttackState : AttackState<FighterController>
 
             CalculateIntercept();
 
-            if (Vector3.Distance(controller.Player.transform.position, controller.transform.position) < controller.RaySize)
+            if (Vector3.Distance(controller.Player.transform.position, controller.transform.position) < controller.AttackDistance)
             {
                 AIManager.aiManager.StopAttack(controller.aiType);
                 controller.PerformTransition(Transition.Patrol);

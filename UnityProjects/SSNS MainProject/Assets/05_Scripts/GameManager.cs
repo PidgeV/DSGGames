@@ -76,11 +76,13 @@ public class GameManager : MonoBehaviour
         switch (gameState)
         {
             case GameState.BATTLE:
+                MusicManager.instance.RandomTrack(MusicTrackType.COMBAT);
                 healthAndShields.Invincible = false;
                 shipController.Warping = false;
                 WarpEffectBehaviour.instance.EndWarp();
                 break;
             case GameState.BATTLE_END:
+                MusicManager.instance.RandomTrack(MusicTrackType.NON_COMBAT);
 				healthAndShields.ResetValues();
                 healthAndShields.Invincible = true;
                 AreaManager.Instance.EndArea();
