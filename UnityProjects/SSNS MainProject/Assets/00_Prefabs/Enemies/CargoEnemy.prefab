@@ -81,7 +81,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21bcb8e5aef53064495f71d628833b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipStats: {fileID: 0}
+  shipStats: {fileID: 11400000, guid: 3c7b79c5395107041843d168d1c8edda, type: 2}
+  explosionPrefab: {fileID: 3817437503652497280, guid: 2544be274a446db469b8aea361102624,
+    type: 3}
+  explosionScale: 1
   shieldRegenDelay: 3
   currentLife: 0
   currentShield: 0
@@ -129,6 +132,7 @@ MonoBehaviour:
     m_Bits: 4864
   raySize: 8.5
   showStats: 0
+  aiType: 0
   hitPlayer: 0
 --- !u!114 &4994356229069780107
 MonoBehaviour:

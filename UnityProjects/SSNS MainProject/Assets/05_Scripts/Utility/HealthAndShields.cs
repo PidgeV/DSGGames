@@ -4,211 +4,213 @@ using UnityEngine;
 
 public class HealthAndShields : MonoBehaviour
 {
-	/// <summary> When this GameObjects life or shields change values </summary>
-	public delegate void OnLifeChange(float current, float max);
-	public OnLifeChange onLifeChange;
+    /// <summary> When this GameObjects life or shields change values </summary>
+    public delegate void OnLifeChange(float current, float max);
+    public OnLifeChange onLifeChange;
 
-	/// <summary> When this GameObjects life or shields change values </summary>
-	public delegate void OnShieldChange(float current, float max);
-	public OnShieldChange onShieldChange;
+    /// <summary> When this GameObjects life or shields change values </summary>
+    public delegate void OnShieldChange(float current, float max);
+    public OnShieldChange onShieldChange;
 
-	/// <summary> When this GameObject dies </summary>
-	public delegate void OnDeath();
-	public OnDeath onDeath;
+    /// <summary> When this GameObject dies </summary>
+    public delegate void OnDeath();
+    public OnDeath onDeath;
 
-	[SerializeField] private Stats shipStats;
-	[SerializeField] private GameObject destroyedPrefab;
-	private GameObject destroyedObject;
+    [SerializeField] private Stats shipStats;
+    [SerializeField] private GameObject explosionPrefab;
+    [SerializeField] float explosionScale = 1f;
+    private GameObject destroyedObject;
 
-	// The MAX life the ship has
-	public float MaxLife { get { return shipStats.maxHealth; } }
+    // The MAX life the ship has
+    public float MaxLife { get { return shipStats.maxHealth; } }
 
-	// The MAX shield the ship has
-	public float MaxShield { get { return shipStats.maxShield; } }
+    // The MAX shield the ship has
+    public float MaxShield { get { return shipStats.maxShield; } }
 
-	public float shieldRegenDelay = 3f;
-
-
-	// Can we regenerate our shield
-	public bool CanRegen { get { return Time.realtimeSinceStartup > shieldRegenDelay; } }
-
-	public float currentLife;
-	public float currentShield;
-
-	public bool Invincible = false;
-	public bool DestroyOnDeath = true;
+    public float shieldRegenDelay = 3f;
 
 
-	// Start is called before the first frame update
-	void Start()
-	{
-		if (shipStats == null)
-		{
-			if (TryGetComponent(out ShipController player))
-			{
-				shipStats = player.Properties;
-			}
-			else if (TryGetComponent(out EnemyController enemy))
-			{
-				shipStats = enemy.Stats;
-			}
-			else if (TryGetComponent(out FlockAgent flockAgent))
-			{
-				shipStats = flockAgent.swarm.FlockLeader.Stats;
-			}
-			else
-			{
-				Debug.LogError("Couldn't get ship stats");
-			}
-		}
+    // Can we regenerate our shield
+    public bool CanRegen { get { return Time.realtimeSinceStartup > shieldRegenDelay; } }
 
-		currentLife = MaxLife;
-		currentShield = MaxShield;
+    public float currentLife;
+    public float currentShield;
 
-		ShieldProjector shieldProjector = gameObject.GetComponentInChildren<ShieldProjector>();
+    public bool Invincible = false;
+    public bool DestroyOnDeath = true;
 
-		if (shieldProjector)
-		{
-			// So we can take damage when this shield is hit
-			shieldProjector.onShieldHit += OnShieldHit;
 
-			// So we can update the color of the shield when we take damage
-			onShieldChange += shieldProjector.UpdateShieldPercent;
-		}
-	}
+    // Start is called before the first frame update
+    void Start()
+    {
+        if (shipStats == null)
+        {
+            if (TryGetComponent(out ShipController player))
+            {
+                shipStats = player.Properties;
+            }
+            else if (TryGetComponent(out EnemyController enemy))
+            {
+                shipStats = enemy.Stats;
+            }
+            else if (TryGetComponent(out FlockAgent flockAgent))
+            {
+                shipStats = flockAgent.swarm.FlockLeader.Stats;
+            }
+            else
+            {
+                Debug.LogError("Couldn't get ship stats");
+            }
+        }
 
-	// Update is called once per frame
-	void Update()
-	{
-		// If we have more then 0 life we can regen shields
-		if (CanRegen && currentLife >= 0)
-		{
-			// Calculating the amount we need to heal WITH regen Speed
-			float amountToHeal = currentShield + (MaxShield * shipStats.shieldRegenPercent / 100f) * Time.deltaTime;
+        currentLife = MaxLife;
+        currentShield = MaxShield;
 
-			// Clamp out shield to the max shield
-			currentShield = Mathf.Clamp(amountToHeal, 0, MaxShield);
-		}
-	}
+        ShieldProjector shieldProjector = gameObject.GetComponentInChildren<ShieldProjector>();
 
-	/// <summary>
-	/// Reinitializes this scripts values
-	/// </summary>
-	/// <param name="invokeEvents"> Do you want to call the OnLifeChange events </param>
-	public void ResetValues(bool invokeEvents = false)
-	{
-		currentLife = MaxLife;
-		currentShield = MaxShield;
+        if (shieldProjector)
+        {
+            // So we can take damage when this shield is hit
+            shieldProjector.onShieldHit += OnShieldHit;
 
-		gameObject.SetActive(true);
+            // So we can update the color of the shield when we take damage
+            onShieldChange += shieldProjector.UpdateShieldPercent;
+        }
+    }
 
-		if (invokeEvents == true)
-		{
-			// Invoke the On Life Change Event
-			onLifeChange?.Invoke(currentLife, MaxLife);
+    // Update is called once per frame
+    void Update()
+    {
+        // If we have more then 0 life we can regen shields
+        if (CanRegen && currentLife >= 0)
+        {
+            // Calculating the amount we need to heal WITH regen Speed
+            float amountToHeal = currentShield + (MaxShield * shipStats.shieldRegenPercent / 100f) * Time.deltaTime;
 
-			// Invoke the On Shield Change Event
-			onShieldChange?.Invoke(currentShield, MaxShield);
-		}
-	}
+            // Clamp out shield to the max shield
+            currentShield = Mathf.Clamp(amountToHeal, 0, MaxShield);
+        }
+    }
 
-	/// <summary> When the shield it hit </summary>
-	public void OnShieldHit(GameObject attacker)
-	{
-		if (attacker.TryGetComponent(out Damage damage))
-		{
-			// PrintDamage(damage.kineticDamage, damage.energyDamage);
-			TakeDamage(damage.KineticDamage, damage.EnergyDamage);
-		}
-	}
+    /// <summary>
+    /// Reinitializes this scripts values
+    /// </summary>
+    /// <param name="invokeEvents"> Do you want to call the OnLifeChange events </param>
+    public void ResetValues(bool invokeEvents = false)
+    {
+        currentLife = MaxLife;
+        currentShield = MaxShield;
 
-	// Damage the ship
-	public void TakeDamage(float kineticDamage, float energyDamage)
-	{
-		if (!Invincible)
-		{
-			shieldRegenDelay = Time.realtimeSinceStartup + shipStats.shieldRegenInterval;
+        gameObject.SetActive(true);
 
-			// Damage the shield
-			currentShield = Mathf.Clamp(currentShield - energyDamage, 0, MaxShield);
+        if (invokeEvents == true)
+        {
+            // Invoke the On Life Change Event
+            onLifeChange?.Invoke(currentLife, MaxLife);
 
-			// If we have negative shields we can take it away from your life pool
-			if (currentShield == 0)
-			{
-				currentLife -= kineticDamage;
-			}
+            // Invoke the On Shield Change Event
+            onShieldChange?.Invoke(currentShield, MaxShield);
+        }
+    }
 
-			// If we are dead cann OnDeath()
-			if (currentLife <= 0)
-			{
-				currentLife = 0;
-				HandleDeath();
-			}
-		}
+    /// <summary> When the shield it hit </summary>
+    public void OnShieldHit(GameObject attacker)
+    {
+        if (attacker.TryGetComponent(out Damage damage))
+        {
+            // PrintDamage(damage.kineticDamage, damage.energyDamage);
+            TakeDamage(damage.KineticDamage, damage.EnergyDamage);
+        }
+    }
 
-		// Invoke the On Life Change Event
-		if (onLifeChange != null)
-		{
-			onLifeChange.Invoke(currentLife, MaxLife);
-		}
+    // Damage the ship
+    public void TakeDamage(float kineticDamage, float energyDamage)
+    {
+        if (!Invincible)
+        {
+            shieldRegenDelay = Time.realtimeSinceStartup + shipStats.shieldRegenInterval;
 
-		// Invoke the On Shield Change Event		
-		if (onShieldChange != null)
-		{
-			onShieldChange.Invoke(currentShield, MaxShield);
-		}
-	}
+            // Damage the shield
+            currentShield = Mathf.Clamp(currentShield - energyDamage, 0, MaxShield);
 
-	// When life is 0 this is called by TakeDamage or Update
-	void HandleDeath()
-	{
-		currentLife = MaxLife;
-		currentShield = MaxShield;
+            // If we have negative shields we can take it away from your life pool
+            if (currentShield == 0)
+            {
+                currentLife -= kineticDamage;
+            }
 
-		// Invoke the On Death Event
-		if (onDeath != null)
-		{
-			onDeath.Invoke();
-		}
+            // If we are dead cann OnDeath()
+            if (currentLife <= 0)
+            {
+                currentLife = 0;
+                HandleDeath();
+            }
+        }
 
-		if (DestroyOnDeath == true)
-		{
-			// Destroy the gameobject
-			Destroy(gameObject);
-		}
-		else
-		{
-			// Respawn the gameobject?
-			gameObject.SetActive(false);
-		}
+        // Invoke the On Life Change Event
+        if (onLifeChange != null)
+        {
+            onLifeChange.Invoke(currentLife, MaxLife);
+        }
 
-		if (destroyedPrefab)
-		{
-			destroyedObject = Instantiate(destroyedPrefab);
-			destroyedObject.transform.position = transform.position;
-			destroyedObject.transform.rotation = transform.rotation;
+        // Invoke the On Shield Change Event		
+        if (onShieldChange != null)
+        {
+            onShieldChange.Invoke(currentShield, MaxShield);
+        }
+    }
 
-			AreaManager.Instance.OnObjectAdd(destroyedObject);
-		}
-	}
+    // When life is 0 this is called by TakeDamage or Update
+    void HandleDeath()
+    {
+        currentLife = MaxLife;
+        currentShield = MaxShield;
 
-	// Heal this GameObjects current life by a given value
-	public void Heal(int amountToHeal)
-	{
-		currentLife += amountToHeal;
+        // Invoke the On Death Event
+        if (onDeath != null)
+        {
+            onDeath.Invoke();
+        }
 
-		// Clamp that value
-		if (currentLife > MaxLife) currentLife = MaxLife;
+        if (DestroyOnDeath == true)
+        {
+            // Destroy the gameobject
+            Destroy(gameObject);
+        }
+        else
+        {
+            // Respawn the gameobject?
+            gameObject.SetActive(false);
+        }
 
-		// Invoke the On Life Change Event
-		onLifeChange.Invoke(currentLife, MaxLife);
-	}
+        if (explosionPrefab)
+        {
+            destroyedObject = Instantiate(explosionPrefab);
+            destroyedObject.transform.position = transform.position;
+            destroyedObject.transform.rotation = transform.rotation;
+            destroyedObject.transform.localScale = new Vector3(explosionScale, explosionScale, explosionScale);
 
-	/// <summary> Print out the damage taken </summary>
-	public void PrintDamage(float kineticDamage, float energyDamag)
-	{
-		Debug.Log("Damage Taken:( KineticDamage: " + kineticDamage + ", EnergyDamage: " + energyDamag + ")");
-	}
+            AreaManager.Instance.OnObjectAdd(destroyedObject);
+        }
+    }
 
-	public bool IsDead { get { return currentLife <= 0; } }
+    // Heal this GameObjects current life by a given value
+    public void Heal(int amountToHeal)
+    {
+        currentLife += amountToHeal;
+
+        // Clamp that value
+        if (currentLife > MaxLife) currentLife = MaxLife;
+
+        // Invoke the On Life Change Event
+        onLifeChange.Invoke(currentLife, MaxLife);
+    }
+
+    /// <summary> Print out the damage taken </summary>
+    public void PrintDamage(float kineticDamage, float energyDamag)
+    {
+        Debug.Log("Damage Taken:( KineticDamage: " + kineticDamage + ", EnergyDamage: " + energyDamag + ")");
+    }
+
+    public bool IsDead { get { return currentLife <= 0; } }
 }

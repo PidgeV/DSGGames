@@ -1,50 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1424508618461599533
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3359430009828271735}
-  - component: {fileID: 2183640337322175803}
-  m_Layer: 14
-  m_Name: MinimapLine
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3359430009828271735
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1424508618461599533}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 3107085776561158193}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2183640337322175803
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1424508618461599533}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5649f8e311582fd4e8b02826b2d6eab6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  closeColor: {r: 0.4162171, g: 1, b: 0, a: 1}
-  farColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &3107085776561158194
 GameObject:
   m_ObjectHideFlags: 0
@@ -85,7 +40,6 @@ Transform:
   m_Children:
   - {fileID: 7509524241790833359}
   - {fileID: 65695769877998401}
-  - {fileID: 3359430009828271735}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -143,7 +97,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4864
   raySize: 20
-  showStats: 1
+  showStats: 0
+  aiType: 0
   hitPlayer: 0
 --- !u!114 &5065271178767460442
 MonoBehaviour:
@@ -157,7 +112,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21bcb8e5aef53064495f71d628833b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shipStats: {fileID: 0}
+  shipStats: {fileID: 11400000, guid: b228fcfa117d79f499461b0c4acb4e68, type: 2}
+  destroyedPrefab: {fileID: 8305956982705048768, guid: 67f64df1e41df954a9007ccd68dbbd16,
+    type: 3}
   shieldRegenDelay: 3
   currentLife: 0
   currentShield: 0

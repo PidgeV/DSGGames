@@ -42,7 +42,6 @@ Transform:
   - {fileID: 3068536347109623564}
   - {fileID: 1864797949346244315}
   - {fileID: 6364613893505835724}
-  - {fileID: 7533529203606699413}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -84,6 +83,7 @@ MonoBehaviour:
     m_Bits: 4864
   raySize: 25
   showStats: 0
+  aiType: 0
   closeDistanceCheck: 90
   bullet: {fileID: 4450240921679082262, guid: 3b677ceb74ae31b4fa791919b59499df, type: 3}
   bulletShootPos: {fileID: 1864797949346244314}
@@ -100,6 +100,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shipStats: {fileID: 0}
+  explosionPrefab: {fileID: 8305956982705048768, guid: 67f64df1e41df954a9007ccd68dbbd16,
+    type: 3}
+  explosionScale: 10
   shieldRegenDelay: 3
   currentLife: 0
   currentShield: 0
@@ -518,51 +521,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!1 &3055522697015703396
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7533529203606699413}
-  - component: {fileID: 7447190322779676476}
-  m_Layer: 14
-  m_Name: MinimapLine
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7533529203606699413
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3055522697015703396}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 58820780711503996}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7447190322779676476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3055522697015703396}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5649f8e311582fd4e8b02826b2d6eab6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  closeColor: {r: 0.4162171, g: 1, b: 0, a: 1}
-  farColor: {r: 1, g: 0, b: 0, a: 1}
 --- !u!54 &6904082373899273987
 Rigidbody:
   m_ObjectHideFlags: 0
