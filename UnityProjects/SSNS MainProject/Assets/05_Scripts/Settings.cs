@@ -126,8 +126,7 @@ public class Settings : MonoBehaviour
 	/// <param name="state">new Size</param>
 	public void ChangeAntiAliasing(bool state)
 	{
-		//Resolution = size;
-		//ResolutionChange(this, EventArgs.Empty);
+		settings.AntiAliasing = state;
 	}
 
 	/// <summary>
@@ -136,8 +135,7 @@ public class Settings : MonoBehaviour
 	/// <param name="state">new Size</param>
 	public void ChangeVSync(bool state)
 	{
-		//Resolution = size;
-		//ResolutionChange(this, EventArgs.Empty);
+		settings.VSync = state;
 	}
 
 	/// <summary>
@@ -146,8 +144,7 @@ public class Settings : MonoBehaviour
 	/// <param name="state">new Size</param>
 	public void ChangeShowClouds(bool state)
 	{
-		//Resolution = size;
-		//ResolutionChange(this, EventArgs.Empty);
+		settings.ShowClouds = state;
 	}
 
 	#endregion
