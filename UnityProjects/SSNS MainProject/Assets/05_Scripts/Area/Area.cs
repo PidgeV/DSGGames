@@ -24,10 +24,7 @@ public class Area : MonoBehaviour
     {
         if (!spawner)
             TryGetComponent(out spawner);
-    }
 
-    private IEnumerator Start()
-    {
         gameObject.SetActive(false);
 
         LoadArea(false);
@@ -38,8 +35,6 @@ public class Area : MonoBehaviour
         {
             spawn.LookAt(transform.position);
         }
-
-        yield return null;
     }
 
     public void LoadArea(bool load)
