@@ -106,8 +106,8 @@ MonoBehaviour:
   enemyLayers:
     serializedVersion: 2
     m_Bits: 2560
-  maxDetectionRadius: 400
-  radiusIncreasePerSecond: 50
+  maxDetectionRadius: 800
+  radiusIncreasePerSecond: 75
   rotationSpeed: 8
   target: {fileID: 0}
 --- !u!54 &8992882616842037817
@@ -255,16 +255,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 533205660235058987}
     m_Modifications:
-    - target: {fileID: 2143217328605918705, guid: 51472dbaec72f7549afaf70f847cc23a,
-        type: 3}
-      propertyPath: m_Name
-      value: MissileBall_Prefab
-      objectReference: {fileID: 0}
-    - target: {fileID: 2143217328605918705, guid: 51472dbaec72f7549afaf70f847cc23a,
-        type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 3163045462547793890, guid: 51472dbaec72f7549afaf70f847cc23a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -319,6 +309,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2143217328605918705, guid: 51472dbaec72f7549afaf70f847cc23a,
+        type: 3}
+      propertyPath: m_Name
+      value: MissileBall_Prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 2143217328605918705, guid: 51472dbaec72f7549afaf70f847cc23a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 8355093222612168674, guid: 51472dbaec72f7549afaf70f847cc23a,
         type: 3}

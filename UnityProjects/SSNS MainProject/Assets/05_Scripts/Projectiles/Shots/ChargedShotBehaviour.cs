@@ -54,18 +54,19 @@ public class ChargedShotBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!hasShot)
-        {
-            currentDamage = Mathf.Clamp(currentDamage + increasePerSecond * Time.deltaTime, minDamage, maxDamage);
-            transform.localScale += scalePerSecond * Time.deltaTime;
+		if (!hasShot)
+		{
+			currentDamage = Mathf.Clamp(currentDamage + increasePerSecond * Time.deltaTime, minDamage, maxDamage);
+			transform.localScale += scalePerSecond * Time.deltaTime;
 			transform.localPosition = Vector3.zero;
 
 		}
-        else
-        {
-           transform.position += transform.forward.normalized * speed * Time.deltaTime;
+		else
+		{
+			transform.position += transform.forward.normalized * speed * Time.deltaTime;
+			transform.localScale += Vector3.one * 7 * Time.deltaTime;
 		}
-    }
+	}
 
     IEnumerator StartCharge()
     {

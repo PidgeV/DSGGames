@@ -15,6 +15,7 @@ public class MissileBehaviour : MonoBehaviour
     public GameObject target;
     ShotInfo info;
     float currentRadius = 25f;
+    float extraSpeed = 0;
     Rigidbody rb;
 
     private void Start()
@@ -83,7 +84,9 @@ public class MissileBehaviour : MonoBehaviour
             transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(newRot), rotationSpeed * Time.deltaTime); //look towards target
         }
 
-        rb.velocity = transform.forward.normalized * info.Speed; //using rigidbody for intercept calculations
+        rb.velocity = (transform.forward.normalized * (info.Speed + extraSpeed)); //using rigidbody for intercept calculations
+		extraSpeed += Time.deltaTime * 5;
+		transform.localScale += Time.deltaTime * Vector3.one * 1;
 
-    }
+	}
 }

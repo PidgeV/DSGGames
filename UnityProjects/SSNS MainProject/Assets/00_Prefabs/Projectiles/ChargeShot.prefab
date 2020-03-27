@@ -68,7 +68,7 @@ MonoBehaviour:
   role: 0
   fireRate: 2.5
   lifeTime: 30
-  speed: 100
+  speed: 200
 --- !u!114 &2650163542115975439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,11 +255,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7451610447520524819}
     m_Modifications:
-    - target: {fileID: 2785737672537857433, guid: 47e6e1dc813e5e04bbd669e50c41b9a6,
-        type: 3}
-      propertyPath: m_Name
-      value: ChargeShot
-      objectReference: {fileID: 0}
     - target: {fileID: 4631578106782141097, guid: 47e6e1dc813e5e04bbd669e50c41b9a6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -314,6 +309,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2785737672537857433, guid: 47e6e1dc813e5e04bbd669e50c41b9a6,
+        type: 3}
+      propertyPath: m_Name
+      value: ChargeShot
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47e6e1dc813e5e04bbd669e50c41b9a6, type: 3}
