@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 544}
+  m_MinSize: {x: 950, y: 522}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -45,7 +45,7 @@ MonoBehaviour:
     y: 0
     width: 1920
     height: 997
-  m_MinSize: {x: 950, y: 544}
+  m_MinSize: {x: 950, y: 522}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &3
 MonoBehaviour:
@@ -111,10 +111,10 @@ MonoBehaviour:
     y: 30
     width: 1920
     height: 947
-  m_MinSize: {x: 683, y: 494}
-  m_MaxSize: {x: 14004, y: 14044}
+  m_MinSize: {x: 679, y: 472}
+  m_MaxSize: {x: 14000, y: 14022}
   vertical: 0
-  controlID: 3735
+  controlID: 1202
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -136,10 +136,10 @@ MonoBehaviour:
     y: 0
     width: 1528
     height: 947
-  m_MinSize: {x: 406, y: 494}
-  m_MaxSize: {x: 10002, y: 14044}
+  m_MinSize: {x: 404, y: 472}
+  m_MaxSize: {x: 10000, y: 14022}
   vertical: 1
-  controlID: 3736
+  controlID: 1203
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -161,10 +161,10 @@ MonoBehaviour:
     y: 0
     width: 1528
     height: 586
-  m_MinSize: {x: 406, y: 222}
-  m_MaxSize: {x: 8006, y: 4022}
+  m_MinSize: {x: 404, y: 222}
+  m_MaxSize: {x: 8004, y: 4022}
   vertical: 0
-  controlID: 3737
+  controlID: 1204
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -385,9 +385,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 34720000
+      m_SelectedIDs: 2e550000
       m_LastClickedID: 0
-      m_ExpandedIDs: 9cbdffff7af100000c650100667b0100
+      m_ExpandedIDs: 2cfbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -661,7 +661,7 @@ MonoBehaviour:
     height: 342
   m_ViewDataDictionary: {fileID: 0}
   m_SearchFilter:
-    m_NameFilter: miss
+    m_NameFilter: 
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
@@ -673,20 +673,20 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/05_Scripts/Player
+    - Assets/05_Scripts/Projectiles/Shots
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/05_Scripts/Player
+  - Assets/05_Scripts/Projectiles/Shots
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\GitHub\DSGGames\UnityProjects\SSNS MainProject
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 22}
-    m_SelectedIDs: 
-    m_LastClickedID: 0
-    m_ExpandedIDs: 00000000c27b0000be7e00000e7f00003680000078840000b88400004a850000a28500007086000076870000a487000024890000728a00007e8a0000fe8f000008900000b09000006c9101006e91010070910100729101007491010076910100789101007a9101007c9101007e910100809101008291010000ca9a3b
+    scrollPos: {x: 0, y: 506}
+    m_SelectedIDs: e25c0000
+    m_LastClickedID: 23778
+    m_ExpandedIDs: 00000000be460000a04a0000f24a00005a4c00008e510000d251000072520000da520000b8530000dc5400000c5500000257000096580000a45800006e5f0000785f000034600000686e01006a6e01006c6e01006e6e0100706e0100726e0100746e0100766e0100786e01007a6e01007c6e01007e6e010000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -714,7 +714,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000c27b0000be7e00000e7f00003680000078840000b88400004a850000a28500007086000076870000a487000024890000728a00007e8a0000fe8f000008900000b09000006c9101006e91010070910100729101007491010076910100789101007a9101007c9101007e910100809101008291010000ca9a3b
+    m_ExpandedIDs: 00000000be460000a04a0000f24a00005a4c00008e510000d251000072520000da520000b8530000dc5400000c5500000257000096580000a45800006e5f0000785f000034600000686e01006a6e01006c6e01006e6e0100706e0100726e0100746e0100766e0100786e01007a6e01007c6e01007e6e010000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

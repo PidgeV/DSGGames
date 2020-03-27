@@ -64,7 +64,7 @@ public class ChargedShotBehaviour : MonoBehaviour
 		else
 		{
 			transform.position += transform.forward.normalized * speed * Time.deltaTime;
-			transform.localScale += Vector3.one * 7 * Time.deltaTime;
+			transform.localScale += Vector3.one * 10 * Time.deltaTime;
 		}
 	}
 
@@ -88,7 +88,7 @@ public class ChargedShotBehaviour : MonoBehaviour
             Instantiate(explosionPrefab, transform.position, Quaternion.identity); //spawn the explosion
         }
 
-        Destroy(gameObject);
+       // Destroy(gameObject);
     }
 
     public float GetDamagePercentage()

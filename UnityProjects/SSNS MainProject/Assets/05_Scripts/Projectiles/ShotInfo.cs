@@ -16,6 +16,8 @@ public class ShotInfo : MonoBehaviour
     public float FireRate { get { return fireRate; } }
     public float Speed { get { return speed; } }
 
+	[SerializeField] private bool destroyOnDeath = true;
+
     private void Update()
     {
 		if (MenuManager.Instance.Sleeping) return;
@@ -23,7 +25,7 @@ public class ShotInfo : MonoBehaviour
         {
             lifeTimer += Time.deltaTime;
 
-            if (lifeTimer >= lifeTime) Destroy(gameObject);
+            if (lifeTimer >= lifeTime && destroyOnDeath) Destroy(gameObject);
         }
     }
 
