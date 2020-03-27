@@ -32,6 +32,11 @@ public class SwarmLeaderAttackState : FSMState
             //Enter defend state mode
             controller.PerformTransition(Transition.Defend);
         }
+        
+        if (AreaManager.Instance.CurrentArea.IsTransformOutside(controller.transform))
+        {
+            controller.PerformTransition(Transition.Patrol);
+        }
 
         if (swarm.player == null)
         {

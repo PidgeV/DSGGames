@@ -77,6 +77,11 @@ public class Area : MonoBehaviour
         }
     }
 
+    public bool IsTransformOutside(Transform t)
+    {
+        return Vector3.Distance(t.position, transform.position) >= size;
+    }
+
     public Transform FindSafeSpawn(string findTag = null)
     {
         Transform[] sp = Spawns;
@@ -128,7 +133,7 @@ public class Area : MonoBehaviour
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(spawn.position, 10f);
 
-            if (Physics.CheckSphere(spawn.position, spawnCheckRadius))
+            if (Physics.CheckSphere(spawn.position, spawnCheckRadius) || IsTransformOutside(spawn))
             {
                 Gizmos.color = Color.red;
             }
@@ -155,5 +160,5 @@ public class Area : MonoBehaviour
     public AreaType AreaType { get { return type; } }
     public int Size { get { return size; } }
     public int Skybox { get { return skyboxIndex; } }
-    public bool IsPlayerOutside { get { return Vector3.Distance(GameManager.Instance.Player.transform.position, transform.position) >= size; } }
+    public bool IsPlayerOutside { get { return IsTransformOutside(GameManager.Instance.Player.transform); } }
 }

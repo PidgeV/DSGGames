@@ -25,6 +25,10 @@ public class ChargerAttackState : AttackState<ChargerController>
             AIManager.aiManager.StopAttack(controller.aiType);
             controller.PerformTransition(Transition.Patrol);
         }
+        else if (AreaManager.Instance.CurrentArea.IsTransformOutside(controller.transform))
+        {
+            controller.PerformTransition(Transition.Patrol);
+        }
         else
         {
             CalcDotProduct();
