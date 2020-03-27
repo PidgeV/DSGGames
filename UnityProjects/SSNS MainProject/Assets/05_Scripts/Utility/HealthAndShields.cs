@@ -38,6 +38,7 @@ public class HealthAndShields : MonoBehaviour
 
     public bool Invincible = false;
     public bool DestroyOnDeath = true;
+    public bool KeepOnDeath = false;
 
 
     // Start is called before the first frame update
@@ -176,6 +177,9 @@ public class HealthAndShields : MonoBehaviour
         {
             // Destroy the gameobject
             Destroy(gameObject);
+        }
+        else if (KeepOnDeath)
+        {
         }
         else
         {
