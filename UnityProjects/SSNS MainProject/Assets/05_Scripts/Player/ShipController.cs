@@ -552,6 +552,11 @@ public class ShipController : MonoBehaviour
 		slowCamera = pressed;
 	}
 
+    private void OnEnable()
+    {
+        weaponsSystem.ShipShooting = false;
+    }
+
     /// <summary>
     /// Makes gunner face the same direction as the pilot
     /// </summary>

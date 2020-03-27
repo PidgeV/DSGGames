@@ -76,6 +76,6 @@ public class WeaponsSystem : MonoBehaviour
 		}
 	}
 
-	[HideInInspector] public bool useDefaultEditor = false;
+    [HideInInspector] public bool useDefaultEditor = false;
 	[HideInInspector] public bool showWeaponsSystem = false;
 }
