@@ -107,6 +107,8 @@ public class ShieldGenerator : MonoBehaviour
 			if (_boom) {
 				_boom = false;
 
+				DialogueSystem.Instance.AddDialogue(22);
+
 				// TODO -- Explode
 				//InitializeGenerator();
 			}

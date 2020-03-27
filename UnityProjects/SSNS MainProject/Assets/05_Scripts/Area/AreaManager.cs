@@ -16,7 +16,7 @@ public class AreaManager : MonoBehaviour
 
     public event AreaLoadEventHandler AreaLoaded;
 
-    private const int MIN_TRAVEL_TIME = 5;
+    private const int MIN_TRAVEL_TIME = 10;
     private const int MAX_OUTSIDE_TIME = 10;
     private const int WARP_HELD_TIME = 5;
 
@@ -118,7 +118,11 @@ public class AreaManager : MonoBehaviour
 				outsideTime += Time.deltaTime;
 
                 if (!boostNotification.gameObject.activeSelf)
+                {
                     boostNotification.gameObject.SetActive(true);
+
+                    DialogueSystem.Instance.AddDialogue(19);
+                }
 
                 boostNotification.text = "Termination in " + Mathf.RoundToInt(MAX_OUTSIDE_TIME - outsideTime) + "s";
 
@@ -131,7 +135,7 @@ public class AreaManager : MonoBehaviour
 					{
 						health.TakeDamage(Mathf.Infinity, Mathf.Infinity);
 					}
-				}
+                }
             }
 			else
 			{
@@ -206,6 +210,15 @@ public class AreaManager : MonoBehaviour
 
         startTravelTime = Time.time;
 
+        if (areaIndex == 0)
+            DialogueSystem.Instance.AddDialogue(10);
+        else if (currentArea.AreaType == AreaType.BossShield)
+            DialogueSystem.Instance.AddDialogue(23);
+        else if (currentArea.AreaType == AreaType.BossAttack)
+            DialogueSystem.Instance.AddDialogue(6);
+        else
+            DialogueSystem.Instance.AddDialogue(15);
+
         StartCoroutine(UnloadLastArea());
         StartCoroutine(LoadNextArea());
     }
@@ -253,7 +266,7 @@ public class AreaManager : MonoBehaviour
 
 		float currentTime = Time.time;
 
-		float time = MIN_TRAVEL_TIME - Mathf.Min(Time.time - startTravelTime, 0);
+		float time = MIN_TRAVEL_TIME + (areaIndex == 0 ? 5 : 0) - Mathf.Min(Time.time - startTravelTime, 0);
 
 		yield return new WaitForSeconds(time);
 
@@ -266,7 +279,7 @@ public class AreaManager : MonoBehaviour
 
         Transform playerSpawn = currentArea.FindSafeSpawn();
 
-        if (currentArea.AreaType == AreaType.Boss)
+        if (currentArea.AreaType == AreaType.BossAttack)
             playerSpawn = currentArea.FindSafeSpawn("PlayerSpawn");
 
         //GameManager.Instance.Player.gameObject.SetActive(false);
@@ -276,7 +289,7 @@ public class AreaManager : MonoBehaviour
 
         SkyboxManager.Instance.SwitchToSkybox(currentArea.Skybox);
 		GameManager.Instance.SwitchState(GameState.BATTLE);
-	}
+    }
 
     /// <summary>
     /// Adds object to the area

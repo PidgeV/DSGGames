@@ -58,6 +58,7 @@ public class DreadnovaController : EnemyController
 
         spawn.AddTransition(Transition.Defend, FSMStateID.Defend);
         spawn.AddTransition(Transition.Reset, FSMStateID.Spawned);
+        spawn.AddTransition(Transition.Attack, FSMStateID.Attacking);
 
         //shield.AddTransition(Transition.Attack, FSMStateID.Attacking);
         shield.AddTransition(Transition.NoShield, FSMStateID.Running);
@@ -73,6 +74,7 @@ public class DreadnovaController : EnemyController
         AddFSMState(spawn);
         AddFSMState(shield);
         AddFSMState(escape);
+        AddFSMState(attack);
         AddFSMState(dead);
     }
 
@@ -100,6 +102,8 @@ public class DreadnovaController : EnemyController
         yield return new WaitForSeconds(1.5f);
 
         transform.position = Vector3.zero;
+
+        DialogueSystem.Instance.AddDialogue(3);
 
         yield return new WaitForSeconds(1.5f);
 

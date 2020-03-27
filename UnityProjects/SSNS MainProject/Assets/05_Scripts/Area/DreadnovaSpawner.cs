@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using SNSSTypes;
 
-public class DreadnovaSpawner : NodeSpawner
+public class DreadnovaSpawner : AreaSpawner
 {
     [SerializeField] private WaveBehaviour shieldWaveBehaviour;
     [SerializeField] private WaveBehaviour attackWaveBehaviour;
@@ -62,6 +62,8 @@ public class DreadnovaSpawner : NodeSpawner
 
             //flock.FlockLeader.gameObject.transform.position = swarmerSpawnpoint;
         }
+
+        DialogueSystem.Instance.AddDialogue(2);
     }
 
     protected override GameObject SpawnEnemy(GameObject prefab, Transform spawnpoint)

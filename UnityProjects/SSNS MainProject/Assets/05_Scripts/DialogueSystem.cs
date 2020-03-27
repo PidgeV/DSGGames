@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class DialogueSystem : MonoBehaviour
 {
+	public static DialogueSystem Instance;
+
     [SerializeField] AudioSource audioSource;
     [SerializeField] Text dialogueText;
 	
@@ -16,6 +18,16 @@ public class DialogueSystem : MonoBehaviour
 	public DialogueClass NewDialogue;
 	public Texture2D SoundIcon;
 	public bool ShowDefaultEditor;
+
+	private void Awake()
+	{
+		if (Instance != null)
+		{
+			Destroy(Instance.gameObject);
+		}
+
+		Instance = this;
+	}
 
 	[ContextMenu("Play Index Zero")]
 	public void PlayIndexZero()
@@ -58,7 +70,7 @@ public class DialogueSystem : MonoBehaviour
         dialogueQueue.Enqueue(dialogue);
     }
 
-	public void AddDialogue(int listIndex)
+	public DialogueClass AddDialogue(int listIndex)
 	{
 		if (listIndex < Dialogue.Count)
 		{
@@ -75,7 +87,7 @@ public class DialogueSystem : MonoBehaviour
 					}
 
 					dialogueQueue.Enqueue(pickedDialogue);
-					return;
+					return pickedDialogue;
 				}
 			}
 		}
@@ -83,6 +95,8 @@ public class DialogueSystem : MonoBehaviour
 		{
 			Debug.LogError("Index out of range.");
 		}
+
+		return null;
 	}
 
 	public void PlayQuickClip(AudioClip clip)

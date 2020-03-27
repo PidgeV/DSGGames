@@ -19,8 +19,6 @@ public class DreadnovaShieldState : FSMState
     {
         controller = enemyController;
         stateID = FSMStateID.Defend;
-
-        EnterStateInit();
     }
 
     public override void EnterStateInit()

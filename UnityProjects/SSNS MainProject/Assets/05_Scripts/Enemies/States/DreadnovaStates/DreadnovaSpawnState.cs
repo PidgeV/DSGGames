@@ -22,7 +22,11 @@ public class DreadnovaSpawnState : FSMState
         {
             if (!controller.warping)
             {
-                controller.PerformTransition(Transition.Defend);
+                if (controller.State == SNSSTypes.DreadnovaState.SHIELD_STAGE)
+                    controller.PerformTransition(Transition.Defend);
+                else if (controller.State == SNSSTypes.DreadnovaState.FINAL_STAGE)
+                    controller.PerformTransition(Transition.Attack);
+
                 controller.gameObject.SetActive(true);
             }
         }

@@ -15,7 +15,8 @@ namespace SNSSTypes
     {
         Tutorial,
         Regular,
-        Boss
+        BossShield,
+        BossAttack
     }
 
     public enum GameState

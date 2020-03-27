@@ -18,13 +18,16 @@ public class Area : MonoBehaviour
 
     [SerializeField] private GameObject areaEffect;
 
-    [SerializeField] private NodeSpawner spawner;
+    [SerializeField] private AreaSpawner spawner;
 
     void Awake()
     {
         if (!spawner)
             TryGetComponent(out spawner);
+    }
 
+    private IEnumerator Start()
+    {
         gameObject.SetActive(false);
 
         LoadArea(false);
@@ -35,6 +38,8 @@ public class Area : MonoBehaviour
         {
             spawn.LookAt(transform.position);
         }
+
+        yield return null;
     }
 
     public void LoadArea(bool load)

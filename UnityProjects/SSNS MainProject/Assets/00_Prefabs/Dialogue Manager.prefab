@@ -102,7 +102,7 @@ MonoBehaviour:
     Name: Dreadnova Sighted
     Text: "Well it looks like we\u2019ve found the Dreadnova and they\u2019ve picked
       up your\r signature\u2026 They\u2019re deploying some of its forces to deal
-      with you, so destroy a\r fair amount of them so we can get to work on the capitol
+      with you, so destroy a\r fair amount of them so we can get to work on the capital
       ship."
     Index: 6
     volumeMultiplier: 1
@@ -187,7 +187,7 @@ MonoBehaviour:
       trail.\r\nSimple."
     Index: 15
     volumeMultiplier: 1
-    alternatives: 
+    alternatives: 100000001100000012000000
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: e19e4e8847acaa84ea236fc43c333cfa, type: 3}
     Name: New System V2
@@ -196,7 +196,7 @@ MonoBehaviour:
       PDA to highlight targets\r\nfor you."
     Index: 16
     volumeMultiplier: 1
-    alternatives: 
+    alternatives: 0f0000001100000012000000
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: c07912ec0456e704db3be3d8f041f41e, type: 3}
     Name: New System V3
@@ -204,7 +204,7 @@ MonoBehaviour:
       to pulse jump in pursuit of the Dreadnova. Good luck!"
     Index: 17
     volumeMultiplier: 1
-    alternatives: 
+    alternatives: 0f0000001000000012000000
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: 582310e67e7fdf647a3153f6c1e3ab36, type: 3}
     Name: New System V4
@@ -212,7 +212,7 @@ MonoBehaviour:
       be\r too far ahead of us\u2026 Scanning the immediate area for hostiles."
     Index: 18
     volumeMultiplier: 1
-    alternatives: 
+    alternatives: 0f0000001000000011000000
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: 7200d350b368289479d5e3fd85822059, type: 3}
     Name: Out of Bounds V1
@@ -242,7 +242,7 @@ MonoBehaviour:
     Text: Shield generator destroyed. Well done!
     Index: 22
     volumeMultiplier: 1
-    alternatives: 17000000
+    alternatives: 
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: aace5b37978f76c4996eb43924fd7035, type: 3}
     Name: Shield Generator Open V2
@@ -250,7 +250,7 @@ MonoBehaviour:
       shields,\r take them both offline at the same time to shut down the system!"
     Index: 23
     volumeMultiplier: 1
-    alternatives: 16000000
+    alternatives: 
   - OwnerType: 0
     SoundClip: {fileID: 8300000, guid: 50a376a593c564740be158e9438c43b3, type: 3}
     Name: Coffee Maker Joke

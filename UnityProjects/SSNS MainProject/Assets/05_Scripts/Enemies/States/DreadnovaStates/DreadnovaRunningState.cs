@@ -13,8 +13,6 @@ public class DreadnovaEscapeState : FSMState
     {
         controller = enemyController;
         stateID = FSMStateID.Running;
-
-        EnterStateInit();
     }
 
     public override void EnterStateInit()

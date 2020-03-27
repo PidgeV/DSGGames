@@ -73,8 +73,8 @@
     <Compile Include="Assets\00_Prefabs\Enemies\Cruiser\DreadNovaTurret.cs" />
     <Compile Include="Assets\05_Scripts\Area\Area.cs" />
     <Compile Include="Assets\05_Scripts\Area\AreaManager.cs" />
+    <Compile Include="Assets\05_Scripts\Area\AreaSpawner.cs" />
     <Compile Include="Assets\05_Scripts\Area\DreadnovaSpawner.cs" />
-    <Compile Include="Assets\05_Scripts\Area\NodeSpawner.cs" />
     <Compile Include="Assets\05_Scripts\Area\Spawns\WaveSpawn.cs" />
     <Compile Include="Assets\05_Scripts\Area\TutorialSpawner.cs" />
     <Compile Include="Assets\05_Scripts\Area\Wave Behaviours\WaveBehaviour.cs" />

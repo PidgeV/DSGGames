@@ -77,6 +77,8 @@ public class PlayerHUDHandler : MonoBehaviour
         gunnerRedicle.rectTransform.localScale = Vector3.one;
         gunnerRedicle.color = new Color(1, 1, 1, gunnerRedicle.color.a);
 
+		if (!gameObject.activeSelf) return;
+
         if (role == SNSSTypes.PlayerRole.Pilot)
         {
             StartCoroutine(Blink(pilotRedicle));

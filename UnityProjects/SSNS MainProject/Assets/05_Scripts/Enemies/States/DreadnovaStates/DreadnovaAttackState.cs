@@ -19,15 +19,13 @@ public class DreadnovaAttackState : FSMState
     {
         controller = enemyController;
         stateID = FSMStateID.Attacking;
-
-        EnterStateInit();
     }
 
     public override void EnterStateInit()
     {
         shieldGone = false;
         shieldDissolve = 1;
-        controller.dreadnovaShield.SetActive(true);
+        controller.dreadnovaShield.SetActive(false);
         controller.Spawner.enabled = true;
 
         waveTime = 0;
