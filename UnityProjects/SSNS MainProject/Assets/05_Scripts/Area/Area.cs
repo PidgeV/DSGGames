@@ -14,7 +14,7 @@ public class Area : MonoBehaviour
    
     [Range(1000, 5000)][SerializeField] private int size = 1000;
     [SerializeField] private int skyboxIndex;
-    [Range(300, 1000)][SerializeField] private int spawnCheckRadius = 300;
+    [Range(150, 1000)][SerializeField] private int spawnCheckRadius = 300;
 
     [SerializeField] private GameObject areaEffect;
 
