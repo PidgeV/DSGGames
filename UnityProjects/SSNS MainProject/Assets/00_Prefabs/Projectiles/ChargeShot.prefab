@@ -65,6 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: 3
+  role: 0
   fireRate: 2.5
   lifeTime: 30
   speed: 100
@@ -96,7 +97,8 @@ AudioSource:
   m_GameObject: {fileID: 110116227568893219}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -4435638778751794195, guid: b7639791db06e7f4b9717ec7c33ef730,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 8b09efc62bceaee4283c5f37be55a7fd, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
@@ -253,6 +255,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7451610447520524819}
     m_Modifications:
+    - target: {fileID: 2785737672537857433, guid: 47e6e1dc813e5e04bbd669e50c41b9a6,
+        type: 3}
+      propertyPath: m_Name
+      value: ChargeShot
+      objectReference: {fileID: 0}
     - target: {fileID: 4631578106782141097, guid: 47e6e1dc813e5e04bbd669e50c41b9a6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -307,11 +314,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2785737672537857433, guid: 47e6e1dc813e5e04bbd669e50c41b9a6,
-        type: 3}
-      propertyPath: m_Name
-      value: ChargeShot
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 47e6e1dc813e5e04bbd669e50c41b9a6, type: 3}

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using SNSSTypes;
 
 public class Area : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class Area : MonoBehaviour
     public Transform enemies;
     public Transform spawns;
     public Transform waypoints;
+
+    [SerializeField] private AreaType type = AreaType.Regular;
    
     [Range(1000, 5000)][SerializeField] private int size = 1000;
     [SerializeField] private int skyboxIndex;
@@ -74,7 +77,7 @@ public class Area : MonoBehaviour
         }
     }
 
-    public Transform FindSafeSpawn()
+    public Transform FindSafeSpawn(string findTag = null)
     {
         Transform[] sp = Spawns;
 
@@ -83,7 +86,8 @@ public class Area : MonoBehaviour
 
         while (true)
         {
-            if (Physics.CheckSphere(sp[spawnIndex].position, spawnCheckRadius))
+            if (Physics.CheckSphere(sp[spawnIndex].position, spawnCheckRadius) ||
+                (findTag != null && !sp[spawnIndex].CompareTag(findTag)))
             {
                 spawnIndex = (spawnIndex + 1) % sp.Length;
                 iterations++;
@@ -124,7 +128,15 @@ public class Area : MonoBehaviour
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(spawn.position, 10f);
 
-            Gizmos.color = Color.red;
+            if (Physics.CheckSphere(spawn.position, spawnCheckRadius))
+            {
+                Gizmos.color = Color.red;
+            }
+            else
+            {
+                Gizmos.color = Color.green;
+            }
+
             Gizmos.DrawWireSphere(spawn.position, spawnCheckRadius);
         }
 
@@ -140,6 +152,7 @@ public class Area : MonoBehaviour
     public Transform[] Enemies { get { return GetChildren(enemies); } }
     public Transform[] Spawns { get { return GetChildren(spawns); } }
     public Transform[] Waypoints { get { return GetChildren(waypoints); } }
+    public AreaType AreaType { get { return type; } }
     public int Size { get { return size; } }
     public int Skybox { get { return skyboxIndex; } }
     public bool IsPlayerOutside { get { return Vector3.Distance(GameManager.Instance.Player.transform.position, transform.position) >= size; } }

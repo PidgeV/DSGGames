@@ -87,6 +87,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: 4
+  role: 0
   fireRate: 0.5
   lifeTime: 15
   speed: 125
@@ -134,7 +135,8 @@ AudioSource:
   m_GameObject: {fileID: 8987361629267154083}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -4435638778751794195, guid: b7639791db06e7f4b9717ec7c33ef730,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 0839e298e36656b428807f4a3b0c0733, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.4
@@ -253,6 +255,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 533205660235058987}
     m_Modifications:
+    - target: {fileID: 2143217328605918705, guid: 51472dbaec72f7549afaf70f847cc23a,
+        type: 3}
+      propertyPath: m_Name
+      value: MissileBall_Prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 2143217328605918705, guid: 51472dbaec72f7549afaf70f847cc23a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 3163045462547793890, guid: 51472dbaec72f7549afaf70f847cc23a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -308,12 +320,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2143217328605918705, guid: 51472dbaec72f7549afaf70f847cc23a,
-        type: 3}
-      propertyPath: m_Name
-      value: MissileBall_Prefab
-      objectReference: {fileID: 0}
-    - target: {fileID: 2143217328605918705, guid: 51472dbaec72f7549afaf70f847cc23a,
+    - target: {fileID: 8355093222612168674, guid: 51472dbaec72f7549afaf70f847cc23a,
         type: 3}
       propertyPath: m_Layer
       value: 13
@@ -323,17 +330,12 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 576483272409239905, guid: 51472dbaec72f7549afaf70f847cc23a,
-        type: 3}
-      propertyPath: m_Layer
-      value: 13
-      objectReference: {fileID: 0}
     - target: {fileID: 6649724982018851647, guid: 51472dbaec72f7549afaf70f847cc23a,
         type: 3}
       propertyPath: m_Layer
       value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 8355093222612168674, guid: 51472dbaec72f7549afaf70f847cc23a,
+    - target: {fileID: 576483272409239905, guid: 51472dbaec72f7549afaf70f847cc23a,
         type: 3}
       propertyPath: m_Layer
       value: 13

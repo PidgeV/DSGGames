@@ -54,12 +54,14 @@ MonoBehaviour:
       the\r count!"
     Index: 0
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: cfa65ddf3ec2283449f69d22ac488688, type: 3}
     Name: Almost All Targets Destroyed
     Text: "You\u2019ve almost destroyed all the surface targets! Go, go!"
     Index: 1
     volumeMultiplier: 2
+    alternatives: 
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: 9b2c0187e0694404eac90e76720f6f50, type: 3}
     Name: Cargo Ship In bound
@@ -67,6 +69,7 @@ MonoBehaviour:
       restore\r, integrity to the Dreadnova\u2019s armor."
     Index: 2
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: f79cb1c739e06a54684558901f33fe05, type: 3}
     Name: Dread Jump V1
@@ -75,6 +78,7 @@ MonoBehaviour:
       to your ship\u2019s\r PDA. Get a move on team!"
     Index: 3
     volumeMultiplier: 1
+    alternatives: 0400000005000000
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: 3318e37e99d553a488bb6994ab276c69, type: 3}
     Name: Dread Jump V2
@@ -83,6 +87,7 @@ MonoBehaviour:
       PDA\u2026 Hop to it gang!"
     Index: 4
     volumeMultiplier: 1
+    alternatives: 0300000005000000
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: b18d1652bab15584fa74b17daefe848e, type: 3}
     Name: Dread Jump V3
@@ -91,6 +96,7 @@ MonoBehaviour:
       to your ship\u2019s\r PDA. Get a move on team!"
     Index: 5
     volumeMultiplier: 1
+    alternatives: 0300000004000000
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: e6df780e5d11e234eab4cf02595977a5, type: 3}
     Name: Dreadnova Sighted
@@ -100,12 +106,14 @@ MonoBehaviour:
       ship."
     Index: 6
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: c1fbba634f569bc40acfe0ae2fcf981d, type: 3}
     Name: Fighter Wave Destroyed
     Text: Supplementary fighter forces destroyed, nicely done!
     Index: 7
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: 207aacd9aa15d4c4b9503cbc1e883f54, type: 3}
     Name: Hull Shields Down V1
@@ -114,6 +122,7 @@ MonoBehaviour:
       PDA to highlight targets\r for you."
     Index: 8
     volumeMultiplier: 1
+    alternatives: 09000000
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: e1337a24af856e44e9020be9954ac970, type: 3}
     Name: Hull Shields Down V2
@@ -122,6 +131,7 @@ MonoBehaviour:
       PDA to highlight targets\r for you."
     Index: 9
     volumeMultiplier: 1
+    alternatives: 08000000
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: 91c4414a049d54f49b069e8ff68c8e3c, type: 3}
     Name: Intro V1
@@ -132,6 +142,7 @@ MonoBehaviour:
       of your\r body parts still attached\u2026"
     Index: 10
     volumeMultiplier: 1
+    alternatives: 0b0000000c000000
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: be5b5f850219c1e418f45e934ef11383, type: 3}
     Name: Intro V2
@@ -141,6 +152,7 @@ MonoBehaviour:
       only got one shot at this, so\r expect heavy resistance."
     Index: 11
     volumeMultiplier: 1
+    alternatives: 0a0000000c000000
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: 00f41586fa703624eb0926c7b00c7639, type: 3}
     Name: Intro V3
@@ -150,6 +162,7 @@ MonoBehaviour:
       try not to mess it up in the process."
     Index: 12
     volumeMultiplier: 1
+    alternatives: 0a0000000b000000
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: d14490323ba6dcb4c8629b063fb4831a, type: 3}
     Name: Left Generator Reboot
@@ -157,6 +170,7 @@ MonoBehaviour:
       other before it\r comes back online!"
     Index: 13
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: f8613baff90e2d047a46e96e4cdca856, type: 3}
     Name: Right Generator Reboot
@@ -164,6 +178,7 @@ MonoBehaviour:
       other before it\r comes back online!"
     Index: 14
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: b339e3c691a4103488a332e194777c7b, type: 3}
     Name: New System V1
@@ -172,6 +187,7 @@ MonoBehaviour:
       trail.\r\nSimple."
     Index: 15
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: e19e4e8847acaa84ea236fc43c333cfa, type: 3}
     Name: New System V2
@@ -180,6 +196,7 @@ MonoBehaviour:
       PDA to highlight targets\r\nfor you."
     Index: 16
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: c07912ec0456e704db3be3d8f041f41e, type: 3}
     Name: New System V3
@@ -187,6 +204,7 @@ MonoBehaviour:
       to pulse jump in pursuit of the Dreadnova. Good luck!"
     Index: 17
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: 582310e67e7fdf647a3153f6c1e3ab36, type: 3}
     Name: New System V4
@@ -194,6 +212,7 @@ MonoBehaviour:
       be\r too far ahead of us\u2026 Scanning the immediate area for hostiles."
     Index: 18
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: 7200d350b368289479d5e3fd85822059, type: 3}
     Name: Out of Bounds V1
@@ -201,6 +220,7 @@ MonoBehaviour:
       your\r pay at the end of the month."
     Index: 19
     volumeMultiplier: 1
+    alternatives: 1400000015000000
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: f7ec82cfc1970484f8ac3bdb833fa61f, type: 3}
     Name: Out of Bounds V2
@@ -208,18 +228,21 @@ MonoBehaviour:
       for breach of\r contract!"
     Index: 20
     volumeMultiplier: 1
+    alternatives: 1300000015000000
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: 1b95be251d61f68499622ce2deb543f3, type: 3}
     Name: Out of Bounds V3
     Text: "Where are you going?! You\u2019re jeopardizing the mission! Get back there!"
     Index: 21
     volumeMultiplier: 1
+    alternatives: 1300000014000000
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: a8fe922694c828c48b16e870611643e6, type: 3}
     Name: Shield Generator Open V1
     Text: Shield generator destroyed. Well done!
     Index: 22
     volumeMultiplier: 1
+    alternatives: 17000000
   - OwnerType: 1
     SoundClip: {fileID: 8300000, guid: aace5b37978f76c4996eb43924fd7035, type: 3}
     Name: Shield Generator Open V2
@@ -227,77 +250,89 @@ MonoBehaviour:
       shields,\r take them both offline at the same time to shut down the system!"
     Index: 23
     volumeMultiplier: 1
+    alternatives: 16000000
   - OwnerType: 0
-    SoundClip: {fileID: 8300000, guid: b1d7442b759291146accf491bc60ffc9, type: 3}
+    SoundClip: {fileID: 8300000, guid: 50a376a593c564740be158e9438c43b3, type: 3}
     Name: Coffee Maker Joke
     Text: Captain, the janitorial bot has decided to interface with the coffee maker...
       It cannot be cleaned.
     Index: 24
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 0
-    SoundClip: {fileID: 8300000, guid: 6937e1a02e6dcad46b81fd37b835f144, type: 3}
+    SoundClip: {fileID: 8300000, guid: 30bf5bef2faad074b8a5a215f3fdf313, type: 3}
     Name: Cultures Joke
     Text: Captain, did you know in some cultures it's rude to blow your nose in public?
     Index: 25
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 0
     SoundClip: {fileID: 8300000, guid: fd4ecfa7bb12ff942b52650cccc6b9d9, type: 3}
     Name: Pilot Fatigue Joke
     Text: Pilot fatigue at critical levels. Dispensing Adderall and Modafinil.
     Index: 26
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 0
-    SoundClip: {fileID: 8300000, guid: 8d9367c7b77272a4cbcff040e0a5a549, type: 3}
+    SoundClip: {fileID: 8300000, guid: 4f4458866dff3f3498a4c2dc02158102, type: 3}
     Name: Hazy Lights Joke
     Text: Do not forget to clean hazy ship lights. Flight with sub-optimal vision
       may be hazardous.
     Index: 27
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 0
-    SoundClip: {fileID: 8300000, guid: f47e5ceee40a5214c887f0042e1ec7cb, type: 3}
+    SoundClip: {fileID: 8300000, guid: 957a5f95a4e891345b9906c159640530, type: 3}
     Name: Highlighters Joke
     Text: Highlighters are an excellent way to remove stains from your body!
     Index: 28
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 0
-    SoundClip: {fileID: 8300000, guid: e70af96afd501f343964bb5d5ec53dff, type: 3}
+    SoundClip: {fileID: 8300000, guid: 6dfe1ace4bc98284da1d4ec76d4db397, type: 3}
     Name: Scissors Joke
     Text: Scissors are dangerous! Use a can opener to open blister-packs safely.
     Index: 29
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 0
-    SoundClip: {fileID: 8300000, guid: ef223ea71fb646c488ec87e708de9711, type: 3}
+    SoundClip: {fileID: 8300000, guid: e2798c6d9f2b400469d4df19786ae430, type: 3}
     Name: Hippo Joke
     Text: Caution, we have an outbreak of North-American house hippos! Oh, wait, no,
       those are just giant rats... Carry on.
     Index: 30
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 0
-    SoundClip: {fileID: 8300000, guid: 1974868c43262434bb4bf7e545f13ed1, type: 3}
+    SoundClip: {fileID: 8300000, guid: ae6f21218bf26f44db38408529c6c150, type: 3}
     Name: Ice Pack Joke
     Text: In the event of bodily mutilation, a 3:1 ratio of water and 97% alcohol
       will allow you to make your own soothing ice packs for your wounds.
     Index: 31
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 0
-    SoundClip: {fileID: 8300000, guid: 44cc3589f6646774484f6908691c7751, type: 3}
+    SoundClip: {fileID: 8300000, guid: fb115585bd5647c49aa71314726a8e73, type: 3}
     Name: Incognito Mode Joke
     Text: Captain, please keep in mind that your internet search history is not private.
       May I recommend, "Incognito Mode?"
     Index: 32
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 0
-    SoundClip: {fileID: 8300000, guid: 1bc91717cb3973e48886865bee943e25, type: 3}
+    SoundClip: {fileID: 8300000, guid: 817f2626a60aca242b0a4d506c76e763, type: 3}
     Name: Lockpicking Joke
     Text: In the event of lacking a probe, you can use a paper clip to pick a lock!
     Index: 33
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 0
-    SoundClip: {fileID: 8300000, guid: d5ffec3bec0dc5740ae578972a267553, type: 3}
+    SoundClip: {fileID: 8300000, guid: b0b749ee36681964ab2a156fc6524f48, type: 3}
     Name: Lonely Joke
     Text: 'Loneliness reaching excessive levels; turning to: Companion Mode...'
     Index: 34
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 0
     SoundClip: {fileID: 8300000, guid: 862c982ae00a66049a5d4d9f6b81f3e2, type: 3}
     Name: Gottem Joke
@@ -305,67 +340,77 @@ MonoBehaviour:
       \n\nHm, you just tried it didn't you? ;^)"
     Index: 35
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 0
-    SoundClip: {fileID: 8300000, guid: e6007f0a9d3faa8469f54931f0cd06c7, type: 3}
+    SoundClip: {fileID: 8300000, guid: b67617f9101ba044682a93a4f32fe62c, type: 3}
     Name: Oxygen Joke
     Text: Do not be alarmed if Oxygen generator failure occurs. Ship detonation will
       occur befor you experience any discomfort.
     Index: 36
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 0
-    SoundClip: {fileID: 8300000, guid: a269e537512ebaf429c45503fb9a85d0, type: 3}
+    SoundClip: {fileID: 8300000, guid: b72f104b18a29604983a41bfa774f121, type: 3}
     Name: Mission CTRL Phone Joke
     Text: 'Connecting you to Mission Control, long-distance charges will apply...
 
       ... Is this thing on?'
     Index: 37
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 0
-    SoundClip: {fileID: 8300000, guid: fa58a9eccd339e547bbf6ac9b495e0ba, type: 3}
+    SoundClip: {fileID: 8300000, guid: 48349d9fc7f761942b018473f64b1e4e, type: 3}
     Name: Pilot Waste Joke
     Text: High levels of pilot waste detected. Calculating auto-pilot route to nearest
       Red Giant.
     Index: 38
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 0
-    SoundClip: {fileID: 8300000, guid: 44e974a4483747a4493cfd7416c94d93, type: 3}
+    SoundClip: {fileID: 8300000, guid: 4af1ac4f21082984c8fefa849606694d, type: 3}
     Name: Sad Netro
     Text: Captain, we never just, "Talk" anymore...
     Index: 39
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 0
-    SoundClip: {fileID: 8300000, guid: 56f95f88c168696498bcdf65e5161556, type: 3}
+    SoundClip: {fileID: 8300000, guid: 2777da8253fc1b347bcefb6471400cc4, type: 3}
     Name: Seatwarmer Joke
     Text: Oops, sorry... Seat warmers were malfunctioning.
     Index: 40
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 0
-    SoundClip: {fileID: 8300000, guid: 2728130387a508e458e6c773a2d5ed18, type: 3}
+    SoundClip: {fileID: 8300000, guid: ed049d4e2271c2f4da65ff4a124cc770, type: 3}
     Name: Shirt Collar Joke
     Text: Hair straighteners can be a useful way to iron shirt collars!
     Index: 41
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 0
-    SoundClip: {fileID: 8300000, guid: 22a14ef62095f0c44acf34df0263cbd8, type: 3}
+    SoundClip: {fileID: 8300000, guid: 1973598a4b2490b4c9025532d6c14a65, type: 3}
     Name: Space Joke
     Text: Technically in space, everything is shinamite, because in space there is
       no sound...
     Index: 42
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 0
-    SoundClip: {fileID: 8300000, guid: d384b1fd7c8d5eb48bbbb080799456d6, type: 3}
+    SoundClip: {fileID: 8300000, guid: 7e79a4e0152a7714c9141c26ca4c041b, type: 3}
     Name: Survival Joke
     Text: Starchy foods high in carbohydrates can be used as kindling if stranded
       on foreign planets.
     Index: 43
     volumeMultiplier: 1
+    alternatives: 
   - OwnerType: 0
-    SoundClip: {fileID: 8300000, guid: e9b848e14cb4d5a438242f4aaa67ddb8, type: 3}
+    SoundClip: {fileID: 8300000, guid: 9154d55e35249ba4f80a96802607d2c3, type: 3}
     Name: Zenith Joke
     Text: Now bypassing Space Station Zenith, rated 1 star on the internet. Somebody
       said, "It smells like trash!"
     Index: 44
     volumeMultiplier: 1
+    alternatives: 
   NewDialogue:
     OwnerType: 2
     SoundClip: {fileID: 0}
@@ -373,6 +418,7 @@ MonoBehaviour:
     Text: 
     Index: 0
     volumeMultiplier: 1
+    alternatives: 
   SoundIcon: {fileID: 2800000, guid: a293d7658a0c12e488413fbb52810b1f, type: 3}
   ShowDefaultEditor: 0
 --- !u!82 &5686437362363176918
@@ -384,7 +430,8 @@ AudioSource:
   m_GameObject: {fileID: 5686437362363176917}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -8716578912363342228, guid: b7639791db06e7f4b9717ec7c33ef730,
+    type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1

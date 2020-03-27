@@ -25,6 +25,9 @@ public class ShipController : MonoBehaviour
 
 	[SerializeField] private ParticleSystem warpEffect1;
 	[SerializeField] private ParticleSystem warpEffect2;
+	[SerializeField] private ParticleSystem sonicBoostEffect1;
+	[SerializeField] private ParticleSystem sonicBoostEffect2;
+	[SerializeField] private GameObject sonicBoomEffect;
 
 	[SerializeField] private Transform shipModel;
 
@@ -69,10 +72,12 @@ public class ShipController : MonoBehaviour
 	private float spinSpeed;
 	private float boostGauge;
 	private float turnMultiplayer;
+	private float sonicBoomTime;
 
 	private bool strafing;
 	private bool rotating;
 	private bool boosting;
+	private bool sonicBoom;
 	private bool warping;
 	private bool roleSwap;
 	private bool stopThrust;
@@ -183,6 +188,17 @@ public class ShipController : MonoBehaviour
 		{
 			WarpEffect1.Stop();
 			WarpEffect2.Stop();
+		}
+
+		if (warping || sonicBoom)
+		{
+			sonicBoostEffect1.Play();
+			sonicBoostEffect2.Play();
+		}
+		else
+		{
+			sonicBoostEffect1.Stop();
+			sonicBoostEffect2.Stop();
 		}
 	}
 
@@ -368,12 +384,31 @@ public class ShipController : MonoBehaviour
 			thrustSpeed = Mathf.Clamp(thrustSpeed - myProperties.shipDeceleration, 0, myProperties.shipSpeed);
 		}
 		// If were boosting
-		else if (boosting)
+		else if (!warping && boosting)
 		{
+			float maxSpeed = myProperties.boostSpeed / 2.0f;
+			float acceleration = myProperties.shipAcceleration * 1.5f;
+
+			if (sonicBoom)
+			{
+				maxSpeed = myProperties.boostSpeed;
+				acceleration = myProperties.shipAcceleration * 2.5f;
+			}
+			else if (!sonicBoom && sonicBoomTime > myProperties.sonicBoomTime)
+			{
+				sonicBoom = true;
+				sonicBoomTime = 0;
+
+				Instantiate(sonicBoomEffect, transform);
+			}
+			else
+			{
+				sonicBoomTime += Time.deltaTime;
+			}
+
 			// Increase our speed when boosting
 			if (rigidbody.velocity.magnitude < myProperties.boostSpeed)
-				thrustSpeed = Mathf.Clamp(thrustSpeed + (myProperties.shipSpeed * 2.4f * Time.deltaTime), myProperties.shipSpeed, myProperties.boostSpeed);
-
+				thrustSpeed = Mathf.Clamp(thrustSpeed + (acceleration * Time.deltaTime), myProperties.shipSpeed, maxSpeed);
 
 			// Reduce the boost gauge
 			boostGauge = Mathf.Clamp(boostGauge - myProperties.boostGaugeConsumeAmount * Time.deltaTime, 0, myProperties.maxBoostGauge);
@@ -394,6 +429,9 @@ public class ShipController : MonoBehaviour
 		{
 			// Clamp our thrust Speed to our max thrust speed
 			thrustSpeed = Mathf.Clamp(thrustSpeed - myProperties.shipDeceleration, myProperties.shipSpeed, myProperties.boostSpeed);
+
+			sonicBoom = false;
+			sonicBoomTime = 0;
 		}
 		// Else were not boosting so we increase our ships normal speed
 		else
@@ -470,9 +508,9 @@ public class ShipController : MonoBehaviour
 		shipModel.transform.localPosition = Vector3.Lerp(currentPos, targetPos, myBehaviour.moveSpeed);
 
 		// Camera
-		Vector3 targetCameraPos = warping ? myBehaviour.warpPos : boosting ? myBehaviour.boostPos : myBehaviour.normalPos;
+		Vector3 targetCameraPos = warping ? myBehaviour.warpPos : sonicBoom ? myBehaviour.sonicPos : boosting ? myBehaviour.boostPos : myBehaviour.normalPos;
 
-		pilotCamera.transform.localPosition = Vector3.Slerp(pilotCamera.transform.localPosition, targetCameraPos, myBehaviour.cameraSpeed);
+		pilotCamera.transform.localPosition = Vector3.Slerp(pilotCamera.transform.localPosition, targetCameraPos, myBehaviour.cameraSpeed * Time.deltaTime);
 	}
 
 	#endregion

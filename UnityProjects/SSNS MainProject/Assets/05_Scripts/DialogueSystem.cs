@@ -65,7 +65,16 @@ public class DialogueSystem : MonoBehaviour
 			foreach (DialogueClass dialogue in Dialogue) {
 				if (dialogue.Index == listIndex)
 				{
-					dialogueQueue.Enqueue(dialogue);
+					DialogueClass pickedDialogue = dialogue;
+					if (dialogue.alternatives != null && dialogue.alternatives.Length > 0)
+					{
+						int randomIndex = Random.Range(0, dialogue.alternatives.Length + 1);
+
+						if (randomIndex > 0)
+							pickedDialogue = Dialogue[dialogue.alternatives[randomIndex - 1]];
+					}
+
+					dialogueQueue.Enqueue(pickedDialogue);
 					return;
 				}
 			}

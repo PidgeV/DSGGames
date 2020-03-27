@@ -11,24 +11,23 @@ namespace SNSSTypes
         None
     };
 
-    public enum NodeType
+    public enum AreaType
     {
         Tutorial,
-        Reward,
-        MiniBoss,
+        Regular,
         Boss
     }
 
     public enum GameState
     {
         MAIN_MENU,
-        NODE_TRANSITION,
+        WARPING,
         BATTLE,
         BATTLE_END,
-        NODE_SELECTION, // Don't use this
         RESPAWN,
         PAUSE,
-        GAME_END
+        GAME_OVER,
+        VICTORY
     }
 
     public enum DreadnovaState
@@ -76,4 +75,6 @@ namespace SNSSTypes
     public enum EnemyType { FIGHTER, CHARGER, SWARMER, CRUISER, CARGO }
 
     public enum MusicTrackType { MENU, NON_COMBAT, COMBAT }
+
+    public enum NotificationType { MAJOR, MINOR }
 }

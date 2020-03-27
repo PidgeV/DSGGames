@@ -102,9 +102,9 @@ public class GunController : MonoBehaviour
 
         InitShot(shot);
 
-        if (shot.TryGetComponent(out Bullet bullet))
+        if (shot.TryGetComponent(out ShotInfo info))
         {
-            bullet.role = PlayerRole.Pilot;
+            info.role = PlayerRole.Pilot;
         }
     }
 
@@ -344,10 +344,10 @@ public class GunController : MonoBehaviour
 			shotThing.whoSent = ShotThing.shotFrom.Player;
         }
 
-        if (newShot.TryGetComponent(out Bullet bullet))
-        {
-            bullet.role = PlayerRole.Gunner;
-        }
+		if (newShot.TryGetComponent(out ShotInfo info))
+		{
+			info.role = PlayerRole.Gunner;
+		}
 
         shieldProjector.IgnoreCollider(newShot.GetComponent<Collider>());
 	}
