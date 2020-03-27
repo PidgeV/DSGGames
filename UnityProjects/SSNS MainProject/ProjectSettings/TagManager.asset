@@ -16,6 +16,8 @@ TagManager:
   - Score
   - Projectile
   - WarpEffect
+  - CargoSpawn
+  - PlayerSpawn
   layers:
   - Default
   - TransparentFX

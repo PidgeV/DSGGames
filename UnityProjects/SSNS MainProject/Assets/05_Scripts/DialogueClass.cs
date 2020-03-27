@@ -21,4 +21,5 @@ public class DialogueClass
 
 	public float volumeMultiplier = 1;
 
+	public int[] alternatives;
 }

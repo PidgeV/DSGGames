@@ -12,7 +12,8 @@ public class DialogueSystemWindow : ExtendedEditorWindow
 
 	private SortType _sortType;
 
-	private Vector2 _scrollPos;
+	private Vector2 _clipListScrollPos;
+	private Vector2 _clipScrollPos;
 
 	private int _currentIndex = -1;
 
@@ -71,7 +72,7 @@ public class DialogueSystemWindow : ExtendedEditorWindow
 
 				EditorGUILayout.BeginHorizontal();
 
-				EditorGUILayout.BeginVertical("box", GUILayout.Width(350), GUILayout.Height(400));
+				EditorGUILayout.BeginVertical("box", GUILayout.Width(350));
 
 				EditorGUILayout.BeginHorizontal();
 				if (GUILayout.Button("Edit", EditorStyles.toolbarButton))
@@ -93,6 +94,9 @@ public class DialogueSystemWindow : ExtendedEditorWindow
 				{
 					Block("Add Clip", () =>
 					{
+
+						_clipScrollPos = EditorGUILayout.BeginScrollView(_clipScrollPos);
+
 						EditorGUILayout.PropertyField(dialogueSystem.FindProperty("NewDialogue").FindPropertyRelative("Name"), true);
 						EditorGUILayout.PropertyField(dialogueSystem.FindProperty("NewDialogue").FindPropertyRelative("Text"), true);
 						GUILayout.Space(5);
@@ -100,12 +104,16 @@ public class DialogueSystemWindow : ExtendedEditorWindow
 						GUILayout.Space(5);
 						EditorGUILayout.PropertyField(dialogueSystem.FindProperty("NewDialogue").FindPropertyRelative("OwnerType"), true);
 						EditorGUILayout.PropertyField(dialogueSystem.FindProperty("NewDialogue").FindPropertyRelative("volumeMultiplier"), true);
+						GUILayout.Space(5);
+						EditorGUILayout.PropertyField(dialogueSystem.FindProperty("NewDialogue").FindPropertyRelative("alternatives"), true);
 
 						if (GUILayout.Button("Add New Clip", EditorStyles.toolbarButton))
 						{
 							_dialogueSystem.GenerateNewDialogue();
 							ReSort();
 						}
+
+						EditorGUILayout.EndScrollView();
 					});
 				}
 
@@ -119,6 +127,8 @@ public class DialogueSystemWindow : ExtendedEditorWindow
 							{
 								Block("", () =>
 								{
+									_clipScrollPos = EditorGUILayout.BeginScrollView(_clipScrollPos);
+
 									EditorGUILayout.PropertyField(dialogueArray.GetArrayElementAtIndex(_currentIndex).FindPropertyRelative("Name"), true);
 									GUILayout.Space(5);
 									EditorGUILayout.PropertyField(dialogueArray.GetArrayElementAtIndex(_currentIndex).FindPropertyRelative("Text"), true);
@@ -127,6 +137,8 @@ public class DialogueSystemWindow : ExtendedEditorWindow
 									EditorGUILayout.PropertyField(dialogueArray.GetArrayElementAtIndex(_currentIndex).FindPropertyRelative("volumeMultiplier"), true);
 									GUILayout.Space(5);
 									EditorGUILayout.PropertyField(dialogueArray.GetArrayElementAtIndex(_currentIndex).FindPropertyRelative("SoundClip"), true);
+									GUILayout.Space(5);
+									EditorGUILayout.PropertyField(dialogueArray.GetArrayElementAtIndex(_currentIndex).FindPropertyRelative("alternatives"), true);
 
 									Block("Auto", () =>
 									{
@@ -136,6 +148,8 @@ public class DialogueSystemWindow : ExtendedEditorWindow
 											EditorGUILayout.FloatField("Sound Clip Length", _dialogueSystem.Dialogue[_currentIndex].SoundClip.length);
 										}
 									});
+
+									EditorGUILayout.EndScrollView();
 								});
 							}
 						}
@@ -148,7 +162,7 @@ public class DialogueSystemWindow : ExtendedEditorWindow
 				{
 					EditorGUILayout.BeginVertical("box");
 
-					_scrollPos = EditorGUILayout.BeginScrollView(_scrollPos);
+					_clipListScrollPos = EditorGUILayout.BeginScrollView(_clipListScrollPos);
 
 					for (int index = 0; index < dialogueArray.arraySize; index++)
 					{

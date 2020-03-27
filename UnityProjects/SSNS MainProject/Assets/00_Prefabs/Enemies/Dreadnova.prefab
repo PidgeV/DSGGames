@@ -99,7 +99,7 @@ MonoBehaviour:
     type: 3}
   swarmerPrefab: {fileID: 2212086307816132563, guid: 01e0ea9331425964888c9f346c3a8fed,
     type: 3}
-  cruiserPrefab: {fileID: 8278412131455947766, guid: d70f243484b0f1349aa7336d65b5ffc7,
+  cruiserPrefab: {fileID: 8772997953672295936, guid: 5eee1b082a867db448441382067d867e,
     type: 3}
   cargoPrefab: {fileID: 3107085776561158194, guid: ec334dcaca7277c4f90e6774cbc973fe,
     type: 3}

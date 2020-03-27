@@ -88,7 +88,7 @@ public class AreaManager : MonoBehaviour
 
 					boostNotification.gameObject.SetActive(false);
 
-					GameManager.Instance.SwitchState(GameState.NODE_TRANSITION);
+					GameManager.Instance.SwitchState(GameState.WARPING);
 				}
 
 				GameManager.Instance.Player.Warping = true;
@@ -117,22 +117,29 @@ public class AreaManager : MonoBehaviour
 			{
 				outsideTime += Time.deltaTime;
 
-				if (outsideTime >= MAX_OUTSIDE_TIME)
+                if (!boostNotification.gameObject.activeSelf)
+                    boostNotification.gameObject.SetActive(true);
+
+                boostNotification.text = "Termination in " + Mathf.RoundToInt(MAX_OUTSIDE_TIME - outsideTime) + "s";
+
+                if (outsideTime >= MAX_OUTSIDE_TIME)
 				{
 					outsideTime = 0;
+                    boostNotification.gameObject.SetActive(false);
 
-					if (GameManager.Instance.Player.TryGetComponent(out HealthAndShields health))
+                    if (GameManager.Instance.Player.TryGetComponent(out HealthAndShields health))
 					{
 						health.TakeDamage(Mathf.Infinity, Mathf.Infinity);
 					}
 				}
-			}
+            }
 			else
 			{
 				float range = currentArea.Size - (currentArea.Size - 150);
 				float input = Mathf.Abs(Vector3.Distance(GameManager.Instance.Player.transform.position, currentArea.transform.position));
 				float t = Mathf.Clamp((input - (currentArea.Size - 150)) / range, 0, 1);
 				outsideOverlay.color = Color.Lerp(outsideStartColor, outsideTargetColor, t);
+                boostNotification.gameObject.SetActive(false);
 			}
 		}
         else if (GameManager.Instance.GameState == GameState.RESPAWN && outsideOverlay.IsActive())
@@ -184,7 +191,7 @@ public class AreaManager : MonoBehaviour
 
         if (areaIndex >= areas.Length)
         {
-            GameManager.Instance.SwitchState(GameState.GAME_END);
+            GameManager.Instance.SwitchState(GameState.GAME_OVER);
             return;
         }
 
@@ -248,8 +255,7 @@ public class AreaManager : MonoBehaviour
 
 		float time = MIN_TRAVEL_TIME - Mathf.Min(Time.time - startTravelTime, 0);
 
-		if (areaIndex != 0)
-			yield return new WaitForSeconds(time);
+		yield return new WaitForSeconds(time);
 
 		AreaLoaded?.Invoke();
 
@@ -257,7 +263,11 @@ public class AreaManager : MonoBehaviour
 
         yield return null;
 
+
         Transform playerSpawn = currentArea.FindSafeSpawn();
+
+        if (currentArea.AreaType == AreaType.Boss)
+            playerSpawn = currentArea.FindSafeSpawn("PlayerSpawn");
 
         //GameManager.Instance.Player.gameObject.SetActive(false);
         GameManager.Instance.Player.transform.position = playerSpawn.position;

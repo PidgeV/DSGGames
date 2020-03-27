@@ -112,6 +112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: 1
+  role: 0
   fireRate: 0.1
   lifeTime: 5
   speed: 700
@@ -122,9 +123,10 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4450240921679082262}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -4435638778751794195, guid: b7639791db06e7f4b9717ec7c33ef730,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: e890eaf5838ae56469b4424518b55902, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5

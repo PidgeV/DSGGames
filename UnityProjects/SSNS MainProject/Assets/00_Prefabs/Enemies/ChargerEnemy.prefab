@@ -113,8 +113,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shipStats: {fileID: 11400000, guid: b228fcfa117d79f499461b0c4acb4e68, type: 2}
-  destroyedPrefab: {fileID: 8305956982705048768, guid: 67f64df1e41df954a9007ccd68dbbd16,
-    type: 3}
+  explosionPrefab: {fileID: 0}
+  explosionScale: 1
   shieldRegenDelay: 3
   currentLife: 0
   currentShield: 0
@@ -194,7 +194,8 @@ AudioSource:
   m_GameObject: {fileID: 3107085776561158194}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -4435638778751794195, guid: b7639791db06e7f4b9717ec7c33ef730,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 0839e298e36656b428807f4a3b0c0733, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5

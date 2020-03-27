@@ -12,9 +12,11 @@ public class GameTimer : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		time += Time.deltaTime / 100;
-		float newTile = time;
-		string s = newTile.ToString("###00.00");
-		text.text = s.Replace('.', ':');
+		time += Time.deltaTime;
+
+		System.TimeSpan timeSpan = System.TimeSpan.FromSeconds(time);
+
+		text.text = timeSpan.ToString("mm\\:ss");
+
 	}
 }

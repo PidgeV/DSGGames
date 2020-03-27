@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -2297667013089116906}
   - component: {fileID: 7657081146545638085}
   m_Layer: 0
-  m_Name: HitSound
+  m_Name: EnergyHitSound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,8 @@ AudioSource:
   m_GameObject: {fileID: 1504425092435240292}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -4435638778751794195, guid: b7639791db06e7f4b9717ec7c33ef730,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: b73784824ce3cf54e870f2d23b7fb1d0, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.2

@@ -46,7 +46,7 @@ public class DreadnovaSpawner : NodeSpawner
 
     public void SpawnCargo()
     {
-        Transform spawnpoint = AreaManager.Instance.CurrentArea.FindSafeSpawn();
+        Transform spawnpoint = AreaManager.Instance.CurrentArea.FindSafeSpawn("CargoSpawn");
 
         Vector3 swarmerSpawnpoint = spawnpoint.position + Random.insideUnitSphere * 20;
 

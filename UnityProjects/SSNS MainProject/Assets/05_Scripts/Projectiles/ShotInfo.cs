@@ -5,6 +5,7 @@ using UnityEngine;
 public class ShotInfo : MonoBehaviour
 {
     public SNSSTypes.WeaponType weapon;
+    public SNSSTypes.PlayerRole role;
     [SerializeField] private float fireRate;
     [Tooltip("Life in seconds, 0 for infinite life")]
     [Range(0, 120)]
@@ -23,6 +24,14 @@ public class ShotInfo : MonoBehaviour
             lifeTimer += Time.deltaTime;
 
             if (lifeTimer >= lifeTime) Destroy(gameObject);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (role != SNSSTypes.PlayerRole.None && GameManager.Instance.Player.TryGetComponent(out PlayerHUDHandler hud))
+        {
+            hud.BlinkRedicle(role);
         }
     }
 }

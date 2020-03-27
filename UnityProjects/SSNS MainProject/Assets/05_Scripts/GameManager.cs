@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     public bool debug;
     public bool paused = false;
 
-    [SerializeField] private GameState gameState = GameState.NODE_TRANSITION;
+    [SerializeField] private GameState gameState = GameState.WARPING;
 
     [SerializeField] private int seed;
 
@@ -89,7 +89,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.PAUSE:
                 break;
-            case GameState.NODE_TRANSITION:
+            case GameState.WARPING:
                 shipController.Warping = true;
                 shipController.Freeze = false;
                 shipController.StopThrust = false;
@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
                 //AreaManager.Instance.LoadNewArea();
                 StartCoroutine(DelayedAreaLoad());
                 break;
-            case GameState.GAME_END:
+            case GameState.GAME_OVER:
 
                 foreach (Player player in FindObjectsOfType<Player>())
                 {
@@ -114,6 +114,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(3f);
         AreaManager.Instance.LoadNewArea();
+        shipController.AlignGunnerWithPilot();
     }
 
     private void CheckForRespawn()
@@ -165,7 +166,7 @@ public class GameManager : MonoBehaviour
     {
         switch (gameState)
         {
-            case GameState.NODE_TRANSITION:
+            case GameState.WARPING:
                 break;
             case GameState.BATTLE:
                 CheckForRespawn();
@@ -175,11 +176,9 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.BATTLE_END:
                 break;
-            case GameState.NODE_SELECTION:
-                break;
             case GameState.PAUSE:
                 break;
-            case GameState.GAME_END:
+            case GameState.GAME_OVER:
                 break;
         }
     }

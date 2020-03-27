@@ -23,6 +23,8 @@ public class WarpEffectBehaviour : MonoBehaviour
 
         vfx = GetComponent<VisualEffect>();
         vfx.enabled = false;
+
+        vfx.SetFloat("WarpRadius", min);
     }
 
     // Update is called once per frame
