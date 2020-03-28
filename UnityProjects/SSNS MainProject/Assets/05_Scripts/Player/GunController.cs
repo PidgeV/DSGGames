@@ -54,7 +54,7 @@ public class GunController : MonoBehaviour
             EndLaser();
         }
 
-		if (laserShot.fadeIn)
+        if (laserShot.fadeIn)
 		{
 			Ray ray = new Ray(barrelL.transform.position, barrelL.transform.forward);
 
@@ -93,8 +93,8 @@ public class GunController : MonoBehaviour
 		gunAnimator.SetBool("Attacking", Attacking);
 	}
 
-	// Shoot from Ship
-	public void ShootFromShip()
+    // Shoot from Ship
+    public void ShootFromShip()
 	{
 		if (MenuManager.Instance.Sleeping) return;
 
@@ -138,8 +138,20 @@ public class GunController : MonoBehaviour
 		}
 	}
 
-	// Standard Shot
-	public float FireRateStandard = 5f;
+    private void OnEnable()
+    {
+        StartCoroutine(EnableMeBois());
+    }
+
+    IEnumerator EnableMeBois()
+    {
+        yield return null;
+        yield return null;
+        UpdateAttacking(false);
+    }
+
+    // Standard Shot
+    public float FireRateStandard = 5f;
 	public float FireRateEnergy = 5f;
 	public void UpdateStandardShot()
 	{

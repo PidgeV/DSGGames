@@ -18,7 +18,7 @@ public class LaserBehaviour : MonoBehaviour
 
     Material[] laserMaterials;
     public float Length { get { return laserLength; } }
-    public float Damage { get { return laserDamagePerSecond / Time.deltaTime; } }
+    public float Damage { get { return laserDamagePerSecond * Time.deltaTime; } }
 
     private void Start()
     {
@@ -55,5 +55,20 @@ public class LaserBehaviour : MonoBehaviour
         laserMaterials[0].SetFloat("Vector1_2C1D604B", fade);
         laserMaterials[1].SetFloat("Vector1_2C1D604B", fade2);
         laserMaterials[2].SetFloat("Vector1_2DFED300", alpha);
+    }
+
+    private void OnEnable()
+    {
+        StartCoroutine(Reset());
+    }
+
+    IEnumerator Reset()
+    {
+        fadeIn = false;
+        yield return null;
+        yield return null;
+        laserMaterials[0].SetFloat("Vector1_2C1D604B", 1);
+        laserMaterials[1].SetFloat("Vector1_2C1D604B", 1);
+        laserMaterials[2].SetFloat("Vector1_2DFED300", 0);
     }
 }
