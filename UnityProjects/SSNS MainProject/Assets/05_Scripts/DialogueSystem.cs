@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+[RequireComponent(typeof(AudioSource))]
 public class DialogueSystem : MonoBehaviour
 {
     public static DialogueSystem Instance;
@@ -38,37 +38,36 @@ public class DialogueSystem : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    IEnumerator Start()
+    private void Start()
     {
-        while (true)
+        audioSource = GetComponent<AudioSource>();
+        StartCoroutine(TrackTextDisplay());
+    }
+
+    private void Update()
+    {
+        if (audioSource && dialogueQueue.Count > 0)
         {
-            yield return new WaitForSeconds(0.5f);
+            if (dialogueText) dialogueText.text = dialogueQueue.Peek().Text[textPos];
 
-            if (!audioSource) audioSource = GameObject.FindGameObjectWithTag("Dialogue").GetComponent<AudioSource>();
-
-            if (audioSource && !audioSource.isPlaying && dialogueQueue.Count > 0)
+            if (!audioSource.isPlaying && textPos == 0)
             {
                 audioSource.clip = dialogueQueue.Peek().SoundClip;
                 audioSource.Play();
+                //Debug.Log("play clip");
+            }
 
-                if (dialogueText) dialogueText.text = dialogueQueue.Peek().Text[textPos];
-
-                if (dialogueQueue.Peek().Text.Length == 1) dialogueQueue.Dequeue();
-                else if (textPos == dialogueQueue.Peek().Text.Length)
-                {
-                    textPos = 0;
-                    dialogueQueue.Dequeue();
-                }
-            }
-            else if (!audioSource.isPlaying && dialogueQueue.Count == 0)
+            if (dialogueQueue.Peek().Text.Length == 1) dialogueQueue.Dequeue();
+            else if (textPos == dialogueQueue.Peek().Text.Length - 1)
             {
-                dialogueText.text = "";
+                //Debug.Log("Reset");
+                textPos = 0;
+                dialogueQueue.Dequeue();
             }
-            else if (!audioSource)
-            {
-                dialogueText.text = "";
-                Debug.LogWarning("No AudioSource found for Dialogue");
-            }
+        }
+        else if (dialogueText.text != "" && !audioSource.isPlaying && dialogueQueue.Count == 0)
+        {
+            dialogueText.text = "";
         }
     }
 
@@ -76,27 +75,31 @@ public class DialogueSystem : MonoBehaviour
     {
         while (true)
         {
-            yield return null;
-
-            DialogueClass diag = dialogueQueue.Peek();
-
-            if (diag.Text.Length > 0)
+            if (dialogueQueue.Count > 0)
             {
-                yield return new WaitForSecondsRealtime(diag.displayTime[textPos]);
+                DialogueClass diag = dialogueQueue.Peek();
 
-                textPos++;
+                if (diag.Text.Length > 1 && textPos < diag.displayTime.Length)
+                {
+                    yield return new WaitForSecondsRealtime(diag.displayTime[textPos]);
+                    textPos++;
+                    //Debug.Log(textPos);
+                }
+                else yield return null;
             }
-
+            else yield return null;
         }
     }
 
     public void AddDialogue(DialogueClass dialogue)
     {
+        Debug.Log("Dialogue added");
         dialogueQueue.Enqueue(dialogue);
     }
 
     public DialogueClass AddDialogue(int listIndex)
     {
+        Debug.Log("Dialogue added");
         if (listIndex < Dialogue.Count)
         {
             foreach (DialogueClass dialogue in Dialogue)
@@ -138,5 +141,11 @@ public class DialogueSystem : MonoBehaviour
         NewDialogue.Index = Dialogue.Count;
         Dialogue.Add(NewDialogue);
         NewDialogue = new DialogueClass();
+    }
+
+    public void ClearDialogue()
+    {
+        dialogueQueue.Clear();
+        audioSource.Stop();
     }
 }
