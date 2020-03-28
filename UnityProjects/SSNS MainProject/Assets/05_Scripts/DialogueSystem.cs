@@ -5,42 +5,44 @@ using UnityEngine.UI;
 
 public class DialogueSystem : MonoBehaviour
 {
-	public static DialogueSystem Instance;
+    public static DialogueSystem Instance;
 
     [SerializeField] AudioSource audioSource;
     [SerializeField] Text dialogueText;
-	
-	Queue<DialogueClass> dialogueQueue = new Queue<DialogueClass>();
 
-	public List<DialogueClass> Dialogue;
+    Queue<DialogueClass> dialogueQueue = new Queue<DialogueClass>();
 
-	// Editor
-	public DialogueClass NewDialogue;
-	public Texture2D SoundIcon;
-	public bool ShowDefaultEditor;
+    public List<DialogueClass> Dialogue;
 
-	private void Awake()
-	{
-		if (Instance != null)
-		{
-			Destroy(Instance.gameObject);
-		}
+    // Editor
+    public DialogueClass NewDialogue;
+    public Texture2D SoundIcon;
+    public bool ShowDefaultEditor;
 
-		Instance = this;
-	}
+    private int textPos = 0;
 
-	[ContextMenu("Play Index Zero")]
-	public void PlayIndexZero()
-	{
-		AddDialogue(0);
-	}
-
-	// Start is called before the first frame update
-	IEnumerator Start()
+    private void Awake()
     {
-        while(true)
+        if (Instance != null)
         {
-            yield return new WaitForSeconds(1);
+            Destroy(Instance.gameObject);
+        }
+
+        Instance = this;
+    }
+
+    [ContextMenu("Play Index Zero")]
+    public void PlayIndexZero()
+    {
+        AddDialogue(0);
+    }
+
+    // Start is called before the first frame update
+    IEnumerator Start()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(0.5f);
 
             if (!audioSource) audioSource = GameObject.FindGameObjectWithTag("Dialogue").GetComponent<AudioSource>();
 
@@ -49,19 +51,42 @@ public class DialogueSystem : MonoBehaviour
                 audioSource.clip = dialogueQueue.Peek().SoundClip;
                 audioSource.Play();
 
-                if (dialogueText) dialogueText.text = dialogueQueue.Peek().Text;
+                if (dialogueText) dialogueText.text = dialogueQueue.Peek().Text[textPos];
 
-                dialogueQueue.Dequeue();
+                if (dialogueQueue.Peek().Text.Length == 1) dialogueQueue.Dequeue();
+                else if (textPos == dialogueQueue.Peek().Text.Length)
+                {
+                    textPos = 0;
+                    dialogueQueue.Dequeue();
+                }
             }
-            else if(!audioSource.isPlaying && dialogueQueue.Count == 0)
+            else if (!audioSource.isPlaying && dialogueQueue.Count == 0)
             {
                 dialogueText.text = "";
             }
-            else if(!audioSource)
+            else if (!audioSource)
             {
                 dialogueText.text = "";
                 Debug.LogWarning("No AudioSource found for Dialogue");
             }
+        }
+    }
+
+    IEnumerator TrackTextDisplay()
+    {
+        while (true)
+        {
+            yield return null;
+
+            DialogueClass diag = dialogueQueue.Peek();
+
+            if (diag.Text.Length > 0)
+            {
+                yield return new WaitForSecondsRealtime(diag.displayTime[textPos]);
+
+                textPos++;
+            }
+
         }
     }
 
@@ -70,46 +95,48 @@ public class DialogueSystem : MonoBehaviour
         dialogueQueue.Enqueue(dialogue);
     }
 
-	public DialogueClass AddDialogue(int listIndex)
-	{
-		if (listIndex < Dialogue.Count)
-		{
-			foreach (DialogueClass dialogue in Dialogue) {
-				if (dialogue.Index == listIndex)
-				{
-					DialogueClass pickedDialogue = dialogue;
-					if (dialogue.alternatives != null && dialogue.alternatives.Length > 0)
-					{
-						int randomIndex = Random.Range(0, dialogue.alternatives.Length + 1);
+    public DialogueClass AddDialogue(int listIndex)
+    {
+        if (listIndex < Dialogue.Count)
+        {
+            foreach (DialogueClass dialogue in Dialogue)
+            {
+                if (dialogue.Index == listIndex)
+                {
+                    DialogueClass pickedDialogue = dialogue;
+                    if (dialogue.alternatives != null && dialogue.alternatives.Length > 0)
+                    {
+                        int randomIndex = Random.Range(0, dialogue.alternatives.Length + 1);
 
-						if (randomIndex > 0)
-							pickedDialogue = Dialogue[dialogue.alternatives[randomIndex - 1]];
-					}
+                        if (randomIndex > 0)
+                            pickedDialogue = Dialogue[dialogue.alternatives[randomIndex - 1]];
+                    }
 
-					dialogueQueue.Enqueue(pickedDialogue);
-					return pickedDialogue;
-				}
-			}
-		}
-		else
-		{
-			Debug.LogError("Index out of range.");
-		}
+                    dialogueQueue.Enqueue(pickedDialogue);
+                    return pickedDialogue;
+                }
+            }
+        }
+        else
+        {
+            Debug.LogError("Index out of range.");
+        }
 
-		return null;
-	}
+        return null;
+    }
 
-	public void PlayQuickClip(AudioClip clip)
-	{
-		if (audioSource != null) {
-			audioSource.PlayOneShot(clip);
-		}
-	}
+    public void PlayQuickClip(AudioClip clip)
+    {
+        if (audioSource != null)
+        {
+            audioSource.PlayOneShot(clip);
+        }
+    }
 
-	public void GenerateNewDialogue()
-	{
-		NewDialogue.Index = Dialogue.Count;
-		Dialogue.Add(NewDialogue);
-		NewDialogue = new DialogueClass();
-	}
+    public void GenerateNewDialogue()
+    {
+        NewDialogue.Index = Dialogue.Count;
+        Dialogue.Add(NewDialogue);
+        NewDialogue = new DialogueClass();
+    }
 }

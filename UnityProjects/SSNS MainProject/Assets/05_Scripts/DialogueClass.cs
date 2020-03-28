@@ -15,7 +15,8 @@ public class DialogueClass
 
 	public string Name;
 
-	[TextArea(7, 1)] public string Text;
+	[TextArea(7, 1)] public string[] Text;
+    public float[] displayTime;
 
 	public int Index;
 
