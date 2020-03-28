@@ -22,6 +22,12 @@ public class AreaSpawner : MonoBehaviour
     [SerializeField] protected Transform[] spawnpoints;
     [SerializeField] protected Transform[] waypoints;
 
+    protected int fighterCount = 0;
+    protected int chargerCount = 0;
+    protected int swarmerCount = 0;
+    protected int cruiserCount = 0;
+    protected int cargoCount = 0;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -109,7 +115,7 @@ public class AreaSpawner : MonoBehaviour
         waypoints = wp.ToArray();
     }
 
-    protected GameObject SpawnEnemy(GameObject prefab, Vector3 spawnpoint, Vector3 destination)
+    protected GameObject SpawnEnemy(GameObject prefab, EnemyType type, Vector3 spawnpoint, Vector3 destination)
     {
         GameObject enemy = Instantiate(prefab);
 
@@ -120,12 +126,41 @@ public class AreaSpawner : MonoBehaviour
             enemyController.Spawn = spawnpoint;
             enemyController.SpawnDestination = destination;
             enemyController.waypoints = waypoints;
+            enemyController.Health.onDeath += () =>
+            {
+                switch (type)
+                {
+                    case EnemyType.FIGHTER:
+                        fighterCount--;
+                        break;
+                    case EnemyType.CHARGER:
+                        chargerCount--;
+                        break;
+                    case EnemyType.CRUISER:
+                        cruiserCount--;
+                        break;
+                    case EnemyType.CARGO:
+                        cargoCount--;
+                        break;
+                }
+            };
         }
         else if (enemy.TryGetComponent(out Flock flock))
         {
             flock.SetSpawnDestination = spawnpoint;
             flock.SetSpawnDestination = destination;
             flock.WayPoints = waypoints;
+            
+            foreach(FlockAgent agent in flock.agents)
+            {
+                if (agent.TryGetComponent(out HealthAndShields health))
+                {
+                    health.onDeath += () =>
+                    {
+                        swarmerCount--;
+                    };
+                }
+            }
         }
 
         AreaManager.Instance.OnObjectAdd(enemy, true);
@@ -133,9 +168,9 @@ public class AreaSpawner : MonoBehaviour
         return enemy;
     }
 
-    protected virtual GameObject SpawnEnemy(GameObject prefab, Transform spawnpoint)
+    protected virtual GameObject SpawnEnemy(GameObject prefab, EnemyType type, Transform spawnpoint)
     {
-        GameObject enemy = SpawnEnemy(prefab, spawnpoint.position, spawnpoint.position);
+        GameObject enemy = SpawnEnemy(prefab, type, spawnpoint.position, spawnpoint.position);
 
         return enemy;
     }
@@ -154,11 +189,14 @@ public class AreaSpawner : MonoBehaviour
             {
                 Transform spawnpoint = safeSpawn ? area.FindSafeSpawn() : spawnpoints[spawnIndex];
 
-                GameObject swarmer = SpawnEnemy(swarmerPrefab, spawnpoint);
+                GameObject swarmer = SpawnEnemy(swarmerPrefab, spawnInfo.type, spawnpoint);
+
+                if (swarmer == null) continue;
 
                 if (swarmer.TryGetComponent(out Flock flock))
                 {
                     flock.startingCount = spawnInfo.count;
+                    swarmerCount+= flock.startingCount;
                 }
 
                 if (!safeSpawn)
@@ -173,16 +211,20 @@ public class AreaSpawner : MonoBehaviour
                     switch (spawnInfo.type)
                     {
                         case EnemyType.FIGHTER:
-                            SpawnEnemy(fighterPrefab, spawnpoint);
+                            SpawnEnemy(fighterPrefab, spawnInfo.type, spawnpoint);
+                            fighterCount++;
                             break;
                         case EnemyType.CHARGER:
-                            SpawnEnemy(chargerPrefab, spawnpoint);
+                            SpawnEnemy(chargerPrefab, spawnInfo.type, spawnpoint);
+                            chargerCount++;
                             break;
                         case EnemyType.CRUISER:
-                            SpawnEnemy(cruiserPrefab, spawnpoint);
+                            SpawnEnemy(cruiserPrefab, spawnInfo.type, spawnpoint);
+                            cruiserCount++;
                             break;
                         case EnemyType.CARGO:
-                            SpawnEnemy(cargoPrefab, spawnpoint);
+                            SpawnEnemy(cargoPrefab, spawnInfo.type, spawnpoint);
+                            cargoCount++;
                             break;
                     }
 

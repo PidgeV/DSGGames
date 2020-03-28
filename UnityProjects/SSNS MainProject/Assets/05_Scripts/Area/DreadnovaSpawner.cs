@@ -10,6 +10,11 @@ public class DreadnovaSpawner : AreaSpawner
 
     [SerializeField] private float distanceToTravelAway = 200;
 
+    [Header("Max Enemy Counts")]
+    [SerializeField] private int fighterMaxCount = 10;
+    [SerializeField] private int chargerMaxCount = 10;
+    [SerializeField] private int swarmerMaxCount = 200;
+
     private CargoController cargoController;
 
     // Start is called before the first frame update
@@ -50,8 +55,8 @@ public class DreadnovaSpawner : AreaSpawner
 
         Vector3 swarmerSpawnpoint = spawnpoint.position + Random.insideUnitSphere * 20;
 
-        GameObject cargo = SpawnEnemy(cargoPrefab, spawnpoint.position, spawnpoint.position);
-        GameObject swarmer = SpawnEnemy(swarmerPrefab, swarmerSpawnpoint, swarmerSpawnpoint);
+        GameObject cargo = SpawnEnemy(cargoPrefab, EnemyType.CARGO, spawnpoint.position, spawnpoint.position);
+        GameObject swarmer = SpawnEnemy(swarmerPrefab, EnemyType.SWARMER, swarmerSpawnpoint, swarmerSpawnpoint);
 
         cargo.TryGetComponent(out cargoController);
 
@@ -66,9 +71,22 @@ public class DreadnovaSpawner : AreaSpawner
         DialogueSystem.Instance.AddDialogue(2);
     }
 
-    protected override GameObject SpawnEnemy(GameObject prefab, Transform spawnpoint)
+    protected override GameObject SpawnEnemy(GameObject prefab, EnemyType type, Transform spawnpoint)
     {
-        GameObject enemy = SpawnEnemy(prefab, spawnpoint.position, spawnpoint.position + spawnpoint.forward * distanceToTravelAway);
+        switch (type)
+        {
+            case EnemyType.FIGHTER:
+                if (fighterCount >= fighterMaxCount) return null;
+                break;
+            case EnemyType.CHARGER:
+                if (chargerCount >= chargerMaxCount) return null;
+                break;
+            case EnemyType.SWARMER:
+                if (swarmerCount >= swarmerMaxCount) return null;
+                break;
+        }
+
+        GameObject enemy = SpawnEnemy(prefab, type, spawnpoint.position, spawnpoint.position + spawnpoint.forward * distanceToTravelAway);
 
         enemy.transform.rotation = spawnpoint.rotation;
 

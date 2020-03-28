@@ -73,6 +73,7 @@ public class ShipController : MonoBehaviour
 	private float boostGauge;
 	private float turnMultiplayer;
 	private float sonicBoomTime;
+	private float boostDepleteDelay;
 
 	private bool strafing;
 	private bool rotating;
@@ -104,7 +105,7 @@ public class ShipController : MonoBehaviour
 
 	public int NumberOfPlayers { get; set; }
 
-	public bool Boosting { get { return boosting; } set { boosting = value; } }
+	public bool Boosting { get { return boosting; } set { boosting = boostDepleteDelay >= myProperties.boostDepleteDelay ? value : false; } }
 	public bool Warping { get { return warping; } set { warping = value; } }
 	public bool Strafing { get { return strafing; } set { strafing = value; } }
 	public bool Rotating { get { return rotating; } set { rotating = value; } }
@@ -164,6 +165,8 @@ public class ShipController : MonoBehaviour
 		boostGauge = myProperties.maxBoostGauge;
 
 		if (!shipHP) TryGetComponent(out shipHP);
+
+		boostDepleteDelay = myProperties.boostDepleteDelay;
     }
 
 	/// <summary>
@@ -225,7 +228,7 @@ public class ShipController : MonoBehaviour
 
 	private void OnCollisionEnter(Collision c)
 	{
-		if (c.gameObject.tag != "Projectile" && !collision)
+		if (c.gameObject.tag != "Projectile" && c.gameObject.layer != LayerMask.GetMask("Swarm") && !collision)
 		{
 			Vector3 dir = c.contacts[0].point - transform.position;
 
@@ -384,7 +387,7 @@ public class ShipController : MonoBehaviour
 			thrustSpeed = Mathf.Clamp(thrustSpeed - myProperties.shipDeceleration, 0, myProperties.shipSpeed);
 		}
 		// If were boosting
-		else if (!warping && boosting)
+		else if (!warping && boosting && boostDepleteDelay >= myProperties.boostDepleteDelay)
 		{
 			float maxSpeed = myProperties.boostSpeed / 2.0f;
 			float acceleration = myProperties.shipAcceleration * 1.5f;
@@ -421,6 +424,7 @@ public class ShipController : MonoBehaviour
 			if (boostGauge <= 0 && UnlimitedBoost == false)
 			{
 				boosting = false;
+				boostDepleteDelay = 0;
 			}
 		}
 		// Else if we are NOT boosting and our thrustSpeed is over our maxThrustSpeed
@@ -437,6 +441,11 @@ public class ShipController : MonoBehaviour
 		else
 		{
 			thrustSpeed = myProperties.shipSpeed;
+		}
+
+		if (boostDepleteDelay < myProperties.boostDepleteDelay)
+		{
+			boostDepleteDelay = Mathf.Clamp(boostDepleteDelay + Time.deltaTime, 0, myProperties.boostDepleteDelay);
 		}
 
 		finalThrustVelocity = transform.forward * thrustSpeed;

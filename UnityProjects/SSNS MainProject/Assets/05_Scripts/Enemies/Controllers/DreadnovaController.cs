@@ -18,8 +18,6 @@ public class DreadnovaController : EnemyController
 
     public override void ResetEnemy()
     {
-        base.ResetEnemy();
-
         foreach (ShieldGenerator generator in shieldGenerators)
         {
             generator.InitializeGenerator();
@@ -32,6 +30,8 @@ public class DreadnovaController : EnemyController
         warping = false;
 
         spawner.enabled = true;
+
+        base.ResetEnemy();
     }
 
     protected override void Initialize()
@@ -85,11 +85,10 @@ public class DreadnovaController : EnemyController
 
     public void DestroyGenerators()
     {
-        // TODO: Need to update
-        //foreach (HealthAndShields generator in shieldGenerators)
-        //{
-        //    generator.TakeDamage(Mathf.Infinity, Mathf.Infinity);
-        //}
+        foreach(ShieldGenerator generator in shieldGenerators)
+        {
+            generator.DestroyGenerator();
+        }
     }
 
     private IEnumerator WarpOut()

@@ -54,12 +54,15 @@ public abstract class EnemyController : AdvancedFSM
 
     protected abstract void ConstructFSM();
 
+    private void Awake()
+    {
+        TryGetComponent(out rbSelf);
+        TryGetComponent(out health);
+    }
+
     protected override void Initialize()
     {
         ConstructFSM();
-
-        TryGetComponent(out rbSelf);
-        TryGetComponent(out health);
 
         //Removes from AIManager on death
         if (health != null)

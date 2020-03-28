@@ -279,7 +279,7 @@ public class AreaManager : MonoBehaviour
 
         Transform playerSpawn = currentArea.FindSafeSpawn();
 
-        if (currentArea.AreaType == AreaType.BossAttack)
+        if (currentArea.AreaType == AreaType.BossShield || currentArea.AreaType == AreaType.BossAttack)
             playerSpawn = currentArea.FindSafeSpawn("PlayerSpawn");
 
         //GameManager.Instance.Player.gameObject.SetActive(false);

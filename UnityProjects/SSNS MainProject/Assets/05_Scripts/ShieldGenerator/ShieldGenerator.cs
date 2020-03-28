@@ -63,6 +63,28 @@ public class ShieldGenerator : MonoBehaviour
 		}
 	}
 
+	public void DestroyGenerator()
+	{
+		_shieldAlive = false;
+		_platesAlive = false;
+		_generatorAlive = true;
+
+		_boom = false;
+
+		_shield.SetActive(false);
+
+		_weakPoint.SetActive(false);
+		_generator.SetActive(false);
+
+		foreach (GameObject go in _armorPanels)
+		{
+			go.SetActive(true);
+			ShieldGeneratorPlate shieldGeneratorPlate = go.GetComponentInParent<ShieldGeneratorPlate>();
+			shieldGeneratorPlate.DestroyPlate();
+			go.SetActive(false);
+		}
+	}
+
 	private void Update()
 	{
 		// If we're in the shield phase

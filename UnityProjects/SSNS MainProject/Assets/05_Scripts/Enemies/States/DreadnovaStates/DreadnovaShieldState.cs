@@ -28,7 +28,7 @@ public class DreadnovaShieldState : FSMState
         controller.dreadnovaShield.SetActive(true);
         controller.Spawner.enabled = true;
 
-        waveTime = 0;
+        waveTime = controller.Spawner.Wave.TimeBetweenWaves;
         waveCount = 0;
         cargoTime = 0;
 
@@ -79,7 +79,7 @@ public class DreadnovaShieldState : FSMState
         }
         else if (GameManager.Instance.GameState == GameState.BATTLE)
         {
-            if (AreaManager.Instance.EnemyCount <= controller.Spawner.Wave.GetMaxEnemyCount(waveCount))
+            if (AreaManager.Instance.EnemyCount <= controller.Spawner.Wave.GetMaxEnemyCount(waveCount) * 0.30f)
             {
                 waveTime += Time.deltaTime;
 

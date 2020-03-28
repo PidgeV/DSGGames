@@ -38,7 +38,7 @@ public class DreadnovaAttackState : FSMState
         // TODO: When dreadnova parts are implemented needs to determine when dreadnova is dead
         if (GameManager.Instance.GameState == GameState.BATTLE)
         {
-            if (AreaManager.Instance.EnemyCount <= controller.Spawner.Wave.GetMaxEnemyCount(waveCount))
+            if (AreaManager.Instance.EnemyCount <= controller.Spawner.Wave.GetMaxEnemyCount(waveCount) * 0.30f)
             {
                 waveTime += Time.deltaTime;
 

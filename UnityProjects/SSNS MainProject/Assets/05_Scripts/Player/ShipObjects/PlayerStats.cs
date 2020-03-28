@@ -39,6 +39,8 @@ public class PlayerStats : Stats
 	// The amount boosting recharges the meter every second
 	public float boostGaugeRechargeAmount = 1.5f;
 
+	public float boostDepleteDelay = 5.0f;
+
 	public float sonicBoomTime = 2.0f;
 
 	[Header("Bonuses")]
