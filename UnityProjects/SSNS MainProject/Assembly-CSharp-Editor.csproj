@@ -367,6 +367,9 @@
     <Reference Include="UnityEditor.VR">
       <HintPath>E:/Program Files/Unity/2019.2.2f1/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.VR">
+      <HintPath>C:/Program Files/Unity/Hub/Editor/2019.2.2f1/Editor/Data/UnityExtensions/Unity/UnityVR/Editor/UnityEditor.VR.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEditor.Graphs">
       <HintPath>E:/Program Files/Unity/2019.2.2f1/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
     </Reference>
