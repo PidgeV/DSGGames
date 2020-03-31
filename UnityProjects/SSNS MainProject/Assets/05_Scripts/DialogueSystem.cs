@@ -79,7 +79,7 @@ public class DialogueSystem : MonoBehaviour
             {
                 DialogueClass diag = dialogueQueue.Peek();
 
-                if (diag.Text.Length > 1 && textPos < diag.displayTime.Length)
+                if (diag.displayTime != null && diag.Text.Length > 1 && textPos < diag.displayTime.Length)
                 {
                     yield return new WaitForSecondsRealtime(diag.displayTime[textPos]);
                     textPos++;
