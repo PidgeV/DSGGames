@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 ﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":true,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":false,"pivot":{"x":456.875,"y":-208.15625,"z":34651.5},"rotation":{"x":0.15128077566623689,"y":-0.7047682404518127,"z":0.1579751968383789,"w":0.6749489307403565},"size":3130.926025390625,"orthographic":true}
+=======
+﻿{"cameraMode":{"drawMode":0,"name":"Shaded","section":"Shading Mode"},"sceneLighting":true,"audioPlay":false,"sceneViewState":{"showFog":true,"showMaterialUpdate":true,"showSkybox":true,"showFlares":true,"showImageEffects":true,"showParticleSystems":true},"in2DMode":false,"pivot":{"x":-6721.34130859375,"y":2995.2197265625,"z":56885.42578125},"rotation":{"x":-0.18285061419010163,"y":-0.5726948976516724,"z":0.13288694620132447,"w":-0.7880406975746155},"size":4619.09619140625,"orthographic":false}
+>>>>>>> blakes
