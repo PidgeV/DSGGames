@@ -1,28 +1,5 @@
 Base path: 'C:/Program Files/Unity/Editor/Data', plugins path 'C:/Program Files/Unity/Editor/Data/PlaybackEngines'
 Cmd: initializeCompiler
-Cmd: compileSnippet
-  api=4 type=1 insize=13911 outsize=6662 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
-Cmd: compileComputeKernel
-  api=4 insize=5297 outsize=2554 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=6496 outsize=2571 ok=1
-Cmd: compileSnippet
-  api=4 type=1 insize=12941 outsize=6550 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
-Cmd: compileComputeKernel
-  error: 1 plat 4 at Packages/com.unity.visualeffectgraph/Shaders/VFXCommon.cginc(561): pow(f, e) will not work for negative f, use abs(f) or conditionally handle negative values if you expect them
-  api=4 insize=7259 outsize=10670 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=6265 outsize=3258 ok=1
-Cmd: compileSnippet
-  api=4 type=0 insize=12484 outsize=3722 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
-Cmd: compileComputeKernel
-  api=4 insize=4024 outsize=1673 ok=1
-Cmd: compileComputeKernel
-  api=4 insize=2804 outsize=1316 ok=1
-Cmd: compileComputeKernel
-  error: 1 plat 4 at Packages/com.unity.visualeffectgraph/Shaders/VFXCommon.cginc(561): pow(f, e) will not work for negative f, use abs(f) or conditionally handle negative values if you expect them
-  api=4 insize=7259 outsize=10670 ok=1
-Cmd: compileSnippet
-  api=4 type=1 insize=12394 outsize=6122 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
-Cmd: compileSnippet
-  api=4 type=1 insize=13119 outsize=4794 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
+Unhandled exception: Protocol error - unexpected end of data (did the Editor crash?)
+
+Quitting shader compiler process
