@@ -52,7 +52,7 @@
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.Vector2ShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Name\": \"Distortion Direction\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"143825f7-25fa-459c-b384-8e076b35df72\"\n    },\n    \"m_DefaultReferenceName\": \"Vector2_FE2DAD5E\",\n    \"m_OverrideReferenceName\": \"\",\n    \"m_Precision\": 0,\n    \"m_Value\": {\n        \"x\": 0.10000000149011612,\n        \"y\": 0.0,\n        \"z\": 0.0,\n        \"w\": 0.0\n    },\n    \"m_Hidden\": false\n}"
+            "JSONnodeData": "{\n    \"m_Name\": \"Distortion Direction\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"143825f7-25fa-459c-b384-8e076b35df72\"\n    },\n    \"m_DefaultReferenceName\": \"Vector2_FE2DAD5E\",\n    \"m_OverrideReferenceName\": \"_distortionDirection\",\n    \"m_Precision\": 0,\n    \"m_Value\": {\n        \"x\": 0.10000000149011612,\n        \"y\": 0.0,\n        \"z\": 0.0,\n        \"w\": 0.0\n    },\n    \"m_Hidden\": false\n}"
         },
         {
             "typeInfo": {

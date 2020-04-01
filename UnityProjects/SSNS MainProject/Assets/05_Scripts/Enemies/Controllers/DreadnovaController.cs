@@ -9,6 +9,7 @@ public class DreadnovaController : EnemyController
     public GameObject dreadnovaShield;
     public GameObject dreadnovaModel;
     public GameObject dreadnovaThrusters;
+    [SerializeField] DreadnovaDistortionManager distort;
 
     [SerializeField] private DreadnovaState dreadnovaState;
 
@@ -98,12 +99,18 @@ public class DreadnovaController : EnemyController
         // TODO: Warp effects
         dreadnovaThrusters.SetActive(true);
 
-        yield return new WaitForSeconds(1.5f);
+        //Start distortion
+        
+        distort.gameObject.SetActive(true);
+        distort.StartDistortion(5);
+
+        yield return new WaitForSeconds(5f);
 
         transform.position = Vector3.zero;
 
         DialogueSystem.Instance.AddDialogue(3);
 
+        //wait for shield dissolve
         yield return new WaitForSeconds(1.5f);
 
         yield return new WaitForSeconds(5.0f);
