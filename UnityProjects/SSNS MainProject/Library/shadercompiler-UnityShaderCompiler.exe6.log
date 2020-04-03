@@ -1,15 +1,53 @@
 Base path: 'C:/Program Files/Unity/Editor/Data', plugins path 'C:/Program Files/Unity/Editor/Data/PlaybackEngines'
 Cmd: initializeCompiler
 Cmd: compileSnippet
-  error: 1 plat 4 at (105): 'TransformObjectToWorld': implicit truncation of vector type\nCompiling Fragment program
-Platform defines: UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR
-  api=4 type=1 insize=3688 outsize=502 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
+  api=4 type=1 insize=12802 outsize=6270 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
+Cmd: compileComputeKernel
+  api=4 insize=5531 outsize=2739 ok=1
+Cmd: compileComputeKernel
+  error: 1 plat 4 at Packages/com.unity.visualeffectgraph/Shaders/VFXCommon.cginc(561): pow(f, e) will not work for negative f, use abs(f) or conditionally handle negative values if you expect them
+  api=4 insize=5444 outsize=9047 ok=1
 Cmd: compileSnippet
-  error: 1 plat 4 at (484): implicit truncation of vector type\nCompiling Fragment program with DECALS_3RT SHADOW_LOW
-Platform defines: UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR
-  error: 1 plat 4 at (486): implicit truncation of vector type\nCompiling Fragment program with DECALS_3RT SHADOW_LOW
-Platform defines: UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR
-  api=4 type=1 insize=37239 outsize=68514 kw=DECALS_3RT SHADOW_LOW pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
-Unhandled exception: Protocol error - unexpected end of data (did the Editor crash?)
-
-Quitting shader compiler process
+  api=4 type=0 insize=12808 outsize=4670 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
+Cmd: compileComputeKernel
+  api=4 insize=5767 outsize=2779 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=5915 outsize=2807 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=12810 outsize=4670 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
+Cmd: compileComputeKernel
+  api=4 insize=5456 outsize=2279 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=5923 outsize=2377 ok=1
+Cmd: compileComputeKernel
+  error: 1 plat 4 at Packages/com.unity.visualeffectgraph/Shaders/VFXCommon.cginc(561): pow(f, e) will not work for negative f, use abs(f) or conditionally handle negative values if you expect them
+  api=4 insize=6958 outsize=9887 ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=13066 outsize=6270 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
+Cmd: compileComputeKernel
+  api=4 insize=6222 outsize=2418 ok=1
+Cmd: compileComputeKernel
+  error: 1 plat 4 at Packages/com.unity.visualeffectgraph/Shaders/VFXCommon.cginc(561): pow(f, e) will not work for negative f, use abs(f) or conditionally handle negative values if you expect them
+  api=4 insize=6958 outsize=9887 ok=1
+Cmd: compileSnippet
+  api=4 type=0 insize=13949 outsize=4754 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
+Cmd: compileComputeKernel
+  api=4 insize=7178 outsize=3095 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=5882 outsize=2463 ok=1
+Cmd: compileSnippet
+  api=4 type=1 insize=13954 outsize=6270 kw= pd=UNITY_ENABLE_REFLECTION_BUFFERS UNITY_USE_DITHER_MASK_FOR_ALPHABLENDED_SHADOWS UNITY_PBS_USE_BRDF1 UNITY_SPECCUBE_BOX_PROJECTION UNITY_SPECCUBE_BLENDING UNITY_ENABLE_DETAIL_NORMALMAP SHADER_API_DESKTOP UNITY_LIGHT_PROBE_PROXY_VOLUME UNITY_LIGHTMAP_FULL_HDR ok=1
+Cmd: compileComputeKernel
+  api=4 insize=6624 outsize=2935 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=6256 outsize=21344 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=6531 outsize=2530 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=6217 outsize=2246 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=6103 outsize=2023 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=3469 outsize=1404 ok=1
+Cmd: compileComputeKernel
+  api=4 insize=6529 outsize=2530 ok=1
