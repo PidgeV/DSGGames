@@ -72,8 +72,8 @@ public class ChargedShotBehaviour : MonoBehaviour
     {
         yield return new WaitForSeconds(maxChargeTime);
 
-        //transform.parent = null;
-        //hasShot = true;
+        transform.parent = null;
+        hasShot = true;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -85,10 +85,11 @@ public class ChargedShotBehaviour : MonoBehaviour
 
         if (explosionPrefab)
         {
-            Instantiate(explosionPrefab, transform.position, Quaternion.identity); //spawn the explosion
+            GameObject go = Instantiate(explosionPrefab, transform.position, Quaternion.identity); //spawn the explosion
+            go.transform.localScale = transform.localScale;
         }
 
-       // Destroy(gameObject);
+        Destroy(gameObject);
     }
 
     public float GetDamagePercentage()
