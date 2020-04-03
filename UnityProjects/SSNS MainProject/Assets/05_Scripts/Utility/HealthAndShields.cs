@@ -179,10 +179,7 @@ public class HealthAndShields : MonoBehaviour
             // Destroy the gameobject
             Destroy(gameObject);
         }
-        else if (KeepOnDeath == true)
-        {
-        }
-        else
+        else if(!KeepOnDeath)
         {
             // Respawn the gameobject?
             gameObject.SetActive(false);

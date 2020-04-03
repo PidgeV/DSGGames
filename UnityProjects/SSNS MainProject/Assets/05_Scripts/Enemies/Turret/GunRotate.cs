@@ -8,11 +8,13 @@ public class GunRotate : InterceptCalculationClass
 
     public GameObject bulletSpawnPos;
     public GameObject bulletPrefab;
+    [SerializeField] Axis axes;
     public float threatDistance = 200f;
     public float rotateSpeed = 0.1f;
 
     public float calculateInterval = 0.2f;
 
+    private int[] axis = new int[3];
     GameObject target;
     GameObject player;
 
@@ -26,6 +28,9 @@ public class GunRotate : InterceptCalculationClass
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        if (axes.x) axis[0] = 1;
+        if (axes.y) axis[1] = 1;
+        if (axes.z) axis[2] = 1;
 
         StartCoroutine(CalculateIntercept());
     }
@@ -33,6 +38,15 @@ public class GunRotate : InterceptCalculationClass
     // Update is called once per frame
     void Update()
     {
+        if (axes.x) axis[0] = 1;
+        else axis[0] = 0;
+        if (axes.y) axis[1] = 1;
+        else axis[1] = 0;
+        if (axes.z) axis[2] = 1;
+        else axis[2] = 0;
+
+        if (player == null) player = GameObject.FindGameObjectWithTag("Player");
+
         if (Vector3.Distance(transform.position, player.transform.position) < threatDistance)
         {
             Rotate();
@@ -51,14 +65,15 @@ public class GunRotate : InterceptCalculationClass
 
         Vector3 dir = interceptPoint - transform.position;
         Vector3 rot = Vector3.RotateTowards(transform.forward, dir, rotateSpeed * Time.deltaTime, 0.0f);
+        Quaternion newRot = Quaternion.LookRotation(rot);
         rot.Normalize();        
 
-        float dot = Vector3.Dot(rot, transform.parent.transform.up);
+        float dot = Vector3.Dot(rot, transform.parent.transform.right);
 
         if (dot > 0)
         {
-            transform.rotation = Quaternion.LookRotation(rot);
-            transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, 0, 0);
+            transform.rotation = Quaternion.Slerp(transform.rotation, newRot, rotateSpeed * Time.deltaTime);
+            transform.localEulerAngles = new Vector3(transform.localEulerAngles.x * axis[0], transform.localEulerAngles.y * axis[1], transform.localEulerAngles.z * axis[2]);
         }
     }
     void Shoot()
@@ -105,7 +120,7 @@ public class GunRotate : InterceptCalculationClass
     {
         if (debug)
         {
-            Debug.DrawRay(transform.position, transform.forward * threatDistance);
+            Debug.DrawRay(transform.position, transform.forward.normalized * threatDistance, Color.red);
         }
     }
 }
