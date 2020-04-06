@@ -17,9 +17,9 @@ public class WarpEffectBehaviour : MonoBehaviour
     //bool warping = false;
     //float lerpVal = 30f;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        if (!instance) instance = this;
+        if (instance == null) instance = this;
 
         vfx = GetComponent<VisualEffect>();
         vfx.enabled = false;
