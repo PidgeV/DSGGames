@@ -33,7 +33,7 @@ public class DrdRandomShooty : MonoBehaviour
     {
         shot++;
         
-
+        //-1,  0,  t  1,2,  t  3,4,  t  5,6  t  7,e,  !t
         if (shot % 2 == 0 && shot < AllShooty.Length)
         {
             bool hasDecided = false;
@@ -52,18 +52,27 @@ public class DrdRandomShooty : MonoBehaviour
             }
             hasDecided = false;
             counter = 0;
-            while (!hasDecided )//&& counter <= 100)
+            if (shot + 1 < AllShooty.Length)
             {
-                int rand = Random.Range(0, AllShooty.Length);
-                //if(AllShooty[rand].GetComponent<HealthAndShields>().currentLife != 0)
-                if (!AllShooty[rand].activeInHierarchy)
+                while (!hasDecided)//&& counter <= 100)
                 {
-                    AllShooty[rand].SetActive(true);
-                    AllShooty[rand].GetComponent<DrdPieceRepulsion>().fireToOff.SetActive(true);
-                    hasDecided = true;
+                    int rand = Random.Range(0, AllShooty.Length);
+                    //if(AllShooty[rand].GetComponent<HealthAndShields>().currentLife != 0)
+                    if (!AllShooty[rand].activeInHierarchy)
+                    {
+                        AllShooty[rand].SetActive(true);
+                        AllShooty[rand].GetComponent<DrdPieceRepulsion>().fireToOff.SetActive(true);
+                        hasDecided = true;
+                    }
+                    counter++;
                 }
-                counter++;
             }
+        }
+        else if (shot >= AllShooty.Length)
+        {
+            //trigger explosion
+
+
         }
     }
 
