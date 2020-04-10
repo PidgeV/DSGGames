@@ -145,10 +145,18 @@ public class Area : MonoBehaviour
             Gizmos.DrawWireSphere(spawn.position, spawnCheckRadius);
         }
 
-        Gizmos.color = Color.blue;
-
         foreach (Transform waypoint in waypoints)
         {
+            if (Physics.CheckSphere(waypoint.position, spawnCheckRadius) || IsTransformOutside(waypoint))
+            {
+                Gizmos.color = Color.cyan;
+            }
+            else
+            {
+
+                Gizmos.color = Color.blue;
+            }
+
             Gizmos.DrawWireSphere(waypoint.position, 10f);
         }
     }

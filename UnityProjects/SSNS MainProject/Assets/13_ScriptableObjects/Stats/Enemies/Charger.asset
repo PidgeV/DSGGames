@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipName: Charger
   shipDescription: 
-  maxHealth: 20
+  maxHealth: 30
   maxShield: 15
+  shieldRegenPercent: 2
+  shieldRegenInterval: 5
   shipSpeed: 100
   rotationSpeed: 10
   fireRate: 0
-  shieldRegenPercent: 2
-  shieldRegenInterval: 5
-  attackShipSpeed: 250
-  attackRotationSpeed: 2
+  attackShipSpeed: 300
+  attackRotationSpeed: 5
   accuracy: 0

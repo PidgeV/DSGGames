@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2212086307816132561}
   - component: {fileID: 2212086307816132560}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SwarmEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -55,12 +55,10 @@ MonoBehaviour:
     m_Bits: 768
   flockLeaderPrefab: {fileID: 561547919149143226, guid: 8b2d5ba9147f86d45ae2e6e961fe4a4a,
     type: 3}
-  swarmFollowRadius: 75
+  swarmFollowRadius: 100
   waypoints: []
   defenseTarget: {fileID: 0}
   startingCount: 200
-  driveFactor: 75
-  maxSpeed: 80
   neighbourRadius: 20
   avoidanceRadius: 25
   obstacleDistance: 100

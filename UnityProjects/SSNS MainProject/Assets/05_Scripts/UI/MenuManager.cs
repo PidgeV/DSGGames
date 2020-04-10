@@ -85,5 +85,7 @@ public class MenuManager : MonoBehaviour
 		}
 
 		_gamePaused = state;
+
+		GameManager.Instance.paused = state;
 	}
 }

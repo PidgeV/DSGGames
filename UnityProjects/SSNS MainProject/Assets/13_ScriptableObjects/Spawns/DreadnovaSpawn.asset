@@ -18,4 +18,8 @@ MonoBehaviour:
   - type: 1
     count: 5
   - type: 2
-    count: 100
+    count: 10
+  - type: 2
+    count: 10
+  - type: 2
+    count: 10

@@ -15,10 +15,10 @@ public class PatrolState<T> : FSMState where T : EnemyController
 
     //Timer for staying in patrol;
     protected float timer1 = 0f;
-    protected float timeAfterTransition = 10f;
+    protected float timeAfterTransition = 5f;
     //Timer for how often to check for seeing the player
     protected float timer2 = 0f;
-    protected float timeOftenCheck = 1.0f;
+    protected float timeOftenCheck = 0.5f;
 
     //Constructor
     public PatrolState(T enemyController, bool randomizePoint = false)

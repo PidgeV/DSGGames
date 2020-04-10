@@ -27,6 +27,8 @@ public abstract class EnemyController : AdvancedFSM
     [Tooltip("Size of ray for collision checking. Larger numbers will mean the avoidance is larger")]
     [SerializeField] float raySize = 7.5f;
 
+    [SerializeField] GameObject thrusters;
+
     private Rigidbody rbSelf;
     private HealthAndShields health;
 
@@ -44,10 +46,10 @@ public abstract class EnemyController : AdvancedFSM
         if (health)
             health.ResetValues();
 
-        gameObject.SetActive(false);
+        if (thrusters) thrusters.SetActive(false);
         transform.position = spawnpoint;
         transform.rotation = Quaternion.LookRotation(spawnDestination - spawnpoint);
-        gameObject.SetActive(true);
+        if (thrusters) thrusters.SetActive(true);
 
         PerformTransition(Transition.Reset);
     }
@@ -147,6 +149,7 @@ public abstract class EnemyController : AdvancedFSM
 
     private void OnDeath()
     {
+        health.onDeath -= OnDeath;
         AIManager.aiManager.StopAttack(this.aiType);
     }
 

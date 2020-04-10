@@ -17,7 +17,7 @@ public class AreaSpawner : MonoBehaviour
 
     [SerializeField] protected WaveBehaviour waveBehaviour;
 
-    private Area area;
+    [SerializeField] private Area area;
 
     [SerializeField] protected Transform[] spawnpoints;
     [SerializeField] protected Transform[] waypoints;
@@ -31,7 +31,8 @@ public class AreaSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        TryGetComponent(out area);
+        if (area == null)
+            TryGetComponent(out area);
 
         StartCoroutine(CreateArea());
     }
@@ -119,6 +120,8 @@ public class AreaSpawner : MonoBehaviour
     {
         GameObject enemy = Instantiate(prefab);
 
+        AreaManager.Instance.OnObjectAdd(enemy, true);
+
         enemy.transform.position = spawnpoint;
 
         if (enemy.TryGetComponent(out EnemyController enemyController))
@@ -162,8 +165,6 @@ public class AreaSpawner : MonoBehaviour
                 }
             }
         }
-
-        AreaManager.Instance.OnObjectAdd(enemy, true);
 
         return enemy;
     }

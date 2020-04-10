@@ -301,6 +301,19 @@ public class AreaManager : MonoBehaviour
         if (enemy)
         {
             gObject.transform.parent = currentArea.enemies;
+
+            if (gObject.TryGetComponent(out EnemyController enemyController))
+            {
+                enemyController.Spawn = gObject.transform.position;
+                enemyController.SpawnDestination = gObject.transform.position;
+                enemyController.waypoints = currentArea.Waypoints;
+            }
+            else if (gObject.TryGetComponent(out Flock flock))
+            {
+                flock.SetSpawnpoint = gObject.transform.position;
+                flock.SetSpawnDestination = gObject.transform.position;
+                flock.WayPoints = currentArea.Waypoints;
+            }
         }
         else
         {

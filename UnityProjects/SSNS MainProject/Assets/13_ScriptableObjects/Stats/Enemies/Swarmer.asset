@@ -18,9 +18,9 @@ MonoBehaviour:
   maxShield: 0
   shieldRegenPercent: 0
   shieldRegenInterval: 5
-  shipSpeed: 75
-  rotationSpeed: 8
+  shipSpeed: 50
+  rotationSpeed: 10
   fireRate: 0
-  attackShipSpeed: 150
-  attackRotationSpeed: 0
+  attackShipSpeed: 60
+  attackRotationSpeed: 15
   accuracy: 0

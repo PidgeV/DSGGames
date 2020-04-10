@@ -34,10 +34,6 @@ public class Flock : MonoBehaviour
     public int startingCount = 250;
     const float agentDensity = 0.8f;
 
-    [Range(1f, 1000f)]
-    public float driveFactor = 10f;
-    [Range(75f, 400f)]
-    public float maxSpeed = 100f;
     [Range(10f, 250f)]
     public float neighbourRadius = 40f;
     [Range(1f, 50f)]
@@ -45,7 +41,6 @@ public class Flock : MonoBehaviour
     [Range(1, 200)]
     public float obstacleDistance = 50f;
 
-    float sqrMaxSpeed;
     float sqrNeighbourRadius;
     float sqrAvoidanceRadius;
     public float SquareAvoidanceRadius { get { return sqrAvoidanceRadius; } }
@@ -63,9 +58,8 @@ public class Flock : MonoBehaviour
     #endregion
 
     // Start is called before the first frame update
-    void Start()
+    IEnumerator Start()
     {
-        sqrMaxSpeed = Mathf.Pow(maxSpeed, 2);
         //sqrNeighbourRadius = Mathf.Pow(neighbourRadius, 2);
         sqrAvoidanceRadius = Mathf.Pow(avoidanceRadius, 2);
 
@@ -90,6 +84,8 @@ public class Flock : MonoBehaviour
             newAgent.name = "Agent" + i;
             newAgent.Initialize(this);
             agents.Add(newAgent);
+
+            yield return null;
         }
 
         //Look for player
@@ -100,13 +96,24 @@ public class Flock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.paused) return;
+
         //target = player.transform.position;
         Vector3 move = Vector3.zero;
+
+        float shipSpeed = FlockLeader.Stats.shipSpeed;
+        float rotationSpeed = FlockLeader.Stats.rotationSpeed;
+
+        if (FlockLeader.CurrentStateID == FSMStateID.Attacking)
+        {
+            shipSpeed = FlockLeader.Stats.attackShipSpeed;
+            rotationSpeed = FlockLeader.Stats.attackRotationSpeed;
+        }
 
         //Loop through each agent and run the behaviours
         foreach (FlockAgent agent in agents)
         {
-            if (flockLeader.GetComponent<FlockLeaderController>().CurrentStateID == FSMStateID.Spawned)
+            if (FlockLeader.CurrentStateID == FSMStateID.Spawned)
             {
                 move = flockLeader.transform.forward;
             }
@@ -121,13 +128,7 @@ public class Flock : MonoBehaviour
                 move = behaviour.CalculateMove(agent, context, this, obstacles); //Move the agent with the behaviour object
             }
 
-            move *= driveFactor; //Multiply the movement by the drive factor
-            if (move.sqrMagnitude > sqrMaxSpeed)
-            {
-                move = move.normalized * maxSpeed; //lower speed to max speed
-            }
-
-            agent.Move(move); //Move agent
+            agent.Move(move, shipSpeed, rotationSpeed); //Move agent
         }
         //Debug.Log("Movement: " + move);
 

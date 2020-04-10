@@ -9772,9 +9772,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapon: 2
+  role: 0
   fireRate: 0
   lifeTime: 0
   speed: 9999999
+  destroyOnDeath: 1
 --- !u!82 &2646903599100677691
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9784,7 +9786,8 @@ AudioSource:
   m_GameObject: {fileID: 3133795025857249393}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -4435638778751794195, guid: b7639791db06e7f4b9717ec7c33ef730,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: 6642bb7b51fad2a44bc263afab74a59f, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0
@@ -9880,7 +9883,8 @@ AudioSource:
   m_GameObject: {fileID: 3133795025857249393}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -4435638778751794195, guid: b7639791db06e7f4b9717ec7c33ef730,
+    type: 2}
   m_audioClip: {fileID: 8300000, guid: d8db728f11a511141aab99ebf4d2c393, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1

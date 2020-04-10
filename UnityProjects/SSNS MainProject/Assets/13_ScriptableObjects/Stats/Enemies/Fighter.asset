@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipName: Fighter
   shipDescription: 
-  maxHealth: 15
-  maxShield: 15
+  maxHealth: 20
+  maxShield: 20
   shieldRegenPercent: 2
   shieldRegenInterval: 5
   shipSpeed: 100

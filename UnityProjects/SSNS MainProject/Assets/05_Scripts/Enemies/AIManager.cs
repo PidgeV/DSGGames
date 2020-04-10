@@ -10,7 +10,7 @@ public class AIManager : MonoBehaviour
     [Header("Do not modify any values while running please")]
     readonly float maxAttack = 4;
     [SerializeField] private float curAttack = 0;
-    readonly int[] countsPer1Point = { 0, 6, 1, 2 };
+    readonly int[] countsPer1Point = { 0, 6, 2, 1 };
     [Header("NULL, Swarmer, Charger, Fighter")]
     [SerializeField] int[] countsOfAI = { 0, 0, 0, 0 };
 

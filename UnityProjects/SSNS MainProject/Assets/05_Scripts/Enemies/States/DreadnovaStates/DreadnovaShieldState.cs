@@ -36,14 +36,6 @@ public class DreadnovaShieldState : FSMState
         {
             generator.InitializeGenerator();
         }
-
-        foreach (Transform child in controller.dreadnovaModel.transform)
-        {
-            if (child.TryGetComponent(out Collider collider))
-            {
-                collider.enabled = false;
-            }
-        }
     }
 
     public override void Reason()
@@ -55,14 +47,6 @@ public class DreadnovaShieldState : FSMState
             if (shieldGone)
             {
                 controller.dreadnovaShield.SetActive(false);
-
-                foreach (Transform child in controller.dreadnovaModel.transform)
-                {
-                    if (child.TryGetComponent(out Collider collider))
-                    {
-                        collider.enabled = true;
-                    }
-                }
 
                 if (controller.State == DreadnovaState.SHIELD_STAGE)
                     controller.PerformTransition(Transition.NoShield);

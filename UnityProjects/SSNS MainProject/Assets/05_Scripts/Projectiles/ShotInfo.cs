@@ -31,7 +31,7 @@ public class ShotInfo : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (role != SNSSTypes.PlayerRole.None && GameManager.Instance.Player.TryGetComponent(out PlayerHUDHandler hud))
+        if (collision.gameObject.layer == LayerMask.GetMask("Enemies") && role != SNSSTypes.PlayerRole.None && GameManager.Instance.Player.TryGetComponent(out PlayerHUDHandler hud))
         {
             hud.BlinkRedicle(role);
         }

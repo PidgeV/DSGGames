@@ -155,6 +155,10 @@ public class GameManager : MonoBehaviour
         random = new System.Random(seed);
 
         shipController = GameObject.FindGameObjectWithTag("Player").GetComponent<ShipController>();
+
+        Physics.IgnoreLayerCollision(12, 12);
+        Physics.IgnoreLayerCollision(11, 12);
+        Physics.IgnoreLayerCollision(10, 12);
     }
 
     private void Start()

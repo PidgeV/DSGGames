@@ -47,6 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26a12dcf569cefd459a368b1ec232939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentStateID: 0
   debugDraw: 0
   waypoints: []
   myStats: {fileID: 0}
@@ -59,6 +60,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4864
   raySize: 7.5
+  thrusters: {fileID: 0}
   showStats: 0
   aiType: 0
   shieldGenerators:
@@ -93,6 +95,7 @@ MonoBehaviour:
   cargoPrefab: {fileID: 3107085776561158194, guid: ec334dcaca7277c4f90e6774cbc973fe,
     type: 3}
   waveBehaviour: {fileID: 0}
+  area: {fileID: 0}
   spawnpoints:
   - {fileID: 2635313141815564535}
   - {fileID: 3677282291892137031}
@@ -114,10 +117,10 @@ MonoBehaviour:
     type: 2}
   attackWaveBehaviour: {fileID: 11400000, guid: f0e561c4a6419c445b151a7077259622,
     type: 2}
-  distanceToTravelAway: 500
+  distanceToTravelAway: 250
   fighterMaxCount: 10
   chargerMaxCount: 10
-  swarmerMaxCount: 200
+  swarmerMaxCount: 50
 --- !u!1 &234800337972893495
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,7 +163,7 @@ GameObject:
   - component: {fileID: 2267482372302298686}
   - component: {fileID: 7373648421324554877}
   - component: {fileID: 1449746091888124794}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RearThrusterAssembly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -236,7 +239,7 @@ MeshCollider:
   m_GameObject: {fileID: 256082714562622342}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -345,8 +348,8 @@ GameObject:
   - component: {fileID: 8272112195011966240}
   - component: {fileID: 2058956424202517173}
   - component: {fileID: 5898432048579230287}
-  - component: {fileID: 3811192830205156137}
-  m_Layer: 0
+  - component: {fileID: 33497895}
+  m_Layer: 8
   m_Name: ConningTower004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -413,7 +416,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &3811192830205156137
+--- !u!64 &33497895
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -422,7 +425,7 @@ MeshCollider:
   m_GameObject: {fileID: 446298020094367077}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -498,13 +501,12 @@ GameObject:
   - component: {fileID: 4935279151703121062}
   - component: {fileID: 6088483306136176313}
   - component: {fileID: 2799206932942422014}
-  - component: {fileID: 7065592763571566928}
   m_Layer: 12
   m_Name: SmThruster1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4935279151703121062
 Transform:
@@ -566,20 +568,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &7065592763571566928
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 681343922383723847}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 2924795318451662954, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &968676024771314117
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,13 +579,12 @@ GameObject:
   - component: {fileID: 4761594825926531487}
   - component: {fileID: 5703820788872031770}
   - component: {fileID: 479129944438895928}
-  - component: {fileID: 5708387080816072551}
   m_Layer: 12
   m_Name: Nosefork
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4761594825926531487
 Transform:
@@ -659,20 +646,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &5708387080816072551
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 968676024771314117}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 8441194713239971508, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &1072069316140752636
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,13 +657,12 @@ GameObject:
   - component: {fileID: 824561328948577275}
   - component: {fileID: 8603403524883617282}
   - component: {fileID: 6493360989882384083}
-  - component: {fileID: 2492642867488078280}
   m_Layer: 12
   m_Name: RearFan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &824561328948577275
 Transform:
@@ -752,20 +724,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2492642867488078280
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1072069316140752636}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 5482472628253524196, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &1075656234908029149
 GameObject:
   m_ObjectHideFlags: 0
@@ -777,13 +735,12 @@ GameObject:
   - component: {fileID: 4098036686200619862}
   - component: {fileID: 2150534800820970127}
   - component: {fileID: 243033489752870672}
-  - component: {fileID: 3205738094284516659}
   m_Layer: 12
   m_Name: Antenna1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4098036686200619862
 Transform:
@@ -845,20 +802,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &3205738094284516659
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1075656234908029149}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -7720040781285236113, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &1267498448853269112
 GameObject:
   m_ObjectHideFlags: 0
@@ -870,13 +813,12 @@ GameObject:
   - component: {fileID: 7307913407094839869}
   - component: {fileID: 807410169321870760}
   - component: {fileID: 5079477649277359442}
-  - component: {fileID: 2540748305483854900}
   m_Layer: 12
   m_Name: ConningTower004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7307913407094839869
 Transform:
@@ -938,20 +880,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2540748305483854900
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1267498448853269112}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -2783051360824858561, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &1268373666320553554
 GameObject:
   m_ObjectHideFlags: 0
@@ -993,13 +921,12 @@ GameObject:
   - component: {fileID: 300975598176644831}
   - component: {fileID: 635334673062916387}
   - component: {fileID: 8210880831276002656}
-  - component: {fileID: 267989274923502695}
   m_Layer: 12
   m_Name: RearThrusterAssembly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &300975598176644831
 Transform:
@@ -1061,20 +988,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &267989274923502695
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1453351441836137627}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 8887475993255646964, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!114 &5771300605290009104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1101,7 +1014,7 @@ GameObject:
   - component: {fileID: 6972684227697883423}
   - component: {fileID: 5601233126794711502}
   - component: {fileID: 3832910504530482901}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RearFan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1177,7 +1090,7 @@ MeshCollider:
   m_GameObject: {fileID: 1821248566564549089}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -1193,8 +1106,7 @@ GameObject:
   - component: {fileID: 3420967803965893707}
   - component: {fileID: 756220668720319890}
   - component: {fileID: 1511506448118505485}
-  - component: {fileID: 4313198843931558446}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Antenna1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1261,20 +1173,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &4313198843931558446
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1822797956337516480}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -7720040781285236113, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &1934281775228399320
 GameObject:
   m_ObjectHideFlags: 0
@@ -1287,7 +1185,7 @@ GameObject:
   - component: {fileID: 6381200971151311111}
   - component: {fileID: 1225164459524676133}
   - component: {fileID: 6385784857755531386}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Nosefork
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1363,7 +1261,7 @@ MeshCollider:
   m_GameObject: {fileID: 1934281775228399320}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -1380,7 +1278,7 @@ GameObject:
   - component: {fileID: 4888725564724750756}
   - component: {fileID: 3566386288204009699}
   - component: {fileID: 8478195202856474189}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SmThruster1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1456,7 +1354,7 @@ MeshCollider:
   m_GameObject: {fileID: 2220837699749884506}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -1517,13 +1415,12 @@ GameObject:
   - component: {fileID: 1465041842323738068}
   - component: {fileID: 1621757632825003423}
   - component: {fileID: 7904324907928761159}
-  - component: {fileID: 6041949415159450968}
   m_Layer: 12
   m_Name: TopBodyShell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1465041842323738068
 Transform:
@@ -1585,20 +1482,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &6041949415159450968
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2363702109592046605}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 2719471903296380578, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &2462918742575693131
 GameObject:
   m_ObjectHideFlags: 0
@@ -1610,8 +1493,7 @@ GameObject:
   - component: {fileID: 2734778114969756911}
   - component: {fileID: 2356447690860014937}
   - component: {fileID: 3284809481854210865}
-  - component: {fileID: 2585827491725199074}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ConningTower001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1678,20 +1560,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2585827491725199074
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2462918742575693131}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -2888144318744257663, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &2475842909325525456
 GameObject:
   m_ObjectHideFlags: 0
@@ -1703,13 +1571,12 @@ GameObject:
   - component: {fileID: 4334525012752512769}
   - component: {fileID: 50327452255114063}
   - component: {fileID: 4509281961943757521}
-  - component: {fileID: 2366571370976416188}
   m_Layer: 12
   m_Name: ConningTower003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4334525012752512769
 Transform:
@@ -1771,20 +1638,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2366571370976416188
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2475842909325525456}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -3715277419721965548, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &2592425685919901197
 GameObject:
   m_ObjectHideFlags: 0
@@ -1796,13 +1649,12 @@ GameObject:
   - component: {fileID: 3141858627233276128}
   - component: {fileID: 5812846826090755880}
   - component: {fileID: 824481782298749761}
-  - component: {fileID: 3671351116299124417}
   m_Layer: 12
   m_Name: SmThruster3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &3141858627233276128
 Transform:
@@ -1864,20 +1716,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &3671351116299124417
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2592425685919901197}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 667338675951995064, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &2876029429896654451
 GameObject:
   m_ObjectHideFlags: 0
@@ -1890,7 +1728,7 @@ GameObject:
   - component: {fileID: 705528348806990941}
   - component: {fileID: 2697313225962640715}
   - component: {fileID: 5156173095195848799}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TopShell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1966,7 +1804,7 @@ MeshCollider:
   m_GameObject: {fileID: 2876029429896654451}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -1982,13 +1820,12 @@ GameObject:
   - component: {fileID: 1842924378523778737}
   - component: {fileID: 194161013470882555}
   - component: {fileID: 1041931193526982806}
-  - component: {fileID: 2405799378134707411}
   m_Layer: 12
   m_Name: CommsDisc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1842924378523778737
 Transform:
@@ -2050,20 +1887,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2405799378134707411
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2996178370798650261}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 205084609457668094, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &3303692800230068683
 GameObject:
   m_ObjectHideFlags: 0
@@ -2076,7 +1899,7 @@ GameObject:
   - component: {fileID: 8433122498303675655}
   - component: {fileID: 3728812303276985856}
   - component: {fileID: 7040603612769103990}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Underbody Shell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2152,7 +1975,7 @@ MeshCollider:
   m_GameObject: {fileID: 3303692800230068683}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -2168,13 +1991,12 @@ GameObject:
   - component: {fileID: 6924853549780895421}
   - component: {fileID: 268876742594817049}
   - component: {fileID: 6120771984894929830}
-  - component: {fileID: 1289645599474959031}
   m_Layer: 12
   m_Name: Cab Neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6924853549780895421
 Transform:
@@ -2236,20 +2058,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &1289645599474959031
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3347775254090683411}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 5932586331490347493, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &3481048555397939566
 GameObject:
   m_ObjectHideFlags: 0
@@ -2261,13 +2069,12 @@ GameObject:
   - component: {fileID: 1420800914201201558}
   - component: {fileID: 2192150188963226432}
   - component: {fileID: 3659269969874123350}
-  - component: {fileID: 5776137742333091650}
   m_Layer: 12
   m_Name: TopShell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1420800914201201558
 Transform:
@@ -2329,20 +2136,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &5776137742333091650
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3481048555397939566}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -661172413073482254, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &3773097149872736528
 GameObject:
   m_ObjectHideFlags: 0
@@ -2355,7 +2148,7 @@ GameObject:
   - component: {fileID: 5120029633362516021}
   - component: {fileID: 2078335777927595100}
   - component: {fileID: 2690299153741812188}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SmThruster3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2431,7 +2224,7 @@ MeshCollider:
   m_GameObject: {fileID: 3773097149872736528}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -2447,13 +2240,12 @@ GameObject:
   - component: {fileID: 3626941981976316914}
   - component: {fileID: 3969173206533571140}
   - component: {fileID: 4193803847202765868}
-  - component: {fileID: 3766182294186289663}
   m_Layer: 12
   m_Name: ConningTower001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &3626941981976316914
 Transform:
@@ -2515,20 +2307,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &3766182294186289663
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3857497169851224662}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -2888144318744257663, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &3890380770068016845
 GameObject:
   m_ObjectHideFlags: 0
@@ -2540,8 +2318,7 @@ GameObject:
   - component: {fileID: 3135012457333266460}
   - component: {fileID: 1663044588395527250}
   - component: {fileID: 2968627233164713420}
-  - component: {fileID: 3995078451848953505}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ConningTower003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2608,20 +2385,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &3995078451848953505
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3890380770068016845}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -3715277419721965548, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &3993303342330536720
 GameObject:
   m_ObjectHideFlags: 0
@@ -2634,7 +2397,7 @@ GameObject:
   - component: {fileID: 83102503662428802}
   - component: {fileID: 8797591858901621850}
   - component: {fileID: 4935890541018341957}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TopBodyShell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2710,7 +2473,7 @@ MeshCollider:
   m_GameObject: {fileID: 3993303342330536720}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -2727,7 +2490,7 @@ GameObject:
   - component: {fileID: 1449494192774759172}
   - component: {fileID: 4852565926534284475}
   - component: {fileID: 451243316851731882}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cab Neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2803,7 +2566,7 @@ MeshCollider:
   m_GameObject: {fileID: 4166728419587242766}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -2849,13 +2612,12 @@ GameObject:
   - component: {fileID: 770174883059927929}
   - component: {fileID: 7110874349029057050}
   - component: {fileID: 2601384829660487965}
-  - component: {fileID: 8508321272151777131}
   m_Layer: 12
   m_Name: Underbody Shell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &770174883059927929
 Transform:
@@ -2917,20 +2679,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &8508321272151777131
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4215243537363779286}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 1719975081194901971, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &4404173668191931284
 GameObject:
   m_ObjectHideFlags: 0
@@ -2972,8 +2720,7 @@ GameObject:
   - component: {fileID: 1024005164987552172}
   - component: {fileID: 1519774492694922726}
   - component: {fileID: 1860884219182299019}
-  - component: {fileID: 3946705205726118862}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CommsDisc
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3040,20 +2787,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &3946705205726118862
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4481660979415297160}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 205084609457668094, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &4586706819648247093
 GameObject:
   m_ObjectHideFlags: 0
@@ -3095,8 +2828,7 @@ GameObject:
   - component: {fileID: 6332631065853723933}
   - component: {fileID: 9173299829372882466}
   - component: {fileID: 778837915386702178}
-  - component: {fileID: 2303290460487752287}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ConningTower006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3163,20 +2895,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2303290460487752287
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4636711413205644161}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -3883646712622532360, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &4649789851873925867
 GameObject:
   m_ObjectHideFlags: 0
@@ -3259,13 +2977,12 @@ GameObject:
   - component: {fileID: 4616475490747123140}
   - component: {fileID: 5035451771632174662}
   - component: {fileID: 5341104168869443228}
-  - component: {fileID: 6201421346450668135}
   m_Layer: 12
   m_Name: SmThruster4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4616475490747123140
 Transform:
@@ -3327,20 +3044,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &6201421346450668135
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4894685845704929772}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -2577071994731635200, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &4894815224471502021
 GameObject:
   m_ObjectHideFlags: 0
@@ -3352,13 +3055,12 @@ GameObject:
   - component: {fileID: 1964824516399327236}
   - component: {fileID: 5965964694331791445}
   - component: {fileID: 3645371086937455441}
-  - component: {fileID: 2277141779520865941}
   m_Layer: 12
   m_Name: NavEquipbase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1964824516399327236
 Transform:
@@ -3420,20 +3122,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2277141779520865941
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4894815224471502021}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -5371007597206392457, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &5237694328547115081
 GameObject:
   m_ObjectHideFlags: 0
@@ -3446,7 +3134,7 @@ GameObject:
   - component: {fileID: 8330157375889528569}
   - component: {fileID: 8033046759880330592}
   - component: {fileID: 9145239019377761108}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: radarCapsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3522,7 +3210,7 @@ MeshCollider:
   m_GameObject: {fileID: 5237694328547115081}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -3539,7 +3227,7 @@ GameObject:
   - component: {fileID: 8425743764478921913}
   - component: {fileID: 8895127840834346742}
   - component: {fileID: 270747124122445252}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SmThruster2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3615,7 +3303,7 @@ MeshCollider:
   m_GameObject: {fileID: 5326112849739024636}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -3668,13 +3356,12 @@ GameObject:
   - component: {fileID: 8684052090548391456}
   - component: {fileID: 1629964470722166985}
   - component: {fileID: 400725398573226387}
-  - component: {fileID: 3092323068886611626}
   m_Layer: 12
   m_Name: ConningTower005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &8684052090548391456
 Transform:
@@ -3736,20 +3423,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &3092323068886611626
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5691532053670609639}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -8565580799816139191, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &5753236865001180505
 GameObject:
   m_ObjectHideFlags: 0
@@ -3792,7 +3465,7 @@ GameObject:
   - component: {fileID: 5002870227353319240}
   - component: {fileID: 2679759427867530316}
   - component: {fileID: 593515083307706760}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: NavEquipbase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3868,7 +3541,7 @@ MeshCollider:
   m_GameObject: {fileID: 6074087282852402136}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -3885,7 +3558,7 @@ GameObject:
   - component: {fileID: 5928736047416600923}
   - component: {fileID: 6753700977435253121}
   - component: {fileID: 4731384812476683642}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SmThruster4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3961,7 +3634,7 @@ MeshCollider:
   m_GameObject: {fileID: 6074217246105886449}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -3977,13 +3650,12 @@ GameObject:
   - component: {fileID: 9047448132404513174}
   - component: {fileID: 5401917226306359319}
   - component: {fileID: 4334354707746290217}
-  - component: {fileID: 256242640263786488}
   m_Layer: 12
   m_Name: ShieldGens
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &9047448132404513174
 Transform:
@@ -4045,20 +3717,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &256242640263786488
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6203050455946466150}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -2677509089782349378, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &6340635918913871004
 GameObject:
   m_ObjectHideFlags: 0
@@ -4070,13 +3728,12 @@ GameObject:
   - component: {fileID: 4630994370311367168}
   - component: {fileID: 7559438378584940863}
   - component: {fileID: 2119051676640102015}
-  - component: {fileID: 599102756967789890}
   m_Layer: 12
   m_Name: ConningTower006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4630994370311367168
 Transform:
@@ -4138,20 +3795,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &599102756967789890
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6340635918913871004}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -3883646712622532360, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &6438736310607277562
 GameObject:
   m_ObjectHideFlags: 0
@@ -4163,8 +3806,8 @@ GameObject:
   - component: {fileID: 8008928377808265533}
   - component: {fileID: 87911160997326804}
   - component: {fileID: 1308637711011264142}
-  - component: {fileID: 4417113977232153015}
-  m_Layer: 0
+  - component: {fileID: 1882098292}
+  m_Layer: 8
   m_Name: ConningTower005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4231,7 +3874,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &4417113977232153015
+--- !u!64 &1882098292
 MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4240,7 +3883,7 @@ MeshCollider:
   m_GameObject: {fileID: 6438736310607277562}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -4346,13 +3989,12 @@ GameObject:
   - component: {fileID: 6596040917117271260}
   - component: {fileID: 7154214294804243364}
   - component: {fileID: 7842817628391404011}
-  - component: {fileID: 1470281945742592729}
   m_Layer: 12
   m_Name: SmThruster2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6596040917117271260
 Transform:
@@ -4414,20 +4056,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &1470281945742592729
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6795010284029749217}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -1971796281396176031, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &6851832714728812372
 GameObject:
   m_ObjectHideFlags: 0
@@ -4439,13 +4067,12 @@ GameObject:
   - component: {fileID: 1926626604907075610}
   - component: {fileID: 7222708716885277156}
   - component: {fileID: 8709262147008045693}
-  - component: {fileID: 7587708713694344265}
   m_Layer: 12
   m_Name: radarCapsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1926626604907075610
 Transform:
@@ -4507,20 +4134,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &7587708713694344265
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6851832714728812372}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 6669064033171920934, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &6952510790364303169
 GameObject:
   m_ObjectHideFlags: 0
@@ -4533,7 +4146,7 @@ GameObject:
   - component: {fileID: 1745960914239747057}
   - component: {fileID: 267484571108233306}
   - component: {fileID: 2053474881017684438}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4609,7 +4222,7 @@ MeshCollider:
   m_GameObject: {fileID: 6952510790364303169}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -4655,13 +4268,12 @@ GameObject:
   - component: {fileID: 6846549039905758521}
   - component: {fileID: 8005487522133281630}
   - component: {fileID: 974469447433553560}
-  - component: {fileID: 194693648345192767}
   m_Layer: 12
   m_Name: FrontCannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6846549039905758521
 Transform:
@@ -4723,20 +4335,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &194693648345192767
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7430979055565640930}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 8257676267754523311, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &7506211325508057894
 GameObject:
   m_ObjectHideFlags: 0
@@ -4752,7 +4350,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &6804994797418121525
 Transform:
@@ -4804,7 +4402,7 @@ Animator:
   m_GameObject: {fileID: 7506211325508057894}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cb4b5276160cb4a4c99912c70bbac523, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4824,13 +4422,12 @@ GameObject:
   - component: {fileID: 57509903528070550}
   - component: {fileID: 5787619061844941573}
   - component: {fileID: 2748245010142399227}
-  - component: {fileID: 2009220610415710932}
   m_Layer: 12
   m_Name: ConningTower002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &57509903528070550
 Transform:
@@ -4892,20 +4489,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2009220610415710932
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7693263406110233154}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 3139807372698049376, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &7706055962874777467
 GameObject:
   m_ObjectHideFlags: 0
@@ -4952,7 +4535,7 @@ GameObject:
   - component: {fileID: 4874339323155471955}
   - component: {fileID: 3241138402386177655}
   - component: {fileID: 1615690210720635521}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: UnderFin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5028,7 +4611,7 @@ MeshCollider:
   m_GameObject: {fileID: 7897018134312405533}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -5045,7 +4628,7 @@ GameObject:
   - component: {fileID: 7179035751562121643}
   - component: {fileID: 5642778342508800222}
   - component: {fileID: 7821149912963840177}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: UnderBodyCooler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5121,7 +4704,7 @@ MeshCollider:
   m_GameObject: {fileID: 8028488682386029141}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -5138,7 +4721,7 @@ GameObject:
   - component: {fileID: 8700860799871951939}
   - component: {fileID: 1882676701709805957}
   - component: {fileID: 1519171471896573474}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FrontCannon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5214,7 +4797,7 @@ MeshCollider:
   m_GameObject: {fileID: 8108373395193019391}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -5230,13 +4813,12 @@ GameObject:
   - component: {fileID: 4696015952140276572}
   - component: {fileID: 1124906513624161516}
   - component: {fileID: 1445890209763000135}
-  - component: {fileID: 853984319051501259}
   m_Layer: 12
   m_Name: Cab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4696015952140276572
 Transform:
@@ -5298,20 +4880,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &853984319051501259
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8636453875602333788}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 6954709850020237141, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &8704461216022680904
 GameObject:
   m_ObjectHideFlags: 0
@@ -5323,13 +4891,12 @@ GameObject:
   - component: {fileID: 8327340217141140762}
   - component: {fileID: 8360809881600409270}
   - component: {fileID: 6478907114179758019}
-  - component: {fileID: 8875698594786039724}
   m_Layer: 12
   m_Name: UnderBodyCooler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &8327340217141140762
 Transform:
@@ -5391,20 +4958,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &8875698594786039724
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8704461216022680904}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 5049704855025043113, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &8804896364101952768
 GameObject:
   m_ObjectHideFlags: 0
@@ -5416,13 +4969,12 @@ GameObject:
   - component: {fileID: 7476427725458968095}
   - component: {fileID: 6053892850889322830}
   - component: {fileID: 4277373480232829290}
-  - component: {fileID: 129068506204009884}
   m_Layer: 12
   m_Name: UnderFin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &7476427725458968095
 Transform:
@@ -5484,20 +5036,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &129068506204009884
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8804896364101952768}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -4859315812696128892, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &9035743668834205023
 GameObject:
   m_ObjectHideFlags: 0
@@ -5509,8 +5047,7 @@ GameObject:
   - component: {fileID: 1687387798370591371}
   - component: {fileID: 5185717329163629592}
   - component: {fileID: 3568298920010950118}
-  - component: {fileID: 884026929988402633}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: ConningTower002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5577,20 +5114,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &884026929988402633
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9035743668834205023}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 3139807372698049376, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
 --- !u!1 &9191272751502283835
 GameObject:
   m_ObjectHideFlags: 0
@@ -5601,7 +5124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5320629152973563432}
   - component: {fileID: 2836335138773076818}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Dreadnova Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5657,7 +5180,7 @@ Animator:
   m_GameObject: {fileID: 9191272751502283835}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 5a5c0800494a60942ad5af2d818c4dec, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cb4b5276160cb4a4c99912c70bbac523, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -5673,11 +5196,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7278434657028351793}
     m_Modifications:
-    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
-        type: 3}
-      propertyPath: m_Name
-      value: DreadNova Turret (8)
-      objectReference: {fileID: 0}
     - target: {fileID: 5496556695023662048, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5733,6 +5251,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
+        type: 3}
+      propertyPath: m_Name
+      value: DreadNova Turret (8)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 974f3f5a0a4bd0c4dacda926424a45cf, type: 3}
 --- !u!4 &5517059630725981709 stripped
@@ -5748,11 +5271,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7278434657028351793}
     m_Modifications:
-    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
-        type: 3}
-      propertyPath: m_Name
-      value: DreadNova Turret (4)
-      objectReference: {fileID: 0}
     - target: {fileID: 5496556695023662048, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5808,6 +5326,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
+        type: 3}
+      propertyPath: m_Name
+      value: DreadNova Turret (4)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 974f3f5a0a4bd0c4dacda926424a45cf, type: 3}
 --- !u!4 &5459355100657976190 stripped
@@ -5823,11 +5346,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7278434657028351793}
     m_Modifications:
-    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
-        type: 3}
-      propertyPath: m_Name
-      value: DreadNova Turret (6)
-      objectReference: {fileID: 0}
     - target: {fileID: 5496556695023662048, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5883,6 +5401,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
+        type: 3}
+      propertyPath: m_Name
+      value: DreadNova Turret (6)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 974f3f5a0a4bd0c4dacda926424a45cf, type: 3}
 --- !u!4 &4981242170841156776 stripped
@@ -5898,11 +5421,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7278434657028351793}
     m_Modifications:
-    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
-        type: 3}
-      propertyPath: m_Name
-      value: DreadNova Turret (10)
-      objectReference: {fileID: 0}
     - target: {fileID: 5496556695023662048, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5957,6 +5475,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
+        type: 3}
+      propertyPath: m_Name
+      value: DreadNova Turret (10)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 974f3f5a0a4bd0c4dacda926424a45cf, type: 3}
@@ -6050,6 +5573,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2948943925930208187, guid: 122cd8a4f59235445b3655e8a2403fb1,
         type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -15.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2948943925930208187, guid: 122cd8a4f59235445b3655e8a2403fb1,
+        type: 3}
       propertyPath: m_LocalScale.x
       value: 9000
       objectReference: {fileID: 0}
@@ -6062,16 +5590,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 9000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2948943925930208187, guid: 122cd8a4f59235445b3655e8a2403fb1,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2948943925930208187, guid: 122cd8a4f59235445b3655e8a2403fb1,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -15.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 122cd8a4f59235445b3655e8a2403fb1, type: 3}
@@ -6100,11 +5618,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7278434657028351793}
     m_Modifications:
-    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
-        type: 3}
-      propertyPath: m_Name
-      value: DreadNova Turret (9)
-      objectReference: {fileID: 0}
     - target: {fileID: 5496556695023662048, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6160,6 +5673,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
+        type: 3}
+      propertyPath: m_Name
+      value: DreadNova Turret (9)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 974f3f5a0a4bd0c4dacda926424a45cf, type: 3}
 --- !u!4 &6627699725855597272 stripped
@@ -6175,11 +5693,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7278434657028351793}
     m_Modifications:
-    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
-        type: 3}
-      propertyPath: m_Name
-      value: DreadNova Turret (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 5496556695023662048, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6235,6 +5748,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
+        type: 3}
+      propertyPath: m_Name
+      value: DreadNova Turret (2)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 974f3f5a0a4bd0c4dacda926424a45cf, type: 3}
 --- !u!4 &7165647523403854517 stripped
@@ -6250,11 +5768,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7130178765704309529}
     m_Modifications:
-    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyThruster (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275373, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6310,20 +5823,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
+    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 120
+      propertyPath: m_Name
+      value: EnemyThruster (2)
       objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
@@ -6340,6 +5843,26 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 204
       objectReference: {fileID: 0}
+    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Time
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_Parameters.widthMultiplier
@@ -6349,11 +5872,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Time
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59d053a849b18994bae25015b58df19c, type: 3}
@@ -6370,11 +5888,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7278434657028351793}
     m_Modifications:
-    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
-        type: 3}
-      propertyPath: m_Name
-      value: DreadNova Turret
-      objectReference: {fileID: 0}
     - target: {fileID: 5496556695023662048, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6429,6 +5942,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
+        type: 3}
+      propertyPath: m_Name
+      value: DreadNova Turret
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 974f3f5a0a4bd0c4dacda926424a45cf, type: 3}
@@ -6522,6 +6040,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2948943925930208187, guid: 122cd8a4f59235445b3655e8a2403fb1,
         type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -15.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2948943925930208187, guid: 122cd8a4f59235445b3655e8a2403fb1,
+        type: 3}
       propertyPath: m_LocalScale.x
       value: 9000
       objectReference: {fileID: 0}
@@ -6534,16 +6057,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 9000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2948943925930208187, guid: 122cd8a4f59235445b3655e8a2403fb1,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2948943925930208187, guid: 122cd8a4f59235445b3655e8a2403fb1,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -15.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 122cd8a4f59235445b3655e8a2403fb1, type: 3}
@@ -6572,11 +6085,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7278434657028351793}
     m_Modifications:
-    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
-        type: 3}
-      propertyPath: m_Name
-      value: DreadNova Turret (11)
-      objectReference: {fileID: 0}
     - target: {fileID: 5496556695023662048, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6632,6 +6140,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
+        type: 3}
+      propertyPath: m_Name
+      value: DreadNova Turret (11)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 974f3f5a0a4bd0c4dacda926424a45cf, type: 3}
 --- !u!4 &45320176584940167 stripped
@@ -6647,11 +6160,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7278434657028351793}
     m_Modifications:
-    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
-        type: 3}
-      propertyPath: m_Name
-      value: DreadNova Turret (5)
-      objectReference: {fileID: 0}
     - target: {fileID: 5496556695023662048, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6707,6 +6215,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
+        type: 3}
+      propertyPath: m_Name
+      value: DreadNova Turret (5)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 974f3f5a0a4bd0c4dacda926424a45cf, type: 3}
 --- !u!4 &99135821628849066 stripped
@@ -6722,11 +6235,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7278434657028351793}
     m_Modifications:
-    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
-        type: 3}
-      propertyPath: m_Name
-      value: DreadNova Turret (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 5496556695023662048, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6782,6 +6290,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
+        type: 3}
+      propertyPath: m_Name
+      value: DreadNova Turret (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 974f3f5a0a4bd0c4dacda926424a45cf, type: 3}
 --- !u!4 &2054520001566383044 stripped
@@ -6797,11 +6310,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7278434657028351793}
     m_Modifications:
-    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
-        type: 3}
-      propertyPath: m_Name
-      value: DreadNova Turret (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 5496556695023662048, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6857,6 +6365,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
+        type: 3}
+      propertyPath: m_Name
+      value: DreadNova Turret (1)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 974f3f5a0a4bd0c4dacda926424a45cf, type: 3}
 --- !u!4 &1387299983492567386 stripped
@@ -6872,11 +6385,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7278434657028351793}
     m_Modifications:
-    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
-        type: 3}
-      propertyPath: m_Name
-      value: DreadNova Turret
-      objectReference: {fileID: 0}
     - target: {fileID: 5496556695023662048, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6932,6 +6440,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
+        type: 3}
+      propertyPath: m_Name
+      value: DreadNova Turret
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 974f3f5a0a4bd0c4dacda926424a45cf, type: 3}
 --- !u!4 &1378092556850256941 stripped
@@ -6947,11 +6460,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7278434657028351793}
     m_Modifications:
-    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
-        type: 3}
-      propertyPath: m_Name
-      value: DreadNova Turret (7)
-      objectReference: {fileID: 0}
     - target: {fileID: 5496556695023662048, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7007,6 +6515,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
+        type: 3}
+      propertyPath: m_Name
+      value: DreadNova Turret (7)
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 974f3f5a0a4bd0c4dacda926424a45cf, type: 3}
 --- !u!4 &3020835838025369671 stripped
@@ -7022,11 +6535,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7278434657028351793}
     m_Modifications:
-    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
-        type: 3}
-      propertyPath: m_Name
-      value: DreadNova Turret (12)
-      objectReference: {fileID: 0}
     - target: {fileID: 5496556695023662048, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7081,6 +6589,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
+        type: 3}
+      propertyPath: m_Name
+      value: DreadNova Turret (12)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 974f3f5a0a4bd0c4dacda926424a45cf, type: 3}
@@ -7184,15 +6697,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: b32071e6a4ddaae40a586d2a47130649, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17491c3bff709694bbd0efbc512dbe6a, type: 3}
---- !u!4 &2478270739348473940 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 17491c3bff709694bbd0efbc512dbe6a,
-    type: 3}
-  m_PrefabInstance: {fileID: 7430414737282032462}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1459113243058027079 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 17491c3bff709694bbd0efbc512dbe6a,
+    type: 3}
+  m_PrefabInstance: {fileID: 7430414737282032462}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2478270739348473940 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 17491c3bff709694bbd0efbc512dbe6a,
     type: 3}
   m_PrefabInstance: {fileID: 7430414737282032462}
   m_PrefabAsset: {fileID: 0}
@@ -7203,11 +6716,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7130178765704309529}
     m_Modifications:
-    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyThruster (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275373, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7263,20 +6771,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
+    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 120
+      propertyPath: m_Name
+      value: EnemyThruster (1)
       objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
@@ -7293,6 +6791,26 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 204
       objectReference: {fileID: 0}
+    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Time
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_Parameters.widthMultiplier
@@ -7302,11 +6820,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Time
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59d053a849b18994bae25015b58df19c, type: 3}
@@ -7323,11 +6836,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7130178765704309529}
     m_Modifications:
-    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Name
-      value: EnemyThruster
-      objectReference: {fileID: 0}
     - target: {fileID: 1225102729419275373, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7383,6 +6891,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1225102729419275378, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_Name
+      value: EnemyThruster
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -9.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 24
+      objectReference: {fileID: 0}
     - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -7398,15 +6921,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 120
       objectReference: {fileID: 0}
-    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
+    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -9.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102731379926709, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 24
+      propertyPath: m_Time
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
         type: 3}
@@ -7417,11 +6935,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Parameters.widthCurve.m_Curve.Array.data[0].value
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1225102730936949429, guid: 59d053a849b18994bae25015b58df19c,
-        type: 3}
-      propertyPath: m_Time
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59d053a849b18994bae25015b58df19c, type: 3}
@@ -7438,11 +6951,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7278434657028351793}
     m_Modifications:
-    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
-        type: 3}
-      propertyPath: m_Name
-      value: DreadNova Turret (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 5496556695023662048, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7497,6 +7005,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8799163862641852915, guid: 974f3f5a0a4bd0c4dacda926424a45cf,
+        type: 3}
+      propertyPath: m_Name
+      value: DreadNova Turret (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 974f3f5a0a4bd0c4dacda926424a45cf, type: 3}

@@ -33,7 +33,9 @@ public class ShieldProjector : MonoBehaviour
 	[SerializeField] private GameObject impactVFX;
 	[SerializeField] private GameObject hitVFX;
 
-	[SerializeField] private Collider shipCollider;
+	[SerializeField] private Collider[] shipColliders;
+	[SerializeField] private bool resizeCollider = false;
+	[SerializeField] private bool updateShipColliders = true;
 
 	// Get the current color of the shield between the base color and the broken color
 	public Color GetColor => ShieldColor.Evaluate(_damagePercent);
@@ -60,7 +62,15 @@ public class ShieldProjector : MonoBehaviour
 
         _shieldCollider = GetComponent<SphereCollider>();
 
-		if (shipCollider) Physics.IgnoreCollision(shipCollider, _shieldCollider);
+		if (shipColliders != null)
+		{
+			foreach(Collider c in shipColliders)
+			{
+				IgnoreCollider(c);
+			}
+		}
+
+		UpdateCollider(true);
 	}
 
 	// Update is called once per frame
@@ -109,7 +119,7 @@ public class ShieldProjector : MonoBehaviour
 
 			SpawnShieldDissolve();
 
-			//UpdateShieldCollider(false);
+			UpdateCollider(false);
 		}
 
 		// If we currently have a 0% shield and our new percent is anything above 0%
@@ -121,13 +131,9 @@ public class ShieldProjector : MonoBehaviour
 				onShieldRegen.Invoke();
 			}
 
-			if (fadeType == FadeType.HALF_FADE)
-			{
-				// HALF_FADE means we fade the shield out so that only a small ring of color can be seen
-				_shieldMaterial.SetColor("_BaseColor", GetColor);
-			}
+			_shieldMaterial.SetColor("_BaseColor", GetColor);
 
-		//	UpdateShieldCollider(true);
+			UpdateCollider(true);
 		}
 
 		// Update the damage percent
@@ -145,9 +151,16 @@ public class ShieldProjector : MonoBehaviour
 	// Resize this shields hitbox depending on the shield damage percent
 	public void UpdateCollider(bool shieldEnabled)
 	{
-		if (shipCollider != null)
+		if (resizeCollider)
 		{
-			//shipCollider.enabled = !shieldEnabled;
+			if (shipColliders != null && updateShipColliders)
+			{
+				foreach (Collider c in shipColliders)
+				{
+					c.enabled = !shieldEnabled;
+				}
+			}
+
 			_shieldCollider.enabled = shieldEnabled;
 		}
 	}
@@ -232,8 +245,8 @@ public class ShieldProjector : MonoBehaviour
 		if (fadeType == FadeType.FULL_FADE)
 		{
 			// FULL_FADE means we fade the shield to nothing
-			_shieldMaterial.SetColor("_BaseColor", Color.Lerp(_shieldMaterial.GetColor("_BaseColor"), Color.clear, 0.01f));
-			_shieldMaterial.SetColor("_FresnelColor", Color.Lerp(_shieldMaterial.GetColor("_FresnelColor"), Color.clear, 0.01f));
+			_shieldMaterial.SetColor("_BaseColor", Color.Lerp(_shieldMaterial.GetColor("_BaseColor"), Color.clear, 0.1f));
+			_shieldMaterial.SetColor("_FresnelColor", Color.Lerp(_shieldMaterial.GetColor("_FresnelColor"), Color.clear, 0.1f));
 		}
 		else if (fadeType == FadeType.HALF_FADE)
 		{
@@ -262,4 +275,6 @@ public class ShieldProjector : MonoBehaviour
 		}
 	}
 	#endregion
+	
+	public Collider[] ShipColliders { get { return shipColliders; } }
 }

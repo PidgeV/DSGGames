@@ -118,11 +118,10 @@ public class SwarmLeaderPatrolState : FSMState
                 }
             }
 
-            Vector3 newDir = Vector3.RotateTowards(controller.transform.forward, direction, controller.Stats.rotationSpeed * Time.deltaTime, 0);
-            Quaternion rot = Quaternion.LookRotation(newDir);
+            Quaternion rot = Quaternion.LookRotation(direction.normalized, controller.transform.up);
             controller.transform.rotation = Quaternion.Lerp(controller.transform.rotation, rot, controller.Stats.rotationSpeed * Time.deltaTime);
-            
-            controller.transform.position = Vector3.MoveTowards(controller.transform.position, controller.transform.position + controller.transform.forward, controller.Stats.shipSpeed * Time.deltaTime);
+
+            controller.transform.position += controller.transform.forward * controller.Stats.shipSpeed * Time.deltaTime;
         }
     }
 }

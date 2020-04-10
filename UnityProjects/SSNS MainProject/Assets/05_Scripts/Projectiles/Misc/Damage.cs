@@ -30,17 +30,31 @@ public class Damage : MonoBehaviour
 
         //Spawn the hit sound Object and parent to what it hit. Do this in case the object is destroyed on hitting things
         if (hitSoundObject)
-            Instantiate(hitSoundObject, transform.position, Quaternion.identity, collision.transform);
+        {
+            AreaManager.Instance.OnObjectAdd(Instantiate(hitSoundObject, collision.contacts[0].point, Quaternion.LookRotation(collision.contacts[0].normal, collision.gameObject.transform.up)));
+        }
 
         //Apply damage to things it hits
         if (collision.gameObject.TryGetComponent(out HealthAndShields hpTemp))
         {
             hpTemp.TakeDamage(kineticDamage, energyDamage);
         }
+        else if (collision.gameObject.TryGetComponent(out ShieldProjector shield))
+        {
+            if (shield.ShipColliders != null && shield.ShipColliders[0].TryGetComponent(out HealthAndShields health))
+            {
+                health.TakeDamage(kineticDamage, energyDamage);
+            }
+        }
 
         if (destroyOnHit)
         {
-            Destroy(gameObject);
+            if (TryGetComponent(out HealthAndShields health))
+            {
+                health.TakeDamage(Mathf.Infinity, Mathf.Infinity);
+            }
+            else
+                Destroy(gameObject);
         }
     }
 

@@ -38,6 +38,8 @@ public class GunRotate : InterceptCalculationClass
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.paused) return;
+
         if (axes.x) axis[0] = 1;
         else axis[0] = 0;
         if (axes.y) axis[1] = 1;

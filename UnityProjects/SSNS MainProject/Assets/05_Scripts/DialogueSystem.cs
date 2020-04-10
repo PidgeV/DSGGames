@@ -21,6 +21,8 @@ public class DialogueSystem : MonoBehaviour
 
     private int textPos = 0;
 
+    private bool dialoguePaused;
+
     private void Awake()
     {
         if (Instance != null)
@@ -69,12 +71,31 @@ public class DialogueSystem : MonoBehaviour
         {
             dialogueText.text = "";
         }
+
+        if (GameManager.Instance.paused)
+        {
+            audioSource.Pause();
+
+            dialoguePaused = true;
+        }
+        else if (dialoguePaused)
+        {
+            audioSource.UnPause();
+
+            dialoguePaused = false;
+        }
     }
 
     IEnumerator TrackTextDisplay()
     {
         while (true)
         {
+            if (dialoguePaused)
+            {
+                yield return null;
+                continue;
+            }
+
             if (dialogueQueue.Count > 0)
             {
                 DialogueClass diag = dialogueQueue.Peek();

@@ -40,7 +40,7 @@ public class AdvancedFSM : FSM
     private List<FSMState> fsmStates;
 
     //The fsmStates are not changing directly but updated by using transitions
-    private FSMStateID currentStateID;
+    [SerializeField] private FSMStateID currentStateID;
     public FSMStateID CurrentStateID { get { return currentStateID; } }
 
     private FSMState currentState;

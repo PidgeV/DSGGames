@@ -7,13 +7,15 @@ public class ChargerController : EnemyController
 {
     public bool hitPlayer = false;
 
+    ChargerAttackState attack;
+
     protected override void ConstructFSM()
     {
         base.aiType = AIManager.AITypes.Charger;
         DeadState deadState = new DeadState(this);
         SpawnState spawnState = new SpawnState(this);
         ChargerPatrolState patrol = new ChargerPatrolState(this, true);
-        ChargerAttackState attack = new ChargerAttackState(this);
+        attack = new ChargerAttackState(this);
 
         spawnState.AddTransition(Transition.Patrol, FSMStateID.Patrolling);
 
@@ -35,8 +37,17 @@ public class ChargerController : EnemyController
         if (Player && collision.gameObject.Equals(Player) && CurrentStateID == FSMStateID.Attacking)
         {
             hitPlayer = true;
-            AIManager.aiManager.StopAttack(base.aiType);
+            AIManager.aiManager.StopAttack(aiType);
             PerformTransition(Transition.Patrol);
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        if (attack != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, attack.interceptPoint);
         }
     }
 }

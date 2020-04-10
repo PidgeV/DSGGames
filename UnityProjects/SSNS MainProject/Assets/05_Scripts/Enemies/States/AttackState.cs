@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class AttackState<T> : FSMState where T : EnemyController
 {
     protected T controller;
-    protected Vector3 interceptPoint;
+    public Vector3 interceptPoint;
 
     //Obstacle variables
     protected Vector3 obstacleAvoidDirection = Vector3.right;

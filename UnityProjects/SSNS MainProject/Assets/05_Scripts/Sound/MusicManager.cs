@@ -25,6 +25,7 @@ public class MusicManager : MonoBehaviour
     [SerializeField] float maxVolume = 1;
 
     private bool usingSource1 = true;
+    private bool musicPaused;
 
     // Start is called before the first frame update
     void Start()
@@ -44,7 +45,20 @@ public class MusicManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.paused)
+        {
+            source1.Pause();
+            source2.Pause();
 
+            musicPaused = true;
+        }
+        else if (musicPaused)
+        {
+            source1.UnPause();
+            source2.UnPause();
+
+            musicPaused = false;
+        }
     }
 
     /// <summary>

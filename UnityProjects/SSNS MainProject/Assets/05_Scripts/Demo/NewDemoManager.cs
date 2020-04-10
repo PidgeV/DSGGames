@@ -383,31 +383,20 @@ public class NewDemoManager : MonoBehaviour
 			// Instantiate
 			GameObject newEnemy = Instantiate(enemy, position, Quaternion.identity);
 
-			// TODO -- We should find a better way to do this
-			#region Settings the wapoints 
-
-			//Set waypoints for each enemy
-			if (newEnemy.TryGetComponent(out ChargerController chaserController))
-			{
-				chaserController.waypoints = new Transform[] { transform };
-			}
-			else if (newEnemy.TryGetComponent(out FighterController fighterController))
-			{
-				fighterController.waypoints = new Transform[] { transform };
-			}
-			else if (newEnemy.TryGetComponent(out Flock swarmerController))
-			{
-				swarmerController.WayPoints = new Transform[] { transform };
-			}
-
-			#endregion
+			if (AreaManager.Instance != null)
+				AreaManager.Instance.OnObjectAdd(newEnemy, true);
 		}
 	}
 
 	public void SpawnEnemy_Fighter() {
 		if (enemy_Fighter)
 		{
-			SpawnEnemy(enemy_Fighter, Vector3.zero, Input.GetKey(KeyCode.LeftShift) ? 10 : 1);
+			Vector3 spawnPos = Vector3.zero;
+
+			if (AreaManager.Instance != null)
+				spawnPos = AreaManager.Instance.CurrentArea.FindSafeSpawn().position;
+
+			SpawnEnemy(enemy_Fighter, spawnPos, Input.GetKey(KeyCode.LeftShift) ? 10 : 1);
 		}
 		else { Debug.LogError("You do not have the [enemy_Fighter] prefab"); }
 	}
@@ -415,7 +404,12 @@ public class NewDemoManager : MonoBehaviour
 	public void SpawnEnemy_Charger() {
 		if (enemy_Charger)
 		{
-			SpawnEnemy(enemy_Charger, Vector3.zero, Input.GetKey(KeyCode.LeftShift) ? 10 : 1);
+			Vector3 spawnPos = Vector3.zero;
+
+			if (AreaManager.Instance != null)
+				spawnPos = AreaManager.Instance.CurrentArea.FindSafeSpawn().position;
+
+			SpawnEnemy(enemy_Charger, spawnPos, Input.GetKey(KeyCode.LeftShift) ? 10 : 1);
 		}
 		else { Debug.LogError("You do not have the [enemy_Charger] prefab"); }
 	}
@@ -424,7 +418,12 @@ public class NewDemoManager : MonoBehaviour
 	{
 		if (enemy_Swarmer)
 		{
-			SpawnEnemy(enemy_Swarmer, Vector3.zero, Input.GetKey(KeyCode.LeftShift) ? 10 : 1);
+			Vector3 spawnPos = Vector3.zero;
+
+			if (AreaManager.Instance != null)
+				spawnPos = AreaManager.Instance.CurrentArea.FindSafeSpawn().position;
+
+			SpawnEnemy(enemy_Swarmer, spawnPos, Input.GetKey(KeyCode.LeftShift) ? 10 : 1);
 		}
 		else { Debug.LogError("You do not have the [enemy_Swarmer] prefab"); }
 	}
@@ -433,7 +432,12 @@ public class NewDemoManager : MonoBehaviour
 	{
 		if (enemy_Cargo)
 		{
-			SpawnEnemy(enemy_Cargo, Vector3.zero, Input.GetKey(KeyCode.LeftShift) ? 10 : 1);
+			Vector3 spawnPos = Vector3.zero;
+
+			if (AreaManager.Instance != null)
+				spawnPos = AreaManager.Instance.CurrentArea.FindSafeSpawn().position;
+
+			SpawnEnemy(enemy_Cargo, spawnPos, Input.GetKey(KeyCode.LeftShift) ? 10 : 1);
 		}
 		else { Debug.LogError("You do not have the [enemy_Cargo] prefab"); }
 	}
@@ -442,7 +446,12 @@ public class NewDemoManager : MonoBehaviour
 	{
 		if (enemy_Cruiser)
 		{
-			SpawnEnemy(enemy_Cruiser, Vector3.zero, Input.GetKey(KeyCode.LeftShift) ? 10 : 1);
+			Vector3 spawnPos = Vector3.zero;
+
+			if (AreaManager.Instance != null)
+				spawnPos = AreaManager.Instance.CurrentArea.FindSafeSpawn().position;
+
+			SpawnEnemy(enemy_Cruiser, spawnPos, Input.GetKey(KeyCode.LeftShift) ? 10 : 1);
 		}
 		else { Debug.LogError("You do not have the [enemy_Cruiser] prefab"); }
 	}

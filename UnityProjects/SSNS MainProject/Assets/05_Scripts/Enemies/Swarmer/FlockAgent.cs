@@ -9,7 +9,6 @@ public class FlockAgent : MonoBehaviour
     public Flock swarm;
     Collider agentCollider;
     public Collider AgentCollider { get { return agentCollider; } }
-    [SerializeField] GameObject explosionVFXPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -23,18 +22,14 @@ public class FlockAgent : MonoBehaviour
         transform.parent = swarm.transform;
     }
 
-    public void Move(Vector3 velocity)
+    public void Move(Vector3 velocity, float shipSpeed, float rotationSpeed)
     {
         transform.forward =  Vector3.Lerp(transform.forward, velocity, Time.deltaTime);
-        transform.position = Vector3.Lerp(transform.position, transform.position + velocity, Time.deltaTime);
-    }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (TryGetComponent(out HealthAndShields health) && health.Invincible) return;
+        Quaternion newRot = Quaternion.LookRotation(velocity, transform.up);
+        transform.rotation = Quaternion.Slerp(transform.rotation, newRot, rotationSpeed * Time.deltaTime);
 
-        if(explosionVFXPrefab != null) Instantiate(explosionVFXPrefab, transform.position, transform.rotation);
-        Destroy(gameObject);
+        transform.position += transform.forward * shipSpeed * Time.deltaTime;
     }
 
     private void OnDestroy()

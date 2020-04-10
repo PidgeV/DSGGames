@@ -6,7 +6,7 @@ public class FighterAttackState : AttackState<FighterController>
 {
     float shotTimer = 0.0f;
     float intervalTime = 0.0f;
-    float calculateInterval = 0.1f;
+    float calculateInterval = 0.5f;
     GameObject bulletPrefab;
     GameObject bulletSpawnPos;
     Rigidbody rbPlayer;
@@ -34,6 +34,7 @@ public class FighterAttackState : AttackState<FighterController>
         }
         else if (AreaManager.Instance.CurrentArea.IsTransformOutside(controller.transform))
         {
+            AIManager.aiManager.StopAttack(controller.aiType);
             controller.PerformTransition(Transition.Patrol);
         }
         else

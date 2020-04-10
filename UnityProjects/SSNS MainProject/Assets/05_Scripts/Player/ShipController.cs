@@ -228,7 +228,7 @@ public class ShipController : MonoBehaviour
 
 	private void OnCollisionEnter(Collision c)
 	{
-		if (c.gameObject.tag != "Projectile" && c.gameObject.layer != LayerMask.GetMask("Swarm") && !collision)
+		if (c.gameObject.tag != "Projectile" && c.gameObject.layer != 11 && !collision)
 		{
 			Vector3 dir = c.contacts[0].point - transform.position;
 

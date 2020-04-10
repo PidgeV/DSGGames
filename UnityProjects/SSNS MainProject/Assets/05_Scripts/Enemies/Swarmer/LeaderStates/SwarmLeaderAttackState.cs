@@ -30,11 +30,13 @@ public class SwarmLeaderAttackState : FSMState
         if (swarm.defenseTarget != null)
         {
             //Enter defend state mode
+            AIManager.aiManager.StopAttack(controller.aiType);
             controller.PerformTransition(Transition.Defend);
         }
         
         if (AreaManager.Instance.CurrentArea.IsTransformOutside(controller.transform))
         {
+            AIManager.aiManager.StopAttack(controller.aiType);
             controller.PerformTransition(Transition.Patrol);
         }
 
@@ -106,11 +108,10 @@ public class SwarmLeaderAttackState : FSMState
                 }
             }
 
-            Vector3 newDir = Vector3.RotateTowards(controller.transform.forward, direction, controller.Stats.rotationSpeed * Time.deltaTime, 0);
-            Quaternion rot = Quaternion.LookRotation(newDir);
+            Quaternion rot = Quaternion.LookRotation(direction.normalized, controller.transform.up);
             controller.transform.rotation = Quaternion.Lerp(controller.transform.rotation, rot, controller.Stats.rotationSpeed * Time.deltaTime);
 
-            controller.transform.position = Vector3.MoveTowards(controller.transform.position, controller.transform.position + controller.transform.forward, controller.Stats.shipSpeed * Time.deltaTime);
+            controller.transform.position += controller.transform.forward * controller.Stats.attackShipSpeed * Time.deltaTime;
         }
     }
 }
