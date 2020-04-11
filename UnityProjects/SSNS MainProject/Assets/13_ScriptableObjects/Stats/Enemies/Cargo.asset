@@ -19,7 +19,7 @@ MonoBehaviour:
   shieldRegenPercent: 1
   shieldRegenInterval: 1
   shipSpeed: 300
-  rotationSpeed: 300
+  rotationSpeed: 10
   fireRate: 0
   attackShipSpeed: 0
   attackRotationSpeed: 0
