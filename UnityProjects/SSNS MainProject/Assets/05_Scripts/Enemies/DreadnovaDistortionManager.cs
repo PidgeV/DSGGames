@@ -42,7 +42,7 @@ public class DreadnovaDistortionManager : MonoBehaviour
             mat.SetVector("_distortionDirection", val);
 
             time += Time.deltaTime;
-            Debug.Log(val.x);
+            //Debug.Log(val.x);
             yield return null;
         }
 

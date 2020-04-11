@@ -165,8 +165,11 @@ public class HealthAndShields : MonoBehaviour
     // When life is 0 this is called by TakeDamage or Update
     void HandleDeath()
     {
-        currentLife = MaxLife;
-        currentShield = MaxShield;
+        if (gameObject.tag == "Player")
+        {
+            currentLife = MaxLife;
+            currentShield = MaxShield;
+        }
 
         // Invoke the On Death Event
         if (onDeath != null)

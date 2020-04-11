@@ -63,7 +63,7 @@ public class DreadnovaSpawner : AreaSpawner
         if (swarmer.TryGetComponent(out Flock flock))
         {
             flock.defenseTarget = cargo;
-            flock.startingCount = 300;
+            flock.startingCount = 75;
 
             //flock.FlockLeader.gameObject.transform.position = swarmerSpawnpoint;
         }
