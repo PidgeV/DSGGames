@@ -53,4 +53,5 @@ MonoBehaviour:
   - {fileID: 0}
   totalText: {fileID: 0}
   dreadnovaHP: {fileID: 0}
+  explosions: {fileID: 0}
   curLife: 0

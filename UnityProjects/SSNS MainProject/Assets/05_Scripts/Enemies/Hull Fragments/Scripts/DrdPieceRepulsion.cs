@@ -21,6 +21,7 @@ public class DrdPieceRepulsion : MonoBehaviour
         explosionToOn.SetActive(false);
         replaceScar.SetActive(false);
         fireToOff.SetActive(false);
+        Physics.IgnoreLayerCollision(10, 15);
 
     }
 

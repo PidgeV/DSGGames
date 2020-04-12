@@ -9,6 +9,7 @@ public class DrdRandomShooty : MonoBehaviour
     [SerializeField] GameObject[] AllShooty;
     [SerializeField] Text totalText;
     [SerializeField] DreadnovaHealth dreadnovaHP;
+    [SerializeField] GameObject explosions;
     int shot = -1;  //Must be -1 so addshoot triggers first pass through
     bool hpBarEnabled = false;
     public float curLife;
@@ -26,6 +27,7 @@ public class DrdRandomShooty : MonoBehaviour
             }
             AddShoot();
         }
+        explosions.SetActive(false);
 
         StartCoroutine(Count());
     }
@@ -85,11 +87,15 @@ public class DrdRandomShooty : MonoBehaviour
                     counter++;
                 }
             }
+            else
+            {
+                explosions.SetActive(true);
+            }
         }
         else if (shot >= AllShooty.Length)
         {
             //trigger explosion
-
+            explosions.SetActive(true);
 
         }
     }
