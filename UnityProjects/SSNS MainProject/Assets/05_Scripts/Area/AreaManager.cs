@@ -277,10 +277,7 @@ public class AreaManager : MonoBehaviour
         yield return null;
 
 
-        Transform playerSpawn = currentArea.FindSafeSpawn();
-
-        if (currentArea.AreaType == AreaType.BossShield || currentArea.AreaType == AreaType.BossAttack)
-            playerSpawn = currentArea.FindSafeSpawn("PlayerSpawn");
+        Transform playerSpawn = currentArea.FindSafeSpawn("PlayerSpawn");
 
         //GameManager.Instance.Player.gameObject.SetActive(false);
         GameManager.Instance.Player.transform.position = playerSpawn.position;

@@ -103,6 +103,7 @@ public class HealthAndShields : MonoBehaviour
     {
         currentLife = MaxLife;
         currentShield = MaxShield;
+        killed = false;
 
         gameObject.SetActive(true);
 

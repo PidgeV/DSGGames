@@ -27,7 +27,7 @@ public class PlayerRespawn : MonoBehaviour
         }
         else
         {
-            Transform playerSpawn = AreaManager.Instance.CurrentArea.FindSafeSpawn();
+            Transform playerSpawn = AreaManager.Instance.CurrentArea.FindSafeSpawn("PlayerSpawn");
 
             player.transform.position = playerSpawn.position;
             player.transform.rotation = playerSpawn.rotation;

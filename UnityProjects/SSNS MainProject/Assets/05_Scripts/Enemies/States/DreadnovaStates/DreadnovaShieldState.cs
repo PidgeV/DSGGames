@@ -75,18 +75,6 @@ public class DreadnovaShieldState : FSMState
                     controller.Spawner.StartWave(waveCount, false);
                 }
             }
-
-            if (!controller.Spawner.CargoExists)
-            {
-                cargoTime += Time.deltaTime;
-
-                if (cargoTime >= controller.Spawner.Wave.TimeBetweenCargoSpawns)
-                {
-                    cargoTime = 0;
-
-                    controller.Spawner.SpawnCargo();
-                }
-            }
         }
     }
 

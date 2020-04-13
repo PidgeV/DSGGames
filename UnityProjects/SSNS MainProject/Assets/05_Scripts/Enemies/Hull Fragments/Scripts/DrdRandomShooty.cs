@@ -50,7 +50,6 @@ public class DrdRandomShooty : MonoBehaviour
         if (health == 0)
         {
             dreadnovaHP.gameObject.SetActive(false);
-            GameManager.Instance.SwitchState(SNSSTypes.GameState.VICTORY);
         }
     }
 
@@ -155,5 +154,14 @@ public class DrdRandomShooty : MonoBehaviour
         explosions.SetActive(true);
         yield return new WaitForSeconds(2);
         dreadnova.SetActive(false);
+
+
+        yield return new WaitForSeconds(2);
+
+        AreaManager.Instance.KillEnemies();
+
+        yield return new WaitForSeconds(1);
+
+        GameManager.Instance.SwitchState(SNSSTypes.GameState.VICTORY);
     }
 }

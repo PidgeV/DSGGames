@@ -79,8 +79,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyOnHit: 1
   constantCollisionDamage: 0
-  kineticDamage: 1
-  energyDamage: 5
+  kineticDamage: 3
+  energyDamage: 7
   hitSoundObject: {fileID: 1504425092435240292, guid: bf6550cc8e2fdc045a981d6cb3b78315,
     type: 3}
 --- !u!54 &-5304832730458768805

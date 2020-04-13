@@ -75,20 +75,4 @@ public class DreadnovaAttackState : FSMState
             }
         }
     }
-
-    private bool IsGeneratorsDead()
-    {
-        bool dead = true;
-
-        foreach (ShieldGenerator generator in controller.Generators)
-        {
-            if (!generator.IsDead)
-            {
-                dead = false;
-                break;
-            }
-        }
-
-        return dead;
-    }
 }

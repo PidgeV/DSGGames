@@ -26,7 +26,7 @@ MonoBehaviour:
   shipRotAcceleration: 20
   shipRotDeceleration: 25
   GunRotationSpeed: 200
-  boostSpeed: 125
+  boostSpeed: 200
   strafeSpeed: 15
   baseDamage: 4
   healthDamageReduction: 6
@@ -34,6 +34,7 @@ MonoBehaviour:
   maxBoostGauge: 20
   boostGaugeConsumeAmount: 1.8
   boostGaugeRechargeAmount: 1.5
+  boostDepleteDelay: 5
   sonicBoomTime: 5
   reserveShield: 0
   shieldBreakEMP: 0

@@ -60,8 +60,10 @@ public class Area : MonoBehaviour
         {
             controller.ResetEnemy();
         }
-
-        spawner.StartWave(0);
+        else
+        {
+            spawner.StartWave(0);
+        }
     }
 
     public void KillEnemies()
@@ -99,7 +101,7 @@ public class Area : MonoBehaviour
 
                 if (iterations >= sp.Length)
                 {
-                    return null;
+                    return FindSafeSpawn();
                 }
             }
             else

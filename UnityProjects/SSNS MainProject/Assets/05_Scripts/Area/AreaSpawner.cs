@@ -51,6 +51,9 @@ public class AreaSpawner : MonoBehaviour
 
     private IEnumerator CreateArea()
     {
+        spawnpoints = null;
+        waypoints = null;
+
         if (area && area.spawns && area.spawns.childCount > 0)
         {
             spawnpoints = area.Spawns;
