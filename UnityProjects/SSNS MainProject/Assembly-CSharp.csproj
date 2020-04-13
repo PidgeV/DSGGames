@@ -218,6 +218,7 @@
     <Compile Include="Assets\05_Scripts\Utility\SpawnLookAt.cs" />
     <Compile Include="Assets\05_Scripts\Utility\TimedDestroy.cs" />
     <Compile Include="Assets\05_Scripts\Utility\ToggleObjects.cs" />
+    <Compile Include="Assets\05_Scripts\VideoManager.cs" />
     <Compile Include="Assets\09_Effects\Shaders\AreaIndicator\Scripts\AreaShaderController.cs" />
     <Compile Include="Assets\11_Animations\Menus\Transitions\CinematicController.cs" />
     <Compile Include="Assets\13_ScriptableObjects\ShipObjects\ShipBehaviour.cs" />

@@ -15,6 +15,7 @@ public class HealthAndShields : MonoBehaviour
     /// <summary> When this GameObject dies </summary>
     public delegate void OnDeath();
     public OnDeath onDeath;
+	private bool killed = false;
 
     [SerializeField] private Stats shipStats;
     [SerializeField] private GameObject explosionPrefab;
@@ -142,9 +143,10 @@ public class HealthAndShields : MonoBehaviour
             }
 
             // If we are dead cann OnDeath()
-            if (currentLife <= 0)
+            if (currentLife <= 0 && !killed)
             {
                 currentLife = 0;
+				killed = true;
                 HandleDeath();
             }
         }
