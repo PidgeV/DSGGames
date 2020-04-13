@@ -22,5 +22,5 @@ MonoBehaviour:
   rotationSpeed: 10
   fireRate: 0
   attackShipSpeed: 300
-  attackRotationSpeed: 5
+  attackRotationSpeed: 2
   accuracy: 0

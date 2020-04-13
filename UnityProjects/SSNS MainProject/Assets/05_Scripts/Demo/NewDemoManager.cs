@@ -153,6 +153,14 @@ public class NewDemoManager : MonoBehaviour
 			RespawnPlayer();
 		});
 
+		Button btn_KillPlayer = CreateButton(button, playerRect, "Kill Player [n/a]");
+		btn_KillPlayer.onClick.AddListener(() => {
+			if (GameManager.Instance.Player.TryGetComponent(out HealthAndShields health))
+			{
+				health.TakeDamage(Mathf.Infinity, Mathf.Infinity);
+			}
+		});
+
 		Button btn_TeleportPlayer = CreateButton(vector, playerRect, "Teleport Player [n/a]");
 		btn_TeleportPlayer.onClick.AddListener(() => {
 			TeleportPlayer(btn_TeleportPlayer.GetComponent<DemoValue>().GetValue);
@@ -207,6 +215,12 @@ public class NewDemoManager : MonoBehaviour
 		Button btn_DestroyGenerators = CreateButton(button, sceneRect, "Destroy Generators");
 		btn_DestroyGenerators.onClick.AddListener(() => {
 			DestroyGenerators();
+		});
+
+		// Destroys the generators on the dreadnova
+		Button btn_DestroyArmorPieces = CreateButton(button, sceneRect, "Destroy Armor");
+		btn_DestroyArmorPieces.onClick.AddListener(() => {
+			DestroyArmor();
 		});
 
 		// Loads scenes
@@ -362,11 +376,26 @@ public class NewDemoManager : MonoBehaviour
 	/// </summary>
 	public void DestroyGenerators()
 	{
+		if (AreaManager.Instance != null && AreaManager.Instance.CurrentArea.AreaType != SNSSTypes.AreaType.BossShield) return;
+
 		GameObject dreadnova = GameObject.FindGameObjectWithTag("CapitalShip");
 
 		if (dreadnova && dreadnova.TryGetComponent(out DreadnovaController controller))
 		{
 			controller.DestroyGenerators();
+		}
+	}
+
+	/// <summary>
+	/// Kill all armor pieces
+	/// </summary>
+	public void DestroyArmor()
+	{
+		if (AreaManager.Instance != null && AreaManager.Instance.CurrentArea.AreaType != SNSSTypes.AreaType.BossAttack) return;
+
+		if (DrdRandomShooty.manager != null)
+		{
+			DrdRandomShooty.manager.KillAll();
 		}
 	}
 

@@ -11,6 +11,8 @@ public class WarpEffectBehaviour : MonoBehaviour
     public static WarpEffectBehaviour instance;
 
     [SerializeField] float warpTransitionSpeed = 4f;
+    [SerializeField] VisualEffectAsset switchToEffect;
+    [SerializeField] private bool startOnLoad;
     VisualEffect vfx;
     float min = 1.2f;
     float max = 60f;
@@ -22,7 +24,8 @@ public class WarpEffectBehaviour : MonoBehaviour
         if (instance == null) instance = this;
 
         vfx = GetComponent<VisualEffect>();
-        vfx.enabled = false;
+
+        vfx.enabled = startOnLoad;
 
         vfx.SetFloat("WarpRadius", min);
     }
@@ -63,5 +66,10 @@ public class WarpEffectBehaviour : MonoBehaviour
         vfx.SetFloat("WarpRadius", max);
         yield return new WaitForSeconds(2f);
         vfx.enabled = false;
+
+        if (switchToEffect != null && vfx.visualEffectAsset != switchToEffect)
+        {
+            vfx.visualEffectAsset = switchToEffect;
+        }
     }
 }

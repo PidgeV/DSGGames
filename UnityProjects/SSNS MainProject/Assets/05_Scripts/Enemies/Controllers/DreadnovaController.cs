@@ -19,14 +19,18 @@ public class DreadnovaController : EnemyController
 
     public override void ResetEnemy()
     {
-        foreach (ShieldGenerator generator in shieldGenerators)
+        if (dreadnovaState == DreadnovaState.SHIELD_STAGE)
         {
-            generator.InitializeGenerator();
+            foreach (ShieldGenerator generator in shieldGenerators)
+            {
+                generator.InitializeGenerator();
+            }
+
+            dreadnovaShield.SetActive(true);
         }
 
-        dreadnovaShield.SetActive(true);
         dreadnovaModel.SetActive(true);
-        dreadnovaThrusters.SetActive(true);
+        dreadnovaThrusters.SetActive(false);
 
         warping = false;
 

@@ -46,7 +46,11 @@ public class DrdRandomShooty : MonoBehaviour
 
         dreadnovaHP.SetHealth((int)health);
 
-        if (health == 0) dreadnovaHP.gameObject.SetActive(false);
+        if (health == 0)
+        {
+            dreadnovaHP.gameObject.SetActive(false);
+            GameManager.Instance.SwitchState(SNSSTypes.GameState.VICTORY);
+        }
     }
 
     public void AddShoot()
@@ -87,16 +91,22 @@ public class DrdRandomShooty : MonoBehaviour
                     counter++;
                 }
             }
-            else
-            {
-                explosions.SetActive(true);
-            }
         }
         else if (shot >= AllShooty.Length)
         {
             //trigger explosion
             explosions.SetActive(true);
+        }
+    }
 
+    public void KillAll()
+    {
+        foreach (GameObject go in AllShooty)
+        {
+            if (go.TryGetComponent(out HealthAndShields hp))
+            {
+                hp.TakeDamage(Mathf.Infinity, Mathf.Infinity);
+            }
         }
     }
 

@@ -46,11 +46,23 @@ public class CinematicController : MonoBehaviour
 	public void PlayGame()
 	{
 		animator.SetTrigger("PlayGame");
+
+		WarpEffectBehaviour.instance.StartWarp();
 	}
 
 	public void LoadGame()
 	{
-		SceneManager.LoadScene(1);
+		StartCoroutine(LoadScene());
+	}
+
+	private IEnumerator LoadScene()
+	{
+		AsyncOperation load = SceneManager.LoadSceneAsync(1, LoadSceneMode.Single);
+
+		while (!load.isDone)
+		{
+			yield return null;
+		}
 	}
 
 	public void QuitGame()

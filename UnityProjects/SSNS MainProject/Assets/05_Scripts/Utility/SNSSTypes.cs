@@ -28,7 +28,8 @@ namespace SNSSTypes
         RESPAWN,
         PAUSE,
         GAME_OVER,
-        VICTORY
+        VICTORY,
+        CREDITS
     }
 
     public enum DreadnovaState
@@ -78,4 +79,6 @@ namespace SNSSTypes
     public enum MusicTrackType { MENU, NON_COMBAT, COMBAT }
 
     public enum NotificationType { MAJOR, MINOR }
+
+    public enum VideoType { VICTORY, GAME_OVER }
 }

@@ -5,8 +5,15 @@ using UnityEngine;
 public class PlayerRespawn : MonoBehaviour
 {
     [SerializeField] private float timeToRespawn;
-    [SerializeField] private GameObject cameraPrefab;
+    [SerializeField] private GameObject deathCameraPrefab;
     [SerializeField] private RectTransform hud;
+    [SerializeField] private GameObject lifePrefab;
+
+    private Transform lifeHUD;
+
+    private const int NUMBER_OF_LIFES = 5;
+
+    private int currentLifes;
 
     private ShipController player;
 
@@ -14,36 +21,47 @@ public class PlayerRespawn : MonoBehaviour
 
     public void Respawn()
     {
-        Transform playerSpawn = AreaManager.Instance.CurrentArea.FindSafeSpawn();
-
-        player.transform.position = playerSpawn.position;
-        player.transform.rotation = playerSpawn.rotation;
-
-        if (player.TryGetComponent(out HealthAndShields health))
+        if (currentLifes == 0)
         {
-            health.ResetValues(true);
+            GameManager.Instance.SwitchState(SNSSTypes.GameState.GAME_OVER);
         }
+        else
+        {
+            Transform playerSpawn = AreaManager.Instance.CurrentArea.FindSafeSpawn();
 
-        AreaManager.Instance.CurrentArea.RespawnArea();
+            player.transform.position = playerSpawn.position;
+            player.transform.rotation = playerSpawn.rotation;
 
-        player.gameObject.SetActive(true);
+            if (player.TryGetComponent(out HealthAndShields health))
+            {
+                health.ResetValues(true);
+            }
 
-        Destroy(camera);
+            AreaManager.Instance.CurrentArea.RespawnArea();
 
-        hud.gameObject.SetActive(true);
+            player.gameObject.SetActive(true);
 
-        GameManager.Instance.SwitchState(SNSSTypes.GameState.BATTLE);
+            Destroy(camera);
+
+            hud.gameObject.SetActive(true);
+
+            GameManager.Instance.SwitchState(SNSSTypes.GameState.BATTLE);
+        }
     }
 
     private void OnDeath()
     {
-        camera = Instantiate(cameraPrefab);
+        camera = Instantiate(deathCameraPrefab);
         camera.transform.position = transform.position + Quaternion.LookRotation(transform.forward) * player.Behaviour.deathPos;
         camera.transform.LookAt(transform.position);
 
         camera.transform.rotation = Quaternion.Euler(camera.transform.eulerAngles.x, camera.transform.eulerAngles.y, transform.eulerAngles.z);
 
         hud.gameObject.SetActive(false);
+
+        currentLifes--;
+
+        Destroy(lifeHUD.transform.GetChild(lifeHUD.transform.childCount - 1).gameObject);
     }
 
     private void Start()
@@ -54,5 +72,14 @@ public class PlayerRespawn : MonoBehaviour
         {
             health.onDeath += OnDeath;
         }
+
+        lifeHUD = hud.Find("Player Lives");
+
+        for (int i = 0; i < NUMBER_OF_LIFES; i++)
+        {
+            Instantiate(lifePrefab, lifeHUD);
+        }
+
+        currentLifes = NUMBER_OF_LIFES;
     }
 }

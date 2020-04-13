@@ -28,11 +28,14 @@ public class GameManager : MonoBehaviour
 
     private float respawnTime;
 
-	/// <summary>
-	/// Pause the game and open the pause menu
-	/// This is called from the players OnPause
-	/// </summary>
-	public void PauseGame()
+    private bool startup;
+    private bool exiting;
+
+    /// <summary>
+    /// Pause the game and open the pause menu
+    /// This is called from the players OnPause
+    /// </summary>
+    public void PauseGame()
 	{
 		Player[] players = FindObjectsOfType<Player>();
 
@@ -79,7 +82,9 @@ public class GameManager : MonoBehaviour
                 MusicManager.instance.RandomTrack(MusicTrackType.COMBAT);
                 healthAndShields.Invincible = false;
                 shipController.Warping = false;
+                //WarpEffectBehaviour.instance.WarpTransitionSpeed = 40;
                 WarpEffectBehaviour.instance.EndWarp();
+                startup = false;
                 break;
             case GameState.BATTLE_END:
                 MusicManager.instance.RandomTrack(MusicTrackType.NON_COMBAT);
@@ -94,18 +99,14 @@ public class GameManager : MonoBehaviour
                 shipController.Freeze = false;
                 shipController.StopThrust = false;
                 shipController.AlignGunnerWithPilot();
-                WarpEffectBehaviour.instance.StartWarp();
+                if (!startup)
+                    WarpEffectBehaviour.instance.StartWarp();
                 //AreaManager.Instance.LoadNewArea();
                 StartCoroutine(DelayedAreaLoad());
                 break;
             case GameState.GAME_OVER:
-
-                foreach (Player player in FindObjectsOfType<Player>())
-                {
-                    player.SetPlayerActionMap("MenuNavigation");
-                }
-
-                SceneManager.LoadScene("MainMenu");
+            case GameState.VICTORY:
+                StartCoroutine(DelayedExit());
                 break;
         }
     }
@@ -115,6 +116,24 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(3f);
         AreaManager.Instance.LoadNewArea();
         shipController.AlignGunnerWithPilot();
+    }
+
+    IEnumerator DelayedExit()
+    {
+        switch (gameState)
+        {
+            case GameState.GAME_OVER:
+                VideoManager.Instance.PlayVideo(VideoType.GAME_OVER);
+                break;
+            case GameState.VICTORY:
+                yield return new WaitForSeconds(10f);
+                VideoManager.Instance.PlayVideo(VideoType.VICTORY);
+                break;
+        }
+
+        DisableBattle();
+
+        exiting = true;
     }
 
     private void CheckForRespawn()
@@ -143,6 +162,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void DisableBattle()
+    {
+        AreaManager.Instance.CurrentArea.gameObject.SetActive(false);
+        shipController.gameObject.SetActive(false);
+
+        DialogueSystem.Instance.gameObject.SetActive(false);
+        MusicManager.instance.gameObject.SetActive(false);
+    }
+
     private void Awake()
     {
         if (Instance != null)
@@ -159,6 +187,8 @@ public class GameManager : MonoBehaviour
         Physics.IgnoreLayerCollision(12, 12);
         Physics.IgnoreLayerCollision(11, 12);
         Physics.IgnoreLayerCollision(10, 12);
+
+        startup = true;
     }
 
     private void Start()
@@ -166,7 +196,7 @@ public class GameManager : MonoBehaviour
         UpdateState();
     }
 
-    private void Update()
+    private void LateUpdate()
     {
         switch (gameState)
         {
@@ -182,7 +212,20 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.PAUSE:
                 break;
+            case GameState.VICTORY:
             case GameState.GAME_OVER:
+
+                if (exiting && !VideoManager.Instance.IsPlaying)
+                {
+
+                    foreach (Player player in FindObjectsOfType<Player>())
+                    {
+                        player.SetPlayerActionMap("MenuNavigation");
+                    }
+
+                    SceneManager.LoadScene("MainMenu");
+                }
+
                 break;
         }
     }
