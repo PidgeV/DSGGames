@@ -195,7 +195,7 @@ public class AreaManager : MonoBehaviour
 
         if (areaIndex >= areas.Length)
         {
-            GameManager.Instance.SwitchState(GameState.GAME_OVER);
+            GameManager.Instance.SwitchState(GameState.VICTORY);
             return;
         }
 

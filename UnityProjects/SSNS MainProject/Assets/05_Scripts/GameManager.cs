@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator DelayedAreaLoad()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(6f);
         AreaManager.Instance.LoadNewArea();
         shipController.AlignGunnerWithPilot();
     }

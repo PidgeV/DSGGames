@@ -6,7 +6,7 @@ public class FighterAttackState : AttackState<FighterController>
 {
     float shotTimer = 0.0f;
     float intervalTime = 0.0f;
-    float calculateInterval = 0.5f;
+    float calculateInterval = 0.3f;
     GameObject bulletPrefab;
     GameObject bulletSpawnPos;
     Rigidbody rbPlayer;

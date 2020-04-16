@@ -217,11 +217,11 @@ AudioSource:
   m_GameObject: {fileID: 267487590806969606}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -4435638778751794195, guid: b7639791db06e7f4b9717ec7c33ef730,
+  OutputAudioMixerGroup: {fileID: 1889918887674940210, guid: b7639791db06e7f4b9717ec7c33ef730,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1551,6 +1551,7 @@ GameObject:
   - component: {fileID: 8955104964450262280}
   - component: {fileID: 2474365032764999158}
   - component: {fileID: 3018611695878883401}
+  - component: {fileID: 9191560057675766319}
   m_Layer: 0
   m_Name: Gunner
   m_TagString: Untagged
@@ -1610,6 +1611,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gunAnimator: {fileID: 0}
   swapAnimator: {fileID: 0}
+  soundController: {fileID: 0}
   standardShot: {fileID: 0}
   energyShot: {fileID: 0}
   missileShot: {fileID: 0}
@@ -1629,6 +1631,103 @@ MonoBehaviour:
   FireRateMissile: 1
   FireRateCharge: 2
   FireRateLaser: 0.2
+--- !u!82 &9191560057675766319
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8955104964450262279}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 1889918887674940210, guid: b7639791db06e7f4b9717ec7c33ef730,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: e503aa4ffb81c014a8637edb42cac0c4, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 50
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 1
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8955104964842019702
 GameObject:
   m_ObjectHideFlags: 0
@@ -1670,6 +1769,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8955104964842019703}
     m_Modifications:
+    - target: {fileID: 3133795025857249393, guid: 1d8e860a9132b924e80e194a2546978d,
+        type: 3}
+      propertyPath: m_Name
+      value: LaserBeam
+      objectReference: {fileID: 0}
     - target: {fileID: 2628571849621842110, guid: 1d8e860a9132b924e80e194a2546978d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1724,11 +1828,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3133795025857249393, guid: 1d8e860a9132b924e80e194a2546978d,
-        type: 3}
-      propertyPath: m_Name
-      value: LaserBeam
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d8e860a9132b924e80e194a2546978d, type: 3}

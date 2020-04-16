@@ -40,6 +40,13 @@ public class ShipController : MonoBehaviour
 
 	[SerializeField] private GameObject lockOnTarget;
 
+	[SerializeField] private AudioSource audioSource;
+	[SerializeField] private AudioClip boostSound;
+	[SerializeField] private AudioClip sonicSound;
+
+	private bool boostPlayed;
+	private bool sonicPlayed;
+
 	public Player Player1;
 	public Player Player2;
 
@@ -166,6 +173,8 @@ public class ShipController : MonoBehaviour
 
 		if (!shipHP) TryGetComponent(out shipHP);
 
+		if (!audioSource) TryGetComponent(out audioSource);
+
 		boostDepleteDelay = myProperties.boostDepleteDelay;
     }
 
@@ -197,11 +206,21 @@ public class ShipController : MonoBehaviour
 		{
 			sonicBoostEffect1.Play();
 			sonicBoostEffect2.Play();
+
+			if (!sonicPlayed && audioSource && !audioSource.isPlaying)
+			{
+				audioSource.clip = sonicSound;
+				audioSource.Play();
+
+				sonicPlayed = true;
+			}
 		}
 		else
 		{
 			sonicBoostEffect1.Stop();
 			sonicBoostEffect2.Stop();
+
+			sonicPlayed = false;
 		}
 	}
 
@@ -389,6 +408,14 @@ public class ShipController : MonoBehaviour
 		// If were boosting
 		else if (!warping && boosting && boostDepleteDelay >= myProperties.boostDepleteDelay)
 		{
+
+			if (!boostPlayed && audioSource && !audioSource.isPlaying)
+			{
+				audioSource.clip = boostSound;
+				audioSource.Play();
+				boostPlayed = true;
+			}
+
 			float maxSpeed = myProperties.boostSpeed / 2.0f;
 			float acceleration = myProperties.shipAcceleration * 1.5f;
 
@@ -436,11 +463,13 @@ public class ShipController : MonoBehaviour
 
 			sonicBoom = false;
 			sonicBoomTime = 0;
+			boostPlayed = false;
 		}
 		// Else were not boosting so we increase our ships normal speed
 		else
 		{
 			thrustSpeed = myProperties.shipSpeed;
+			boostPlayed = false;
 		}
 
 		if (boostDepleteDelay < myProperties.boostDepleteDelay)

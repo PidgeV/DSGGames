@@ -13,6 +13,8 @@ public class WarpEffectBehaviour : MonoBehaviour
     [SerializeField] float warpTransitionSpeed = 4f;
     [SerializeField] VisualEffectAsset switchToEffect;
     [SerializeField] private bool startOnLoad;
+
+    AudioSource audioSource;
     VisualEffect vfx;
     float min = 1.2f;
     float max = 60f;
@@ -28,6 +30,8 @@ public class WarpEffectBehaviour : MonoBehaviour
         vfx.enabled = startOnLoad;
 
         vfx.SetFloat("WarpRadius", min);
+
+        TryGetComponent(out audioSource);
     }
 
     // Update is called once per frame
@@ -39,6 +43,7 @@ public class WarpEffectBehaviour : MonoBehaviour
     public void StartWarp()
     {
         Debug.Log("Started warp");
+        audioSource.Play();
         StartCoroutine(Enable());
     }
 

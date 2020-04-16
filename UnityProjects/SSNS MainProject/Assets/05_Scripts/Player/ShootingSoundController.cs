@@ -29,4 +29,9 @@ public class ShootingSoundController : MonoBehaviour
 
         if(shotSource.clip != null) shotSource.Play();
     }
+
+    public void Stop()
+    {
+        shotSource.Stop();
+    }
 }

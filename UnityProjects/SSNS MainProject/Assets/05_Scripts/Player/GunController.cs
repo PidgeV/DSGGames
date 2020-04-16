@@ -8,6 +8,7 @@ public class GunController : MonoBehaviour
 {
 	[SerializeField] private Animator gunAnimator;
 	[SerializeField] private Animator swapAnimator;
+	[SerializeField] private ShootingSoundController soundController;
 
 	public GameObject standardShot;
 	public GameObject energyShot;
@@ -27,6 +28,8 @@ public class GunController : MonoBehaviour
 
 	[SerializeField] private ShipController _shipController;
 
+	AudioSource audioSource;
+
 	private WeaponType currentWeapon;
 
 	public bool Attacking = false;
@@ -45,6 +48,10 @@ public class GunController : MonoBehaviour
 		gunAnimator = gunAnimator ? gunAnimator : GetComponent<Animator>();
 
 		currentWeapon = WeaponType.Regular;
+
+		transform.Find("Gunners Camera").TryGetComponent(out soundController);
+
+		TryGetComponent(out audioSource);
 	}
 
 	private void Update()
@@ -98,15 +105,19 @@ public class GunController : MonoBehaviour
 	{
 		if (MenuManager.Instance.Sleeping) return;
 
-        GameObject shot = Instantiate(standardShot, _shipController.ShipModel.position + _shipController.ShipModel.forward * 10, _shipController.ShipModel.rotation);
+		audioSource.Stop();
+
+		GameObject shot = Instantiate(standardShot, _shipController.ShipModel.position + _shipController.ShipModel.forward * 10, _shipController.ShipModel.rotation);
 
         InitShot(shot);
 
         if (shot.TryGetComponent(out ShotInfo info))
         {
             info.role = PlayerRole.Pilot;
-        }
-    }
+		}
+
+		audioSource.Play();
+	}
 
 	public void ResetSpeed()
 	{
@@ -188,6 +199,7 @@ public class GunController : MonoBehaviour
 
 		GameObject shotPrefab = currentWeapon == WeaponType.Regular ? standardShot : energyShot;
 		InitShot(Instantiate(shotPrefab, barrelL.position, barrelL.rotation));
+		soundController.PlayShot(WeaponType.Regular);
 	}
 
 	public void ShootMissileL()
@@ -200,6 +212,7 @@ public class GunController : MonoBehaviour
 		ammoCount.Take1Ammo(currentWeapon);
 		InitShot(Instantiate(missileShot, barrelL.position, barrelL.rotation));
 		CheckAmmo();
+		soundController.PlayShot(WeaponType.Missiles);
 	}
 
 	public void ShootMissileR()
@@ -212,6 +225,7 @@ public class GunController : MonoBehaviour
 		ammoCount.Take1Ammo(currentWeapon);
 		InitShot(Instantiate(missileShot, barrelR.position, barrelR.rotation));
 		CheckAmmo();
+		soundController.PlayShot(WeaponType.Missiles);
 	}
 
 	public void StartCharge()
@@ -224,6 +238,8 @@ public class GunController : MonoBehaviour
 		InitShot(newChargeShot);
 
 		_chargeShotTransform = newChargeShot.transform;
+
+		soundController.PlayShot(WeaponType.Charged);
 	}
 
 	public void EndCharge()
@@ -239,6 +255,7 @@ public class GunController : MonoBehaviour
 
 			ammoCount.Take1Ammo(currentWeapon);
 			CheckAmmo();
+			soundController.Stop();
 		}
 	}
 
@@ -250,6 +267,7 @@ public class GunController : MonoBehaviour
 		//enemyLayer += LayerMask.GetMask("Swarm");
 
 		laserShot.fadeIn = true;
+		soundController.PlayShot(WeaponType.Laser);
 
 		//RaycastHit[] hits = Physics.SphereCastAll(barrelL.transform.position, laserShot.radius, barrelL.transform.forward.normalized, laserShot.Length, enemyLayer);
 
@@ -266,6 +284,7 @@ public class GunController : MonoBehaviour
 	{
 		// TODO -- Stop Sound
 		laserShot.fadeIn = false;
+		soundController.Stop();
 	}
 
 	public void SwapWeapon( WeaponType newWeapon)

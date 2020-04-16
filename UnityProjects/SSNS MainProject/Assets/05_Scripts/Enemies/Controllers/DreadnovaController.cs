@@ -10,6 +10,7 @@ public class DreadnovaController : EnemyController
     public GameObject dreadnovaModel;
     public GameObject dreadnovaThrusters;
     [SerializeField] DreadnovaDistortionManager distort;
+    [SerializeField] AudioSource warpSound;
 
     [SerializeField] private DreadnovaState dreadnovaState;
 
@@ -113,6 +114,7 @@ public class DreadnovaController : EnemyController
         transform.position = Vector3.zero;
 
         DialogueSystem.Instance.AddDialogue(3);
+        warpSound.Play();
 
         //wait for shield dissolve
         yield return new WaitForSeconds(1.5f);
