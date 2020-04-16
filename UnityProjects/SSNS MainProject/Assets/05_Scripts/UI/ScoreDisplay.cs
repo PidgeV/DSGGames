@@ -17,4 +17,11 @@ public class ScoreDisplay : MonoBehaviour
 
 		animator.SetTrigger("AddScore");
 	}
+
+    public void SetScore(int score)
+    {
+        text.text = score.ToString();
+
+        animator.SetTrigger("AddScore");
+    }
 }
