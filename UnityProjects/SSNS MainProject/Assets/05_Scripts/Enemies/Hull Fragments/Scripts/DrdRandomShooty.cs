@@ -164,4 +164,19 @@ public class DrdRandomShooty : MonoBehaviour
 
         GameManager.Instance.SwitchState(SNSSTypes.GameState.VICTORY);
     }
+
+    public void Heal()
+    {
+        for (int i = 0; i < AllShooty.Length; i++)
+        {
+            if (AllShooty[i].activeInHierarchy)
+            {
+                if (AllShooty[i].GetComponent<HealthAndShields>().currentLife > 10)
+                {
+                    AllShooty[i].GetComponent<HealthAndShields>().currentLife = AllShooty[i].GetComponent<HealthAndShields>().MaxLife;
+                }
+            }
+        }
+    }
+
 }

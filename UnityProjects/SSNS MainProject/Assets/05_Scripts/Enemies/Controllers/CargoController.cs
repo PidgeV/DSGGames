@@ -10,8 +10,10 @@ public class CargoController : EnemyController
 
     protected override void ConstructFSM()
     {
+        gameObject.TryGetComponent<HealthAndShields>(out HealthAndShields has);
+
         DeadState deadState = new DeadState(this);
-        CargoPatrolState patrol = new CargoPatrolState(this);
+        CargoPatrolState patrol = new CargoPatrolState(this, has, gameObject);
 
         patrol.AddTransition(Transition.NoHealth, FSMStateID.Dead);
         patrol.AddTransition(Transition.SawPlayer, FSMStateID.Attacking); //Change this

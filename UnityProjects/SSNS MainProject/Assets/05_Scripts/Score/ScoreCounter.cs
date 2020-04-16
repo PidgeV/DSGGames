@@ -51,19 +51,22 @@ public class ScoreCounter : MonoBehaviour
         {
             if (typeOfHit == TypeOfHit.ShieldHit)
 			{
-				if (scoreDisplay) scoreDisplay.AddScore(thisScore);
+				//if (scoreDisplay) scoreDisplay.AddScore(thisScore);
 
 				Score += thisScore;
+                scoreDisplay.SetScore(Score);
+
             }
         }
         else if (thingShot.TryGetComponent(out ShotThing st))
         {
-
             if (st.whoSent == ShotThing.shotFrom.Player && typeOfHit == TypeOfHit.ShieldHit)
             {
-				if (scoreDisplay) scoreDisplay.AddScore(thisScore);
-
+                //if (scoreDisplay)
+                //scoreDisplay.AddScore(thisScore);
+           
                 Score += thisScore;
+                scoreDisplay.SetScore(Score);
             }
         }
 
@@ -79,6 +82,7 @@ public class ScoreCounter : MonoBehaviour
         if (typeOfHit == TypeOfHit.DestroyHit)
         {
             Score += thisScore;
+            scoreDisplay.SetScore(Score);
         }
     }
 }
