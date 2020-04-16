@@ -10,6 +10,7 @@ public class DreadnovaController : EnemyController
     public GameObject dreadnovaModel;
     public GameObject dreadnovaThrusters;
     [SerializeField] DreadnovaDistortionManager distort;
+    [SerializeField] WarpEffectBehaviour warpEffect;
     [SerializeField] AudioSource warpSound;
 
     [SerializeField] private DreadnovaState dreadnovaState;
@@ -99,22 +100,63 @@ public class DreadnovaController : EnemyController
 
     private IEnumerator WarpOut()
     {
+        if (warping) yield break;
+
         warping = true;
+
+        GameObject dreadnovaParent = new GameObject();
+        dreadnovaParent.transform.parent = transform.parent;
+        dreadnovaParent.transform.localPosition = new Vector3(0, 0, 2500);
+        transform.parent = dreadnovaParent.transform;
+        transform.localPosition = new Vector3(0, 0, -2500);
 
         // TODO: Warp effects
         dreadnovaThrusters.SetActive(true);
 
         //Start distortion
-        
+
+        int chargeTime = 10;
+
         distort.gameObject.SetActive(true);
-        distort.StartDistortion(5);
+        distort.StartDistortion(chargeTime);
+        //warpEffect.StartWarp();
 
-        yield return new WaitForSeconds(5f);
+        Vector3 orScale = transform.localScale;
+        Vector3 newScale = new Vector3(1, 1, 1.1f);
 
-        transform.position = Vector3.zero;
+        float chargeScale = 0.05f;
+
+        for (int i = 0; i < chargeTime / chargeScale; i++)
+        {
+            dreadnovaParent.transform.localScale = Vector3.Slerp(dreadnovaParent.transform.localScale, newScale, chargeScale * Time.deltaTime);
+
+            if (i >= chargeTime / chargeScale) break;
+
+            yield return null;
+        }
+
+        dreadnovaParent.transform.localScale = newScale;
+
+        int warpTime = 5;
+
+        Vector3 orPos = transform.position;
+        Vector3 newPos = Vector3.zero;
+
+        float warpScale = 5f;
+
+        for (int i = 0; i < warpTime / warpScale; i++)
+        {
+            dreadnovaParent.transform.position = Vector3.Lerp(dreadnovaParent.transform.position, newPos, warpScale * Time.deltaTime);
+
+            if (i >= warpTime / warpScale) break;
+
+            yield return null;
+        }
+
+        dreadnovaParent.transform.position = newPos;
+        warpSound.Play();
 
         DialogueSystem.Instance.AddDialogue(3);
-        warpSound.Play();
 
         //wait for shield dissolve
         yield return new WaitForSeconds(1.5f);

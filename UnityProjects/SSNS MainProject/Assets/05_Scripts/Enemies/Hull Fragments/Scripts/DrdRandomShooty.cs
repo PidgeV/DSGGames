@@ -13,6 +13,7 @@ public class DrdRandomShooty : MonoBehaviour
 	[SerializeField] GameObject dreadnova;
     int shot = -1;  //Must be -1 so addshoot triggers first pass through
     bool hpBarEnabled = false;
+    [SerializeField] private AudioSource audioSource;
     public float curLife;
     public float CurLife { get { return curLife; } }
     // Start is called before the first frame update
@@ -151,6 +152,7 @@ public class DrdRandomShooty : MonoBehaviour
     }
 	IEnumerator ExplodeDreadnova()
     {
+        audioSource.Play();
         explosions.SetActive(true);
         yield return new WaitForSeconds(2);
         dreadnova.SetActive(false);

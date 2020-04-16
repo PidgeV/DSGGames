@@ -43,7 +43,7 @@ public class WarpEffectBehaviour : MonoBehaviour
     public void StartWarp()
     {
         Debug.Log("Started warp");
-        audioSource.Play();
+        if (audioSource) audioSource.Play();
         StartCoroutine(Enable());
     }
 
