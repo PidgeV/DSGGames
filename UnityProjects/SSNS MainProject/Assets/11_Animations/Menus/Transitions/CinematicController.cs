@@ -7,12 +7,16 @@ public class CinematicController : MonoBehaviour
 {
 	public static CinematicController Instance;
 
+	[SerializeField] private GameObject mainMenu;
+
 	private Animator animator;
 	private GameObject ship;
 
 
 	bool canSkip = true;
 	public bool inTransition = false;
+
+	public GameObject creditMenu;
 
 
 	private void Awake()
@@ -41,6 +45,20 @@ public class CinematicController : MonoBehaviour
 	public void TransitionSetupTo_Main()
 	{
 		animator.SetTrigger("Exit");
+	}
+
+	public void CreditsMenu()
+	{
+		animator.SetTrigger("CreditsMenu");
+		mainMenu.SetActive(false);
+		creditMenu.SetActive(true);
+	}
+
+	public void LeaveCreditsMenu()
+	{
+		animator.SetTrigger("Exit");
+		creditMenu.SetActive(false);
+		mainMenu.SetActive(true);
 	}
 
 	public void PlayGame()
@@ -117,10 +135,10 @@ public class CinematicController : MonoBehaviour
 		foreach (TrailRenderer trail in trails) { trail.emitting = false; }
 	}
 
-	[SerializeField] private GameObject mainMenu;
 	public void ShowMainMenu()
 	{
-		mainMenu.SetActive(true);
+		if (!creditMenu.activeSelf)
+			mainMenu.SetActive(true);
 	}
 	public void HideMainMenu()
 	{

@@ -137,7 +137,7 @@ public class ShipController : MonoBehaviour
 	/// <summary>
 	/// Initialize and Get dependencies
 	/// </summary>
-	private void Awake()
+	private void Start()
 	{
 		if (shieldProjector == null) {
 			shieldProjector = GetComponentInChildren<ShieldProjector>();

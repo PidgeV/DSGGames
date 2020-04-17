@@ -159,7 +159,8 @@ public class Player : Controller
 	}
 	public override void OnX(InputValue input)
 	{
-		Controller.ToggleMap(input.isPressed);
+		if (!Controller)
+			Controller.ToggleMap(input.isPressed);
 	}
 	public override void OnY(InputValue input)
 	{
