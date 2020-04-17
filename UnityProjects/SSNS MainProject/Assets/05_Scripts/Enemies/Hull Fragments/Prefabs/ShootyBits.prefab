@@ -30,22 +30,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dreadnova: {fileID: 0}
   pieceToThrow: {fileID: 0}
+  explosionToOn: {fileID: 0}
+  fireToOff: {fileID: 0}
+  replaceScar: {fileID: 0}
+  turnOffCrack: {fileID: 0}
   propulsionForce: 200000
   yFire: 0
---- !u!114 &7612057300984019955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1910257273441968887}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5765d23cf400244494d861d4cdcd341, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  glowy: {fileID: 2100000, guid: 8689bfe5290ad874595a0f6de99af8a4, type: 2}
-  noGlowy: {fileID: 2100000, guid: a791e0bd62b69e94b8ebd30feaa21358, type: 2}
 --- !u!114 &7612057300984019956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,6 +56,7 @@ MonoBehaviour:
   currentShield: 0
   Invincible: 0
   DestroyOnDeath: 0
+  KeepOnDeath: 0
 --- !u!54 &7612057300912792129
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -96,22 +87,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dreadnova: {fileID: 0}
   pieceToThrow: {fileID: 0}
+  explosionToOn: {fileID: 0}
+  fireToOff: {fileID: 0}
+  replaceScar: {fileID: 0}
+  turnOffCrack: {fileID: 0}
   propulsionForce: 200000
   yFire: 1
---- !u!114 &7612057300912792131
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1910257273504807750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5765d23cf400244494d861d4cdcd341, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  glowy: {fileID: 2100000, guid: 8689bfe5290ad874595a0f6de99af8a4, type: 2}
-  noGlowy: {fileID: 2100000, guid: a791e0bd62b69e94b8ebd30feaa21358, type: 2}
 --- !u!114 &7612057300912792132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,6 +113,7 @@ MonoBehaviour:
   currentShield: 0
   Invincible: 0
   DestroyOnDeath: 0
+  KeepOnDeath: 0
 --- !u!54 &7612057300500513382
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -148,20 +130,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7612057300500513368
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1910257273898261357}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5765d23cf400244494d861d4cdcd341, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  glowy: {fileID: 2100000, guid: 8689bfe5290ad874595a0f6de99af8a4, type: 2}
-  noGlowy: {fileID: 2100000, guid: a791e0bd62b69e94b8ebd30feaa21358, type: 2}
 --- !u!114 &7612057300500513369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,6 +150,7 @@ MonoBehaviour:
   currentShield: 0
   Invincible: 0
   DestroyOnDeath: 0
+  KeepOnDeath: 0
 --- !u!114 &7612057300500513383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -196,6 +165,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dreadnova: {fileID: 0}
   pieceToThrow: {fileID: 0}
+  explosionToOn: {fileID: 0}
+  fireToOff: {fileID: 0}
+  replaceScar: {fileID: 0}
+  turnOffCrack: {fileID: 0}
   propulsionForce: 200000
   yFire: 1
 --- !u!54 &7612057300399084261
@@ -234,6 +207,7 @@ MonoBehaviour:
   currentShield: 0
   Invincible: 0
   DestroyOnDeath: 0
+  KeepOnDeath: 0
 --- !u!114 &7612057300399084262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,22 +222,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dreadnova: {fileID: 0}
   pieceToThrow: {fileID: 0}
+  explosionToOn: {fileID: 0}
+  fireToOff: {fileID: 0}
+  replaceScar: {fileID: 0}
+  turnOffCrack: {fileID: 0}
   propulsionForce: 200000
   yFire: 1
---- !u!114 &7612057300399084263
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1910257273997593578}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5765d23cf400244494d861d4cdcd341, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  glowy: {fileID: 2100000, guid: 8689bfe5290ad874595a0f6de99af8a4, type: 2}
-  noGlowy: {fileID: 2100000, guid: a791e0bd62b69e94b8ebd30feaa21358, type: 2}
 --- !u!54 &7612057300374275205
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -294,22 +258,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dreadnova: {fileID: 0}
   pieceToThrow: {fileID: 0}
+  explosionToOn: {fileID: 0}
+  fireToOff: {fileID: 0}
+  replaceScar: {fileID: 0}
+  turnOffCrack: {fileID: 0}
   propulsionForce: 200000
   yFire: 1
---- !u!114 &7612057300374275207
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1910257274039115146}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5765d23cf400244494d861d4cdcd341, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  glowy: {fileID: 2100000, guid: 8689bfe5290ad874595a0f6de99af8a4, type: 2}
-  noGlowy: {fileID: 2100000, guid: a791e0bd62b69e94b8ebd30feaa21358, type: 2}
 --- !u!114 &7612057300374275320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,6 +284,7 @@ MonoBehaviour:
   currentShield: 0
   Invincible: 0
   DestroyOnDeath: 0
+  KeepOnDeath: 0
 --- !u!54 &7612057300541823155
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -360,22 +315,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dreadnova: {fileID: 0}
   pieceToThrow: {fileID: 0}
+  explosionToOn: {fileID: 0}
+  fireToOff: {fileID: 0}
+  replaceScar: {fileID: 0}
+  turnOffCrack: {fileID: 0}
   propulsionForce: 200000
   yFire: 1
---- !u!114 &7612057300541823157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1910257274408501688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5765d23cf400244494d861d4cdcd341, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  glowy: {fileID: 2100000, guid: 8689bfe5290ad874595a0f6de99af8a4, type: 2}
-  noGlowy: {fileID: 2100000, guid: a791e0bd62b69e94b8ebd30feaa21358, type: 2}
 --- !u!114 &7612057300541823158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,6 +341,7 @@ MonoBehaviour:
   currentShield: 0
   Invincible: 0
   DestroyOnDeath: 0
+  KeepOnDeath: 0
 --- !u!54 &7612057299227624626
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -426,22 +372,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dreadnova: {fileID: 0}
   pieceToThrow: {fileID: 0}
+  explosionToOn: {fileID: 0}
+  fireToOff: {fileID: 0}
+  replaceScar: {fileID: 0}
+  turnOffCrack: {fileID: 0}
   propulsionForce: 200000
   yFire: 0
---- !u!114 &7612057299227624628
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1910257275175345590}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5765d23cf400244494d861d4cdcd341, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  glowy: {fileID: 2100000, guid: 8689bfe5290ad874595a0f6de99af8a4, type: 2}
-  noGlowy: {fileID: 2100000, guid: a791e0bd62b69e94b8ebd30feaa21358, type: 2}
 --- !u!114 &7612057299227624629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -462,6 +398,7 @@ MonoBehaviour:
   currentShield: 0
   Invincible: 0
   DestroyOnDeath: 0
+  KeepOnDeath: 0
 --- !u!1 &7612057300244094419
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,15 +642,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9cb82f519c9f9e7409f8169d060ea3d6, type: 3}
---- !u!1 &1910257274039115146 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 9cb82f519c9f9e7409f8169d060ea3d6,
-    type: 3}
-  m_PrefabInstance: {fileID: 7612057300374275203}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3231826440322543513 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 9cb82f519c9f9e7409f8169d060ea3d6,
+    type: 3}
+  m_PrefabInstance: {fileID: 7612057300374275203}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1910257274039115146 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 9cb82f519c9f9e7409f8169d060ea3d6,
     type: 3}
   m_PrefabInstance: {fileID: 7612057300374275203}
   m_PrefabAsset: {fileID: 0}
@@ -801,15 +738,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c337822fcad657498a5c18d995c9bf7, type: 3}
---- !u!4 &3231826440365111801 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 2c337822fcad657498a5c18d995c9bf7,
-    type: 3}
-  m_PrefabInstance: {fileID: 7612057300399084259}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1910257273997593578 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 2c337822fcad657498a5c18d995c9bf7,
+    type: 3}
+  m_PrefabInstance: {fileID: 7612057300399084259}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3231826440365111801 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 2c337822fcad657498a5c18d995c9bf7,
     type: 3}
   m_PrefabInstance: {fileID: 7612057300399084259}
   m_PrefabAsset: {fileID: 0}
@@ -897,15 +834,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c17ed85d6f7d228489d4591b3217ff2e, type: 3}
---- !u!1 &1910257273898261357 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: c17ed85d6f7d228489d4591b3217ff2e,
-    type: 3}
-  m_PrefabInstance: {fileID: 7612057300500513380}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3231826440468638078 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: c17ed85d6f7d228489d4591b3217ff2e,
+    type: 3}
+  m_PrefabInstance: {fileID: 7612057300500513380}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1910257273898261357 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: c17ed85d6f7d228489d4591b3217ff2e,
     type: 3}
   m_PrefabInstance: {fileID: 7612057300500513380}
   m_PrefabAsset: {fileID: 0}
@@ -1185,15 +1122,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e053b0dbb44a4cd4c976685e9fa106e0, type: 3}
---- !u!4 &3231826440916537572 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: e053b0dbb44a4cd4c976685e9fa106e0,
-    type: 3}
-  m_PrefabInstance: {fileID: 7612057300984019966}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1910257273441968887 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: e053b0dbb44a4cd4c976685e9fa106e0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7612057300984019966}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3231826440916537572 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: e053b0dbb44a4cd4c976685e9fa106e0,
     type: 3}
   m_PrefabInstance: {fileID: 7612057300984019966}
   m_PrefabAsset: {fileID: 0}
