@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipName: Turret
   shipDescription: Needed for health to work apparently
-  maxHealth: 30
-  maxShield: 30
+  maxHealth: 60
+  maxShield: 40
   shieldRegenPercent: 5
   shieldRegenInterval: 5
   shipSpeed: 30

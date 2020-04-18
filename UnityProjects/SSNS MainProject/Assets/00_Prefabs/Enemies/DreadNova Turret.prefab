@@ -176,11 +176,11 @@ MonoBehaviour:
     x: 1
     y: 0
     z: 0
-  threatDistance: 1000
+  threatDistance: 1200
   rotateSpeed: 5
   calculateInterval: 0.1
   accuracy: 30
-  shotInterval: 0.5
+  shotInterval: 0.25
 --- !u!1 &3828221871227305166
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,7 +284,7 @@ MonoBehaviour:
   shipStats: {fileID: 11400000, guid: 3cc201833f8f7b541859eb8f5ce2b90c, type: 2}
   explosionPrefab: {fileID: 8305956982705048768, guid: 67f64df1e41df954a9007ccd68dbbd16,
     type: 3}
-  explosionScale: 1.5
+  explosionScale: 10.5
   shieldRegenDelay: 3
   currentLife: 0
   currentShield: 0
@@ -419,7 +419,7 @@ MonoBehaviour:
     x: 1
     y: 0
     z: 0
-  threatDistance: 1000
+  threatDistance: 2000
   rotateSpeed: 0.1
   calculateInterval: 0.2
   accuracy: 30
@@ -506,11 +506,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 370.1208
       objectReference: {fileID: 0}
-    - target: {fileID: 6310708430626000254, guid: c0c0ed7488653d34baf9950ba7dc7311,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6103393024892273190, guid: c0c0ed7488653d34baf9950ba7dc7311,
         type: 3}
       propertyPath: shipColliders.Array.size
@@ -526,6 +521,11 @@ PrefabInstance:
       propertyPath: shipColliders.Array.data[1]
       value: 
       objectReference: {fileID: 8137766117900137070}
+    - target: {fileID: 6310708430626000254, guid: c0c0ed7488653d34baf9950ba7dc7311,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c0c0ed7488653d34baf9950ba7dc7311, type: 3}
 --- !u!4 &4424567370709173303 stripped

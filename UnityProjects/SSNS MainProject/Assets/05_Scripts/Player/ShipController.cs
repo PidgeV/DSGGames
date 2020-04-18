@@ -137,6 +137,7 @@ public class ShipController : MonoBehaviour
 	/// <summary>
 	/// Initialize and Get dependencies
 	/// </summary>
+    /// 
 	private void Start()
 	{
 		if (shieldProjector == null) {
@@ -592,6 +593,11 @@ public class ShipController : MonoBehaviour
 
     private void OnEnable()
     {
+        if (weaponsSystem == null)
+        {
+            weaponsSystem = gameObject.GetComponent<WeaponsSystem>();
+        }
+
         weaponsSystem.ShipShooting = false;
     }
 

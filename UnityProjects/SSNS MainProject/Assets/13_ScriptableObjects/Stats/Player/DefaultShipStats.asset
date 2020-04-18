@@ -16,7 +16,7 @@ MonoBehaviour:
   shipDescription: 
   maxHealth: 200
   maxShield: 200
-  shieldRegenPercent: 20
+  shieldRegenPercent: 10
   shieldRegenInterval: 2
   shipSpeed: 50
   rotationSpeed: 2.2

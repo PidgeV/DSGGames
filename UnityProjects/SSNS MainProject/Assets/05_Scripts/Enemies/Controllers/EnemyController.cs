@@ -73,13 +73,20 @@ public abstract class EnemyController : AdvancedFSM
         }
     }
 
-    protected override void FSMUpdate()
+    protected override void FSMFixedUpdate()
     {
         //Do this
         if (CurrentState != null && !MenuManager.Instance.Sleeping)
 		{
-			CurrentState.Reason();
             CurrentState.Act();
+        }
+    }
+    protected override void FSMUpdate()
+    {
+        //Do this
+        if (CurrentState != null && !MenuManager.Instance.Sleeping)
+        {
+            CurrentState.Reason();
         }
     }
 

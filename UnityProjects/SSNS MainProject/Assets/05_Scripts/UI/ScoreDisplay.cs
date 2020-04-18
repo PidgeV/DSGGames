@@ -5,23 +5,26 @@ using UnityEngine.UI;
 
 public class ScoreDisplay : MonoBehaviour
 {
-	[SerializeField] private Animator animator;
-	[SerializeField] private Text text;
+    [SerializeField] private Animator animator;
+    [SerializeField] private Text text;
 
-	public void AddScore(int score)
-	{
-		int currentScore = int.Parse(text.text);
-		int newScore = currentScore + score;
+    public void AddScore(int score)
+    {
+        int currentScore = int.Parse(text.text);
+        int newScore = currentScore + score;
 
-		text.text = newScore.ToString();
+        text.text = newScore.ToString();
 
-		animator.SetTrigger("AddScore");
-	}
+        animator.SetTrigger("AddScore");
+    }
 
     public void SetScore(int score)
     {
-        text.text = score.ToString();
+        if (text != null)
+        {
+            text.text = score.ToString();
 
-        animator.SetTrigger("AddScore");
+            animator.SetTrigger("AddScore");
+        }
     }
 }
