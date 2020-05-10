@@ -19,7 +19,7 @@ MonoBehaviour:
     m_Value: 1
   meteringMode:
     m_OverrideState: 1
-    m_Value: 2
+    m_Value: 0
   luminanceSource:
     m_OverrideState: 1
     m_Value: 1
@@ -27,14 +27,14 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0
   compensation:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 1
   limitMin:
     m_OverrideState: 0
-    m_Value: -10
+    m_Value: 0
   limitMax:
     m_OverrideState: 0
-    m_Value: 20
+    m_Value: 0
   curveMap:
     m_OverrideState: 0
     m_Value:
@@ -65,11 +65,11 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 1
   adaptationSpeedDarkToLight:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 3
     min: 0.001
   adaptationSpeedLightToDark:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
     min: 0.001
 --- !u!114 &-2279951657060789787
@@ -199,7 +199,7 @@ MonoBehaviour:
     showEyeDropper: 1
   meanFreePath:
     m_OverrideState: 1
-    m_Value: 2000
+    m_Value: 5500
     min: 1
   baseHeight:
     m_OverrideState: 1
@@ -277,7 +277,7 @@ MonoBehaviour:
     m_Value: 1
   skyAmbientMode:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   fogType:
     m_OverrideState: 1
     m_Value: 3
@@ -319,7 +319,7 @@ MonoBehaviour:
     m_Value: 20000
   updateMode:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 2
   updatePeriod:
     m_OverrideState: 1
     m_Value: 0.1

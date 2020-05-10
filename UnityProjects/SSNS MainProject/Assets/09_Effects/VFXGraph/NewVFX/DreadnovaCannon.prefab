@@ -40,7 +40,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4534235373937761611}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: e4cde1733fa9c2649854c0e5843f72df, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: 13f098cec80ce9949862ddf1329cfc94, type: 3}
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_PropertySheet:
@@ -180,7 +180,7 @@ VisualEffect:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4534235375352463198}
   m_Enabled: 1
-  m_Asset: {fileID: 8926484042661614526, guid: f7015f584e603c84c998d61ac1471368, type: 3}
+  m_Asset: {fileID: 8926484042661614526, guid: 34ed3d1a6a43fd5449388a359d4ac7eb, type: 3}
   m_StartSeed: 0
   m_ResetSeedOnPlay: 1
   m_PropertySheet:
