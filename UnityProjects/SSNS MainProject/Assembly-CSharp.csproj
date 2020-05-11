@@ -280,6 +280,7 @@
     <Compile Include="Assets\Misselaineous\Cinemachine\Timeline\CinemachineMixer.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Timeline\CinemachineShot.cs" />
     <Compile Include="Assets\Misselaineous\Cinemachine\Timeline\CinemachineTrack.cs" />
+    <Compile Include="Assets\roatethingy.cs" />
     <Compile Include="Assets\TriggerAnim.cs" />
     <None Include="Assets\05_Scripts\Enemies\Hull Fragments\READ_ME.txt" />
     <None Include="Assets\Misselaineous\Cinemachine\ReleaseNotes.txt" />
